@@ -40,7 +40,8 @@ do_install_append() {
     touch ${KEYSTONE_CONF_DIR}/keystone.db
 }
 
-pkg_postinst_${PN} () {
+pkg_postinst_${SRCNAME} () {
+
     if [ "x$D" != "x" ]; then
         exit 1
     fi
@@ -56,7 +57,13 @@ pkg_postinst_${PN} () {
     bash /etc/keystone/identity.sh
 }
 
-FILES_${PN} += "${sysconfdir}/${SRCNAME}/*"
+PACKAGES += " ${SRCNAME}"
+
+FILES_${PN} = "${libdir}/*"
+
+FILES_${SRCNAME} = "${bindir}/* \
+    ${sysconfdir}/${SRCNAME}/* \ 
+    ${sysconfdir}/init.d/* "
 
 RDEPENDS_${PN} += "python-pam \
 	python-webob \
@@ -73,3 +80,6 @@ RDEPENDS_${PN} += "python-pam \
 	python-keystoneclient \
 	python-oslo.config \
 	"
+
+RDEPENDS_${SRCNAME} = "${PN} \
+        postgresql postgresql-client python-psycopg2"
