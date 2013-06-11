@@ -62,7 +62,7 @@ GROUPADD_PARAM_${PN} = "--system nova"
 USERADD_PARAM_${PN}  = "--system --home /var/lib/nova -g nova \
                         --no-create-home --shell /bin/false nova"
 
-pkg_postinst_${PN} () {
+pkg_postinst_${SRCNAME}-controller () {
     if [ "x$D" != "x" ]; then
         exit 1
     fi
@@ -73,18 +73,24 @@ pkg_postinst_${PN} () {
     nova-manage db sync
 }
 
+PACKAGES += "${SRCNAME}-common ${SRCNAME}-compute ${SRCNAME}-controller"
 
+FILES_${PN} = "${libdir}/*"
 
-FILES_${PN} += "${sysconfdir}/${SRCNAME}/* \
-                ${sysconfdir}/sudoers.d "
+FILES_${SRCNAME}-common = " ${bindir}/nova-manage \
+                      ${bindir}/nova-rootwrap \
+                      ${sysconfdir}/${SRCNAME}/* \
+                      ${sysconfdir}/sudoers.d"
 
-RDEPENDS_${PN} = "openssl openssl-misc libxml2 libxslt iptables curl dnsmasq sudo procps\
-    qemu libvirt libvirt-libvirtd libvirt-python libvirt-virsh \
-    python-modules \
+FILES_${SRCNAME}-compute = "${bindir}/nova-compute \
+                            ${sysconfdir}/init.d/nova-compute"
+
+FILES_${SRCNAME}-controller = "${bindir}/* \
+                               ${sysconfdir}/init.d/nova-all"
+
+RDEPENDS_${PN} = " python-modules \
     python-misc \
     python-argparse \
-    libvirt-python \
-	libvirt-libvirtd \
     python-amqplib \
     python-anyjson \
     python-babel \
@@ -117,3 +123,12 @@ RDEPENDS_${PN} = "openssl openssl-misc libxml2 libxslt iptables curl dnsmasq sud
     python-webob \
     python-websockify \
     "
+
+RDEPENDS_${SRCNAME}-common = "${PN} openssl openssl-misc libxml2 libxslt \
+        iptables curl dnsmasq sudo procps"
+
+RDEPENDS_${SRCNAME}-compute = "${PN} nova-common \
+       qemu libvirt libvirt-libvirtd libvirt-python libvirt-virsh"
+
+RDEPENDS_${SRCNAME}-controller = "${PN} nova-common \
+        postgresql postgresql-client python-psycopg2"
