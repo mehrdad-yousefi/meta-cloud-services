@@ -11,6 +11,8 @@ SRCNAME = "nova"
 
 SRC_URI = "https://launchpad.net/${SRCNAME}/grizzly/${PV}/+download/${SRCNAME}-${PV}.tar.gz \
            file://nova.conf \
+           file://nova-compute \
+           file://nova-all \
            file://api-paste.ini"
 
 
@@ -19,7 +21,7 @@ SRC_URI[sha256sum] = "db7f5259d848358bf14105d5833869ec145f643312e6bc0adef0050120
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
-inherit setuptools useradd
+inherit setuptools useradd update-rc.d
 
 do_install_append() {
 
@@ -53,9 +55,16 @@ do_install_append() {
     # Create the sqlite database
     #touch ${NOVA_CONF_DIR}/nova.db
     install -d ${NOVA_CONF_DIR}/instances
+
+    if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
+        install -d ${D}${sysconfdir}/init.d
+        install -m 0755 ${WORKDIR}/nova-compute ${D}${sysconfdir}/init.d/nova-compute
+        install -m 0755 ${WORKDIR}/nova-all ${D}${sysconfdir}/init.d/nova-all
+    fi
+
 }
 
-inherit useradd
+inherit useradd update-rc.d
 
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "--system nova"
@@ -66,7 +75,8 @@ pkg_postinst_${SRCNAME}-controller () {
     if [ "x$D" != "x" ]; then
         exit 1
     fi
-
+    #quick fix
+    #exit 1
     # Needed when using a MySQL backend
     # mysql -u root -e "CREATE DATABASE nova CHARACTER SET latin1;"
     sudo -u postgres createdb nova
@@ -132,3 +142,7 @@ RDEPENDS_${SRCNAME}-compute = "${PN} nova-common \
 
 RDEPENDS_${SRCNAME}-controller = "${PN} nova-common \
         postgresql postgresql-client python-psycopg2"
+
+INITSCRIPT_PACKAGES = "${SRCNAME}-compute ${SRCNAME}-controller"
+INITSCRIPT_NAME_${SRCNAME}-compute = "nova-compute"
+INITSCRIPT_NAME_${SRCNAME}-controller = "nova-all"
