@@ -51,7 +51,7 @@ do_install_append() {
     install -m 664 ${WORKDIR}/api-paste.ini ${NOVA_CONF_DIR}
 
     # Create the sqlite database
-    touch ${NOVA_CONF_DIR}/nova.db
+    #touch ${NOVA_CONF_DIR}/nova.db
     install -d ${NOVA_CONF_DIR}/instances
 }
 
@@ -69,13 +69,11 @@ pkg_postinst_${PN} () {
 
     # Needed when using a MySQL backend
     # mysql -u root -e "CREATE DATABASE nova CHARACTER SET latin1;"
+    sudo -u postgres createdb nova
     nova-manage db sync
 }
 
-PACKAGECONFIG ??= "sqlite"
 
-PACKAGECONFIG[sqlite] = ",,,sqlite3"
-PACKAGECONFIG[mysql] = ",,,mysql5-server mysql5-client mysql-python libmysqlclient"
 
 FILES_${PN} += "${sysconfdir}/${SRCNAME}/* \
                 ${sysconfdir}/sudoers.d "
