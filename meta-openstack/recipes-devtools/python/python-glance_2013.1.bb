@@ -37,6 +37,8 @@ do_install_append() {
     install -d ${GLANCE_CONF_DIR}/images
     install -d ${D}${localstatedir}/lib/glance/image_cache
 
+    install -d ${D}${localstatedir}/log/${SRCNAME}
+
     # Create the sqlite database
     touch ${GLANCE_CONF_DIR}/glance.db
 }
@@ -46,8 +48,10 @@ pkg_postinst_${PN} () {
         exit 1
     fi
     
+    mkdir /var/log/glance
     # Needed when using a MySQL backend
     # mysql -u root -e "CREATE DATABASE glance CHARACTER SET utf8;"
+    sudo -u postgres createdb glance
     glance-manage db_sync
 }
 
