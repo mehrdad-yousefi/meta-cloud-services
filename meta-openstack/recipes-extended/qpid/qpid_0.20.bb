@@ -3,8 +3,7 @@ HOMEPAGE = "http://qpid.apache.org/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7ab4c208aa62d92d7a03cc8e0a89c12b"
 SECTION = "mq"
-DEPENDS = "boost perl-native python " 
-#ruby"
+DEPENDS = "boost perl-native python "
 PR = "r0"
 
 SRC_URI = "http://mirror.nexcess.net/apache/${PN}/${PV}/qpid-cpp-0.20.tar.gz \
