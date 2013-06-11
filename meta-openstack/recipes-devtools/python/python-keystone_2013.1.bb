@@ -9,6 +9,8 @@ SRCNAME = "keystone"
 
 SRC_URI = "https://launchpad.net/keystone/grizzly/${PV}/+download/${SRCNAME}-${PV}.tar.gz \
            file://keystone.conf \
+           file://identity.sh \
+           file://openrc \
 		  "
 
 SRC_URI[md5sum] = "f82189cd7e3f0955e32c60e41f4120da"
@@ -18,13 +20,19 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit setuptools
 
+SERVICE_TOKEN = "password"
+
 do_install_append() {
 
     KEYSTONE_CONF_DIR=${D}${sysconfdir}/keystone
 
     install -d ${KEYSTONE_CONF_DIR}
 
+    sed -e "s:^admin_token=.*:admin_token=${SERVICE_TOKEN}:g" -i ${WORKDIR}/keystone.conf
+
     install -m 600 ${WORKDIR}/keystone.conf ${KEYSTONE_CONF_DIR}/
+    install -m 600 ${WORKDIR}/identity.sh ${KEYSTONE_CONF_DIR}/
+    install -m 600 ${WORKDIR}/openrc ${KEYSTONE_CONF_DIR}/
     install -m 600 ${S}/etc/logging.conf.sample ${KEYSTONE_CONF_DIR}/logging.conf
     install -m 600 ${S}/etc/policy.json ${KEYSTONE_CONF_DIR}/policy.json
 
@@ -42,6 +50,10 @@ pkg_postinst_${PN} () {
     sudo -u postgres createdb keystone
     keystone-manage db_sync
     keystone-manage pki_setup
+    # quick fix
+    echo "source /etc/keystone/openrc" > /home/root/.bashrc
+    sleep 1
+    bash /etc/keystone/identity.sh
 }
 
 FILES_${PN} += "${sysconfdir}/${SRCNAME}/*"
