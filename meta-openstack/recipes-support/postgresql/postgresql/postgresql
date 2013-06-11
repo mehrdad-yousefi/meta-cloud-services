@@ -1,0 +1,69 @@
+#!/bin/sh
+set -e
+
+### BEGIN INIT INFO
+# Provides:     postgresql
+# Required-Start:   $local_fs $remote_fs $network $time
+# Required-Stop:    $local_fs $remote_fs $network $time
+# Should-Start:     $syslog
+# Should-Stop:      $syslog
+# Default-Start:    2 3 4 5
+# Default-Stop:     0 1 6
+# Short-Description:    PostgreSQL RDBMS server
+### END INIT INFO
+
+DAEMON=/usr/bin/postmaster
+DESC="PostgreSQL RDBMS server"
+
+start ()
+{
+    echo -n "Starting postgres server..."
+    if pidof ${DAEMON} > /dev/null; then
+        echo "already running."
+        exit 0
+    fi
+    start-stop-daemon --start --quiet --chuid postgres --exec ${DAEMON} --background -- -D /etc/postgresql
+    if [ $? -eq 0 ]; then
+        echo "done."
+    else
+        echo "failed."
+    fi
+}
+
+stop ()
+{
+    echo -n "Stopping postgres server..."
+    if ! pidof ${DAEMON} >/dev/null; then
+        echo "not running."
+        exit 0
+    fi
+    start-stop-daemon --stop --quiet --chuid postgres --exec ${DAEMON}
+    if [ $? -eq 0 ]; then
+        echo "done."
+    else
+        echo "failed."
+    fi
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    force-reload)
+        stop
+        start
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|force-reload|restart}"
+        exit 1
+        ;;
+esac
+
+exit 0
