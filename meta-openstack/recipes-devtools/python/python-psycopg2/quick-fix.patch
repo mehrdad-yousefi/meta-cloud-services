@@ -1,0 +1,17 @@
+Index: psycopg2-2.5/setup.py
+===================================================================
+--- psycopg2-2.5.orig/setup.py
++++ psycopg2-2.5/setup.py
+@@ -377,9 +377,9 @@ class psycopg_build_ext(build_ext):
+             self.libraries.append("pq")
+ 
+         try:
+-            self.library_dirs.append(pg_config_helper.query("libdir"))
+-            self.include_dirs.append(pg_config_helper.query("includedir"))
+-            self.include_dirs.append(pg_config_helper.query("includedir-server"))
++            #self.library_dirs.append(pg_config_helper.query("libdir"))
++            #self.include_dirs.append(pg_config_helper.query("includedir"))
++            #self.include_dirs.append(pg_config_helper.query("includedir-server"))
+             try:
+                 # Here we take a conservative approach: we suppose that
+                 # *at least* PostgreSQL 7.4 is available (this is the only
