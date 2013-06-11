@@ -1,28 +1,16 @@
-DESCRIPTION = "A minimal nova compute image"
+DESCRIPTION = "Openstack compute node image"
+LICENSE = "MIT"
 
 IMAGE_INSTALL = " \
     packagegroup-core-boot \
     ${ROOTFS_PKGMANAGE_BOOTSTRAP} \
-    qemu \
-    libvirt \
-    libvirt-libvirtd \
-    libvirt-virsh \
-    python-nova \
-    python-novaclient \
-    qpid \
-    kernel-module-kvm \
-    kernel-module-kvm-intel \
-    kernel-module-kvm-amd \
+    packagegroup-cloud-compute \
     "
 
 IMAGE_FEATURES += "ssh-server-openssh"
 
-IMAGE_LINGUAS = " "
-
-LICENSE = "MIT"
-
 inherit core-image
 
-IMAGE_ROOTFS_SIZE = "8192"
+#IMAGE_ROOTFS_EXTRA_SPACE = "41943040"
 
 ROOTFS_POSTPROCESS_COMMAND += "remove_packaging_data_files ; "
