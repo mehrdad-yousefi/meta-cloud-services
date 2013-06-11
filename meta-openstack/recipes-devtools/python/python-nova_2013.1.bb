@@ -43,7 +43,7 @@ do_install_append() {
     touch ${D}${sysconfdir}/sudoers.d/nova-rootwrap
     chmod 0440 ${D}${sysconfdir}/sudoers.d/nova-rootwrap
     chown root:root ${D}${sysconfdir}/sudoers.d/nova-rootwrap
-    echo "root ALL=(root) NOPASSWD: nova-rootwrap" > ${D}${sysconfdir}/sudoers.d/nova-rootwrap
+    echo "root ALL=(root) NOPASSWD: ${bindir}/nova-rootwrap" > ${D}${sysconfdir}/sudoers.d/nova-rootwrap
 
     # Get the sample configuration file in place
     install -m 664 ${S}/etc/nova/api-paste.ini ${NOVA_CONF_DIR}
