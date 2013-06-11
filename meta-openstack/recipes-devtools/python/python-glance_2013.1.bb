@@ -11,6 +11,7 @@ SRC_URI = "https://launchpad.net/glance/grizzly/${PV}/+download/${SRCNAME}-${PV}
            file://glance-api.conf \
            file://glance-cache.conf \
            file://glance-registry.conf \
+           file://glance.init \
            "
 
 SRC_URI[md5sum] = "cd813098ca807bed67440bb1646d0647"
@@ -18,7 +19,7 @@ SRC_URI[sha256sum] = "f4deee125ee6729daee5315c6aacd9e265c3015692a62ae6aefeadbd3f
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
-inherit setuptools
+inherit setuptools update-rc.d
 
 do_install_append() {
 
@@ -41,6 +42,15 @@ do_install_append() {
 
     # Create the sqlite database
     touch ${GLANCE_CONF_DIR}/glance.db
+
+    if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
+        install -d ${D}${sysconfdir}/init.d
+        sed 's:@suffix@:api:' < ${WORKDIR}/glance.init >${WORKDIR}/glance-api.init.sh
+        install -m 0755 ${WORKDIR}/glance-api.init.sh ${D}${sysconfdir}/init.d/glance-api
+        sed 's:@suffix@:registry:' < ${WORKDIR}/glance.init >${WORKDIR}/glance-registry.init.sh
+        install -m 0755 ${WORKDIR}/glance-registry.init.sh ${D}${sysconfdir}/init.d/glance-registry
+    fi
+
 }
 
 pkg_postinst_${SRCNAME} () {
@@ -98,3 +108,6 @@ RDEPENDS_${SRCNAME} = "${PN} \
 RDEPENDS_${SRCNAME}-api = "${SRCNAME}"
 RDEPENDS_${SRCNAME}-registry = "${SRCNAME}"
 
+INITSCRIPT_PACKAGES = "${SRCNAME}-api ${SRCNAME}-registry"
+INITSCRIPT_NAME_${SRCNAME}-api = "glance-api"
+INITSCRIPT_NAME_${SRCNAME}-registry = "glance-registry"
