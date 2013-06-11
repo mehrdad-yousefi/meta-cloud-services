@@ -8,7 +8,8 @@ DEPENDS = "boost perl-native python "
 PR = "r0"
 
 SRC_URI = "http://mirror.nexcess.net/apache/${PN}/${PV}/qpid-cpp-0.20.tar.gz \
-           file://quick-fix.patch"
+           file://quick-fix.patch \
+           file://qpidd"
 
 SRC_URI[md5sum] = "566132c5939ca31a32a0e80cc4124122"
 SRC_URI[sha256sum] = "31b80ba3c4773d288b4e6245e3b2048438386331d460f7a7b0794cbd200301de"
@@ -26,7 +27,12 @@ export PERL="${STAGING_BINDIR}/perl"
 
 EXTRA_OECONF += " --without-help2man"
 
-PACKAGES += "qmfgen qmfgen-python"
+do_install_append() {
+     install -d ${D}${sysconfdir}/init.d
+     install -m 0755 ${WORKDIR}/qpidd ${D}${sysconfdir}/init.d/qpidd
+}
+
+PACKAGES += "qmfgen qmfgen-python qmfgen-python-dbg"
 
 FILES_qmfgen = "${bindir}/qmf-gen"
 
