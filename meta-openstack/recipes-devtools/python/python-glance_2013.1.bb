@@ -43,7 +43,7 @@ do_install_append() {
     touch ${GLANCE_CONF_DIR}/glance.db
 }
 
-pkg_postinst_${PN} () {
+pkg_postinst_${SRCNAME} () {
     if [ "x$D" != "x" ]; then
         exit 1
     fi
@@ -55,8 +55,22 @@ pkg_postinst_${PN} () {
     glance-manage db_sync
 }
 
-FILES_${PN} += "${sysconfdir}/${SRCNAME}/* \
-               ${localstatedir}/lib/${SRCNAME}/*"
+PACKAGES += " ${SRCNAME} ${SRCNAME}-api ${SRCNAME}-registry"
+
+FILES_${PN} = "${libdir}/*"
+
+FILES_${SRCNAME} = "${bindir}/* \
+    ${sysconfdir}/${SRCNAME}/* \
+    ${localstatedir}/* \
+    "
+
+FILES_${SRCNAME}-api = "${bindir}/glance-api \
+    ${sysconfdir}/init.d/glance-api \
+    "
+
+FILES_${SRCNAME}-registry = "${bindir}/glance-registry \
+    ${sysconfdir}/init.d/glance-registry \
+    "
 
 RDEPENDS_${PN} += "python-greenlet \
 	python-sqlalchemy \
@@ -78,3 +92,9 @@ RDEPENDS_${PN} += "python-greenlet \
 	python-keystoneclient \
 	python-swiftclient \
 	"
+
+RDEPENDS_${SRCNAME} = "${PN} \
+        postgresql postgresql-client python-psycopg2"
+RDEPENDS_${SRCNAME}-api = "${SRCNAME}"
+RDEPENDS_${SRCNAME}-registry = "${SRCNAME}"
+
