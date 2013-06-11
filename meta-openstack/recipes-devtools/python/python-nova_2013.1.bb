@@ -10,7 +10,8 @@ PR = "r0"
 SRCNAME = "nova"
 
 SRC_URI = "https://launchpad.net/${SRCNAME}/grizzly/${PV}/+download/${SRCNAME}-${PV}.tar.gz \
-           file://nova.conf"
+           file://nova.conf \
+           file://api-paste.ini"
 
 
 SRC_URI[md5sum] = "38022353c398ce38c4e220d1d18b5916"
@@ -45,11 +46,9 @@ do_install_append() {
     chown root:root ${D}${sysconfdir}/sudoers.d/nova-rootwrap
     echo "root ALL=(root) NOPASSWD: ${bindir}/nova-rootwrap" > ${D}${sysconfdir}/sudoers.d/nova-rootwrap
 
-    # Get the sample configuration file in place
-    install -m 664 ${S}/etc/nova/api-paste.ini ${NOVA_CONF_DIR}
-
     #Copy the configuration file
-    install -m 664 ${WORKDIR}/nova.conf ${NOVA_CONF_DIR}/nova.conf
+    install -m 664 ${WORKDIR}/nova.conf     ${NOVA_CONF_DIR}/nova.conf
+    install -m 664 ${WORKDIR}/api-paste.ini ${NOVA_CONF_DIR}
 
     # Create the sqlite database
     touch ${NOVA_CONF_DIR}/nova.db
