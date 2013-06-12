@@ -8,7 +8,6 @@ PR = "r0"
 SRCNAME = "quantum"
 
 SRC_URI = "https://launchpad.net/${SRCNAME}/grizzly/${PV}/+download/${SRCNAME}-${PV}.tar.gz \
-      file://fix-amqlib-version.patch \
       file://quantum.conf \
       file://ovs_quantum_plugin.ini \
       file://linuxbridge_conf.ini \
@@ -16,11 +15,12 @@ SRC_URI = "https://launchpad.net/${SRCNAME}/grizzly/${PV}/+download/${SRCNAME}-$
       file://quantum-agent.init \
 	  "
 
-#SRC_URI[md5sum] = "06ba502f288e30519f2f13c7b189bfb8"
-#SRC_URI[sha256sum] = "1fa925e2d95b7c508ad826d3020d67e1f720efa53e5c41eaca790116f2a0f691"
+#SRC_URI[md5sum] = "1ad2338b25cfde582de479678533113e"
+#SRC_URI[sha256sum] = "edae19fe45849168bc9cace82b63a11a3b9d2292ba733d4c536657c1c722e61e"
 
-SRC_URI[md5sum] = "1ad2338b25cfde582de479678533113e"
-SRC_URI[sha256sum] = "edae19fe45849168bc9cace82b63a11a3b9d2292ba733d4c536657c1c722e61e"
+SRC_URI[md5sum] = "890ec5be7cede9cef6c8033412b74fe9"
+SRC_URI[sha256sum] = "08752d58fc010332c527974ddff0475378f6104e77de40b0a690580f672c7fd2"
+
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
