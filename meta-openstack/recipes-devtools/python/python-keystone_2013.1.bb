@@ -52,15 +52,14 @@ pkg_postinst_${SRCNAME} () {
         exit 1
     fi
 
-    # Needed when using a MySQL backend
-    # mysql -u root -e "CREATE DATABASE keystone CHARACTER SET utf8;"
     sudo -u postgres createdb keystone
     keystone-manage db_sync
     keystone-manage pki_setup
     # quick fix
     echo "source /etc/keystone/openrc" > /home/root/.bashrc
+    #Create users, services and endpoints
     /etc/init.d/keystone start
-    sleep 1
+    sleep 0.25
     bash /etc/keystone/identity.sh
 }
 
