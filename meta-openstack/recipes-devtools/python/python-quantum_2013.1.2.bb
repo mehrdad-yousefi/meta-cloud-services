@@ -57,8 +57,6 @@ pkg_postinst_${SRCNAME} () {
         exit 1
     fi
 
-    # quick fix
-    #exit 1
     sudo -u postgres createdb quantum
 }
 
