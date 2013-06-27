@@ -3,12 +3,13 @@ HOMEPAGE = "http://www.rabbitmq.com/"
 LICENSE = "MPL-1.1"
 LIC_FILES_CHKSUM = "file://LICENSE-MPL-RabbitMQ;md5=10a81373a21abb63f98ef5dc93e1601a"
 SECTION = "network"
-DEPENDS = "erlang-native libxslt python-simplejson "
+DEPENDS = "erlang-native libxslt python-simplejson"
 PR = "r0"
 
 SRC_URI = "http://www.rabbitmq.com/releases/rabbitmq-server/v${PV}/${PN}-${PV}.tar.gz \
            file://rabbitmq-server \
-           file://quick-fix.patch"
+           file://remove-docs.patch \
+           "
 
 SRC_URI[md5sum] = "e4db90708fa2e9a687af342bbd2c0dd8"
 SRC_URI[sha256sum] = "e49dbcfd8b2085133847de33081e2defb1f4879d21a9776d54ab1f1988e0e163"
