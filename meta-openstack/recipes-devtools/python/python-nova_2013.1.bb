@@ -75,8 +75,7 @@ pkg_postinst_${SRCNAME}-controller () {
     if [ "x$D" != "x" ]; then
         exit 1
     fi
-    # Needed when using a MySQL backend
-    # mysql -u root -e "CREATE DATABASE nova CHARACTER SET latin1;"
+
     sudo -u postgres createdb nova
     nova-manage db sync
 }
