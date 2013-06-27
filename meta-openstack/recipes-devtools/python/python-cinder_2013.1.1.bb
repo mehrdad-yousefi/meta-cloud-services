@@ -43,8 +43,12 @@ pkg_postinst_${SRCNAME} () {
         exit 1
     fi
 
-    # quick fix
-    /etc/rpm-postinsts/postgresql
+    if ! pidof postmaster > /dev/null; then
+       sudo -u postgres initdb -D /etc/postgresql/
+       /etc/init.d/postgresql start
+       sleep 0.5
+       sudo -u postgres psql -c "CREATE ROLE admin WITH SUPERUSER LOGIN PASSWORD 'admin'"
+    fi
 
     sudo -u postgres createdb cinder
     cinder-manage db sync
