@@ -24,10 +24,8 @@ pkg_postinst_${PN} () {
     fi
 
     sudo -u postgres initdb -D /etc/${PN}/
-    #quick fix
     /etc/init.d/postgresql start
-    sleep 1
-    sudo -u postgres createuser -s nova
+    sudo -u postgres psql -c "CREATE ROLE admin WITH SUPERUSER LOGIN PASSWORD 'admin'"
 }
 
 FILES_${PN} += "${localstatedir}/run/${PN}"
