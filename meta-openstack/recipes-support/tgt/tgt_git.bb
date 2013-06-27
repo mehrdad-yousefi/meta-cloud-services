@@ -26,8 +26,8 @@ do_install() {
         install -m 0755 ${WORKDIR}/tgtd.init ${D}${sysconfdir}/init.d/tgtd
     fi
 }
-
-RDEPENDS_${PN} = "perl-tests \
+#perl-ptest
+RDEPENDS_${PN} = " \
     libconfig-general-perl \
     perl-module-english \
     perl-module-tie-hash-namedcapture \
