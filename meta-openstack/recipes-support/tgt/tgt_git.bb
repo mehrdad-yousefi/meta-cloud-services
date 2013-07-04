@@ -18,7 +18,6 @@ do_compile() {
 }
 
 do_install() {
-    #Quick don't build docs
     oe_runmake -e DESTDIR="${D}" install-programs install-conf install-scripts
 
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
