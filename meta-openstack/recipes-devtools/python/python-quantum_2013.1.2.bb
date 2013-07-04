@@ -15,9 +15,6 @@ SRC_URI = "https://launchpad.net/${SRCNAME}/grizzly/${PV}/+download/${SRCNAME}-$
       file://quantum-agent.init \
 	  "
 
-#SRC_URI[md5sum] = "1ad2338b25cfde582de479678533113e"
-#SRC_URI[sha256sum] = "edae19fe45849168bc9cace82b63a11a3b9d2292ba733d4c536657c1c722e61e"
-
 SRC_URI[md5sum] = "890ec5be7cede9cef6c8033412b74fe9"
 SRC_URI[sha256sum] = "08752d58fc010332c527974ddff0475378f6104e77de40b0a690580f672c7fd2"
 
