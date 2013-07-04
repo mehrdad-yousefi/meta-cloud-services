@@ -58,7 +58,14 @@ pkg_postinst_${SRCNAME} () {
         exit 1
     fi
     
-    mkdir /var/log/glance
+    # This is to make sure postgres is configured and running
+    if ! pidof postmaster > /dev/null; then
+       sudo -u postgres initdb -D /etc/postgresql/
+       /etc/init.d/postgresql start
+       sleep 0.5
+       sudo -u postgres psql -c "CREATE ROLE admin WITH SUPERUSER LOGIN PASSWORD 'admin'"
+    fi
+
     # Needed when using a MySQL backend
     # mysql -u root -e "CREATE DATABASE glance CHARACTER SET utf8;"
     sudo -u postgres createdb glance
