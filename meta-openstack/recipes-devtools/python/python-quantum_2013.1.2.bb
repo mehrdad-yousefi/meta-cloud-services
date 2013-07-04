@@ -57,7 +57,16 @@ pkg_postinst_${SRCNAME} () {
         exit 1
     fi
 
+    # This is to make sure postgres is configured and running
+    if ! pidof postmaster > /dev/null; then
+       sudo -u postgres initdb -D /etc/postgresql/
+       /etc/init.d/postgresql start
+       sleep 0.2
+       sudo -u postgres psql -c "CREATE ROLE admin WITH SUPERUSER LOGIN PASSWORD 'admin'"
+    fi
+
     sudo -u postgres createdb quantum
+
 }
 
 PACKAGES += " \

@@ -62,7 +62,7 @@ pkg_postinst_${SRCNAME} () {
     if ! pidof postmaster > /dev/null; then
        sudo -u postgres initdb -D /etc/postgresql/
        /etc/init.d/postgresql start
-       sleep 0.5
+       sleep 0.2
        sudo -u postgres psql -c "CREATE ROLE admin WITH SUPERUSER LOGIN PASSWORD 'admin'"
     fi
 
