@@ -26,6 +26,7 @@ pkg_postinst_${PN} () {
     sudo -u postgres initdb -D /etc/${PN}/
     /etc/init.d/postgresql start
     sudo -u postgres psql -c "CREATE ROLE admin WITH SUPERUSER LOGIN PASSWORD 'admin'"
+    ln -s /usr/share/zoneinfo /usr/share/postgresql/timezone
 }
 
 FILES_${PN} += "${localstatedir}/run/${PN}"
