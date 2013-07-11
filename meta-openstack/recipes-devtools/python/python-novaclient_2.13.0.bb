@@ -3,6 +3,7 @@ HOMEPAGE = "https://github.com/openstack/python-novaclient"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7cdb54622cacc9bc9b2883091e6dd669"
+DEPENDS = "python-setuptools-git"
 
 PR = "r0"
 
