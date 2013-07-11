@@ -20,4 +20,5 @@ RDEPENDS_${PN} = " postgresql \
     openvswitch-controller \
     cinder-api \
     cinder-volume \
+    horizon \
     "
