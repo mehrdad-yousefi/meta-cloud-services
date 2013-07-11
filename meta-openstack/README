@@ -1,0 +1,52 @@
+meta-openstack
+===================
+
+This layer provides support for building the packages from the OpenStack project.
+The layer contains recipes for the nova, glance, keystone, cinder, quantum, swift
+and horizon components.
+
+Dependencies
+------------
+
+This layer depends on:
+
+URI: git://github.com/openembedded/oe-core.git
+branch: master
+tag: yocto-1.4.1
+
+URI: git://github.com/openembedded/meta-oe.git
+branch: dylan
+revision: HEAD
+patches: 0001-python-sqlalchemy-update-to-0.7.9.patch
+layers: meta-oe
+	meta-networking
+    meta-ruby
+
+URI: git://git.yoctoproject.org/meta-virtualization
+branch: master
+revision: 7040db74c375ef55d1b040f53071be29590882de
+patches: 0001-linux-yocto-Added-3.8-kernel-bbappend.patch
+
+The patches for the layers can be found in the patches folder. They can be
+applied using git am.
+
+Maintenance
+-----------
+
+Maintainers: Mihai Prica <prica.mihai@gmail.com>
+
+License
+-------
+
+All metadata is MIT licensed unless otherwise stated. Source code included
+in tree for individual recipes is under the LICENSE stated in each recipe
+(.bb file) unless otherwise stated.
+
+Target images
+-------------
+
+There are two target images: nova-image-compute and nova-image-controller.
+This contain the packagegroups with the same name and can be used to create
+the two types of targets. There are no extra configurations required to build
+these images.
+
