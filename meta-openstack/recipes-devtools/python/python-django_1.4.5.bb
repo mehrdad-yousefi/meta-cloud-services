@@ -10,12 +10,12 @@ SRCNAME = "Django"
 SRC_URI = "https://pypi.python.org/packages/source/D/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
 "
 
-#SRC_URI[md5sum] = "7465f6383264ba167a9a031d6b058bff"
-#SRC_URI[sha256sum] = "885fadcbb8963c0ccda5d9d2cca792970b0289b4e662406b2de2b736ff46123d"
-
-SRC_URI[md5sum] = "fac09e1e0f11bb83bb187d652a9be967"
-SRC_URI[sha256sum] = "078bf8f8ab025ed79e41ed5cee145a64dffea638eb5c2928c8cd106720824416"
+SRC_URI[md5sum] = "851d00905eb70e4aa6384b3b8b111fb7"
+SRC_URI[sha256sum] = "0e1e8c4217299672bbf9404994717fca2d8d4b7a4f7b8b3b74d413e1fda81428"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
-inherit distutils 
+inherit distutils
+
+FILES_${PN} += "${datadir}/django/*"
+
