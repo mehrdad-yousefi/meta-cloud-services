@@ -9,43 +9,40 @@ horizon components and their dependencies.
 
 Components
 ----------
-* All the openstack packages are python packages so they can be found in the
+* All the openstack packages are python packages. They can be found in the
 recipes-devtools/python folder. Each component has been split into multiple
-packages similar to the ones used by other Linux distributions.
+packages similar to the system used by other Linux distributions.
 
-* The configuration files for each package can be found in the folder with the
-package name. The debug and verbose options have been enabled for capturing
-meaningful information in the logs. The configurations have been done using
-devstack as a model. Each package has to initialize the database before it is
-used for the first time. This is done using a postinstall script that is run
-the first time the image is booted. Due to this, the image boot time is longer
-the first time.
+* The configuration files for each package can be found in the files folder
+for each package. The debug and verbose options have been enabled for capturing
+meaningful information in the logs. The packages have been configured
+following the model used by devstack. Each package has to initialize a database
+before it is used for the first time. This is done using a postinstall script
+that is run the first time the image is booted. This is why the image boot
+time is longer the first time.
 
-* System-V initscripts are also provided that start the services at boot time.
+* System-V initscripts are also provided in order to start the services at boot time.
 
-* The postgresql package is used for the database backend. The layer contains
-an initscript that starts the DB server at boot time. Tests were also done
+* We used postgresql (package) for the database backend. The layer contains
+an initscript that starts the DB server at boot time. Tests were done
 using sqlite3 and MySQL and there were no errors.
 
-* The RabbitMQ server is used for the AMQP message queues.  The server is
-started at boot time with the default configuration.
+* The RabbitMQ server is used for the AMQP message queues. The server starts
+at boot time with the default configuration.
 
-* The dashboard(horizon) component is still under development.
-
-* Three new packagegroups have been defined:
+* The layer also contains three packagegroups:
 ** packagegroup-cloud-controller - required packages for building a controller
-node. This provides all functionality except the hosting of the virtual
-machines or providing network services. This includes the postgresql-server,
-rabbitmq-server and all the openstack services except the nova-compute
-component.
+node. This provides all functionality except the actual hosting of the virtual
+machines or network services. This includes the database server, AMQP server
+and all the openstack services except nova-compute.
 ** packagegroup-cloud-compute - packages for a processing  node. This node runs
 the compute service as well as the network service agent (in our case, the
 Open vSwitch plugin agent). This server also manages the KVM  hypervisor.
 ** packagegroup-cloud-network: this provides networking services like DHCP,
 layer 2 switching, layer 3 routing and metadata connectivity.
 
-* Multiple packagegroups can be used in the same image to get a image that can
-be used both as a controller and compute node.
+* When creating an image, multiple packagegroups can be used to obtain a target
+that has the functionality of both a controller and compute node.
 
 Dependencies
 ------------
@@ -57,7 +54,7 @@ Building an image
 -----------------
 * There are two new target images: nova-image-compute and nova-image-controller
 that contain the packagegroups with the same name, that have been describe
-above.
+in the previous section.
 
 * Once a buildir has been initialized you have to append the necessary layers
 to the bblayers.conf file:
@@ -69,19 +66,23 @@ to the bblayers.conf file:
 Package configurations
 ----------------------
 The identity.sh script creates the necessary users, services and endpoints
-for the Keystone identity system. If you want to customize the usernames,
-passwords you have to change this information in the configuration
-files for the services as well.
+for the Keystone identity system. If you want to customize the usernames or
+passwords don't forget to change the information in the configuration files
+for the services as well.
 
 Running an image
 ----------------
 * Controller node *
-To test the image, you can run it using the runqemu script. After the image
-has booted, to use the command line clients some environmental variables
-required by the openstack services to connect to the identity service have to
-be set. These can be found in /root/.bashrc. If you start a new bash session
-they are automatically loaded. All the nova(except compute), keystone, glance,
-cinder, quantum, swift services should be running after a successful boot.
+To test the image, you can run it using the runqemu script. In order to use
+the command line clients (nova, keystone, glance etc) some environmental
+variables have to be set. These are required by the openstack services to
+connect to the identity service and authenticate the user. These can be found
+in /root/.bashrc. If you start a new bash session they are automatically
+loaded. All the installed OpenStack services nova(except compute), keystone,
+glance, cinder, quantum, swift horizon should be running after a successful boot.
+
+The dashboard component is listening for new connections on port 8080. You can
+connect to it using any browser.
 
 * Compute node *
 The configuration files for the nova package are for a controller node so some
@@ -92,5 +93,5 @@ to replace localhost to the controller node IP in the following files:
     /root/.bashrc:              SERVICE_ENDPOINT, OS_AUTH_URL;
 Once the changes are done you have to restart the nova-compute service.
 !! Hint !!
-When using a multi-node setup is recommended that each host have a different
+When using a multi-node setup it is recommended that each host have a different
 hostname and that every host knows the other hosts.
