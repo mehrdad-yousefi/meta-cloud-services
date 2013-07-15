@@ -13,18 +13,17 @@ SRC_URI = "https://launchpad.net/${SRCNAME}/grizzly/${PV}/+download/${SRCNAME}-$
            file://nova.conf \
            file://nova-compute \
            file://nova-all \
-           file://api-paste.ini"
-
+           "
 
 SRC_URI[md5sum] = "38022353c398ce38c4e220d1d18b5916"
 SRC_URI[sha256sum] = "db7f5259d848358bf14105d5833869ec145f643312e6bc0adef0050120fe3e07"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
-inherit setuptools useradd update-rc.d
+inherit setuptools useradd update-rc.d identity
 
 do_install_append() {
-
+    TEMPLATE_CONF_DIR=${S}${sysconfdir}/${SRCNAME}
     NOVA_CONF_DIR=${D}/${sysconfdir}/nova
 
     install -d ${NOVA_CONF_DIR}
@@ -48,6 +47,13 @@ do_install_append() {
     chown root:root ${D}${sysconfdir}/sudoers.d/nova-rootwrap
     echo "root ALL=(root) NOPASSWD: ${bindir}/nova-rootwrap" > ${D}${sysconfdir}/sudoers.d/nova-rootwrap
 
+    #Configuration options
+    sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
+        ${TEMPLATE_CONF_DIR}/api-paste.ini > ${WORKDIR}/api-paste.ini
+    sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${WORKDIR}/api-paste.ini
+    sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
+        -i ${WORKDIR}/api-paste.ini
+
     #Copy the configuration file
     install -m 664 ${WORKDIR}/nova.conf     ${NOVA_CONF_DIR}/nova.conf
     install -m 664 ${WORKDIR}/api-paste.ini ${NOVA_CONF_DIR}
@@ -63,8 +69,6 @@ do_install_append() {
     fi
 
 }
-
-inherit useradd update-rc.d
 
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "--system nova"
