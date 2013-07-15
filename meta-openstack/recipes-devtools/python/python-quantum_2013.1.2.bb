@@ -8,7 +8,6 @@ PR = "r0"
 SRCNAME = "quantum"
 
 SRC_URI = "https://launchpad.net/${SRCNAME}/grizzly/${PV}/+download/${SRCNAME}-${PV}.tar.gz \
-      file://quantum.conf \
       file://ovs_quantum_plugin.ini \
       file://linuxbridge_conf.ini \
       file://quantum-server.init \
@@ -21,11 +20,19 @@ SRC_URI[sha256sum] = "08752d58fc010332c527974ddff0475378f6104e77de40b0a690580f67
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
-inherit setuptools update-rc.d
+inherit setuptools update-rc.d identity
 
 do_install_append() {
-
+    TEMPLATE_CONF_DIR=${S}${sysconfdir}/
     QUANTUM_CONF_DIR=${D}${sysconfdir}/quantum
+
+    sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
+        ${TEMPLATE_CONF_DIR}/quantum.conf > ${WORKDIR}/quantum.conf
+    sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${WORKDIR}/quantum.conf
+    sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
+        -i ${WORKDIR}/quantum.conf
+    sed -e "s:^# core_plugin.*:core_plugin = quantum.plugins.openvswitch.ovs_quantum_plugin.OVSQuantumPluginV2:g" \
+        -i ${WORKDIR}/quantum.conf
 
     install -d ${QUANTUM_CONF_DIR}
     install -d ${QUANTUM_CONF_DIR}/plugins/openvswitch
@@ -38,7 +45,6 @@ do_install_append() {
     install -m 600 ${S}/etc/policy.json ${QUANTUM_CONF_DIR}/
 
     PLUGIN=openvswitch
-
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
         sed "s:@plugin@:/etc/quantum/plugins/$PLUGIN/ovs_quantum_plugin.ini:" \
@@ -63,7 +69,6 @@ pkg_postinst_${SRCNAME} () {
     fi
 
     sudo -u postgres createdb quantum
-
 }
 
 PACKAGES += " \
