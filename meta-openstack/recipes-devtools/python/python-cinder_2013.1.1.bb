@@ -9,7 +9,6 @@ SRCNAME = "cinder"
 
 SRC_URI = "https://launchpad.net/${SRCNAME}/grizzly/${PV}/+download/${SRCNAME}-${PV}.tar.gz \
     file://cinder.conf \
-	file://api-paste.ini \
     file://cinder.init \
 	"
 
@@ -18,17 +17,23 @@ SRC_URI[sha256sum] = "c4d7f508f404b555242abc638901a39b02d4345c2d101a0aaad52fec11
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
-inherit setuptools update-rc.d
+inherit setuptools update-rc.d identity
 
 do_install_append() {
-	CINDER_CONF_DIR=${D}${sysconfdir}/cinder
+    TEMPLATE_CONF_DIR=${S}${sysconfdir}/${SRCNAME}
+    CINDER_CONF_DIR=${D}${sysconfdir}/${SRCNAME}
+
+    sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
+        ${TEMPLATE_CONF_DIR}/api-paste.ini > ${WORKDIR}/api-paste.ini
+    sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${WORKDIR}/api-paste.ini
+    sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
+        -i ${WORKDIR}/api-paste.ini
 
     install -d ${CINDER_CONF_DIR}
-
     install -m 600 ${WORKDIR}/cinder.conf ${CINDER_CONF_DIR}/
     install -m 600 ${WORKDIR}/api-paste.ini ${CINDER_CONF_DIR}/
     install -m 600 ${S}/etc/cinder/policy.json ${CINDER_CONF_DIR}/
-    
+
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
         sed 's:@suffix@:api:' < ${WORKDIR}/cinder.init >${WORKDIR}/cinder-api.init.sh
