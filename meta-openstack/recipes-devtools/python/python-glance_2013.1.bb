@@ -8,9 +8,6 @@ PR = "r0"
 SRCNAME = "glance"
 
 SRC_URI = "https://launchpad.net/glance/grizzly/${PV}/+download/${SRCNAME}-${PV}.tar.gz \
-           file://glance-api.conf \
-           file://glance-cache.conf \
-           file://glance-registry.conf \
            file://glance.init \
            "
 
@@ -19,14 +16,26 @@ SRC_URI[sha256sum] = "f4deee125ee6729daee5315c6aacd9e265c3015692a62ae6aefeadbd3f
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
-inherit setuptools update-rc.d
+inherit setuptools update-rc.d identity
 
 do_install_append() {
-
+    TEMPLATE_CONF_DIR=${S}${sysconfdir}
     GLANCE_CONF_DIR=${D}${sysconfdir}/glance
 
-    install -d ${GLANCE_CONF_DIR}
+    for file in api registry cache
+    do
+        sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
+            ${TEMPLATE_CONF_DIR}/glance-$file.conf > ${WORKDIR}/glance-$file.conf
+        sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${WORKDIR}/glance-$file.conf
+        sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
+            -i ${WORKDIR}/glance-$file.conf
+        sed -e "s#^sql_conn.*#sql_connection = postgresql://admin:admin@localhost/glance#g" \
+            -i ${WORKDIR}/glance-$file.conf
+    done
+    sed -e "s:^filesystem_store_datadir =.*:filesystem_store_datadir = ${sysconfdir}/${SRCNAME}/images/:g" \
+        -i ${WORKDIR}/glance-api.conf
 
+    install -d ${GLANCE_CONF_DIR}
     install -m 600 ${WORKDIR}/glance-registry.conf ${GLANCE_CONF_DIR}/
     install -m 600 ${WORKDIR}/glance-api.conf ${GLANCE_CONF_DIR}/
     install -m 600 ${WORKDIR}/glance-cache.conf ${GLANCE_CONF_DIR}/
@@ -61,9 +70,8 @@ pkg_postinst_${SRCNAME} () {
        sleep 0.2
        sudo -u postgres psql -c "CREATE ROLE admin WITH SUPERUSER LOGIN PASSWORD 'admin'"
     fi
-
-    # Needed when using a MySQL backend
-    # mysql -u root -e "CREATE DATABASE glance CHARACTER SET utf8;"
+    
+    mkdir /var/log/glance
     sudo -u postgres createdb glance
     glance-manage db_sync
 }
