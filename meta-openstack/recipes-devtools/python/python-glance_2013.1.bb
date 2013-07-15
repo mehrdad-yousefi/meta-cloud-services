@@ -40,9 +40,6 @@ do_install_append() {
 
     install -d ${D}${localstatedir}/log/${SRCNAME}
 
-    # Create the sqlite database
-    touch ${GLANCE_CONF_DIR}/glance.db
-
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
         sed 's:@suffix@:api:' < ${WORKDIR}/glance.init >${WORKDIR}/glance-api.init.sh
@@ -50,7 +47,6 @@ do_install_append() {
         sed 's:@suffix@:registry:' < ${WORKDIR}/glance.init >${WORKDIR}/glance-registry.init.sh
         install -m 0755 ${WORKDIR}/glance-registry.init.sh ${D}${sysconfdir}/init.d/glance-registry
     fi
-
 }
 
 pkg_postinst_${SRCNAME} () {
