@@ -19,7 +19,7 @@ SRC_URI[sha256sum] = "34347a3242a40d93b98c3722e6f3fbc112bc1c9ef20c045c3d40637e45
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
-inherit setuptools update-rc.d
+inherit setuptools update-rc.d identity
 
 SERVICE_TOKEN = "password"
 
@@ -68,7 +68,9 @@ pkg_postinst_${SRCNAME} () {
     #Create users, services and endpoints
     /etc/init.d/keystone start
     sleep 0.25
-    bash /etc/keystone/identity.sh
+    SERVICE_PASSWORD=${SERVICE_PASSWORD} \
+    SERVICE_TENANT_NAME=${SERVICE_TENANT_NAME} \
+        bash /etc/keystone/identity.sh
 }
 
 PACKAGES += " ${SRCNAME}"
