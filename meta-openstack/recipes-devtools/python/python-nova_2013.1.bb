@@ -54,6 +54,9 @@ do_install_append() {
     sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
         -i ${WORKDIR}/api-paste.ini
 
+    sed -e "s:%DB_USER%:${DB_USER}:g" -i ${WORKDIR}/nova.conf
+    sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${WORKDIR}/nova.conf
+
     #Copy the configuration file
     install -m 664 ${WORKDIR}/nova.conf     ${NOVA_CONF_DIR}/nova.conf
     install -m 664 ${WORKDIR}/api-paste.ini ${NOVA_CONF_DIR}
@@ -85,7 +88,7 @@ pkg_postinst_${SRCNAME}-controller () {
        sudo -u postgres initdb -D /etc/postgresql/
        /etc/init.d/postgresql start
        sleep 0.2
-       sudo -u postgres psql -c "CREATE ROLE admin WITH SUPERUSER LOGIN PASSWORD 'admin'"
+       sudo -u postgres psql -c "CREATE ROLE ${DB_USER} WITH SUPERUSER LOGIN PASSWORD '${DB_PASSWORD}'"
     fi
 
     sudo -u postgres createdb nova
