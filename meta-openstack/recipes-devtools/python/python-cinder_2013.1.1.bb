@@ -29,6 +29,9 @@ do_install_append() {
     sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
         -i ${WORKDIR}/api-paste.ini
 
+    sed -e "s:%DB_USER%:${DB_USER}:g" -i ${WORKDIR}/cinder.conf
+    sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${WORKDIR}/cinder.conf
+
     install -d ${CINDER_CONF_DIR}
     install -m 600 ${WORKDIR}/cinder.conf ${CINDER_CONF_DIR}/
     install -m 600 ${WORKDIR}/api-paste.ini ${CINDER_CONF_DIR}/
@@ -53,7 +56,7 @@ pkg_postinst_${SRCNAME} () {
        sudo -u postgres initdb -D /etc/postgresql/
        /etc/init.d/postgresql start
        sleep 0.2
-       sudo -u postgres psql -c "CREATE ROLE admin WITH SUPERUSER LOGIN PASSWORD 'admin'"
+       sudo -u postgres psql -c "CREATE ROLE ${DB_USER} WITH SUPERUSER LOGIN PASSWORD '${DB_PASSWORD}'"
     fi
 
     sudo -u postgres createdb cinder
