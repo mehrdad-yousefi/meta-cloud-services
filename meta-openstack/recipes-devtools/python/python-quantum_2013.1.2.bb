@@ -34,6 +34,12 @@ do_install_append() {
     sed -e "s:^# core_plugin.*:core_plugin = quantum.plugins.openvswitch.ovs_quantum_plugin.OVSQuantumPluginV2:g" \
         -i ${WORKDIR}/quantum.conf
 
+    for file in ovs_quantum_plugin.ini linuxbridge_conf.ini
+    do
+        sed -e "s:%DB_USER%:${DB_USER}:g" -i ${WORKDIR}/${file}
+        sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${WORKDIR}/${file}
+    done
+
     install -d ${QUANTUM_CONF_DIR}
     install -d ${QUANTUM_CONF_DIR}/plugins/openvswitch
     install -d ${QUANTUM_CONF_DIR}/plugins/linuxbridge
@@ -65,7 +71,7 @@ pkg_postinst_${SRCNAME} () {
        sudo -u postgres initdb -D /etc/postgresql/
        /etc/init.d/postgresql start
        sleep 0.2
-       sudo -u postgres psql -c "CREATE ROLE admin WITH SUPERUSER LOGIN PASSWORD 'admin'"
+       sudo -u postgres psql -c "CREATE ROLE ${DB_USER} WITH SUPERUSER LOGIN PASSWORD '${DB_PASSWORD}'"
     fi
 
     sudo -u postgres createdb quantum
