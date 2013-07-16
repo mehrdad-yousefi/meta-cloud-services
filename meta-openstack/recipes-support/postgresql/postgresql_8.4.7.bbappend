@@ -3,7 +3,7 @@ PRINC := "${@int(PRINC) + 1}"
 
 SRC_URI += "file://postgresql"
 
-inherit useradd update-rc.d
+inherit useradd update-rc.d identity
 
 do_install_append() {
     install -d ${D}${sysconfdir}/${PN}
@@ -25,7 +25,7 @@ pkg_postinst_${PN} () {
 
     sudo -u postgres initdb -D /etc/${PN}/
     /etc/init.d/postgresql start
-    sudo -u postgres psql -c "CREATE ROLE admin WITH SUPERUSER LOGIN PASSWORD 'admin'"
+    sudo -u postgres psql -c "CREATE ROLE ${DB_USER} WITH SUPERUSER LOGIN PASSWORD '${DB_PASSWORD}'"
     ln -s /usr/share/zoneinfo /usr/share/postgresql/timezone
 }
 
