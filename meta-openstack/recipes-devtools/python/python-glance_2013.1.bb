@@ -29,7 +29,7 @@ do_install_append() {
         sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${WORKDIR}/glance-$file.conf
         sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
             -i ${WORKDIR}/glance-$file.conf
-        sed -e "s#^sql_conn.*#sql_connection = postgresql://admin:admin@localhost/glance#g" \
+        sed -e "s#^sql_conn.*#sql_connection = postgresql://${DB_USER}:${DB_PASSWORD}@localhost/glance#g" \
             -i ${WORKDIR}/glance-$file.conf
     done
     sed -e "s:^filesystem_store_datadir =.*:filesystem_store_datadir = ${sysconfdir}/${SRCNAME}/images/:g" \
@@ -68,7 +68,7 @@ pkg_postinst_${SRCNAME} () {
        sudo -u postgres initdb -D /etc/postgresql/
        /etc/init.d/postgresql start
        sleep 0.2
-       sudo -u postgres psql -c "CREATE ROLE admin WITH SUPERUSER LOGIN PASSWORD 'admin'"
+       sudo -u postgres psql -c "CREATE ROLE ${DB_USER} WITH SUPERUSER LOGIN PASSWORD '${DB_PASSWORD}'"
     fi
     
     mkdir /var/log/glance
