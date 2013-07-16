@@ -29,7 +29,9 @@ do_install_append() {
 
     install -d ${KEYSTONE_CONF_DIR}
 
-    sed -e "s:^admin_token=.*:admin_token=${SERVICE_TOKEN}:g" -i ${WORKDIR}/keystone.conf
+    sed -e "s:%SERVICE_TOKEN%:${SERVICE_TOKEN}:g" -i ${WORKDIR}/keystone.conf
+    sed -e "s:%DB_USER%:${DB_USER}:g" -i ${WORKDIR}/keystone.conf
+    sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${WORKDIR}/keystone.conf
 
     install -m 600 ${WORKDIR}/keystone.conf ${KEYSTONE_CONF_DIR}/
     install -m 600 ${WORKDIR}/identity.sh ${KEYSTONE_CONF_DIR}/
@@ -57,7 +59,7 @@ pkg_postinst_${SRCNAME} () {
        sudo -u postgres initdb -D /etc/postgresql/
        /etc/init.d/postgresql start
        sleep 0.2
-       sudo -u postgres psql -c "CREATE ROLE admin WITH SUPERUSER LOGIN PASSWORD 'admin'"
+       sudo -u postgres psql -c "CREATE ROLE ${DB_USER} WITH SUPERUSER LOGIN PASSWORD '${DB_PASSWORD}'"
     fi
 
     sudo -u postgres createdb keystone
