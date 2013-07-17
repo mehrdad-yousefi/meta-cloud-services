@@ -43,9 +43,6 @@ do_install_append() {
         install -d ${D}${sysconfdir}/init.d
         install -m 0755 ${WORKDIR}/keystone ${D}${sysconfdir}/init.d/keystone
     fi
-
-    # Create the sqlite database
-    touch ${KEYSTONE_CONF_DIR}/keystone.db
 }
 
 pkg_postinst_${SRCNAME} () {
