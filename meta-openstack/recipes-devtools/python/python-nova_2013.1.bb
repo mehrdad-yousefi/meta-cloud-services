@@ -37,7 +37,8 @@ do_install_append() {
 
      # Set up rootwrap.conf, pointing to /etc/nova/rootwrap.d
     install -m 644 ${S}/etc/nova/rootwrap.conf ${NOVA_CONF_DIR}/
-    sed -e "s:^filters_path=.*$:filters_path=${NOVA_CONF_DIR}/rootwrap.d:" -i ${NOVA_CONF_DIR}/rootwrap.conf
+    sed -e "s:^filters_path=.*$:filters_path=${NOVA_CONF_DIR}/rootwrap.d:" \
+        -i ${NOVA_CONF_DIR}/rootwrap.conf
     chown root:root $NOVA_CONF_DIR/rootwrap.conf
 
     # Set up the rootwrap sudoers for nova
@@ -45,7 +46,8 @@ do_install_append() {
     touch ${D}${sysconfdir}/sudoers.d/nova-rootwrap
     chmod 0440 ${D}${sysconfdir}/sudoers.d/nova-rootwrap
     chown root:root ${D}${sysconfdir}/sudoers.d/nova-rootwrap
-    echo "root ALL=(root) NOPASSWD: ${bindir}/nova-rootwrap" > ${D}${sysconfdir}/sudoers.d/nova-rootwrap
+    echo "root ALL=(root) NOPASSWD: ${bindir}/nova-rootwrap" > \
+        ${D}${sysconfdir}/sudoers.d/nova-rootwrap
 
     #Configuration options
     sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
@@ -78,6 +80,16 @@ GROUPADD_PARAM_${PN} = "--system nova"
 USERADD_PARAM_${PN}  = "--system --home /var/lib/nova -g nova \
                         --no-create-home --shell /bin/false nova"
 
+PACKAGES += "${SRCNAME}-common ${SRCNAME}-compute ${SRCNAME}-controller"
+
+pkg_postinst_${SRCNAME}-common () {
+    if [ "x$D" != "x" ]; then
+        exit 1
+    fi
+
+    echo "source /etc/nova/openrc" > /home/root/.bashrc
+}
+
 pkg_postinst_${SRCNAME}-controller () {
     if [ "x$D" != "x" ]; then
         exit 1
@@ -95,7 +107,6 @@ pkg_postinst_${SRCNAME}-controller () {
     nova-manage db sync
 }
 
-PACKAGES += "${SRCNAME}-common ${SRCNAME}-compute ${SRCNAME}-controller"
 
 FILES_${PN} = "${libdir}/*"
 
