@@ -62,11 +62,11 @@ pkg_postinst_${SRCNAME} () {
     sudo -u postgres createdb keystone
     keystone-manage db_sync
     keystone-manage pki_setup
-    # quick fix
-    echo "source /etc/keystone/openrc" > /home/root/.bashrc
+
     #Create users, services and endpoints
     /etc/init.d/keystone start
     sleep 0.25
+    ADMIN_PASSWORD=${ADMIN_PASSWORD} \
     SERVICE_PASSWORD=${SERVICE_PASSWORD} \
     SERVICE_TENANT_NAME=${SERVICE_TENANT_NAME} \
         bash /etc/keystone/identity.sh
