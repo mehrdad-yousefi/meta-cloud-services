@@ -10,7 +10,6 @@ SRCNAME = "keystone"
 SRC_URI = "https://launchpad.net/keystone/grizzly/${PV}/+download/${SRCNAME}-${PV}.tar.gz \
            file://keystone.conf \
            file://identity.sh \
-           file://openrc \
            file://keystone \
 		  "
 

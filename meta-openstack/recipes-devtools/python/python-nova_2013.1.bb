@@ -13,6 +13,7 @@ SRC_URI = "https://launchpad.net/${SRCNAME}/grizzly/${PV}/+download/${SRCNAME}-$
            file://nova.conf \
            file://nova-compute \
            file://nova-all \
+           file://openrc \
            "
 
 SRC_URI[md5sum] = "38022353c398ce38c4e220d1d18b5916"
@@ -59,12 +60,14 @@ do_install_append() {
     sed -e "s:%DB_USER%:${DB_USER}:g" -i ${WORKDIR}/nova.conf
     sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${WORKDIR}/nova.conf
 
+    sed -e "s:%OS_PASSWORD%:${ADMIN_PASSWORD}:g" -i ${WORKDIR}/openrc
+    sed -e "s:%SERVICE_TOKEN%:${SERVICE_TOKEN}:g" -i ${WORKDIR}/openrc
+
     #Copy the configuration file
     install -m 664 ${WORKDIR}/nova.conf     ${NOVA_CONF_DIR}/nova.conf
     install -m 664 ${WORKDIR}/api-paste.ini ${NOVA_CONF_DIR}
+    install -m 664 ${WORKDIR}/openrc        ${NOVA_CONF_DIR}
 
-    # Create the sqlite database
-    #touch ${NOVA_CONF_DIR}/nova.db
     install -d ${NOVA_CONF_DIR}/instances
 
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
