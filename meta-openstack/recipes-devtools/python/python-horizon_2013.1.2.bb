@@ -39,10 +39,8 @@ do_install_append() {
     DASHBOARD_DIR=${D}${PYTHON_SITEPACKAGES_DIR}/openstack_dashboard
     sed -e "s:^LANGUAGE_CODE =.*:LANGUAGE_CODE = 'en-us':g" \
         -i ${DASHBOARD_DIR}/settings.py
-    sed -e "s:^DEBUG =.*:DEBUG = False:g" \
-        ${DASHBOARD_DIR}/local/local_settings.py.example > ${DASHBOARD_DIR}/local/local_settings.py
     sed -e "s:^# from horizon.utils:from horizon.utils:g" \
-        -i ${DASHBOARD_DIR}/local/local_settings.py
+        ${DASHBOARD_DIR}/local/local_settings.py.example > ${DASHBOARD_DIR}/local/local_settings.py
     sed -e "s:^# SECRET_KEY =:SECRET_KEY =:g" \
         -i ${DASHBOARD_DIR}/local/local_settings.py
     install -m 644 ${S}/manage.py ${DASHBOARD_DIR}/manage.py
