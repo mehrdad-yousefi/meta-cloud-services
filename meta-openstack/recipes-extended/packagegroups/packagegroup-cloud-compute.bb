@@ -12,6 +12,7 @@ RDEPENDS_${PN} = " qemu \
     kernel-module-kvm-intel \
     kernel-module-kvm-amd \
     kernel-module-nbd \
+    kernel-module-veth \
     nova-compute \
     python-novaclient \
     quantum-plugin-openvswitch \
