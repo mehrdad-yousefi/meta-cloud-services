@@ -25,6 +25,7 @@ SRCNAME = "horizon"
 
 SRC_URI = "https://launchpad.net/horizon/grizzly/${PV}/+download/${SRCNAME}-${PV}.tar.gz \
     file://horizon.init \
+    file://fix_bindir_path.patch \
     "
 
 SRC_URI[md5sum] = "23db8455f768c830485ef283c06f0e65"
@@ -51,6 +52,8 @@ do_install_append() {
         sed 's:@PYTHON_SITEPACKAGES@:${PYTHON_SITEPACKAGES_DIR}:' ${WORKDIR}/horizon.init >${WORKDIR}/horizon
         install -m 0755 ${WORKDIR}/horizon ${D}${sysconfdir}/init.d/horizon
     fi
+
+    mv ${D}${datadir}/bin ${DASHBOARD_DIR}/bin
 }
 
 PACKAGES += "${SRCNAME}"
