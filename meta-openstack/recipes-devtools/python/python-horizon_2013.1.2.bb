@@ -63,7 +63,8 @@ FILES_${SRCNAME} = "${bindir}/* \
     ${datadir}/* \
     "
 
-RDEPENDS_${PN} += "python-django \
+RDEPENDS_${PN} += "nodejs \
+    python-django \
     python-django-appconf \
     python-django-compressor \
     python-django-openstack-auth \
