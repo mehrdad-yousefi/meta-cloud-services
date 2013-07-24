@@ -74,7 +74,8 @@ pkg_postinst_${SRCNAME} () {
        sudo -u postgres psql -c "CREATE ROLE ${DB_USER} WITH SUPERUSER LOGIN PASSWORD '${DB_PASSWORD}'"
     fi
 
-    sudo -u postgres createdb quantum
+    sudo -u postgres createdb ovs_quantum
+}
 }
 
 PACKAGES += " \
