@@ -20,4 +20,8 @@ RRECOMMENDS_${PN} = " \
     kernel-module-kvm-amd \
     kernel-module-nbd \
     kernel-module-veth \
+    kernel-module-ebt-arp \
+    kernel-module-ebt-ip \
+    kernel-module-ebtables \
+    kernel-module-ebtable-nat \
     "
