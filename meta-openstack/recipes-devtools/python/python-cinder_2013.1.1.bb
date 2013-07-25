@@ -42,6 +42,8 @@ do_install_append() {
         install -d ${D}${sysconfdir}/init.d
         sed 's:@suffix@:api:' < ${WORKDIR}/cinder.init >${WORKDIR}/cinder-api.init.sh
         install -m 0755 ${WORKDIR}/cinder-api.init.sh ${D}${sysconfdir}/init.d/cinder-api
+        sed 's:@suffix@:scheduler:' < ${WORKDIR}/cinder.init >${WORKDIR}/cinder-scheduler.init.sh
+        install -m 0755 ${WORKDIR}/cinder-scheduler.init.sh ${D}${sysconfdir}/init.d/cinder-scheduler
         install -m 0755 ${WORKDIR}/cinder-volume ${D}${sysconfdir}/init.d/cinder-volume
     fi
 }
@@ -67,7 +69,7 @@ pkg_postinst_${SRCNAME} () {
     echo "include /etc/cinder/data/volumes/*" >> /etc/tgt/targets.conf
 }
 
-PACKAGES += "${SRCNAME} ${SRCNAME}-api ${SRCNAME}-volume"
+PACKAGES += "${SRCNAME} ${SRCNAME}-api ${SRCNAME}-volume ${SRCNAME}-scheduler"
 
 FILES_${PN} = "${libdir}/*"
 
@@ -76,6 +78,9 @@ FILES_${SRCNAME}-api = "${bindir}/cinder-api \
 
 FILES_${SRCNAME}-volume = "${bindir}/cinder-volume \
     ${sysconfdir}/init.d/cinder-volume"
+
+FILES_${SRCNAME}-scheduler = "${bindir}/cinder-scheduler \
+    ${sysconfdir}/init.d/cinder-scheduler"
 
 FILES_${SRCNAME} = "${bindir}/* \
     ${sysconfdir}/${SRCNAME}/* "
@@ -111,7 +116,9 @@ RDEPENDS_${SRCNAME} = "${PN} \
 
 RDEPENDS_${SRCNAME}-api = "${SRCNAME}"
 RDEPENDS_${SRCNAME}-volume = "${SRCNAME}"
+RDEPENDS_${SRCNAME}-scheduler = "${SRCNAME}"
 
-INITSCRIPT_PACKAGES = "${SRCNAME}-api ${SRCNAME}-volume"
+INITSCRIPT_PACKAGES = "${SRCNAME}-api ${SRCNAME}-volume ${SRCNAME}-scheduler"
 INITSCRIPT_NAME_${SRCNAME}-api = "cinder-api"
 INITSCRIPT_NAME_${SRCNAME}-volume = "cinder-volume"
+INITSCRIPT_NAME_${SRCNAME}-scheduler = "cinder-scheduler"

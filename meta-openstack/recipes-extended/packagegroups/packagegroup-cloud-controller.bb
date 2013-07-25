@@ -20,5 +20,6 @@ RDEPENDS_${PN} = " postgresql \
     openvswitch-controller \
     cinder-api \
     cinder-volume \
+    cinder-scheduler \
     horizon \
     "
