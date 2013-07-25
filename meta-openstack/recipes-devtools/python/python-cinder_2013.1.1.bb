@@ -10,6 +10,7 @@ SRCNAME = "cinder"
 SRC_URI = "https://launchpad.net/${SRCNAME}/grizzly/${PV}/+download/${SRCNAME}-${PV}.tar.gz \
     file://cinder.conf \
     file://cinder.init \
+    file://cinder-volume \
 	"
 
 SRC_URI[md5sum] = "8fbfbd8aad5f1a6d5e2a239b7801966d"
@@ -41,8 +42,7 @@ do_install_append() {
         install -d ${D}${sysconfdir}/init.d
         sed 's:@suffix@:api:' < ${WORKDIR}/cinder.init >${WORKDIR}/cinder-api.init.sh
         install -m 0755 ${WORKDIR}/cinder-api.init.sh ${D}${sysconfdir}/init.d/cinder-api
-        sed 's:@suffix@:volume:' < ${WORKDIR}/cinder.init >${WORKDIR}/cinder-volume.init.sh
-        install -m 0755 ${WORKDIR}/cinder-volume.init.sh ${D}${sysconfdir}/init.d/cinder-volume
+        install -m 0755 ${WORKDIR}/cinder-volume ${D}${sysconfdir}/init.d/cinder-volume
     fi
 }
 
@@ -61,6 +61,9 @@ pkg_postinst_${SRCNAME} () {
 
     sudo -u postgres createdb cinder
     cinder-manage db sync
+
+    #Create cinder volume group backing file
+    [[ -f /etc/cinder/volumes-backing ]] || truncate -s 2G /etc/cinder/volumes-backing
     echo "include /etc/cinder/data/volumes/*" >> /etc/tgt/targets.conf
 }
 
