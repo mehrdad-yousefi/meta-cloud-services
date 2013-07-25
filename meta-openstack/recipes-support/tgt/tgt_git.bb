@@ -27,7 +27,7 @@ do_install() {
         install -m 0755 ${WORKDIR}/tgtd.init ${D}${sysconfdir}/init.d/tgtd
     fi
 }
-#perl-ptest
+
 RDEPENDS_${PN} = " \
     libconfig-general-perl \
     perl-module-english \
@@ -55,6 +55,8 @@ RDEPENDS_${PN} = " \
     perl-module-file-spec-unix \
     perl-module-file-spec \
     perl-module-file-spec-functions \
+    perl-module-getopt-long \
+    perl-module-constant \
     "
 INITSCRIPT_PACKAGES = "${PN}"
 INITSCRIPT_NAME_${PN} = "tgtd"
