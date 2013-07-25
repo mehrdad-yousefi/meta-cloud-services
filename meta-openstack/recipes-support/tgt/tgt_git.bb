@@ -13,6 +13,8 @@ SRC_URI = "git://github.com/fujita/${PN}.git;protocol=git \
 
 S = "${WORKDIR}/git"
 
+inherit update-rc.d
+
 do_compile() {
     oe_runmake -e programs conf scripts
 }
@@ -54,5 +56,6 @@ RDEPENDS_${PN} = " \
     perl-module-file-spec \
     perl-module-file-spec-functions \
     "
+INITSCRIPT_PACKAGES = "${PN}"
+INITSCRIPT_NAME_${PN} = "tgtd"
 
-INITSCRIPT_NAME_${tgt} = "tgtd"
