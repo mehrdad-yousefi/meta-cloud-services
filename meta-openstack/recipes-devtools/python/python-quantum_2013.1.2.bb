@@ -76,6 +76,14 @@ pkg_postinst_${SRCNAME} () {
 
     sudo -u postgres createdb ovs_quantum
 }
+
+pkg_postinst_${SRCNAME}-plugin-openvswitch () {
+    if [ "x$D" != "x" ]; then
+        exit 1
+    fi
+
+    /etc/init.d/openvswitch-switch start
+    ovs-vsctl --no-wait -- --may-exist add-br br-int
 }
 
 PACKAGES += " \
