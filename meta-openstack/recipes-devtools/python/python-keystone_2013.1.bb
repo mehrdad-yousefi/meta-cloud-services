@@ -11,7 +11,8 @@ SRC_URI = "https://launchpad.net/keystone/grizzly/${PV}/+download/${SRCNAME}-${P
            file://keystone.conf \
            file://identity.sh \
            file://keystone \
-		  "
+           file://openrc \
+	  "
 
 SRC_URI[md5sum] = "f82189cd7e3f0955e32c60e41f4120da"
 SRC_URI[sha256sum] = "34347a3242a40d93b98c3722e6f3fbc112bc1c9ef20c045c3d40637e459b4574"
