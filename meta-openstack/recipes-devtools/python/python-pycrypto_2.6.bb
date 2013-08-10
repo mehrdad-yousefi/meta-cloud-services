@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=35f354d199e8cb7667b059a23578e63d"
 PR = "r0"
 SRCNAME = "pycrypto"
 
-SRC_URI = "https://ftp.dlitz.net/pub/dlitz/crypto/pycrypto/${SRCNAME}-${PV}.tar.gz \
+SRC_URI = "https://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
            file://cross-compiling.patch"
 
 SRC_URI[md5sum] = "88dad0a270d1fe83a39e0467a66a22bb"
