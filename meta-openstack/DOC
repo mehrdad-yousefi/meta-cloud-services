@@ -52,14 +52,16 @@ necessary revisions in the README file.
 
 Building an image
 -----------------
-* There are two new target images: nova-image-compute and nova-image-controller
-that contain the packagegroups with the same name, that have been describe
-in the previous section.
+
+* There are three new target images: openstack-image-compute,
+openstack-image-network and openstack-image-controller that contain the
+packagegroups with the same name, that have been described in the previous
+section.
 
 * Once a buildir has been initialized you have to append the necessary layers
 to the bblayers.conf file:
     /meta-virtualization \
-    /meta-openstack \
+    /meta-cloud/meta-openstack \
     /meta-openembedded/meta-oe \
     /meta-openembedded/meta-networking \
 
