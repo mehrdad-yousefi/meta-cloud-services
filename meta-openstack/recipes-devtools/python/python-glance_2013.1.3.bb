@@ -11,8 +11,8 @@ SRC_URI = "https://launchpad.net/glance/grizzly/${PV}/+download/${SRCNAME}-${PV}
            file://glance.init \
            "
 
-SRC_URI[md5sum] = "cd813098ca807bed67440bb1646d0647"
-SRC_URI[sha256sum] = "f4deee125ee6729daee5315c6aacd9e265c3015692a62ae6aefeadbd3fef7f70"
+SRC_URI[md5sum] = "f9ba3865ff2cf98caa471bd54173fecd"
+SRC_URI[sha256sum] = "642782416d790dfcb6d5bb85626dd5d48784ba8f3a53e7863ec13312e86cb209"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 

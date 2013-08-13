@@ -28,8 +28,8 @@ SRC_URI = "https://launchpad.net/horizon/grizzly/${PV}/+download/${SRCNAME}-${PV
     file://fix_bindir_path.patch \
     "
 
-SRC_URI[md5sum] = "23db8455f768c830485ef283c06f0e65"
-SRC_URI[sha256sum] = "12a0b87ed4796595ba15ed7c8743cbab188bafc711ade9735b635c5eb65652e6"
+SRC_URI[md5sum] = "8edb861987dffe3017eada91d3009f0a"
+SRC_URI[sha256sum] = "4dbf05e75313d9d6ac966de1d139f26647ab537a3d1f418a3e4424210b4c05fd"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 

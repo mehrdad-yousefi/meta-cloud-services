@@ -14,8 +14,8 @@ SRC_URI = "https://launchpad.net/keystone/grizzly/${PV}/+download/${SRCNAME}-${P
            file://openrc \
 	  "
 
-SRC_URI[md5sum] = "f82189cd7e3f0955e32c60e41f4120da"
-SRC_URI[sha256sum] = "34347a3242a40d93b98c3722e6f3fbc112bc1c9ef20c045c3d40637e459b4574"
+SRC_URI[md5sum] = "49bfcd088426960ef787d040ea8426af"
+SRC_URI[sha256sum] = "e097170ebb1cf22de50f2d5ab2216a5116ffe0934720dbad8b02d61c370b8261"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 

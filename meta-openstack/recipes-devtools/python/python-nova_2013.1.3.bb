@@ -15,9 +15,8 @@ SRC_URI = "https://launchpad.net/${SRCNAME}/grizzly/${PV}/+download/${SRCNAME}-$
            file://nova-all \
            file://openrc \
            "
-
-SRC_URI[md5sum] = "38022353c398ce38c4e220d1d18b5916"
-SRC_URI[sha256sum] = "db7f5259d848358bf14105d5833869ec145f643312e6bc0adef0050120fe3e07"
+SRC_URI[md5sum] = "6215982b9ed08b9042e088470d60a0a6"
+SRC_URI[sha256sum] = "f7c25186920daccb16867c5fd272318beb8cc076e5a55f79b5906618ef2724f4"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 

@@ -13,8 +13,8 @@ SRC_URI = "https://launchpad.net/${SRCNAME}/grizzly/${PV}/+download/${SRCNAME}-$
     file://cinder-volume \
 	"
 
-SRC_URI[md5sum] = "8fbfbd8aad5f1a6d5e2a239b7801966d"
-SRC_URI[sha256sum] = "c4d7f508f404b555242abc638901a39b02d4345c2d101a0aaad52fec1143ec2a"
+SRC_URI[md5sum] = "2bfeacfaea7be5194587bb932dd8f693"
+SRC_URI[sha256sum] = "358ab7fb1cb57ea1f0c1d76e30d45eebb6308a6122b6e6ff6ac3405f51eceb1e"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
