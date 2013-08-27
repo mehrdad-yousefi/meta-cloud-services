@@ -10,7 +10,6 @@ RDEPENDS_${PN} = " postgresql \
     rabbitmq-server \
     nova-controller \
     python-novaclient \
-    python-novaclient \
     glance \
     glance-api \
     glance-registry \
