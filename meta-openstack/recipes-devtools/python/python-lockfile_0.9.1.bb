@@ -7,10 +7,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2340dffbbfea534b58f1349984eeef72"
 PR = "r0"
 SRCNAME = "lockfile"
 
-SRC_URI = "https://pylockfile.googlecode.com/files/${SRCNAME}-${PV}.tar.gz"
+SRC_URI = "https://pypi.python.org/packages/source/l/lockfile/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "4e4c7ea4c4301500da5e7f3b51e01cfe"
-SRC_URI[sha256sum] = "88d8ea8d435ee5691117a87d1ca8fed2f8da881eb145295bf6895ac2c416e95d"
+SRC_URI[md5sum] = "ce61468d4c1263e3005737bbed2641f0"
+SRC_URI[sha256sum] = "23da589c91f59cb7c644d5ce5df539d448341bd479917d6dde973f82e2719147"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
