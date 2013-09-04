@@ -20,6 +20,7 @@ NATIVE_BIN = "${TMPDIR}/work/erlang-native-${PV}-${PR}/otp_src_${UPSTREAM_VERSIO
 do_configure() {
 
     cd ${S}/erts; autoreconf; cd -
+    cd ${S}/lib/wx; autoreconf; cd -
 
     . ${CONFIG_SITE}
 
@@ -41,9 +42,10 @@ do_install() {
     TARGET=${TARGET_SYS} \
     PATH=${NATIVE_BIN}:$PATH \
     oe_runmake 'INSTALL_PREFIX=${D}' install
+
     for f in erl start
-        do sed -i -e 's:ROOTDIR=.*:ROOTDIR=/usr/lib/erlang:' \
-        	${D}/usr/lib/erlang/erts-*/bin/$f ${D}/usr/lib/erlang/bin/$f
+        do sed -i -e 's:ROOTDIR=.*:ROOTDIR=/${libdir}/erlang:' \
+               ${D}/${libdir}/erlang/erts-*/bin/$f ${D}/${libdir}/erlang/bin/$f
     done
 }
 
