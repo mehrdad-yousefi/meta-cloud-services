@@ -12,6 +12,7 @@ SRC_URI += "file://nova-all \
 inherit controller update-rc.d
 
 PACKAGES = "${SRCNAME}-controller ${SRCNAME}-controller-misc"
+# PACKAGES = "${SRCNAME}-controller-misc ${SRCNAME}-controller"
 
 do_install_append() {
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
@@ -37,11 +38,20 @@ pkg_postinst_${SRCNAME}-controller () {
     nova-manage db sync
 }
 
-
-FILES_${SRCNAME}-controller = "${files_${SRCNAME}-controller}"
+# FILES_${SRCNAME}-controller = "${files_${SRCNAME}-controller}"
+FILES_${SRCNAME}-controller = "${bindir}/* \
+			       ${sysconfdir}/${SRCNAME}/* \
+			       ${sysconfdir}/init.d/nova-all"
 
 # If the compute is built, so we package it out of the way
-FILES_${SRCNAME}-controller-misc = "${files_${SRCNAME}-compute} ${files_${SRCNAME}-common} ${files_${PYTHON_PN}}"
+# FILES_${SRCNAME}-controller-misc = "${files_${SRCNAME}-compute} ${files_${SRCNAME}-common} ${files_${PYTHON_PN}}"
+FILES_${SRCNAME}-controller-misc = "${libdir}/*\
+				    ${bindir}/nova-compute \
+				    ${sysconfdir}/${SRCNAME}/* \
+				    ${sysconfdir}/init.d/nova-compute \
+				    ${bindir}/nova-manage \
+				    ${bindir}/nova-rootwrap \
+				    ${sysconfdir}/sudoers.d"
 
 RDEPENDS_${SRCNAME}-controller = "${PYTHON_PN} ${SRCNAME}-common \
                                   postgresql postgresql-client python-psycopg2"

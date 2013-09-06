@@ -12,11 +12,21 @@ pkg_postinst_${SRCNAME}-common () {
 
 PACKAGES += "${SRCNAME}-common ${SRCNAME}-common-misc"
 
-FILES_${PN} = "${files_${PN}}"
+# FILES_${PN} = "${files_${PN}}"
+FILES_${PN} = "${libdir}/*"
 
-FILES_${SRCNAME}-common = "${files_${SRCNAME}-common}"
+# FILES_${SRCNAME}-common = "${files_${SRCNAME}-common}"
+FILES_${SRCNAME}-common = "${bindir}/nova-manage \
+                           ${bindir}/nova-rootwrap \
+                           ${sysconfdir}/sudoers.d"
 
-FILES_${SRCNAME}-common-misc = "${files_${SRCNAME}-compute} ${files_${SRCNAME}-controller}"
+# FILES_${SRCNAME}-common-misc = "${files_${SRCNAME}-compute} ${files_${SRCNAME}-controller}"
+FILES_${SRCNAME}-common-misc = "${bindir}/nova-compute \
+                                ${sysconfdir}/${SRCNAME}/* \
+			        ${sysconfdir}/init.d/nova-compute \
+                                ${bindir}/* \
+				${sysconfdir}/${SRCNAME}/* \
+				${sysconfdir}/init.d/nova-all"
 
 RDEPENDS_${SRCNAME}-common = "${PN} openssl openssl-misc libxml2 libxslt \
         iptables curl dnsmasq sudo procps"
