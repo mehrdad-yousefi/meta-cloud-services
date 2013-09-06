@@ -8,8 +8,8 @@ SRCREV = "0ee382bab57a8ecd9ece18d511bd098298478409"
 PV = "1.0.36+git${SRCPV}"
 PR = "r0"
 
-SRC_URI = "git://github.com/fujita/${PN}.git;protocol=git \
-    file://tgtd.init"
+SRC_URI = "git://github.com/fujita/tgt.git"
+SRC_URI += "file://tgtd.init"
 
 S = "${WORKDIR}/git"
 
