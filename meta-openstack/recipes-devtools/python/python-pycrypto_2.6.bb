@@ -22,30 +22,4 @@ export STAGING_LIBDIR
 export BUILD_SYS
 export HOST_SYS
 
-CONFIGUREOPTS = "--build=${BUILD_SYS} \
-                 --host=${HOST_SYS} \
-                 --target=${TARGET_SYS} \
-                 --prefix=${prefix} \
-                 --exec_prefix=${exec_prefix} \
-                 --bindir=${bindir} \
-                 --sbindir=${sbindir} \
-                 --libexecdir=${libexecdir} \
-                 --datadir=${datadir} \
-                 --sysconfdir=${sysconfdir} \
-                 --sharedstatedir=${sharedstatedir} \
-                 --localstatedir=${localstatedir} \
-                 --libdir=${libdir} \
-                 --includedir=${includedir} \
-                 --oldincludedir=${oldincludedir} \
-                 --infodir=${infodir} \
-                 --mandir=${mandir} \
-                 --disable-silent-rules \
-                 --with-libtool-sysroot=${STAGING_DIR_HOST}"
-
-do_configure () {
-    # Workaround autoconf bug
-    export ac_cv_func_malloc_0_nonnull=yes
-
-    ./configure ${CONFIGUREOPTS}
-}
-
+inherit autotools distutils
