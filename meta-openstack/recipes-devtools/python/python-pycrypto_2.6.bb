@@ -15,7 +15,37 @@ SRC_URI[sha256sum] = "7293c9d7e8af2e44a82f86eb9c3b058880f4bcc884bf3ad6c8a34b6498
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
+inherit distutils
+
+export STAGING_INCDIR
+export STAGING_LIBDIR
 export BUILD_SYS
 export HOST_SYS
 
-inherit distutils
+CONFIGUREOPTS = "--build=${BUILD_SYS} \
+                 --host=${HOST_SYS} \
+                 --target=${TARGET_SYS} \
+                 --prefix=${prefix} \
+                 --exec_prefix=${exec_prefix} \
+                 --bindir=${bindir} \
+                 --sbindir=${sbindir} \
+                 --libexecdir=${libexecdir} \
+                 --datadir=${datadir} \
+                 --sysconfdir=${sysconfdir} \
+                 --sharedstatedir=${sharedstatedir} \
+                 --localstatedir=${localstatedir} \
+                 --libdir=${libdir} \
+                 --includedir=${includedir} \
+                 --oldincludedir=${oldincludedir} \
+                 --infodir=${infodir} \
+                 --mandir=${mandir} \
+                 --disable-silent-rules \
+                 --with-libtool-sysroot=${STAGING_DIR_HOST}"
+
+do_configure () {
+    # Workaround autoconf bug
+    export ac_cv_func_malloc_0_nonnull=yes
+
+    ./configure ${CONFIGUREOPTS}
+}
+
