@@ -44,8 +44,8 @@ do_install() {
     oe_runmake 'INSTALL_PREFIX=${D}' install
 
     for f in erl start
-        do sed -i -e 's:ROOTDIR=.*:ROOTDIR=/${libdir}/erlang:' \
-               ${D}/${libdir}/erlang/erts-*/bin/$f ${D}/${libdir}/erlang/bin/$f
+        do sed -i -e 's:ROOTDIR=.*:ROOTDIR=${libdir}/erlang:' \
+        	${D}/${libdir}/erlang/erts-*/bin/$f ${D}/${libdir}/erlang/bin/$f
     done
 }
 
