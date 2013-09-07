@@ -12,7 +12,7 @@ SRC_URI += "file://nova-compute \
 
 inherit compute update-rc.d
 
-PACKAGES = "${SRCNAME}-compute ${SRCNAME}-compute-misc"
+PACKAGES = "${PN} ${SRCNAME}-compute ${SRCNAME}-compute-misc"
 
 do_install_append() {
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
@@ -21,10 +21,26 @@ do_install_append() {
     fi
 }
 
-FILES_${SRCNAME}-compute = " ${files_${SRCNAME}-compute}"
-
+#FILES_${SRCNAME}-compute = " ${files_${SRCNAME}-compute}"
+#
 # the controller is built, so we package it out of the way
-FILES_${SRCNAME}-compute-misc = "${files_${SRCNAME}-controller} ${files_${SRCNAME}-common} ${files_${PYTHON_PN}}"
+
+#FILES_${SRCNAME}-compute-misc = "${files_${SRCNAME}-controller} 
+#${files_${SRCNAME}-common} ${files_${PYTHON_PN}}"
+
+FILES_${PN} = "${libdir}/python*"
+
+FILES_${SRCNAME}-compute = " \
+	${bindir}/nova-compute \
+	${sysconfdir}/${SRCNAME}/* \
+	${sysconfdir}/init.d/nova-compute"
+
+FILES_${SRCNAME}-compute-misc = " \
+	${bindir} \
+	${sysconfdir}/init.d/nova-all \
+	${bindir}/nova-manage \
+	${bindir}/nova-rootwrap \
+	${sysconfdir}/sudoers.d"
 
 RDEPENDS_${SRCNAME}-compute = "${PYTHON_PN} ${SRCNAME}-common \
                                qemu libvirt libvirt-libvirtd libvirt-python libvirt-virsh"
