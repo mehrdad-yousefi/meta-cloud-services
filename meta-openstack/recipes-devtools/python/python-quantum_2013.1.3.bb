@@ -148,7 +148,7 @@ RDEPENDS_${PN} += "python-paste \
 	python-routes \
 	python-amqplib \
 	python-anyjson \
-    python-alembic \
+	python-alembic \
 	python-eventlet \
 	python-greenlet \
 	python-httplib2 \
@@ -162,8 +162,9 @@ RDEPENDS_${PN} += "python-paste \
 	python-oslo.config \
 	python-pyudev \
 	python-novaclient \
-    python-mako \
-    python-markupsafe \
+	python-mako \
+	python-markupsafe \
+	python-pyparsing \
 	"
 
 RDEPENDS_${SRCNAME} = "${PN} \
