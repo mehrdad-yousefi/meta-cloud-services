@@ -7,7 +7,11 @@ pkg_postinst_${SRCNAME}-common () {
         exit 1
     fi
 
-    echo "source /etc/nova/openrc" > /home/root/.bashrc
+    if [ -d $D/home/root/ ]; then
+        echo "source /etc/nova/openrc" >> $D/home/root/.bashrc
+    elif [ -d $D/root/ ]; then
+        echo "source /etc/nova/openrc" >> $D/root/.bashrc
+    fi
 }
 
 PACKAGES += "${SRCNAME}-common ${SRCNAME}-common-misc"
