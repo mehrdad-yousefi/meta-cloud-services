@@ -53,7 +53,6 @@ FILES_${SRCNAME}-controller = " \
 
 FILES_${SRCNAME}-controller-misc = " \
 	${bindir}/nova-compute \
-	${sysconfdir}/${SRCNAME}/* \
 	${sysconfdir}/init.d/nova-compute \
 	${bindir}/nova-manage \
 	${bindir}/nova-rootwrap \
