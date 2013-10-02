@@ -6,11 +6,14 @@ IMAGE_INSTALL = "\
     ${ROOTFS_PKGMANAGE_BOOTSTRAP} \
     packagegroup-core-basic \
     packagegroup-cloud-controller \
+    packagegroup-cloud-network \
     "
 
 IMAGE_FEATURES += " ssh-server-openssh"
 
 inherit core-image
+inherit openstack-base
 
-# Ensure extra space for guest images
-IMAGE_ROOTFS_EXTRA_SPACE = "2000000"
+# Ensure extra space for guest images, and rabbit MQ has a hard coded
+# check for 2G of free space, so we use 3G as a starting point.
+IMAGE_ROOTFS_EXTRA_SPACE = "3000000"
