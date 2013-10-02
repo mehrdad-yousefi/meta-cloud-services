@@ -3,7 +3,7 @@ PRINC := "${@int(PRINC) + 1}"
 
 SRC_URI += "file://postgresql"
 
-inherit useradd update-rc.d identity
+inherit useradd update-rc.d identity hosts
 
 do_install_append() {
     install -d ${D}${sysconfdir}/${PN}
@@ -25,6 +25,10 @@ pkg_postinst_${PN} () {
     fi
 
     sudo -u postgres initdb -D /etc/${PN}/
+    sleep 2
+    echo "listen_addresses = '*'" >> /etc/${PN}/postgresql.conf
+    echo "host   all   all   ${CONTROLLER_IP}/32   trust" >> /etc/${PN}/pg_hba.conf
+    echo "host   all   all   ${COMPUTE_IP}/32   trust" >> /etc/${PN}/pg_hba.conf
     sleep 2
     /etc/init.d/postgresql start
     sleep 5
