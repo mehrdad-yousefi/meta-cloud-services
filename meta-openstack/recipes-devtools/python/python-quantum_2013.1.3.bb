@@ -34,10 +34,14 @@ do_install_append() {
     sed -e "s:^# core_plugin.*:core_plugin = quantum.plugins.openvswitch.ovs_quantum_plugin.OVSQuantumPluginV2:g" \
         -i ${WORKDIR}/quantum.conf
 
+    echo "rabbit_host = ${CONTROLLER_EXTERNAL_IP}" >> ${WORKDIR}/quantum.conf
+
     for file in ovs_quantum_plugin.ini linuxbridge_conf.ini
     do
         sed -e "s:%DB_USER%:${DB_USER}:g" -i ${WORKDIR}/${file}
         sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${WORKDIR}/${file}
+        sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${WORKDIR}/${file}
+        sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${WORKDIR}/${file}
     done
 
     install -d ${QUANTUM_CONF_DIR}
@@ -49,6 +53,8 @@ do_install_append() {
     install -m 600 ${WORKDIR}/linuxbridge_conf.ini ${QUANTUM_CONF_DIR}/plugins/linuxbridge/
     install -m 600 ${S}/etc/api-paste.ini ${QUANTUM_CONF_DIR}/
     install -m 600 ${S}/etc/policy.json ${QUANTUM_CONF_DIR}/
+
+    install -d ${D}${localstatedir}/log/${SRCNAME}
 
     PLUGIN=openvswitch
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
@@ -106,7 +112,9 @@ FILES_${SRCNAME} = " \
     ${bindir}/quantum-debug \
     ${bindir}/quantum-netns-cleanup \
     ${bindir}/quantum-ovs-cleanup \
-    ${sysconfdir}/${SRCNAME}/* "
+    ${sysconfdir}/${SRCNAME}/* \
+    ${localstatedir}/* \    
+    "
 
 FILES_${SRCNAME}-server = "${bindir}/quantum-server \
     ${sysconfdir}/init.d/quantum-server \
@@ -125,6 +133,7 @@ FILES_${SRCNAME}-plugin-linuxbridge = " \
     "
 
 FILES_${SRCNAME}-dhcp-agent = "${bindir}/quantum-dhcp-agent \
+    ${bindir}/quantum-dhcp-agent-dnsmasq-lease-update \
     ${sysconfdir}/${SRCNAME}/dhcp_agent.ini \
     ${sysconfdir}/init.d/dhcp_agent \
     "
