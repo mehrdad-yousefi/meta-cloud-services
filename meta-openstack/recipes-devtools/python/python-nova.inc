@@ -42,7 +42,7 @@ do_install_append() {
 
     # Set up rootwrap.conf, pointing to /etc/nova/rootwrap.d
     install -m 644 ${S}/etc/nova/rootwrap.conf ${NOVA_CONF_DIR}/
-    sed -e "s:^filters_path=.*$:filters_path=${NOVA_CONF_DIR}/rootwrap.d:" \
+    sed -e "s:^filters_path=.*$:filters_path=${sysconfdir}/nova/rootwrap.d:" \
         -i ${NOVA_CONF_DIR}/rootwrap.conf
     chown root:root $NOVA_CONF_DIR/rootwrap.conf
 
