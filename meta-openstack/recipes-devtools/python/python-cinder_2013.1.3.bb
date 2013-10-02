@@ -38,6 +38,8 @@ do_install_append() {
     install -m 600 ${WORKDIR}/api-paste.ini ${CINDER_CONF_DIR}/
     install -m 600 ${S}/etc/cinder/policy.json ${CINDER_CONF_DIR}/
 
+    install -d ${D}${localstatedir}/log/${SRCNAME}
+
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
         sed 's:@suffix@:api:' < ${WORKDIR}/cinder.init >${WORKDIR}/cinder-api.init.sh
@@ -83,7 +85,9 @@ FILES_${SRCNAME}-scheduler = "${bindir}/cinder-scheduler \
     ${sysconfdir}/init.d/cinder-scheduler"
 
 FILES_${SRCNAME} = "${bindir}/* \
-    ${sysconfdir}/${SRCNAME}/* "
+    ${sysconfdir}/${SRCNAME}/* \
+    ${localstatedir}/* \
+    "
 
 RDEPENDS_${PN} += "lvm2 \
     python-sqlalchemy \
