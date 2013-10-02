@@ -1,1 +1,1 @@
-inherit controller
+inherit hosts

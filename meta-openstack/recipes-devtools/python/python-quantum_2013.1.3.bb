@@ -20,7 +20,7 @@ SRC_URI[sha256sum] = "79e60ec1aef800da3a4e1841909cdd8b2cf645979d08f27bc481957c79
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
-inherit setuptools update-rc.d identity
+inherit setuptools update-rc.d identity hosts
 
 do_install_append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}/
@@ -34,7 +34,7 @@ do_install_append() {
     sed -e "s:^# core_plugin.*:core_plugin = quantum.plugins.openvswitch.ovs_quantum_plugin.OVSQuantumPluginV2:g" \
         -i ${WORKDIR}/quantum.conf
 
-    echo "rabbit_host = ${CONTROLLER_EXTERNAL_IP}" >> ${WORKDIR}/quantum.conf
+    echo "rabbit_host = ${CONTROLLER_IP}" >> ${WORKDIR}/quantum.conf
 
     for file in ovs_quantum_plugin.ini linuxbridge_conf.ini
     do

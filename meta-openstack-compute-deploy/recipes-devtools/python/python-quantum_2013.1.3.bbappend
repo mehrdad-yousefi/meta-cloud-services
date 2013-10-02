@@ -1,1 +1,1 @@
-inherit compute
+inherit hosts
