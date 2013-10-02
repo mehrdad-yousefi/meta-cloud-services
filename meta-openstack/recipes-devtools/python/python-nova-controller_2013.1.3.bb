@@ -9,7 +9,7 @@ SRC_URI += "file://nova-all \
             file://openrc \
            "
 
-inherit controller update-rc.d
+inherit hosts update-rc.d
 
 #PACKAGES = "${SRCNAME}-controller ${SRCNAME}-controller-misc"
 PACKAGES = "${PN} ${PN}-dbg ${SRCNAME}-controller-misc ${SRCNAME}-controller"

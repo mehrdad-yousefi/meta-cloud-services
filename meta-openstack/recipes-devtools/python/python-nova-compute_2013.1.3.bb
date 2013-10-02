@@ -10,7 +10,7 @@ SRC_URI += "file://nova-compute \
             file://openrc \
            "
 
-inherit compute update-rc.d
+inherit hosts update-rc.d
 
 PACKAGES = "${PN} ${SRCNAME}-compute ${SRCNAME}-compute-misc"
 
