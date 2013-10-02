@@ -19,7 +19,7 @@ SRC_URI[sha256sum] = "e097170ebb1cf22de50f2d5ab2216a5116ffe0934720dbad8b02d61c37
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
-inherit setuptools update-rc.d identity
+inherit setuptools update-rc.d identity hosts
 
 SERVICE_TOKEN = "password"
 
@@ -32,6 +32,11 @@ do_install_append() {
     sed -e "s:%SERVICE_TOKEN%:${SERVICE_TOKEN}:g" -i ${WORKDIR}/keystone.conf
     sed -e "s:%DB_USER%:${DB_USER}:g" -i ${WORKDIR}/keystone.conf
     sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${WORKDIR}/keystone.conf
+
+    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${WORKDIR}/keystone.conf
+    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${WORKDIR}/identity.sh
+
+    install -d ${D}${localstatedir}/log/${SRCNAME}
 
     install -m 600 ${WORKDIR}/keystone.conf ${KEYSTONE_CONF_DIR}/
     install -m 600 ${WORKDIR}/identity.sh ${KEYSTONE_CONF_DIR}/
@@ -82,7 +87,9 @@ FILES_${PN} = "${libdir}/*"
 
 FILES_${SRCNAME} = "${bindir}/* \
     ${sysconfdir}/${SRCNAME}/* \ 
-    ${sysconfdir}/init.d/* "
+    ${sysconfdir}/init.d/* \
+    ${localstatedir}/* \
+    "
 
 RDEPENDS_${PN} += "python-pam \
 	python-webob \

@@ -14,7 +14,7 @@ MYSQL_HOST=localhost
 MYSQL_PASSWORD=password
 #
 KEYSTONE_REGION=RegionOne
-KEYSTONE_HOST=localhost
+KEYSTONE_HOST=%CONTROLLER_IP%
 
 # Shortcut function to get a newly generated ID
 function get_field() {
