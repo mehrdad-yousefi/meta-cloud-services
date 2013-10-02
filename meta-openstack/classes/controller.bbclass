@@ -1,2 +1,0 @@
-CONTROLLER_IP = "0.0.0.0"
-CONTROLLER_HOST = "localhost"
