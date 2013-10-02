@@ -31,6 +31,8 @@ do_install() {
 
     install -d ${D}${libdir}/rabbitmq/lib/${PN}-${PV}
 
+    install -d ${D}${localstatedir}/log/${PN}
+
     install -d ${D}${sysconfdir}/init.d
     install -m 0755 ${WORKDIR}/rabbitmq-server ${D}${sysconfdir}/init.d/rabbitmq-server
 
@@ -49,6 +51,8 @@ USERADD_PARAM_${PN}  = "--system --home /var/lib/rabbitmq -g rabbitmq \
 INITSCRIPT_NAME = "rabbitmq-server"
 INITSCRIPT_PARAMS = "defaults"
 
-FILES_${PN} += " ${libdir}/rabbitmq/lib/${PN}-${PV}/*"
+FILES_${PN} += " ${libdir}/rabbitmq/lib/${PN}-${PV}/* \
+                 ${localstatedir}/* \ 
+               "
 
 FILES_${PN}-doc += "LICENSE* INSTALL"
