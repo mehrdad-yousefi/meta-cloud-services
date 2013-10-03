@@ -49,10 +49,9 @@ in tree for individual recipes is under the LICENSE stated in each recipe
 Target images
 -------------
 
-There are target images: openstack-image-compute, openstack-image-network,
-openstack-image-controller.
+Target images: openstack-image-compute, openstack-image-network, openstack-image-controller.
 
 They contain the packagegroups with the same name and can be used to create
-the ypes of targets. There are no extra configurations required to build
-these images.
+the types of targets. There are no extra configurations required to build
+these images. See README.setup for more details.
 

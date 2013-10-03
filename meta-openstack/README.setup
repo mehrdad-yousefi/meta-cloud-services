@@ -4,9 +4,12 @@ Meta-OpenStack
 Description
 -----------
 
-The meta-openstack layer provides support for building the OpenStack
+The meta-openstack layers provide support for building the OpenStack
 packages.  It contains recipes for the nova, glance, keystone, cinder,
 quantum, swift and horizon components and their dependencies.
+
+The main meta-openstack layer, works in conjunction with the meta-openstack*
+layers to configure and deploy a system.
 
 Components
 ----------
@@ -53,7 +56,7 @@ Components
 Dependencies
 ------------
 
-* This layers depends on components from the poky, meta-virtualization and
+* This layer depends on components from the poky, meta-virtualization and
 meta-openembedded layers. You can find the exact URIs of the repos and the
 necessary revisions in the README file.
 
@@ -69,9 +72,12 @@ Building an image
 to the bblayers.conf file:
 
     /meta-virtualization \
-    /meta-cloud/meta-openstack \
+    /meta-cloud-services/meta-openstack-<node type>-deploy \
+    /meta-cloud-services/meta-openstack \
+    /meta-cloud-services/meta-openstack-qemu \ # optional, add if using qemu
+    /meta-cloud-services/meta-openstack \
     /meta-openembedded/meta-oe \
-    /meta-openembedded/meta-networking \
+    /meta-openembedded/meta-networking \   
 
 Package configurations
 ----------------------
@@ -81,35 +87,64 @@ for the Keystone identity system. If you want to customize the usernames or
 passwords don't forget to change the information in the configuration files
 for the services as well.
 
+The hosts.bbclass contains the IP addresses of the compute and controller
+nodes that will seed the system. It also contains the IP address of the
+node being built "MY_IP". Override this class in a layer to provide values
+that are specific to your configuration. The defaults are suitable for a 
+2 node system launched via runqemu.
+
+If deploying to a simulated system, add the qemu deployment layer to the
+bblayers.conf file, after the node type deployment layer.
+
+* Sample Guest Image *
+
+If a sample guest image is desired on a control node, the following can
+be added to local.conf:
+
+  IMAGE_INSTALL_append = " cirros-guest-image"
+
 Running an image
 ----------------
 
+To test the images, you can run them using the runqemu script (on a machine
+with appropriate accleration). 
+
+In order to use the command line clients (nova, keystone, glance etc) some
+environmental variables have to be set. These are required by the openstack
+services to connect to the identity service and authenticate the user. These
+can be found in /root/.bashrc or /etc/nova/openrc.
+
 * Controller node *
 
-To test the image, you can run it using the runqemu script. In order to use
-the command line clients (nova, keystone, glance etc) some environmental
-variables have to be set. These are required by the openstack services to
-connect to the identity service and authenticate the user. These can be found
-in /root/.bashrc. If you start a new bash session they are automatically
-loaded. All the installed OpenStack services nova(except compute), keystone,
-glance, cinder, quantum, swift horizon should be running after a successful
-boot.
+All the installed OpenStack services nova(except compute), keystone, glance,
+cinder, quantum, swift horizon should be running after a successful boot.
+
+  % bitbake openstack-image-controller
+  % runqemu qemux86-64 openstack-image-controller kvm nographic qemuparams="-m 4096"
 
 The dashboard component is listening for new connections on port 8080. You can
 connect to it using any browser.
 
-* Compute node *
+* Compute Node *
 
-The configuration files for the nova package are for a controller node so some
-options have to be changed for the compute service to properly work. You have
-to replace localhost to the controller node IP in the following files:
+All the installed OpenStack compute services nova, quantum, should be running
+after a successful boot.
 
-    /etc/nova/nova.conf:        sql_connection; rabbit_host;
-    /etc/nova/api-paste.ini:    auth_host;
-    /root/.bashrc:              SERVICE_ENDPOINT, OS_AUTH_URL;
+  % bitbake openstack-image-compute
+  % runqemu qemux86-64 openstack-image-compute kvm nographic qemuparams="-m 4096"
 
-Once the changes are done you have to restart the nova-compute service.
+* Image Launch *
+
+Assuing that the cirros-guest-image has been added to the control image, the
+following steps will validate a simple compute node guest launch:
+
+ % . /etc/nova/openrc
+ % glance image-create --name myFirstImage --is-public true \
+      --container-format bare --disk-format qcow2 --file images/cirros-0.3.0-x86_64-disk.img
+ % quantum net-create mynetwork
+ % nova boot --image myFirstImage --flavor 1 myinstance
 
 !! Hint !!
-When using a multi-node setup it is recommended that each host have a different
-hostname and that every host knows the other hosts.
+
+ When using a multi-node setup it is recommended that each host have a different
+ hostname and that every host knows the other hosts.

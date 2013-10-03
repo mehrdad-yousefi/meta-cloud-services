@@ -17,6 +17,22 @@ branch: master
 revision: HEAD
 prio: default
 
+
+Layers
+------
+
+openstack layers
+----------------
+
+There are four openstack layers that are used to build a controller/compute
+node image pair. The dependencies of these layers are also required for a
+build, and are listed in the layers themselves.
+
+   - meta-cloud-services/meta-openstack
+   - meta-cloud-services/meta-openstack-compute-deploy
+   - meta-cloud-services/meta-openstack-controller-deploy
+   - meta-cloud-services/meta-openstack-qemu
+
 Maintenance
 -----------
 
