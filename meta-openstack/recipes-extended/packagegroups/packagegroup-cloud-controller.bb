@@ -21,4 +21,5 @@ RDEPENDS_${PN} = " postgresql \
     cinder-volume \
     cinder-scheduler \
     horizon \
+    novnc \
     "
