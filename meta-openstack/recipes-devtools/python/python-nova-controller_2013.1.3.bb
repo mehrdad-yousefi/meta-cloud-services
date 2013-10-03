@@ -5,19 +5,24 @@ PR = "r0"
 FILESEXTRAPATHS := "${THISDIR}/${PYTHON_PN}"
 
 SRC_URI += "file://nova-all \
+            file://nova-consoleauth \
+            file://nova-novncproxy \
             file://nova.conf \
             file://openrc \
            "
 
 inherit hosts update-rc.d
 
-#PACKAGES = "${SRCNAME}-controller ${SRCNAME}-controller-misc"
 PACKAGES = "${PN} ${PN}-dbg ${SRCNAME}-controller-misc ${SRCNAME}-controller"
+PACKAGES += " ${SRCNAME}-consoleauth"
+PACKAGES += " ${SRCNAME}-novncproxy"
 
 do_install_append() {
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
         install -m 0755 ${WORKDIR}/nova-all ${D}${sysconfdir}/init.d/nova-all
+        install -m 0755 ${WORKDIR}/nova-consoleauth ${D}${sysconfdir}/init.d/nova-consoleauth
+        install -m 0755 ${WORKDIR}/nova-novncproxy ${D}${sysconfdir}/init.d/nova-novncproxy
     fi
 }
 
@@ -49,7 +54,15 @@ pkg_postinst_${SRCNAME}-controller () {
 FILES_${SRCNAME}-controller = " \
 	${bindir} \
 	${sysconfdir}/${SRCNAME}/* \
-	${sysconfdir}/init.d/nova-all"
+	${sysconfdir}/init.d/nova-all \
+"
+
+FILES_${SRCNAME}-consoleauth = " \
+	${sysconfdir}/init.d/nova-consoleauth \
+"
+FILES_${SRCNAME}-novncproxy = " \
+	${sysconfdir}/init.d/nova-novncproxy \
+"
 
 FILES_${SRCNAME}-controller-misc = " \
 	${bindir}/nova-compute \
@@ -62,10 +75,13 @@ FILES_${SRCNAME}-controller-misc = " \
 FILES_${PN} = " \
 	${libdir}/python*/site-packages"
 
-RDEPENDS_${SRCNAME}-controller = "${PYTHON_PN} ${SRCNAME}-common \
+RDEPENDS_${SRCNAME}-controller = "${PYTHON_PN} ${SRCNAME}-common ${SRCNAME}-consoleauth \
+                                  ${SRCNAME}-novncproxy \
                                   postgresql postgresql-client python-psycopg2"
 
 RCONFLICTS_${SRCNAME}-controller = "${SRCNAME}-compute"
 
-INITSCRIPT_PACKAGES = "${SRCNAME}-controller"
+INITSCRIPT_PACKAGES = "${SRCNAME}-controller ${SRCNAME}-consoleauth ${SRCNAME}-novncproxy"
 INITSCRIPT_NAME_${SRCNAME}-controller = "nova-all"
+INITSCRIPT_NAME_${SRCNAME}-consoleauth = "nova-consoleauth"
+INITSCRIPT_NAME_${SRCNAME}-novncproxy = "nova-novncproxy"
