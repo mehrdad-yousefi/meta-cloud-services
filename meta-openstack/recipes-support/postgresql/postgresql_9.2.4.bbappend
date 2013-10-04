@@ -26,6 +26,7 @@ do_install_append() {
 
 }
 
+RDEPENDS_${PN} += "postgresql-timezone eglibc-utils update-rc.d"
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "--system postgres"
 USERADD_PARAM_${PN}  = "--system --home /var/lib/postgres -g postgres \
