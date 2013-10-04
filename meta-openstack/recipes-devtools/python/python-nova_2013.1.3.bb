@@ -28,7 +28,7 @@ SRC_URI[sha256sum] = "f7c25186920daccb16867c5fd272318beb8cc076e5a55f79b5906618ef
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
-inherit update-rc.d setuptools identity hosts
+inherit update-rc.d setuptools identity hosts useradd
 
 do_install_append() {
     if [ ! -f "${WORKDIR}/nova.conf" ]; then
