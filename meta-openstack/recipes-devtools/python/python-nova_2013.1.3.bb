@@ -16,6 +16,7 @@ SRC_URI = "https://launchpad.net/${SRCNAME}/grizzly/${PV}/+download/${SRCNAME}-$
            "
 
 SRC_URI += "file://nova-all \
+            file://nova-compute \
             file://nova-consoleauth \
             file://nova-novncproxy \
             file://nova.conf \
@@ -93,6 +94,7 @@ do_install_append() {
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
         install -m 0755 ${WORKDIR}/nova-all ${D}${sysconfdir}/init.d/nova-all
+        install -m 0755 ${WORKDIR}/nova-compute ${D}${sysconfdir}/init.d/nova-compute
         install -m 0755 ${WORKDIR}/nova-consoleauth ${D}${sysconfdir}/init.d/nova-consoleauth
         install -m 0755 ${WORKDIR}/nova-novncproxy ${D}${sysconfdir}/init.d/nova-novncproxy
     fi
@@ -197,14 +199,15 @@ RDEPENDS_${SRCNAME}-common = "${PN} openssl openssl-misc libxml2 libxslt \
                               iptables curl dnsmasq sudo procps"
 
 RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common \
-                                  ${SRCNAME}-consoleauth \
-                                  ${SRCNAME}-novncproxy \
-                                  postgresql postgresql-client python-psycopg2"
+				  ${SRCNAME}-consoleauth \
+				  ${SRCNAME}-novncproxy \
+				  postgresql postgresql-client python-psycopg2"
 
 RDEPENDS_${SRCNAME}-compute = "${PN} ${SRCNAME}-common \
-                               qemu libvirt libvirt-libvirtd libvirt-python libvirt-virsh"
+			       qemu libvirt libvirt-libvirtd libvirt-python libvirt-virsh"
 
-INITSCRIPT_PACKAGES = "${SRCNAME}-controller ${SRCNAME}-consoleauth ${SRCNAME}-novncproxy"
+INITSCRIPT_PACKAGES = "${SRCNAME}-compute ${SRCNAME}-controller ${SRCNAME}-consoleauth ${SRCNAME}-novncproxy"
 INITSCRIPT_NAME_${SRCNAME}-controller = "nova-all"
+INITSCRIPT_NAME_${SRCNAME}-compute = "nova-compute"
 INITSCRIPT_NAME_${SRCNAME}-consoleauth = "nova-consoleauth"
 INITSCRIPT_NAME_${SRCNAME}-novncproxy = "nova-novncproxy"

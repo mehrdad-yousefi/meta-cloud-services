@@ -74,10 +74,9 @@ pkg_postinst_${SRCNAME} () {
 
     # This is to make sure postgres is configured and running
     if ! pidof postmaster > /dev/null; then
-       sudo -u postgres initdb -D /etc/postgresql/
+       /etc/init.d/postgresql-init
        /etc/init.d/postgresql start
-       sleep 0.2
-       sudo -u postgres psql -c "CREATE ROLE ${DB_USER} WITH SUPERUSER LOGIN PASSWORD '${DB_PASSWORD}'"
+       sleep 5
     fi
 
     sudo -u postgres createdb ovs_quantum

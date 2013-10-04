@@ -1,7 +1,8 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 PRINC := "${@int(PRINC) + 1}"
 
-SRC_URI += "file://postgresql"
+SRC_URI += "file://postgresql \
+            file://postgresql-init"
 
 inherit useradd update-rc.d identity hosts
 
@@ -11,6 +12,18 @@ do_install_append() {
 
     install -d ${D}${sysconfdir}/init.d/
     install -m 0755 ${WORKDIR}/postgresql ${D}${sysconfdir}/init.d/postgresql
+
+    sed -e "s:%DB_USER%:${DB_USER}:g" -i ${WORKDIR}/postgresql-init
+    sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${WORKDIR}/postgresql-init
+
+    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${WORKDIR}/postgresql-init
+    sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${WORKDIR}/postgresql-init
+
+    sed -e "s:%COMPUTE_IP%:${COMPUTE_IP}:g" -i ${WORKDIR}/postgresql-init
+    sed -e "s:%COMPUTE_HOST%:${COMPUTE_HOST}:g" -i ${WORKDIR}/postgresql-init
+
+    install -m 0755 ${WORKDIR}/postgresql-init ${D}${sysconfdir}/init.d/postgresql-init
+
 }
 
 USERADD_PACKAGES = "${PN}"
@@ -24,38 +37,11 @@ pkg_postinst_${PN} () {
         exit 1
     fi
 
-    sudo -u postgres initdb -D /etc/${PN}/
-    sleep 2
-    echo "listen_addresses = '*'" >> /etc/${PN}/postgresql.conf
-    echo "host   all   all   ${CONTROLLER_IP}/32   trust" >> /etc/${PN}/pg_hba.conf
-    echo "host   all   all   ${COMPUTE_IP}/32   trust" >> /etc/${PN}/pg_hba.conf
-    sleep 2
-    /etc/init.d/postgresql start
-    sleep 5
-
-    count=0
-    done=0
-    while [ $count -le 10 ] && [ $done -eq 0 ]; do
-	sudo -u postgres psql -c "CREATE ROLE ${DB_USER} WITH SUPERUSER LOGIN PASSWORD '${DB_PASSWORD}'" 2> /dev/null
-	if [ $? -ne 0 ]; then
-            echo "[INFO] postgres: failed to create account for ${DB_USER}, trying again"
-            /etc/init.d/postgresql stop
-	    sleep 2
-            /etc/init.d/postgresql start
-	    sleep 1
-	else
-            done=1
-	fi
-	count=`expr $count + 1`
-    done
-
-    if [ $done -eq 0 ]; then
+    /etc/init.d/postgresql-init
+    if [ $? -eq 0 ]; then
 	echo "[ERROR] postgres: unable to create admin account"
 	exit 1
     fi
-
-    ln -s /usr/share/zoneinfo /usr/share/postgresql/timezone
-    # end postgres 9.2.4 postinst
 }
 
 FILES_${PN} += "${localstatedir}/run/${PN}"

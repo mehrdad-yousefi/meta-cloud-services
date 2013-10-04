@@ -58,11 +58,9 @@ pkg_postinst_${SRCNAME} () {
 
     # This is to make sure postgres is configured and running
     if ! pidof postmaster > /dev/null; then
-       sudo -u postgres initdb -D /etc/postgresql/
-       sleep 10
+       /etc/init.d/postgresql-init
        /etc/init.d/postgresql start
        sleep 5
-       sudo -u postgres psql -c "CREATE ROLE ${DB_USER} WITH SUPERUSER LOGIN PASSWORD '${DB_PASSWORD}'"
     fi
 
     sudo -u postgres createdb keystone
