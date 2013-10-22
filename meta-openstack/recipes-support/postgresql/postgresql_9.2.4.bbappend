@@ -47,5 +47,6 @@ pkg_postinst_${PN} () {
 
 FILES_${PN} += "${localstatedir}/run/${PN}"
 
+INITSCRIPT_PACKAGES = "${PN}"
 INITSCRIPT_NAME = "${PN}"
 INITSCRIPT_PARAMS = "defaults"
