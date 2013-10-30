@@ -9,11 +9,11 @@ SRCNAME = "oslo.config"
 
 SRC_URI = "https://pypi.python.org/packages/source/o/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "35fc1adbc70234291af09673fd481705"
-SRC_URI[sha256sum] = "fe5dedb9b47c508eb886a7b9b96eb7667597af407ff42853db82b4b9e949ea82"
+SRC_URI[md5sum] = "9ba2c7d74a19b16b5b6a33ec057d7eda"
+SRC_URI[sha256sum] = "e4ccf489159f0c2b1932ea282f7663daada0a7f8309edc4c34904605a98cf9f2"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit setuptools
 
-
+RDEPENDS_${PN} += "python-pbr"
