@@ -11,7 +11,7 @@ SRCNAME = "nova"
 
 FILESEXTRAPATHS := "${THISDIR}/${PN}"
 
-SRC_URI = "https://launchpad.net/${SRCNAME}/grizzly/${PV}/+download/${SRCNAME}-${PV}.tar.gz \
+SRC_URI = "git://github.com/openstack/nova.git;branch=stable/havana \
            file://0001-nova-api-paste.ini-make-controller-IP-configurable.patch \
            "
 
@@ -22,11 +22,10 @@ SRC_URI += "file://nova-all \
             file://nova.conf \
             file://openrc \
            "
+SRCREV="88cfe5a0ae682794f8ce25b787084115925023f2"
+PV="2013.2+git${SRCPV}"
 
-SRC_URI[md5sum] = "6215982b9ed08b9042e088470d60a0a6"
-SRC_URI[sha256sum] = "f7c25186920daccb16867c5fd272318beb8cc076e5a55f79b5906618ef2724f4"
-
-S = "${WORKDIR}/${SRCNAME}-${PV}"
+S = "${WORKDIR}/git"
 
 inherit update-rc.d setuptools identity hosts useradd
 
