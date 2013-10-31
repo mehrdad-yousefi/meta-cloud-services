@@ -105,6 +105,7 @@ RDEPENDS_${PN} += "python-greenlet \
 	python-kombu \
 	python-iso8601 \
 	python-oslo.config \
+	python-pip \
 	python-lxml \
 	python-paste \
 	python-pycrypto \
