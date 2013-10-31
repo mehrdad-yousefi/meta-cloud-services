@@ -11,7 +11,7 @@ SRCNAME = "nova"
 
 FILESEXTRAPATHS := "${THISDIR}/${PN}"
 
-SRC_URI = "git://github.com/openstack/nova.git;branch=stable/havana \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://0001-nova-api-paste.ini-make-controller-IP-configurable.patch \
            "
 
@@ -173,6 +173,7 @@ RDEPENDS_${PN} = " python-modules \
     python-greenlet \
     python-httplib2 \
     python-iso8601 \
+    python-jinja2 \
     python-kombu \
     python-lxml \
     python-netaddr \
@@ -188,7 +189,7 @@ RDEPENDS_${PN} = " python-modules \
     python-sqlalchemy-migrate \
     python-stevedore \
     python-suds \
-    python-quantumclient \
+    python-neutronclient \
     python-routes \
     python-webob \
     python-websockify \
