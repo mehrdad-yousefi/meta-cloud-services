@@ -8,12 +8,11 @@ DEPENDS = "python-setuptools-git"
 PR = "r0"
 SRCNAME = "python-cinderclient"
 
-SRC_URI = "http://pypi.python.org/packages/source/p/python-cinderclient/python-cinderclient-1.0.3.tar.gz"
+SRC_URI = "git://github.com/openstack/python-cinderclient.git;branch=master"
 
-SRC_URI[md5sum] = "3bf0b62be5fb293108899e49d709694c"
-SRC_URI[sha256sum] = "6cc03f68a93a014d8ece1ed3bc7c37a6de79d08e29abfd97f185a5f412c7ce1a"
-
-S = "${WORKDIR}/${SRCNAME}-${PV}"
+PV="git${SRCPV}"
+SRCREV="bdd560b3c02ea0a013ed4b7e7641c6240f3b602f"
+S = "${WORKDIR}/git"
 
 inherit setuptools
 

@@ -7,16 +7,15 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r0"
 SRCNAME = "cinder"
 
-SRC_URI = "https://launchpad.net/${SRCNAME}/grizzly/${PV}/+download/${SRCNAME}-${PV}.tar.gz \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
     file://cinder.conf \
     file://cinder.init \
     file://cinder-volume \
 	"
 
-SRC_URI[md5sum] = "2bfeacfaea7be5194587bb932dd8f693"
-SRC_URI[sha256sum] = "358ab7fb1cb57ea1f0c1d76e30d45eebb6308a6122b6e6ff6ac3405f51eceb1e"
-
-S = "${WORKDIR}/${SRCNAME}-${PV}"
+SRCREV="1f99a044580286bf0d927cc7fc7ce3378653aef0"
+PV="2013.2+git${SRCPV}"
+S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d identity
 
