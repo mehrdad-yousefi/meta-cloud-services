@@ -7,14 +7,14 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r0"
 SRCNAME = "glance"
 
-SRC_URI = "https://launchpad.net/glance/grizzly/${PV}/+download/${SRCNAME}-${PV}.tar.gz \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://glance.init \
            "
 
-SRC_URI[md5sum] = "f9ba3865ff2cf98caa471bd54173fecd"
-SRC_URI[sha256sum] = "642782416d790dfcb6d5bb85626dd5d48784ba8f3a53e7863ec13312e86cb209"
+SRCREV="252fe8572400c25c35e1973b2622e479947c6135"
+PV="2013.2+git${SRCPV}"
 
-S = "${WORKDIR}/${SRCNAME}-${PV}"
+S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d identity
 
