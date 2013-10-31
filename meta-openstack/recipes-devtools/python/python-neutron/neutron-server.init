@@ -1,17 +1,19 @@
-#! /bin/sh
+#!/bin/sh
 
 ### BEGIN INIT INFO
+# Provides:          neutron-server
 # Required-Start:    $remote_fs $syslog
 # Required-Stop:     $remote_fs $syslog
 # Default-Start:     2 3 5
 # Default-Stop:      0 1 6
-# Description:       Quantum networking agent
+# Short-Description: neutron-server
+# Description:       Provides the Quantum networking service
 ### END INIT INFO
 
-SUFFIX=@suffix@
-DESC="quantum-$SUFFIX-agent"
-DAEMON="/usr/bin/quantum-$SUFFIX-agent"
-PIDFILE="/var/run/quantum-$SUFFIX-agent.pid"
+DESC="neutron-server"
+DAEMON="/usr/bin/neutron-server"
+PIDFILE="/var/run/neutron-server.pid"
+DAEMON_ARGS="--config-file=/etc/neutron/neutron.conf --config-file=@plugin@"
 
 start() 
 {
@@ -29,7 +31,8 @@ start()
     echo -n "Starting $DESC..."
 
     start-stop-daemon --start --quiet --background \
-        --pidfile ${PIDFILE} --make-pidfile --exec ${DAEMON}
+        --pidfile ${PIDFILE} --make-pidfile --exec ${DAEMON} \
+	    -- $DAEMON_ARGS
 
     if [ $? -eq 0 ]; then
         echo "done."

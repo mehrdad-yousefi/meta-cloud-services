@@ -16,8 +16,8 @@ RDEPENDS_${PN} = " postgresql \
     glance-api \
     glance-registry \
     keystone \
-    quantum-server \
-    quantum-plugin-openvswitch \
+    neutron-server \
+    neutron-plugin-openvswitch \
     openvswitch-controller \
     cinder-api \
     cinder-volume \

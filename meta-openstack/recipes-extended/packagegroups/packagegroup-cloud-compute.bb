@@ -12,7 +12,7 @@ RDEPENDS_${PN} = " qemu \
     libvirt-virsh \
     nova-compute \
     python-novaclient \
-    quantum-plugin-openvswitch \
+    neutron-plugin-openvswitch \
     openvswitch-switch \
     "
 

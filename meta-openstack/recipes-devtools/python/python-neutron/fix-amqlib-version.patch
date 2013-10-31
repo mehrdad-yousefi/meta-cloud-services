@@ -1,7 +1,7 @@
-Index: quantum-2013.1.1/tools/pip-requires
+Index: neutron-2013.1.1/tools/pip-requires
 ===================================================================
---- quantum-2013.1.1.orig/tools/pip-requires
-+++ quantum-2013.1.1/tools/pip-requires
+--- neutron-2013.1.1.orig/tools/pip-requires
++++ neutron-2013.1.1/tools/pip-requires
 @@ -1,7 +1,7 @@
  Paste
  PasteDeploy>=1.5.0

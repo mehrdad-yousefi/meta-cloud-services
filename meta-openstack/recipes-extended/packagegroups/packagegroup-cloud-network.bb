@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3
 inherit packagegroup
 
 RDEPENDS_${PN} = " \
-    quantum-plugin-openvswitch \
-    quantum-dhcp-agent \
-    quantum-l3-agent \
+    neutron-plugin-openvswitch \
+    neutron-dhcp-agent \
+    neutron-l3-agent \
     openvswitch-switch \
     "

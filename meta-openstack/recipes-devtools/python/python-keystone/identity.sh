@@ -73,12 +73,13 @@ if [ $? -eq 1 ]; then
 else
     GLANCE_USER=$(keystone user-get glance | grep " id " | get_field 2)
 fi
-keystone user-get quantum
+keystone user-get neutron
 if [ $? -eq 1 ]; then                                                                                                                           
-    QUANTUM_USER=$(keystone user-create --name=quantum --pass="$SERVICE_PASSWORD" --tenant-id $SERVICE_TENANT --email=quantum@domain.com | grep " id " | get_field 2)
+    NEUTRON_USER=$(keystone user-create --name=neutron --pass="$SERVICE_PASSWORD" --tenant-id $SERVICE_TENANT --email=neutron@domain.com | grep " id " | get_field 2)
 else
-    QUANTUM_USER=$(keystone user-get quantum | grep " id " | get_field 2)
+    NEUTRON_USER=$(keystone user-get neutron | grep " id " | get_field 2)
 fi
+
 keystone user-get cinder
 if [ $? -eq 1 ]; then                                                                                                                           
     CINDER_USER=$(keystone user-create --name=cinder --pass="$SERVICE_PASSWORD" --tenant-id $SERVICE_TENANT --email=cinder@domain.com | grep " id " | get_field 2)
@@ -110,8 +111,8 @@ keystone user-role-add --tenant-id $SERVICE_TENANT --user-id $NOVA_USER --role-i
 keystone user-role-list --user-id $GLANCE_USER --tenant-id $SERVICE_TENANT &> /dev/null
 keystone user-role-add --tenant-id $SERVICE_TENANT --user-id $GLANCE_USER --role-id $ADMIN_ROLE
 
-keystone user-role-list --user-id $QUANTUM_USER --tenant-id $SERVICE_TENANT &> /dev/null
-keystone user-role-add --tenant-id $SERVICE_TENANT --user-id $QUANTUM_USER --role-id $ADMIN_ROLE
+keystone user-role-list --user-id $NEUTRON_USER --tenant-id $SERVICE_TENANT &> /dev/null
+keystone user-role-add --tenant-id $SERVICE_TENANT --user-id $NEUTRON_USER --role-id $ADMIN_ROLE
 
 keystone user-role-list --user-id $CINDER_USER --tenant-id $SERVICE_TENANT &> /dev/null
 keystone user-role-add --tenant-id $SERVICE_TENANT --user-id $CINDER_USER --role-id $ADMIN_ROLE
@@ -125,7 +126,7 @@ VOLUME_SERVICE=$(keystone service-create --name cinder --type volume --descripti
 IMAGE_SERVICE=$(keystone service-create --name glance --type image --description 'OpenStack Image Service' | grep " id " | get_field 2)
 IDENTITY_SERVICE=$(keystone service-create --name keystone --type identity --description 'OpenStack Identity' | grep " id " | get_field 2)
 EC2_SERVICE=$(keystone service-create --name ec2 --type ec2 --description 'OpenStack EC2 service' | grep " id " | get_field 2)
-NETWORK_SERVICE=$(keystone service-create --name quantum --type network --description 'OpenStack Networking service' | grep " id " | get_field 2)
+NETWORK_SERVICE=$(keystone service-create --name neutron --type network --description 'OpenStack Networking service' | grep " id " | get_field 2)
 
 # Create endpoints
 keystone endpoint-create --region $KEYSTONE_REGION --service-id $COMPUTE_SERVICE --publicurl 'http://'"$KEYSTONE_HOST"':8774/v2/$(tenant_id)s' --adminurl 'http://'"$KEYSTONE_HOST"':8774/v2/$(tenant_id)s' --internalurl 'http://'"$KEYSTONE_HOST"':8774/v2/$(tenant_id)s'

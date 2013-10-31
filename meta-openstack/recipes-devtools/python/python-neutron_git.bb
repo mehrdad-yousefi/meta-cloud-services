@@ -1,42 +1,40 @@
-DESCRIPTION = "Quantum (virtual network service)"
-HOMEPAGE = "https://launchpad.net/quantum"
+DESCRIPTION = "Neutron (virtual network service)"
+HOMEPAGE = "https://launchpad.net/neutron"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
 PR = "r0"
-SRCNAME = "quantum"
+SRCNAME = "neutron"
 
-SRC_URI = "https://launchpad.net/${SRCNAME}/grizzly/${PV}/+download/${SRCNAME}-${PV}.tar.gz \
-      file://ovs_quantum_plugin.ini \
-      file://linuxbridge_conf.ini \
-      file://quantum-server.init \
-      file://quantum-agent.init \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
+           file://ovs_neutron_plugin.ini \
+           file://linuxbridge_conf.ini \
+           file://neutron-server.init \
+           file://neutron-agent.init \
 	  "
+SRCREV="a3f8cf3513c01ed2f92af9d49a92a67a67f80308"
+PV="2013.2+git${SRCPV}"
 
-SRC_URI[md5sum] = "ca410283029db2cade16c8af003f9b7f"
-SRC_URI[sha256sum] = "79e60ec1aef800da3a4e1841909cdd8b2cf645979d08f27bc481957c7944e93d"
-
-
-S = "${WORKDIR}/${SRCNAME}-${PV}"
+S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d identity hosts
 
 do_install_append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}/
-    QUANTUM_CONF_DIR=${D}${sysconfdir}/quantum
+    NEUTRON_CONF_DIR=${D}${sysconfdir}/neutron
 
     sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
-        ${TEMPLATE_CONF_DIR}/quantum.conf > ${WORKDIR}/quantum.conf
-    sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${WORKDIR}/quantum.conf
+        ${TEMPLATE_CONF_DIR}/neutron.conf > ${WORKDIR}/neutron.conf
+    sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${WORKDIR}/neutron.conf
     sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
-        -i ${WORKDIR}/quantum.conf
-    sed -e "s:^# core_plugin.*:core_plugin = quantum.plugins.openvswitch.ovs_quantum_plugin.OVSQuantumPluginV2:g" \
-        -i ${WORKDIR}/quantum.conf
+        -i ${WORKDIR}/neutron.conf
+    sed -e "s:^# core_plugin.*:core_plugin = neutron.plugins.openvswitch.ovs_neutron_plugin.OVSNeutronPluginV2:g" \
+        -i ${WORKDIR}/neutron.conf
 
-    echo "rabbit_host = ${CONTROLLER_IP}" >> ${WORKDIR}/quantum.conf
+    echo "rabbit_host = ${CONTROLLER_IP}" >> ${WORKDIR}/neutron.conf
 
-    for file in ovs_quantum_plugin.ini linuxbridge_conf.ini
+    for file in ovs_neutron_plugin.ini linuxbridge_conf.ini
     do
         sed -e "s:%DB_USER%:${DB_USER}:g" -i ${WORKDIR}/${file}
         sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${WORKDIR}/${file}
@@ -44,26 +42,26 @@ do_install_append() {
         sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${WORKDIR}/${file}
     done
 
-    install -d ${QUANTUM_CONF_DIR}
-    install -d ${QUANTUM_CONF_DIR}/plugins/openvswitch
-    install -d ${QUANTUM_CONF_DIR}/plugins/linuxbridge
+    install -d ${NEUTRON_CONF_DIR}
+    install -d ${NEUTRON_CONF_DIR}/plugins/openvswitch
+    install -d ${NEUTRON_CONF_DIR}/plugins/linuxbridge
 
-    install -m 600 ${WORKDIR}/quantum.conf ${QUANTUM_CONF_DIR}/
-    install -m 600 ${WORKDIR}/ovs_quantum_plugin.ini ${QUANTUM_CONF_DIR}/plugins/openvswitch/
-    install -m 600 ${WORKDIR}/linuxbridge_conf.ini ${QUANTUM_CONF_DIR}/plugins/linuxbridge/
-    install -m 600 ${S}/etc/api-paste.ini ${QUANTUM_CONF_DIR}/
-    install -m 600 ${S}/etc/policy.json ${QUANTUM_CONF_DIR}/
+    install -m 600 ${WORKDIR}/neutron.conf ${NEUTRON_CONF_DIR}/
+    install -m 600 ${WORKDIR}/ovs_neutron_plugin.ini ${NEUTRON_CONF_DIR}/plugins/openvswitch/
+    install -m 600 ${WORKDIR}/linuxbridge_conf.ini ${NEUTRON_CONF_DIR}/plugins/linuxbridge/
+    install -m 600 ${S}/etc/api-paste.ini ${NEUTRON_CONF_DIR}/
+    install -m 600 ${S}/etc/policy.json ${NEUTRON_CONF_DIR}/
 
     install -d ${D}${localstatedir}/log/${SRCNAME}
 
     PLUGIN=openvswitch
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
-        sed "s:@plugin@:/etc/quantum/plugins/$PLUGIN/ovs_quantum_plugin.ini:" \
-             < ${WORKDIR}/quantum-server.init >${WORKDIR}/quantum-server.init.sh
-        install -m 0755 ${WORKDIR}/quantum-server.init.sh ${D}${sysconfdir}/init.d/quantum-server
-        sed "s:@suffix@:$PLUGIN:" < ${WORKDIR}/quantum-agent.init >${WORKDIR}/quantum-$PLUGIN.init.sh
-        install -m 0755 ${WORKDIR}/quantum-$PLUGIN.init.sh ${D}${sysconfdir}/init.d/quantum-$PLUGIN-agent
+        sed "s:@plugin@:/etc/neutron/plugins/$PLUGIN/ovs_neutron_plugin.ini:" \
+             < ${WORKDIR}/neutron-server.init >${WORKDIR}/neutron-server.init.sh
+        install -m 0755 ${WORKDIR}/neutron-server.init.sh ${D}${sysconfdir}/init.d/neutron-server
+        sed "s:@suffix@:$PLUGIN:" < ${WORKDIR}/neutron-agent.init >${WORKDIR}/neutron-$PLUGIN.init.sh
+        install -m 0755 ${WORKDIR}/neutron-$PLUGIN.init.sh ${D}${sysconfdir}/init.d/neutron-$PLUGIN-agent
     fi
 }
 
@@ -79,7 +77,7 @@ pkg_postinst_${SRCNAME} () {
        sleep 5
     fi
 
-    sudo -u postgres createdb ovs_quantum
+    sudo -u postgres createdb ovs_neutron
 }
 
 pkg_postinst_${SRCNAME}-plugin-openvswitch () {
@@ -106,43 +104,43 @@ PACKAGES += " \
 FILES_${PN} = "${libdir}/*"
 
 FILES_${SRCNAME} = " \
-    ${bindir}/quantum-db-manage \
-    ${bindir}/quantum-rootwrap \
-    ${bindir}/quantum-debug \
-    ${bindir}/quantum-netns-cleanup \
-    ${bindir}/quantum-ovs-cleanup \
+    ${bindir}/neutron-db-manage \
+    ${bindir}/neutron-rootwrap \
+    ${bindir}/neutron-debug \
+    ${bindir}/neutron-netns-cleanup \
+    ${bindir}/neutron-ovs-cleanup \
     ${sysconfdir}/${SRCNAME}/* \
     ${localstatedir}/* \    
     "
 
-FILES_${SRCNAME}-server = "${bindir}/quantum-server \
-    ${sysconfdir}/init.d/quantum-server \
+FILES_${SRCNAME}-server = "${bindir}/neutron-server \
+    ${sysconfdir}/init.d/neutron-server \
     "
 
 FILES_${SRCNAME}-plugin-openvswitch = " \
-    ${bindir}/quantum-openvswitch-agent \
-    ${sysconfdir}/${SRCNAME}/plugins/openvswitch/ovs_quantum_plugin.ini \
-    ${sysconfdir}/init.d/quantum-openvswitch-agent \
+    ${bindir}/neutron-openvswitch-agent \
+    ${sysconfdir}/${SRCNAME}/plugins/openvswitch/ovs_neutron_plugin.ini \
+    ${sysconfdir}/init.d/neutron-openvswitch-agent \
     "
 
 FILES_${SRCNAME}-plugin-linuxbridge = " \
-    ${bindir}/quantum-linuxbridge-agent \
+    ${bindir}/neutron-linuxbridge-agent \
     ${sysconfdir}/${SRCNAME}/plugins/linuxbridge/linuxbridge_conf.ini \
-    ${sysconfdir}/init.d/quantum-linuxbridge-agent \
+    ${sysconfdir}/init.d/neutron-linuxbridge-agent \
     "
 
-FILES_${SRCNAME}-dhcp-agent = "${bindir}/quantum-dhcp-agent \
-    ${bindir}/quantum-dhcp-agent-dnsmasq-lease-update \
+FILES_${SRCNAME}-dhcp-agent = "${bindir}/neutron-dhcp-agent \
+    ${bindir}/neutron-dhcp-agent-dnsmasq-lease-update \
     ${sysconfdir}/${SRCNAME}/dhcp_agent.ini \
     ${sysconfdir}/init.d/dhcp_agent \
     "
 
-FILES_${SRCNAME}-l3-agent = "${bindir}/quantum-l3-agent \
+FILES_${SRCNAME}-l3-agent = "${bindir}/neutron-l3-agent \
     ${sysconfdir}/${SRCNAME}/l3_agent.ini \
     ${sysconfdir}/init.d/l3_agent \
     "
 
-FILES_${SRCNAME}-metadata-agent = "${bindir}/quantum-metadata-agent \
+FILES_${SRCNAME}-metadata-agent = "${bindir}/neutron-metadata-agent \
     ${sysconfdir}/${SRCNAME}/metadata_agent.ini \
     ${sysconfdir}/init.d/metadata_agent \
     "
@@ -163,7 +161,7 @@ RDEPENDS_${PN} += "python-paste \
 	python-iso8601 \
 	python-kombu \
 	python-netaddr \
-	python-quantumclient \
+	python-neutronclient \
 	python-sqlalchemy \
 	python-webob \
 	python-keystoneclient \
@@ -187,6 +185,6 @@ RDEPENDS_${SRCNAME}-l3-agent = "${SRCNAME} ${SRCNAME}-metadata-agent iputils"
 RRECOMMENDS_${SRCNAME}-server = "${SRCNAME}-plugin-openvswitch"
 
 INITSCRIPT_PACKAGES = "${SRCNAME}-server ${SRCNAME}-plugin-openvswitch ${SRCNAME}-plugin-linuxbridge"
-INITSCRIPT_NAME_${SRCNAME}-server = "quantum-server"
-INITSCRIPT_NAME_${SRCNAME}-plugin-openvswitch = "quantum-openvswitch-agent"
-INITSCRIPT_NAME_${SRCNAME}-plugin-linuxbridge = "quantum-linuxbridge-agent"
+INITSCRIPT_NAME_${SRCNAME}-server = "neutron-server"
+INITSCRIPT_NAME_${SRCNAME}-plugin-openvswitch = "neutron-openvswitch-agent"
+INITSCRIPT_NAME_${SRCNAME}-plugin-linuxbridge = "neutron-linuxbridge-agent"
