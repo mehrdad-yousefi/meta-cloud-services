@@ -10,8 +10,8 @@ SRCNAME = "six"
 SRC_URI = "https://pypi.python.org/packages/source/s/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
 "
 
-SRC_URI[md5sum] = "ec47fe6070a8a64c802363d2c2b1e2ee"
-SRC_URI[sha256sum] = "d59793f9b255bd00de800b97f9a50cce4fc8a44c205f7defa5bb7d691d13b852"
+SRC_URI[md5sum] = "bdbb9e12d3336c198695aa4cf3a61d62"
+SRC_URI[sha256sum] = "f045afd6dffb755cc0411acb7ce9acc4de0e71261d4b5f91de2e68d9aa5f8367"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
