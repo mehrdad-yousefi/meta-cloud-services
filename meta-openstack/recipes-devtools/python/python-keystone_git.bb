@@ -7,17 +7,17 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r0"
 SRCNAME = "keystone"
 
-SRC_URI = "https://launchpad.net/keystone/grizzly/${PV}/+download/${SRCNAME}-${PV}.tar.gz \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://keystone.conf \
            file://identity.sh \
            file://keystone \
            file://openrc \
 	  "
 
-SRC_URI[md5sum] = "49bfcd088426960ef787d040ea8426af"
-SRC_URI[sha256sum] = "e097170ebb1cf22de50f2d5ab2216a5116ffe0934720dbad8b02d61c370b8261"
+SRCREV="4221b6020e6b0b42325d8904d7b8a22577a6acc0"
+PV="2013.2+git${SRCPV}"
 
-S = "${WORKDIR}/${SRCNAME}-${PV}"
+S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d identity hosts
 
@@ -65,7 +65,7 @@ pkg_postinst_${SRCNAME} () {
 
     sudo -u postgres createdb keystone
     keystone-manage db_sync
-    keystone-manage pki_setup
+    keystone-manage pki_setup --keystone-user=root --keystone-group=root
 
     # Create users, services and endpoints
     /etc/init.d/keystone start
@@ -103,6 +103,8 @@ RDEPENDS_${PN} += "python-pam \
 	python-iso8601 \
 	python-keystoneclient \
 	python-oslo.config \
+        python-dogpile.core \
+        python-dogpile.cache \
 	"
 
 RDEPENDS_${SRCNAME} = "${PN} \

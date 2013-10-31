@@ -6,10 +6,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4a4d0e932ffae1c0131528d30d419c55"
 
 PR = "r0"
 
-SRC_URI = "http://pypi.python.org/packages/source/p/${PN}/${PN}-${PV}.tar.gz"
+SRC_URI = "git://github.com/openstack/python-keystoneclient.git;branch=master"
 
-SRC_URI[md5sum] = "ad6fcbdd0e4cb239d315155bdbe9337c"
-SRC_URI[sha256sum] = "10b98946aaa98e97f032ca44848a5d84bc61d6f0b4186c635704087e72c08818"
+PV="git${SRCPV}"
+SRCREV="0774d5aafade9e5a5de3830de461843c4a7d59a1"
+S = "${WORKDIR}/git"
 
 inherit setuptools
 
