@@ -184,6 +184,7 @@ RDEPENDS_${PN} = " python-modules \
     python-pyasn1 \
     python-setuptools-git \
     python-simplejson \
+    python-six \
     python-setuptools \
     python-sqlalchemy \
     python-sqlalchemy-migrate \
