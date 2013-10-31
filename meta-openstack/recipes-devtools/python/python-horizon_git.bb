@@ -12,7 +12,8 @@ DEPENDS_${PN} += "python-django \
     python-glanceclient \
     python-keystoneclient \
     python-novaclient \
-    python-quantumclient \
+    python-neutronclient \
+    python-heatclient \
     python-pytz \
     python-django-appconf \
     python-six \
@@ -20,20 +21,22 @@ DEPENDS_${PN} += "python-django \
     python-lockfile \
     "
 
-PR = "r0"
+PR = "r1"
 SRCNAME = "horizon"
 
-SRC_URI = "https://launchpad.net/horizon/grizzly/${PV}/+download/${SRCNAME}-${PV}.tar.gz \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
     file://horizon.init \
     file://fix_bindir_path.patch \
     "
 
-SRC_URI[md5sum] = "8edb861987dffe3017eada91d3009f0a"
-SRC_URI[sha256sum] = "4dbf05e75313d9d6ac966de1d139f26647ab537a3d1f418a3e4424210b4c05fd"
-
-S = "${WORKDIR}/${SRCNAME}-${PV}"
+SRCREV="a93c611e7185234d4a4ce36ba182cf321c2113fe"
+PV="2013.2+git${SRCPV}"
+S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d python-dir
+
+# no longer required. kept as reference.
+# do_install[dirs] += "${D}/usr/share/bin"
 
 do_install_append() {
     DASHBOARD_DIR=${D}${PYTHON_SITEPACKAGES_DIR}/openstack_dashboard
@@ -51,7 +54,8 @@ do_install_append() {
         install -m 0755 ${WORKDIR}/horizon ${D}${sysconfdir}/init.d/horizon
     fi
 
-    mv ${D}${datadir}/bin ${DASHBOARD_DIR}/bin
+    # no longer required. kept as reference.
+    # mv ${D}${datadir}/bin ${DASHBOARD_DIR}/bin
 }
 
 PACKAGES += "${SRCNAME}"
@@ -69,15 +73,19 @@ RDEPENDS_${PN} += "nodejs \
     python-django-compressor \
     python-django-openstack-auth \
     python-netaddr \
+    python-ceilometerclient \
     python-cinderclient \
     python-glanceclient \
+    python-heatclient \
     python-keystoneclient \
+    python-lesscpy \
     python-novaclient \
-    python-quantumclient \
+    python-neutronclient \
     python-pytz \
     python-six \
     python-swiftclient \
     python-lockfile \
+    python-pyyaml \
     "
 
 RDEPENDS_${SRCNAME} = "${PN}"
