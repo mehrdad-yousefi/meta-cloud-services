@@ -6,10 +6,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 
 PR = "r0"
 
-SRC_URI = "https://pypi.python.org/packages/source/p/${PN}/${PN}-${PV}.tar.gz"
+SRC_URI = "git://github.com/openstack/python-swiftclient.git;branch=master"
 
-SRC_URI[md5sum] = "3767442551361cffdbb3681e401cea52"
-SRC_URI[sha256sum] = "95367a1db761cd71ac480cd4733a1cc55ef2afc2d48613142b8b89eac50cccc8"
+PV="git${SRCPV}"
+SRCREV="4b78b4d136f5e18544ba97db85f47c5201d3a761"
+S = "${WORKDIR}/git"
 
 inherit setuptools 
 

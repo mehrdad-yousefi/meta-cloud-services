@@ -7,13 +7,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 PR = "r0"
 SRCNAME = "swift"
 
-SRC_URI = "https://launchpad.net/${SRCNAME}/grizzly/${PV}/+download/${SRCNAME}-${PV}.tar.gz \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
 "
 
-SRC_URI[md5sum] = "0d2479c3cbb124fa3a6b001d0d4d5a8b"
-SRC_URI[sha256sum] = "613185473e0c6f11c77bdc6b65efee195303268117afd9024fee82ebde6ed8a3"
-
-S = "${WORKDIR}/${SRCNAME}-${PV}"
+SRCREV="9b521fe800ed3984169d37e9772674867745fede"
+PV="2013.2+git${SRCPV}"
+S = "${WORKDIR}/git"
 
 inherit setuptools
 
