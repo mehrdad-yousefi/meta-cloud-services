@@ -13,13 +13,10 @@ if [ -e /etc/${PN}/PG_VERSION ]; then
 fi
 
 sudo -u postgres initdb -D /etc/${PN}/
-sleep 2
 echo "listen_addresses = '*'" >> /etc/${PN}/postgresql.conf
 echo "host   all   all   ${CONTROLLER_IP}/32   trust" >> /etc/${PN}/pg_hba.conf
 echo "host   all   all   ${COMPUTE_IP}/32   trust" >> /etc/${PN}/pg_hba.conf
-sleep 2
 /etc/init.d/postgresql start
-sleep 10
 
 count=0
 done=0
