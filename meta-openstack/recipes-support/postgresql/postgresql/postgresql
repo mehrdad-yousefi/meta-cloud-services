@@ -22,7 +22,9 @@ start ()
         echo "already running."
         exit 0
     fi
-    start-stop-daemon --start --quiet --chuid postgres --exec ${DAEMON} --background -- -D /etc/postgresql
+    touch /var/log/postgresql.log
+    chown postgres /var/log/postgresql.log
+    sudo -u postgres /usr/bin/pg_ctl start -w -D /etc/postgresql -s -l /var/log/postgresql.log
     if [ $? -eq 0 ]; then
         echo "done."
     else
@@ -37,7 +39,7 @@ stop ()
         echo "not running."
         exit 0
     fi
-    start-stop-daemon --stop --quiet --chuid postgres --exec ${DAEMON}
+    sudo -u postgres /usr/bin/pg_ctl stop -w -D /etc/postgresql -m fast -s
     if [ $? -eq 0 ]; then
         echo "done."
     else
