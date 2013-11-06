@@ -7,11 +7,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 PR = "r0"
 
 SRCNAME = "stevedore"
-SRC_URI = "http://pypi.python.org/packages/source/s/stevedore/stevedore-0.8.tar.gz \
-           file://remove-distribute-dependency.patch"
+SRC_URI = "http://pypi.python.org/packages/source/s/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "8f340230754c2d70e6e34bc6d8678048"
-SRC_URI[sha256sum] = "bf187929f739f86a73ad218193d23bddb34c717c5adb6fd84008c2975043edb6"
+SRC_URI[md5sum] = "8bf1b7bed06bf5ab636784d161f1a494"
+SRC_URI[sha256sum] = "9689a76c09eaeb60b6db5b45aae71de8c53f15d302d790536ac5bf7c47d729eb"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
