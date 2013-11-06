@@ -87,6 +87,13 @@ else
     CINDER_USER=$(keystone user-get cinder | grep " id " | get_field 2)
 fi
 
+keystone user-get ceilometer
+if [ $? -eq 1 ]; then
+    CEILOMETER_USER=$(keystone user-create --name=ceilometer --pass="$SERVICE_PASSWORD" --tenant-id $SERVICE_TENANT --email=ceilometer@domain.com | grep " id " | get_field 2)
+else
+    CEILOMETER_USER=$(keystone user-get ceilometer | grep " id " | get_field 2)
+fi
+
 # Roles
 keystone role-get admin
 if [ $? -eq 1 ]; then
@@ -99,6 +106,12 @@ if [ $? -eq 1 ]; then
     MEMBER_ROLE=$(keystone role-create --name=Member | grep " id " | get_field 2)
 else
     MEMBER_ROLE=$(keystone role-get Member | grep " id " | get_field 2)
+fi
+keystone role-get ResellerAdmin
+if [ $? -eq 1 ]; then
+    RESELLER_ADMIN_ROLE=$(keystone role-create --name=ResellerAdmin | grep " id " | get_field 2)
+else
+    RESELLER_ADMIN_ROLE=$(keystone role-get ResellerAdmin | grep " id " | get_field 2)
 fi
 
 # Add Roles to Users in Tenants
@@ -119,6 +132,9 @@ keystone user-role-add --tenant-id $SERVICE_TENANT --user-id $CINDER_USER --role
 
 keystone user-role-list --user-id $DEMO_USER --tenant-id $DEMO_TENANT &> /dev/null
 keystone user-role-add --tenant-id $DEMO_TENANT --user-id $DEMO_USER --role-id $MEMBER_ROLE
+
+keystone user-role-list --user-id $CEILOMETER_USER --tenant_id $SERVICE_TENANT &> /dev/null
+keystone user-role-add --tenant_id $SERVICE_TENANT --user_id $CEILOMETER_USER --role-id $RESELLER_ADMIN_ROLE
 
 # Create services
 COMPUTE_SERVICE=$(keystone service-create --name nova --type compute --description 'OpenStack Compute Service' | grep " id " | get_field 2)
