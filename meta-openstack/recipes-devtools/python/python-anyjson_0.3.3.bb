@@ -12,7 +12,7 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit setuptools
 
-SRC_URI[md5sum] = "ed707033ad6cee0a44db199c289a4c80"
-SRC_URI[sha256sum] = "27ddec5bc9220c13f405cb30adee9b5db17a608f56935618785219348c8a90ac"
+SRC_URI[md5sum] = "2ea28d6ec311aeeebaf993cb3008b27c"
+SRC_URI[sha256sum] = "37812d863c9ad3e35c0734c42e0bf0320ce8c3bed82cd20ad54cb34d158157ba"
 
 RDEPENDS_${PN} = "python-simplejson"

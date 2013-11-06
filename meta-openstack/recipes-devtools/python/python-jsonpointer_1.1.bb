@@ -9,8 +9,8 @@ SRCNAME = "jsonpointer"
 
 SRC_URI = "http://pypi.python.org/packages/source/j/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "41fe4189279b9c6cd35a4131cb2498f2"
-SRC_URI[sha256sum] = "6a27fb4cb590a118d0f8c7e367f902cf553abf5dcb4b7938cdc91cc36e3e4bdf"
+RC_URI[md5sum] = "51f0959e633b533057e9eb8cc508e468"
+SRC_URI[sha256sum] = "a0fe333840d5191f14592ce9fc791bae57546564680a1aef5657edf88f29c366"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
