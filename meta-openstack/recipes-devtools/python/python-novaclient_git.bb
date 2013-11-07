@@ -7,10 +7,11 @@ DEPENDS = "python-setuptools-git"
 
 PR = "r0"
 
-SRC_URI = "https://pypi.python.org/packages/source/p/${PN}/${PN}-${PV}.tar.gz"
+SRC_URI = "git://github.com/openstack/python-novaclient.git;branch=master"
 
-SRC_URI[md5sum] = "e1079ade7e1956c8ea0613ca7910ab54"
-SRC_URI[sha256sum] = "f48c9c159ea8efd617f0379d1df060ea53f40f40e29ebe733464779267a314e6"
+PV="git${SRCPV}"
+SRCREV="1d2263dae339590b60250793bc81ec5776845060"
+S = "${WORKDIR}/git"
 
 inherit setuptools 
 
