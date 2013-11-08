@@ -10,8 +10,8 @@ SRCNAME = "pytz"
 SRC_URI = "https://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
 "
 
-SRC_URI[md5sum] = "64dd31f3f731a5adf9754c32e00d46c3"
-SRC_URI[sha256sum] = "0797293d12ca2f7e5dd5bc0807f521f39d5b60a2c347c48f8362f9fd0174af3f"
+SRC_URI[md5sum] = "37750ca749ed3a52523b9682b0b7e381"
+SRC_URI[sha256sum] = "58552e870aa2c0a1fa3b4ef923f00fbf3e55afaa87f8d31244d44f188de4793a"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
