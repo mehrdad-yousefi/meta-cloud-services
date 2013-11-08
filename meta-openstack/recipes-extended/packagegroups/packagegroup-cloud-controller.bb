@@ -22,6 +22,9 @@ RDEPENDS_${PN} = " postgresql \
     cinder-api \
     cinder-volume \
     cinder-scheduler \
+    ceilometer-api \
+    ceilometer-collector \
+    ceilometer-controller \
     horizon \
     novnc \
     "

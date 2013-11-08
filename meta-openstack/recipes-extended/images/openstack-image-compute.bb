@@ -16,4 +16,4 @@ inherit openstack-base
 # check for 2G of free space, so we use 3G as a starting point.
 IMAGE_ROOTFS_EXTRA_SPACE = "3000000"
 
-ROOTFS_POSTPROCESS_COMMAND += "remove_packaging_data_files ; "
+# ROOTFS_POSTPROCESS_COMMAND += "remove_packaging_data_files ; "

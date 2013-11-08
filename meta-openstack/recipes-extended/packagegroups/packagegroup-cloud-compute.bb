@@ -11,6 +11,7 @@ RDEPENDS_${PN} = " qemu \
     libvirt-libvirtd \
     libvirt-virsh \
     nova-compute \
+    ceilometer-compute \
     python-novaclient \
     neutron-plugin-openvswitch \
     openvswitch-switch \
