@@ -1,5 +1,4 @@
 #!/bin/sh
-set -e
 
 ### BEGIN INIT INFO
 # Provides:     postgresql
@@ -15,6 +14,19 @@ set -e
 DAEMON=/usr/bin/postmaster
 DESC="PostgreSQL RDBMS server"
 
+datadir=`grep ^data_directory /etc/postgresql/postgresql.conf |sed -e "s#^.*= '##; s#'.*##"`
+if [ "$datadir" = "" ] ; then
+    datadir=/etc/postgresql
+else
+    if [ ! -e $datadir/postgresql.conf ] ; then
+	if [ -e /etc/postgresql/postgresql.conf -a -e $datadir ] ; then
+	    ln -s /etc/postgresql/*.conf $datadir/
+	fi
+    fi
+fi
+
+cd /
+
 start ()
 {
     echo -n "Starting postgres server..."
@@ -24,7 +36,7 @@ start ()
     fi
     touch /var/log/postgresql.log
     chown postgres /var/log/postgresql.log
-    sudo -u postgres /usr/bin/pg_ctl start -w -D /etc/postgresql -s -l /var/log/postgresql.log
+    sudo -u postgres /usr/bin/pg_ctl start -w -D $datadir -s -l /var/log/postgresql.log
     if [ $? -eq 0 ]; then
         echo "done."
     else
@@ -39,7 +51,7 @@ stop ()
         echo "not running."
         exit 0
     fi
-    sudo -u postgres /usr/bin/pg_ctl stop -w -D /etc/postgresql -m fast -s
+    sudo -u postgres /usr/bin/pg_ctl stop -w -D $datadir -m fast -s
     if [ $? -eq 0 ]; then
         echo "done."
     else
