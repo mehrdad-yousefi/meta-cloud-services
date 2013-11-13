@@ -94,6 +94,13 @@ else
     CEILOMETER_USER=$(keystone user-get ceilometer | grep " id " | get_field 2)
 fi
 
+keystone user-get heat
+if [ $? -eq 1 ]; then
+    HEAT_USER=$(keystone user-create --name=heat --pass="$SERVICE_PASSWORD" --tenant-id $SERVICE_TENANT --email=heat@domain.com | grep " id " | get_field 2)
+else
+    HEAT_USER=$(keystone user-get heat | grep " id " | get_field 2)
+fi
+
 # Roles
 keystone role-get admin
 if [ $? -eq 1 ]; then
@@ -113,6 +120,8 @@ if [ $? -eq 1 ]; then
 else
     RESELLER_ADMIN_ROLE=$(keystone role-get ResellerAdmin | grep " id " | get_field 2)
 fi
+#  heat stack template user role
+keystone role-create --name heat_stack_user
 
 # Add Roles to Users in Tenants
 keystone user-role-list --user-id $ADMIN_USER --tenant-id $ADMIN_TENANT &> /dev/null
@@ -136,6 +145,9 @@ keystone user-role-add --tenant-id $DEMO_TENANT --user-id $DEMO_USER --role-id $
 keystone user-role-list --user-id $CEILOMETER_USER --tenant_id $SERVICE_TENANT &> /dev/null
 keystone user-role-add --tenant_id $SERVICE_TENANT --user_id $CEILOMETER_USER --role-id $RESELLER_ADMIN_ROLE
 
+keystone user-role-add --tenant_id $SERVICE_TENANT --user-id $HEAT_USER --role-id $ADMIN_ROLE
+
+
 # Create services
 COMPUTE_SERVICE=$(keystone service-create --name nova --type compute --description 'OpenStack Compute Service' | grep " id " | get_field 2)
 VOLUME_SERVICE=$(keystone service-create --name cinder --type volume --description 'OpenStack Volume Service' | grep " id " | get_field 2)
@@ -144,6 +156,8 @@ IDENTITY_SERVICE=$(keystone service-create --name keystone --type identity --des
 EC2_SERVICE=$(keystone service-create --name ec2 --type ec2 --description 'OpenStack EC2 service' | grep " id " | get_field 2)
 NETWORK_SERVICE=$(keystone service-create --name neutron --type network --description 'OpenStack Networking service' | grep " id " | get_field 2)
 METERING_SERVICE=$(keystone service-create --name ceilometer --type=metering --description='OpenStack Metering Service' | grep " id " | get_field 2)
+ORCHESTRATION_SERVICE=$(keystone service-create --name heat --type=orchestration --description='OpenStack Orchestration Service' | grep " id " | get_field 2)
+CLOUDFORMATION_SERVICE=$(keystone service-create --name heat-cfn --type=cloudformation --description='OpenStack Cloudformation Service' | grep " id " | get_field 2)
 
 # Create endpoints
 keystone endpoint-create --region $KEYSTONE_REGION --service-id $COMPUTE_SERVICE --publicurl 'http://'"$KEYSTONE_HOST"':8774/v2/$(tenant_id)s' --adminurl 'http://'"$KEYSTONE_HOST"':8774/v2/$(tenant_id)s' --internalurl 'http://'"$KEYSTONE_HOST"':8774/v2/$(tenant_id)s'
@@ -152,4 +166,6 @@ keystone endpoint-create --region $KEYSTONE_REGION --service-id $IMAGE_SERVICE -
 keystone endpoint-create --region $KEYSTONE_REGION --service-id $IDENTITY_SERVICE --publicurl 'http://'"$KEYSTONE_HOST"':5000/v2.0' --adminurl 'http://'"$KEYSTONE_HOST"':35357/v2.0' --internalurl 'http://'"$KEYSTONE_HOST"':5000/v2.0'
 keystone endpoint-create --region $KEYSTONE_REGION --service-id $EC2_SERVICE --publicurl 'http://'"$KEYSTONE_HOST"':8773/services/Cloud' --adminurl 'http://'"$KEYSTONE_HOST"':8773/services/Admin' --internalurl 'http://'"$KEYSTONE_HOST"':8773/services/Cloud'
 keystone endpoint-create --region $KEYSTONE_REGION --service-id $NETWORK_SERVICE --publicurl 'http://'"$KEYSTONE_HOST"':9696/' --adminurl 'http://'"$KEYSTONE_HOST"':9696/' --internalurl 'http://'"$KEYSTONE_HOST"':9696/'
-keystone endpoint-create --region $KEYSTONE_REGION --service_id $METERING_SERVICE --publicurl 'http://$KEYSTONE_HOST:8777/' --adminurl 'http://$KEYSTONE_HOST:8777/' --internalurl 'http://$KEYSTONE_HOST:8777/'
+keystone endpoint-create --region $KEYSTONE_REGION --service_id $METERING_SERVICE --publicurl 'http://'"$KEYSTONE_HOST"':8777/' --adminurl 'http://'"$KEYSTONE_HOST"':8777/' --internalurl 'http://'"$KEYSTONE_HOST"':8777/'
+keystone endpoint-create --region $KEYSTONE_REGION --service_id $ORCHESTRATION_SERVICE --publicurl 'http://'"$KEYSTONE_HOST"':8004/v1/%(tenant_id)s' --adminurl 'http://'"$KEYSTONE_HOST"':8004/v1/%(tenant_id)s' --internalurl 'http://'"$KEYSTONE_HOST"':8004/v1/%(tenant_id)s'
+keystone endpoint-create --region $KEYSTONE_REGION --service_id $CLOUDFORMATION_SERVICE --publicurl 'http://'"$KEYSTONE_HOST"':8000/v1' --adminurl 'http://'"$KEYSTONE_HOST"':8000/v1' --internalurl 'http://'"$KEYSTONE_HOST"':8000/v1'

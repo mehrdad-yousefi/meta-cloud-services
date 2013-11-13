@@ -1,0 +1,83 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:
+# Required-Start: $remote_fs $network $syslog
+# Required-Stop: $remote_fs $syslog
+# Default-Stop: 0 1 6
+# Short-Description: Heat Servers
+# Description: OpenStack Orchestration Service (code-named heat)
+### END INIT INFO
+
+SUFFIX="@suffix@"
+CONFIG="/etc/heat/heat.conf" 
+if [ -n "$SUFFIX" ]; then
+    DAEMON="/usr/bin/heat-$SUFFIX"
+    DESC="heat-$SUFFIX"
+    PIDFILE="/var/run/heat-$SUFFIX.pid"
+else
+    DAEMON="/usr/bin/heat"
+    DESC="heat"
+    PIDFILE="/var/run/heat.pid"
+fi
+
+start() 
+{
+    if [ -e $PIDFILE ]; then
+        PIDDIR=/proc/$(cat $PIDFILE)
+        if [ -d ${PIDDIR} ]; then
+            echo "$DESC already running."
+            exit 1
+        else
+            echo "Removing stale PID file $PIDFILE"
+            rm -f $PIDFILE
+        fi
+    fi
+
+    if [ ! -d /var/log/heat ]; then
+        mkdir /var/log/heat
+    fi
+
+    echo -n "Starting $DESC..."
+
+    start-stop-daemon --start --quiet --background \
+        --pidfile ${PIDFILE} --make-pidfile --exec ${DAEMON} \
+	-- --config-file $CONFIG
+
+    if [ $? -eq 0 ]; then
+        echo "done."
+    else
+        echo "failed."
+    fi
+}
+
+stop() 
+{
+    echo -n "Stopping $DESC..."
+    start-stop-daemon --stop --quiet --pidfile $PIDFILE
+    if [ $? -eq 0 ]; then
+        echo "done."
+    else
+        echo "failed."
+    fi
+    rm -f $PIDFILE
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart|force-reload)
+        stop
+        start
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|force-reload|restart}"
+        exit 1
+        ;;
+esac
+
+exit 0

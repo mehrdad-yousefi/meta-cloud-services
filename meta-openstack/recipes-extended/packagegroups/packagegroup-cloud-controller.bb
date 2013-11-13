@@ -25,6 +25,9 @@ RDEPENDS_${PN} = " postgresql \
     ceilometer-api \
     ceilometer-collector \
     ceilometer-controller \
+    heat-api \
+    heat-api-cfn \
+    heat-engine \
     horizon \
     novnc \
     "
