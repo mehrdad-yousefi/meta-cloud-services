@@ -1,10 +1,13 @@
 DESCRIPTION = "Openstack compute node image"
 LICENSE = "MIT"
 
+OPENSTACK_COMPUTE_EXTRA_INSTALL ?= ""
+
 IMAGE_INSTALL = " \
     packagegroup-core-boot \
     ${ROOTFS_PKGMANAGE_BOOTSTRAP} \
     packagegroup-cloud-compute \
+    ${OPENSTACK_COMPUTE_EXTRA_INSTALL} \
     "
 
 IMAGE_FEATURES += "ssh-server-openssh"
