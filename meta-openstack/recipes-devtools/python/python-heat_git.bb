@@ -100,6 +100,7 @@ FILES_${SRCNAME}-engine = "${bindir}/heat-engine \
 "
 
 RDEPENDS_${PN} += " \
+        python-heatclient \
         python-sqlalchemy \
 	python-amqplib \
 	python-anyjson \
