@@ -7,6 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r0"
 SRCNAME = "tempest"
 
+inherit setuptools identity hosts
+
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://tempest.conf \
            file://logging.conf \
@@ -37,57 +39,51 @@ do_install_append() {
     sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" -i ${WORKDIR}/tempest.conf
 
     install -d ${TEMPEST_CONF_DIR}
+    install -d ${TEMPEST_CONF_DIR}/tests
     install -m 600 ${WORKDIR}/tempest.conf ${TEMPEST_CONF_DIR}
     install -m 600 ${WORKDIR}/logging.conf ${TEMPEST_CONF_DIR}
     install -m 600 ${TEMPLATE_CONF_DIR}/*.yaml ${TEMPEST_CONF_DIR}
+
+    # relocate tests to somewhere less cryptic, which means we pull them out of
+    # site-packages and put them in /etc/tempest/tests/
+    for t in api cli scenario stress thirdparty; do
+       ln -s ${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}/$t ${TEMPEST_CONF_DIR}/tests/
+    done
 }
 
-pkg_postinst_${SRCNAME}() {
-    if [ "x$D" != "x" ]; then
-        exit 1
-    fi
-    
-    # This is to make sure postgres is configured and running
-    if ! pidof postmaster > /dev/null; then
-       /etc/init.d/postgresql-init
-       /etc/init.d/postgresql start
-       sleep 5
-    fi
-}
+PACKAGES =+ "${SRCNAME}-tests"
 
-inherit setuptools identity hosts
-
-# PACKAGES += "${SRCNAME}-common ${SRCNAME}-api ${SRCNAME}-api-cfn ${SRCNAME}-engine"
+FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/tests/*"
 
 FILES_${PN} = "${libdir}/* \
                ${sysconfdir}/* \
 "
-
 RDEPENDS_${PN} += " \
-        python-testrepository \
-        python-fixtures \
-        python-keyring \
+        ${SRCNAME}-tests \
+	python-testrepository \
+	python-fixtures \
+	python-keyring \
 	python-glanceclient \
 	python-keystoneclient \
 	python-swiftclient \
-        python-novaclient \
-        python-cinderclient \
-        python-heatclient \
-        python-pbr \
-        python-anyjson \
-        python-nose \
-        python-httplib2 \
-        python-jsonschema \
-        python-testtools \
-        python-lxml \
-        python-boto \
-        python-paramiko \
-        python-netaddr \
-        python-testresources \
-        python-oslo.config \
-        python-eventlet \
-        python-six \
-        python-iso8601 \
-        python-mimeparse \
+	python-novaclient \
+	python-cinderclient \
+	python-heatclient \
+	python-pbr \
+	python-anyjson \
+	python-nose \
+	python-httplib2 \
+	python-jsonschema \
+	python-testtools \
+	python-lxml \
+	python-boto \
+	python-paramiko \
+	python-netaddr \
+	python-testresources \
+	python-oslo.config \
+	python-eventlet \
+	python-six \
+	python-iso8601 \
+	python-mimeparse \
 	"
 
