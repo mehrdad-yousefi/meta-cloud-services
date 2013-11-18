@@ -30,4 +30,5 @@ RDEPENDS_${PN} = " postgresql \
     heat-engine \
     horizon \
     novnc \
+    chkconfig \
     "
