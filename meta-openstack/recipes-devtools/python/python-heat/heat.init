@@ -4,7 +4,8 @@
 # Provides:
 # Required-Start: $remote_fs $network $syslog
 # Required-Stop: $remote_fs $syslog
-# Default-Stop: 0 1 6
+# Default-Start:     3 5
+# Default-Stop:      0 1 2 6
 # Short-Description: Heat Servers
 # Description: OpenStack Orchestration Service (code-named heat)
 ### END INIT INFO

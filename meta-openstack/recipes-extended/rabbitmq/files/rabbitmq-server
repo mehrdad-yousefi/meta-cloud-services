@@ -16,6 +16,10 @@
 # Short-Description: Enable AMQP service provided by RabbitMQ broker
 ### END INIT INFO
 
+# Ensure that HOME is set, since the erlang ookie file must be written
+# somewhere
+export HOME=${HOME:-/tmp}
+
 DAEMON=/usr/bin/rabbitmq-server
 CONTROL=/usr/bin/rabbitmqctl
 USER=root

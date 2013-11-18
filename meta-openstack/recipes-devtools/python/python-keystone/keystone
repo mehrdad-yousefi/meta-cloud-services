@@ -2,7 +2,12 @@
 
 ### BEGIN INIT INFO
 # Provides:          keystone
-# Short-Description: OpenStack Identity Service
+# Required-Start: $remote_fs $network $syslog
+# Required-Stop: $remote_fs $syslog
+# Default-Start:     3 5
+# Default-Stop:      0 1 2 6
+# Short-Description: Keystone Server
+# Description: OpenStack identity Service (code-named keystone)
 ### END INIT INFO
 
 DESC="keystone"
