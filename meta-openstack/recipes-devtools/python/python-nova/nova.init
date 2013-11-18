@@ -6,13 +6,14 @@
 # Required-Stop:     $remote_fs $syslog
 # Default-Start:     3 5
 # Default-Stop:      0 1 2 6
-# Short-Description: OpenStack Compute (Nova) - compute
-# Description:       OpenStack Compute (Nova) - compute
+# Short-Description: OpenStack Compute (Nova) - @suffix@
+# Description:       OpenStack Compute (Nova) - @suffix@
 ### END INIT INFO
 
-DESC="nova-compute"
-DAEMON="/usr/bin/nova-compute"
-PIDFILE="/var/run/nova-compute.pid"
+SUFFIX="@suffix@"
+DESC="nova-@suffix@"
+DAEMON="/usr/bin/nova-$SUFFIX"
+PIDFILE="/var/run/nova-$SUFFIX.pid"
 
 start ()
 {

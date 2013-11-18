@@ -16,7 +16,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            "
 
 SRC_URI += "file://nova-all \
-            file://nova-compute \
+            file://nova.init \
             file://nova-consoleauth \
             file://nova-novncproxy \
             file://nova.conf \
@@ -92,10 +92,16 @@ do_install_append() {
 
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
+
+	# nova-all is installed (and packaged), but not used as an initscript by default
         install -m 0755 ${WORKDIR}/nova-all ${D}${sysconfdir}/init.d/nova-all
-        install -m 0755 ${WORKDIR}/nova-compute ${D}${sysconfdir}/init.d/nova-compute
         install -m 0755 ${WORKDIR}/nova-consoleauth ${D}${sysconfdir}/init.d/nova-consoleauth
         install -m 0755 ${WORKDIR}/nova-novncproxy ${D}${sysconfdir}/init.d/nova-novncproxy
+
+	for binary in api compute network scheduler cert conductor; do
+	    sed "s:@suffix@:$binary:" < ${WORKDIR}/nova.init >${WORKDIR}/nova-$binary.init.sh
+            install -m 0755 ${WORKDIR}/nova-$binary.init.sh ${D}${sysconfdir}/init.d/nova-$binary
+	done	
     fi
 }
 
@@ -136,7 +142,11 @@ USERADD_PARAM_${PN}  = "--system --home /var/lib/nova -g nova \
 PACKAGES += " ${SRCNAME}-common ${SRCNAME}-compute ${SRCNAME}-controller"
 PACKAGES += " ${SRCNAME}-consoleauth"
 PACKAGES += " ${SRCNAME}-novncproxy"
-
+PACKAGES += " ${SRCNAME}-network"
+PACKAGES += " ${SRCNAME}-scheduler"
+PACKAGES += " ${SRCNAME}-cert"
+PACKAGES += " ${SRCNAME}-conductor"
+PACKAGES += " ${SRCNAME}-api"
 
 FILES_${PN} = "${libdir}/*"
 
@@ -156,6 +166,21 @@ FILES_${SRCNAME}-consoleauth = " \
 "
 FILES_${SRCNAME}-novncproxy = " \
 	${sysconfdir}/init.d/nova-novncproxy \
+"
+FILES_${SRCNAME}-network = " \
+	${sysconfdir}/init.d/nova-network \
+"
+FILES_${SRCNAME}-scheduler = " \
+	${sysconfdir}/init.d/nova-scheduler \
+"
+FILES_${SRCNAME}-cert = " \
+	${sysconfdir}/init.d/nova-cert \
+"
+FILES_${SRCNAME}-conductor = " \
+	${sysconfdir}/init.d/nova-conductor \
+"
+FILES_${SRCNAME}-api = " \
+	${sysconfdir}/init.d/nova-api \
 "
 
 RDEPENDS_${PN} = " python-modules \
@@ -202,13 +227,32 @@ RDEPENDS_${SRCNAME}-common = "${PN} openssl openssl-misc libxml2 libxslt \
 RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common \
 				  ${SRCNAME}-consoleauth \
 				  ${SRCNAME}-novncproxy \
+				  ${SRCNAME}-network \
+				  ${SRCNAME}-scheduler \
+				  ${SRCNAME}-cert \
+				  ${SRCNAME}-conductor \
+                                  ${SRCNAME}-api \
 				  postgresql postgresql-client python-psycopg2"
 
 RDEPENDS_${SRCNAME}-compute = "${PN} ${SRCNAME}-common \
 			       qemu libvirt libvirt-libvirtd libvirt-python libvirt-virsh"
 
-INITSCRIPT_PACKAGES = "${SRCNAME}-compute ${SRCNAME}-controller ${SRCNAME}-consoleauth ${SRCNAME}-novncproxy"
-INITSCRIPT_NAME_${SRCNAME}-controller = "nova-all"
+INITSCRIPT_PACKAGES =  "${SRCNAME}-compute ${SRCNAME}-consoleauth ${SRCNAME}-novncproxy"
+INITSCRIPT_PACKAGES += "${SRCNAME}-network ${SRCNAME}-scheduler ${SRCNAME}-cert ${SRCNAME}-conductor"
+INITSCRIPT_PACKAGES += "${SRCNAME}-api"
+
+# nova-all can replace: network, scheduler, cert, conductor and api. 
+# by default we go for the more granular initscripts, but this is left
+# in case nova-all is desired.
+# INITSCRIPT_PACKAGES += "${SRCNAME}-controller"
+# INITSCRIPT_NAME_${SRCNAME}-controller = "nova-all"
+INITSCRIPT_NAME_${SRCNAME}-network = "nova-network"
+INITSCRIPT_NAME_${SRCNAME}-scheduler = "nova-scheduler"
+INITSCRIPT_NAME_${SRCNAME}-cert = "nova-cert"
+INITSCRIPT_NAME_${SRCNAME}-conductor = "nova-conductor"
+INITSCRIPT_NAME_${SRCNAME}-api = "nova-api"
+
 INITSCRIPT_NAME_${SRCNAME}-compute = "nova-compute"
 INITSCRIPT_NAME_${SRCNAME}-consoleauth = "nova-consoleauth"
 INITSCRIPT_NAME_${SRCNAME}-novncproxy = "nova-novncproxy"
+
