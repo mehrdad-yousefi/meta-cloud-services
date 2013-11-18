@@ -184,41 +184,41 @@ FILES_${SRCNAME}-api = " \
 "
 
 RDEPENDS_${PN} = " python-modules \
-    python-misc \
-    python-argparse \
-    python-amqplib \
-    python-anyjson \
-    python-babel \
-    python-boto \
-    python-cinderclient \
-    python-cheetah \
-    python-eventlet \
-    python-feedparser \
-    python-glanceclient \
-    python-greenlet \
-    python-httplib2 \
-    python-iso8601 \
-    python-jinja2 \
-    python-kombu \
-    python-lxml \
-    python-netaddr \
-    python-oslo.config \
-    python-paste \
-    python-pastedeploy \
-    python-paramiko \
-    python-pyasn1 \
-    python-setuptools-git \
-    python-simplejson \
-    python-six \
-    python-setuptools \
-    python-sqlalchemy \
-    python-sqlalchemy-migrate \
-    python-stevedore \
-    python-suds \
-    python-neutronclient \
-    python-routes \
-    python-webob \
-    python-websockify \
+		   python-misc \
+		   python-argparse \
+		   python-amqplib \
+		   python-anyjson \
+		   python-babel \
+		   python-boto \
+		   python-cinderclient \
+		   python-cheetah \
+		   python-eventlet \
+		   python-feedparser \
+		   python-glanceclient \
+		   python-greenlet \
+		   python-httplib2 \
+		   python-iso8601 \
+		   python-jinja2 \
+		   python-kombu \
+		   python-lxml \
+		   python-netaddr \
+		   python-oslo.config \
+		   python-paste \
+		   python-pastedeploy \
+		   python-paramiko \
+		   python-pyasn1 \
+		   python-setuptools-git \
+		   python-simplejson \
+		   python-six \
+		   python-setuptools \
+		   python-sqlalchemy \
+		   python-sqlalchemy-migrate \
+		   python-stevedore \
+		   python-suds \
+		   python-neutronclient \
+		   python-routes \
+		   python-webob \
+		   python-websockify \
     "
 
 RDEPENDS_${SRCNAME}-common = "${PN} openssl openssl-misc libxml2 libxslt \
