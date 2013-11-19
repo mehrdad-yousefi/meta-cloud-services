@@ -63,8 +63,7 @@ FILES_${SRCNAME} = "${bindir}/* \
     ${datadir}/* \
     "
 
-RDEPENDS_${PN} += "nodejs \
-    python-django \
+RDEPENDS_${PN} += " python-django \
     python-django-appconf \
     python-django-compressor \
     python-django-openstack-auth \
@@ -79,6 +78,11 @@ RDEPENDS_${PN} += "nodejs \
     python-swiftclient \
     python-lockfile \
     "
+
+RDEPENDS_${PN}_arm += " nodejs"
+RDEPENDS_${PN}_i686 += " nodejs"
+RDEPENDS_${PN}_x86-64 += " nodejs"
+RDEPENDS_${PN}_ia32 += " nodejs"
 
 RDEPENDS_${SRCNAME} = "${PN}"
 
