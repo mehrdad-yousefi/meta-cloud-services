@@ -32,16 +32,20 @@ GROUPADD_PARAM_${PN} = "--system postgres"
 USERADD_PARAM_${PN}  = "--system --home /var/lib/postgres -g postgres \
                         --no-create-home --shell /bin/false postgres"
 
-pkg_postinst_${PN} () {
+PACKAGES += " ${PN}-setup"
+ALLOW_EMPTY_${PN}-setup = "1"
+RDEPENDS_${PN} += " ${PN}-setup"
+
+pkg_postinst_${PN}-setup () {
     # postgres 9.2.4 postinst
     if [ "x$D" != "x" ]; then
         exit 1
     fi
-
+      
     /etc/init.d/postgresql-init
     if [ $? -eq 0 ]; then
-	echo "[ERROR] postgres: unable to create admin account"
-	exit 1
+        echo "[ERROR] postgres: unable to create admin account"
+        exit 1
     fi
 }
 

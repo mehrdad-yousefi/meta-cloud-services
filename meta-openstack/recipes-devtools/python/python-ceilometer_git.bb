@@ -58,16 +58,16 @@ do_install_append() {
     fi
 }
 
-pkg_postinst_${SRCNAME}-controller () {
+pkg_postinst_${SRCNAME}-setup () {
     if [ "x$D" != "x" ]; then
         exit 1
     fi
-    
+
     # This is to make sure postgres is configured and running
     if ! pidof postmaster > /dev/null; then
        /etc/init.d/postgresql-init
        /etc/init.d/postgresql start
-       sleep 5
+       sleep 2
     fi
     
     mkdir /var/log/ceilometer
@@ -77,7 +77,9 @@ pkg_postinst_${SRCNAME}-controller () {
 
 inherit setuptools identity hosts update-rc.d
 
-PACKAGES += "${SRCNAME}-common ${SRCNAME}-api ${SRCNAME}-collector ${SRCNAME}-compute ${SRCNAME}-controller"
+PACKAGES += "${SRCNAME}-setup ${SRCNAME}-common ${SRCNAME}-api ${SRCNAME}-collector ${SRCNAME}-compute ${SRCNAME}-controller"
+
+ALLOW_EMPTY_${SRCNAME}-setup = "1"
 
 FILES_${PN} = "${libdir}/*"
 
@@ -145,7 +147,7 @@ RDEPENDS_${PN} += " \
         python-pytz \
 	"
 
-RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common postgresql postgresql-client python-psycopg2 tgt"
+RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-setup ${SRCNAME}-common postgresql postgresql-client python-psycopg2 tgt"
 RDEPENDS_${SRCNAME}-api = "${SRCNAME}-controller"
 RDEPENDS_${SRCNAME}-collector = "${SRCNAME}-controller"
 RDEPENDS_${SRCNAME}-compute = "${PN} ${SRCNAME}-common python-ceilometerclient libvirt"

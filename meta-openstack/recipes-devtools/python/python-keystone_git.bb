@@ -50,7 +50,7 @@ do_install_append() {
     fi
 }
 
-pkg_postinst_${SRCNAME} () {
+pkg_postinst_${SRCNAME}-setup () {
     # python-keystone postinst start
     if [ "x$D" != "x" ]; then
         exit 1
@@ -58,9 +58,9 @@ pkg_postinst_${SRCNAME} () {
 
     # This is to make sure postgres is configured and running
     if ! pidof postmaster > /dev/null; then
-       /etc/init.d/postgresql-init
-       /etc/init.d/postgresql start
-       sleep 5
+        /etc/init.d/postgresql-init
+        /etc/init.d/postgresql start
+        sleep 2
     fi
 
     sudo -u postgres createdb keystone
@@ -74,12 +74,14 @@ pkg_postinst_${SRCNAME} () {
     ADMIN_PASSWORD=${ADMIN_PASSWORD} \
     SERVICE_PASSWORD=${SERVICE_PASSWORD} \
     SERVICE_TENANT_NAME=${SERVICE_TENANT_NAME} \
-        bash /etc/keystone/identity.sh
+             bash /etc/keystone/identity.sh
 
     # end python-keystone postinst
 }
 
-PACKAGES += " ${SRCNAME}"
+PACKAGES += " ${SRCNAME} ${SRCNAME}-setup"
+
+ALLOW_EMPTY_${SRCNAME}-setup = "1"
 
 FILES_${PN} = "${libdir}/*"
 
@@ -107,7 +109,7 @@ RDEPENDS_${PN} += "python-pam \
         python-dogpile.cache \
 	"
 
-RDEPENDS_${SRCNAME} = "${PN} \
+RDEPENDS_${SRCNAME} = "${PN} ${SRCNAME}-setup \
         postgresql postgresql-client python-psycopg2"
 
 INITSCRIPT_PACKAGES = "${SRCNAME}"

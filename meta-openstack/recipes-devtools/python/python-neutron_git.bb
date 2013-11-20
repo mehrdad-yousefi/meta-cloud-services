@@ -65,29 +65,32 @@ do_install_append() {
     fi
 }
 
-pkg_postinst_${SRCNAME} () {
+pkg_postinst_${SRCNAME}-setup () {
     if [ "x$D" != "x" ]; then
         exit 1
     fi
 
     # This is to make sure postgres is configured and running
     if ! pidof postmaster > /dev/null; then
-       /etc/init.d/postgresql-init
-       /etc/init.d/postgresql start
-       sleep 5
+        /etc/init.d/postgresql-init
+        /etc/init.d/postgresql start
+        sleep 2
     fi
 
     sudo -u postgres createdb ovs_neutron
 }
 
-pkg_postinst_${SRCNAME}-plugin-openvswitch () {
+pkg_postinst_${SRCNAME}-plugin-openvswitch-setup () {
     if [ "x$D" != "x" ]; then
         exit 1
     fi
-
+   
     /etc/init.d/openvswitch-switch start
     ovs-vsctl --no-wait -- --may-exist add-br br-int
 }
+
+ALLOW_EMPTY_${SRCNAME}-setup = "1"
+ALLOW_EMPTY_${SRCNAME}-plugin-openvswitch-setup = "1"
 
 PACKAGES += " \
      ${SRCNAME} \
@@ -99,6 +102,8 @@ PACKAGES += " \
      ${SRCNAME}-l3-agent \
      ${SRCNAME}-metadata-agent \
      ${SRCNAME}-extra-agents \
+     ${SRCNAME}-setup \
+     ${SRCNAME}-plugin-openvswitch-setup \
      "
 
 FILES_${PN} = "${libdir}/*"
@@ -176,8 +181,8 @@ RDEPENDS_${PN} += "python-paste \
 RDEPENDS_${SRCNAME} = "${PN} \
         postgresql postgresql-client python-psycopg2"
 
-RDEPENDS_${SRCNAME}-server = "${SRCNAME}"
-RDEPENDS_${SRCNAME}-plugin-openvswitch = "${SRCNAME} openvswitch-switch "
+RDEPENDS_${SRCNAME}-server = "${SRCNAME} ${SRCNAME}-setup"
+RDEPENDS_${SRCNAME}-plugin-openvswitch = "${SRCNAME} ${SRCNAME}-plugin-openvswitch-setup openvswitch-switch "
 RDEPENDS_${SRCNAME}-plugin-linuxbridge = "${SRCNAME} bridge-utils"
 RDEPENDS_${SRCNAME}-dhcp-agent = "${SRCNAME} dnsmasq"
 RDEPENDS_${SRCNAME}-l3-agent = "${SRCNAME} ${SRCNAME}-metadata-agent iputils"

@@ -61,7 +61,7 @@ do_install_append() {
     fi
 }
 
-pkg_postinst_${SRCNAME}-engine () {
+pkg_postinst_${SRCNAME}-setup () {
     if [ "x$D" != "x" ]; then
         exit 1
     fi
@@ -70,7 +70,7 @@ pkg_postinst_${SRCNAME}-engine () {
     if ! pidof postmaster > /dev/null; then
        /etc/init.d/postgresql-init
        /etc/init.d/postgresql start
-       sleep 5
+       sleep 2
     fi
     
     mkdir /var/log/heat
@@ -81,6 +81,9 @@ pkg_postinst_${SRCNAME}-engine () {
 inherit setuptools identity hosts update-rc.d
 
 PACKAGES += "${SRCNAME}-common ${SRCNAME}-api ${SRCNAME}-api-cfn ${SRCNAME}-engine"
+PACKAGES += "${SRCNAME}-setup"
+
+ALLOW_EMPTY_${SRCNAME}-setup = "1"
 
 FILES_${PN} = "${libdir}/*"
 
@@ -98,7 +101,6 @@ FILES_${SRCNAME}-engine = "${bindir}/heat-engine \
                            ${bindir}/* \
                            ${sysconfdir}/init.d/heat-engine \
 "
-
 RDEPENDS_${PN} += " \
         python-heatclient \
         python-sqlalchemy \
@@ -144,7 +146,7 @@ RDEPENDS_${PN} += " \
         python-pytz \
 	"
 
-RDEPENDS_${SRCNAME}-engine = "${PN} ${SRCNAME}-common postgresql postgresql-client python-psycopg2 tgt"
+RDEPENDS_${SRCNAME}-engine = "${PN} ${SRCNAME}-setup ${SRCNAME}-common postgresql postgresql-client python-psycopg2 tgt"
 RDEPENDS_${SRCNAME}-api = "${SRCNAME}-engine"
 RDEPENDS_${SRCNAME}-api-cfn = "${SRCNAME}-engine"
 
