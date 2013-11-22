@@ -105,7 +105,7 @@ do_install_append() {
     fi
 }
 
-pkg_postinst_${SRCNAME}-controller () {
+pkg_postinst_${SRCNAME}-setup () {
     if [ "x$D" != "x" ]; then
         exit 1
     fi
@@ -139,7 +139,7 @@ GROUPADD_PARAM_${PN} = "--system nova"
 USERADD_PARAM_${PN}  = "--system --home /var/lib/nova -g nova \
                         --no-create-home --shell /bin/false nova"
 
-PACKAGES += " ${SRCNAME}-common ${SRCNAME}-compute ${SRCNAME}-controller"
+PACKAGES += " ${SRCNAME}-setup ${SRCNAME}-common ${SRCNAME}-compute ${SRCNAME}-controller"
 PACKAGES += " ${SRCNAME}-consoleauth"
 PACKAGES += " ${SRCNAME}-novncproxy"
 PACKAGES += " ${SRCNAME}-network"
@@ -147,6 +147,8 @@ PACKAGES += " ${SRCNAME}-scheduler"
 PACKAGES += " ${SRCNAME}-cert"
 PACKAGES += " ${SRCNAME}-conductor"
 PACKAGES += " ${SRCNAME}-api"
+
+ALLOW_EMPTY_${SRCNAME}-setup = "1"
 
 FILES_${PN} = "${libdir}/*"
 

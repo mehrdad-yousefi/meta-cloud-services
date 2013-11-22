@@ -58,7 +58,7 @@ do_install_append() {
     fi
 }
 
-pkg_postinst_${SRCNAME} () {
+pkg_postinst_${SRCNAME}-setup () {
     if [ "x$D" != "x" ]; then
         exit 1
     fi
@@ -75,7 +75,8 @@ pkg_postinst_${SRCNAME} () {
     glance-manage db_sync
 }
 
-PACKAGES += " ${SRCNAME} ${SRCNAME}-api ${SRCNAME}-registry"
+PACKAGES += " ${SRCNAME} ${SRCNAME}-setup ${SRCNAME}-api ${SRCNAME}-registry"
+ALLOW_EMPTY_${SRCNAME}-setup = "1"
 
 FILES_${PN} = "${libdir}/*"
 

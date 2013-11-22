@@ -147,7 +147,7 @@ RDEPENDS_${PN} += " \
         python-pytz \
 	"
 
-RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-setup ${SRCNAME}-common postgresql postgresql-client python-psycopg2 tgt"
+RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common postgresql postgresql-client python-psycopg2 tgt"
 RDEPENDS_${SRCNAME}-api = "${SRCNAME}-controller"
 RDEPENDS_${SRCNAME}-collector = "${SRCNAME}-controller"
 RDEPENDS_${SRCNAME}-compute = "${PN} ${SRCNAME}-common python-ceilometerclient libvirt"

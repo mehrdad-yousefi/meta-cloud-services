@@ -109,8 +109,7 @@ RDEPENDS_${PN} += "python-pam \
         python-dogpile.cache \
 	"
 
-RDEPENDS_${SRCNAME} = "${PN} ${SRCNAME}-setup \
-        postgresql postgresql-client python-psycopg2"
+RDEPENDS_${SRCNAME} = "${PN} postgresql postgresql-client python-psycopg2"
 
 INITSCRIPT_PACKAGES = "${SRCNAME}"
 INITSCRIPT_NAME_${SRCNAME} = "keystone"

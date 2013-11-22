@@ -34,7 +34,6 @@ USERADD_PARAM_${PN}  = "--system --home /var/lib/postgres -g postgres \
 
 PACKAGES += " ${PN}-setup"
 ALLOW_EMPTY_${PN}-setup = "1"
-RDEPENDS_${PN} += " ${PN}-setup"
 
 pkg_postinst_${PN}-setup () {
     # postgres 9.2.4 postinst

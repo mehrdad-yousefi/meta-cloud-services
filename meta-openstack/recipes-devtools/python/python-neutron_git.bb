@@ -181,7 +181,7 @@ RDEPENDS_${PN} += "python-paste \
 RDEPENDS_${SRCNAME} = "${PN} \
         postgresql postgresql-client python-psycopg2"
 
-RDEPENDS_${SRCNAME}-server = "${SRCNAME} ${SRCNAME}-setup"
+RDEPENDS_${SRCNAME}-server = "${SRCNAME}"
 RDEPENDS_${SRCNAME}-plugin-openvswitch = "${SRCNAME} ${SRCNAME}-plugin-openvswitch-setup openvswitch-switch "
 RDEPENDS_${SRCNAME}-plugin-linuxbridge = "${SRCNAME} bridge-utils"
 RDEPENDS_${SRCNAME}-dhcp-agent = "${SRCNAME} dnsmasq"

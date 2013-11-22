@@ -146,7 +146,7 @@ RDEPENDS_${PN} += " \
         python-pytz \
 	"
 
-RDEPENDS_${SRCNAME}-engine = "${PN} ${SRCNAME}-setup ${SRCNAME}-common postgresql postgresql-client python-psycopg2 tgt"
+RDEPENDS_${SRCNAME}-engine = "${PN} ${SRCNAME}-common postgresql postgresql-client python-psycopg2 tgt"
 RDEPENDS_${SRCNAME}-api = "${SRCNAME}-engine"
 RDEPENDS_${SRCNAME}-api-cfn = "${SRCNAME}-engine"
 

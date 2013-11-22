@@ -49,7 +49,7 @@ do_install_append() {
     fi
 }
 
-pkg_postinst_${SRCNAME} () {
+pkg_postinst_${SRCNAME}-setup () {
     if [ "x$D" != "x" ]; then
         exit 1
     fi
@@ -68,7 +68,8 @@ pkg_postinst_${SRCNAME} () {
     echo "include /etc/cinder/data/volumes/*" >> /etc/tgt/targets.conf
 }
 
-PACKAGES += "${SRCNAME} ${SRCNAME}-api ${SRCNAME}-volume ${SRCNAME}-scheduler"
+PACKAGES += "${SRCNAME} ${SRCNAME}-setup ${SRCNAME}-api ${SRCNAME}-volume ${SRCNAME}-scheduler"
+ALLOW_EMPTY_${SRCNAME}-setup = "1"
 
 FILES_${PN} = "${libdir}/*"
 
