@@ -7,11 +7,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 PR = "r0"
 SRCNAME = "cliff"
 
-SRC_URI = "https://pypi.python.org/packages/source/c/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
-           file://remove-distribute-dependency.patch"
+SRC_URI = "https://pypi.python.org/packages/source/c/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "a42f7894dbc70f42c0979042175f1b8f"
-SRC_URI[sha256sum] = "7c0250b5139993d04dcbb8b9d05376094b7271586b3698b4764c7c6f4697e0f8"
+SRC_URI[md5sum] = "21743e9e800cf526e88e420f366a4c5c"
+SRC_URI[sha256sum] = "0ec2c40e899cbb4d478aa946e1430600bf596ca2a3f12162a9514e9d580935ec"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 

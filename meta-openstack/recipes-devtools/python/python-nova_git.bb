@@ -4,7 +4,7 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-DEPENDS = "sudo"
+DEPENDS = "sudo libvirt"
 
 PR = "r0"
 SRCNAME = "nova"
@@ -38,7 +38,7 @@ do_install_append() {
     NOVA_CONF_DIR=${D}/${sysconfdir}/nova
 
     install -d ${NOVA_CONF_DIR}
-    install -m 600 ${S}/etc/nova/policy.json ${NOVA_CONF_DIR}/
+    install -o nova -m 664 ${S}/etc/nova/policy.json ${NOVA_CONF_DIR}/
 
     # Deploy filters to /etc/nova/rootwrap.d
     install -m 755 -d ${NOVA_CONF_DIR}/rootwrap.d
@@ -57,8 +57,12 @@ do_install_append() {
     touch ${D}${sysconfdir}/sudoers.d/nova-rootwrap
     chmod 0440 ${D}${sysconfdir}/sudoers.d/nova-rootwrap
     chown root:root ${D}${sysconfdir}/sudoers.d/nova-rootwrap
+    # root user setup
     echo "root ALL=(root) NOPASSWD: ${bindir}/nova-rootwrap" > \
         ${D}${sysconfdir}/sudoers.d/nova-rootwrap
+    # nova user setup
+    echo "nova ALL=(root) NOPASSWD: ${bindir}/nova-rootwrap ${sysconfdir}/nova/rootwrap.conf *" >> \
+         ${D}${sysconfdir}/sudoers.d/nova-rootwrap
 
     # Configuration options
     sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
@@ -84,11 +88,11 @@ do_install_append() {
     sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${WORKDIR}/openrc
 
     # Copy the configuration file
-    install -m 664 ${WORKDIR}/nova.conf     ${NOVA_CONF_DIR}/nova.conf
-    install -m 664 ${WORKDIR}/api-paste.ini ${NOVA_CONF_DIR}
-    install -m 664 ${WORKDIR}/openrc        ${NOVA_CONF_DIR}
+    install -o nova -m 664 ${WORKDIR}/nova.conf     ${NOVA_CONF_DIR}/nova.conf
+    install -o nova -m 664 ${WORKDIR}/api-paste.ini ${NOVA_CONF_DIR}
+    install -o nova -m 664 ${WORKDIR}/openrc        ${NOVA_CONF_DIR}
 
-    install -d ${NOVA_CONF_DIR}/instances
+    install -o nova -d ${NOVA_CONF_DIR}/instances
 
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
@@ -136,7 +140,7 @@ pkg_postinst_${SRCNAME}-common () {
 
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "--system nova"
-USERADD_PARAM_${PN}  = "--system --home /var/lib/nova -g nova \
+USERADD_PARAM_${PN}  = "--system --home /var/lib/nova -g nova -G libvirt \
                         --no-create-home --shell /bin/false nova"
 
 PACKAGES += " ${SRCNAME}-setup ${SRCNAME}-common ${SRCNAME}-compute ${SRCNAME}-controller"
@@ -185,7 +189,8 @@ FILES_${SRCNAME}-api = " \
 	${sysconfdir}/init.d/nova-api \
 "
 
-RDEPENDS_${PN} = " python-modules \
+RDEPENDS_${PN} = " libvirt \
+		   python-modules \
 		   python-misc \
 		   python-argparse \
 		   python-amqplib \
@@ -193,6 +198,7 @@ RDEPENDS_${PN} = " python-modules \
 		   python-babel \
 		   python-boto \
 		   python-cinderclient \
+		   python-cliff \
 		   python-cheetah \
 		   python-eventlet \
 		   python-feedparser \

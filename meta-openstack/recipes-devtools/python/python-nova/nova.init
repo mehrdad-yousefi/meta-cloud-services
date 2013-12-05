@@ -30,7 +30,8 @@ start ()
 
     echo -n "Starting $DESC..."
 
-    start-stop-daemon --start --quiet --background \
+    sudo -u nova \
+        start-stop-daemon --start --quiet --background \
         --pidfile ${PIDFILE} --make-pidfile --exec ${DAEMON}
 
     if [ $? -eq 0 ]; then
