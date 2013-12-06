@@ -42,7 +42,7 @@ pkg_postinst_${PN}-setup () {
     fi
       
     /etc/init.d/postgresql-init
-    if [ $? -eq 0 ]; then
+    if [ $? -ne 0 ]; then
         echo "[ERROR] postgres: unable to create admin account"
         exit 1
     fi

@@ -35,9 +35,9 @@ while [ $count -le 10 ] && [ $done -eq 0 ]; do
     count=`expr $count + 1`
 done
     
-if [ $done -ne 0 ]; then
+if [ $done -eq 0 ]; then
     echo "[ERROR] postgres: unable to create admin account"
     exit 1
 fi
 
-ln -s /usr/share/zoneinfo /usr/share/postgresql/timezone
+ln -s /usr/share/zoneinfo /usr/share/postgresql/timezone || true
