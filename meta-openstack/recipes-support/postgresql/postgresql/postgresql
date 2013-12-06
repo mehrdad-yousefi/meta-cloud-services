@@ -55,7 +55,16 @@ stop ()
     if [ $? -eq 0 ]; then
         echo "done."
     else
-        echo "failed."
+	if [ -f /etc/postgresql/postmaster.pid -a "$datadir" != "/etc/postgresql" ] ; then
+	    # Special case for transition 
+	    sudo -u postgres /usr/bin/pg_ctl stop -w -D /etc/postgresql -m fast -s
+	fi
+        if ! pidof ${DAEMON} > /dev/null; then
+	    echo "done."
+	else
+            echo "failed."
+	    exit 1
+	fi
     fi
 }
 
