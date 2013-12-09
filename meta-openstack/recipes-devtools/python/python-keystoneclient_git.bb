@@ -8,7 +8,7 @@ PR = "r0"
 
 SRC_URI = "git://github.com/openstack/python-keystoneclient.git;branch=master"
 
-PV="git${SRCPV}"
+PV="0.4.1+git${SRCPV}"
 SRCREV="0774d5aafade9e5a5de3830de461843c4a7d59a1"
 S = "${WORKDIR}/git"
 

@@ -5,8 +5,8 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 DEPENDS = "gmp"
 
-SRCREV = "741c15f9633f642aa2e52de10b8eb65d6a8c9ecb"
-PV = "0.9.0+gitr${SRCREV}"
+SRCREV = "cd7f2cbd79df54ea41d9a075d904efc82bdcb440"
+PV = "0.12.0+gitr${SRCREV}"
 PR = "0"
 
 SRC_URI = "git://github.com/openstack/${PN}.git;protocol=https"

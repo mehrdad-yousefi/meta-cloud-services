@@ -16,7 +16,7 @@ PR = "r0"
 
 SRC_URI = "git://github.com/openstack/python-ceilometerclient.git;branch=master"
 
-PV="git${SRCPV}"
+PV="1.0.6+git${SRCPV}"
 SRCREV="067b76d9a821c3acb60d93787396d25b729a7421"
 S = "${WORKDIR}/git"
 

@@ -10,14 +10,14 @@ SRCNAME = "python-cinderclient"
 
 SRC_URI = "git://github.com/openstack/python-cinderclient.git;branch=master"
 
-PV="git${SRCPV}"
-SRCREV="bdd560b3c02ea0a013ed4b7e7641c6240f3b602f"
+PV="1.0.7+git${SRCPV}"
+SRCREV="8fc5ae480eafffc7e1bea046ad9b8e06350b008e"
 S = "${WORKDIR}/git"
 
 inherit setuptools
 
 RDEPENDS_${PN} += "python-prettytable \
-	python-simplejson \
-	python-requests \
-    python-setuptools-git \
-	"
+                   python-simplejson \
+                   python-requests \
+                   python-setuptools-git \
+	           "

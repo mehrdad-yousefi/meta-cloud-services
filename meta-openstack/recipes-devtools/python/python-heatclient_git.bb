@@ -16,7 +16,7 @@ PR = "r0"
 
 SRC_URI = "git://github.com/openstack/python-heatclient.git;branch=master"
 
-PV="git${SRCPV}"
+PV="0.2.5+git${SRCPV}"
 SRCREV="30032302f359985335d50e80abb03ba901143168"
 S = "${WORKDIR}/git"
 

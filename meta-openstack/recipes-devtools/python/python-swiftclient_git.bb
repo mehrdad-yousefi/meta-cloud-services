@@ -8,7 +8,7 @@ PR = "r0"
 
 SRC_URI = "git://github.com/openstack/python-swiftclient.git;branch=master"
 
-PV="git${SRCPV}"
+PV="1.8.0+git${SRCPV}"
 SRCREV="4b78b4d136f5e18544ba97db85f47c5201d3a761"
 S = "${WORKDIR}/git"
 
