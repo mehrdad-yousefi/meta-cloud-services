@@ -1,5 +1,5 @@
 DESCRIPTION = "Mock object framework"
-HOMEPAGE = "http://code.google.com/p/pymox/"
+HOMEPAGE = "https://github.com/dreamhost/cliff"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=3b83ef96387f14655fc854ddc3c6bd57"
@@ -15,3 +15,8 @@ SRC_URI[sha256sum] = "424ee725ee12652802b4e86571f816059b0d392401ceae70bf6487d656
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit distutils
+
+DISTUTILS_INSTALL_ARGS = "--root=${D} \
+    --prefix=${prefix} \
+    --install-lib=${PYTHON_SITEPACKAGES_DIR} \
+    --install-data=${datadir}"
