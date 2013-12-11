@@ -11,6 +11,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
     file://cinder.conf \
     file://cinder.init \
     file://cinder-volume \
+    file://0001-run_tests-respect-tools-dir.patch \
 	"
 
 SRCREV="1f99a044580286bf0d927cc7fc7ce3378653aef0"
@@ -48,7 +49,9 @@ do_install_append() {
         install -m 0755 ${WORKDIR}/cinder-volume ${D}${sysconfdir}/init.d/cinder-volume
     fi
 
+    # test setup
     cp run_tests.sh ${CINDER_CONF_DIR}
+    cp -r tools ${CINDER_CONF_DIR}
 }
 
 pkg_postinst_${SRCNAME}-setup () {
@@ -75,7 +78,8 @@ ALLOW_EMPTY_${SRCNAME}-setup = "1"
 
 FILES_${PN} = "${libdir}/*"
 
-FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
+FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh \
+                          ${sysconfdir}/${SRCNAME}/tools"
 
 FILES_${SRCNAME}-api = "${bindir}/cinder-api \
     ${sysconfdir}/init.d/cinder-api"
