@@ -60,6 +60,7 @@ FILES_${PN} = "${libdir}/* \
 "
 RDEPENDS_${PN} += " \
         ${SRCNAME}-tests \
+	python-mox \
 	python-testrepository \
 	python-fixtures \
 	python-keyring \
