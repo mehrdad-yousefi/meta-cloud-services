@@ -56,6 +56,8 @@ do_install_append() {
         sed 's:@suffix@:agent-compute:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-agent-compute.init.sh
         install -m 0755 ${WORKDIR}/ceilometer-agent-compute.init.sh ${D}${sysconfdir}/init.d/ceilometer-agent-compute
     fi
+
+    cp run-tests.sh ${CEILOMETER_CONF_DIR}
 }
 
 pkg_postinst_${SRCNAME}-setup () {
@@ -77,11 +79,14 @@ pkg_postinst_${SRCNAME}-setup () {
 
 inherit setuptools identity hosts update-rc.d
 
+PACKAGES += " ${SRCNAME}-tests"
 PACKAGES += "${SRCNAME}-setup ${SRCNAME}-common ${SRCNAME}-api ${SRCNAME}-collector ${SRCNAME}-compute ${SRCNAME}-controller"
 
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
 
 FILES_${PN} = "${libdir}/*"
+
+FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run-tests.sh"
 
 FILES_${SRCNAME}-common = "${sysconfdir}/${SRCNAME}/* \
 "
