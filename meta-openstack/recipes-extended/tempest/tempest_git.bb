@@ -62,6 +62,7 @@ RDEPENDS_${PN} += " \
         ${SRCNAME}-tests \
 	python-mox \
 	python-mock \
+	python-hp3parclient \
 	python-testrepository \
 	python-fixtures \
 	python-keyring \
