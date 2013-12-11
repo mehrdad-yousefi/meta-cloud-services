@@ -48,6 +48,8 @@ do_install_append() {
         install -d ${D}${sysconfdir}/init.d
         install -m 0755 ${WORKDIR}/keystone ${D}${sysconfdir}/init.d/keystone
     fi
+
+    cp run_tests.sh ${KEYSTONE_CONF_DIR}
 }
 
 pkg_postinst_${SRCNAME}-setup () {
@@ -79,11 +81,13 @@ pkg_postinst_${SRCNAME}-setup () {
     # end python-keystone postinst
 }
 
-PACKAGES += " ${SRCNAME} ${SRCNAME}-setup"
+PACKAGES += " ${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-setup"
 
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
 
 FILES_${PN} = "${libdir}/*"
+
+FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
 
 FILES_${SRCNAME} = "${bindir}/* \
     ${sysconfdir}/${SRCNAME}/* \ 
@@ -91,7 +95,8 @@ FILES_${SRCNAME} = "${bindir}/* \
     ${localstatedir}/* \
     "
 
-RDEPENDS_${PN} += "python-pam \
+RDEPENDS_${PN} += " \
+        python-pam \
 	python-webob \
 	python-eventlet \
 	python-greenlet \
@@ -108,6 +113,9 @@ RDEPENDS_${PN} += "python-pam \
         python-dogpile.core \
         python-dogpile.cache \
 	"
+
+# TODO:
+#    if DISTRO_FEATURE contains "tempest" then add *-tests to the main RDEPENDS
 
 RDEPENDS_${SRCNAME} = "${PN} postgresql postgresql-client python-psycopg2"
 

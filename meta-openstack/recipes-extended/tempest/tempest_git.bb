@@ -85,5 +85,6 @@ RDEPENDS_${PN} += " \
 	python-six \
 	python-iso8601 \
 	python-mimeparse \
+	python-flake8 \
 	"
 

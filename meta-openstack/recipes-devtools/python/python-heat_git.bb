@@ -59,6 +59,8 @@ do_install_append() {
         sed 's:@suffix@:engine:' < ${WORKDIR}/heat.init >${WORKDIR}/heat-engine.init.sh
         install -m 0755 ${WORKDIR}/heat-engine.init.sh ${D}${sysconfdir}/init.d/heat-engine
     fi
+
+    cp run_tests.sh ${HEAT_CONF_DIR}
 }
 
 pkg_postinst_${SRCNAME}-setup () {
@@ -80,12 +82,14 @@ pkg_postinst_${SRCNAME}-setup () {
 
 inherit setuptools identity hosts update-rc.d
 
-PACKAGES += "${SRCNAME}-common ${SRCNAME}-api ${SRCNAME}-api-cfn ${SRCNAME}-engine"
+PACKAGES += "${SRCNAME}-tests ${SRCNAME}-common ${SRCNAME}-api ${SRCNAME}-api-cfn ${SRCNAME}-engine"
 PACKAGES += "${SRCNAME}-setup"
 
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
 
 FILES_${PN} = "${libdir}/*"
+
+FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
 
 FILES_${SRCNAME}-common = "${sysconfdir}/${SRCNAME}/* \
 "

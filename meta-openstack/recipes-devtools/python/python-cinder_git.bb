@@ -47,6 +47,8 @@ do_install_append() {
         install -m 0755 ${WORKDIR}/cinder-scheduler.init.sh ${D}${sysconfdir}/init.d/cinder-scheduler
         install -m 0755 ${WORKDIR}/cinder-volume ${D}${sysconfdir}/init.d/cinder-volume
     fi
+
+    cp run_tests.sh ${CINDER_CONF_DIR}
 }
 
 pkg_postinst_${SRCNAME}-setup () {
@@ -68,10 +70,12 @@ pkg_postinst_${SRCNAME}-setup () {
     echo "include /etc/cinder/data/volumes/*" >> /etc/tgt/targets.conf
 }
 
-PACKAGES += "${SRCNAME} ${SRCNAME}-setup ${SRCNAME}-api ${SRCNAME}-volume ${SRCNAME}-scheduler"
+PACKAGES += "${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-setup ${SRCNAME}-api ${SRCNAME}-volume ${SRCNAME}-scheduler"
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
 
 FILES_${PN} = "${libdir}/*"
+
+FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
 
 FILES_${SRCNAME}-api = "${bindir}/cinder-api \
     ${sysconfdir}/init.d/cinder-api"

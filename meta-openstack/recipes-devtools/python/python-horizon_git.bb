@@ -39,6 +39,10 @@ inherit setuptools update-rc.d python-dir
 # do_install[dirs] += "${D}/usr/share/bin"
 
 do_install_append() {
+    HORIZON_CONF_DIR=${D}${sysconfdir}/horizon
+
+    install -d ${HORIZON_CONF_DIR}
+
     DASHBOARD_DIR=${D}${PYTHON_SITEPACKAGES_DIR}/openstack_dashboard
     sed -e "s:^LANGUAGE_CODE =.*:LANGUAGE_CODE = 'en-us':g" \
         -i ${DASHBOARD_DIR}/settings.py
@@ -56,11 +60,15 @@ do_install_append() {
 
     # no longer required. kept as reference.
     # mv ${D}${datadir}/bin ${DASHBOARD_DIR}/bin
+
+    cp run_tests.sh ${HORIZON_CONF_DIR}
 }
 
-PACKAGES += "${SRCNAME}"
+PACKAGES += "${SRCNAME}-tests ${SRCNAME}"
 
 FILES_${PN} = "${libdir}/*"
+
+FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
 
 FILES_${SRCNAME} = "${bindir}/* \
     ${sysconfdir}/init.d/* \

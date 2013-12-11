@@ -56,6 +56,8 @@ do_install_append() {
         sed 's:@suffix@:registry:' < ${WORKDIR}/glance.init >${WORKDIR}/glance-registry.init.sh
         install -m 0755 ${WORKDIR}/glance-registry.init.sh ${D}${sysconfdir}/init.d/glance-registry
     fi
+
+    cp run_tests.sh ${GLANCE_CONF_DIR}
 }
 
 pkg_postinst_${SRCNAME}-setup () {
@@ -75,10 +77,12 @@ pkg_postinst_${SRCNAME}-setup () {
     glance-manage db_sync
 }
 
-PACKAGES += " ${SRCNAME} ${SRCNAME}-setup ${SRCNAME}-api ${SRCNAME}-registry"
+PACKAGES += " ${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-setup ${SRCNAME}-api ${SRCNAME}-registry"
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
 
 FILES_${PN} = "${libdir}/*"
+
+FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
 
 FILES_${SRCNAME} = "${bindir}/* \
     ${sysconfdir}/${SRCNAME}/* \

@@ -63,6 +63,8 @@ do_install_append() {
         sed "s:@suffix@:$PLUGIN:" < ${WORKDIR}/neutron-agent.init >${WORKDIR}/neutron-$PLUGIN.init.sh
         install -m 0755 ${WORKDIR}/neutron-$PLUGIN.init.sh ${D}${sysconfdir}/init.d/neutron-$PLUGIN-agent
     fi
+
+    cp run_tests.sh ${NEUTRON_CONF_DIR}
 }
 
 pkg_postinst_${SRCNAME}-setup () {
@@ -93,6 +95,7 @@ ALLOW_EMPTY_${SRCNAME}-setup = "1"
 ALLOW_EMPTY_${SRCNAME}-plugin-openvswitch-setup = "1"
 
 PACKAGES += " \
+     ${SRCNAME}-tests \
      ${SRCNAME} \
      ${SRCNAME}-doc \
      ${SRCNAME}-server \
@@ -107,6 +110,8 @@ PACKAGES += " \
      "
 
 FILES_${PN} = "${libdir}/*"
+
+FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
 
 FILES_${SRCNAME} = " \
     ${bindir}/neutron-db-manage \
