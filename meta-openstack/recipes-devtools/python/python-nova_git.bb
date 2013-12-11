@@ -107,6 +107,8 @@ do_install_append() {
             install -m 0755 ${WORKDIR}/nova-$binary.init.sh ${D}${sysconfdir}/init.d/nova-$binary
 	done	
     fi
+
+    cp run_tests.sh ${NOVA_CONF_DIR}
 }
 
 pkg_postinst_${SRCNAME}-setup () {
@@ -143,6 +145,7 @@ GROUPADD_PARAM_${PN} = "--system nova"
 USERADD_PARAM_${PN}  = "--system --home /var/lib/nova -g nova -G libvirt \
                         --no-create-home --shell /bin/false nova"
 
+PACKAGES += " ${SRCNAME}-tests"
 PACKAGES += " ${SRCNAME}-setup ${SRCNAME}-common ${SRCNAME}-compute ${SRCNAME}-controller"
 PACKAGES += " ${SRCNAME}-consoleauth"
 PACKAGES += " ${SRCNAME}-novncproxy"
@@ -155,6 +158,8 @@ PACKAGES += " ${SRCNAME}-api"
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
 
 FILES_${PN} = "${libdir}/*"
+
+FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
 
 FILES_${SRCNAME}-common = "${bindir}/nova-manage \
                            ${bindir}/nova-rootwrap \
