@@ -75,6 +75,12 @@ FILES_${SRCNAME} = "${bindir}/* \
     ${datadir}/* \
     "
 
+RDEP_ARCH_VAR = ""
+RDEP_ARCH_VAR_arm = "nodejs"
+RDEP_ARCH_VAR_i686 = "nodejs"
+RDEP_ARCH_VAR_x86-64 = "nodejs"
+RDEP_ARCH_VAR_ia32 = "nodejs"
+
 RDEPENDS_${PN} += " python-django \
     python-django-appconf \
     python-django-compressor \
@@ -93,12 +99,8 @@ RDEPENDS_${PN} += " python-django \
     python-swiftclient \
     python-lockfile \
     python-pyyaml \
+    ${RDEP_ARCH_VAR} \
     "
-
-RDEPENDS_${PN}_arm += " nodejs"
-RDEPENDS_${PN}_i686 += " nodejs"
-RDEPENDS_${PN}_x86-64 += " nodejs"
-RDEPENDS_${PN}_ia32 += " nodejs"
 
 RDEPENDS_${SRCNAME} = "${PN}"
 
