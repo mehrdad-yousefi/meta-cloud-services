@@ -49,6 +49,11 @@ do_install_append() {
     for t in api cli scenario stress thirdparty; do
        ln -s ${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}/$t ${TEMPEST_CONF_DIR}/tests/
     done
+
+    # test infrastructure
+    cp run_tests.sh ${TEMPEST_CONF_DIR}
+    cp .testr.conf ${TEMPEST_CONF_DIR}
+    
 }
 
 PACKAGES =+ "${SRCNAME}-tests"
