@@ -63,6 +63,7 @@ RDEPENDS_${PN} += " \
 	python-mox \
 	python-mock \
 	python-hp3parclient \
+	python-oauth2 \
 	python-testrepository \
 	python-fixtures \
 	python-keyring \
