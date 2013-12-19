@@ -29,8 +29,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
     file://fix_bindir_path.patch \
     "
 
-SRCREV="a93c611e7185234d4a4ce36ba182cf321c2113fe"
-PV="2013.2+git${SRCPV}"
+SRCREV="82b6e108d2a5233be3cc4bd254599f6c878f2dda"
+PV="2013.2.2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d python-dir
