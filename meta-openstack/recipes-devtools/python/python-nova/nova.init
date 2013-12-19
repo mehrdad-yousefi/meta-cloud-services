@@ -13,7 +13,7 @@
 SUFFIX="@suffix@"
 DESC="nova-@suffix@"
 DAEMON="/usr/bin/nova-$SUFFIX"
-PIDFILE="/var/run/nova-$SUFFIX.pid"
+PIDFILE="/var/run/nova/nova-$SUFFIX.pid"
 
 start ()
 {
@@ -27,7 +27,11 @@ start ()
             rm -f $PIDFILE
         fi
     fi
-
+    PIDDIR=`dirname $PIDFILE`
+    if [ ! -d $PIDDIR ]; then
+        mkdir -p $PIDDIR
+        chown nova $PIDDIR
+    fi
     echo -n "Starting $DESC..."
 
     sudo -u nova \
