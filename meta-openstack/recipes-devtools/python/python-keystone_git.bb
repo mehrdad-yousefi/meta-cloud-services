@@ -14,8 +14,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://openrc \
 	  "
 
-SRCREV="4221b6020e6b0b42325d8904d7b8a22577a6acc0"
-PV="2013.2+git${SRCPV}"
+SRCREV="0d83e7eee20a50a75863a9d3c75aee7030518229"
+PV="2013.2.2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
