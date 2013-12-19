@@ -14,8 +14,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
     file://0001-run_tests-respect-tools-dir.patch \
 	"
 
-SRCREV="1f99a044580286bf0d927cc7fc7ce3378653aef0"
-PV="2013.2+git${SRCPV}"
+SRCREV="8b5fb8409322f61d8b610c97c109a61bf48a940e"
+PV="2013.2.2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d identity
