@@ -12,8 +12,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://heat.init \
 "
 
-SRCREV="e6979b0f81c2cbc87cb353cfa29790b68d70a193"
-PV="2013.2+git${SRCPV}"
+SRCREV="ff6901141fbbc0a13604491aaba01a60487d6f6d"
+PV="2013.2.2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 do_install_append() {
