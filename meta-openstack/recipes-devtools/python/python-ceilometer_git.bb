@@ -12,8 +12,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://ceilometer.init \
 "
 
-SRCREV="b6165624ef1095e979b4e383a84462afb62ec2d0"
-PV="2013.2+git${SRCPV}"
+SRCREV="4d15cc05e9d2ada01b90e1d3c15427608cc49f54"
+PV="2013.2.2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 CEILOMETER_SECRET ?= "12121212"
