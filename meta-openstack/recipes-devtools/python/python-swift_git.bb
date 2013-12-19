@@ -10,8 +10,8 @@ SRCNAME = "swift"
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
 "
 
-SRCREV="9b521fe800ed3984169d37e9772674867745fede"
-PV="2013.2+git${SRCPV}"
+SRCREV="2f3526c559fe53ce904b735a81dee6de46127176"
+PV="2013.2.2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools
