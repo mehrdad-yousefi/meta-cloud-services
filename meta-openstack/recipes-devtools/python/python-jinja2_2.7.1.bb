@@ -15,3 +15,5 @@ SRC_URI[sha256sum] = "5cc0a087a81dca1c08368482fb7a92fe2bdd8cfbb22bc0fccfe6c85aff
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit setuptools
+
+RDEPENDS_${PN} += "python-io python-pickle python-crypt python-math python-netclient python-re python-textutils python-lang python-pprint python-shell python-markupsafe"
