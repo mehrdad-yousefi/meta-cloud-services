@@ -1,7 +1,7 @@
 DESCRIPTION = "A microframework based on Werkzeug, Jinja2 and good intentions"
 HOMEPAGE = "https://pypi.python.org/pypi/Flask/"
 SECTION = "devel/python"
-LICENSE = "Apache-2.0"
+LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=79aa8b7bc4f781210d6b5c06d6424cb0"
 
 PR = "r0"
