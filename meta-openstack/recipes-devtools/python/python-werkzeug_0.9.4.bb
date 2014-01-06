@@ -1,7 +1,7 @@
 DESCRIPTION = "The Swiss Army knife of Python web development"
 HOMEPAGE = "https://pypi.python.org/pypi/Werkzeug/"
 SECTION = "devel/python"
-LICENSE = "Apache-2.0"
+LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ad2e600a437b1b03d25b02df8c23ad1c"
 
 PR = "r0"
