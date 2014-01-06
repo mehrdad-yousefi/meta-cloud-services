@@ -55,6 +55,12 @@ do_install_append() {
 
         sed 's:@suffix@:agent-compute:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-agent-compute.init.sh
         install -m 0755 ${WORKDIR}/ceilometer-agent-compute.init.sh ${D}${sysconfdir}/init.d/ceilometer-agent-compute
+
+        sed 's:@suffix@:alarm-notifier:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-alarm-notifier.init.sh
+        install -m 0755 ${WORKDIR}/ceilometer-alarm-notifier.init.sh ${D}${sysconfdir}/init.d/ceilometer-alarm-notifier
+
+        sed 's:@suffix@:alarm-evaluator:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-alarm-evaluator.init.sh
+        install -m 0755 ${WORKDIR}/ceilometer-alarm-evaluator.init.sh ${D}${sysconfdir}/init.d/ceilometer-alarm-evaluator
     fi
 
     cp run-tests.sh ${CEILOMETER_CONF_DIR}
@@ -80,7 +86,9 @@ pkg_postinst_${SRCNAME}-setup () {
 inherit setuptools identity hosts update-rc.d
 
 PACKAGES += " ${SRCNAME}-tests"
-PACKAGES += "${SRCNAME}-setup ${SRCNAME}-common ${SRCNAME}-api ${SRCNAME}-collector ${SRCNAME}-compute ${SRCNAME}-controller"
+PACKAGES += "${SRCNAME}-setup ${SRCNAME}-common ${SRCNAME}-api"
+PACKAGES += "${SRCNAME}-alarm-notifier ${SRCNAME}-alarm-evaluator"
+PACKAGES += "${SRCNAME}-collector ${SRCNAME}-compute ${SRCNAME}-controller"
 
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
 
@@ -99,6 +107,14 @@ FILES_${SRCNAME}-collector = "${bindir}/ceilometer-collector \
                               ${bindir}/ceilometer-collector-udp \
                               ${sysconfdir}/init.d/ceilometer-collector \
 "
+FILES_${SRCNAME}-alarm-evaluator = "${bindir}/ceilometer-alarm-evaluator \
+                                    ${sysconfdir}/init.d/ceilometer-alarm-evaluator \
+"
+
+FILES_${SRCNAME}-alarm-notifier = "${bindir}/ceilometer-alarm-notifier \
+                                   ${sysconfdir}/init.d/ceilometer-alarm-notifier \
+"
+
 FILES_${SRCNAME}-compute = "${bindir}/ceilometer-agent-compute \
                             ${sysconfdir}/init.d/ceilometer-agent-compute \
 "
@@ -152,13 +168,17 @@ RDEPENDS_${PN} += " \
         python-pytz \
 	"
 
-RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common postgresql postgresql-client python-psycopg2 tgt"
+RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common ${SRCNAME}-alarm-notifier ${SRCNAME}-alarm-evaluator \
+                                  postgresql postgresql-client python-psycopg2 tgt"
 RDEPENDS_${SRCNAME}-api = "${SRCNAME}-controller"
 RDEPENDS_${SRCNAME}-collector = "${SRCNAME}-controller"
 RDEPENDS_${SRCNAME}-compute = "${PN} ${SRCNAME}-common python-ceilometerclient libvirt"
 
-INITSCRIPT_PACKAGES = "${SRCNAME}-api ${SRCNAME}-collector ${SRCNAME}-compute ${SRCNAME}-controller"
+INITSCRIPT_PACKAGES =  "${SRCNAME}-api ${SRCNAME}-collector ${SRCNAME}-compute ${SRCNAME}-controller"
+INITSCRIPT_PACKAGES += "${SRCNAME}-alarm-notifier ${SRCNAME}-alarm-evaluator"
 INITSCRIPT_NAME_${SRCNAME}-api = "${SRCNAME}-api"
 INITSCRIPT_NAME_${SRCNAME}-collector = "${SRCNAME}-collector"
 INITSCRIPT_NAME_${SRCNAME}-compute = "${SRCNAME}-agent-compute"
 INITSCRIPT_NAME_${SRCNAME}-controller = "${SRCNAME}-agent-central"
+INITSCRIPT_NAME_${SRCNAME}-alarm-notifier = "${SRCNAME}-alarm-notifier"
+INITSCRIPT_NAME_${SRCNAME}-alarm-evaluator = "${SRCNAME}-alarm-evaluator"
