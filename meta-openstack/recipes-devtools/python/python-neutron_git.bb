@@ -189,7 +189,7 @@ RDEPENDS_${SRCNAME} = "${PN} \
 RDEPENDS_${SRCNAME}-server = "${SRCNAME}"
 RDEPENDS_${SRCNAME}-plugin-openvswitch = "${SRCNAME} ${SRCNAME}-plugin-openvswitch-setup openvswitch-switch "
 RDEPENDS_${SRCNAME}-plugin-linuxbridge = "${SRCNAME} bridge-utils"
-RDEPENDS_${SRCNAME}-dhcp-agent = "${SRCNAME} dnsmasq"
+RDEPENDS_${SRCNAME}-dhcp-agent = "${SRCNAME} dnsmasq dhcp-server dhcp-server-config"
 RDEPENDS_${SRCNAME}-l3-agent = "${SRCNAME} ${SRCNAME}-metadata-agent iputils"
 
 RRECOMMENDS_${SRCNAME}-server = "${SRCNAME}-plugin-openvswitch"

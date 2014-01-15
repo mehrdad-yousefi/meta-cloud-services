@@ -11,4 +11,7 @@ RDEPENDS_${PN} = " \
     neutron-dhcp-agent \
     neutron-l3-agent \
     openvswitch-switch \
+    dhcp-server \
+    dhcp-client \
+    dhcp-relay \
     "
