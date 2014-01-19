@@ -143,6 +143,7 @@ keystone user-role-list --user-id $DEMO_USER --tenant-id $DEMO_TENANT &> /dev/nu
 keystone user-role-add --tenant-id $DEMO_TENANT --user-id $DEMO_USER --role-id $MEMBER_ROLE
 
 keystone user-role-list --user-id $CEILOMETER_USER --tenant_id $SERVICE_TENANT &> /dev/null
+keystone user-role-add --tenant-id $SERVICE_TENANT --user-id $CEILOMETER_USER --role-id $ADMIN_ROLE
 keystone user-role-add --tenant_id $SERVICE_TENANT --user_id $CEILOMETER_USER --role-id $RESELLER_ADMIN_ROLE
 
 keystone user-role-add --tenant_id $SERVICE_TENANT --user-id $HEAT_USER --role-id $ADMIN_ROLE
