@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://ceilometer.init \
            file://0001-Fix-for-get_resources-with-postgresql.patch \
            file://0002-enable-sql-metadata-query.patch \
+           file://sqlalchemy-fix-ceilometer-resource-query.patch \
 "
 
 SRCREV="ef71dc6a11ab624e756bfb61ec974e9f6096bc30"
