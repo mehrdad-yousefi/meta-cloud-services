@@ -35,6 +35,10 @@ do_install_append() {
     sed -e "s:^filesystem_store_datadir =.*:filesystem_store_datadir = ${sysconfdir}/${SRCNAME}/images/:g" \
         -i ${WORKDIR}/glance-api.conf
 
+    # send samples to rabbitmq for ceilometer integration
+    sed -e "s:^notifier_strategy = noop:notifier_strategy = rabbit:g" \
+        -i ${WORKDIR}/glance-api.conf         
+
     install -d ${GLANCE_CONF_DIR}
     install -m 600 ${WORKDIR}/glance-registry.conf ${GLANCE_CONF_DIR}/
     install -m 600 ${WORKDIR}/glance-api.conf ${GLANCE_CONF_DIR}/
