@@ -14,7 +14,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://0002-enable-sql-metadata-query.patch \
 "
 
-SRCREV="4d15cc05e9d2ada01b90e1d3c15427608cc49f54"
+SRCREV="ef71dc6a11ab624e756bfb61ec974e9f6096bc30"
 PV="2013.2.2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
