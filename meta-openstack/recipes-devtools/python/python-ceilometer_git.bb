@@ -176,6 +176,7 @@ RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common ${SRCNAME}-alarm-notif
 RDEPENDS_${SRCNAME}-api = "${SRCNAME}-controller"
 RDEPENDS_${SRCNAME}-collector = "${SRCNAME}-controller"
 RDEPENDS_${SRCNAME}-compute = "${PN} ${SRCNAME}-common python-ceilometerclient libvirt"
+RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-controller"
 
 INITSCRIPT_PACKAGES =  "${SRCNAME}-api ${SRCNAME}-collector ${SRCNAME}-compute ${SRCNAME}-controller"
 INITSCRIPT_PACKAGES += "${SRCNAME}-alarm-notifier ${SRCNAME}-alarm-evaluator"

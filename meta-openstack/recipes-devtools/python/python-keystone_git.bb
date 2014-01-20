@@ -118,6 +118,7 @@ RDEPENDS_${PN} += " \
 #    if DISTRO_FEATURE contains "tempest" then add *-tests to the main RDEPENDS
 
 RDEPENDS_${SRCNAME} = "${PN} postgresql postgresql-client python-psycopg2"
+RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}"
 
 INITSCRIPT_PACKAGES = "${SRCNAME}"
 INITSCRIPT_NAME_${SRCNAME} = "keystone"

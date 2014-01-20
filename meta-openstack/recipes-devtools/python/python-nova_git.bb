@@ -249,6 +249,7 @@ RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common \
 
 RDEPENDS_${SRCNAME}-compute = "${PN} ${SRCNAME}-common \
 			       qemu libvirt libvirt-libvirtd libvirt-python libvirt-virsh"
+RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-common"
 
 INITSCRIPT_PACKAGES =  "${SRCNAME}-compute ${SRCNAME}-consoleauth ${SRCNAME}-novncproxy"
 INITSCRIPT_PACKAGES += "${SRCNAME}-network ${SRCNAME}-scheduler ${SRCNAME}-cert ${SRCNAME}-conductor"

@@ -153,6 +153,7 @@ RDEPENDS_${PN} += " \
 RDEPENDS_${SRCNAME}-engine = "${PN} ${SRCNAME}-common postgresql postgresql-client python-psycopg2 tgt"
 RDEPENDS_${SRCNAME}-api = "${SRCNAME}-engine"
 RDEPENDS_${SRCNAME}-api-cfn = "${SRCNAME}-engine"
+RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-engine"
 
 INITSCRIPT_PACKAGES = "${SRCNAME}-api ${SRCNAME}-api-cfn ${SRCNAME}-engine"
 INITSCRIPT_NAME_${SRCNAME}-api = "${SRCNAME}-api"

@@ -127,6 +127,7 @@ RDEPENDS_${SRCNAME} = "${PN} \
 RDEPENDS_${SRCNAME}-api = "${SRCNAME}"
 RDEPENDS_${SRCNAME}-volume = "${SRCNAME}"
 RDEPENDS_${SRCNAME}-scheduler = "${SRCNAME}"
+RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}"
 
 INITSCRIPT_PACKAGES = "${SRCNAME}-api ${SRCNAME}-volume ${SRCNAME}-scheduler"
 INITSCRIPT_NAME_${SRCNAME}-api = "cinder-api"

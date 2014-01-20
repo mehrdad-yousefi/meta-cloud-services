@@ -127,6 +127,7 @@ RDEPENDS_${SRCNAME} = "${PN} \
         postgresql postgresql-client python-psycopg2"
 RDEPENDS_${SRCNAME}-api = "${SRCNAME}"
 RDEPENDS_${SRCNAME}-registry = "${SRCNAME}"
+RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}"
 
 INITSCRIPT_PACKAGES = "${SRCNAME}-api ${SRCNAME}-registry"
 INITSCRIPT_NAME_${SRCNAME}-api = "glance-api"
