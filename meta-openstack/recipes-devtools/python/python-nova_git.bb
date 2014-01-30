@@ -13,6 +13,7 @@ FILESEXTRAPATHS := "${THISDIR}/${PN}"
 
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://0001-nova-api-paste.ini-make-controller-IP-configurable.patch \
+           file://nova-add-migrate.cfg-to-the-MANIFEST.patch \
            "
 
 SRC_URI += "file://nova-all \
