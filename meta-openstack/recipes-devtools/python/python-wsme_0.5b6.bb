@@ -9,8 +9,8 @@ SRCNAME = "WSME"
 
 SRC_URI = "https://pypi.python.org/packages/source/W/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "88764f4923e83bd995940ef06eb42aa7"
-SRC_URI[sha256sum] = "7d8bf27e78d4c701c10a1f0047f4cf7e375ffc458bf88bb10a12efb98695be1a"
+SRC_URI[md5sum] = "4c71906a0af298f2170b452a3bd09754"
+SRC_URI[sha256sum] = "9476b6c80fa9c36e966d80352e589d5fd9cf356b9bdec7f755b07ca5d2f492cb"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
