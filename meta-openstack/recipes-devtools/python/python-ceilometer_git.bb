@@ -7,19 +7,23 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r0"
 SRCNAME = "ceilometer"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://ceilometer.conf \
            file://ceilometer.init \
-           file://0001-Fix-for-get_resources-with-postgresql.patch \
-           file://0002-enable-sql-metadata-query.patch \
-           file://sqlalchemy-fix-ceilometer-resource-query.patch \
+           file://0001-sqlalchemy-Fix-for-get_statistics-with-postgresql.patch \
 "
 
-SRCREV="ef71dc6a11ab624e756bfb61ec974e9f6096bc30"
-PV="2013.2.2+git${SRCPV}"
+SRCREV="a4c7411ac903984c7e7524469f89a417cf9cf97e"
+PV="2014.1.b2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 CEILOMETER_SECRET ?= "12121212"
+
+do_configure_append() {
+    # We are using postgresql support, hence this requirement is not valid
+    # removing it, to avoid on-target runtime issues
+    sed -e "s:MySQL-python::g" -i ${S}/requirements.txt
+}
 
 do_install_append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}/${SRCNAME}
@@ -128,7 +132,9 @@ FILES_${SRCNAME}-controller = "${bindir}/* \
 "
 
 RDEPENDS_${PN} += " \
-        python-sqlalchemy \
+	python-ply \
+	python-jsonpath-rw \
+	python-sqlalchemy \
 	python-amqplib \
 	python-anyjson \
 	python-eventlet \
