@@ -81,9 +81,21 @@ pkg_postinst_${SRCNAME}-setup () {
     # end python-keystone postinst
 }
 
-PACKAGES += " ${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-setup"
+# By default tokens are expired after 1 day so by default we can set
+# this token flush cronjob to run every 2 days
+KEYSTONE_TOKEN_FLUSH_TIME ??= "0 0 */2 * *"
+
+pkg_postinst_${SRCNAME}-cronjobs () {
+    # By default keystone expired tokens are not automatic removed out of the
+    # database.  So we create a cronjob for cleaning these expired tokens.
+    echo "${KEYSTONE_TOKEN_FLUSH_TIME} root /usr/bin/keystone-manage token_flush" >> /etc/crontab
+}
+
+PACKAGES += " ${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-setup ${SRCNAME}-cronjobs"
 
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
+
+ALLOW_EMPTY_${SRCNAME}-cronjobs = "1"
 
 FILES_${PN} = "${libdir}/*"
 
@@ -119,6 +131,7 @@ RDEPENDS_${PN} += " \
 
 RDEPENDS_${SRCNAME} = "${PN} postgresql postgresql-client python-psycopg2"
 RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}"
+RDEPENDS_${SRCNAME}-cronjobs = "cronie ${SRCNAME}"
 
 INITSCRIPT_PACKAGES = "${SRCNAME}"
 INITSCRIPT_NAME_${SRCNAME} = "keystone"
