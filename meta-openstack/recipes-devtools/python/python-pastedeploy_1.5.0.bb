@@ -9,8 +9,8 @@ SRCNAME = "PasteDeploy"
 
 SRC_URI = "https://pypi.python.org/packages/source/P/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = ""
-SRC_URI[sha256sum] = ""
+SRC_URI[md5sum] = "f1a068a0b680493b6eaff3dd7690690f"
+SRC_URI[sha256sum] = "61c205633adae996cd0e306451c8a28deca0499524e2a38c65ff1570f35a8a53"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
