@@ -1,0 +1,24 @@
+Update test core ETCDIR location
+
+Tests in keystone/tests are failed because they
+looks for some config files at wrong location.
+Currently all the keystone config files are at
+/etc/keystone.
+
+Signed-off-by: Vu Tran <vu.tran@windriver.com>
+diff --git a/keystone/tests/core.py b/keystone/tests/core.py
+index 860f68d..565cbcc 100644
+--- a/keystone/tests/core.py
++++ b/keystone/tests/core.py
+@@ -77,7 +77,7 @@ LOG = logging.getLogger(__name__)
+ TESTSDIR = os.path.dirname(os.path.abspath(__file__))
+ ROOTDIR = os.path.normpath(os.path.join(TESTSDIR, '..', '..'))
+ VENDOR = os.path.join(ROOTDIR, 'vendor')
+-ETCDIR = os.path.join(ROOTDIR, 'etc')
++ETCDIR = "/etc/keystone"
+ TMPDIR = os.path.join(TESTSDIR, 'tmp')
+ 
+ CONF = config.CONF
+-- 
+1.7.9.5
+

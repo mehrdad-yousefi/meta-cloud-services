@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://identity.sh \
            file://keystone \
            file://openrc \
+           file://Update-test-core-ETCDIR-location.patch \
 	  "
 
 SRCREV="0d83e7eee20a50a75863a9d3c75aee7030518229"
@@ -43,6 +44,7 @@ do_install_append() {
     install -m 600 ${WORKDIR}/openrc ${KEYSTONE_CONF_DIR}/
     install -m 600 ${S}/etc/logging.conf.sample ${KEYSTONE_CONF_DIR}/logging.conf
     install -m 600 ${S}/etc/policy.json ${KEYSTONE_CONF_DIR}/policy.json
+    install -m 600 ${S}/etc/keystone.conf.sample ${KEYSTONE_CONF_DIR}/keystone.conf.sample
 
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
