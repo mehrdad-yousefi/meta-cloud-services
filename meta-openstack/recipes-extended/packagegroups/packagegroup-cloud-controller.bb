@@ -20,6 +20,7 @@ RDEPENDS_${PN} = " postgresql-setup \
     glance-registry \
     glance-setup \
     keystone \
+    keystone-cronjobs \
     neutron-setup \
     neutron-server \
     neutron-plugin-openvswitch \
