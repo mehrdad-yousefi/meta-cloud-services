@@ -140,7 +140,7 @@ following steps will validate a simple compute node guest launch:
 
  % . /etc/nova/openrc
  % glance image-create --name myFirstImage --is-public true \
-      --container-format bare --disk-format qcow2 --file images/cirros-0.3.0-x86_64-disk.img
+      --container-format bare --disk-format qcow2 --file /root/images/cirros-0.3.0-x86_64-disk.img
  % neutron net-create mynetwork
  % nova boot --image myFirstImage --flavor 1 myinstance
 
@@ -148,3 +148,14 @@ following steps will validate a simple compute node guest launch:
 
  When using a multi-node setup it is recommended that each host have a different
  hostname and that every host knows the other hosts.
+
+* Notes *
+
+Keystone token query:
+
+  % sudo -u postgres psql -d keystone -c "select count(*) from token"
+
+Ceilometer:
+
+  % ceilometer meter-list
+  % ceilometer sample-list --meter cpu
