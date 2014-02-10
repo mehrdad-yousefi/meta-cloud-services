@@ -9,8 +9,8 @@ SRCNAME = "dogpile.core"
 
 SRC_URI = "https://pypi.python.org/packages/source/d/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "5f76cce023d505a5375b07e094c3260f"
-SRC_URI[sha256sum] = "af2555702811d56846778d39451cf822b04b3f13347080c121a4977fefdfcbff"
+SRC_URI[md5sum] = "01cb19f52bba3e95c9b560f39341f045"
+SRC_URI[sha256sum] = "be652fb11a8eaf66f7e5c94d418d2eaa60a2fe81dae500f3743a863cc9dbed76"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
