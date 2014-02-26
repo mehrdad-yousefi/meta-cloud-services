@@ -15,3 +15,10 @@ SRC_URI[sha256sum] = "74312a83c7f67d8a362649a822259fcf5983ea9b9e5f2e4e17d6710943
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit setuptools
+
+do_install_append() {
+	perm_files=`find "${D}${PYTHON_SITEPACKAGES_DIR}/" -name "top_level.txt"`
+	for f in $perm_files; do
+		chmod 644 "${f}"
+	done
+}
