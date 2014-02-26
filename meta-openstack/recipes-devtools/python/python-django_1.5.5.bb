@@ -4,14 +4,14 @@ SECTION = "devel/python"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fa8608154dcdd4029ae653131d4b7365"
 
-PR = "r0"
+PR = "r1"
 SRCNAME = "Django"
 
 SRC_URI = "https://pypi.python.org/packages/source/D/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
 "
 
-SRC_URI[md5sum] = "851d00905eb70e4aa6384b3b8b111fb7"
-SRC_URI[sha256sum] = "0e1e8c4217299672bbf9404994717fca2d8d4b7a4f7b8b3b74d413e1fda81428"
+SRC_URI[md5sum] = "e33355ee4bb2cbb4ab3954d3dff5eddd"
+SRC_URI[sha256sum] = "6ae69c1dfbfc9d0c44ae80e2fbe48e59bbbbb70e8df66ad2b7029bd39947d71d"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
