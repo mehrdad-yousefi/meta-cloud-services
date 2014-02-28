@@ -20,7 +20,7 @@ SRCREV="8b5fb8409322f61d8b610c97c109a61bf48a940e"
 PV="2013.2.2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
-inherit setuptools update-rc.d identity
+inherit setuptools update-rc.d identity default_configs
 
 do_install_append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}/${SRCNAME}
@@ -166,5 +166,8 @@ RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}"
 
 INITSCRIPT_PACKAGES = "${SRCNAME}-api ${SRCNAME}-volume ${SRCNAME}-scheduler"
 INITSCRIPT_NAME_${SRCNAME}-api = "cinder-api"
+INITSCRIPT_PARAMS_${SRCNAME}-api = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-volume = "cinder-volume"
+INITSCRIPT_PARAMS_${SRCNAME}-volume = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-scheduler = "cinder-scheduler"
+INITSCRIPT_PARAMS_${SRCNAME}-scheduler = "${OS_DEFAULT_INITSCRIPT_PARAMS}"

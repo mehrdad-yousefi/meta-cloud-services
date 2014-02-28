@@ -90,7 +90,7 @@ pkg_postinst_${SRCNAME}-setup () {
     ceilometer-dbsync
 }
 
-inherit setuptools identity hosts update-rc.d
+inherit setuptools identity hosts update-rc.d default_configs
 
 PACKAGES += " ${SRCNAME}-tests"
 PACKAGES += "${SRCNAME}-setup ${SRCNAME}-common ${SRCNAME}-api"
@@ -193,8 +193,14 @@ RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-controller"
 INITSCRIPT_PACKAGES =  "${SRCNAME}-api ${SRCNAME}-collector ${SRCNAME}-compute ${SRCNAME}-controller"
 INITSCRIPT_PACKAGES += "${SRCNAME}-alarm-notifier ${SRCNAME}-alarm-evaluator"
 INITSCRIPT_NAME_${SRCNAME}-api = "${SRCNAME}-api"
+INITSCRIPT_PARAMS_${SRCNAME}-api = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-collector = "${SRCNAME}-collector"
+INITSCRIPT_PARAMS_${SRCNAME}-collector = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-compute = "${SRCNAME}-agent-compute"
+INITSCRIPT_PARAMS_${SRCNAME}-compute = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-controller = "${SRCNAME}-agent-central"
+INITSCRIPT_PARAMS_${SRCNAME}-controller = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-alarm-notifier = "${SRCNAME}-alarm-notifier"
+INITSCRIPT_PARAMS_${SRCNAME}-alarm-notifier = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-alarm-evaluator = "${SRCNAME}-alarm-evaluator"
+INITSCRIPT_PARAMS_${SRCNAME}-alarm-evaluator = "${OS_DEFAULT_INITSCRIPT_PARAMS}"

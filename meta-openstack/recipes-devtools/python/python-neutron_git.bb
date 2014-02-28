@@ -18,7 +18,7 @@ PV="2013.2.2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit setuptools update-rc.d identity hosts
+inherit setuptools update-rc.d identity hosts default_configs
 
 do_install_append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}/
@@ -204,5 +204,8 @@ RRECOMMENDS_${SRCNAME}-server = "${SRCNAME}-plugin-openvswitch"
 
 INITSCRIPT_PACKAGES = "${SRCNAME}-server ${SRCNAME}-plugin-openvswitch ${SRCNAME}-plugin-linuxbridge"
 INITSCRIPT_NAME_${SRCNAME}-server = "neutron-server"
+INITSCRIPT_PARAMS_${SRCNAME}-server = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-plugin-openvswitch = "neutron-openvswitch-agent"
+INITSCRIPT_PARAMS_${SRCNAME}-plugin-openvswitch = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-plugin-linuxbridge = "neutron-linuxbridge-agent"
+INITSCRIPT_PARAMS_${SRCNAME}-plugin-linuxbridge = "${OS_DEFAULT_INITSCRIPT_PARAMS}"

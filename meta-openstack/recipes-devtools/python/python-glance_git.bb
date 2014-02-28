@@ -16,7 +16,7 @@ PV="2013.2.2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit setuptools update-rc.d identity
+inherit setuptools update-rc.d identity default_configs
 
 do_install_append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}
@@ -137,4 +137,6 @@ RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}"
 
 INITSCRIPT_PACKAGES = "${SRCNAME}-api ${SRCNAME}-registry"
 INITSCRIPT_NAME_${SRCNAME}-api = "glance-api"
+INITSCRIPT_PARAMS_${SRCNAME}-api = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-registry = "glance-registry"
+INITSCRIPT_PARAMS_${SRCNAME}-registry = "${OS_DEFAULT_INITSCRIPT_PARAMS}"

@@ -80,7 +80,7 @@ pkg_postinst_${SRCNAME}-setup () {
     heat-manage db_sync
 }
 
-inherit setuptools identity hosts update-rc.d
+inherit setuptools identity hosts update-rc.d default_configs
 
 PACKAGES += "${SRCNAME}-tests ${SRCNAME}-common ${SRCNAME}-api ${SRCNAME}-api-cfn ${SRCNAME}-engine"
 PACKAGES += "${SRCNAME}-setup"
@@ -164,6 +164,9 @@ RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-engine"
 
 INITSCRIPT_PACKAGES = "${SRCNAME}-api ${SRCNAME}-api-cfn ${SRCNAME}-engine"
 INITSCRIPT_NAME_${SRCNAME}-api = "${SRCNAME}-api"
+INITSCRIPT_PARAMS_${SRCNAME}-api = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-api-cfn = "${SRCNAME}-api-cfn"
+INITSCRIPT_PARAMS_${SRCNAME}-api-cfn = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-engine = "${SRCNAME}-engine"
+INITSCRIPT_PARAMS_${SRCNAME}-engine = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 

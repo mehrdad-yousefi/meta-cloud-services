@@ -20,7 +20,7 @@ PV="2013.2.2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit setuptools update-rc.d identity hosts
+inherit setuptools update-rc.d identity hosts default_configs
 
 SERVICE_TOKEN = "password"
 
@@ -143,3 +143,4 @@ RDEPENDS_${SRCNAME}-cronjobs = "cronie ${SRCNAME}"
 
 INITSCRIPT_PACKAGES = "${SRCNAME}"
 INITSCRIPT_NAME_${SRCNAME} = "keystone"
+INITSCRIPT_PARAMS_${SRCNAME} = "${OS_DEFAULT_INITSCRIPT_PARAMS}"

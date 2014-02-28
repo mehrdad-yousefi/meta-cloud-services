@@ -39,7 +39,7 @@ SRCREV="1912cc6a88dca7238da7c444a1ede84b983ab354"
 PV="2013.2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
-inherit setuptools update-rc.d python-dir
+inherit setuptools update-rc.d python-dir default_configs
 
 # no longer required. kept as reference.
 # do_install[dirs] += "${D}/usr/share/bin"
@@ -112,3 +112,4 @@ RDEPENDS_${SRCNAME} = "${PN}"
 
 INITSCRIPT_PACKAGES = "${SRCNAME}"
 INITSCRIPT_NAME_${SRCNAME} = "horizon"
+INITSCRIPT_PARAMS_${SRCNAME} = "${OS_DEFAULT_INITSCRIPT_PARAMS}"

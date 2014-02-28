@@ -28,7 +28,7 @@ PV="2013.2.2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit update-rc.d setuptools identity hosts useradd
+inherit update-rc.d setuptools identity hosts useradd default_configs
 
 do_install_append() {
     if [ ! -f "${WORKDIR}/nova.conf" ]; then
@@ -268,12 +268,20 @@ INITSCRIPT_PACKAGES += "${SRCNAME}-api"
 # INITSCRIPT_PACKAGES += "${SRCNAME}-controller"
 # INITSCRIPT_NAME_${SRCNAME}-controller = "nova-all"
 INITSCRIPT_NAME_${SRCNAME}-network = "nova-network"
+INITSCRIPT_PARAMS_${SRCNAME}-network = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-scheduler = "nova-scheduler"
+INITSCRIPT_PARAMS_${SRCNAME}-scheduler = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-cert = "nova-cert"
+INITSCRIPT_PARAMS_${SRCNAME}-cert = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-conductor = "nova-conductor"
+INITSCRIPT_PARAMS_${SRCNAME}-conductor = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-api = "nova-api"
+INITSCRIPT_PARAMS_${SRCNAME}-api = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 
 INITSCRIPT_NAME_${SRCNAME}-compute = "nova-compute"
+INITSCRIPT_PARAMS_${SRCNAME}-compute = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-consoleauth = "nova-consoleauth"
+INITSCRIPT_PARAMS_${SRCNAME}-consoleauth = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-novncproxy = "nova-novncproxy"
+INITSCRIPT_PARAMS_${SRCNAME}-novncproxy = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 
