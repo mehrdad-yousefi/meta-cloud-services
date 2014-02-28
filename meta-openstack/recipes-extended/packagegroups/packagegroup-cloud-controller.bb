@@ -42,5 +42,6 @@ RDEPENDS_${PN} = " postgresql-setup \
     horizon \
     novnc \
     chkconfig \
+    qemu \
     cloud-init \
     "
