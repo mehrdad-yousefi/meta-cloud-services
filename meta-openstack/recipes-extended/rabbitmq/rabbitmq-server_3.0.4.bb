@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.rabbitmq.com/"
 LICENSE = "MPL-1.1"
 LIC_FILES_CHKSUM = "file://LICENSE-MPL-RabbitMQ;md5=10a81373a21abb63f98ef5dc93e1601a"
 SECTION = "network"
-DEPENDS = "erlang-native libxslt python-simplejson"
+DEPENDS = "erlang-native libxslt python-simplejson zip-native"
 PR = "r0"
 
 SRC_URI = "http://www.rabbitmq.com/releases/rabbitmq-server/v${PV}/${PN}-${PV}.tar.gz \
