@@ -152,6 +152,24 @@ following steps will validate a simple compute node guest launch:
  % neutron net-create mynetwork
  % nova boot --image myFirstImage --flavor 1 myinstance
 
+* Cinder Multi-backend *
+
+Cinder currently is configured to support multi-backend: lvm-iscsi and nfs backends.
+When a Cinder volume is created, it's needed to be specified which backend its belong
+to through "--volume_type" option passed in "cinder create" command.
+
+The Cinder volume types for lvm-iscsi and nfs can be created as following steps:
+
+ % . /etc/nova/openrc
+ % cinder type-create lvm_iscsi
+ % cinder type-key lvm_iscsi set volume_backend_name=LVM_iSCSI
+ % cinder type-create nfs
+ % cinder type-key nfs set volume_backend_name=Generic_NFS
+
+For example, to create 1G Cinder volume in lvm-iscsi backend:
+
+ % cinder create --volume_type lvm_iscsi --display_name=lvm_vol 1
+
 !! Hint !!
 
  When using a multi-node setup it is recommended that each host have a different

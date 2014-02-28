@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
     file://cinder.init \
     file://cinder-volume \
     file://0001-run_tests-respect-tools-dir.patch \
+    file://nfs_setup.sh \
 	"
 
 SRCREV="8b5fb8409322f61d8b610c97c109a61bf48a940e"
@@ -38,6 +39,9 @@ do_install_append() {
     install -m 600 ${WORKDIR}/api-paste.ini ${CINDER_CONF_DIR}/
     install -m 600 ${S}/etc/cinder/policy.json ${CINDER_CONF_DIR}/
 
+    install -d ${CINDER_CONF_DIR}/drivers
+    install -m 600 ${WORKDIR}/nfs_setup.sh ${CINDER_CONF_DIR}/drivers/
+
     install -d ${D}${localstatedir}/log/${SRCNAME}
 
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
@@ -55,6 +59,8 @@ do_install_append() {
 }
 
 CINDER_LVM_VOLUME_BACKING_FILE_SIZE ?= "2G"
+CINDER_NFS_VOLUME_SERVERS_DEFAULT = "controller:/etc/cinder/nfs_volumes"
+CINDER_NFS_VOLUME_SERVERS ?= "${CINDER_NFS_VOLUME_SERVERS_DEFAULT}"
 
 pkg_postinst_${SRCNAME}-setup () {
     if [ "x$D" != "x" ]; then
@@ -73,6 +79,14 @@ pkg_postinst_${SRCNAME}-setup () {
     #Create cinder volume group backing file
     [[ -f /etc/cinder/volumes-backing ]] || truncate -s ${CINDER_LVM_VOLUME_BACKING_FILE_SIZE} /etc/cinder/volumes-backing
     echo "include /etc/cinder/data/volumes/*" >> /etc/tgt/targets.conf
+
+    # Create Cinder nfs_share config file with default nfs server
+    if [ ! -f /etc/cinder/nfs_shares ]; then
+        echo "${CINDER_NFS_VOLUME_SERVERS}" > /etc/cinder/nfs_shares
+        sed 's/\s\+/\n/g' -i /etc/cinder/nfs_shares
+        [[ "x${CINDER_NFS_VOLUME_SERVERS}" == "x${CINDER_NFS_VOLUME_SERVERS_DEFAULT}" ]] && is_default="1" || is_default="0"
+        /bin/bash /etc/cinder/drivers/nfs_setup.sh ${is_default}
+    fi
 }
 
 PACKAGES += "${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-setup ${SRCNAME}-api ${SRCNAME}-volume ${SRCNAME}-scheduler"
@@ -95,6 +109,7 @@ FILES_${SRCNAME}-scheduler = "${bindir}/cinder-scheduler \
 FILES_${SRCNAME} = "${bindir}/* \
     ${sysconfdir}/${SRCNAME}/* \
     ${localstatedir}/* \
+    ${sysconfdir}/${SRCNAME}/drivers/* \
     "
 
 DEPENDS += " \

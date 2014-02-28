@@ -21,6 +21,7 @@ RDEPENDS_${PN} = " \
     openvswitch-switch \
     ${@base_contains('CINDER_EXTRA_FEATURES', 'open-iscsi-user', 'open-iscsi-user', '', d)} \
     ${@base_contains('CINDER_EXTRA_FEATURES', 'iscsi-initiator-utils', 'iscsi-initiator-utils', '', d)} \
+    nfs-utils-client \
     "
 
 RRECOMMENDS_${PN} = " \
