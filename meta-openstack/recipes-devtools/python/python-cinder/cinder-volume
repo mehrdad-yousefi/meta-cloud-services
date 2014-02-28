@@ -29,15 +29,8 @@ start()
         fi
     fi
 
-	#Load volume group
-	DEV=`losetup -j /etc/cinder/volumes-backing | cut -d ":" -f 1 | head -1`
-	if [ -z $DEV ]; then
-		DEV=`losetup -f --show /etc/cinder/volumes-backing`
-	fi
-	if ! vgs cinder-volumes &> /dev/null ; then
-	    vgcreate cinder-volumes $DEV
-	fi
-	vgchange -ay cinder-volumes
+    #Load volume group
+    /bin/bash /etc/cinder/drivers/lvm_iscsi_setup.sh
 
     echo -n "Starting $DESC..."
 

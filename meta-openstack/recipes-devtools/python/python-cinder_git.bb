@@ -14,6 +14,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
     file://0001-run_tests-respect-tools-dir.patch \
     file://nfs_setup.sh \
     file://glusterfs_setup.sh \
+    file://lvm_iscsi_setup.sh \
 	"
 
 SRCREV="8b5fb8409322f61d8b610c97c109a61bf48a940e"
@@ -43,6 +44,7 @@ do_install_append() {
     install -d ${CINDER_CONF_DIR}/drivers
     install -m 600 ${WORKDIR}/nfs_setup.sh ${CINDER_CONF_DIR}/drivers/
     install -m 600 ${WORKDIR}/glusterfs_setup.sh ${CINDER_CONF_DIR}/drivers/
+    install -m 600 ${WORKDIR}/lvm_iscsi_setup.sh ${CINDER_CONF_DIR}/drivers/
 
     install -d ${D}${localstatedir}/log/${SRCNAME}
 
@@ -81,7 +83,7 @@ pkg_postinst_${SRCNAME}-setup () {
     cinder-manage db sync
 
     #Create cinder volume group backing file
-    [[ -f /etc/cinder/volumes-backing ]] || truncate -s ${CINDER_LVM_VOLUME_BACKING_FILE_SIZE} /etc/cinder/volumes-backing
+    sed 's/%CINDER_LVM_VOLUME_BACKING_FILE_SIZE%/${CINDER_LVM_VOLUME_BACKING_FILE_SIZE}/g' -i /etc/cinder/drivers/lvm_iscsi_setup.sh
     echo "include /etc/cinder/data/volumes/*" >> /etc/tgt/targets.conf
 
     # Create Cinder nfs_share config file with default nfs server
