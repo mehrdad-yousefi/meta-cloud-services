@@ -54,6 +54,8 @@ do_install_append() {
     cp -r tools ${CINDER_CONF_DIR}
 }
 
+CINDER_LVM_VOLUME_BACKING_FILE_SIZE ?= "2G"
+
 pkg_postinst_${SRCNAME}-setup () {
     if [ "x$D" != "x" ]; then
         exit 1
@@ -69,7 +71,7 @@ pkg_postinst_${SRCNAME}-setup () {
     cinder-manage db sync
 
     #Create cinder volume group backing file
-    [[ -f /etc/cinder/volumes-backing ]] || truncate -s 2G /etc/cinder/volumes-backing
+    [[ -f /etc/cinder/volumes-backing ]] || truncate -s ${CINDER_LVM_VOLUME_BACKING_FILE_SIZE} /etc/cinder/volumes-backing
     echo "include /etc/cinder/data/volumes/*" >> /etc/tgt/targets.conf
 }
 
