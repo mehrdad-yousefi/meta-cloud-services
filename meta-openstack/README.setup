@@ -78,6 +78,7 @@ to the bblayers.conf file:
     /meta-cloud-services/meta-openstack \
     /meta-openembedded/meta-oe \
     /meta-openembedded/meta-networking \   
+    /meta-openembedded/meta-filesystems
 
 Package configurations
 ----------------------
@@ -109,7 +110,12 @@ On compute node, by default openstack-image-compute doesn't include
 initiator iscsi package.  If open-iscsi-user recipe exists in layers,
 the following can be added to local.conf:
 
-  CINDER_EXTRA_FEATURES += "open-iscsi-user"
+  CINDER_EXTRA_FEATURES += " open-iscsi-user"
+
+If glusterfs recipi exists in layers, the following can be added to
+local.conf:
+
+  CINDER_EXTRA_FEATURES += " glusterfs"
 
 Running an image
 ----------------
@@ -154,7 +160,7 @@ following steps will validate a simple compute node guest launch:
 
 * Cinder Multi-backend *
 
-Cinder currently is configured to support multi-backend: lvm-iscsi and nfs backends.
+Cinder currently is configured to support multi-backend: lvm-iscsi, nfs, glusterfs backends.
 When a Cinder volume is created, it's needed to be specified which backend its belong
 to through "--volume_type" option passed in "cinder create" command.
 
@@ -165,6 +171,8 @@ The Cinder volume types for lvm-iscsi and nfs can be created as following steps:
  % cinder type-key lvm_iscsi set volume_backend_name=LVM_iSCSI
  % cinder type-create nfs
  % cinder type-key nfs set volume_backend_name=Generic_NFS
+ % cinder type-create glusterfs
+ % cinder type-key glusterfs set volume_backend_name=GlusterFS
 
 For example, to create 1G Cinder volume in lvm-iscsi backend:
 

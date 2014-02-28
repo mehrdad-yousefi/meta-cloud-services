@@ -43,5 +43,11 @@ RDEPENDS_${PN} = " postgresql-setup \
     novnc \
     chkconfig \
     qemu \
+    fuse \
+    ${@base_contains('CINDER_EXTRA_FEATURES', 'glusterfs', 'glusterfs glusterfs-fuse glusterfs-server', '', d)} \
+    "
+
+RRECOMMENDS_${PN} = " \
+    kernel-module-fuse \
     cloud-init \
     "

@@ -13,6 +13,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
     file://cinder-volume \
     file://0001-run_tests-respect-tools-dir.patch \
     file://nfs_setup.sh \
+    file://glusterfs_setup.sh \
 	"
 
 SRCREV="8b5fb8409322f61d8b610c97c109a61bf48a940e"
@@ -41,6 +42,7 @@ do_install_append() {
 
     install -d ${CINDER_CONF_DIR}/drivers
     install -m 600 ${WORKDIR}/nfs_setup.sh ${CINDER_CONF_DIR}/drivers/
+    install -m 600 ${WORKDIR}/glusterfs_setup.sh ${CINDER_CONF_DIR}/drivers/
 
     install -d ${D}${localstatedir}/log/${SRCNAME}
 
@@ -61,6 +63,8 @@ do_install_append() {
 CINDER_LVM_VOLUME_BACKING_FILE_SIZE ?= "2G"
 CINDER_NFS_VOLUME_SERVERS_DEFAULT = "controller:/etc/cinder/nfs_volumes"
 CINDER_NFS_VOLUME_SERVERS ?= "${CINDER_NFS_VOLUME_SERVERS_DEFAULT}"
+CINDER_GLUSTERFS_VOLUME_SERVERS_DEFAULT = "controller:/glusterfs_volumes"
+CINDER_GLUSTERFS_VOLUME_SERVERS ?= "${CINDER_GLUSTERFS_VOLUME_SERVERS_DEFAULT}"
 
 pkg_postinst_${SRCNAME}-setup () {
     if [ "x$D" != "x" ]; then
@@ -86,6 +90,14 @@ pkg_postinst_${SRCNAME}-setup () {
         sed 's/\s\+/\n/g' -i /etc/cinder/nfs_shares
         [[ "x${CINDER_NFS_VOLUME_SERVERS}" == "x${CINDER_NFS_VOLUME_SERVERS_DEFAULT}" ]] && is_default="1" || is_default="0"
         /bin/bash /etc/cinder/drivers/nfs_setup.sh ${is_default}
+    fi
+
+    # Create Cinder glusterfs_share config file with default glusterfs server
+    if [ ! -f /etc/cinder/glusterfs_shares ] && [ -f /usr/sbin/glusterfsd ]; then
+        echo "${CINDER_GLUSTERFS_VOLUME_SERVERS}" > /etc/cinder/glusterfs_shares
+        sed 's/\s\+/\n/g' -i /etc/cinder/glusterfs_shares
+        [[ "x${CINDER_GLUSTERFS_VOLUME_SERVERS}" == "x${CINDER_GLUSTERFS_VOLUME_SERVERS_DEFAULT}" ]] && is_default="1" || is_default="0"
+        /bin/bash /etc/cinder/drivers/glusterfs_setup.sh ${is_default}
     fi
 }
 

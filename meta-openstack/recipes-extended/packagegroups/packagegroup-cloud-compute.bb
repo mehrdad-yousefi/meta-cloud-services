@@ -22,6 +22,8 @@ RDEPENDS_${PN} = " \
     ${@base_contains('CINDER_EXTRA_FEATURES', 'open-iscsi-user', 'open-iscsi-user', '', d)} \
     ${@base_contains('CINDER_EXTRA_FEATURES', 'iscsi-initiator-utils', 'iscsi-initiator-utils', '', d)} \
     nfs-utils-client \
+    fuse \
+    ${@base_contains('CINDER_EXTRA_FEATURES', 'glusterfs', 'glusterfs glusterfs-fuse', '', d)} \
     "
 
 RRECOMMENDS_${PN} = " \
@@ -33,4 +35,5 @@ RRECOMMENDS_${PN} = " \
     kernel-module-iscsi-boot-sysfs \
     kernel-module-iscsi-tcp \
     kernel-module-libiscsi \
+    kernel-module-fuse \
     "
