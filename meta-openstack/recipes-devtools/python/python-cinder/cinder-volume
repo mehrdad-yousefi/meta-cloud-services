@@ -37,6 +37,7 @@ start()
 	if ! vgs cinder-volumes &> /dev/null ; then
 	    vgcreate cinder-volumes $DEV
 	fi
+	vgchange -ay cinder-volumes
 
     echo -n "Starting $DESC..."
 
