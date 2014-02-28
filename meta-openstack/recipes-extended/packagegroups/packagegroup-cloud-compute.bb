@@ -19,6 +19,8 @@ RDEPENDS_${PN} = " \
     python-novaclient \
     neutron-plugin-openvswitch \
     openvswitch-switch \
+    ${@base_contains('CINDER_EXTRA_FEATURES', 'open-iscsi-user', 'open-iscsi-user', '', d)} \
+    ${@base_contains('CINDER_EXTRA_FEATURES', 'iscsi-initiator-utils', 'iscsi-initiator-utils', '', d)} \
     "
 
 RRECOMMENDS_${PN} = " \
@@ -26,4 +28,8 @@ RRECOMMENDS_${PN} = " \
     kernel-module-kvm-intel \
     kernel-module-kvm-amd \
     kernel-module-nbd \
+    kernel-module-libiscsi-tcp \
+    kernel-module-iscsi-boot-sysfs \
+    kernel-module-iscsi-tcp \
+    kernel-module-libiscsi \
     "

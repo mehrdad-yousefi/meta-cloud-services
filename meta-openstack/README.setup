@@ -103,6 +103,14 @@ be added to local.conf:
 
   IMAGE_INSTALL_append = " cirros-guest-image"
 
+* Cinder Additional Packages *
+
+On compute node, by default openstack-image-compute doesn't include
+initiator iscsi package.  If open-iscsi-user recipe exists in layers,
+the following can be added to local.conf:
+
+  CINDER_EXTRA_FEATURES += "open-iscsi-user"
+
 Running an image
 ----------------
 
