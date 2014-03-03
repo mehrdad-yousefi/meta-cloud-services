@@ -37,6 +37,8 @@ RDEPENDS_${PN} = " postgresql-setup \
     heat-api-cfn \
     heat-engine \
     heat-setup \
+    python-heat-cfntools \
+    python-openstackclient \
     horizon \
     novnc \
     chkconfig \
