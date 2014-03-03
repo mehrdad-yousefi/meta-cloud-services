@@ -8,8 +8,8 @@ PR = "r0"
 
 SRC_URI = "git://github.com/openstack/python-keystoneclient.git;branch=master"
 
-PV="0.4.1+git${SRCPV}"
-SRCREV="0774d5aafade9e5a5de3830de461843c4a7d59a1"
+PV="0.6.0+git${SRCPV}"
+SRCREV="a6b8e506740935498f5eba319c67b740d17752a2"
 S = "${WORKDIR}/git"
 
 inherit setuptools

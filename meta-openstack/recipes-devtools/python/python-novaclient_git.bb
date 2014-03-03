@@ -9,8 +9,8 @@ PR = "r0"
 
 SRC_URI = "git://github.com/openstack/python-novaclient.git;branch=master"
 
-PV="2.15.0+git${SRCPV}"
-SRCREV="dd4bc08dd9a571637734a92c9411c32ea1f36dcf"
+PV="2.16.0+git${SRCPV}"
+SRCREV="64043442bbafa48f9042b669d30292b1db00db4f"
 S = "${WORKDIR}/git"
 
 inherit setuptools 

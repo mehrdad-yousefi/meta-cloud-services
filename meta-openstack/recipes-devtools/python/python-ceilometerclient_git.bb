@@ -16,8 +16,8 @@ PR = "r0"
 
 SRC_URI = "git://github.com/openstack/python-ceilometerclient.git;branch=master"
 
-PV="1.0.6+git${SRCPV}"
-SRCREV="4c42f5052678539648a1051a526b82ab95269a2b"
+PV="1.0.9+git${SRCPV}"
+SRCREV="6f4ec9dc96477131c90040ee00f5535e50d5f914"
 S = "${WORKDIR}/git"
 
 inherit setuptools

@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 DEPENDS = "gmp"
 
-SRCREV = "cd7f2cbd79df54ea41d9a075d904efc82bdcb440"
+SRCREV = "23ad1d6db7ec8116afed7c8aca3832dac440930a"
 PV = "0.12.0+gitr${SRCREV}"
 PR = "0"
 

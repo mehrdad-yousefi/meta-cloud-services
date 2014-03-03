@@ -16,8 +16,8 @@ PR = "r0"
 
 SRC_URI = "git://github.com/openstack/python-neutronclient.git;branch=master"
 
-PV="2.3.1+git${SRCPV}"
-SRCREV="1598fc0f75503f8c357ac4b58f77edf6e0443a69"
+PV="2.3.4+git${SRCPV}"
+SRCREV="6adb11703cb5b55a4af45e8524dc1039fb03176c"
 S = "${WORKDIR}/git"
 
 inherit setuptools
