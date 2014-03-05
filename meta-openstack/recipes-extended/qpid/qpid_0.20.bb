@@ -6,7 +6,7 @@ SECTION = "mq"
 DEPENDS = "boost perl-native python "
 PR = "r0"
 
-SRC_URI = "http://mirror.nexcess.net/apache/${PN}/${PV}/qpid-cpp-0.20.tar.gz \
+SRC_URI = "http://archive.apache.org/dist/${PN}/${PV}/qpid-cpp-0.20.tar.gz \
            file://quick-fix.patch \
            file://qpidd"
 
