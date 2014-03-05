@@ -1,5 +1,5 @@
 include erlang.inc
-DEPENDS += "erlang-native openssl"
+DEPENDS += "openssl"
 
 PR = "r3"
 
