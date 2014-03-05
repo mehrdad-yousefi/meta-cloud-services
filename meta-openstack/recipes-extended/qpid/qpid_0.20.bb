@@ -3,11 +3,13 @@ HOMEPAGE = "http://qpid.apache.org/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7ab4c208aa62d92d7a03cc8e0a89c12b"
 SECTION = "mq"
-DEPENDS = "boost perl-native python "
+DEPENDS = "boost perl-native python util-linux cyrus-sasl"
+RDEPENDS_${PN} = "cyrus-sasl-bin"
 PR = "r0"
 
 SRC_URI = "http://archive.apache.org/dist/${PN}/${PV}/qpid-cpp-0.20.tar.gz \
            file://quick-fix.patch \
+           file://QPID-4579-Fixes-building-Qpid-under-the-latest-GCC-4.patch \
            file://qpidd"
 
 SRC_URI[md5sum] = "566132c5939ca31a32a0e80cc4124122"
@@ -24,7 +26,7 @@ export PERL_LIB = "${STAGING_LIBDIR}${PERL_OWN_DIR}/perl/${@get_perl_version(d)}
 export PERL_ARCHLIB = "${STAGING_LIBDIR}${PERL_OWN_DIR}/perl/${@get_perl_version(d)}"
 export PERL="${STAGING_BINDIR}/perl"
 
-EXTRA_OECONF += " --without-help2man"
+EXTRA_OECONF += " --without-help2man SASL_PASSWD=/usr/sbin/saslpasswd2"
 
 do_install_append() {
      install -d ${D}${sysconfdir}/init.d
