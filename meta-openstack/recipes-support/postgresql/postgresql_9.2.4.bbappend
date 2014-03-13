@@ -6,9 +6,12 @@ SRC_URI += "file://postgresql \
 
 inherit useradd update-rc.d identity hosts
 
+# default
+DB_DATADIR ?= "/var/lib/postgres/data"
+
 do_install_append() {
-    install -d ${D}${sysconfdir}/${PN}
-    chown postgres ${D}${sysconfdir}/${PN}
+    sed -e "s:%DB_DATADIR%:${DB_DATADIR}:g" -i ${WORKDIR}/postgresql
+    sed -e "s:%DB_DATADIR%:${DB_DATADIR}:g" -i ${WORKDIR}/postgresql-init
 
     install -d ${D}${sysconfdir}/init.d/
     install -m 0755 ${WORKDIR}/postgresql ${D}${sysconfdir}/init.d/postgresql

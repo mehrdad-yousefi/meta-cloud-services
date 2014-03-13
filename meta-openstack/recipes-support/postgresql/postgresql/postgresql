@@ -13,14 +13,15 @@
 
 DAEMON=/usr/bin/postmaster
 DESC="PostgreSQL RDBMS server"
+DEFAULT_DATA_DIR=%DB_DATADIR%
 
-datadir=`grep ^data_directory /etc/postgresql/postgresql.conf |sed -e "s#^.*= '##; s#'.*##"`
+datadir=`grep ^data_directory $DEFAULT_DATA_DIR/postgresql.conf |sed -e "s#^.*= '##; s#'.*##"`
 if [ "$datadir" = "" ] ; then
-    datadir=/etc/postgresql
+    datadir=$DEFAULT_DATA_DIR
 else
     if [ ! -e $datadir/postgresql.conf ] ; then
-	if [ -e /etc/postgresql/postgresql.conf -a -e $datadir ] ; then
-	    ln -s /etc/postgresql/*.conf $datadir/
+	if [ -e $DEFAULT_DATA_DIR/postgresql.conf -a -e $datadir ] ; then
+	    ln -s $DEFAULT_DATA_DIR/*.conf $datadir/
 	fi
     fi
 fi
@@ -55,9 +56,9 @@ stop ()
     if [ $? -eq 0 ]; then
         echo "done."
     else
-	if [ -f /etc/postgresql/postmaster.pid -a "$datadir" != "/etc/postgresql" ] ; then
+	if [ -f $DEFAULT_DATA_DIR/postmaster.pid -a "$datadir" != "$DEFAULT_DATA_DIR" ] ; then
 	    # Special case for transition 
-	    sudo -u postgres /usr/bin/pg_ctl stop -w -D /etc/postgresql -m fast -s
+	    sudo -u postgres /usr/bin/pg_ctl stop -w -D $DEFAULT_DATA_DIR -m fast -s
 	fi
         if ! pidof ${DAEMON} > /dev/null; then
 	    echo "done."

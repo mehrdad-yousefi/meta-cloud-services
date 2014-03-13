@@ -6,16 +6,22 @@ CONTROLLER_IP=%CONTROLLER_IP%
 COMPUTE_IP=%COMPUTE_IP%
 DB_USER=%DB_USER%
 DB_PASSWORD=%DB_PASSWORD%
+DATA_DIR=%DB_DATADIR%
 
-if [ -e /etc/${PN}/PG_VERSION ]; then
+if [ ! -e $DATA_DIR ]; then
+	mkdir -p $DATA_DIR
+	chown postgres $DATA_DIR
+fi
+
+if [ -e $DATA_DIR/PG_VERSION ]; then
     # the database has already been initialized, return
     exit 0
 fi
 
-sudo -u postgres initdb -D /etc/${PN}/
-echo "listen_addresses = '*'" >> /etc/${PN}/postgresql.conf
-echo "host   all   all   ${CONTROLLER_IP}/32   trust" >> /etc/${PN}/pg_hba.conf
-echo "host   all   all   ${COMPUTE_IP}/32   trust" >> /etc/${PN}/pg_hba.conf
+sudo -u postgres initdb -D $DATA_DIR
+echo "listen_addresses = '*'" >> $DATA_DIR/postgresql.conf
+echo "host   all   all   ${CONTROLLER_IP}/32   trust" >> $DATA_DIR/pg_hba.conf
+echo "host   all   all   ${COMPUTE_IP}/32   trust" >> $DATA_DIR/pg_hba.conf
 /etc/init.d/postgresql start
 
 count=0
