@@ -43,8 +43,9 @@ start()
 
 stop()
 {
+    if [ ! -e $PIDFILE ]; then return; fi
     echo -n "Stopping $DESC..."
-    start-stop-daemon --stop --quiet --pidfile $PIDFILE
+    pkill -TERM -P `cat $PIDFILE`
     if [ $? -eq 0 ]; then
         echo "done."
     else
