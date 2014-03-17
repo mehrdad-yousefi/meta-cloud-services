@@ -16,4 +16,9 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit setuptools
 
+DEPENDS += " \
+        python-pbr \
+        python-pip \
+        "
+
 RDEPENDS_${PN} += "python-pbr"

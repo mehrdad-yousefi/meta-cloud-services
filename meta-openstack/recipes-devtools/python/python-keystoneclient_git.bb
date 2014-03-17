@@ -16,9 +16,15 @@ inherit setuptools
 
 FILES_${PN}-doc += "${datadir}/keystoneclient" 
 
+DEPENDS += " \
+        python-pip \
+        python-pbr \
+        "
+
 RDEPENDS_${PN} += "python-iso8601 \
 	python-prettytable \
 	python-requests \
 	python-simplejson \
 	python-oslo.config \
+	python-pbr \
 	"

@@ -109,6 +109,11 @@ FILES_${SRCNAME} = "${bindir}/* \
     ${localstatedir}/* \
     "
 
+DEPENDS += " \
+        python-pip \
+        python-pbr \
+        "
+
 RDEPENDS_${PN} += " \
         python-pam \
 	python-webob \
@@ -126,6 +131,7 @@ RDEPENDS_${PN} += " \
 	python-oslo.config \
         python-dogpile.core \
         python-dogpile.cache \
+        python-pbr \
 	"
 
 # TODO:

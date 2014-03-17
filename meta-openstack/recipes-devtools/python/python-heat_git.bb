@@ -105,6 +105,12 @@ FILES_${SRCNAME}-engine = "${bindir}/heat-engine \
                            ${bindir}/* \
                            ${sysconfdir}/init.d/heat-engine \
 "
+
+DEPENDS += " \
+        python-pip \
+        python-pbr \
+        "
+
 RDEPENDS_${PN} += " \
         python-heatclient \
         python-sqlalchemy \
@@ -148,6 +154,7 @@ RDEPENDS_${PN} += " \
         python-pyyaml \
         python-pip \
         python-pytz \
+        python-pbr \
 	"
 
 RDEPENDS_${SRCNAME}-engine = "${PN} ${SRCNAME}-common postgresql postgresql-client python-psycopg2 tgt"

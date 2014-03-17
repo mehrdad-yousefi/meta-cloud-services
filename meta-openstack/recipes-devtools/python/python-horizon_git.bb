@@ -4,6 +4,11 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
+DEPENDS += " \
+        python-pip \
+        python-pbr \
+        "
+
 DEPENDS_${PN} += "python-django \
     python-django-compressor \
     python-django-openstack-auth \
@@ -19,6 +24,7 @@ DEPENDS_${PN} += "python-django \
     python-six \
     python-swiftclient \
     python-lockfile \
+    python-pbr \
     "
 
 PR = "r1"

@@ -131,6 +131,11 @@ FILES_${SRCNAME}-controller = "${bindir}/* \
                                ${sysconfdir}/init.d/ceilometer-agent-central \
 "
 
+DEPENDS += " \
+        python-pip \
+        python-pbr \
+        "
+
 RDEPENDS_${PN} += " \
 	python-ply \
 	python-jsonpath-rw \
@@ -175,6 +180,7 @@ RDEPENDS_${PN} += " \
         python-pyyaml \
         python-pip \
         python-pytz \
+        python-pbr \
 	"
 
 RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common ${SRCNAME}-alarm-notifier ${SRCNAME}-alarm-evaluator \

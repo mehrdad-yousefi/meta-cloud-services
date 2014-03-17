@@ -16,7 +16,13 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit setuptools
 
+DEPENDS += " \
+        python-pip \
+        python-pbr \
+        "
+
 RDEPENDS_${PN} += "python-sqlalchemy  \
 	python-decorator \
 	python-tempita  \
+        python-pbr \
     "

@@ -159,6 +159,11 @@ FILES_${SRCNAME}-extra-agents = "${bindir}/*"
 
 FILES_${SRCNAME}-doc = "${datadir}/*"
 
+DEPENDS += " \
+        python-pip \
+        python-pbr \
+        "
+
 RDEPENDS_${PN} += "python-paste \
 	python-pastedeploy \
 	python-routes \
@@ -181,6 +186,7 @@ RDEPENDS_${PN} += "python-paste \
 	python-mako \
 	python-markupsafe \
 	python-pyparsing \
+	python-pbr \
 	"
 
 RDEPENDS_${SRCNAME} = "${PN} \

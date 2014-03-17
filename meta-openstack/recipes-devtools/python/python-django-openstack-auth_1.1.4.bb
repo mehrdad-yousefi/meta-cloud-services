@@ -17,6 +17,12 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit setuptools 
 
+DEPENDS += " \
+        python-pip \
+        python-pbr \
+        "
+
 RDEPENDS_${PN} += "python-django  \
 	python-keystoneclient  \
+	python-pbr \
 	"

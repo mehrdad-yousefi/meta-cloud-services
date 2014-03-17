@@ -195,6 +195,11 @@ FILES_${SRCNAME}-api = " \
 	${sysconfdir}/init.d/nova-api \
 "
 
+DEPENDS += " \
+        python-pip \
+        python-pbr \
+        "
+
 RDEPENDS_${PN} = " libvirt \
 		   python-modules \
 		   python-misc \
@@ -233,6 +238,7 @@ RDEPENDS_${PN} = " libvirt \
 		   python-routes \
 		   python-webob \
 		   python-websockify \
+		   python-pbr \
     "
 
 RDEPENDS_${SRCNAME}-common = "${PN} openssl openssl-misc libxml2 libxslt \

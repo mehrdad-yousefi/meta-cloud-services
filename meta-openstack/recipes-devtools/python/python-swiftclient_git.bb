@@ -14,4 +14,12 @@ S = "${WORKDIR}/git"
 
 inherit setuptools 
 
-RDEPENDS_${PN} += "python-simplejson"
+DEPENDS += " \
+        python-pip \
+        python-pbr \
+        "
+
+RDEPENDS_${PN} += " \
+        python-simplejson \
+        python-pbr \
+        "

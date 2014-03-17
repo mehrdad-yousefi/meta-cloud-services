@@ -4,12 +4,18 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 
+DEPENDS += " \
+        python-pip \
+        python-pbr \
+        "
+
 RDEPENDS_${PN} +="python-cliff \
 	python-httplib2 \
 	python-iso8601 \
 	python-prettytable \
 	python-pyparsing \
 	python-simplejson \
+	python-pbr \
 	"
 
 PR = "r0"

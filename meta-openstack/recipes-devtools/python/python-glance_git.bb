@@ -101,6 +101,11 @@ FILES_${SRCNAME}-registry = "${bindir}/glance-registry \
     ${sysconfdir}/init.d/glance-registry \
     "
 
+DEPENDS += " \
+        python-pip \
+        python-pbr \
+        "
+
 RDEPENDS_${PN} += "python-greenlet \
 	python-sqlalchemy \
 	python-anyjson \
@@ -121,6 +126,7 @@ RDEPENDS_${PN} += "python-greenlet \
 	python-jsonschema \
 	python-keystoneclient \
 	python-swiftclient \
+	python-pbr \
 	"
 
 RDEPENDS_${SRCNAME} = "${PN} \

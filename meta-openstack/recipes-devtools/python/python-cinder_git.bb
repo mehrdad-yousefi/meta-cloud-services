@@ -95,6 +95,11 @@ FILES_${SRCNAME} = "${bindir}/* \
     ${localstatedir}/* \
     "
 
+DEPENDS += " \
+        python-pip \
+        python-pbr \
+        "
+
 RDEPENDS_${PN} += "lvm2 \
     python-sqlalchemy \
 	python-amqplib \
@@ -119,6 +124,7 @@ RDEPENDS_${PN} += "lvm2 \
 	python-keystoneclient \
 	python-swiftclient \
 	python-oslo.config \
+	python-pbr \
 	"
 
 RDEPENDS_${SRCNAME} = "${PN} \

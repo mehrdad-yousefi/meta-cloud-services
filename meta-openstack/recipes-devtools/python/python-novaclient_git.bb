@@ -15,8 +15,14 @@ S = "${WORKDIR}/git"
 
 inherit setuptools 
 
+DEPENDS += " \
+        python-pip \
+        python-pbr \
+        "
+
 RDEPENDS_${PN} += "python-iso8601 \
 	python-prettytable \
 	python-requests \
 	python-simplejson \
+	python-pbr \
 	"

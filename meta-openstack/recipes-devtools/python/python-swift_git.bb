@@ -37,6 +37,11 @@ FILES_${SRCNAME} = "${bindir}/* \
     ${sysconfdir}/${SRCNAME}/* \
 "
 
+DEPENDS += " \
+        python-pip \
+        python-pbr \
+        "
+
 RDEPENDS_${PN} += " \
     python-eventlet \
     python-greenlet \
@@ -45,6 +50,7 @@ RDEPENDS_${PN} += " \
     python-swiftclient \
     python-netifaces \
     python-xattr \
+    python-pbr \
     "
 
 RDEPENDS_${SRCNAME} = "${PN}"
