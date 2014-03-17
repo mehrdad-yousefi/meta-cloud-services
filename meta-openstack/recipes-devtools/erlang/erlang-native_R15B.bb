@@ -4,6 +4,8 @@ inherit native
 
 PR = "r1"
 
+DEPENDS += "ncurses-native"
+
 # EXTRA_OEMAKE = 'OTP_SMALL_BUILD=true'
 EXTRA_OECONF = '--without-ssl'
 
