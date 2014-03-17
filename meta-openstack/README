@@ -20,6 +20,7 @@ revision: HEAD
 layers: meta-oe
 	meta-networking
         meta-ruby
+        meta-filesystems
 
 URI: git://git.yoctoproject.org/meta-virtualization
 branch: master
