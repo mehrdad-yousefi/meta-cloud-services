@@ -43,6 +43,19 @@ if ! [ -x ${DAEMON} ] ; then
 	exit 0
 fi
 
+DESC="nova console"
+status()
+{
+    pid=`cat $PIDFILE 2>/dev/null`
+    if [ -n "$pid" ]; then
+        if ps -p $pid >&- ; then
+            echo "$DESC is running"
+            return
+        fi
+    fi
+    echo "$DESC is not running"
+}
+
 case "$1" in
   start)
     test "$ENABLED" = "true" || exit 0
@@ -56,7 +69,7 @@ case "$1" in
     start-stop-daemon --stop --oknodo --pidfile ${PIDFILE}
     log_end_msg $?
     ;;
-  restart|force-reload)
+  restart|force-reload|reload)
     test "$ENABLED" = "true" || exit 1
     $0 stop
     sleep 1
@@ -64,10 +77,10 @@ case "$1" in
     ;;
   status)
     test "$ENABLED" = "true" || exit 0
-    status_of_proc -p $PIDFILE $DAEMON nova-consoleauth && exit 0 || exit $?
+    status
     ;;
   *)
-    echo "Usage: /etc/init.d/nova-consoleauth {start|stop|restart|force-reload|status}"
+    echo "Usage: /etc/init.d/nova-consoleauth {start|stop|restart|force-reload|status|reload|status}"
     exit 1
     ;;
 esac

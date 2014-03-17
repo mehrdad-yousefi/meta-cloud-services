@@ -58,6 +58,18 @@ stop()
     rm -f $PIDFILE
 }
 
+status()
+{
+    pid=`cat $PIDFILE 2>/dev/null`
+    if [ -n "$pid" ]; then
+        if ps -p $pid >&- ; then
+            echo "$DESC is running"
+            return
+        fi
+    fi
+    echo "$DESC is not running"
+}
+
 case "$1" in
     start)
         start
@@ -65,12 +77,15 @@ case "$1" in
     stop)
         stop
         ;;
-    restart|force-reload)
+    restart|force-reload|reload)
         stop
         start
         ;;
+    status)
+	status
+        ;;
     *)
-        echo "Usage: $0 {start|stop|force-reload|restart}"
+        echo "Usage: $0 {start|stop|force-reload|restart|reload|status}"
         exit 1
         ;;
 esac
