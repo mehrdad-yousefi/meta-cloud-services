@@ -24,6 +24,7 @@ RDEPENDS_${PN} = " \
     nfs-utils-client \
     fuse \
     ${@base_contains('CINDER_EXTRA_FEATURES', 'glusterfs', 'glusterfs glusterfs-fuse', '', d)} \
+    ${@base_contains('CINDER_EXTRA_FEATURES', 'ceph', 'task-ceph xfsprogs', '', d)} \
     "
 
 RRECOMMENDS_${PN} = " \

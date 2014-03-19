@@ -14,6 +14,8 @@ FILESEXTRAPATHS := "${THISDIR}/${PN}"
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://0001-nova-api-paste.ini-make-controller-IP-configurable.patch \
            file://nova-add-migrate.cfg-to-the-MANIFEST.patch \
+           file://Make-rbd.libvirt_info-parent-class-compatible.patch \
+           file://Fix-rbd-backend-not-working-for-none-admin-ceph-user.patch \
            "
 
 SRC_URI += "file://nova-all \
@@ -29,6 +31,8 @@ PV="2013.2.2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit update-rc.d setuptools identity hosts useradd default_configs
+
+LIBVIRT_IMAGES_TYPE ?= "default"
 
 do_install_append() {
     if [ ! -f "${WORKDIR}/nova.conf" ]; then
@@ -81,6 +85,8 @@ do_install_append() {
 
     sed -e "s:%COMPUTE_IP%:${COMPUTE_IP}:g" -i ${WORKDIR}/nova.conf
     sed -e "s:%COMPUTE_HOST%:${COMPUTE_HOST}:g" -i ${WORKDIR}/nova.conf
+
+    sed -e "s:%LIBVIRT_IMAGES_TYPE%:${LIBVIRT_IMAGES_TYPE}:g" -i ${WORKDIR}/nova.conf
 
     sed -e "s:%OS_PASSWORD%:${ADMIN_PASSWORD}:g" -i ${WORKDIR}/openrc
     sed -e "s:%SERVICE_TOKEN%:${SERVICE_TOKEN}:g" -i ${WORKDIR}/openrc
