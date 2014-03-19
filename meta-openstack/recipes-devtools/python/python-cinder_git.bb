@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
     file://nfs_setup.sh \
     file://glusterfs_setup.sh \
     file://lvm_iscsi_setup.sh \
+    file://add-cinder-volume-types.sh \
 	"
 
 SRCREV="8b5fb8409322f61d8b610c97c109a61bf48a940e"
@@ -45,6 +46,7 @@ do_install_append() {
     install -m 600 ${WORKDIR}/nfs_setup.sh ${CINDER_CONF_DIR}/drivers/
     install -m 600 ${WORKDIR}/glusterfs_setup.sh ${CINDER_CONF_DIR}/drivers/
     install -m 600 ${WORKDIR}/lvm_iscsi_setup.sh ${CINDER_CONF_DIR}/drivers/
+    install -m 700 ${WORKDIR}/add-cinder-volume-types.sh ${CINDER_CONF_DIR}/
 
     install -d ${D}${localstatedir}/log/${SRCNAME}
 
