@@ -45,6 +45,7 @@ RDEPENDS_${PN} = " postgresql-setup \
     qemu \
     fuse \
     ${@base_contains('CINDER_EXTRA_FEATURES', 'glusterfs', 'glusterfs glusterfs-fuse glusterfs-server', '', d)} \
+    ${@base_contains('CINDER_EXTRA_FEATURES', 'ceph', 'task-ceph ceph-setup xfsprogs', '', d)} \
     "
 
 RRECOMMENDS_${PN} = " \

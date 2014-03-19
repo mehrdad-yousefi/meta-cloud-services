@@ -160,11 +160,12 @@ following steps will validate a simple compute node guest launch:
 
 * Cinder Multi-backend *
 
-Cinder currently is configured to support multi-backend: lvm-iscsi, nfs, glusterfs backends.
-When a Cinder volume is created, it's needed to be specified which backend its belong
-to through "--volume_type" option passed in "cinder create" command.
+Cinder currently is configured to support multi-backend: lvm-iscsi, nfs,
+glusterfs, and ceph rbd.  When a Cinder volume is created, it's needed to
+be specified which backend it belongs to through "--volume_type" option passed
+in "cinder create" command.
 
-The Cinder volume types for lvm-iscsi and nfs can be created as following steps:
+The Cinder volume types for these backends can be created following the steps:
 
  % . /etc/nova/openrc
  % cinder type-create lvm_iscsi
@@ -173,6 +174,8 @@ The Cinder volume types for lvm-iscsi and nfs can be created as following steps:
  % cinder type-key nfs set volume_backend_name=Generic_NFS
  % cinder type-create glusterfs
  % cinder type-key glusterfs set volume_backend_name=GlusterFS
+ % cinder type-create cephrbd
+ % cinder type-key cephrbd set volume_backend_name=RBD_CEPH
 
 For example, to create 1G Cinder volume in lvm-iscsi backend:
 
