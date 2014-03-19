@@ -18,6 +18,8 @@ S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d identity default_configs
 
+GLANCE_DEFAULT_STORE ?= "file"
+
 do_install_append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}
     GLANCE_CONF_DIR=${D}${sysconfdir}/glance
@@ -60,6 +62,8 @@ do_install_append() {
         sed 's:@suffix@:registry:' < ${WORKDIR}/glance.init >${WORKDIR}/glance-registry.init.sh
         install -m 0755 ${WORKDIR}/glance-registry.init.sh ${D}${sysconfdir}/init.d/glance-registry
     fi
+
+    sed 's:^default_store =.*:default_store = ${GLANCE_DEFAULT_STORE}:g' -i ${WORKDIR}/glance-api.conf
 
     cp run_tests.sh ${GLANCE_CONF_DIR}
 }
