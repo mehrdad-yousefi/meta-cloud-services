@@ -54,6 +54,8 @@ do_install_append() {
         install -m 0755 ${WORKDIR}/cinder-api.init.sh ${D}${sysconfdir}/init.d/cinder-api
         sed 's:@suffix@:scheduler:' < ${WORKDIR}/cinder.init >${WORKDIR}/cinder-scheduler.init.sh
         install -m 0755 ${WORKDIR}/cinder-scheduler.init.sh ${D}${sysconfdir}/init.d/cinder-scheduler
+        sed 's:@suffix@:backup:' < ${WORKDIR}/cinder.init >${WORKDIR}/cinder-backup.init.sh
+        install -m 0755 ${WORKDIR}/cinder-backup.init.sh ${D}${sysconfdir}/init.d/cinder-backup
         install -m 0755 ${WORKDIR}/cinder-volume ${D}${sysconfdir}/init.d/cinder-volume
     fi
 
@@ -103,7 +105,7 @@ pkg_postinst_${SRCNAME}-setup () {
     fi
 }
 
-PACKAGES += "${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-setup ${SRCNAME}-api ${SRCNAME}-volume ${SRCNAME}-scheduler"
+PACKAGES += "${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-setup ${SRCNAME}-api ${SRCNAME}-volume ${SRCNAME}-scheduler ${SRCNAME}-backup"
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
 
 FILES_${PN} = "${libdir}/*"
@@ -119,6 +121,9 @@ FILES_${SRCNAME}-volume = "${bindir}/cinder-volume \
 
 FILES_${SRCNAME}-scheduler = "${bindir}/cinder-scheduler \
     ${sysconfdir}/init.d/cinder-scheduler"
+
+FILES_${SRCNAME}-backup = "${bindir}/cinder-backup \
+    ${sysconfdir}/init.d/cinder-backup"
 
 FILES_${SRCNAME} = "${bindir}/* \
     ${sysconfdir}/${SRCNAME}/* \
@@ -166,10 +171,12 @@ RDEPENDS_${SRCNAME}-volume = "${SRCNAME}"
 RDEPENDS_${SRCNAME}-scheduler = "${SRCNAME}"
 RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}"
 
-INITSCRIPT_PACKAGES = "${SRCNAME}-api ${SRCNAME}-volume ${SRCNAME}-scheduler"
+INITSCRIPT_PACKAGES = "${SRCNAME}-api ${SRCNAME}-volume ${SRCNAME}-scheduler ${SRCNAME}-backup"
 INITSCRIPT_NAME_${SRCNAME}-api = "cinder-api"
 INITSCRIPT_PARAMS_${SRCNAME}-api = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-volume = "cinder-volume"
 INITSCRIPT_PARAMS_${SRCNAME}-volume = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-scheduler = "cinder-scheduler"
 INITSCRIPT_PARAMS_${SRCNAME}-scheduler = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+INITSCRIPT_NAME_${SRCNAME}-backup = "cinder-backup"
+INITSCRIPT_PARAMS_${SRCNAME}-backup = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
