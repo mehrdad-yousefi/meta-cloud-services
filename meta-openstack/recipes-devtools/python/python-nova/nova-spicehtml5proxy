@@ -1,23 +1,26 @@
 #! /bin/sh
 ### BEGIN INIT INFO
-# Provides:          nova-novncproxy
+# Provides:          nova-spicehtml5proxy
 # Required-Start:    $remote_fs $syslog
 # Required-Stop:     $remote_fs $syslog
 # Should-Start:      libvirt-bin
 # Should-Stop:       libvirt-bin
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: nova-novncproxy service
-# Description:       Provides vnc proxy services for the openstack
+# Short-Description: nova-spicehtml5proxy service
+# Description:       Provides spice html5 proxy services for the openstack
 #                    cloud computing system
 ### END INIT INFO
 
 
 set -e
 
-DAEMON=/usr/bin/nova-novncproxy
+NAME=nova-spicehtml5proxy
+DESC="OpenStack Compute Spice HTML5 Proxy"
+SCRIPTNAME=/etc/init.d/$NAME
+DAEMON=/usr/bin/nova-spicehtml5proxy
 DAEMON_ARGS=""
-PIDFILE=/var/run/nova/nova-novncproxy.pid
+PIDFILE=/var/run/nova/$NAME.pid
 
 ENABLED=true
 
@@ -25,12 +28,7 @@ if test -f /etc/default/nova-consoleproxy; then
   . /etc/default/nova-consoleproxy
 fi
 
-# default to novnc
-if [ -z "${NOVA_CONSOLE_PROXY_TYPE}" ] ; then
-	NOVA_CONSOLE_PROXY_TYPE="novnc"
-fi
-
-if ! [ "${NOVA_CONSOLE_PROXY_TYPE}" = "novnc" ] ; then
+if ! [ "${NOVA_CONSOLE_PROXY_TYPE}" = "spicehtml5" ] ; then
 	exit 0
 fi
 
@@ -49,7 +47,6 @@ if ! [ -x ${DAEMON} ] ; then
 	exit 0
 fi
 
-DESC="nova vnc proxy"
 status()
 {
     pid=`cat $PIDFILE 2>/dev/null`
@@ -65,13 +62,13 @@ status()
 case "$1" in
   start)
     test "$ENABLED" = "true" || exit 0
-    echo "Starting nova vnc proxy" "nova-novncproxy"
+    echo "Starting $DESC" "$NAME"
     start-stop-daemon --start -b -m --pidfile $PIDFILE --exec ${DAEMON} -- ${DAEMON_ARGS}
     log_end_msg $?
     ;;
   stop)
     test "$ENABLED" = "true" || exit 0
-    echo "Stopping nova vnc proxy" "nova-novncproxy"
+    echo "Stopping $DESC" "$NAME"
     start-stop-daemon --stop --oknodo --pidfile ${PIDFILE}
     log_end_msg $?
     ;;
@@ -86,7 +83,7 @@ case "$1" in
     status
     ;;
   *)
-    echo "Usage: /etc/init.d/nova-novncproxy {start|stop|restart|force-reload|status|reload|status}"
+    echo "Usage: $SCRIPTNAME {start|stop|restart|force-reload|status|reload|status}"
     exit 1
     ;;
 esac

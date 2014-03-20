@@ -22,8 +22,10 @@ SRC_URI += "file://nova-all \
             file://nova.init \
             file://nova-consoleauth \
             file://nova-novncproxy \
+            file://nova-spicehtml5proxy \
             file://nova.conf \
             file://openrc \
+            file://nova-consoleproxy \
            "
 SRCREV="afc9e4e23327fb566e8ade2c0c06c90d369c9e29"
 PV="2013.2.2+git${SRCPV}"
@@ -108,6 +110,7 @@ do_install_append() {
         install -m 0755 ${WORKDIR}/nova-all ${D}${sysconfdir}/init.d/nova-all
         install -m 0755 ${WORKDIR}/nova-consoleauth ${D}${sysconfdir}/init.d/nova-consoleauth
         install -m 0755 ${WORKDIR}/nova-novncproxy ${D}${sysconfdir}/init.d/nova-novncproxy
+        install -m 0755 ${WORKDIR}/nova-spicehtml5proxy ${D}${sysconfdir}/init.d/nova-spicehtml5proxy
 
 	for binary in api compute network scheduler cert conductor; do
 	    sed "s:@suffix@:$binary:" < ${WORKDIR}/nova.init >${WORKDIR}/nova-$binary.init.sh
@@ -116,6 +119,8 @@ do_install_append() {
     fi
 
     cp run_tests.sh ${NOVA_CONF_DIR}
+
+    install -D -o nova -m 664 ${WORKDIR}/nova-consoleproxy ${D}${sysconfdir}/default/nova-consoleproxy
 }
 
 pkg_postinst_${SRCNAME}-setup () {
@@ -156,6 +161,7 @@ PACKAGES += " ${SRCNAME}-tests"
 PACKAGES += " ${SRCNAME}-setup ${SRCNAME}-common ${SRCNAME}-compute ${SRCNAME}-controller"
 PACKAGES += " ${SRCNAME}-consoleauth"
 PACKAGES += " ${SRCNAME}-novncproxy"
+PACKAGES += " ${SRCNAME}-spicehtml5proxy"
 PACKAGES += " ${SRCNAME}-network"
 PACKAGES += " ${SRCNAME}-scheduler"
 PACKAGES += " ${SRCNAME}-cert"
@@ -184,6 +190,10 @@ FILES_${SRCNAME}-consoleauth = " \
 "
 FILES_${SRCNAME}-novncproxy = " \
 	${sysconfdir}/init.d/nova-novncproxy \
+"
+FILES_${SRCNAME}-spicehtml5proxy = " \
+	${sysconfdir}/init.d/nova-spicehtml5proxy \
+	${sysconfdir}/default/nova-consoleproxy \
 "
 FILES_${SRCNAME}-network = " \
 	${sysconfdir}/init.d/nova-network \
@@ -245,6 +255,7 @@ RDEPENDS_${PN} = " libvirt \
 		   python-webob \
 		   python-websockify \
 		   python-pbr \
+		   spice-html5 \
     "
 
 RDEPENDS_${SRCNAME}-common = "${PN} openssl openssl-misc libxml2 libxslt \
@@ -253,6 +264,7 @@ RDEPENDS_${SRCNAME}-common = "${PN} openssl openssl-misc libxml2 libxslt \
 RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common \
 				  ${SRCNAME}-consoleauth \
 				  ${SRCNAME}-novncproxy \
+				  ${SRCNAME}-spicehtml5proxy \
 				  ${SRCNAME}-network \
 				  ${SRCNAME}-scheduler \
 				  ${SRCNAME}-cert \
@@ -264,7 +276,7 @@ RDEPENDS_${SRCNAME}-compute = "${PN} ${SRCNAME}-common \
 			       qemu libvirt libvirt-libvirtd libvirt-python libvirt-virsh"
 RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-common"
 
-INITSCRIPT_PACKAGES =  "${SRCNAME}-compute ${SRCNAME}-consoleauth ${SRCNAME}-novncproxy"
+INITSCRIPT_PACKAGES =  "${SRCNAME}-compute ${SRCNAME}-consoleauth ${SRCNAME}-novncproxy ${SRCNAME}-spicehtml5proxy"
 INITSCRIPT_PACKAGES += "${SRCNAME}-network ${SRCNAME}-scheduler ${SRCNAME}-cert ${SRCNAME}-conductor"
 INITSCRIPT_PACKAGES += "${SRCNAME}-api"
 
@@ -291,3 +303,5 @@ INITSCRIPT_PARAMS_${SRCNAME}-consoleauth = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-novncproxy = "nova-novncproxy"
 INITSCRIPT_PARAMS_${SRCNAME}-novncproxy = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 
+INITSCRIPT_NAME_${SRCNAME}-spicehtml5proxy = "nova-spicehtml5proxy"
+INITSCRIPT_PARAMS_${SRCNAME}-spicehtml5proxy = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
