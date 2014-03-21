@@ -4,7 +4,7 @@ LICENSE = "MIT"
 IMAGE_INSTALL = "\
     ${CORE_IMAGE_BASE_INSTALL} \
     ${ROOTFS_PKGMANAGE_BOOTSTRAP} \
-    packagegroup-core-basic \
+    packagegroup-core-full-cmdline \
     packagegroup-cloud-network \
     "
 
