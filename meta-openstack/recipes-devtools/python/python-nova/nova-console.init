@@ -1,0 +1,119 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          nova-compute
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     3 5
+# Default-Stop:      0 1 2 6
+# Short-Description: OpenStack Compute (Nova) - @suffix@
+# Description:       OpenStack Compute (Nova) - @suffix@
+### END INIT INFO
+
+SUFFIX="@suffix@"
+DESC="nova-@suffix@"
+DAEMON="/usr/bin/nova-$SUFFIX"
+PIDFILE="/var/run/nova/nova-$SUFFIX.pid"
+
+if test -f /etc/default/nova-consoleproxy; then
+        . /etc/default/nova-consoleproxy
+fi
+
+
+# default to spicehtml5
+if [ -z "${NOVA_CONSOLE_PROXY_TYPE}" ] ; then
+        NOVA_CONSOLE_PROXY_TYPE="spicehtml5"
+fi
+
+if ! [ "${NOVA_CONSOLE_PROXY_TYPE}" = "@proxy_type@" ] ; then
+        exit 0
+fi
+
+mkdir -p /var/run/nova
+chown nova:root /var/run/nova/
+
+mkdir -p /var/lock/nova
+chown nova:root /var/lock/nova/
+
+export PATH="${PATH:+$PATH:}/usr/sbin:/sbin"
+export TMPDIR=/var/lib/nova/tmp
+
+if ! [ -x ${DAEMON} ] ; then
+        exit 0
+fi
+
+start ()
+{
+    if [ -e $PIDFILE ]; then
+        PIDDIR=/proc/$(cat $PIDFILE)
+        if [ -d ${PIDDIR} ]; then
+            echo "$DESC already running."
+            exit 1
+        else
+            echo "Removing stale PID file $PIDFILE"
+            rm -f $PIDFILE
+        fi
+    fi
+    PIDDIR=`dirname $PIDFILE`
+    if [ ! -d $PIDDIR ]; then
+        mkdir -p $PIDDIR
+        chown nova $PIDDIR
+    fi
+    echo -n "Starting $DESC..."
+
+    sudo -u nova \
+        start-stop-daemon --start --quiet --background \
+        --pidfile ${PIDFILE} --make-pidfile --exec ${DAEMON}
+
+    if [ $? -eq 0 ]; then
+        echo "done."
+    else
+        echo "failed."
+    fi
+}
+
+stop ()
+{
+    echo -n "Stopping $DESC..."
+    start-stop-daemon --stop --quiet --pidfile $PIDFILE
+    if [ $? -eq 0 ]; then
+        echo "done."
+    else
+        echo "failed."
+    fi
+    rm -f $PIDFILE
+}
+
+status()
+{
+    pid=`cat $PIDFILE 2>/dev/null`
+    if [ -n "$pid" ]; then
+        if ps -p $pid >&- ; then
+            echo "$DESC is running"
+            return
+        fi
+    fi
+    echo "$DESC is not running"
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart|force-reload|reload)
+        stop
+        start
+        ;;
+    status)
+	status
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|force-reload|restart|reload|status}"
+        exit 1
+        ;;
+esac
+
+exit 0
