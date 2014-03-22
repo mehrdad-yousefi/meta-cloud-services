@@ -119,7 +119,9 @@ FILES_${SRCNAME} = " \
     ${bindir}/neutron-debug \
     ${bindir}/neutron-netns-cleanup \
     ${bindir}/neutron-ovs-cleanup \
-    ${sysconfdir}/${SRCNAME}/* \
+    ${sysconfdir}/${SRCNAME}/policy.json \
+    ${sysconfdir}/${SRCNAME}/neutron.conf \
+    ${sysconfdir}/${SRCNAME}/api-paste.ini \
     ${localstatedir}/* \    
     "
 
