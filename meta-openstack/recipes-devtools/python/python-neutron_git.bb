@@ -52,8 +52,6 @@ do_install_append() {
     install -m 600 ${S}/etc/api-paste.ini ${NEUTRON_CONF_DIR}/
     install -m 600 ${S}/etc/policy.json ${NEUTRON_CONF_DIR}/
 
-    install -d ${D}${localstatedir}/log/${SRCNAME}
-
     PLUGIN=openvswitch
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
