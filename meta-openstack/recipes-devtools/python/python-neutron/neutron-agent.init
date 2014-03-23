@@ -12,6 +12,7 @@ SUFFIX=@suffix@
 DESC="neutron-$SUFFIX-agent"
 DAEMON="/usr/bin/neutron-$SUFFIX-agent"
 PIDFILE="/var/run/neutron-$SUFFIX-agent.pid"
+DAEMON_ARGS="@args@"
 
 start() 
 {
@@ -34,7 +35,7 @@ start()
 
     start-stop-daemon --start --quiet --background \
         --pidfile ${PIDFILE} --make-pidfile --exec ${DAEMON} \
-	-- --log-dir=/var/log/neutron
+	-- ${DAEMON_ARGS} --log-dir=/var/log/neutron
 
     if [ $? -eq 0 ]; then
         echo "done."

@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://linuxbridge_conf.ini \
            file://neutron-server.init \
            file://neutron-agent.init \
+           file://l3_agent.ini \
 	  "
 SRCREV="8cb9d895675f2a89c6b741da4b594f416fbeee5a"
 PV="2013.2.2+git${SRCPV}"
@@ -53,13 +54,22 @@ do_install_append() {
     install -m 600 ${S}/etc/policy.json ${NEUTRON_CONF_DIR}/
 
     PLUGIN=openvswitch
+    ARGS=""
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
         sed "s:@plugin@:/etc/neutron/plugins/$PLUGIN/ovs_neutron_plugin.ini:" \
              < ${WORKDIR}/neutron-server.init >${WORKDIR}/neutron-server.init.sh
         install -m 0755 ${WORKDIR}/neutron-server.init.sh ${D}${sysconfdir}/init.d/neutron-server
-        sed "s:@suffix@:$PLUGIN:" < ${WORKDIR}/neutron-agent.init >${WORKDIR}/neutron-$PLUGIN.init.sh
+        sed "s:@suffix@:$PLUGIN:;s:@args@:$ARGS:" < ${WORKDIR}/neutron-agent.init >${WORKDIR}/neutron-$PLUGIN.init.sh
         install -m 0755 ${WORKDIR}/neutron-$PLUGIN.init.sh ${D}${sysconfdir}/init.d/neutron-$PLUGIN-agent
+    fi
+
+    AGENT=l3
+    ARGS="--config-file=${sysconfdir}/${SRCNAME}/neutron.conf --config-file=${sysconfdir}/${SRCNAME}/l3_agent.ini"
+    if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
+        sed "s:@suffix@:$AGENT:;s:@args@:$ARGS:" < ${WORKDIR}/neutron-agent.init >${WORKDIR}/neutron-$AGENT.init.sh
+        install -m 0755 ${WORKDIR}/neutron-$AGENT.init.sh ${D}${sysconfdir}/init.d/neutron-$AGENT-agent
+        install -m 600 ${WORKDIR}/${AGENT}_agent.ini ${NEUTRON_CONF_DIR}/
     fi
 
     cp run_tests.sh ${NEUTRON_CONF_DIR}
@@ -147,7 +157,7 @@ FILES_${SRCNAME}-dhcp-agent = "${bindir}/neutron-dhcp-agent \
 
 FILES_${SRCNAME}-l3-agent = "${bindir}/neutron-l3-agent \
     ${sysconfdir}/${SRCNAME}/l3_agent.ini \
-    ${sysconfdir}/init.d/l3_agent \
+    ${sysconfdir}/init.d/neutron-l3-agent \
     "
 
 FILES_${SRCNAME}-metadata-agent = "${bindir}/neutron-metadata-agent \
@@ -202,10 +212,12 @@ RDEPENDS_${SRCNAME}-setup = "postgresql sudo"
 
 RRECOMMENDS_${SRCNAME}-server = "${SRCNAME}-plugin-openvswitch"
 
-INITSCRIPT_PACKAGES = "${SRCNAME}-server ${SRCNAME}-plugin-openvswitch ${SRCNAME}-plugin-linuxbridge"
+INITSCRIPT_PACKAGES = "${SRCNAME}-server ${SRCNAME}-plugin-openvswitch ${SRCNAME}-plugin-linuxbridge ${SRCNAME}-l3-agent"
 INITSCRIPT_NAME_${SRCNAME}-server = "neutron-server"
 INITSCRIPT_PARAMS_${SRCNAME}-server = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-plugin-openvswitch = "neutron-openvswitch-agent"
 INITSCRIPT_PARAMS_${SRCNAME}-plugin-openvswitch = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-plugin-linuxbridge = "neutron-linuxbridge-agent"
 INITSCRIPT_PARAMS_${SRCNAME}-plugin-linuxbridge = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+INITSCRIPT_NAME_${SRCNAME}-l3-agent = "neutron-l3-agent"
+INITSCRIPT_PARAMS_${SRCNAME}-l3-agent = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
