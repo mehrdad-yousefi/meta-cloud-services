@@ -20,11 +20,9 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
 
 SRC_URI += "file://nova-all \
             file://nova.init \
-            file://nova-console.init \
             file://nova-consoleauth \
             file://nova.conf \
             file://openrc \
-            file://nova-consoleproxy \
            "
 SRCREV="afc9e4e23327fb566e8ade2c0c06c90d369c9e29"
 PV="2013.2.2+git${SRCPV}"
@@ -109,21 +107,13 @@ do_install_append() {
         install -m 0755 ${WORKDIR}/nova-all ${D}${sysconfdir}/init.d/nova-all
         install -m 0755 ${WORKDIR}/nova-consoleauth ${D}${sysconfdir}/init.d/nova-consoleauth
 
-	for binary in api compute network scheduler cert conductor; do
+	for binary in api compute network scheduler cert conductor novncproxy spicehtml5proxy; do
 	    sed "s:@suffix@:$binary:" < ${WORKDIR}/nova.init >${WORKDIR}/nova-$binary.init.sh
-            install -m 0755 ${WORKDIR}/nova-$binary.init.sh ${D}${sysconfdir}/init.d/nova-$binary
-	done	
-	for binary in novncproxy spicehtml5proxy; do
-	    proxy_type=`echo $binary | sed -e 's/proxy//;'`
-	    sed "s:@suffix@:$binary:" < ${WORKDIR}/nova-console.init | \
-                sed "s:@proxy_type@:$proxy_type:" >${WORKDIR}/nova-$binary.init.sh
             install -m 0755 ${WORKDIR}/nova-$binary.init.sh ${D}${sysconfdir}/init.d/nova-$binary
 	done	
     fi
 
     cp run_tests.sh ${NOVA_CONF_DIR}
-
-    install -D -o nova -m 664 ${WORKDIR}/nova-consoleproxy ${D}${sysconfdir}/default/nova-consoleproxy
 }
 
 pkg_postinst_${SRCNAME}-setup () {
@@ -196,7 +186,6 @@ FILES_${SRCNAME}-novncproxy = " \
 "
 FILES_${SRCNAME}-spicehtml5proxy = " \
 	${sysconfdir}/init.d/nova-spicehtml5proxy \
-	${sysconfdir}/default/nova-consoleproxy \
 "
 FILES_${SRCNAME}-network = " \
 	${sysconfdir}/init.d/nova-network \

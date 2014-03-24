@@ -15,6 +15,20 @@ DESC="nova-@suffix@"
 DAEMON="/usr/bin/nova-$SUFFIX"
 PIDFILE="/var/run/nova/nova-$SUFFIX.pid"
 
+if [ ! -d /var/run/nova ]; then
+	mkdir -p /var/run/nova
+	chown nova:root /var/run/nova/
+fi
+
+if [ ! -d /var/lock/nova ]; then
+	mkdir -p /var/lock/nova
+	chown nova:root /var/lock/nova/
+fi
+
+if ! [ -x ${DAEMON} ] ; then
+	exit 0
+fi
+
 start ()
 {
     if [ -e $PIDFILE ]; then
