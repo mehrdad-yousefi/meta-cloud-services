@@ -72,6 +72,7 @@ Building an image
 to the bblayers.conf file:
 
     /meta-virtualization \
+    /meta-cloud-services \
     /meta-cloud-services/meta-openstack-<node type>-deploy \
     /meta-cloud-services/meta-openstack \
     /meta-cloud-services/meta-openstack-qemu \ # optional, add if using qemu
