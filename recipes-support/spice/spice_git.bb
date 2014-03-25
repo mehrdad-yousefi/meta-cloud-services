@@ -29,16 +29,16 @@ SRC_URI = "git://anongit.freedesktop.org/spice/spice;name=spice \
            git://anongit.freedesktop.org/spice/spice-protocol;destsuffix=git/spice-common/spice-protocol;name=spice-protocol \
           "
 
-SRC_URI += "file://spice-fix-CVE-2013-4282.patch"
+SRC_URI += " \
+        file://spice-fix-CVE-2013-4282.patch \
+        file://configure.ac-add-subdir-objects-to-AM_INIT_AUTOMAKE.patch \
+        "
 
 S = "${WORKDIR}/git"
 
 inherit autotools gettext pythonnative python-dir pkgconfig
 
 DEPENDS += "python-native celt051 python-pyparsing jpeg pixman alsa-lib glib-2.0"
-
-EXTRA_OECONF_append = " -Wnone"
-EXTRA_AUTORECONF_append = " -Wnone"
 
 export PYTHON="${STAGING_BINDIR_NATIVE}/python-native/python"
 export PYTHONPATH="${PKG_CONFIG_SYSROOT_DIR}${libdir}/python2.7/site-packages"
@@ -55,6 +55,10 @@ PACKAGES =+ "${PN}-protocol"
 LICENSE_${PN}-protocol = "BSD"
 FILES_${PN}-protocol += "${includedir}/spice-1"
 FILES_${PN}-protocol += "${datadir}/pkgconfig"
+
+do_configure_prepend() {
+	mkdir -p ${S}/spice-common/spice-protocol/m4
+}
 
 do_install_append() {
 	cd ${S}/spice-common/spice-protocol
