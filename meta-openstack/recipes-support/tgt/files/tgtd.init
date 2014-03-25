@@ -99,7 +99,7 @@ case "$1" in
         status
         ;;
     *)
-        echo "Usage: $0 {start|stop|force-reload|restart}"
+        echo "Usage: $0 {start|stop|force-reload|restart|status|reload}"
         exit 1
         ;;
 esac
