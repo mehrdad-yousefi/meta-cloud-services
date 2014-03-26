@@ -45,8 +45,8 @@ inherit useradd update-rc.d
 
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "--system rabbitmq"
-USERADD_PARAM_${PN}  = "--system --home /var/lib/rabbitmq -g rabbitmq \
-                        --no-create-home rabbitmq"
+USERADD_PARAM_${PN}  = "--system --create-home --home /var/lib/rabbitmq \
+			-g rabbitmq rabbitmq"
 
 INITSCRIPT_NAME = "rabbitmq-server"
 INITSCRIPT_PARAMS = "defaults"
