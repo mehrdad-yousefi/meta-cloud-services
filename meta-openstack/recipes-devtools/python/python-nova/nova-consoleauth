@@ -99,7 +99,7 @@ case "$1" in
     status
     ;;
   *)
-    echo "Usage: /etc/init.d/nova-consoleauth {start|stop|restart|force-reload|status|reload|status}"
+    echo "Usage: /etc/init.d/nova-consoleauth {start|stop|restart|force-reload|status|reload}"
     exit 1
     ;;
 esac
