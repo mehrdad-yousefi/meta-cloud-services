@@ -9,6 +9,8 @@ IMAGE_INSTALL = "\
     packagegroup-core-full-cmdline \
     packagegroup-cloud-controller \
     packagegroup-cloud-network \
+    packagegroup-cloud-debug \
+    packagegroup-cloud-extras \
     ${OPENSTACK_CONTROLLER_EXTRA_INSTALL} \
     "
 

@@ -7,6 +7,8 @@ IMAGE_INSTALL = " \
     packagegroup-core-boot \
     ${ROOTFS_PKGMANAGE_BOOTSTRAP} \
     packagegroup-cloud-compute \
+    packagegroup-cloud-debug \
+    packagegroup-cloud-extras \
     ${OPENSTACK_COMPUTE_EXTRA_INSTALL} \
     "
 
