@@ -46,11 +46,14 @@ start ()
         mkdir -p $PIDDIR
         chown nova $PIDDIR
     fi
+    if [ ! -d /var/log/nova ]; then
+    	mkdir /var/log/nova
+    fi
     echo -n "Starting $DESC..."
 
-    sudo -u nova \
-        start-stop-daemon --start --quiet --background \
-        --pidfile ${PIDFILE} --make-pidfile --exec ${DAEMON}
+    start-stop-daemon --start --quiet --background \
+        --pidfile ${PIDFILE} --make-pidfile --exec ${DAEMON} \
+	-- --log-dir=/var/log/nova
 
     if [ $? -eq 0 ]; then
         echo "done."

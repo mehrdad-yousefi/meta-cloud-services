@@ -13,7 +13,9 @@
 DESC="neutron-server"
 DAEMON="/usr/bin/neutron-server"
 PIDFILE="/var/run/neutron-server.pid"
-DAEMON_ARGS="--config-file=/etc/neutron/neutron.conf --config-file=@plugin@"
+DAEMON_ARGS="--config-file=/etc/neutron/neutron.conf \
+  --config-file=@plugin@ \
+  --log-dir=/var/log/neutron"
 
 start() 
 {
@@ -26,6 +28,10 @@ start()
             echo "Removing stale PID file $PIDFILE"
             rm -f $PIDFILE
         fi
+    fi
+
+    if [ ! -d /var/log/neutron ]; then
+        mkdir /var/log/neutron
     fi
 
     echo -n "Starting $DESC..."

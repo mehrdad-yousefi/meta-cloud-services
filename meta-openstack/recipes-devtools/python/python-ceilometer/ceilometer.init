@@ -37,7 +37,7 @@ start()
 
     start-stop-daemon --start --quiet --background \
         --pidfile ${PIDFILE} --make-pidfile --exec ${DAEMON} \
-	-- --config-file $CONFIG
+	-- --config-file $CONFIG --log-dir=/var/log/ceilometer
 
     if [ $? -eq 0 ]; then
         echo "done."

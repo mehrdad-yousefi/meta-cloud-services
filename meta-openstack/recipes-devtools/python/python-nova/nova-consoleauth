@@ -16,7 +16,7 @@
 set -e
 
 DAEMON=/usr/bin/nova-consoleauth
-DAEMON_ARGS=""
+DAEMON_ARGS="--log-dir=/var/log/nova "                                              
 PIDFILE=/var/run/nova/nova-consoleauth.pid
 
 ENABLED=true
@@ -76,9 +76,12 @@ case "$1" in
         chown nova $PIDDIR
     fi
 
+    if [ ! -d /var/log/nova ]; then
+        mkdir /var/log/nova
+    fi
+
     echo "Starting nova console" "nova-consoleauth"
-    sudo -u nova \
-        start-stop-daemon --start -b -m --pidfile $PIDFILE \
+    start-stop-daemon --start -b -m --pidfile $PIDFILE \
         --exec ${DAEMON} -- ${DAEMON_ARGS}
     log_end_msg $?
     ;;

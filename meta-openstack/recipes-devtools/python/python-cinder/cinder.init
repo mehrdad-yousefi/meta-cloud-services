@@ -30,10 +30,15 @@ start()
         fi
     fi
 
+    if [ ! -d /var/log/cinder ]; then
+        mkdir  /var/log/cinder                                                      
+    fi      
+
     echo -n "Starting $DESC..."
 
     start-stop-daemon --start --quiet --background \
-        --pidfile ${PIDFILE} --make-pidfile --exec ${DAEMON}
+        --pidfile ${PIDFILE} --make-pidfile --exec ${DAEMON} \
+	-- --log-dir=/var/log/cinder
 
     if [ $? -eq 0 ]; then
         echo "done."

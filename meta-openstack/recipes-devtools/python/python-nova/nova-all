@@ -29,10 +29,15 @@ start ()
         fi
     fi
 
+    if [ ! -d /var/log/nova ]; then
+        mkdir /var/log/nova
+    fi
+
     echo -n "Starting $DESC..."
 
     start-stop-daemon --start --quiet --background \
-        --pidfile ${PIDFILE} --make-pidfile --exec ${DAEMON}
+        --pidfile ${PIDFILE} --make-pidfile --exec ${DAEMON} \
+        -- --log-dir=/var/log/nova
 
     if [ $? -eq 0 ]; then
         echo "done."
