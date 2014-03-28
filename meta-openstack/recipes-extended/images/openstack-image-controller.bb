@@ -20,5 +20,6 @@ inherit core-image
 inherit openstack-base
 
 # Ensure extra space for guest images, and rabbit MQ has a hard coded
-# check for 2G of free space, so we use 3G as a starting point.
-IMAGE_ROOTFS_EXTRA_SPACE ?= "5000000"
+# check for 2G of free space, so we use 5G as a starting point.
+IMAGE_ROOTFS_EXTRA_SPACE_append += "+ 5000000"
+
