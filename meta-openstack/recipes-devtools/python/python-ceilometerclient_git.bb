@@ -20,7 +20,10 @@ RDEPENDS_${PN} +="python-cliff \
 
 PR = "r0"
 
-SRC_URI = "git://github.com/openstack/python-ceilometerclient.git;branch=master"
+SRC_URI = "\
+	git://github.com/openstack/python-ceilometerclient.git;branch=master \
+	file://fix_ceilometerclient_memory_leak.patch \
+	"
 
 PV="1.0.9+git${SRCPV}"
 SRCREV="6f4ec9dc96477131c90040ee00f5535e50d5f914"

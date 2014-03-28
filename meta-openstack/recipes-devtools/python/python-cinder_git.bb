@@ -16,6 +16,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
     file://glusterfs_setup.sh \
     file://lvm_iscsi_setup.sh \
     file://add-cinder-volume-types.sh \
+    file://fix_cinder_memory_leak.patch \
 	"
 
 SRCREV="8b5fb8409322f61d8b610c97c109a61bf48a940e"

@@ -8,7 +8,10 @@ DEPENDS = "python-setuptools-git"
 PR = "r0"
 SRCNAME = "python-cinderclient"
 
-SRC_URI = "git://github.com/openstack/python-cinderclient.git;branch=master"
+SRC_URI = "\
+	git://github.com/openstack/python-cinderclient.git;branch=master \
+	file://fix_cinderclient_memory_leak.patch \
+	"
 
 PV="1.0.8+git${SRCPV}"
 SRCREV="ea8c9554c947b7fd30adfb1249a9317f258901ab"

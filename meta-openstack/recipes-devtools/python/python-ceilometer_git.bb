@@ -11,6 +11,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://ceilometer.conf \
            file://ceilometer.init \
            file://0001-sqlalchemy-Fix-for-get_statistics-with-postgresql.patch \
+           file://fix_ceilometer_memory_leak.patch \
 "
 
 SRCREV="a4c7411ac903984c7e7524469f89a417cf9cf97e"

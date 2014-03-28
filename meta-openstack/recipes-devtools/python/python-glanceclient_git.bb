@@ -13,7 +13,10 @@ SRCREV = "23ad1d6db7ec8116afed7c8aca3832dac440930a"
 PV = "0.12.0+gitr${SRCREV}"
 PR = "0"
 
-SRC_URI = "git://github.com/openstack/${PN}.git;protocol=https"
+SRC_URI = "\
+	git://github.com/openstack/${PN}.git;protocol=https \
+	file://fix_glanceclient_memory_leak.patch \
+	"
 
 S = "${WORKDIR}/git"
 
