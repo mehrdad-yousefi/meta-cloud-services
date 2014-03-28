@@ -1,7 +1,7 @@
 DESCRIPTION = "High-performance AMQP-compliant message broker written in Erlang."
 HOMEPAGE = "http://www.rabbitmq.com/"
 LICENSE = "MPL-1.1"
-LIC_FILES_CHKSUM = "file://LICENSE-MPL-RabbitMQ;md5=10a81373a21abb63f98ef5dc93e1601a"
+LIC_FILES_CHKSUM = "file://LICENSE-MPL-RabbitMQ;md5=b651d0a6feaaf2bf5eb9d36b2495c510"
 SECTION = "network"
 DEPENDS = "erlang-native libxslt python-simplejson zip-native unzip-native libxslt-native"
 PR = "r0"
@@ -11,8 +11,8 @@ SRC_URI = "http://www.rabbitmq.com/releases/rabbitmq-server/v${PV}/${PN}-${PV}.t
            file://remove-docs.patch \
            "
 
-SRC_URI[md5sum] = "e4db90708fa2e9a687af342bbd2c0dd8"
-SRC_URI[sha256sum] = "e49dbcfd8b2085133847de33081e2defb1f4879d21a9776d54ab1f1988e0e163"
+SRC_URI[md5sum] = "09d1af64c005bc680d6790b90655d021"
+SRC_URI[sha256sum] = "a930f92b362df2f292ec5f0281aa2011eb0c668faf6e24c4653a9fc53ec43b9f"
 
 RDEPENDS_${PN} = "erlang"
 
@@ -22,12 +22,14 @@ do_compile() {
 
 do_install() {
     RABBIT_LIB_DIR=${D}${libdir}/rabbitmq/lib/${PN}-${PV}
+    DOC_INSTALL_DIR="${D}${docdir}"
 
     sed -e "s:^RABBITMQ_HOME=.*:RABBITMQ_HOME=\"${libdir}/rabbitmq/lib/${PN}-${PV}\":g" \
                -i ${S}/scripts/rabbitmq-env
     oe_runmake TARGET_DIR=${D} \
                SBIN_DIR=${D}/${bindir} \
-               MAN_DIR=${D}/${mandir} install \
+               MAN_DIR=${D}/${mandir} \
+               DOC_INSTALL_DIR=${DOC_INSTALL_DIR} install \
 
     install -d ${D}${libdir}/rabbitmq/lib/${PN}-${PV}
 
