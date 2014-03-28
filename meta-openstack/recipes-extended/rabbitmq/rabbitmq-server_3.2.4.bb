@@ -14,7 +14,7 @@ SRC_URI = "http://www.rabbitmq.com/releases/rabbitmq-server/v${PV}/${PN}-${PV}.t
 SRC_URI[md5sum] = "09d1af64c005bc680d6790b90655d021"
 SRC_URI[sha256sum] = "a930f92b362df2f292ec5f0281aa2011eb0c668faf6e24c4653a9fc53ec43b9f"
 
-RDEPENDS_${PN} = "erlang"
+RDEPENDS_${PN} = "erlang erlang-modules"
 
 do_compile() {
     oe_runmake
