@@ -211,7 +211,6 @@ DEPENDS += " \
 RDEPENDS_${PN} = " libvirt \
 		   python-modules \
 		   python-misc \
-		   python-argparse \
 		   python-amqplib \
 		   python-anyjson \
 		   python-babel \
