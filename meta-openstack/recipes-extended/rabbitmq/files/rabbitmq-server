@@ -18,7 +18,7 @@
 
 # Ensure that HOME is set, since the erlang ookie file must be written
 # somewhere
-export HOME=/var/lib/rabbitmq/
+export HOME=/root/
 
 DAEMON=/usr/bin/rabbitmq-server
 CONTROL=/usr/bin/rabbitmqctl
