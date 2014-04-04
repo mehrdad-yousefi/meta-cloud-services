@@ -114,6 +114,9 @@ do_install_append() {
     fi
 
     cp run_tests.sh ${NOVA_CONF_DIR}
+
+    install -d ${D}/${sysconfdir}/bash_completion.d
+    install -m 664 ${S}/tools/nova-manage.bash_completion ${D}/${sysconfdir}/bash_completion.d
 }
 
 pkg_postinst_${SRCNAME}-setup () {
@@ -139,9 +142,11 @@ pkg_postinst_${SRCNAME}-common () {
     fi
 
     if [ -d  /home/root ]; then
-        echo "source /etc/nova/openrc" > /home/root/.bashrc
+        echo "source /etc/nova/openrc" >> /home/root/.bashrc
+	echo "source /etc/nova/openrc" >> /home/root/.profile
     else
-        echo "source /etc/nova/openrc" > /root/.bashrc
+        echo "source /etc/nova/openrc" >> /root/.bashrc
+	echo "source /etc/nova/openrc" >> /root/.profile
     fi
 }
 
@@ -160,6 +165,13 @@ PACKAGES += " ${SRCNAME}-scheduler"
 PACKAGES += " ${SRCNAME}-cert"
 PACKAGES += " ${SRCNAME}-conductor"
 PACKAGES += " ${SRCNAME}-api"
+
+PACKAGECONFIG ?= "bash-completion"
+PACKAGECONFIG[bash-completion] = ",,bash-completion,bash-completion python-nova-bash-completion"
+
+PACKAGES =+ "${BPN}-bash-completion"
+FILES_${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"
+
 
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
 
@@ -215,6 +227,7 @@ RDEPENDS_${PN} = " libvirt \
 		   python-anyjson \
 		   python-babel \
 		   python-boto \
+		   python-novaclient \
 		   python-cinderclient \
 		   python-cliff \
 		   python-cheetah \

@@ -3,7 +3,6 @@ HOMEPAGE = "https://github.com/openstack/python-novaclient"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7cdb54622cacc9bc9b2883091e6dd669"
-DEPENDS = "python-setuptools-git"
 
 PR = "r0"
 
@@ -18,6 +17,7 @@ S = "${WORKDIR}/git"
 
 inherit setuptools 
 
+DEPENDS = "python-setuptools-git"
 DEPENDS += " \
         python-pip \
         python-pbr \
@@ -29,3 +29,14 @@ RDEPENDS_${PN} += "python-iso8601 \
 	python-simplejson \
 	python-pbr \
 	"
+
+PACKAGECONFIG ?= "bash-completion"
+PACKAGECONFIG[bash-completion] = ",,bash-completion,bash-completion ${BPN}-bash-completion"
+
+do_install_append() {
+	install -d ${D}/${sysconfdir}/bash_completion.d
+	install -m 664 ${S}/tools/nova.bash_completion ${D}/${sysconfdir}/bash_completion.d
+}
+
+PACKAGES =+ "${BPN}-bash-completion"
+FILES_${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"

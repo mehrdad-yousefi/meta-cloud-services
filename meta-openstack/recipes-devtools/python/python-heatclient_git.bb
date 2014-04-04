@@ -27,3 +27,15 @@ SRCREV="55e794f922dd2005a62bb33fd129996b6c476b66"
 S = "${WORKDIR}/git"
 
 inherit setuptools
+
+
+PACKAGECONFIG ?= "bash-completion"
+PACKAGECONFIG[bash-completion] = ",,bash-completion,bash-completion ${BPN}-bash-completion"
+
+do_install_append() {
+	install -d ${D}/${sysconfdir}/bash_completion.d
+	install -m 664 ${S}/tools/heat.bash_completion ${D}/${sysconfdir}/bash_completion.d
+}
+
+PACKAGES =+ "${BPN}-bash-completion"
+FILES_${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"

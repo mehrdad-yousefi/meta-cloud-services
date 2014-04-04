@@ -27,3 +27,14 @@ SRCREV="6adb11703cb5b55a4af45e8524dc1039fb03176c"
 S = "${WORKDIR}/git"
 
 inherit setuptools
+
+PACKAGECONFIG ?= "bash-completion"
+PACKAGECONFIG[bash-completion] = ",,bash-completion,bash-completion ${BPN}-bash-completion"
+
+do_install_append() {
+	install -d ${D}/${sysconfdir}/bash_completion.d
+	install -m 664 ${S}/tools/neutron.bash_completion ${D}/${sysconfdir}/bash_completion.d
+}
+
+PACKAGES =+ "${BPN}-bash-completion"
+FILES_${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"

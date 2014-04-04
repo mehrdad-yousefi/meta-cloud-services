@@ -162,6 +162,7 @@ RDEPENDS_${PN} += "lvm2 \
 	python-glanceclient \
 	python-keystoneclient \
 	python-swiftclient \
+	python-cinderclient \
 	python-oslo.config \
 	python-pbr \
 	"

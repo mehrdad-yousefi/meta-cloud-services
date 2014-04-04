@@ -162,26 +162,27 @@ RDEPENDS_${PN} += " \
 	python-glanceclient \
 	python-keystoneclient \
 	python-swiftclient \
+	python-ceilometerclient \
 	python-oslo.config \
-        python-msgpack \
-        python-pecan \
-        python-amqp \
-        python-singledispatch \
-        python-flask \
-        python-werkzeug \
-        python-itsdangerous \
-        python-happybase \
-        python-wsme \
-        python-eventlet \
-        python-pymongo \
-        python-thrift \
-        python-simplegeneric \
-        python-webtest \
-        python-waitress \
-        python-pyyaml \
-        python-pip \
-        python-pytz \
-        python-pbr \
+	python-msgpack \
+	python-pecan \
+	python-amqp \
+	python-singledispatch \
+	python-flask \
+	python-werkzeug \
+	python-itsdangerous \
+	python-happybase \
+	python-wsme \
+	python-eventlet \
+	python-pymongo \
+	python-thrift \
+	python-simplegeneric \
+	python-webtest \
+	python-waitress \
+	python-pyyaml \
+	python-pip \
+	python-pytz \
+	python-pbr \
 	"
 
 RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common ${SRCNAME}-alarm-notifier ${SRCNAME}-alarm-evaluator \

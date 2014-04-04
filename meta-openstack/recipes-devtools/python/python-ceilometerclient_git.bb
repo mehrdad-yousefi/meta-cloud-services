@@ -30,3 +30,15 @@ SRCREV="6f4ec9dc96477131c90040ee00f5535e50d5f914"
 S = "${WORKDIR}/git"
 
 inherit setuptools
+
+
+PACKAGECONFIG ?= "bash-completion"
+PACKAGECONFIG[bash-completion] = ",,bash-completion,bash-completion ${BPN}-bash-completion"
+
+do_install_append() {
+	install -d ${D}/${sysconfdir}/bash_completion.d
+	install -m 664 ${S}/tools/ceilometer.bash_completion ${D}/${sysconfdir}/bash_completion.d
+}
+
+PACKAGES =+ "${BPN}-bash-completion"
+FILES_${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"
