@@ -15,7 +15,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://Update-test-core-ETCDIR-location.patch \
 	  "
 
-SRCREV="0d83e7eee20a50a75863a9d3c75aee7030518229"
+SRCREV="a96d1a44bc0f074729c312e5c2a0f0875edf1765"
 PV="2013.2.2+git${SRCPV}"
 
 S = "${WORKDIR}/git"

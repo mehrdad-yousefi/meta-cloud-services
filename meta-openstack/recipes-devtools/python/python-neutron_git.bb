@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://neutron-server.init \
            file://neutron-agent.init \
 	  "
-SRCREV="e79771e9ba2e50b542d2acc127c9d7613e8374bf"
+SRCREV="8cb9d895675f2a89c6b741da4b594f416fbeee5a"
 PV="2013.2.2+git${SRCPV}"
 
 S = "${WORKDIR}/git"

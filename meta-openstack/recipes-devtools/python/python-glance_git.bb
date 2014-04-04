@@ -11,7 +11,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://glance.init \
            "
 
-SRCREV="5cd7a22b44c3e8acb90bcb0cb7a0d58b3c6a17e9"
+SRCREV="1690a739cd94efe6cb2af8e794a4acdf59de54cd"
 PV="2013.2.2+git${SRCPV}"
 
 S = "${WORKDIR}/git"

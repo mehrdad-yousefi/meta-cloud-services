@@ -14,8 +14,6 @@ FILESEXTRAPATHS := "${THISDIR}/${PN}"
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://0001-nova-api-paste.ini-make-controller-IP-configurable.patch \
            file://nova-add-migrate.cfg-to-the-MANIFEST.patch \
-           file://Make-rbd.libvirt_info-parent-class-compatible.patch \
-           file://Fix-rbd-backend-not-working-for-none-admin-ceph-user.patch \
            "
 
 SRC_URI += "file://nova-all \
@@ -24,7 +22,7 @@ SRC_URI += "file://nova-all \
             file://nova.conf \
             file://openrc \
            "
-SRCREV="afc9e4e23327fb566e8ade2c0c06c90d369c9e29"
+SRCREV="feedcb240807cdfa354d27ebe3a4b7f416504a62"
 PV="2013.2.2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
