@@ -14,7 +14,6 @@ RDEPENDS_${PN} = " postgresql-setup \
     nova-setup \
     nova-controller \
     keystone-setup \
-    python-novaclient \
     glance \
     glance-api \
     glance-registry \
