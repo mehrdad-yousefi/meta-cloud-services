@@ -10,11 +10,11 @@ SRCNAME = "ceilometer"
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://ceilometer.conf \
            file://ceilometer.init \
-           file://0001-sqlalchemy-Fix-for-get_statistics-with-postgresql.patch \
+           file://0001-sqlalchemy-fix-grouping-for-postgresql-databases.patch \
            file://fix_ceilometer_memory_leak.patch \
 "
 
-SRCREV="a4c7411ac903984c7e7524469f89a417cf9cf97e"
+SRCREV="faada69444988c66a09ade812e10fa2ab5a0adae"
 PV="2014.1.b2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
@@ -71,7 +71,7 @@ do_install_append() {
         install -m 0755 ${WORKDIR}/ceilometer-alarm-evaluator.init.sh ${D}${sysconfdir}/init.d/ceilometer-alarm-evaluator
     fi
 
-    cp run-tests.sh ${CEILOMETER_CONF_DIR}
+    cp setup-test-env.sh ${CEILOMETER_CONF_DIR}
 }
 
 pkg_postinst_${SRCNAME}-setup () {
@@ -102,7 +102,7 @@ ALLOW_EMPTY_${SRCNAME}-setup = "1"
 
 FILES_${PN} = "${libdir}/*"
 
-FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run-tests.sh"
+FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/setup-test-env.sh"
 
 FILES_${SRCNAME}-common = "${sysconfdir}/${SRCNAME}/* \
 "
@@ -183,6 +183,8 @@ RDEPENDS_${PN} += " \
 	python-pip \
 	python-pytz \
 	python-pbr \
+	python-croniter \
+	python-ipaddr \
 	"
 
 RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common ${SRCNAME}-alarm-notifier ${SRCNAME}-alarm-evaluator \

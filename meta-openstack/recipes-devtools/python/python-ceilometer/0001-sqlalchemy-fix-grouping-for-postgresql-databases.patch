@@ -1,0 +1,40 @@
+From d64999f1eba3db1444f36214bf4be7b8eaffdcb1 Mon Sep 17 00:00:00 2001
+From: Bruce Ashfield <bruce.ashfield@windriver.com>
+Date: Mon, 7 Apr 2014 16:24:18 -0400
+Subject: [PATCH] sqlalchemy: fix grouping for postgresql databases
+
+To avoid horizon errors, and avoid the following query issue:
+
+   ProgrammingError: (ProgrammingError) column "meter.unit" must appear in the GROUP BY clause or be used in an aggregate function
+
+We need to add meter.unit as an explicit group_by attribute
+
+Signed-off-by: Bruce Ashfield <bruce.ashfield@windriver.com>
+---
+ ceilometer/storage/impl_sqlalchemy.py |   10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/ceilometer/storage/impl_sqlalchemy.py b/ceilometer/storage/impl_sqlalchemy.py
+index 0e5df7008c5e..697f51136c37 100644
+--- a/ceilometer/storage/impl_sqlalchemy.py
++++ b/ceilometer/storage/impl_sqlalchemy.py
+@@ -674,8 +674,14 @@ class Connection(base.Connection):
+             group_attributes = [getattr(models.Sample, g) for g in groupby]
+             select.extend(group_attributes)
+ 
+-        query = session.query(*select).filter(
+-            models.Meter.id == models.Sample.meter_id)
++	# Group by Meter.unit for postgresql queries
++	# In mysql this doesn't change anything because one meter has one unit
++
++	# mysql:
++	# query = session.query(*select).filter(
++	#    models.Meter.id == models.Sample.meter_id)
++	# postgres:
++	query = session.query(*select).group_by(models.Meter.unit)
+ 
+         if groupby:
+             query = query.group_by(*group_attributes)
+-- 
+1.7.10.4
+
