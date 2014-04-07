@@ -35,7 +35,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
     file://fix_bindir_path.patch \
     "
 
-SRCREV="1912cc6a88dca7238da7c444a1ede84b983ab354"
+SRCREV="b2259b352fd1e00a269b8275afa8093223598235"
 PV="2013.2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
