@@ -2,7 +2,7 @@ DESCRIPTION = "Python 2 and 3 compatibility utilities"
 HOMEPAGE = "http://pypi.python.org/pypi/six/"
 SECTION = "devel/python"
 LICENSE = "UNKNOWN"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=aa39e09066d6ba3a8c8b2db7cbd8bd70"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=530f34047c21ad45b3199946dd90bea5"
 
 PR = "r0"
 SRCNAME = "six"
@@ -10,9 +10,9 @@ SRCNAME = "six"
 SRC_URI = "https://pypi.python.org/packages/source/s/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
 "
 
-SRC_URI[md5sum] = "bdbb9e12d3336c198695aa4cf3a61d62"
-SRC_URI[sha256sum] = "f045afd6dffb755cc0411acb7ce9acc4de0e71261d4b5f91de2e68d9aa5f8367"
+SRC_URI[md5sum] = "07d606ac08595d795bf926cc9985674f"
+SRC_URI[sha256sum] = "d4392a7c8d91b005c002568a85faf617c67241c8cd8399cc395e8f1005aff80d"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
-inherit distutils 
+inherit setuptools
