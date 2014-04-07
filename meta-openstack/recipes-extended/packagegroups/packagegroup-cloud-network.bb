@@ -14,4 +14,6 @@ RDEPENDS_${PN} = " \
     dhcp-server \
     dhcp-client \
     dhcp-relay \
+    ntp  \
+    ntpdate \
     "
