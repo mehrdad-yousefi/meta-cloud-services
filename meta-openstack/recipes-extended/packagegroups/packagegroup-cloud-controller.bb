@@ -40,6 +40,8 @@ RDEPENDS_${PN} = " postgresql-setup \
     python-heat-cfntools \
     python-openstackclient \
     horizon \
+    horizon-apache \
+    apache2 \
     novnc \
     chkconfig \
     qemu \

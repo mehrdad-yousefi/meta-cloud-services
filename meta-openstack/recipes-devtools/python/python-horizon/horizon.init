@@ -66,6 +66,10 @@ status()
     echo "$DESC is not running"
 }
 
+if [ -e /etc/apache2/conf.d/openstack-dashboard-apache.conf ]; then
+    chown -R daemon /usr/share/openstack-dashboard/openstack_dashboard/static
+fi
+
 case "$1" in
     start)
         start

@@ -27,12 +27,14 @@ DEPENDS_${PN} += "python-django \
     python-pbr \
     "
 
-PR = "r1"
+PR = "r2"
 SRCNAME = "horizon"
 
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
     file://horizon.init \
     file://fix_bindir_path.patch \
+    file://openstack-dashboard-apache.conf \
+    file://local_settings.py \
     "
 
 SRCREV="b2259b352fd1e00a269b8275afa8093223598235"
@@ -68,9 +70,25 @@ do_install_append() {
     # mv ${D}${datadir}/bin ${DASHBOARD_DIR}/bin
 
     cp run_tests.sh ${HORIZON_CONF_DIR}
+
+    # the following are setup required for horizon-apache
+    install -d ${D}/usr/share/openstack-dashboard
+    cp -a ${S}/openstack_dashboard ${D}/usr/share/openstack-dashboard/
+    cp ${S}/manage.py ${D}/usr/share/openstack-dashboard
+
+    install -D -m 644 ${WORKDIR}/local_settings.py \
+      ${D}/etc/openstack-dashboard/local_settings.py
+    ln -fs /etc/openstack-dashboard/local_settings.py \
+      ${D}/usr/share/openstack-dashboard/openstack_dashboard/local/local_settings.py
+
+    install -D -m 644 ${WORKDIR}/openstack-dashboard-apache.conf \
+      ${D}/etc/apache2/conf.d/openstack-dashboard-apache.conf
+    sed -i -e 's#%PYTHON_SITEPACKAGES%#${PYTHON_SITEPACKAGES_DIR}#' ${D}/etc/apache2/conf.d/openstack-dashboard-apache.conf
+
+    ln -fs openstack_dashboard/static ${D}/usr/share/openstack-dashboard/static
 }
 
-PACKAGES += "${SRCNAME}-tests ${SRCNAME}"
+PACKAGES += "${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-apache"
 
 FILES_${PN} = "${libdir}/*"
 
@@ -79,6 +97,12 @@ FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
 FILES_${SRCNAME} = "${bindir}/* \
     ${sysconfdir}/init.d/* \
     ${datadir}/* \
+    "
+
+FILES_${SRCNAME}-apache = "/etc/apache2 \
+    /etc/openstack-dashboard/ \
+    /usr/share/openstack-dashboard/ \
+    /var/lib/openstack-dashboard \
     "
 
 RDEP_ARCH_VAR = ""
@@ -113,3 +137,11 @@ RDEPENDS_${SRCNAME} = "${PN}"
 INITSCRIPT_PACKAGES = "${SRCNAME}"
 INITSCRIPT_NAME_${SRCNAME} = "horizon"
 INITSCRIPT_PARAMS_${SRCNAME} = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+
+RDEPENDS_${SRCNAME}-apache = "\
+    apache2 \
+    mod-wsgi \
+    python-lesscpy \
+    memcached \
+    python-memcached \
+    "
