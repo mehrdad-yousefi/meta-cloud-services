@@ -14,7 +14,7 @@ SRCREV="2f3526c559fe53ce904b735a81dee6de46127176"
 PV="2013.2.2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
-inherit setuptools
+inherit setuptools hosts
 
 do_install_append() {
     SWIFT_CONF_DIR=${D}${sysconfdir}/swift
@@ -26,6 +26,24 @@ do_install_append() {
     install -m 600 ${S}/etc/account-server.conf-sample ${SWIFT_CONF_DIR}/account-server.conf
     install -m 600 ${S}/etc/container-server.conf-sample ${SWIFT_CONF_DIR}/container-server.conf
     install -m 600 ${S}/etc/object-server.conf-sample ${SWIFT_CONF_DIR}/object-server.conf
+
+    sed 's/^# bind_port =.*/bind_port = 6002/' -i ${SWIFT_CONF_DIR}/account-server.conf
+    sed 's/^# user =.*/user = root/' -i ${SWIFT_CONF_DIR}/account-server.conf
+    sed 's/^# swift_dir =.*/swift_dir = \/etc\/swift/' -i ${SWIFT_CONF_DIR}/account-server.conf
+    sed 's/^# devices =.*/devices = \/etc\/swift\/node/' -i ${SWIFT_CONF_DIR}/account-server.conf
+    sed 's/^# mount_check =.*/mount_check = false/' -i ${SWIFT_CONF_DIR}/account-server.conf
+
+    sed 's/^# bind_port =.*/bind_port = 6001/' -i ${SWIFT_CONF_DIR}/container-server.conf
+    sed 's/^# user =.*/user = root/' -i ${SWIFT_CONF_DIR}/container-server.conf
+    sed 's/^# swift_dir =.*/swift_dir = \/etc\/swift/' -i ${SWIFT_CONF_DIR}/container-server.conf
+    sed 's/^# devices =.*/devices = \/etc\/swift\/node/' -i ${SWIFT_CONF_DIR}/container-server.conf
+    sed 's/^# mount_check =.*/mount_check = false/' -i ${SWIFT_CONF_DIR}/container-server.conf
+
+    sed 's/^# bind_port =.*/bind_port = 6000/' -i ${SWIFT_CONF_DIR}/object-server.conf
+    sed 's/^# user =.*/user = root/' -i ${SWIFT_CONF_DIR}/object-server.conf
+    sed 's/^# swift_dir =.*/swift_dir = \/etc\/swift/' -i ${SWIFT_CONF_DIR}/object-server.conf
+    sed 's/^# devices =.*/devices = \/etc\/swift\/node/' -i ${SWIFT_CONF_DIR}/object-server.conf
+    sed 's/^# mount_check =.*/mount_check = false/' -i ${SWIFT_CONF_DIR}/object-server.conf
 }
 
 PACKAGES += "${SRCNAME}"
