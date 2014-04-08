@@ -51,6 +51,7 @@ RDEPENDS_${PN} += " \
     python-netifaces \
     python-xattr \
     python-pbr \
+    python-dnspython \
     "
 
 RDEPENDS_${SRCNAME} = "${PN}"
