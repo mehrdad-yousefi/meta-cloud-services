@@ -40,6 +40,7 @@ RDEPENDS_${PN} = " postgresql-setup \
     python-heat-cfntools \
     python-openstackclient \
     horizon \
+    horizon-standalone \
     horizon-apache \
     apache2 \
     novnc \

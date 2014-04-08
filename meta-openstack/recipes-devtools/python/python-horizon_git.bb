@@ -86,23 +86,26 @@ do_install_append() {
     sed -i -e 's#%PYTHON_SITEPACKAGES%#${PYTHON_SITEPACKAGES_DIR}#' ${D}/etc/apache2/conf.d/openstack-dashboard-apache.conf
 
     ln -fs openstack_dashboard/static ${D}/usr/share/openstack-dashboard/static
+
+    # daemon is UID 1
+    chown -R 1 ${D}/usr/share/openstack-dashboard/openstack_dashboard/static
 }
 
-PACKAGES += "${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-apache"
+PACKAGES += "${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-apache ${SRCNAME}-standalone"
 
 FILES_${PN} = "${libdir}/*"
 
 FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
 
 FILES_${SRCNAME} = "${bindir}/* \
-    ${sysconfdir}/init.d/* \
     ${datadir}/* \
     "
+
+FILES_${SRCNAME}-standalone = "${sysconfdir}/init.d/horizon"
 
 FILES_${SRCNAME}-apache = "/etc/apache2 \
     /etc/openstack-dashboard/ \
     /usr/share/openstack-dashboard/ \
-    /var/lib/openstack-dashboard \
     "
 
 RDEP_ARCH_VAR = ""
