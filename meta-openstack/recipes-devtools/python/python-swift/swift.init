@@ -1,0 +1,74 @@
+#!/bin/sh
+
+# chkconfig: 2345 20 20
+
+### BEGIN INIT INFO
+# Provides:          swift-openstack
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     3 5
+# Default-Stop:      0 1 2 6
+# Short-Description: OpenStack Swift
+# Description:       OpenStack Swift
+### END INIT INFO
+
+
+DESC="Swift Cluster"
+SWIFT_HOME=/etc/swift
+SWIFT_INIT=/usr/bin/swift-init
+
+start ()
+{
+    echo -n "Starting $DESC..."
+    if [ ! -e $SWIFT_HOME/account.builder -a ! -e $SWIFT_HOME/container.builder -a ! -e $SWIFT_HOME/object.builder ]; then
+        echo "no Swift cluster has been setup, failed."
+        exit 1
+    fi
+    /etc/swift/swift_setup.sh mountdevs
+    $SWIFT_INIT proxy-server start
+    $SWIFT_INIT account-server start
+    $SWIFT_INIT container-server start
+    $SWIFT_INIT object-server start
+    echo "done."
+}
+
+
+stop ()
+{
+    echo -n "Stopping $DESC..."
+    $SWIFT_INIT all stop
+    /etc/swift/swift_setup.sh unmountdevs
+    echo "done."
+}
+
+
+status ()
+{
+    $SWIFT_INIT proxy-server status
+    $SWIFT_INIT account-server status
+    $SWIFT_INIT container-server status
+    $SWIFT_INIT object-server status
+}
+
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart|force-reload)
+        stop
+        start
+        ;;
+    status)
+        status
+        ;;
+    *)
+        echo "Usage: swift {start|stop|force-reload|restart|status}"
+        exit 1
+        ;;
+esac
+
+exit 0
