@@ -95,5 +95,6 @@ RDEPENDS_${PN} += " \
 	python-iso8601 \
 	python-mimeparse \
 	python-flake8 \
+	python-tox \
 	"
 
