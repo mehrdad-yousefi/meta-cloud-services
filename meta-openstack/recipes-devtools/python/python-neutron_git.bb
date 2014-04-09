@@ -35,7 +35,7 @@ do_install_append() {
     sed -e "s:^# core_plugin.*:core_plugin = neutron.plugins.openvswitch.ovs_neutron_plugin.OVSNeutronPluginV2:g" \
         -i ${WORKDIR}/neutron.conf
 
-    echo "rabbit_host = ${CONTROLLER_IP}" >> ${WORKDIR}/neutron.conf
+    sed -e "s:^# rabbit_host =.*:rabbit_host = ${CONTROLLER_IP}:" -i ${WORKDIR}/neutron.conf
 
     for file in ovs_neutron_plugin.ini linuxbridge_conf.ini
     do
@@ -56,7 +56,7 @@ do_install_append() {
     install -m 600 ${S}/etc/policy.json ${NEUTRON_CONF_DIR}/
 
     PLUGIN=openvswitch
-    ARGS=""
+    ARGS="--config-file=${sysconfdir}/${SRCNAME}/neutron.conf --config-file=${sysconfdir}/${SRCNAME}/plugins/openvswitch/ovs_neutron_plugin.ini"
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
         sed "s:@plugin@:/etc/neutron/plugins/$PLUGIN/ovs_neutron_plugin.ini:" \
