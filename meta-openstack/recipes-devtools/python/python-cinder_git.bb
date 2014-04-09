@@ -25,6 +25,8 @@ S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d identity default_configs
 
+CINDER_BACKUP_BACKEND_DRIVER ?= "cinder.backup.drivers.swift"
+
 do_install_append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}/${SRCNAME}
     CINDER_CONF_DIR=${D}${sysconfdir}/${SRCNAME}
@@ -37,6 +39,7 @@ do_install_append() {
 
     sed -e "s:%DB_USER%:${DB_USER}:g" -i ${WORKDIR}/cinder.conf
     sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${WORKDIR}/cinder.conf
+    sed -e "s:%CINDER_BACKUP_BACKEND_DRIVER%:${CINDER_BACKUP_BACKEND_DRIVER}:g" -i ${WORKDIR}/cinder.conf
 
     install -d ${CINDER_CONF_DIR}
     install -m 600 ${WORKDIR}/cinder.conf ${CINDER_CONF_DIR}/
