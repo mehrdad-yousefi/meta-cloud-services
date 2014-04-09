@@ -41,6 +41,12 @@ do_install_append() {
     sed -e "s:^notifier_strategy = noop:notifier_strategy = rabbit:g" \
         -i ${WORKDIR}/glance-api.conf         
 
+    sed 's:^default_store =.*:default_store = ${GLANCE_DEFAULT_STORE}:g' -i ${WORKDIR}/glance-api.conf
+    sed 's:^swift_store_auth_address =.*:swift_store_auth_address = http\://127.0.0.1\:5000/v2.0/:g' -i ${WORKDIR}/glance-api.conf
+    sed 's:^swift_store_user =.*:swift_store_user = ${SERVICE_TENANT_NAME}\:${SRCNAME}:g' -i ${WORKDIR}/glance-api.conf
+    sed 's:^swift_store_key =.*:swift_store_key = ${SERVICE_PASSWORD}:g' -i ${WORKDIR}/glance-api.conf
+    sed 's:^swift_store_create_container_on_put =.*:swift_store_create_container_on_put = True:g' -i ${WORKDIR}/glance-api.conf
+
     install -d ${GLANCE_CONF_DIR}
     install -m 600 ${WORKDIR}/glance-registry.conf ${GLANCE_CONF_DIR}/
     install -m 600 ${WORKDIR}/glance-api.conf ${GLANCE_CONF_DIR}/
@@ -62,8 +68,6 @@ do_install_append() {
         sed 's:@suffix@:registry:' < ${WORKDIR}/glance.init >${WORKDIR}/glance-registry.init.sh
         install -m 0755 ${WORKDIR}/glance-registry.init.sh ${D}${sysconfdir}/init.d/glance-registry
     fi
-
-    sed 's:^default_store =.*:default_store = ${GLANCE_DEFAULT_STORE}:g' -i ${WORKDIR}/glance-api.conf
 
     cp run_tests.sh ${GLANCE_CONF_DIR}
 }
