@@ -29,6 +29,8 @@ RDEPENDS_${PN} = " postgresql-setup \
     cinder-scheduler \
     cinder-backup \
     cinder-setup \
+    swift \
+    swift-setup \
     ceilometer-setup \
     ceilometer-api \
     ceilometer-collector \
