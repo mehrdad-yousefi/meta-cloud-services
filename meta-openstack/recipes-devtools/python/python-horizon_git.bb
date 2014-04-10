@@ -84,6 +84,7 @@ do_install_append() {
     install -D -m 644 ${WORKDIR}/openstack-dashboard-apache.conf \
       ${D}/etc/apache2/conf.d/openstack-dashboard-apache.conf
     sed -i -e 's#%PYTHON_SITEPACKAGES%#${PYTHON_SITEPACKAGES_DIR}#' ${D}/etc/apache2/conf.d/openstack-dashboard-apache.conf
+    sed -i -e 's#%LIBDIR%#${libdir}#' ${D}/etc/apache2/conf.d/openstack-dashboard-apache.conf
 
     ln -fs openstack_dashboard/static ${D}/usr/share/openstack-dashboard/static
 
