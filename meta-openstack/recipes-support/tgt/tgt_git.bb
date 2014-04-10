@@ -8,7 +8,9 @@ SRCREV = "0ee382bab57a8ecd9ece18d511bd098298478409"
 PV = "1.0.36+git${SRCPV}"
 PR = "r0"
 
-SRC_URI = "git://github.com/fujita/tgt.git"
+SRC_URI = "git://github.com/fujita/tgt.git \
+	file://0001-Correct-the-path-of-header-files-check-in-Yocto-buil.patch \
+"
 SRC_URI += "file://tgtd.init"
 
 S = "${WORKDIR}/git"
@@ -16,7 +18,7 @@ S = "${WORKDIR}/git"
 inherit update-rc.d
 
 do_compile() {
-    oe_runmake -e programs conf scripts
+    oe_runmake SYSROOT="${STAGING_DIR_TARGET}" -e programs conf scripts
 }
 
 do_install() {
