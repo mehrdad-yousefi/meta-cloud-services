@@ -23,7 +23,7 @@ SRC_URI[sha256sum] = "ae85c98e9e146840ab3c3e4490e6774f9bef0f99b9f679fca786b2adb5
 inherit autotools distutils-base
 
 DEPENDS += "apache2-native apache2 python-native"
-RDEPENDS = "python"
+RDEPENDS_${PN} = "python"
 
 EXTRA_OECONF = "\
 	--with-apxs=${STAGING_BINDIR_CROSS}/apxs \

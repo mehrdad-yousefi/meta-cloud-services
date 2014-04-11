@@ -22,7 +22,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7e5ded7363d335e1bb18013ca08046ff"
 inherit autotools
 
 DEPENDS += "libevent"
-RDEPENDS += "perl perl-module-posix perl-module-autoloader perl-module-tie-hash"
+RDEPENDS_${PN} += "perl perl-module-posix perl-module-autoloader perl-module-tie-hash"
 
 SRC_URI = "http://www.memcached.org/files/${PN}-${PV}.tar.gz"
 
