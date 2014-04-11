@@ -21,6 +21,7 @@ layers: meta-oe
 	meta-networking
         meta-ruby
         meta-filesystems
+        meta-webserver
 
 URI: git://git.yoctoproject.org/meta-virtualization
 branch: master
