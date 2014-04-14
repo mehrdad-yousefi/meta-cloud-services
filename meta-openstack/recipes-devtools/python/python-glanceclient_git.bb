@@ -14,7 +14,7 @@ PV = "0.12.0+git${SRCPV}"
 PR = "0"
 
 SRC_URI = "\
-	git://github.com/openstack/${PN}.git;protocol=https \
+	git://github.com/openstack/${BPN}.git;protocol=https \
 	file://fix_glanceclient_memory_leak.patch \
 	"
 
