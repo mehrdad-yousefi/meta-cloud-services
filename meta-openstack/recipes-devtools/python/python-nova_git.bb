@@ -66,35 +66,35 @@ do_install_append() {
     echo "nova ALL=(root) NOPASSWD: ${bindir}/nova-rootwrap ${sysconfdir}/nova/rootwrap.conf *" >> \
          ${D}${sysconfdir}/sudoers.d/nova-rootwrap
 
+    # Copy the configuration file
+    install -o nova -m 664 ${WORKDIR}/nova.conf               ${NOVA_CONF_DIR}/nova.conf
+    install -o nova -m 664 ${TEMPLATE_CONF_DIR}/api-paste.ini ${NOVA_CONF_DIR}
+    install -o nova -m 664 ${WORKDIR}/openrc                  ${NOVA_CONF_DIR}
+
     # Configuration options
     sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
-        ${TEMPLATE_CONF_DIR}/api-paste.ini > ${WORKDIR}/api-paste.ini
-    sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${WORKDIR}/api-paste.ini
+        -i ${NOVA_CONF_DIR}/api-paste.ini
+    sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${NOVA_CONF_DIR}/api-paste.ini
     sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
-        -i ${WORKDIR}/api-paste.ini
-    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${WORKDIR}/api-paste.ini
+        -i ${NOVA_CONF_DIR}/api-paste.ini
+    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${NOVA_CONF_DIR}/api-paste.ini
 
-    sed -e "s:%DB_USER%:${DB_USER}:g" -i ${WORKDIR}/nova.conf
-    sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${WORKDIR}/nova.conf
+    sed -e "s:%DB_USER%:${DB_USER}:g" -i ${NOVA_CONF_DIR}/nova.conf
+    sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${NOVA_CONF_DIR}/nova.conf
 
-    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${WORKDIR}/nova.conf
-    sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${WORKDIR}/nova.conf
+    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${NOVA_CONF_DIR}/nova.conf
+    sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${NOVA_CONF_DIR}/nova.conf
 
-    sed -e "s:%COMPUTE_IP%:${COMPUTE_IP}:g" -i ${WORKDIR}/nova.conf
-    sed -e "s:%COMPUTE_HOST%:${COMPUTE_HOST}:g" -i ${WORKDIR}/nova.conf
+    sed -e "s:%COMPUTE_IP%:${COMPUTE_IP}:g" -i ${NOVA_CONF_DIR}/nova.conf
+    sed -e "s:%COMPUTE_HOST%:${COMPUTE_HOST}:g" -i ${NOVA_CONF_DIR}/nova.conf
 
-    sed -e "s:%LIBVIRT_IMAGES_TYPE%:${LIBVIRT_IMAGES_TYPE}:g" -i ${WORKDIR}/nova.conf
+    sed -e "s:%LIBVIRT_IMAGES_TYPE%:${LIBVIRT_IMAGES_TYPE}:g" -i ${NOVA_CONF_DIR}/nova.conf
 
-    sed -e "s:%OS_PASSWORD%:${ADMIN_PASSWORD}:g" -i ${WORKDIR}/openrc
-    sed -e "s:%SERVICE_TOKEN%:${SERVICE_TOKEN}:g" -i ${WORKDIR}/openrc
+    sed -e "s:%OS_PASSWORD%:${ADMIN_PASSWORD}:g" -i ${NOVA_CONF_DIR}/openrc
+    sed -e "s:%SERVICE_TOKEN%:${SERVICE_TOKEN}:g" -i ${NOVA_CONF_DIR}/openrc
 
-    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${WORKDIR}/openrc
-    sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${WORKDIR}/openrc
-
-    # Copy the configuration file
-    install -o nova -m 664 ${WORKDIR}/nova.conf     ${NOVA_CONF_DIR}/nova.conf
-    install -o nova -m 664 ${WORKDIR}/api-paste.ini ${NOVA_CONF_DIR}
-    install -o nova -m 664 ${WORKDIR}/openrc        ${NOVA_CONF_DIR}
+    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${NOVA_CONF_DIR}/openrc
+    sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${NOVA_CONF_DIR}/openrc
 
     install -o nova -d ${NOVA_CONF_DIR}/instances
 

@@ -27,33 +27,33 @@ do_install_append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}/
     NEUTRON_CONF_DIR=${D}${sysconfdir}/neutron
 
-    sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
-        ${TEMPLATE_CONF_DIR}/neutron.conf > ${WORKDIR}/neutron.conf
-    sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${WORKDIR}/neutron.conf
-    sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
-        -i ${WORKDIR}/neutron.conf
-    sed -e "s:^# core_plugin.*:core_plugin = neutron.plugins.openvswitch.ovs_neutron_plugin.OVSNeutronPluginV2:g" \
-        -i ${WORKDIR}/neutron.conf
-
-    sed -e "s:^# rabbit_host =.*:rabbit_host = ${CONTROLLER_IP}:" -i ${WORKDIR}/neutron.conf
-
-    for file in ovs_neutron_plugin.ini linuxbridge_conf.ini
-    do
-        sed -e "s:%DB_USER%:${DB_USER}:g" -i ${WORKDIR}/${file}
-        sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${WORKDIR}/${file}
-        sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${WORKDIR}/${file}
-        sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${WORKDIR}/${file}
-    done
-
     install -d ${NEUTRON_CONF_DIR}
     install -d ${NEUTRON_CONF_DIR}/plugins/openvswitch
     install -d ${NEUTRON_CONF_DIR}/plugins/linuxbridge
 
-    install -m 600 ${WORKDIR}/neutron.conf ${NEUTRON_CONF_DIR}/
+    install -m 600 ${TEMPLATE_CONF_DIR}/neutron.conf ${NEUTRON_CONF_DIR}/
     install -m 600 ${WORKDIR}/ovs_neutron_plugin.ini ${NEUTRON_CONF_DIR}/plugins/openvswitch/
     install -m 600 ${WORKDIR}/linuxbridge_conf.ini ${NEUTRON_CONF_DIR}/plugins/linuxbridge/
     install -m 600 ${S}/etc/api-paste.ini ${NEUTRON_CONF_DIR}/
     install -m 600 ${S}/etc/policy.json ${NEUTRON_CONF_DIR}/
+
+    sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
+        -i ${NEUTRON_CONF_DIR}/neutron.conf
+    sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${NEUTRON_CONF_DIR}/neutron.conf
+    sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
+        -i ${NEUTRON_CONF_DIR}/neutron.conf
+    sed -e "s:^# core_plugin.*:core_plugin = neutron.plugins.openvswitch.ovs_neutron_plugin.OVSNeutronPluginV2:g" \
+        -i ${NEUTRON_CONF_DIR}/neutron.conf
+
+    sed -e "s:^# rabbit_host =.*:rabbit_host = ${CONTROLLER_IP}:" -i ${NEUTRON_CONF_DIR}/neutron.conf
+
+    for file in plugins/openvswitch/ovs_neutron_plugin.ini plugins/linuxbridge/linuxbridge_conf.ini
+    do
+        sed -e "s:%DB_USER%:${DB_USER}:g" -i ${NEUTRON_CONF_DIR}/${file}
+        sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${NEUTRON_CONF_DIR}/${file}
+        sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${NEUTRON_CONF_DIR}/${file}
+        sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${NEUTRON_CONF_DIR}/${file}
+    done
 
     PLUGIN=openvswitch
     ARGS="--config-file=${sysconfdir}/${SRCNAME}/neutron.conf --config-file=${sysconfdir}/${SRCNAME}/plugins/openvswitch/ovs_neutron_plugin.ini"

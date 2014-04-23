@@ -30,13 +30,6 @@ do_install_append() {
 
     install -d ${KEYSTONE_CONF_DIR}
 
-    sed -e "s:%SERVICE_TOKEN%:${SERVICE_TOKEN}:g" -i ${WORKDIR}/keystone.conf
-    sed -e "s:%DB_USER%:${DB_USER}:g" -i ${WORKDIR}/keystone.conf
-    sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${WORKDIR}/keystone.conf
-
-    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${WORKDIR}/keystone.conf
-    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${WORKDIR}/identity.sh
-
     install -d ${D}${localstatedir}/log/${SRCNAME}
 
     install -m 600 ${WORKDIR}/keystone.conf ${KEYSTONE_CONF_DIR}/
@@ -45,6 +38,13 @@ do_install_append() {
     install -m 600 ${S}/etc/logging.conf.sample ${KEYSTONE_CONF_DIR}/logging.conf
     install -m 600 ${S}/etc/policy.json ${KEYSTONE_CONF_DIR}/policy.json
     install -m 600 ${S}/etc/keystone.conf.sample ${KEYSTONE_CONF_DIR}/keystone.conf.sample
+
+    sed -e "s:%SERVICE_TOKEN%:${SERVICE_TOKEN}:g" -i ${KEYSTONE_CONF_DIR}/keystone.conf
+    sed -e "s:%DB_USER%:${DB_USER}:g" -i ${KEYSTONE_CONF_DIR}/keystone.conf
+    sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${KEYSTONE_CONF_DIR}/keystone.conf
+
+    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${KEYSTONE_CONF_DIR}/keystone.conf
+    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${KEYSTONE_CONF_DIR}/identity.sh
 
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d

@@ -20,24 +20,6 @@ do_install_append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}/${SRCNAME}
     HEAT_CONF_DIR=${D}${sysconfdir}/${SRCNAME}
 
-    sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
-                      ${TEMPLATE_CONF_DIR}/api-paste.ini > ${WORKDIR}/api-paste.ini
-    sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${WORKDIR}/api-paste.ini
-    sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" -i ${WORKDIR}/api-paste.ini
-    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${WORKDIR}/api-paste.ini
-
-    sed -e "s:%DB_USER%:${DB_USER}:g" -i ${WORKDIR}/heat.conf
-    sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${WORKDIR}/heat.conf
-
-    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${WORKDIR}/heat.conf
-    sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${WORKDIR}/heat.conf
-
-    sed -e "s:%COMPUTE_IP%:${COMPUTE_IP}:g" -i ${WORKDIR}/heat.conf
-    sed -e "s:%COMPUTE_HOST%:${COMPUTE_HOST}:g" -i ${WORKDIR}/heat.conf
-
-    sed -e "s:%ADMIN_PASSWORD%:${ADMIN_PASSWORD}:g" -i ${WORKDIR}/heat.conf
-    sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" -i ${WORKDIR}/heat.conf
-
     install -d ${HEAT_CONF_DIR}
     install -m 600 ${WORKDIR}/heat.conf ${HEAT_CONF_DIR}
     install -m 600 ${TEMPLATE_CONF_DIR}/*.json ${HEAT_CONF_DIR}
@@ -45,7 +27,25 @@ do_install_append() {
     install -m 600 ${TEMPLATE_CONF_DIR}/templates/* ${HEAT_CONF_DIR}/templates
     install -d ${HEAT_CONF_DIR}/environment.d
     install -m 600 ${TEMPLATE_CONF_DIR}/environment.d/* ${HEAT_CONF_DIR}/environment.d
-    install -m 664 ${WORKDIR}/api-paste.ini ${HEAT_CONF_DIR}
+    install -m 664 ${TEMPLATE_CONF_DIR}/api-paste.ini ${HEAT_CONF_DIR}
+
+    sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
+        -i ${HEAT_CONF_DIR}/api-paste.ini
+    sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${HEAT_CONF_DIR}/api-paste.ini
+    sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" -i ${HEAT_CONF_DIR}/api-paste.ini
+    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${HEAT_CONF_DIR}/api-paste.ini
+
+    sed -e "s:%DB_USER%:${DB_USER}:g" -i ${HEAT_CONF_DIR}/heat.conf
+    sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${HEAT_CONF_DIR}/heat.conf
+
+    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${HEAT_CONF_DIR}/heat.conf
+    sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${HEAT_CONF_DIR}/heat.conf
+
+    sed -e "s:%COMPUTE_IP%:${COMPUTE_IP}:g" -i ${HEAT_CONF_DIR}/heat.conf
+    sed -e "s:%COMPUTE_HOST%:${COMPUTE_HOST}:g" -i ${HEAT_CONF_DIR}/heat.conf
+
+    sed -e "s:%ADMIN_PASSWORD%:${ADMIN_PASSWORD}:g" -i ${HEAT_CONF_DIR}/heat.conf
+    sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" -i ${HEAT_CONF_DIR}/heat.conf
 
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d

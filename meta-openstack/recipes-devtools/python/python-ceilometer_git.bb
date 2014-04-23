@@ -30,24 +30,24 @@ do_install_append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}/${SRCNAME}
     CEILOMETER_CONF_DIR=${D}${sysconfdir}/${SRCNAME}
 
-    sed -e "s:%CEILOMETER_SECRET%:${CEILOMETER_SECRET}:g" -i ${WORKDIR}/ceilometer.conf
-
-    sed -e "s:%DB_USER%:${DB_USER}:g" -i ${WORKDIR}/ceilometer.conf
-    sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${WORKDIR}/ceilometer.conf
-
-    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${WORKDIR}/ceilometer.conf
-    sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${WORKDIR}/ceilometer.conf
-
-    sed -e "s:%COMPUTE_IP%:${COMPUTE_IP}:g" -i ${WORKDIR}/ceilometer.conf
-    sed -e "s:%COMPUTE_HOST%:${COMPUTE_HOST}:g" -i ${WORKDIR}/ceilometer.conf
-
-    sed -e "s:%ADMIN_PASSWORD%:${ADMIN_PASSWORD}:g" -i ${WORKDIR}/ceilometer.conf
-    sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" -i ${WORKDIR}/ceilometer.conf
-
     install -d ${CEILOMETER_CONF_DIR}
     install -m 600 ${WORKDIR}/ceilometer.conf ${CEILOMETER_CONF_DIR}
     install -m 600 ${TEMPLATE_CONF_DIR}/*.json ${CEILOMETER_CONF_DIR}
     install -m 600 ${TEMPLATE_CONF_DIR}/*.yaml ${CEILOMETER_CONF_DIR}
+
+    sed -e "s:%CEILOMETER_SECRET%:${CEILOMETER_SECRET}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
+
+    sed -e "s:%DB_USER%:${DB_USER}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
+    sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
+
+    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
+    sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
+
+    sed -e "s:%COMPUTE_IP%:${COMPUTE_IP}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
+    sed -e "s:%COMPUTE_HOST%:${COMPUTE_HOST}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
+
+    sed -e "s:%ADMIN_PASSWORD%:${ADMIN_PASSWORD}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
+    sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
 
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
