@@ -1,7 +1,7 @@
 DESCRIPTION = "DB-API 2.0 interface for SQLite 3.x"
 HOMEPAGE = "http://github.com/ghaering/pysqlite"
 SECTION = "devel/python"
-LICENSE = "zlib"
+LICENSE = "Zlib"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a85bd923e5c830f8eb89db354ff72f38"
 
 PR = "r0"
