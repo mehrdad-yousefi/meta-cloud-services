@@ -45,6 +45,7 @@ RDEPENDS_${PN} = " postgresql-setup \
     horizon-standalone \
     horizon-apache \
     apache2 \
+    barbican \
     novnc \
     chkconfig \
     qemu \
