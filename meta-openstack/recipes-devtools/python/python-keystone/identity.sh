@@ -79,33 +79,35 @@ if [ $? -eq 1 ]; then
 else
     NEUTRON_USER=$(keystone user-get neutron | grep " id " | get_field 2)
 fi
-
 keystone user-get cinder
 if [ $? -eq 1 ]; then                                                                                                                           
     CINDER_USER=$(keystone user-create --name=cinder --pass="$SERVICE_PASSWORD" --tenant-id $SERVICE_TENANT --email=cinder@domain.com | grep " id " | get_field 2)
 else
     CINDER_USER=$(keystone user-get cinder | grep " id " | get_field 2)
 fi
-
 keystone user-get ceilometer
 if [ $? -eq 1 ]; then
     CEILOMETER_USER=$(keystone user-create --name=ceilometer --pass="$SERVICE_PASSWORD" --tenant-id $SERVICE_TENANT --email=ceilometer@domain.com | grep " id " | get_field 2)
 else
     CEILOMETER_USER=$(keystone user-get ceilometer | grep " id " | get_field 2)
 fi
-
 keystone user-get heat
 if [ $? -eq 1 ]; then
     HEAT_USER=$(keystone user-create --name=heat --pass="$SERVICE_PASSWORD" --tenant-id $SERVICE_TENANT --email=heat@domain.com | grep " id " | get_field 2)
 else
     HEAT_USER=$(keystone user-get heat | grep " id " | get_field 2)
 fi
-
 keystone user-get swift
 if [ $? -eq 1 ]; then
     SWIFT_USER=$(keystone user-create --name=swift --pass="$SERVICE_PASSWORD" --tenant-id $SERVICE_TENANT --email=swift@domain.com | grep " id " | get_field 2)
 else
     SWIFT_USER=$(keystone user-get swift | grep " id " | get_field 2)
+fi
+keystone user-get barbican
+if [ $? -eq 1 ]; then                                                                                                                           
+    BARBICAN_USER=$(keystone user-create --name=barbican --pass="$SERVICE_PASSWORD" --tenant-id $SERVICE_TENANT --email=barbican@domain.com | grep " id " | get_field 2)
+else
+    BARBICAN_USER=$(keystone user-get barbican | grep " id " | get_field 2)
 fi
 
 # Roles
@@ -158,6 +160,9 @@ keystone user-role-add --tenant_id $SERVICE_TENANT --user-id $HEAT_USER --role-i
 keystone user-role-list --user-id $SWIFT_USER --tenant_id $SERVICE_TENANT &> /dev/null
 keystone user-role-add --tenant-id $SERVICE_TENANT --user-id $SWIFT_USER --role-id $ADMIN_ROLE
 
+keystone user-role-list --user-id $BARBICAN_USER --tenant_id $SERVICE_TENANT &> /dev/null
+keystone user-role-add --tenant-id $SERVICE_TENANT --user-id $BARBICAN_USER --role-id $ADMIN_ROLE
+
 # Create services
 COMPUTE_SERVICE=$(keystone service-create --name nova --type compute --description 'OpenStack Compute Service' | grep " id " | get_field 2)
 VOLUME_SERVICE=$(keystone service-create --name cinder --type volume --description 'OpenStack Volume Service' | grep " id " | get_field 2)
@@ -169,6 +174,7 @@ METERING_SERVICE=$(keystone service-create --name ceilometer --type=metering --d
 ORCHESTRATION_SERVICE=$(keystone service-create --name heat --type=orchestration --description='OpenStack Orchestration Service' | grep " id " | get_field 2)
 CLOUDFORMATION_SERVICE=$(keystone service-create --name heat-cfn --type=cloudformation --description='OpenStack Cloudformation Service' | grep " id " | get_field 2)
 SWIFT_SERVICE=$(keystone service-create --name swift --type=object-store --description='OpenStack object-store' | grep " id " | get_field 2)
+BARBICAN_SERVICE=$(keystone service-create --name barbican --type=keystore --description='Barbican Key Management Service' | grep " id " | get_field 2)
 
 # Create endpoints
 keystone endpoint-create --region $KEYSTONE_REGION --service-id $COMPUTE_SERVICE --publicurl 'http://'"$KEYSTONE_HOST"':8774/v2/$(tenant_id)s' --adminurl 'http://'"$KEYSTONE_HOST"':8774/v2/$(tenant_id)s' --internalurl 'http://'"$KEYSTONE_HOST"':8774/v2/$(tenant_id)s'
@@ -181,3 +187,4 @@ keystone endpoint-create --region $KEYSTONE_REGION --service_id $METERING_SERVIC
 keystone endpoint-create --region $KEYSTONE_REGION --service_id $ORCHESTRATION_SERVICE --publicurl 'http://'"$KEYSTONE_HOST"':8004/v1/%(tenant_id)s' --adminurl 'http://'"$KEYSTONE_HOST"':8004/v1/%(tenant_id)s' --internalurl 'http://'"$KEYSTONE_HOST"':8004/v1/%(tenant_id)s'
 keystone endpoint-create --region $KEYSTONE_REGION --service_id $CLOUDFORMATION_SERVICE --publicurl 'http://'"$KEYSTONE_HOST"':8000/v1' --adminurl 'http://'"$KEYSTONE_HOST"':8000/v1' --internalurl 'http://'"$KEYSTONE_HOST"':8000/v1'
 keystone endpoint-create --region $KEYSTONE_REGION --service_id $SWIFT_SERVICE --publicurl 'http://'"$KEYSTONE_HOST"':8888/v1/AUTH_%(tenant_id)s' --adminurl 'http://'"$KEYSTONE_HOST"':8888/v1' --internalurl 'http://'"$KEYSTONE_HOST"':8888/v1/AUTH_%(tenant_id)s'
+keystone endpoint-create --region $KEYSTONE_REGION --service_id $BARBICAN_SERVICE --publicurl 'http://'"$KEYSTONE_HOST"':9311/v1' --adminurl 'http://'"$KEYSTONE_HOST"':9312/v1' --internalurl 'http://'"$KEYSTONE_HOST"':9313/v1'
