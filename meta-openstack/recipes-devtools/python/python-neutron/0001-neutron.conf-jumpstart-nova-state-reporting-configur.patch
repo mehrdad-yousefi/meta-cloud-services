@@ -1,0 +1,43 @@
+From 0ae370672b9246664a8159709809bcef635fb3e0 Mon Sep 17 00:00:00 2001
+From: Bruce Ashfield <bruce.ashfield@windriver.com>
+Date: Tue, 29 Apr 2014 23:57:24 -0400
+Subject: [PATCH] neutron.conf: jumpstart nova state reporting configuration
+
+To enable neutron reporting of vif states to nova, we need to configure
+neutron.conf with auth urls and passwords. While this configuration isn't
+complete, it fills in some required values (and leaves them commented).
+
+Signed-off-by: Bruce Ashfield <bruce.ashfield@windriver.com>
+---
+ etc/neutron.conf |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/etc/neutron.conf b/etc/neutron.conf
+index 775c75725286..8305f1718c49 100644
+--- a/etc/neutron.conf
++++ b/etc/neutron.conf
+@@ -303,7 +303,7 @@ notification_driver = neutron.openstack.common.notifier.rpc_notifier
+ # notify_nova_on_port_data_changes = True
+ 
+ # URL for connection to nova (Only supports one nova region currently).
+-# nova_url = http://127.0.0.1:8774
++# nova_url = http://%CONTROLLER_IP%:8774
+ 
+ # Name of nova region to use. Useful if keystone manages more than one region
+ # nova_region_name =
+@@ -315,10 +315,10 @@ notification_driver = neutron.openstack.common.notifier.rpc_notifier
+ # nova_admin_tenant_id =
+ 
+ # Password for connection to nova in admin context.
+-# nova_admin_password =
++# nova_admin_password = %SERVICE_PASSWORD%
+ 
+ # Authorization URL for connection to nova in admin context.
+-# nova_admin_auth_url =
++# nova_admin_auth_url = http://%CONTROLLER_IP%:35357/v2.0
+ 
+ # Number of seconds between sending events to nova if there are any events to send
+ # send_events_interval = 2
+-- 
+1.7.10.4
+
