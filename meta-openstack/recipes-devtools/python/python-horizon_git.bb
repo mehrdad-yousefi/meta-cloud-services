@@ -9,7 +9,7 @@ DEPENDS += " \
         python-pbr \
         "
 
-DEPENDS_${PN} += "python-django \
+RDEPENDS_${PN} += "python-django \
     python-django-compressor \
     python-django-openstack-auth \
     python-netaddr \
@@ -25,20 +25,21 @@ DEPENDS_${PN} += "python-django \
     python-swiftclient \
     python-lockfile \
     python-pbr \
+    python-troveclient \
     "
 
 PR = "r2"
 SRCNAME = "horizon"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
     file://horizon.init \
     file://fix_bindir_path.patch \
     file://openstack-dashboard-apache.conf \
     file://local_settings.py \
     "
 
-SRCREV="b2259b352fd1e00a269b8275afa8093223598235"
-PV="2013.2+git${SRCPV}"
+SRCREV="0c3b71055c0d169b8245aee773438dbcb46c2bcf"
+PV="2014.1+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d python-dir default_configs
