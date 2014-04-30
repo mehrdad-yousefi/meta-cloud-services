@@ -7,13 +7,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r0"
 SRCNAME = "heat"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
            file://heat.conf \
            file://heat.init \
 "
 
-SRCREV="ff6901141fbbc0a13604491aaba01a60487d6f6d"
-PV="2013.2.2+git${SRCPV}"
+SRCREV="69145518cb9a20d401c4213a030c39caaad1c326"
+PV="2014.1+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 do_install_append() {
