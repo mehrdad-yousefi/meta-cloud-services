@@ -46,6 +46,12 @@ do_install_append() {
     sed -e "s:^# core_plugin.*:core_plugin = neutron.plugins.openvswitch.ovs_neutron_plugin.OVSNeutronPluginV2:g" \
         -i ${NEUTRON_CONF_DIR}/neutron.conf
 
+    # disable reporting of state changes to nova
+    sed -e "s:^# notify_nova_on_port_status_changes.*:notify_nova_on_port_status_changes = False:g" \
+        -i ${NEUTRON_CONF_DIR}/neutron.conf
+    sed -e "s:^# notify_nova_on_port_data_changes.*:notify_nova_on_port_data_changes = False:g" \
+        -i ${NEUTRON_CONF_DIR}/neutron.conf
+
     sed -e "s:^# rabbit_host =.*:rabbit_host = ${CONTROLLER_IP}:" -i ${NEUTRON_CONF_DIR}/neutron.conf
 
     for file in plugins/openvswitch/ovs_neutron_plugin.ini plugins/linuxbridge/linuxbridge_conf.ini
