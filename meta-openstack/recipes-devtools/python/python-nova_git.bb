@@ -11,8 +11,7 @@ SRCNAME = "nova"
 
 FILESEXTRAPATHS := "${THISDIR}/${PN}"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
-           file://0001-nova-api-paste.ini-make-controller-IP-configurable.patch \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
            file://nova-add-migrate.cfg-to-the-MANIFEST.patch \
            "
 
@@ -22,8 +21,8 @@ SRC_URI += "file://nova-all \
             file://nova.conf \
             file://openrc \
            "
-SRCREV="feedcb240807cdfa354d27ebe3a4b7f416504a62"
-PV="2013.2.2+git${SRCPV}"
+SRCREV="e1e140b295ea9ea6fd6cc2b6dc10981020e48adb"
+PV="2014.1+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -87,6 +86,10 @@ do_install_append() {
 
     sed -e "s:%COMPUTE_IP%:${COMPUTE_IP}:g" -i ${NOVA_CONF_DIR}/nova.conf
     sed -e "s:%COMPUTE_HOST%:${COMPUTE_HOST}:g" -i ${NOVA_CONF_DIR}/nova.conf
+
+    sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" -i ${NOVA_CONF_DIR}/nova.conf
+    sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${NOVA_CONF_DIR}/nova.conf
+    sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" -i ${NOVA_CONF_DIR}/nova.conf
 
     sed -e "s:%LIBVIRT_IMAGES_TYPE%:${LIBVIRT_IMAGES_TYPE}:g" -i ${NOVA_CONF_DIR}/nova.conf
 
@@ -274,7 +277,7 @@ RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common \
                                   ${SRCNAME}-api \
 				  postgresql postgresql-client python-psycopg2"
 
-RDEPENDS_${SRCNAME}-compute = "${PN} ${SRCNAME}-common \
+RDEPENDS_${SRCNAME}-compute = "${PN} ${SRCNAME}-common python-oslo.messaging \
 			       qemu libvirt libvirt-libvirtd libvirt-python libvirt-virsh"
 RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-common"
 
