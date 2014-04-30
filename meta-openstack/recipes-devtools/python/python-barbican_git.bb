@@ -93,6 +93,7 @@ RDEPENDS_${PN} += " \
         python-stevedore \
         python-webob \
         python-wsgiref \
+        python-barbicanclient \
         "
 
 INITSCRIPT_PACKAGES = "${SRCNAME}"
