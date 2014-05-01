@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r0"
 SRCNAME = "cinder"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
     file://cinder.conf \
     file://cinder.init \
     file://cinder-volume \
@@ -19,8 +19,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
     file://fix_cinder_memory_leak.patch \
 	"
 
-SRCREV="8b5fb8409322f61d8b610c97c109a61bf48a940e"
-PV="2013.2.2+git${SRCPV}"
+SRCREV="978b036a6467f7f6afb4419f92bf4fa7d1ff2347"
+PV="2014.1+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d identity default_configs
@@ -168,6 +168,7 @@ RDEPENDS_${PN} += "lvm2 \
 	python-cinderclient \
 	python-oslo.config \
 	python-pbr \
+	python-taskflow \
 	"
 
 RDEPENDS_${SRCNAME} = "${PN} \
