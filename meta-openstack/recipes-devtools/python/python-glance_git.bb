@@ -7,18 +7,25 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r0"
 SRCNAME = "glance"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
+           file://0001-glance-store-only-load-known-stores-not-all-stores.patch \
            file://glance.init \
            "
 
-SRCREV="1690a739cd94efe6cb2af8e794a4acdf59de54cd"
-PV="2013.2.2+git${SRCPV}"
+SRCREV="556eebb7780b55af87c0fe49b76593f833ea189a"
+PV="2014.1+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d identity default_configs
 
 GLANCE_DEFAULT_STORE ?= "file"
+GLANCE_KNOWN_STORES ?= "glance.store.rbd.Store,\
+ glance.store.swift.Store,\
+ glance.store.cinder.Store,\
+ glance.store.filesystem.Store,\
+ glance.store.http.Store"
+
 
 do_install_append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}
@@ -31,14 +38,14 @@ do_install_append() {
         sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${WORKDIR}/glance-$file.conf
         sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
             -i ${WORKDIR}/glance-$file.conf
-        sed -e "s#^sql_conn.*#sql_connection = postgresql://${DB_USER}:${DB_PASSWORD}@localhost/glance#g" \
+        sed -e "s!^#connection =.*!connection = postgresql://${DB_USER}:${DB_PASSWORD}@localhost/glance!g" \
             -i ${WORKDIR}/glance-$file.conf
     done
     sed -e "s:^filesystem_store_datadir =.*:filesystem_store_datadir = ${sysconfdir}/${SRCNAME}/images/:g" \
         -i ${WORKDIR}/glance-api.conf
 
     # send samples to rabbitmq for ceilometer integration
-    sed -e "s:^notifier_strategy = noop:notifier_strategy = rabbit:g" \
+    sed -e "s:^# notification_driver = noop:notification_driver = rabbit:g" \
         -i ${WORKDIR}/glance-api.conf         
 
     sed 's:^default_store =.*:default_store = ${GLANCE_DEFAULT_STORE}:g' -i ${WORKDIR}/glance-api.conf
@@ -46,6 +53,9 @@ do_install_append() {
     sed 's:^swift_store_user =.*:swift_store_user = ${SERVICE_TENANT_NAME}\:${SRCNAME}:g' -i ${WORKDIR}/glance-api.conf
     sed 's:^swift_store_key =.*:swift_store_key = ${SERVICE_PASSWORD}:g' -i ${WORKDIR}/glance-api.conf
     sed 's:^swift_store_create_container_on_put =.*:swift_store_create_container_on_put = True:g' -i ${WORKDIR}/glance-api.conf
+
+    # multi line match, replace the known stores with the ones we support.
+    sed '1!N; s:#known_stores = glance.store.*\n.*#.*glance.store.http.*:known_stores = ${GLANCE_KNOWN_STORES}:g' -i ${WORKDIR}/glance-api.conf
 
     install -d ${GLANCE_CONF_DIR}
     install -m 600 ${WORKDIR}/glance-registry.conf ${GLANCE_CONF_DIR}/
@@ -55,6 +65,7 @@ do_install_append() {
     install -m 600 ${S}/etc/glance-registry-paste.ini ${GLANCE_CONF_DIR}/
     install -m 600 ${S}/etc/glance-api-paste.ini ${GLANCE_CONF_DIR}/
     install -m 600 ${S}/etc/policy.json ${GLANCE_CONF_DIR}/
+    install -m 600 ${S}/etc/schema-image.json ${GLANCE_CONF_DIR}/
 
     install -d ${GLANCE_CONF_DIR}/images
     install -d ${D}${localstatedir}/lib/glance/image_cache
