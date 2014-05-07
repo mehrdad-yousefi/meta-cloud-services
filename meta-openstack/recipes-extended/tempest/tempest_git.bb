@@ -9,13 +9,13 @@ SRCNAME = "tempest"
 
 inherit setuptools identity hosts
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://tempest.conf \
            file://logging.conf \
 "
 
-SRCREV="6273339e2da725b01560b6a2db11a3bf7a6659d7"
-PV="2013.2+git${SRCPV}"
+SRCREV="50af5d5ecc7d21d5e0d1a36fa564ef4850cf94ff"
+PV="2014.1+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 do_install_append() {
@@ -62,6 +62,7 @@ FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/tests/*"
 
 FILES_${PN} = "${libdir}/* \
                ${sysconfdir}/* \
+               ${bindir}/* \
 "
 RDEPENDS_${PN} += " \
         ${SRCNAME}-tests \
