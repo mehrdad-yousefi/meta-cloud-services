@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 PR = "r0"
 SRCNAME = "swift"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
            file://proxy-server.conf \
            file://dispersion.conf \
            file://test.conf \
@@ -16,8 +16,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://cluster.conf \
 "
 
-SRCREV="2f3526c559fe53ce904b735a81dee6de46127176"
-PV="2013.2.2+git${SRCPV}"
+SRCREV="6946240c757d2ecc2e66f5054c5172b110084c89"
+PV="1.13.1+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools python-dir update-rc.d hosts identity
