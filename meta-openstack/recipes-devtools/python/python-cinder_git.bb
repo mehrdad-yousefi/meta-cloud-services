@@ -40,6 +40,9 @@ do_install_append() {
     sed -e "s:%DB_USER%:${DB_USER}:g" -i ${WORKDIR}/cinder.conf
     sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${WORKDIR}/cinder.conf
     sed -e "s:%CINDER_BACKUP_BACKEND_DRIVER%:${CINDER_BACKUP_BACKEND_DRIVER}:g" -i ${WORKDIR}/cinder.conf
+    sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" -i ${WORKDIR}/cinder.conf
+    sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${WORKDIR}/cinder.conf
+    sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" -i ${WORKDIR}/cinder.conf
 
     install -d ${CINDER_CONF_DIR}
     install -m 600 ${WORKDIR}/cinder.conf ${CINDER_CONF_DIR}/
