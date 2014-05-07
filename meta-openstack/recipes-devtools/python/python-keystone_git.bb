@@ -4,7 +4,7 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-PR = "r0"
+PR = "r1"
 SRCNAME = "keystone"
 
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
@@ -13,6 +13,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://keystone \
            file://openrc \
            file://Update-test-core-ETCDIR-location.patch \
+           file://CVE-2014-2828-keystone-1300274.patch \
 	  "
 
 SRCREV="a96d1a44bc0f074729c312e5c2a0f0875edf1765"
