@@ -4,7 +4,7 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-PR = "r0"
+PR = "r1"
 SRCNAME = "swift"
 
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
@@ -14,6 +14,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://swift.init \
            file://swift_setup.sh \
            file://cluster.conf \
+           file://CVE-2014-0006-swift-1265665.patch \
 "
 
 SRCREV="2f3526c559fe53ce904b735a81dee6de46127176"
