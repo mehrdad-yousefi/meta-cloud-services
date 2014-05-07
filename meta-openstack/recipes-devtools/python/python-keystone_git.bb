@@ -28,7 +28,7 @@ do_install_append() {
 
     KEYSTONE_CONF_DIR=${D}${sysconfdir}/keystone
 
-    install -d ${KEYSTONE_CONF_DIR}
+    install -m 750 -d ${KEYSTONE_CONF_DIR}
 
     install -d ${D}${localstatedir}/log/${SRCNAME}
 
