@@ -33,6 +33,8 @@ do_install_append() {
 	    sed "s:@suffix@:$binary:" < ${WORKDIR}/barbican.init >${WORKDIR}/barbican-$binary.init.sh
             install -m 0755 ${WORKDIR}/barbican-$binary.init.sh ${D}${sysconfdir}/init.d/barbican-$binary
 	done
+	rm -f ${D}/usr/bin/barbican.sh
+	rm -f ${D}/usr/bin/barbican-worker.py
     fi
 }
 
