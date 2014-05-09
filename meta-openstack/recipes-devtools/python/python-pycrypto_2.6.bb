@@ -22,7 +22,7 @@ export STAGING_LIBDIR
 export BUILD_SYS
 export HOST_SYS
 
-inherit autotools distutils
+inherit autotools autotools-brokensep distutils
 
 # We explicitly call distutils_do_install, since we want it to run, but
 # *don't* want the autotools install to run, since this package doesn't
