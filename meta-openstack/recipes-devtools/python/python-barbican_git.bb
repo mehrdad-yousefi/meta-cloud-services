@@ -50,6 +50,7 @@ FILES_${PN} = "${libdir}/* \
 "
 FILES_${SRCNAME} = "${sysconfdir}/${SRCNAME}/* \
                     ${sysconfdir}/init.d/barbican-api \
+	            ${bindir} \
 	            ${bindir}/* \
                     ${localstatedir}/* \
 "
