@@ -19,8 +19,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
     file://fix_cinder_memory_leak.patch \
 	"
 
-SRCREV="8b5fb8409322f61d8b610c97c109a61bf48a940e"
-PV="2013.2.2+git${SRCPV}"
+SRCREV="81259f36f57e91b31009fbd209ea2a07a2ceb213"
+PV="2013.2.3+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d identity default_configs

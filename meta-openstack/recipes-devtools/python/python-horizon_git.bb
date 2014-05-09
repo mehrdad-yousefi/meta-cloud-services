@@ -37,8 +37,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
     file://local_settings.py \
     "
 
-SRCREV="b2259b352fd1e00a269b8275afa8093223598235"
-PV="2013.2+git${SRCPV}"
+SRCREV="cd1de75ee2a8c246d5564e96ccc48185816c2290"
+PV="2013.2.3+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d python-dir default_configs

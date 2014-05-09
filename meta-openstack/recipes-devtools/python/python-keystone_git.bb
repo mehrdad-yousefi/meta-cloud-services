@@ -13,11 +13,10 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://keystone \
            file://openrc \
            file://Update-test-core-ETCDIR-location.patch \
-           file://CVE-2014-2828-keystone-1300274.patch \
 	  "
 
-SRCREV="a96d1a44bc0f074729c312e5c2a0f0875edf1765"
-PV="2013.2.2+git${SRCPV}"
+SRCREV="e7c29874e5a0e43f4f0e9970556c701af508152f"
+PV="2013.2.3+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
