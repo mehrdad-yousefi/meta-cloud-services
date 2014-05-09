@@ -32,6 +32,7 @@ SRC_URI = "git://anongit.freedesktop.org/spice/spice;name=spice \
 SRC_URI += " \
         file://spice-fix-CVE-2013-4282.patch \
         file://configure.ac-add-subdir-objects-to-AM_INIT_AUTOMAKE.patch \
+        file://build-allow-separated-src-and-build-dirs.patch \
         "
 
 S = "${WORKDIR}/git"
@@ -61,7 +62,7 @@ do_configure_prepend() {
 }
 
 do_install_append() {
-	cd ${S}/spice-common/spice-protocol
+	cd ${B}/spice-common/spice-protocol
 	oe_runmake DESTDIR="${D}" install
 	cd -
 }
