@@ -13,6 +13,7 @@ SRCNAME = "mod_wsgi"
 SRC_URI = "\
 	http://modwsgi.googlecode.com/files/${SRCNAME}-${PV}.tar.gz \
 	file://configure_var.patch \
+	file://build-fix-builds-that-have-separated-build-dir.patch \
 	"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
