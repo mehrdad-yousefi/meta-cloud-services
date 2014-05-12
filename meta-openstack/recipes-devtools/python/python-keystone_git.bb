@@ -23,6 +23,7 @@ S = "${WORKDIR}/git"
 inherit setuptools update-rc.d identity hosts default_configs
 
 SERVICE_TOKEN = "password"
+TOKEN_FORMAT ?= "PKI"
 
 do_install_append() {
 
@@ -45,6 +46,8 @@ do_install_append() {
 
     sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${KEYSTONE_CONF_DIR}/keystone.conf
     sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${KEYSTONE_CONF_DIR}/identity.sh
+
+    sed -e "s:%TOKEN_FORMAT%:${TOKEN_FORMAT}:g" -i ${KEYSTONE_CONF_DIR}/keystone.conf
 
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
