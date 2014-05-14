@@ -13,6 +13,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
            file://autoscaling_example.template \
            file://one_vm_example.template \
            file://two_vms_example.template \
+           file://heat-tests-change-project_dir-path.patch \
 "
 
 SRCREV="69145518cb9a20d401c4213a030c39caaad1c326"
