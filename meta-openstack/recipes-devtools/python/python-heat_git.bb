@@ -10,6 +10,9 @@ SRCNAME = "heat"
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
            file://heat.conf \
            file://heat.init \
+           file://autoscaling_example.template \
+           file://one_vm_example.template \
+           file://two_vms_example.template \
 "
 
 SRCREV="69145518cb9a20d401c4213a030c39caaad1c326"
@@ -25,6 +28,7 @@ do_install_append() {
     install -m 600 ${TEMPLATE_CONF_DIR}/*.json ${HEAT_CONF_DIR}
     install -d ${HEAT_CONF_DIR}/templates
     install -m 600 ${TEMPLATE_CONF_DIR}/templates/* ${HEAT_CONF_DIR}/templates
+    install -m 600 ${WORKDIR}/*.template ${HEAT_CONF_DIR}/templates
     install -d ${HEAT_CONF_DIR}/environment.d
     install -m 600 ${TEMPLATE_CONF_DIR}/environment.d/* ${HEAT_CONF_DIR}/environment.d
     install -m 664 ${TEMPLATE_CONF_DIR}/api-paste.ini ${HEAT_CONF_DIR}
@@ -82,7 +86,7 @@ pkg_postinst_${SRCNAME}-setup () {
 
 inherit setuptools identity hosts update-rc.d default_configs
 
-PACKAGES += "${SRCNAME}-tests ${SRCNAME}-common ${SRCNAME}-api ${SRCNAME}-api-cfn ${SRCNAME}-engine"
+PACKAGES += "${SRCNAME}-tests ${SRCNAME}-templates ${SRCNAME}-common ${SRCNAME}-api ${SRCNAME}-api-cfn ${SRCNAME}-engine"
 PACKAGES += "${SRCNAME}-setup"
 
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
@@ -90,6 +94,8 @@ ALLOW_EMPTY_${SRCNAME}-setup = "1"
 FILES_${PN} = "${libdir}/*"
 
 FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
+
+FILES_${SRCNAME}-templates = "${sysconfdir}/${SRCNAME}/templates/*"
 
 FILES_${SRCNAME}-common = "${sysconfdir}/${SRCNAME}/* \
 "
@@ -157,7 +163,7 @@ RDEPENDS_${PN} += " \
         python-pbr \
 	"
 
-RDEPENDS_${SRCNAME}-engine = "${PN} ${SRCNAME}-common postgresql postgresql-client python-psycopg2 tgt"
+RDEPENDS_${SRCNAME}-engine = "${PN} ${SRCNAME}-templates ${SRCNAME}-common postgresql postgresql-client python-psycopg2 tgt"
 RDEPENDS_${SRCNAME}-api = "${SRCNAME}-engine"
 RDEPENDS_${SRCNAME}-api-cfn = "${SRCNAME}-engine"
 RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-engine"
