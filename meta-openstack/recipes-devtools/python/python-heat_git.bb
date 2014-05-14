@@ -13,6 +13,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://autoscaling_example.template \
            file://one_vm_example.template \
            file://two_vms_example.template \
+           file://heat-tests-change-project_dir-path.patch \
 "
 
 SRCREV="58de9e6415f5bdabde708c8584b21b59b7e96a88"
