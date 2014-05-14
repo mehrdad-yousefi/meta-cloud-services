@@ -146,7 +146,7 @@ All the installed OpenStack compute services nova, quantum, should be running
 after a successful boot.
 
   % bitbake openstack-image-compute
-  % runqemu qemux86-64 openstack-image-compute kvm nographic qemuparams="-m 4096"
+  % runqemu qemux86-64 openstack-image-compute kvm nographic qemuparams="-m 4096 -smp 4"
 
 * Image Launch *
 
