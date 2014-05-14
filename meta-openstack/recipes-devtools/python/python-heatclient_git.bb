@@ -19,6 +19,7 @@ RDEPENDS_${PN} +="python-cliff \
 	"
 
 PR = "r0"
+SRCNAME = "heatclient"
 
 SRC_URI = "git://github.com/openstack/python-heatclient.git;branch=master"
 
@@ -37,5 +38,10 @@ do_install_append() {
 	install -m 664 ${S}/tools/heat.bash_completion ${D}/${sysconfdir}/bash_completion.d
 }
 
-PACKAGES =+ "${BPN}-bash-completion"
+PACKAGES =+ "${SRCNAME}-tests ${BPN}-bash-completion"
 FILES_${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"
+ALLOW_EMPTY_${SRCNAME}-tests = "1"
+
+RDEPENDS_${SRCNAME}-tests += "python-testscenarios \
+	python-mox3 \
+	"
