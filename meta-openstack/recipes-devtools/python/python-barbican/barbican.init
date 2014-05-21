@@ -14,8 +14,9 @@ SUFFIX="@suffix@"
 DESC="barbican-@suffix@"
 PIDFILE="/var/run/barbican/barbican-$SUFFIX.pid"
 CONFIG_DIR="/etc/barbican"
+LOG_DIR="/var/log/barbican"
 UWSGI="/usr/bin/uwsgi"
-EXEC="--master --emperor $CONFIG_DIR/vassals"
+EXEC="--master --emperor $CONFIG_DIR/vassals --logto $LOG_DIR/barbican.log"
 
 if [ ! -d /var/run/barbican ]; then
 	mkdir -p /var/run/barbican
@@ -39,8 +40,8 @@ start ()
         mkdir -p $PIDDIR
         chown barbican $PIDDIR
     fi
-    if [ ! -d /var/log/barbican ]; then
-    	mkdir /var/log/barbican
+    if [ ! -d $LOG_DIR ]; then
+    	mkdir -p $LOG_DIR
     fi
     echo -n "Starting $DESC..."
 
