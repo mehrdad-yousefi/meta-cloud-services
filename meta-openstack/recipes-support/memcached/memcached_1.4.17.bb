@@ -19,7 +19,7 @@ LICENSE = "BSD"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=7e5ded7363d335e1bb18013ca08046ff"
 
-inherit autotools
+inherit autotools autotools-brokensep
 
 DEPENDS += "libevent"
 RDEPENDS_${PN} += "perl perl-module-posix perl-module-autoloader perl-module-tie-hash"
