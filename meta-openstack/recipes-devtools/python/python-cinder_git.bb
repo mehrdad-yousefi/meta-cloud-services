@@ -87,6 +87,10 @@ pkg_postinst_${SRCNAME}-setup () {
        /etc/init.d/postgresql start
     fi
 
+    if [ ! -d /var/log/cinder ]; then
+       mkdir /var/log/cinder
+    fi
+
     sudo -u postgres createdb cinder
     cinder-manage db sync
 
