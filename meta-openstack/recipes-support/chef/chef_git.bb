@@ -33,7 +33,7 @@ DEPENDS += " \
         bundler-native \
         "
 
-RDEPENDS += " \
+RDEPENDS_${PN} += " \
         ruby \
         chef-zero \
         coderay \
