@@ -4,7 +4,7 @@
 DEPENDS += " \
     ruby-native \
 "
-RDEPENDS += " \
+RDEPENDS_${PN} += " \
     ruby \
 "
 
@@ -93,6 +93,15 @@ ruby_do_compile() {
 ruby_do_install() {
 	for gem in ${RUBY_INSTALL_GEMS}; do
 		gem install --ignore-dependencies --local --env-shebang --install-dir ${D}/${libdir}/ruby/gems/${RUBY_GEM_VERSION}/ $gem
+	done
+
+	# create symlink from the gems bin directory to /usr/bin
+	for i in ${D}/${libdir}/ruby/gems/${RUBY_GEM_VERSION}/bin/*; do
+		if [ -e "$i" ]; then
+			if [ ! -d ${D}/${bindir} ]; then mkdir -p ${D}/${bindir}; fi
+			b=`basename $i`
+			ln -sf ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/bin/$b ${D}/${bindir}/$b
+		fi
 	done
 }
 

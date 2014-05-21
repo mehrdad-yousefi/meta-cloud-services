@@ -24,3 +24,4 @@ inherit ruby
 RUBY_COMPILE_FLAGS += "RELEASE=1"
 
 BBCLASSEXTEND = "native"
+DEPENDS += "yard"

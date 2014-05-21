@@ -26,7 +26,7 @@ SRC_URI = " \
 
 inherit ruby
 
-RDEPENDS += " \
+RDEPENDS_${PN} += " \
         net-ssh \
         "
 
