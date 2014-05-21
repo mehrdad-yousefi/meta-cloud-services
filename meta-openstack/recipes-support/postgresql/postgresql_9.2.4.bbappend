@@ -4,7 +4,7 @@ PRINC := "${@int(PRINC) + 1}"
 SRC_URI += "file://postgresql \
             file://postgresql-init"
 
-inherit useradd update-rc.d identity hosts
+inherit useradd update-rc.d identity hosts autotools-brokensep
 
 # default
 DB_DATADIR ?= "/var/lib/postgres/data"

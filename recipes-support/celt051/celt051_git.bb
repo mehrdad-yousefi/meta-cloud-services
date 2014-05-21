@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
 
 DEPENDS += "libogg"
 
-inherit pkgconfig autotools
+inherit pkgconfig autotools-brokensep
 
 PACKAGECONFIG = ""
 
