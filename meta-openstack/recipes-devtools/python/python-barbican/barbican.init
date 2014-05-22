@@ -16,7 +16,7 @@ PIDFILE="/var/run/barbican/barbican-$SUFFIX.pid"
 CONFIG_DIR="/etc/barbican"
 LOG_DIR="/var/log/barbican"
 UWSGI="/usr/bin/uwsgi"
-EXEC="--master --emperor $CONFIG_DIR/vassals --logto $LOG_DIR/barbican.log"
+EXEC="--master --emperor $CONFIG_DIR/vassals --logto $LOG_DIR/barbican.log -b %BARBICAN_MAX_PACKET_SIZE%"
 
 if [ ! -d /var/run/barbican ]; then
 	mkdir -p /var/run/barbican
