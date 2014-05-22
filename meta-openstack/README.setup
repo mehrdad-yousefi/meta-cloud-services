@@ -80,6 +80,8 @@ to the bblayers.conf file:
     /meta-openembedded/meta-oe \
     /meta-openembedded/meta-networking \   
     /meta-openembedded/meta-filesystems
+    /meta-openembedded/meta-webserver
+    /meta-openembedded/meta-ruby
 
 Package configurations
 ----------------------
