@@ -4,11 +4,12 @@ LICENSE = "MPL-1.1"
 LIC_FILES_CHKSUM = "file://LICENSE-MPL-RabbitMQ;md5=b651d0a6feaaf2bf5eb9d36b2495c510"
 SECTION = "network"
 DEPENDS = "erlang-native libxslt python-simplejson zip-native unzip-native libxslt-native"
-PR = "r0"
+PR = "r1"
 
 SRC_URI = "http://www.rabbitmq.com/releases/rabbitmq-server/v${PV}/${PN}-${PV}.tar.gz \
            file://rabbitmq-server \
            file://remove-docs.patch \
+           file://cleanup_install.patch \
            "
 
 SRC_URI[md5sum] = "09d1af64c005bc680d6790b90655d021"
