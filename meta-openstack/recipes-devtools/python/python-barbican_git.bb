@@ -6,9 +6,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=fc8be9e7dffe97390d1216b01fd0be01"
 
 PR = "r0"
 SRCNAME = "barbican"
+BARBICAN_MAX_PACKET_SIZE ?= "65535"
 
 SRC_URI = "git://github.com/stackforge/barbican.git;branch=master \
            file://barbican.init \
+           file://barbican-increase-buffer-size-to-support-PKI-tokens.patch \
           "
 
 SRCREV="177d4499af6b261f48814503e3565f433e86cc66"
@@ -26,11 +28,15 @@ do_install_append() {
 
     install -d ${D}${localstatedir}/lib/barbican
 
+    sed -e "s:%BARBICAN_MAX_PACKET_SIZE%:${BARBICAN_MAX_PACKET_SIZE}:g" -i ${BARBICAN_CONF_DIR}/vassals/barbican-api.ini
+    sed -e "s:%BARBICAN_MAX_PACKET_SIZE%:${BARBICAN_MAX_PACKET_SIZE}:g" -i ${BARBICAN_CONF_DIR}/vassals/barbican-admin.ini
+
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
 
 	for binary in api; do
 	    sed "s:@suffix@:$binary:" < ${WORKDIR}/barbican.init >${WORKDIR}/barbican-$binary.init.sh
+	    sed -e "s:%BARBICAN_MAX_PACKET_SIZE%:${BARBICAN_MAX_PACKET_SIZE}:g" -i ${WORKDIR}/barbican-$binary.init.sh
             install -m 0755 ${WORKDIR}/barbican-$binary.init.sh ${D}${sysconfdir}/init.d/barbican-$binary
 	done
 	rm -f ${D}/usr/bin/barbican.sh
