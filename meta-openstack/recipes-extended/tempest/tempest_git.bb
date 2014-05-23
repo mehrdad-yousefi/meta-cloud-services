@@ -13,6 +13,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://tempest.conf \
            file://logging.conf \
            file://0001-Stop-auto-detecting-glance-API-versions.patch \
+           file://image-client-not-specify-version.patch \
 "
 
 SRCREV="6273339e2da725b01560b6a2db11a3bf7a6659d7"
