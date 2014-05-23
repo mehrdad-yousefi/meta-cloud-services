@@ -1,0 +1,129 @@
+Stop auto-detecting glance API versions
+
+This commit switches the image api tests from auto detecting which
+api versions are available to having them explicitly set in the config
+file. This is to make it explicit which tests are expected to be run
+instead of assuming that everything is expected to work.
+
+Partially Implements: blueprint config-cleanup
+
+Change-Id: Ie958a7fb03ff502c5ea1783eaae9debb442c34ea
+---
+ etc/tempest.conf.sample   |    9 ++++++---
+ tempest/api/image/base.py |   15 ++-------------
+ tempest/config.py         |   16 +++++++++++++---
+ 3 files changed, 21 insertions(+), 19 deletions(-)
+
+diff --git a/etc/tempest.conf.sample b/etc/tempest.conf.sample
+index 400cfca..e537c75 100644
+--- a/etc/tempest.conf.sample
++++ b/etc/tempest.conf.sample
+@@ -198,12 +198,15 @@ catalog_type = image
+ # catalog, the first found one is used.
+ #region = RegionOne
+ 
+-# The version of the OpenStack Images API to use
+-api_version = 1
+-
+ # HTTP image to use for glance http image testing
+ http_image = http://download.cirros-cloud.net/0.3.1/cirros-0.3.1-x86_64-uec.tar.gz
+ 
++[image-feature-enabled]
++# Is the image api_v1 enabled
++api_v1 = True
++# Is the image api_v2 enabled
++api_v2 = True
++
+ [network]
+ # This section contains configuration options used when executing tests
+ # against the OpenStack Network API.
+diff --git a/tempest/api/image/base.py b/tempest/api/image/base.py
+index 4f54a15..ab0cb00 100644
+--- a/tempest/api/image/base.py
++++ b/tempest/api/image/base.py
+@@ -74,17 +74,6 @@ class BaseImageTest(tempest.test.BaseTestCase):
+         cls.created_images.append(image['id'])
+         return resp, image
+ 
+-    @classmethod
+-    def _check_version(cls, version):
+-        __, versions = cls.client.get_versions()
+-        if version == 'v2.0':
+-            if 'v2.0' in versions:
+-                return True
+-        elif version == 'v1.0':
+-            if 'v1.1' in versions or 'v1.0' in versions:
+-                return True
+-        return False
+-
+ 
+ class BaseV1ImageTest(BaseImageTest):
+ 
+@@ -92,7 +81,7 @@ class BaseV1ImageTest(BaseImageTest):
+     def setUpClass(cls):
+         super(BaseV1ImageTest, cls).setUpClass()
+         cls.client = cls.os.image_client
+-        if not cls._check_version('v1.0'):
++        if not cls.config.image_feature_enabled.api_v1:
+             msg = "Glance API v1 not supported"
+             raise cls.skipException(msg)
+ 
+@@ -103,6 +92,6 @@ class BaseV2ImageTest(BaseImageTest):
+     def setUpClass(cls):
+         super(BaseV2ImageTest, cls).setUpClass()
+         cls.client = cls.os.image_client_v2
+-        if not cls._check_version('v2.0'):
++        if not cls.config.image_feature_enabled.api_v2:
+             msg = "Glance API v2 not supported"
+             raise cls.skipException(msg)
+diff --git a/tempest/config.py b/tempest/config.py
+index b454120..9123395 100644
+--- a/tempest/config.py
++++ b/tempest/config.py
+@@ -252,9 +252,6 @@ image_group = cfg.OptGroup(name='image',
+                            title="Image Service Options")
+ 
+ ImageGroup = [
+-    cfg.StrOpt('api_version',
+-               default='1',
+-               help="Version of the API"),
+     cfg.StrOpt('catalog_type',
+                default='image',
+                help='Catalog type of the Image service.'),
+@@ -270,6 +267,17 @@ ImageGroup = [
+                help='http accessible image')
+ ]
+ 
++image_feature_group = cfg.OptGroup(name='image-feature-enabled',
++                                   title='Enabled image service features')
++
++ImageFeaturesGroup = [
++    cfg.BoolOpt('api_v2',
++                default=True,
++                help="Is the v2 image API enabled"),
++    cfg.BoolOpt('api_v1',
++                default=True,
++                help="Is the v1 image API enabled"),
++]
+ 
+ network_group = cfg.OptGroup(name='network',
+                              title='Network Service Options')
+@@ -635,6 +643,7 @@ class TempestConfig:
+                            ComputeFeaturesGroup)
+         register_opt_group(cfg.CONF, identity_group, IdentityGroup)
+         register_opt_group(cfg.CONF, image_group, ImageGroup)
++        register_opt_group(cfg.CONF, image_feature_group, ImageFeaturesGroup)
+         register_opt_group(cfg.CONF, network_group, NetworkGroup)
+         register_opt_group(cfg.CONF, volume_group, VolumeGroup)
+         register_opt_group(cfg.CONF, volume_feature_group,
+@@ -655,6 +664,7 @@ class TempestConfig:
+         self.compute_feature_enabled = cfg.CONF['compute-feature-enabled']
+         self.identity = cfg.CONF.identity
+         self.images = cfg.CONF.image
++        self.image_feature_enabled = cfg.CONF['image-feature-enabled']
+         self.network = cfg.CONF.network
+         self.volume = cfg.CONF.volume
+         self.volume_feature_enabled = cfg.CONF['volume-feature-enabled']
+-- 
+1.7.9.5
+
