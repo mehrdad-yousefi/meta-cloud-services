@@ -12,6 +12,7 @@ inherit setuptools identity hosts
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://tempest.conf \
            file://logging.conf \
+           file://0001-Stop-auto-detecting-glance-API-versions.patch \
 "
 
 SRCREV="50af5d5ecc7d21d5e0d1a36fa564ef4850cf94ff"
