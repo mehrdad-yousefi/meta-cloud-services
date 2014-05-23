@@ -13,7 +13,7 @@ RDEPENDS_${PN} += " \
 def get_rubyversion(p):
     import re
     from os.path import isfile
-    from subprocess import check_output
+    import subprocess
     found_version = "SOMETHING FAILED!"
 
     cmd = "%s/ruby" % p
@@ -21,7 +21,7 @@ def get_rubyversion(p):
     if not isfile(cmd):
        return found_version
 
-    version = check_output([cmd, "--version"])
+    version = subprocess.Popen([cmd, "--version"], stdout=subprocess.PIPE).communicate()[0]
     
     r = re.compile("ruby ([0-9]+\.[0-9]+\.[0-9]+)*")
     m = r.match(version)
@@ -33,7 +33,7 @@ def get_rubyversion(p):
 def get_rubygemslocation(p):
     import re
     from os.path import isfile
-    from subprocess import check_output
+    import subprocess
     found_loc = "SOMETHING FAILED!"
 
     cmd = "%s/gem" % p
@@ -41,10 +41,10 @@ def get_rubygemslocation(p):
     if not isfile(cmd):
        return found_loc
 
-    loc = check_output([cmd, "env"]).split('\n')
+    loc = subprocess.Popen([cmd, "env"], stdout=subprocess.PIPE).communicate()[0]
 
     r = re.compile(".*\- (/usr.*/ruby/gems/.*)")
-    for line in loc:
+    for line in loc.split('\n'):
         m = r.match(line)
         if m:
             found_loc = m.group(1)
@@ -55,7 +55,7 @@ def get_rubygemslocation(p):
 def get_rubygemsversion(p):
     import re
     from os.path import isfile
-    from subprocess import check_output
+    import subprocess
     found_version = "SOMETHING FAILED!"
 
     cmd = "%s/gem" % p
@@ -63,7 +63,7 @@ def get_rubygemsversion(p):
     if not isfile(cmd):
        return found_version
 
-    version = check_output([cmd, "env", "gemdir"])
+    version = subprocess.Popen([cmd, "env", "gemdir"], stdout=subprocess.PIPE).communicate()[0]
     
     r = re.compile(".*([0-9]+\.[0-9]+\.[0-9]+)$")
     m = r.match(version)
