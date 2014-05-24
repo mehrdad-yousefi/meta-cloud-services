@@ -135,20 +135,8 @@ in which the volume backups will be saved into.
 Build Configuration Options
 ===========================
 
-* Controller build config options:
-
-    --enable-board=intel-xeon-core \
-    --enable-rootfs=ovp-openstack-controller \
-    --enable-addons=wr-ovp-openstack,wr-ovp \
-    --with-template=feature/openstack-tests \
-    --with-layer=meta-cloud-services/meta-openstack-swift-deploy
-
-* Compute build config options:
-
-    --enable-board=intel-xeon-core \
-    --enable-rootfs=ovp-openstack-compute \
-    --enable-addons=wr-ovp-openstack,wr-ovp
-
+To add/deploy swift as part of a controller build, add the following layer
+to your configuration: meta-cloud-services/meta-openstack-swift-deploy
 
 Test Steps
 ==========

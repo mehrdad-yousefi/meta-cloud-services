@@ -226,27 +226,6 @@ However, these 2 replications are stored into the same machine (which
 is Controller node).
 
 
-Build Configuration Options
-===========================
-
-* Controller build config options:
-
-    --enable-board=intel-xeon-core \
-    --enable-rootfs=ovp-openstack-controller \
-    --enable-kernel=preempt-rt \
-    --enable-addons=wr-ovp-openstack,wr-ovp \
-    --with-template=feature/openstack-tests \
-    --enable-unsupported-config=yes
-
-* Compute build config options:
-
-    --enable-board=intel-xeon-core \
-    --enable-rootfs=ovp-openstack-compute \
-    --enable-kernel=preempt-rt \
-    --enable-addons=wr-ovp-openstack,wr-ovp \
-    --enable-unsupported-config=yes
-
-
 Testing Commands and Expected Results
 =====================================
 
