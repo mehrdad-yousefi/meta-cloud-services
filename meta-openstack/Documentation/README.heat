@@ -20,23 +20,6 @@ then Heat can add or remove resources into or out of that stack to handle
 the changing demands.
 
 
-Build Configuration Options
-===========================
-
-* Controller build config options:
-
-    --enable-board=intel-xeon-core \
-    --enable-rootfs=ovp-openstack-controller \
-    --enable-addons=wr-ovp-openstack,wr-ovp \
-    --with-template=feature/openstack-tests
-
-* Compute build config options:
-
-    --enable-board=intel-xeon-core \
-    --enable-rootfs=ovp-openstack-compute \
-    --enable-addons=wr-ovp-openstack,wr-ovp
-
-
 Test Steps
 ==========
 
