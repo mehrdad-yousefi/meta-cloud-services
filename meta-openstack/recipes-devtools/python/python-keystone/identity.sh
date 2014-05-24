@@ -41,6 +41,12 @@ if [ $? -eq 1 ]; then
 else
     DEMO_TENANT=$(keystone tenant-get demo | grep " id " | get_field 2)
 fi
+keystone tenant-get alt_demo
+if [ $? -eq 1 ]; then
+    ALT_DEMO_TENANT=$(keystone tenant-create --name=alt_demo | grep " id " | get_field 2)
+else
+    ALT_DEMO_TENANT=$(keystone tenant-get alt_demo | grep " id " | get_field 2)
+fi
 keystone tenant-get $SERVICE_TENANT_NAME
 if [ $? -eq 1 ]; then
     SERVICE_TENANT=$(keystone tenant-create --name=$SERVICE_TENANT_NAME | grep " id " | get_field 2)
@@ -60,6 +66,12 @@ if [ $? -eq 1 ]; then
     DEMO_USER=$(keystone user-create --name=demo --pass="$DEMO_PASSWORD" --email=demo@domain.com --tenant-id=$DEMO_TENANT | grep " id " | get_field 2)
 else
     DEMO_USER=$(keystone user-get demo | grep " id " | get_field 2)
+fi
+keystone user-get alt_demo
+if [ $? -eq 1 ]; then
+    ALT_DEMO_USER=$(keystone user-create --name=alt_demo --pass="$DEMO_PASSWORD" --email=alt_demo@domain.com --tenant-id=$ALT_DEMO_TENANT | grep " id " | get_field 2)
+else
+    ALT_DEMO_USER=$(keystone user-get alt_demo | grep " id " | get_field 2)
 fi
 keystone user-get nova
 if [ $? -eq 1 ]; then                                                                                                                           
@@ -135,6 +147,7 @@ keystone role-create --name heat_stack_user
 # Add Roles to Users in Tenants
 keystone user-role-list --user-id $ADMIN_USER --tenant-id $ADMIN_TENANT &> /dev/null
 keystone user-role-add --tenant-id $ADMIN_TENANT --user-id $ADMIN_USER --role-id $ADMIN_ROLE
+keystone user-role-add --tenant-id $DEMO_TENANT --user-id $ADMIN_USER --role-id $ADMIN_ROLE
 
 keystone user-role-list --user-id $NOVA_USER --tenant-id $SERVICE_TENANT &> /dev/null
 keystone user-role-add --tenant-id $SERVICE_TENANT --user-id $NOVA_USER --role-id $ADMIN_ROLE
@@ -150,6 +163,9 @@ keystone user-role-add --tenant-id $SERVICE_TENANT --user-id $CINDER_USER --role
 
 keystone user-role-list --user-id $DEMO_USER --tenant-id $DEMO_TENANT &> /dev/null
 keystone user-role-add --tenant-id $DEMO_TENANT --user-id $DEMO_USER --role-id $MEMBER_ROLE
+
+keystone user-role-list --user-id $ALT_DEMO_USER --tenant-id $ALT_DEMO_TENANT &> /dev/null
+keystone user-role-add --tenant-id $ALT_DEMO_TENANT --user-id $ALT_DEMO_USER --role-id $MEMBER_ROLE
 
 keystone user-role-list --user-id $CEILOMETER_USER --tenant_id $SERVICE_TENANT &> /dev/null
 keystone user-role-add --tenant-id $SERVICE_TENANT --user-id $CEILOMETER_USER --role-id $ADMIN_ROLE
