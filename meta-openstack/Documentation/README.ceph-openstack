@@ -235,7 +235,7 @@ Ceph is integrated properly into OpenStack
 Please note: the following commands are carried on Controller node, unless
 otherwise explicitly indicated.
 
-    $ Start Controller and Compute node in hardware targets
+    # Start Controller and Compute node in hardware targets
 
     $ ps aux | grep ceph
 
@@ -273,9 +273,13 @@ root      3808  0.0  0.0 3289468 34428 ?       Ssl  02:50   0:36 /usr/bin/ceph-o
 +----+------+--------+------------+-------------+----------+
 +----+------+--------+------------+-------------+----------+
 
-    $ Modify /etc/glance/glance-api.conf,
+    # Modify /etc/glance/glance-api.conf,
       to change "default_store = file" to "default_store = rbd",
     $ /etc/init.d/glance-api restart
+
+    # Modify /etc/cinder/cinder.conf,
+      to change "backup_driver=cinder.backup.drivers.ceph"
+    $ /etc/init.d/cinder-backup restart
 
     $ /etc/cinder/add-cinder-volume-types.sh
     $ cinder extra-specs-list
@@ -383,7 +387,7 @@ Secret value set
 
 volume-c905b9b1-10cb-413b-a949-c86ff3c1c4c6
 
-    $ On Compute node: to allow nova-compute to save glance image into
+    # On Compute node: to allow nova-compute to save glance image into
       ceph (by default it saves at the local filesystem /etc/nova/instances)
 
       modify /etc/nova/nova.conf to change:
@@ -523,7 +527,7 @@ Hello World
 Hello World
 
     $ /etc/init.d/ceph start osd.0
-    $ Wait until "ceph -s" shows "health HEALTH_OK"
+    # Wait until "ceph -s" shows "health HEALTH_OK"
     $ /etc/init.d/ceph stop osd.1
     $ On VM, run: "sudo mount /dev/vdb ceph && echo "Hello World" > ceph/test_2.log"
     $ On VM, run: "cat ceph/test*.log && sudo umount ceph"
@@ -540,7 +544,7 @@ Hello World
 
     $ /etc/init.d/ceph start osd.0
     $ /etc/init.d/ceph start osd.1
-    $ On VM, the previous mount should pass
+    # On VM, the previous mount should pass
     $ On VM, run: "sudo mount /dev/vdb ceph && echo "Hello World" > ceph/test_3.log"
     $ On VM, run: "cat ceph/test*.log && sudo umount ceph"
 
