@@ -1,0 +1,43 @@
+tempest TenantUsagesTestJSON sleeps more
+
+Two testcases:
+
+* tempest.api.compute.admin.test_simple_tenant_usage.TenantUsagesTestJSON.test_get_usage_tenant[gate]
+*  tempest.api.compute.admin.test_simple_tenant_usage.TenantUsagesTestJSON.test_get_usage_tenant_with_non_admin_user[gate]
+
+fail with the following reason:
+
+2014-05-26 22:46:23,929 Response Body: {"tenant_usage": {}}
+}}}
+
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/tempest/api/compute/admin/test_simple_tenant_usage.py", line 92, in test_get_usage_tenant_with_non_admin_user
+    self.assertEqual(len(tenant_usage), 8)
+  File "/usr/lib64/python2.7/site-packages/testtools/testcase.py", line 322, in assertEqual
+    self.assertThat(observed, matcher, message)
+  File "/usr/lib64/python2.7/site-packages/testtools/testcase.py", line 412, in assertThat
+    raise MismatchError(matchee, matcher, mismatch, verbose)
+MismatchError: 0 != 8
+
+These 2 testcases first spawn a VM for a new tenant, sleep for 2s
+and then request "tenant usage" stat from nova-compute.  However, the
+"tenant usage" stat returned is empty and thus testcases fail.
+
+Increase sleep to 20s to make sure nova-compute has enough time to collect
+stat.
+
+Signed-off-by: Vu Tran <vu.tran@windriver.com>
+
+diff --git a/tempest/api/compute/admin/test_simple_tenant_usage.py b/tempest/api/compute/admin/test_simple_tenant_usage.py
+index ce05899..fde7b5d 100644
+--- a/tempest/api/compute/admin/test_simple_tenant_usage.py
++++ b/tempest/api/compute/admin/test_simple_tenant_usage.py
+@@ -40,7 +40,7 @@ class TenantUsagesTestJSON(base.BaseComputeAdminTest):
+ 
+         # Create a server in the demo tenant
+         resp, server = cls.create_server(wait_until='ACTIVE')
+-        time.sleep(2)
++        time.sleep(20)
+ 
+         now = datetime.datetime.now()
+         cls.start = cls._parse_strtime(now - datetime.timedelta(days=1))
