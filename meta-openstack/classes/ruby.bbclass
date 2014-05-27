@@ -81,7 +81,7 @@ export GEM_HOME = "${STAGING_DIR_NATIVE}/usr/lib/ruby/gems/${RUBY_GEM_VERSION}"
 RUBY_BUILD_GEMS ?= "${BPN}.gemspec"
 RUBY_INSTALL_GEMS ?= "${BPN}-${BPV}.gem"
 
-RUBY_COMPILE_FLAGS ?= 'LANG="C.UTF-8" LC_ALL="C.UTF-8"'
+RUBY_COMPILE_FLAGS ?= 'LANG="en_US.UTF-8" LC_ALL="en_US.UTF-8"'
 
 ruby_do_compile() {
 	for gem in ${RUBY_BUILD_GEMS}; do
