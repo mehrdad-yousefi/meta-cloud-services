@@ -1,0 +1,274 @@
+#!/bin/bash
+#Location of servics configuration files
+D="%SYSCONFDIR%"
+TEMPLATES="%DEPLOYCHEF_ROOT_DIR%/cookbooks/openstack/templates/default"
+#Chefsolo template suffix
+SUFFIX='.erb'
+#List of services whose config files needs to be converted to templates
+service_list="ceph swift nova heat cinder keystone glance neutron ceilometer init.d"
+source %DEPLOYCHEF_ROOT_DIR%/conf-templates/constants.inc
+source %DEPLOYCHEF_ROOT_DIR%/conf-templates/nova-template.inc
+source %DEPLOYCHEF_ROOT_DIR%/conf-templates/ceph-template.inc
+source %DEPLOYCHEF_ROOT_DIR%/conf-templates/swift-template.inc
+source %DEPLOYCHEF_ROOT_DIR%/conf-templates/neutron-template.inc
+source %DEPLOYCHEF_ROOT_DIR%/conf-templates/ceilometer-template.inc
+source %DEPLOYCHEF_ROOT_DIR%/conf-templates/glance-template.inc
+source %DEPLOYCHEF_ROOT_DIR%/conf-templates/postgresql-template.inc
+source %DEPLOYCHEF_ROOT_DIR%/conf-templates/keystone-template.inc
+source %DEPLOYCHEF_ROOT_DIR%/conf-templates/cinder-template.inc
+source %DEPLOYCHEF_ROOT_DIR%/conf-templates/heat-template.inc
+source %DEPLOYCHEF_ROOT_DIR%/conf-templates/hosts-template.inc
+
+SRC="${D}/%POSTINSTS_DIR%/"
+DST=${TEMPLATES}
+#Copy postinstall scripts and make chefsolo templates
+postinsts_make_templates(){
+    for file in $(ls -h ${SRC}); do
+        dst_file=${DST}/$file$SUFFIX
+        install -m 0644 ${SRC}/$file $dst_file
+        sed 's|ADMIN_PASSWORD=.*$|ADMIN_PASSWORD=<%=node[:ADMIN_PASSWORD]%> \\|' -i $dst_file
+        sed 's|SERVICE_PASSWORD=.*$|SERVICE_PASSWORD=<%=node[:SERVICE_PASSWORD]%> \\|' -i $dst_file
+        sed 's|SERVICE_TENANT_NAME=.*$|SERVICE_TENANT_NAME=<%=node[:SERVICE_TENANT_NAME]%> \\|' -i $dst_file
+        sed "s|$CONTROLLER_IP|<%=node[:CONTROLLER_IP]%>|g" -i $dst_file
+        sed "s|$CONTROLLER_HOST|<%=node[:CONTROLLER_HOST]%>|g" -i $dst_file
+    done
+}
+
+#These sets of make_*_templates() helper functions
+#copy the respective configuration files if they
+#exist and converts them to chefsolo templates
+etc-hosts_make_templates(){
+    #Creat template file for /etc/hosts
+    SRC=${D}
+    DST=${TEMPLATES}
+    file_name=hosts
+    install -m 0644 ${SRC}/$file_name ${DST}
+    file_name="${DST}/$file_name"
+    hosts_chefsolo_template $file_name
+}
+
+make_ceph_templates(){
+    file_name=ceph.conf
+    if [ -f ${SRC}/$file_name ]; then
+        install -m 0644 ${SRC}/$file_name ${DST}
+        file_name="${DST}/$file_name"
+        ceph-conf_chefsolo_template $file_name
+    fi
+    file_name=ceph-setup
+    if [ -f ${SRC}/$file_name ]; then
+        install -m 0644 ${SRC}/../init.d/$file_name ${DST}
+        file_name="${DST}/$file_name"
+        ceph-setup_chefsolo_template $file_name
+    fi
+}
+
+make_swift_templates(){
+    file_name='test.conf'
+    if [ -f ${SRC}/$file_name ]; then
+        install -m 0644 ${SRC}/$file_name ${DST}
+        file_name="${DST}/$file_name"
+        test-conf_chefsolo_template $file_name
+    fi
+
+    file_name='dispersion.conf'
+    if [ -f ${SRC}/$file_name ]; then
+        install -m 0644 ${SRC}/$file_name ${DST}
+        file_name="${DST}/$file_name"
+        dispersion-conf_chefsolo_template $file_name
+    fi
+    file_name='proxy-server.conf'
+    if [ -f ${SRC}/$file_name ]; then
+        install -m 0644 ${SRC}/$file_name ${DST}
+        file_name="${DST}/$file_name"
+        proxy-server_chefsolo_template $file_name
+    fi
+}
+
+make_nova_templates(){
+    file_name=nova.conf
+    if [ -f ${SRC}/$file_name ]; then
+        install -m 0644 ${SRC}/$file_name ${DST}
+        file_name="${DST}/$file_name"
+        nova-conf_chefsolo_template $file_name
+    fi
+    file_name=openrc
+    if [ -f ${SRC}/$file_name ]; then
+        install -m 0644 ${SRC}/$file_name ${DST}
+        file_name="${DST}/$file_name"
+        openrc_chefsolo_template $file_name
+    fi
+    file_name=api-paste.ini
+    if [ -f ${SRC}/$file_name ]; then
+        install -m 0644 ${SRC}/$file_name ${DST}
+        file_name="${DST}/$file_name"
+        api-paste_chefsolo_template $file_name
+    fi
+
+    file_name=deploy.conf
+    if [ -f ${SRC}/$file_name ]; then
+        install -m 0644 ${SRC}/$file_name ${DST}
+        file_name="${DST}/$file_name"
+        deploy-conf_chefsolo_template $file_name
+    fi
+}
+
+make_neutron_templates(){
+    file_name=neutron.conf
+    install -m 0644 ${SRC}/$file_name ${DST}
+    file_name="${DST}/$file_name"
+    neutron-conf_chefsolo_template $file_name
+    if [ -d ${SRC}/plugins/openvswitch ]; then
+        file_name=ovs_neutron_plugin.ini
+        install -m 0644 ${SRC}/plugins/openvswitch/$file_name ${DST}
+        file_name="${DST}/$file_name"
+        neutron-plugins_chefsolo_template $file_name
+    fi
+
+    if [ -d ${SRC}/plugins/linuxbridge ]; then
+        file_name=linuxbridge_conf.ini
+        install -m 0644 ${SRC}/plugins/linuxbridge/$file_name ${DST}
+        file_name="${DST}/$file_name"
+        neutron-plugins_chefsolo_template $file_name
+    fi
+}
+make_heat_templates(){
+    file_name=heat.conf
+    if [ -f ${SRC}/$file_name ]; then
+        install -m 0644 ${SRC}/$file_name ${DST}
+        file_name="${DST}/$file_name"
+        heat-conf_chefsolo_template $file_name
+    fi
+}
+
+make_cinder_templates(){
+    file_name=api-paste.ini
+    if [ -f ${SRC}/$file_name ]; then
+        install -m 0644 ${SRC}/$file_name ${DST}/${file_name}.cinder
+        file_name="${DST}/${file_name}.cinder"
+        cinder-api_chefsolo_template $file_name
+    fi
+
+    file_name=cinder.conf
+    if [ -f ${SRC}/$file_name ]; then
+        install -m 0644 ${SRC}/$file_name ${DST}
+        file_name="${DST}/$file_name"
+        cinder-conf_chefsolo_template $file_name
+    fi
+}
+make_keystone_templates(){
+    file_name=keystone.conf
+    if [ -f ${SRC}/$file_name ]; then
+        install -m 0644 ${SRC}/$file_name ${DST}
+        file_name="${DST}/$file_name"
+        keystone-conf_chefsolo_template $file_name
+    fi
+    file_name=identity.sh
+    if [ -f ${SRC}/$file_name ]; then
+        install -m 0644 ${SRC}/$file_name ${DST}
+        file_name="${DST}/$file_name"
+        keystone-identity_chefsolo_template $file_name
+    fi
+}
+make_glance_templates(){
+    file_name=glance-api.conf
+    if [ -f ${SRC}/$file_name ]; then
+        install -m 0644 ${SRC}/$file_name ${DST}
+        file_name="${DST}/$file_name"
+        glance_chefsolo_template $file_name
+    fi
+
+    file_name=glance-cache.conf
+    if [ -f ${SRC}/$file_name ]; then
+        install -m 0644 ${SRC}/$file_name ${DST}
+        file_name="${DST}/$file_name"
+        glance_chefsolo_template $file_name
+    fi
+    file_name=glance-registry.conf
+    if [ -f ${SRC}/$file_name ]; then
+        install -m 0644 ${SRC}/$file_name ${DST}
+        file_name="${DST}/$file_name"
+        glance_chefsolo_template $file_name
+    fi
+}
+
+make_ceilometer_templates(){
+
+    file_name=ceilometer.conf
+    if [ -f ${SRC}/$file_name ]; then
+        install -m 0644 ${SRC}/$file_name ${DST}
+        file_name="${DST}/$file_name"
+        ceilometer-conf_chefsolo_template $file_name
+    fi
+}
+
+make_postgresql_templates(){
+
+    file_name=postgresql-init
+    if [ -f ${SRC}/$file_name ]; then
+        install -m 0644 ${SRC}/$file_name ${DST}
+        file_name="${DST}/$file_name"
+        postgresql_chefsolo_template $file_name
+    fi
+}
+
+
+#This function installs the config/script files of services
+#and converts them into templates.
+services-conf_make_templates(){
+    for mod in ${service_list}; do
+        if [ -d ${D}/$mod ]; then
+            SRC=${D}/$mod
+            DST=${TEMPLATES}
+            case $mod in
+                ceph)
+                    #Copy ceph configuration files and convert them to templates
+                    make_ceph_templates
+                    ;;
+                swift)
+                    #Copy swift configuration files and convert them into
+                    #chefsolo templates
+                    make_swift_templates
+
+                    ;;
+                nova)
+                    #Copy nova configuration files and convert them into
+                    #chefsolo templates
+                    make_nova_templates
+                    ;;
+                neutron)
+                    #Copy neutron configuration files and convert them into
+                    #chefsolo templates
+                    make_neutron_templates
+                    ;;
+                heat)
+                    make_heat_templates
+                    ;;
+                cinder)
+                    make_cinder_templates
+                    ;;
+                keystone)
+                    make_keystone_templates
+                    ;;
+                glance)
+                    #Copy glance configuration files and convert them into
+                    #chefsolo templates
+                    make_glance_templates
+                    ;;
+                ceilometer)
+                    make_ceilometer_templates
+                    ;;
+                init.d)
+                    make_postgresql_templates
+                    ;;
+                *)
+                    ;;
+            esac
+            echo "Service present in $mod"
+        fi
+    done
+}
+
+install -d ${TEMPLATES}
+postinsts_make_templates
+etc-hosts_make_templates
+services-conf_make_templates
