@@ -69,6 +69,9 @@ do_install_append() {
 
         sed 's:@suffix@:alarm-evaluator:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-alarm-evaluator.init.sh
         install -m 0755 ${WORKDIR}/ceilometer-alarm-evaluator.init.sh ${D}${sysconfdir}/init.d/ceilometer-alarm-evaluator
+
+        sed 's:@suffix@:agent-notification:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-agent-notification.init.sh
+        install -m 0755 ${WORKDIR}/ceilometer-agent-notification.init.sh ${D}${sysconfdir}/init.d/ceilometer-agent-notification
     fi
 
     cp setup-test-env.sh ${CEILOMETER_CONF_DIR}
@@ -96,6 +99,7 @@ inherit setuptools identity hosts update-rc.d default_configs
 PACKAGES += " ${SRCNAME}-tests"
 PACKAGES += "${SRCNAME}-setup ${SRCNAME}-common ${SRCNAME}-api"
 PACKAGES += "${SRCNAME}-alarm-notifier ${SRCNAME}-alarm-evaluator"
+PACKAGES += "${SRCNAME}-agent-notification"
 PACKAGES += "${SRCNAME}-collector ${SRCNAME}-compute ${SRCNAME}-controller"
 
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
@@ -121,6 +125,10 @@ FILES_${SRCNAME}-alarm-evaluator = "${bindir}/ceilometer-alarm-evaluator \
 
 FILES_${SRCNAME}-alarm-notifier = "${bindir}/ceilometer-alarm-notifier \
                                    ${sysconfdir}/init.d/ceilometer-alarm-notifier \
+"
+
+FILES_${SRCNAME}-agent-notification = "${bindir}/ceilometer-agent-notification \
+                                       ${sysconfdir}/init.d/ceilometer-agent-notification \
 "
 
 FILES_${SRCNAME}-compute = "${bindir}/ceilometer-agent-compute \
@@ -187,7 +195,7 @@ RDEPENDS_${PN} += " \
 	python-ipaddr \
 	"
 
-RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common ${SRCNAME}-alarm-notifier ${SRCNAME}-alarm-evaluator \
+RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common ${SRCNAME}-alarm-notifier ${SRCNAME}-alarm-evaluator ${SRCNAME}-agent-notification \
                                   postgresql postgresql-client python-psycopg2 tgt"
 RDEPENDS_${SRCNAME}-api = "${SRCNAME}-controller"
 RDEPENDS_${SRCNAME}-collector = "${SRCNAME}-controller"
@@ -195,7 +203,7 @@ RDEPENDS_${SRCNAME}-compute = "${PN} ${SRCNAME}-common python-ceilometerclient l
 RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-controller"
 
 INITSCRIPT_PACKAGES =  "${SRCNAME}-api ${SRCNAME}-collector ${SRCNAME}-compute ${SRCNAME}-controller"
-INITSCRIPT_PACKAGES += "${SRCNAME}-alarm-notifier ${SRCNAME}-alarm-evaluator"
+INITSCRIPT_PACKAGES += "${SRCNAME}-alarm-notifier ${SRCNAME}-alarm-evaluator ${SRCNAME}-agent-notification"
 INITSCRIPT_NAME_${SRCNAME}-api = "${SRCNAME}-api"
 INITSCRIPT_PARAMS_${SRCNAME}-api = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-collector = "${SRCNAME}-collector"
@@ -208,3 +216,5 @@ INITSCRIPT_NAME_${SRCNAME}-alarm-notifier = "${SRCNAME}-alarm-notifier"
 INITSCRIPT_PARAMS_${SRCNAME}-alarm-notifier = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-alarm-evaluator = "${SRCNAME}-alarm-evaluator"
 INITSCRIPT_PARAMS_${SRCNAME}-alarm-evaluator = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+INITSCRIPT_NAME_${SRCNAME}-agent-notification = "${SRCNAME}-agent-notification"
+INITSCRIPT_PARAMS_${SRCNAME}-agent-notification = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
