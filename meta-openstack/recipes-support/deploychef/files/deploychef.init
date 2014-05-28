@@ -1,0 +1,11 @@
+#!/bin/bash
+#After this script runs, chefsolo postinsts templates
+#script will all be in chefsolo default templates directory
+i=%DEPLOYCHEF_ROOT_DIR%/generate-templates
+if [ -f $i ] && $i; then
+    echo "Chefsolo templates made successfully"
+    rm -f /etc/rcS.d/S96deploychef
+    rm -f $i
+else
+    echo "ERROR: $i failed."
+fi
