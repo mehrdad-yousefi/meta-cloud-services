@@ -17,6 +17,7 @@ DEPENDS_${PN} += "python-django \
     python-cinderclient \
     python-glanceclient \
     python-keystoneclient \
+    python-nose-exclude \
     python-novaclient \
     python-neutronclient \
     python-heatclient \
@@ -130,6 +131,7 @@ RDEPENDS_${PN} += " python-django \
     python-keystoneclient \
     python-lesscpy \
     python-novaclient \
+    python-nose-exclude \
     python-neutronclient \
     python-pytz \
     python-six \
