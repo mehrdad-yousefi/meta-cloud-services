@@ -11,6 +11,7 @@ DEPENDS += " \
 
 DEPENDS_${PN} += "python-django \
     python-django-compressor \
+    python-django-nose \
     python-django-openstack-auth \
     python-netaddr \
     python-cinderclient \
@@ -119,6 +120,7 @@ RDEP_ARCH_VAR_ia32 = "nodejs"
 RDEPENDS_${PN} += " python-django \
     python-django-appconf \
     python-django-compressor \
+    python-django-nose \
     python-django-openstack-auth \
     python-netaddr \
     python-ceilometerclient \
