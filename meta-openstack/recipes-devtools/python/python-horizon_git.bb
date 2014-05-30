@@ -38,6 +38,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
     file://openstack-dashboard-apache.conf \
     file://local_settings.py \
     file://horizon-fix-test-script-to-not-require-coverage-tool.patch \
+    file://horizon-use-full-package-path-to-test-directories.patch \
     "
 
 SRCREV="cd1de75ee2a8c246d5564e96ccc48185816c2290"
@@ -68,6 +69,7 @@ do_install_append() {
         sed 's:@PYTHON_SITEPACKAGES@:${PYTHON_SITEPACKAGES_DIR}:' ${WORKDIR}/horizon.init >${WORKDIR}/horizon
         install -m 0755 ${WORKDIR}/horizon ${D}${sysconfdir}/init.d/horizon
     fi
+    sed -i -e 's#%PYTHON_SITEPACKAGES%#${PYTHON_SITEPACKAGES_DIR}#g' ${D}${PYTHON_SITEPACKAGES_DIR}/horizon/test/settings.py
 
     # no longer required. kept as reference.
     # mv ${D}${datadir}/bin ${DASHBOARD_DIR}/bin
