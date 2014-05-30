@@ -36,6 +36,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
     file://fix_bindir_path.patch \
     file://openstack-dashboard-apache.conf \
     file://local_settings.py \
+    file://horizon-fix-test-script-to-not-require-coverage-tool.patch \
     "
 
 SRCREV="0c3b71055c0d169b8245aee773438dbcb46c2bcf"
