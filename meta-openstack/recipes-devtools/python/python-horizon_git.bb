@@ -35,6 +35,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
     file://fix_bindir_path.patch \
     file://openstack-dashboard-apache.conf \
     file://local_settings.py \
+    file://horizon-fix-test-script-to-not-require-coverage-tool.patch \
     "
 
 SRCREV="cd1de75ee2a8c246d5564e96ccc48185816c2290"
