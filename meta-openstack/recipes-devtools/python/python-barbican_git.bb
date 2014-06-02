@@ -8,7 +8,7 @@ PR = "r0"
 SRCNAME = "barbican"
 BARBICAN_MAX_PACKET_SIZE ?= "65535"
 
-SRC_URI = "git://github.com/stackforge/barbican.git;branch=master \
+SRC_URI = "git://github.com/openstack/barbican.git;branch=master \
            file://barbican.init \
            file://barbican-increase-buffer-size-to-support-PKI-tokens.patch \
           "
