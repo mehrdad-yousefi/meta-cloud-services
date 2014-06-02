@@ -17,6 +17,7 @@ S = "${WORKDIR}/git"
 inherit setuptools
 
 DEPENDS += " \
+        e2fsprogs \
         python-pip \
         python-six \
         "
