@@ -59,6 +59,8 @@ do_install_append() {
         install -m 0755 ${WORKDIR}/keystone ${D}${sysconfdir}/init.d/keystone
     fi
 
+    install -d ${KEYSTONE_PACKAGE_DIR}/tests/tmp
+
     sed -e "s:%KEYSTONE_PACKAGE_DIR%:${PYTHON_SITEPACKAGES_DIR}/keystone:g" -i ${KEYSTONE_PACKAGE_DIR}/tests/test_overrides.conf
 
     cp run_tests.sh ${KEYSTONE_CONF_DIR}
