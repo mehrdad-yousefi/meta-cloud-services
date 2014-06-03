@@ -28,6 +28,7 @@ TOKEN_FORMAT ?= "PKI"
 do_install_append() {
 
     KEYSTONE_CONF_DIR=${D}${sysconfdir}/keystone
+    KEYSTONE_PACKAGE_DIR=${D}${PYTHON_SITEPACKAGES_DIR}/keystone
 
     install -m 750 -d ${KEYSTONE_CONF_DIR}
 
@@ -40,6 +41,8 @@ do_install_append() {
     install -m 600 ${S}/etc/policy.json ${KEYSTONE_CONF_DIR}/policy.json
     install -m 600 ${S}/etc/keystone.conf.sample ${KEYSTONE_CONF_DIR}/keystone.conf.sample
     install -m 600 ${S}/etc/keystone-paste.ini ${KEYSTONE_CONF_DIR}/keystone-paste.ini
+
+    cp -r ${S}/examples ${KEYSTONE_PACKAGE_DIR}
 
     sed -e "s:%SERVICE_TOKEN%:${SERVICE_TOKEN}:g" -i ${KEYSTONE_CONF_DIR}/keystone.conf
     sed -e "s:%DB_USER%:${DB_USER}:g" -i ${KEYSTONE_CONF_DIR}/keystone.conf
