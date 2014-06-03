@@ -13,6 +13,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://keystone \
            file://openrc \
            file://keystone-search-in-etc-directory-for-config-files.patch \
+           file://keystone-fix-location-of-files-for-tests.patch \
            "
 
 SRCREV="a96d1a44bc0f074729c312e5c2a0f0875edf1765"
@@ -57,6 +58,8 @@ do_install_append() {
         install -d ${D}${sysconfdir}/init.d
         install -m 0755 ${WORKDIR}/keystone ${D}${sysconfdir}/init.d/keystone
     fi
+
+    sed -e "s:%KEYSTONE_PACKAGE_DIR%:${PYTHON_SITEPACKAGES_DIR}/keystone:g" -i ${KEYSTONE_PACKAGE_DIR}/tests/test_overrides.conf
 
     cp run_tests.sh ${KEYSTONE_CONF_DIR}
 }
