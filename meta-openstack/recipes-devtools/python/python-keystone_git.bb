@@ -14,6 +14,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://openrc \
            file://keystone-search-in-etc-directory-for-config-files.patch \
            file://keystone-fix-location-of-files-for-tests.patch \
+           file://keystone-remove-git-commands-in-tests.patch \
            "
 
 SRCREV="e7c29874e5a0e43f4f0e9970556c701af508152f"
