@@ -4,7 +4,7 @@ LICENSE = "MPL-1.1"
 LIC_FILES_CHKSUM = "file://LICENSE-MPL-RabbitMQ;md5=b651d0a6feaaf2bf5eb9d36b2495c510"
 SECTION = "network"
 DEPENDS = "erlang-native libxslt python-simplejson zip-native unzip-native libxslt-native"
-PR = "r1"
+PR = "r2"
 
 SRC_URI = "http://www.rabbitmq.com/releases/rabbitmq-server/v${PV}/${PN}-${PV}.tar.gz \
            file://rabbitmq-server \
@@ -59,3 +59,4 @@ FILES_${PN} += " ${libdir}/rabbitmq/lib/${PN}-${PV}/* \
                "
 
 FILES_${PN}-doc += "LICENSE* INSTALL"
+INSANE_SKIP_${PN} = "unsafe-references-in-scripts"
