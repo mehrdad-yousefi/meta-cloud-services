@@ -131,6 +131,7 @@ RDEPENDS_${PN} += " \
         python-lxml \
         python-iso8601 \
         python-keystoneclient \
+        python-openstack-nose \
         python-oslo.config \
         python-dogpile.core \
         python-dogpile.cache \
