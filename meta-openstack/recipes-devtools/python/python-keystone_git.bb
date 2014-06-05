@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://identity.sh \
            file://keystone \
            file://openrc \
-           file://Update-test-core-ETCDIR-location.patch \
+           file://keystone-search-in-etc-directory-for-config-files.patch \
            "
 
 SRCREV="e7c29874e5a0e43f4f0e9970556c701af508152f"
@@ -39,6 +39,7 @@ do_install_append() {
     install -m 600 ${S}/etc/logging.conf.sample ${KEYSTONE_CONF_DIR}/logging.conf
     install -m 600 ${S}/etc/policy.json ${KEYSTONE_CONF_DIR}/policy.json
     install -m 600 ${S}/etc/keystone.conf.sample ${KEYSTONE_CONF_DIR}/keystone.conf.sample
+    install -m 600 ${S}/etc/keystone-paste.ini ${KEYSTONE_CONF_DIR}/keystone-paste.ini
 
     sed -e "s:%SERVICE_TOKEN%:${SERVICE_TOKEN}:g" -i ${KEYSTONE_CONF_DIR}/keystone.conf
     sed -e "s:%DB_USER%:${DB_USER}:g" -i ${KEYSTONE_CONF_DIR}/keystone.conf

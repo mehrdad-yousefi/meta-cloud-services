@@ -1,0 +1,44 @@
+From ed3c1f7c8eb90506eda1aafbc6d4de3b9e2abe71 Mon Sep 17 00:00:00 2001
+From: Keith Holman <Keith.Holman@windriver.com>
+Date: Tue, 3 Jun 2014 11:28:23 -0400
+Subject: [PATCH] keystone: search in etc directory for config files
+
+The core.py file in the tests directory is setup to find
+the file as they exist in the source code tree.  When
+deployed some configuration files are moved to the /etc
+directory.  This modification changes the test code to
+find the files in the new location.
+
+Signed-off-by: Keith Holman <Keith.Holman@windriver.com>
+---
+ keystone/tests/core.py | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/keystone/tests/core.py b/keystone/tests/core.py
+index 860f68d..8e069fb 100644
+--- a/keystone/tests/core.py
++++ b/keystone/tests/core.py
+@@ -75,9 +75,9 @@ from keystone.openstack.common import policy as common_policy  # noqa
+ 
+ LOG = logging.getLogger(__name__)
+ TESTSDIR = os.path.dirname(os.path.abspath(__file__))
+-ROOTDIR = os.path.normpath(os.path.join(TESTSDIR, '..', '..'))
++ROOTDIR = os.path.normpath(os.path.join(TESTSDIR, '..'))
+ VENDOR = os.path.join(ROOTDIR, 'vendor')
+-ETCDIR = os.path.join(ROOTDIR, 'etc')
++ETCDIR = "/etc/keystone"
+ TMPDIR = os.path.join(TESTSDIR, 'tmp')
+ 
+ CONF = config.CONF
+@@ -380,7 +380,7 @@ class TestCase(NoModule, testtools.TestCase):
+     def _paste_config(self, config):
+         if not config.startswith('config:'):
+             test_path = os.path.join(TESTSDIR, config)
+-            etc_path = os.path.join(ROOTDIR, 'etc', config)
++            etc_path = os.path.join(ETCDIR, config)
+             for path in [test_path, etc_path]:
+                 if os.path.exists('%s-paste.ini' % path):
+                     return 'config:%s-paste.ini' % path
+-- 
+1.9.3
+
