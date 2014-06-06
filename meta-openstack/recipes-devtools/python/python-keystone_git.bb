@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://keystone \
            file://openrc \
            file://Update-test-core-ETCDIR-location.patch \
-	  "
+           "
 
 SRCREV="e7c29874e5a0e43f4f0e9970556c701af508152f"
 PV="2013.2.3+git${SRCPV}"
@@ -119,23 +119,23 @@ DEPENDS += " \
 
 RDEPENDS_${PN} += " \
         python-pam \
-	python-webob \
-	python-eventlet \
-	python-greenlet \
-	python-pastedeploy \
-	python-paste \
-	python-routes \
-	python-sqlalchemy \
-	python-sqlalchemy-migrate \
-	python-passlib \
-	python-lxml \
-	python-iso8601 \
-	python-keystoneclient \
-	python-oslo.config \
+        python-webob \
+        python-eventlet \
+        python-greenlet \
+        python-pastedeploy \
+        python-paste \
+        python-routes \
+        python-sqlalchemy \
+        python-sqlalchemy-migrate \
+        python-passlib \
+        python-lxml \
+        python-iso8601 \
+        python-keystoneclient \
+        python-oslo.config \
         python-dogpile.core \
         python-dogpile.cache \
         python-pbr \
-	"
+        "
 
 # TODO:
 #    if DISTRO_FEATURE contains "tempest" then add *-tests to the main RDEPENDS
