@@ -22,10 +22,17 @@ DISTUTILS_INSTALL_ARGS_append = " ${@base_contains('DISTRO_FEATURES', 'systemd',
 MANAGE_HOSTS ?= "False"
 HOSTNAME ?= ""
 
+do_install_prepend() {
+    sed -e 's:/usr/lib/${BPN}:${libdir}/${BPN}:' -i ${S}/setup.py
+}
+
 do_install_append() {
     sed -e "s:%MANAGE_HOSTS%:${MANAGE_HOSTS}:g" -i ${WORKDIR}/cloud.cfg
     sed -e "s:%HOSTNAME%:${HOSTNAME}:g" -i ${WORKDIR}/cloud.cfg
     install -m 0755 ${WORKDIR}/cloud.cfg ${D}${sysconfdir}/cloud/cloud.cfg
+
+    ln -s ${libdir}/${BPN}/uncloud-init ${D}${sysconfdir}/cloud/uncloud-init
+    ln -s ${libdir}/${BPN}/write-ssh-key-fingerprints ${D}${sysconfdir}/cloud/write-ssh-key-fingerprints
 }
 
 inherit setuptools update-rc.d
