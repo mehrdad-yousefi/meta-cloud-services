@@ -18,15 +18,14 @@ SRC_URI[md5sum] = "9cf4246c181c324bdbd553fe9b348373"
 SRC_URI[sha256sum] = "73e64151203ae0c347c488358e71ca582bb7fb7f0d66df86b71c42050390eb9b"
 
 do_install () {
-    install -d ${D}${base_sbindir}
-    install -m 755 ${S}/gdisk ${D}${base_sbindir}/
-    install -m 755 ${S}/cgdisk ${D}${base_sbindir}/
-    install -m 755 ${S}/sgdisk ${D}${base_sbindir}/
-    install -m 755 ${S}/fixparts ${D}${base_sbindir}/
+    install -d ${D}${sbindir}
+    install -m 755 ${S}/gdisk ${D}${sbindir}/
+    install -m 755 ${S}/cgdisk ${D}${sbindir}/
+    install -m 755 ${S}/sgdisk ${D}${sbindir}/
+    install -m 755 ${S}/fixparts ${D}${sbindir}/
 }
 
-FILES_${PN} += "${base_sbindir}/gdisk \
-                ${base_sbindir}/cgdisk \
-                ${base_sbindir}/sgdisk \
-                ${base_sbindir}/fixparts \
+FILES_${PN} += "${sbindir}/* \
 "
+
+DEPENDS += "util-linux"
