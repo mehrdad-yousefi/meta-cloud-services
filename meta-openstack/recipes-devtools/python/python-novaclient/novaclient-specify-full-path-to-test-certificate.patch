@@ -1,0 +1,35 @@
+From bdd853d38c7b14088d3e6368e298201c249ab004 Mon Sep 17 00:00:00 2001
+From: Keith Holman <Keith.Holman@windriver.com>
+Date: Fri, 13 Jun 2014 09:54:41 -0400
+Subject: [PATCH] novaclient: specify full path to test certificate
+
+The tests shipped with novaclient assume that the files
+exist at the same location as are appear within the
+source tree.  The tests also assume that the test is ran
+from the root of the tree. This causes a test to fail as
+it can't find a test certificate used in one of the
+tests.  This patch fixes the affected test by putting in
+an identifier that is replaced with the full path to the
+certificate file.
+
+Signed-off-by: Keith Holman <Keith.Holman@windriver.com>
+---
+ novaclient/tests/v1_1/test_servers.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/novaclient/tests/v1_1/test_servers.py b/novaclient/tests/v1_1/test_servers.py
+index a48204c..443adc3 100644
+--- a/novaclient/tests/v1_1/test_servers.py
++++ b/novaclient/tests/v1_1/test_servers.py
+@@ -462,7 +462,7 @@ class ServersTest(utils.TestCase):
+ 
+     def test_get_password(self):
+         s = cs.servers.get(1234)
+-        self.assertEqual(s.get_password('novaclient/tests/idfake.pem'),
++        self.assertEqual(s.get_password('%PYTHON_SITEPACKAGES_DIR%/novaclient/tests/idfake.pem'),
+                          b'FooBar123')
+         cs.assert_called('GET', '/servers/1234/os-server-password')
+ 
+-- 
+1.9.3
+
