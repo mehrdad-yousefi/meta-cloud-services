@@ -83,6 +83,8 @@ do_install_append() {
     sed -e "s:%DB_USER%:${DB_USER}:g" -i ${NOVA_CONF_DIR}/nova.conf
     sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${NOVA_CONF_DIR}/nova.conf
 
+    sed -e "s:%METADATA_SHARED_SECRET%:${METADATA_SHARED_SECRET}:g" -i ${NOVA_CONF_DIR}/nova.conf
+
     sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${NOVA_CONF_DIR}/nova.conf
     sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${NOVA_CONF_DIR}/nova.conf
 
