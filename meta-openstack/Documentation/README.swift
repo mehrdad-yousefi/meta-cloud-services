@@ -260,7 +260,7 @@ b1a1b6b34a6852cdd51cd487a01192cc  100M_c2.org
 (The md5sums of each pair "zzz.save" and "zzz.org" files must be the same)
 
     $ neutron net-create mynetwork
-    $ glance image-create --name myfirstimage --is-public true --container-format bare --disk-format qcow2 --file /root/images/cirros-0.3.0-x86_64-disk.img
+    $ glance image-create --name myfirstimage --is-public true --container-format bare --disk-format qcow2 --file /root/images/cirros-*-x86_64-disk.img
     $ glance image-list
 
 +--------------------------------------+--------------+-------------+------------------+---------+--------+
@@ -277,10 +277,10 @@ b1a1b6b34a6852cdd51cd487a01192cc  100M_c2.org
 (The object name in the "glance" container must be the same as glance image id just created)
 
     $ swift download glance 79f52103-5b22-4aa5-8159-2d146b82b0b2
-    $ md5sum 79f52103-5b22-4aa5-8159-2d146b82b0b2 /root/images/cirros-0.3.0-x86_64-disk.img
+    $ md5sum 79f52103-5b22-4aa5-8159-2d146b82b0b2 /root/images/cirros-*-x86_64-disk.img
 
 50bdc35edb03a38d91b1b071afb20a3c  79f52103-5b22-4aa5-8159-2d146b82b0b2
-50bdc35edb03a38d91b1b071afb20a3c  /root/images/cirros-0.3.0-x86_64-disk.img
+50bdc35edb03a38d91b1b071afb20a3c  /root/images/cirros-*-x86_64-disk.img
 
 (The md5sum of these 2 files must be the same)
 

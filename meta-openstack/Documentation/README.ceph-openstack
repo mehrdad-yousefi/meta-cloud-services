@@ -256,7 +256,7 @@ root      3808  0.0  0.0 3289468 34428 ?       Ssl  02:50   0:36 /usr/bin/ceph-o
 | 15157fda-0940-4eba-853d-52338ace3362 | mynetwork |         |
 +--------------------------------------+-----------+---------+
 
-    $ glance image-create --name myfirstimage --is-public true --container-format bare --disk-format qcow2 --file /root/images/cirros-0.3.0-x86_64-disk.img
+    $ glance image-create --name myfirstimage --is-public true --container-format bare --disk-format qcow2 --file /root/images/cirros-*-x86_64-disk.img
     $ nova boot --image myfirstimage --flavor 1 myinstance
     $ nova list
 
@@ -293,7 +293,7 @@ root      3808  0.0  0.0 3289468 34428 ?       Ssl  02:50   0:36 /usr/bin/ceph-o
 | d38811d4-741a-4a68-afe3-fb5892160d7c |    nfs    | {u'volume_backend_name': u'Generic_NFS'} |
 +--------------------------------------+-----------+------------------------------------------+
 
-    $ glance image-create --name mysecondimage --is-public true --container-format bare --disk-format qcow2 --file /root/images/cirros-0.3.0-x86_64-disk.img
+    $ glance image-create --name mysecondimage --is-public true --container-format bare --disk-format qcow2 --file /root/images/cirros-*-x86_64-disk.img
     $ glance image-list
 
 +--------------------------------------+---------------+-------------+------------------+---------+--------+
