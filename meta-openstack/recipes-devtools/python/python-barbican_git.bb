@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/openstack/barbican.git;branch=master \
            file://barbican.init \
            file://barbican-increase-buffer-size-to-support-PKI-tokens.patch \
            file://barbican-fix-path-to-find-configuration-files.patch \
+           file://barbican-handle-white-space-in-date-strings.patch \
           "
 
 SRCREV="177d4499af6b261f48814503e3565f433e86cc66"
