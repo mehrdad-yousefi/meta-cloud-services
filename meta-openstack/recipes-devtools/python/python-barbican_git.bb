@@ -11,6 +11,7 @@ BARBICAN_MAX_PACKET_SIZE ?= "65535"
 SRC_URI = "git://github.com/openstack/barbican.git;branch=master \
            file://barbican.init \
            file://barbican-increase-buffer-size-to-support-PKI-tokens.patch \
+           file://barbican-fix-path-to-find-configuration-files.patch \
           "
 
 SRCREV="177d4499af6b261f48814503e3565f433e86cc66"
@@ -42,6 +43,9 @@ do_install_append() {
 	rm -f ${D}/usr/bin/barbican.sh
 	rm -f ${D}/usr/bin/barbican-worker.py
     fi
+
+    sed -e "s:%BARBICAN_CONF_DIR%:${sysconfdir}/${SRCNAME}:g" \
+        -i ${D}/${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}/tests/api/test_resources_policy.py
 }
 
 USERADD_PACKAGES = "${PN}"
