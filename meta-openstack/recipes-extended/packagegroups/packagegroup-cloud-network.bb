@@ -10,6 +10,7 @@ RDEPENDS_${PN} = " \
     neutron-plugin-openvswitch \
     neutron-dhcp-agent \
     neutron-l3-agent \
+    neutron-metadata-agent \
     openvswitch-switch \
     dhcp-server \
     dhcp-client \

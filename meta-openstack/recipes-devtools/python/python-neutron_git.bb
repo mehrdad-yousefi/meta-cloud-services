@@ -14,6 +14,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
            file://neutron-agent.init \
            file://l3_agent.ini \
            file://dhcp_agent.ini \
+           file://metadata_agent.ini \
            file://neutron-dhcp-agent-netns-cleanup.cron \
            file://0001-neutron.conf-jumpstart-nova-state-reporting-configur.patch \
 	  "
@@ -91,6 +92,22 @@ do_install_append() {
         install -m 0755 ${WORKDIR}/neutron-$AGENT.init.sh ${D}${sysconfdir}/init.d/neutron-$AGENT-agent
         install -m 600 ${WORKDIR}/${AGENT}_agent.ini ${NEUTRON_CONF_DIR}/
     fi
+    
+    AGENT=metadata
+    ARGS="--config-file=${sysconfdir}/${SRCNAME}/neutron.conf --config-file=${sysconfdir}/${SRCNAME}/metadata_agent.ini"
+    if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
+        sed "s:@suffix@:$AGENT:;s:@args@:$ARGS:" < ${WORKDIR}/neutron-agent.init >${WORKDIR}/neutron-$AGENT.init.sh
+        install -m 0755 ${WORKDIR}/neutron-$AGENT.init.sh ${D}${sysconfdir}/init.d/neutron-$AGENT-agent
+        install -m 600 ${WORKDIR}/${AGENT}_agent.ini ${NEUTRON_CONF_DIR}/
+    fi
+    sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
+        -i ${NEUTRON_CONF_DIR}/metadata_agent.ini
+    sed -e "s:%SERVICE_USER%:${SRCNAME}:g" \
+        -i ${NEUTRON_CONF_DIR}/metadata_agent.ini
+    sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
+        -i ${NEUTRON_CONF_DIR}/metadata_agent.ini
+    sed -e "s:%METADATA_SHARED_SECRET%:${METADATA_SHARED_SECRET}:g" \
+        -i ${NEUTRON_CONF_DIR}/metadata_agent.ini
 
     cp run_tests.sh ${NEUTRON_CONF_DIR}
 }
@@ -182,8 +199,9 @@ FILES_${SRCNAME}-l3-agent = "${bindir}/neutron-l3-agent \
     "
 
 FILES_${SRCNAME}-metadata-agent = "${bindir}/neutron-metadata-agent \
+    ${bindir}/neutron-ns-metadata-proxy \
     ${sysconfdir}/${SRCNAME}/metadata_agent.ini \
-    ${sysconfdir}/init.d/metadata_agent \
+    ${sysconfdir}/init.d/neutron-metadata-agent \
     "
 
 FILES_${SRCNAME}-extra-agents = "${bindir}/*"
@@ -233,7 +251,7 @@ RDEPENDS_${SRCNAME}-setup = "postgresql sudo"
 
 RRECOMMENDS_${SRCNAME}-server = "${SRCNAME}-plugin-openvswitch"
 
-INITSCRIPT_PACKAGES = "${SRCNAME}-server ${SRCNAME}-plugin-openvswitch ${SRCNAME}-plugin-linuxbridge ${SRCNAME}-dhcp-agent ${SRCNAME}-l3-agent"
+INITSCRIPT_PACKAGES = "${SRCNAME}-server ${SRCNAME}-plugin-openvswitch ${SRCNAME}-plugin-linuxbridge ${SRCNAME}-dhcp-agent ${SRCNAME}-l3-agent ${SRCNAME}-metadata-agent"
 INITSCRIPT_NAME_${SRCNAME}-server = "neutron-server"
 INITSCRIPT_PARAMS_${SRCNAME}-server = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-plugin-openvswitch = "neutron-openvswitch-agent"
@@ -244,3 +262,5 @@ INITSCRIPT_NAME_${SRCNAME}-dhcp-agent = "neutron-dhcp-agent"
 INITSCRIPT_PARAMS_${SRCNAME}-dhcp-agent = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-l3-agent = "neutron-l3-agent"
 INITSCRIPT_PARAMS_${SRCNAME}-l3-agent = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+INITSCRIPT_NAME_${SRCNAME}-metadata-agent = "neutron-metadata-agent"
+INITSCRIPT_PARAMS_${SRCNAME}-metadata-agent = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
