@@ -10,6 +10,7 @@ SRCNAME = "glance"
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
            file://0001-glance-store-only-load-known-stores-not-all-stores.patch \
            file://glance.init \
+           file://glance-change-builtin-tests-config-location.patch \
            "
 
 SRCREV="556eebb7780b55af87c0fe49b76593f833ea189a"
@@ -26,6 +27,12 @@ GLANCE_KNOWN_STORES ?= "glance.store.rbd.Store,\
  glance.store.filesystem.Store,\
  glance.store.http.Store"
 
+
+do_install_prepend() {
+    sed 's:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g' -i ${S}/${SRCNAME}/tests/functional/__init__.py
+    sed 's:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g' -i ${S}/${SRCNAME}/tests/unit/base.py
+    sed 's:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g' -i ${S}/${SRCNAME}/tests/utils.py
+}
 
 do_install_append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}
@@ -153,6 +160,7 @@ RDEPENDS_${SRCNAME} = "${PN} \
 RDEPENDS_${SRCNAME}-api = "${SRCNAME}"
 RDEPENDS_${SRCNAME}-registry = "${SRCNAME}"
 RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}"
+RDEPENDS_${SRCNAME}-tests = "python-psutil qpid-python"
 
 INITSCRIPT_PACKAGES = "${SRCNAME}-api ${SRCNAME}-registry"
 INITSCRIPT_NAME_${SRCNAME}-api = "glance-api"
