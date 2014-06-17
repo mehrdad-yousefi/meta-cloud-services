@@ -9,6 +9,7 @@ SRCNAME = "glance"
 
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://glance.init \
+           file://glance-change-builtin-tests-config-location.patch \
            "
 
 SRCREV="396ca82f7e359b430a6cb0a6162d7bc937367705"
@@ -19,6 +20,12 @@ S = "${WORKDIR}/git"
 inherit setuptools update-rc.d identity default_configs
 
 GLANCE_DEFAULT_STORE ?= "file"
+
+do_install_prepend() {
+    sed 's:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g' -i ${S}/${SRCNAME}/tests/functional/__init__.py
+    sed 's:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g' -i ${S}/${SRCNAME}/tests/unit/base.py
+    sed 's:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g' -i ${S}/${SRCNAME}/tests/utils.py
+}
 
 do_install_append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}
@@ -142,6 +149,7 @@ RDEPENDS_${SRCNAME} = "${PN} \
 RDEPENDS_${SRCNAME}-api = "${SRCNAME}"
 RDEPENDS_${SRCNAME}-registry = "${SRCNAME}"
 RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}"
+RDEPENDS_${SRCNAME}-tests = "python-psutil qpid-python"
 
 INITSCRIPT_PACKAGES = "${SRCNAME}-api ${SRCNAME}-registry"
 INITSCRIPT_NAME_${SRCNAME}-api = "glance-api"

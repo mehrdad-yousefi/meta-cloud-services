@@ -1,0 +1,88 @@
+glance change builtin tests config location
+
+Many glance built-in testcases failed because they
+can not find glance configuration files, as these
+testcases assume that they are run at python
+site-packages dir.
+
+So forcing these failure testcases to look for
+these configuration files using absolute path.
+
+Signed-off-by: Vu Tran <vu.tran@windriver.com>
+
+diff --git a/glance/tests/functional/__init__.py b/glance/tests/functional/__init__.py
+index 1256133..01adb81 100644
+--- a/glance/tests/functional/__init__.py
++++ b/glance/tests/functional/__init__.py
+@@ -900,7 +900,7 @@ class FunctionalTest(test_utils.BaseTestCase):
+         return engine.execute(sql)
+ 
+     def copy_data_file(self, file_name, dst_dir):
+-        src_file_name = os.path.join('glance/tests/etc', file_name)
++        src_file_name = os.path.join('%PYTHON_SITEPACKAGES_DIR%/glance/tests/etc', file_name)
+         shutil.copy(src_file_name, dst_dir)
+         dst_file_name = os.path.join(dst_dir, file_name)
+         return dst_file_name
+diff --git a/glance/tests/unit/api/test_common.py b/glance/tests/unit/api/test_common.py
+index 8892025..2aac6b7 100644
+--- a/glance/tests/unit/api/test_common.py
++++ b/glance/tests/unit/api/test_common.py
+@@ -137,7 +137,7 @@ class TestMalformedRequest(test_utils.BaseTestCase):
+         super(TestMalformedRequest, self).setUp()
+         self.config(flavor='',
+                     group='paste_deploy',
+-                    config_file='etc/glance-api-paste.ini')
++                    config_file='/etc/glance/glance-api-paste.ini')
+         self.api = config.load_paste_app('glance-api')
+ 
+     def test_redirect_incomplete_url(self):
+diff --git a/glance/tests/unit/base.py b/glance/tests/unit/base.py
+index 4a19730..16ec103 100644
+--- a/glance/tests/unit/base.py
++++ b/glance/tests/unit/base.py
+@@ -76,7 +76,7 @@ class IsolatedUnitTest(StoreClearingUnitTest):
+                                                  registry=self.registry)
+ 
+     def _copy_data_file(self, file_name, dst_dir):
+-        src_file_name = os.path.join('glance/tests/etc', file_name)
++        src_file_name = os.path.join('%PYTHON_SITEPACKAGES_DIR%/glance/tests/etc', file_name)
+         shutil.copy(src_file_name, dst_dir)
+         dst_file_name = os.path.join(dst_dir, file_name)
+         return dst_file_name
+diff --git a/glance/tests/unit/common/test_config.py b/glance/tests/unit/common/test_config.py
+index 2dfede1..422a458 100644
+--- a/glance/tests/unit/common/test_config.py
++++ b/glance/tests/unit/common/test_config.py
+@@ -64,8 +64,7 @@ class TestPasteApp(test_utils.BaseTestCase):
+ 
+         paste_to = temp_file.replace('.conf', '-paste.ini')
+         if not paste_config_file and make_paste_file:
+-            paste_from = os.path.join(os.getcwd(),
+-                                      'etc/glance-registry-paste.ini')
++            paste_from = '/etc/glance/glance-registry-paste.ini'
+             _appendto(paste_from, paste_to, paste_append)
+ 
+         app = config.load_paste_app('glance-registry')
+@@ -90,8 +89,7 @@ class TestPasteApp(test_utils.BaseTestCase):
+                                      paste_append=pipeline)
+ 
+     def test_load_paste_app_with_paste_config_file(self):
+-        paste_config_file = os.path.join(os.getcwd(),
+-                                         'etc/glance-registry-paste.ini')
++        paste_config_file = '/etc/glance/glance-registry-paste.ini'
+         expected_middleware = context.UnauthenticatedContextMiddleware
+         self._do_test_load_paste_app(expected_middleware,
+                                      paste_config_file=paste_config_file)
+diff --git a/glance/tests/utils.py b/glance/tests/utils.py
+index 760824c..db598ba 100644
+--- a/glance/tests/utils.py
++++ b/glance/tests/utils.py
+@@ -67,7 +67,7 @@ class BaseTestCase(testtools.TestCase):
+         self.config(property_protection_file=self.property_file)
+ 
+     def _copy_data_file(self, file_name, dst_dir):
+-        src_file_name = os.path.join('glance/tests/etc', file_name)
++        src_file_name = os.path.join('%PYTHON_SITEPACKAGES_DIR%/glance/tests/etc', file_name)
+         shutil.copy(src_file_name, dst_dir)
+         dst_file_name = os.path.join(dst_dir, file_name)
+         return dst_file_name
