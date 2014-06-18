@@ -1,0 +1,130 @@
+ceilometer builtin tests config location
+
+Many ceilometer built-in testcases failed because they
+can not find ceilometer configuration files, as these
+testcases use relative paths for finding these configuration
+files.  So forcing these failure testcases to look for
+these configuration file using absolute path.
+
+Signed-off-by: Vu Tran <vu.tran@windriver.com>
+
+diff --git a/ceilometer/tests/agentbase.py b/ceilometer/tests/agentbase.py
+index 4784037..43b9d6c 100644
+--- a/ceilometer/tests/agentbase.py
++++ b/ceilometer/tests/agentbase.py
+@@ -236,7 +236,7 @@ class BaseAgentManagerTestCase(base.BaseTestCase):
+         self.CONF = self.useFixture(config.Config()).conf
+         self.CONF.set_override(
+             'pipeline_cfg_file',
+-            self.path_get('etc/ceilometer/pipeline.yaml')
++            self.path_get('/etc/ceilometer/pipeline.yaml')
+         )
+         self.useFixture(mockpatch.PatchObject(
+             publisher, 'get_publisher', side_effect=self.get_publisher))
+diff --git a/ceilometer/tests/api/__init__.py b/ceilometer/tests/api/__init__.py
+index eee701a..06c1ee4 100644
+--- a/ceilometer/tests/api/__init__.py
++++ b/ceilometer/tests/api/__init__.py
+@@ -41,7 +41,7 @@ class TestBase(db_test_base.TestBase):
+         self.CONF.set_override("auth_version",
+                                "v2.0", group=acl.OPT_GROUP_NAME)
+         self.CONF.set_override("policy_file",
+-                               self.path_get('etc/ceilometer/policy.json'))
++                               self.path_get('/etc/ceilometer/policy.json'))
+         sources_file = self.path_get('ceilometer/tests/sources.json')
+         self.app = v1_app.make_app(self.CONF,
+                                    enable_acl=False,
+@@ -87,7 +87,7 @@ class FunctionalTest(db_test_base.TestBase):
+         self.CONF.set_override("auth_version", "v2.0",
+                                group=acl.OPT_GROUP_NAME)
+         self.CONF.set_override("policy_file",
+-                               self.path_get('etc/ceilometer/policy.json'))
++                               self.path_get('/etc/ceilometer/policy.json'))
+         self.app = self._make_app()
+ 
+     def _make_app(self, enable_acl=False):
+diff --git a/ceilometer/tests/api/v2/test_app.py b/ceilometer/tests/api/v2/test_app.py
+index d6982b7..0b3ebcf 100644
+--- a/ceilometer/tests/api/v2/test_app.py
++++ b/ceilometer/tests/api/v2/test_app.py
+@@ -47,7 +47,7 @@ class TestApp(base.BaseTestCase):
+         self.CONF.set_override("auth_version", "v2.0",
+                                group=acl.OPT_GROUP_NAME)
+         self.CONF.set_override("pipeline_cfg_file",
+-                               self.path_get("etc/ceilometer/pipeline.yaml"))
++                               self.path_get("/etc/ceilometer/pipeline.yaml"))
+         self.CONF.set_override('connection', "log://", group="database")
+         self.CONF.set_override("auth_uri", None, group=acl.OPT_GROUP_NAME)
+ 
+@@ -55,7 +55,7 @@ class TestApp(base.BaseTestCase):
+         self.assertTrue(api_app.auth_uri.startswith('foottp'))
+ 
+     def test_keystone_middleware_parse_conffile(self):
+-        pipeline_conf = self.path_get("etc/ceilometer/pipeline.yaml")
++        pipeline_conf = self.path_get("/etc/ceilometer/pipeline.yaml")
+         content = "[DEFAULT]\n"\
+                   "pipeline_cfg_file = {0}\n"\
+                   "[{1}]\n"\
+diff --git a/ceilometer/tests/db.py b/ceilometer/tests/db.py
+index d0e0e73..293e022 100644
+--- a/ceilometer/tests/db.py
++++ b/ceilometer/tests/db.py
+@@ -62,7 +62,7 @@ class TestBase(test_base.BaseTestCase):
+         # the system.
+         self.CONF.set_override(
+             'pipeline_cfg_file',
+-            self.path_get('etc/ceilometer/pipeline.yaml')
++            self.path_get('/etc/ceilometer/pipeline.yaml')
+         )
+ 
+     def tearDown(self):
+diff --git a/ceilometer/tests/test_bin.py b/ceilometer/tests/test_bin.py
+index 0b9a556..649d603 100644
+--- a/ceilometer/tests/test_bin.py
++++ b/ceilometer/tests/test_bin.py
+@@ -76,7 +76,7 @@ class BinTestCase(base.BaseTestCase):
+ class BinSendSampleTestCase(base.BaseTestCase):
+     def setUp(self):
+         super(BinSendSampleTestCase, self).setUp()
+-        pipeline_cfg_file = self.path_get('etc/ceilometer/pipeline.yaml')
++        pipeline_cfg_file = self.path_get('/etc/ceilometer/pipeline.yaml')
+         content = "[DEFAULT]\n"\
+                   "rpc_backend=ceilometer.openstack.common.rpc.impl_fake\n"\
+                   "pipeline_cfg_file={0}\n".format(pipeline_cfg_file)
+@@ -103,8 +103,8 @@ class BinApiTestCase(base.BaseTestCase):
+         super(BinApiTestCase, self).setUp()
+         self.api_port = random.randint(10000, 11000)
+         self.http = httplib2.Http()
+-        pipeline_cfg_file = self.path_get('etc/ceilometer/pipeline.yaml')
+-        policy_file = self.path_get('etc/ceilometer/policy.json')
++        pipeline_cfg_file = self.path_get('/etc/ceilometer/pipeline.yaml')
++        policy_file = self.path_get('/etc/ceilometer/policy.json')
+         content = "[DEFAULT]\n"\
+                   "rpc_backend=ceilometer.openstack.common.rpc.impl_fake\n"\
+                   "auth_strategy=noauth\n"\
+diff --git a/ceilometer/tests/test_decoupled_pipeline.py b/ceilometer/tests/test_decoupled_pipeline.py
+index 293adb3..33c0397 100644
+--- a/ceilometer/tests/test_decoupled_pipeline.py
++++ b/ceilometer/tests/test_decoupled_pipeline.py
+@@ -210,7 +210,7 @@ class TestDecoupledPipeline(pipeline_base.BasePipelineTestCase):
+ 
+     def _do_test_rate_of_change_in_boilerplate_pipeline_cfg(self, index,
+                                                             meters, units):
+-        with open('etc/ceilometer/pipeline.yaml') as fap:
++        with open('/etc/ceilometer/pipeline.yaml') as fap:
+             data = fap.read()
+         pipeline_cfg = yaml.safe_load(data)
+         for s in pipeline_cfg['sinks']:
+diff --git a/ceilometer/tests/test_deprecated_pipeline.py b/ceilometer/tests/test_deprecated_pipeline.py
+index 606dcad..bbd15b4 100644
+--- a/ceilometer/tests/test_deprecated_pipeline.py
++++ b/ceilometer/tests/test_deprecated_pipeline.py
+@@ -76,7 +76,7 @@ class TestDeprecatedPipeline(pipeline_base.BasePipelineTestCase):
+ 
+     def _do_test_rate_of_change_in_boilerplate_pipeline_cfg(self, index,
+                                                             meters, units):
+-        with open('etc/ceilometer/deprecated_pipeline.yaml') as fap:
++        with open('/etc/ceilometer/deprecated_pipeline.yaml') as fap:
+             data = fap.read()
+         pipeline_cfg = yaml.safe_load(data)
+         for p in pipeline_cfg:
