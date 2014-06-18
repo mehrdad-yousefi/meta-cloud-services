@@ -13,6 +13,7 @@ FILESEXTRAPATHS := "${THISDIR}/${PN}"
 
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
            file://nova-add-migrate.cfg-to-the-MANIFEST.patch \
+           file://nova-convert-path-from-relative-to-absolute.patch \
            "
 
 SRC_URI += "file://nova-all \
