@@ -1,0 +1,36 @@
+cinder builtin tests config location
+
+Many cinder built-in testcases failed because they
+can not find cinder configuration file, as these
+testcases assume that they are run at python
+site-packages dir.  So forcing these failure
+testcases to look for these confiugration file
+using absolute path.
+
+Signed-off-by: Vu Tran <vu.tran@windriver.com>
+
+diff --git a/cinder/tests/conf_fixture.py b/cinder/tests/conf_fixture.py
+index dbf8d08..ac925eb 100644
+--- a/cinder/tests/conf_fixture.py
++++ b/cinder/tests/conf_fixture.py
+@@ -43,7 +43,7 @@ def set_defaults(conf):
+     conf.set_default('verbose', True)
+     conf.set_default('connection', 'sqlite://', group='database')
+     conf.set_default('sqlite_synchronous', False)
+-    conf.set_default('policy_file', 'cinder/tests/policy.json')
++    conf.set_default('policy_file', '%PYTHON_SITEPACKAGES_DIR%/cinder/tests/policy.json')
+     conf.set_default(
+         'xiv_ds8k_proxy',
+         'cinder.tests.test_xiv_ds8k.XIVDS8KFakeProxyDriver')
+diff --git a/cinder/tests/fake_flags.py b/cinder/tests/fake_flags.py
+index 3bf94ae..998524c 100644
+--- a/cinder/tests/fake_flags.py
++++ b/cinder/tests/fake_flags.py
+@@ -43,6 +43,6 @@ def set_defaults(conf):
+     conf.set_default('verbose', True)
+     conf.set_default('connection', 'sqlite://', group='database')
+     conf.set_default('sqlite_synchronous', False)
+-    conf.set_default('policy_file', 'cinder/tests/policy.json')
++    conf.set_default('policy_file', '%PYTHON_SITEPACKAGES_DIR%/cinder/tests/policy.json')
+     conf.set_default('xiv_proxy', 'cinder.tests.test_xiv.XIVFakeProxyDriver')
+     conf.set_default('backup_driver', 'cinder.tests.backup.fake_service')

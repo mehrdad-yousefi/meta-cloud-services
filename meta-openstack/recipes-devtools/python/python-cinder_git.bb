@@ -17,6 +17,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
     file://lvm_iscsi_setup.sh \
     file://add-cinder-volume-types.sh \
     file://fix_cinder_memory_leak.patch \
+    file://cinder-builtin-tests-config-location.patch \
 	"
 
 SRCREV="81259f36f57e91b31009fbd209ea2a07a2ceb213"
@@ -26,6 +27,11 @@ S = "${WORKDIR}/git"
 inherit setuptools update-rc.d identity default_configs
 
 CINDER_BACKUP_BACKEND_DRIVER ?= "cinder.backup.drivers.swift"
+
+do_install_prepend() {
+    sed 's:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g' -i ${S}/${SRCNAME}/tests/conf_fixture.py
+    sed 's:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g' -i ${S}/${SRCNAME}/tests/fake_flags.py
+}
 
 do_install_append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}/${SRCNAME}
