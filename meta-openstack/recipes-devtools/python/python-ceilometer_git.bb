@@ -13,6 +13,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://0001-sqlalchemy-fix-grouping-for-postgresql-databases.patch \
            file://fix_ceilometer_memory_leak.patch \
            file://ceilometer-builtin-tests-config-location.patch \
+           file://Use-known-protocol-scheme-in-keystone-tests.patch \
 "
 
 SRCREV="faada69444988c66a09ade812e10fa2ab5a0adae"
