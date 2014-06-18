@@ -281,6 +281,10 @@ RDEPENDS_${SRCNAME}-compute = "${PN} ${SRCNAME}-common \
 			       qemu libvirt libvirt-libvirtd libvirt-python libvirt-virsh"
 RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-common"
 
+RDEPENDS_${SRCNAME}-tests = " \
+                            python-coverage \
+                            "
+
 INITSCRIPT_PACKAGES =  "${SRCNAME}-compute ${SRCNAME}-consoleauth ${SRCNAME}-novncproxy ${SRCNAME}-spicehtml5proxy"
 INITSCRIPT_PACKAGES += "${SRCNAME}-network ${SRCNAME}-scheduler ${SRCNAME}-cert ${SRCNAME}-conductor"
 INITSCRIPT_PACKAGES += "${SRCNAME}-api"
