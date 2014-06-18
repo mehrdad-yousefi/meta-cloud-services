@@ -17,6 +17,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
     file://lvm_iscsi_setup.sh \
     file://add-cinder-volume-types.sh \
     file://fix_cinder_memory_leak.patch \
+    file://cinder-builtin-tests-config-location.patch \
 	"
 
 SRCREV="978b036a6467f7f6afb4419f92bf4fa7d1ff2347"
@@ -26,6 +27,10 @@ S = "${WORKDIR}/git"
 inherit setuptools update-rc.d identity default_configs
 
 CINDER_BACKUP_BACKEND_DRIVER ?= "cinder.backup.drivers.swift"
+
+do_install_prepend() {
+    sed 's:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g' -i ${S}/${SRCNAME}/tests/conf_fixture.py
+}
 
 do_install_append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}/${SRCNAME}
