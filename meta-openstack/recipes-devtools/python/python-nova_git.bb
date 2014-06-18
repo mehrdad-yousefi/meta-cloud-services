@@ -14,6 +14,7 @@ FILESEXTRAPATHS := "${THISDIR}/${PN}"
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
            file://nova-add-migrate.cfg-to-the-MANIFEST.patch \
            file://nova-convert-path-from-relative-to-absolute.patch \
+           file://nova-fix-location-to-doc-directory.patch \
            "
 
 SRC_URI += "file://nova-all \
@@ -121,6 +122,8 @@ do_install_append() {
 
     install -d ${D}/${sysconfdir}/bash_completion.d
     install -m 664 ${S}/tools/nova-manage.bash_completion ${D}/${sysconfdir}/bash_completion.d
+
+    cp -r "${S}/doc" "${D}/${PYTHON_SITEPACKAGES_DIR}/nova"
 }
 
 pkg_postinst_${SRCNAME}-setup () {
