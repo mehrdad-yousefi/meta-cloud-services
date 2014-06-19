@@ -14,6 +14,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://fix_ceilometer_memory_leak.patch \
            file://ceilometer-builtin-tests-config-location.patch \
            file://Use-known-protocol-scheme-in-keystone-tests.patch \
+           file://skip-failed-unsupported-db-ceilometer-builtin-tests.patch \
 "
 
 SRCREV="faada69444988c66a09ade812e10fa2ab5a0adae"
