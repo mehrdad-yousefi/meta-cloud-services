@@ -5,10 +5,12 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4a4d0e932ffae1c0131528d30d419c55"
 
 PR = "r0"
+SRCNAME = "keystoneclient"
 
 SRC_URI = "\
 	git://github.com/openstack/python-keystoneclient.git;branch=master \
 	file://fix_keystoneclient_memory_leak.patch \
+	file://keystoneclient-fix-test-path-to-example-certificates.patch \
 	"
 
 PV="0.6.0+git${SRCPV}"
@@ -38,7 +40,13 @@ PACKAGECONFIG[bash-completion] = ",,bash-completion,bash-completion ${BPN}-bash-
 do_install_append() {
 	install -d ${D}/${sysconfdir}/bash_completion.d
 	install -m 664 ${S}/tools/keystone.bash_completion ${D}/${sysconfdir}/bash_completion.d
+
+	cp -r ${S}/examples ${D}${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}
 }
 
-PACKAGES =+ "${BPN}-bash-completion"
+PACKAGES =+ " ${SRCNAME}-tests ${BPN}-bash-completion"
 FILES_${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"
+
+FILES_${SRCNAME}-tests = "${D}${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}/examples \
+        "
+
