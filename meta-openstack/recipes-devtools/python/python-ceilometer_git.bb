@@ -195,6 +195,7 @@ RDEPENDS_${PN} += " \
 	python-pbr \
 	python-croniter \
 	python-ipaddr \
+	python-pysnmp \
 	"
 
 RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common ${SRCNAME}-alarm-notifier ${SRCNAME}-alarm-evaluator ${SRCNAME}-agent-notification \
