@@ -26,7 +26,8 @@ DEPENDS += " \
         python-pbr \
         "
 
-RDEPENDS_${PN} += "python-iso8601 \
+RDEPENDS_${PN} += " \
+	python-iso8601 \
 	python-prettytable \
 	python-requests \
 	python-simplejson \
@@ -49,4 +50,7 @@ FILES_${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"
 
 FILES_${SRCNAME}-tests = "${D}${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}/examples \
         "
+RDEPENDS_${SRCNAME}-tests += " \
+	python-httpretty \
+	"
 
