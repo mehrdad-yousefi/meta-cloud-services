@@ -16,6 +16,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://dhcp_agent.ini \
            file://metadata_agent.ini \
            file://neutron-dhcp-agent-netns-cleanup.cron \
+           file://uuid_wscheck.patch \
 	  "
 SRCREV="a8417d78c2675a2ceb5dbfcee70948a88d69e747"
 PV="2013.2.3+git${SRCPV}"

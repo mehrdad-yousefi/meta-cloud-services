@@ -1,0 +1,34 @@
+Binary files git.orig/neutron/api/v2/.attributes.py.swp and git/neutron/api/v2/.attributes.py.swp differ
+diff -uNr git.orig/neutron/api/v2/attributes.py git/neutron/api/v2/attributes.py
+--- git.orig/neutron/api/v2/attributes.py	2014-06-23 11:27:07.498653115 -0400
++++ git/neutron/api/v2/attributes.py	2014-06-23 11:31:18.467897605 -0400
+@@ -311,7 +311,10 @@
+ 
+ def _validate_uuid(data, valid_values=None):
+     if not uuidutils.is_uuid_like(data):
+-        msg = _("'%s' is not a valid UUID") % data
++        if data != data.rstrip():
++            msg = _("'%s' is not a valid UUID: trailing whitespace?") % data
++        else:
++            msg = _("'%s' is not a valid UUID") % data
+         LOG.debug(msg)
+         return msg
+ 
+Binary files git.orig/neutron/plugins/cisco/n1kv/.n1kv_neutron_plugin.py.swp and git/neutron/plugins/cisco/n1kv/.n1kv_neutron_plugin.py.swp differ
+diff -uNr git.orig/neutron/plugins/cisco/n1kv/n1kv_neutron_plugin.py git/neutron/plugins/cisco/n1kv/n1kv_neutron_plugin.py
+--- git.orig/neutron/plugins/cisco/n1kv/n1kv_neutron_plugin.py	2014-06-23 11:27:07.510653175 -0400
++++ git/neutron/plugins/cisco/n1kv/n1kv_neutron_plugin.py	2014-06-23 11:34:04.968723238 -0400
+@@ -642,8 +642,11 @@
+                         raise q_exc.InvalidInput(error_message=msg)
+                 pair_list.append((segment, dot1qtag))
+             else:
+-                LOG.debug(_('%s is not a valid uuid'), segment)
+-                msg = _("'%s' is not a valid UUID") % segment
++                if segment != segment.rstrip():
++                    msg = _("'%s' is not a valid UUID: trailing whitespace?") % segment
++                else:
++                    msg = _("'%s' is not a valid UUID") % segment
++                LOG.debug(msg)
+                 raise q_exc.InvalidInput(error_message=msg)
+         return pair_list
+ 
