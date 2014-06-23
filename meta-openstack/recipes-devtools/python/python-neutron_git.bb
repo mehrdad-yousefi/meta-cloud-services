@@ -17,6 +17,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
            file://metadata_agent.ini \
            file://neutron-dhcp-agent-netns-cleanup.cron \
            file://0001-neutron.conf-jumpstart-nova-state-reporting-configur.patch \
+           file://uuid_wscheck.patch \
 	  "
 SRCREV="e0deffc71e5031059530b9b6c2ef3b0765de3d10"
 PV="2014.1+git${SRCPV}"
