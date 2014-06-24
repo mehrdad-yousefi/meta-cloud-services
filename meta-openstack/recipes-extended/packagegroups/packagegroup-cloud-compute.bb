@@ -37,4 +37,5 @@ RRECOMMENDS_${PN} = " \
     kernel-module-iscsi-tcp \
     kernel-module-libiscsi \
     kernel-module-fuse \
+    kernel-module-softdog \
     "
