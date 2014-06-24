@@ -57,4 +57,5 @@ RDEPENDS_${PN} = " postgresql-setup \
 RRECOMMENDS_${PN} = " \
     kernel-module-fuse \
     cloud-init \
+    kernel-module-softdog \
     "
