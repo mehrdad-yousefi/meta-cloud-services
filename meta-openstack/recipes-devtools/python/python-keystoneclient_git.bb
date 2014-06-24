@@ -48,7 +48,7 @@ do_install_append() {
 PACKAGES =+ " ${SRCNAME}-tests ${BPN}-bash-completion"
 FILES_${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"
 
-FILES_${SRCNAME}-tests = "${D}${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}/examples \
+FILES_${SRCNAME}-tests = "${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}/examples \
         "
 RDEPENDS_${SRCNAME}-tests += " \
 	python-httpretty \
