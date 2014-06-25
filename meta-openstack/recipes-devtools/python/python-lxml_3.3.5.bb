@@ -2,7 +2,7 @@ DESCRIPTION = "Powerful and Pythonic XML processing library combining libxml2/li
 HOMEPAGE = "http://lxml.de/"
 SECTION = "devel/python"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=%LIC_MD5SUM%"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f9f1dc24f720c143c2240df41fe5073b"
 
 PR = "r0"
 
