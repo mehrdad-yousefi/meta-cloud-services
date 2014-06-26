@@ -8,7 +8,7 @@ Index: git/neutron/api/v2/attributes.py
  def _validate_uuid(data, valid_values=None):
      if not uuidutils.is_uuid_like(data):
 -        msg = _("'%s' is not a valid UUID") % data
-+        if data != data.rstrip():
++        if data is not None and data != data.rstrip():
 +            msg = _("'%s' is not a valid UUID: trailing whitespace?") % data
 +        else:
 +            msg = _("'%s' is not a valid UUID") % data
@@ -25,7 +25,7 @@ Index: git/neutron/plugins/cisco/n1kv/n1kv_neutron_plugin.py
              else:
 -                LOG.debug(_('%s is not a valid uuid'), segment)
 -                msg = _("'%s' is not a valid UUID") % segment
-+                if segment != segment.rstrip():
++                if segment is not None and segment != segment.rstrip():
 +                    msg = _("'%s' is not a valid UUID: trailing whitespace?") % segment
 +                else:
 +                    msg = _("'%s' is not a valid UUID") % segment
