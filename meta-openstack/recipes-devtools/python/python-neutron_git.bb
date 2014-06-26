@@ -18,6 +18,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
            file://neutron-dhcp-agent-netns-cleanup.cron \
            file://0001-neutron.conf-jumpstart-nova-state-reporting-configur.patch \
            file://uuid_wscheck.patch \
+           file://neutron-test-nec-plugin-extensions-location.patch \
 	  "
 SRCREV="e0deffc71e5031059530b9b6c2ef3b0765de3d10"
 PV="2014.1+git${SRCPV}"
@@ -111,6 +112,8 @@ do_install_append() {
         -i ${NEUTRON_CONF_DIR}/metadata_agent.ini
 
     cp run_tests.sh ${NEUTRON_CONF_DIR}
+
+    sed 's:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g' -i ${D}${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}/tests/unit/nec/test_nec_plugin.py
 }
 
 pkg_postinst_${SRCNAME}-setup () {
