@@ -17,6 +17,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://metadata_agent.ini \
            file://neutron-dhcp-agent-netns-cleanup.cron \
            file://uuid_wscheck.patch \
+           file://neutron-test-nec-plugin-extensions-location.patch \
 	  "
 SRCREV="a8417d78c2675a2ceb5dbfcee70948a88d69e747"
 PV="2013.2.3+git${SRCPV}"
@@ -104,6 +105,8 @@ do_install_append() {
         -i ${NEUTRON_CONF_DIR}/metadata_agent.ini
 
     cp run_tests.sh ${NEUTRON_CONF_DIR}
+
+    sed 's:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g' -i ${D}${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}/tests/unit/nec/test_nec_plugin.py
 }
 
 pkg_postinst_${SRCNAME}-setup () {
