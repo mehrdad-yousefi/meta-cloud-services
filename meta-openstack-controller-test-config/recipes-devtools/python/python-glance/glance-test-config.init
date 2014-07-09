@@ -39,7 +39,8 @@ start()
         id=`sed -n '4p' < $temp_file | get_field 1`
         glance image-show $id > /dev/null 2>&1
         if [ "$?" != "0" ]; then
-            id=`glance image-create --name myfirstimage --is-public true --container-format bare --disk-format qcow2 --file /root/images/cirros-0.3.0-x86_64-disk.img | grep " id " | get_field 2`
+            cirros_image_file=`find /root/images/ -name "cirros*.img" | tail -1`
+            id=`glance image-create --name myfirstimage --is-public true --container-format bare --disk-format qcow2 --file ${cirros_image_file} | grep " id " | get_field 2`
         fi
         sed -i "s/^image_ref = .*/image_ref = ${id}/" $TEMPEST_CONF_FILE
         sed -i "s/^image_ref_alt = .*/image_ref_alt = ${id}/" $TEMPEST_CONF_FILE
