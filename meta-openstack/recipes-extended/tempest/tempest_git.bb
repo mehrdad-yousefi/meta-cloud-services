@@ -53,7 +53,8 @@ do_install_append() {
     # test infrastructure
     cp run_tests.sh ${TEMPEST_CONF_DIR}
     cp .testr.conf ${TEMPEST_CONF_DIR}
-    
+    sed "s:discover -t ./ ./tempest:discover -t ${PYTHON_SITEPACKAGES_DIR} tempest:g" -i ${TEMPEST_CONF_DIR}/.testr.conf
+    cp -r tools ${TEMPEST_CONF_DIR}
 }
 
 PACKAGES =+ "${SRCNAME}-tests"
