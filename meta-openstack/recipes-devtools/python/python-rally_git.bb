@@ -16,6 +16,7 @@ SRC_URI = "git://github.com/stackforge/${SRCNAME}.git;branch=master \
            file://deployment-existing.json \
            file://remove-ironic-support.patch \
            file://verification-to-use-existing-tempest.patch \
+           file://sqlalchemy-db-missing-name-for-ENUM.patch \
 "
 
 SRCREV="b297cf00750f263b8b5bdeb71f6952f672e87f5a"
