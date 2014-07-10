@@ -11,6 +11,7 @@ IMAGE_INSTALL = "\
     packagegroup-cloud-network \
     packagegroup-cloud-debug \
     packagegroup-cloud-extras \
+    ${@base_contains('OPENSTACK_EXTRA_FEATURES', 'benchmarking', 'packagegroup-cloud-benchmarking', '', d)} \
     ${OPENSTACK_CONTROLLER_EXTRA_INSTALL} \
     "
 
