@@ -33,6 +33,36 @@ inherit update-rc.d setuptools identity hosts useradd default_configs
 
 LIBVIRT_IMAGES_TYPE ?= "default"
 
+SERVICECREATE_PACKAGES = "${SRCNAME}-setup ${SRCNAME}-ec2"
+KEYSTONE_HOST="${CONTROLLER_IP}"
+
+# USERCREATE_PARAM and SERVICECREATE_PARAM contain the list of parameters to be set.
+# If the flag for a parameter in the list is not set here, the default value will be given to that parameter.
+# Parameters not in the list will be set to empty.
+
+USERCREATE_PARAM_${SRCNAME}-setup = "name pass tenant role email"
+SERVICECREATE_PARAM_${SRCNAME}-setup = "name type description region publicurl adminurl internalurl"
+python () {
+    flags = {'type':'compute',\
+             'description':'OpenStack Compute Service',\
+             'publicurl':"'http://${KEYSTONE_HOST}:8774/v2/\$(tenant_id)s'",\
+             'adminurl':"'http://${KEYSTONE_HOST}:8774/v2/\$(tenant_id)s'",\
+             'internalurl':"'http://${KEYSTONE_HOST}:8774/v2/\$(tenant_id)s'"}
+    d.setVarFlags("SERVICECREATE_PARAM_%s-setup" % d.getVar('SRCNAME',True), flags)
+}
+
+# ec2 is provided by nova-api
+SERVICECREATE_PARAM_${SRCNAME}-ec2 = "name type description region publicurl adminurl internalurl"
+python () {
+    flags = {'name':'ec2',\
+             'type':'ec2',\
+             'description':'OpenStack EC2 Service',\
+             'publicurl':"'http://${KEYSTONE_HOST}:8773/services/Cloud'",\
+             'adminurl':"'http://${KEYSTONE_HOST}:8773/services/Admin'",\
+             'internalurl':"'http://${KEYSTONE_HOST}:8773/services/Cloud'"}
+    d.setVarFlags("SERVICECREATE_PARAM_%s-ec2" % d.getVar('SRCNAME',True), flags)
+}
+
 do_install_append() {
     if [ ! -f "${WORKDIR}/nova.conf" ]; then
         return
@@ -174,6 +204,7 @@ PACKAGES += " ${SRCNAME}-scheduler"
 PACKAGES += " ${SRCNAME}-cert"
 PACKAGES += " ${SRCNAME}-conductor"
 PACKAGES += " ${SRCNAME}-api"
+PACKAGES += " ${SRCNAME}-ec2"
 
 PACKAGECONFIG ?= "bash-completion"
 PACKAGECONFIG[bash-completion] = ",,bash-completion,bash-completion python-nova-bash-completion"
@@ -183,6 +214,7 @@ FILES_${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"
 
 
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
+ALLOW_EMPTY_${SRCNAME}-ec2 = "1"
 
 FILES_${PN} = "${libdir}/*"
 
@@ -278,6 +310,7 @@ RDEPENDS_${SRCNAME}-common = "${PN} openssl openssl-misc libxml2 libxslt \
                               iptables curl dnsmasq sudo procps"
 
 RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common \
+				  ${SRCNAME}-ec2 \
 				  ${SRCNAME}-consoleauth \
 				  ${SRCNAME}-novncproxy \
 				  ${SRCNAME}-spicehtml5proxy \
@@ -291,6 +324,7 @@ RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common \
 RDEPENDS_${SRCNAME}-compute = "${PN} ${SRCNAME}-common python-oslo.messaging \
 			       qemu libvirt libvirt-libvirtd libvirt-python libvirt-virsh"
 RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-common"
+RDEPENDS_${SRCNAME}-ec2 = "postgresql sudo ${SRCNAME}-common"
 
 RDEPENDS_${SRCNAME}-tests = " \
                             python-coverage \

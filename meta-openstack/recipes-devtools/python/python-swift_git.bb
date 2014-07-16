@@ -29,6 +29,25 @@ inherit setuptools python-dir update-rc.d hosts identity
 # filesystem of must support xattrs. e.g ext4
 SWIFT_BACKING_FILE_SIZE ?= "2G"
 
+SERVICECREATE_PACKAGES = "${SRCNAME}-setup"
+KEYSTONE_HOST="${CONTROLLER_IP}"
+
+# USERCREATE_PARAM and SERVICECREATE_PARAM contain the list of parameters to be set.
+# If the flag for a parameter in the list is not set here, the default value will be given to that parameter.
+# Parameters not in the list will be set to empty.
+
+USERCREATE_PARAM_${SRCNAME}-setup = "name pass tenant role email"
+SERVICECREATE_PARAM_${SRCNAME}-setup = "name type description region publicurl adminurl internalurl"
+python () {
+    flags = {'type':'object-store',\
+             'description':'OpenStack object-store',\
+             'publicurl':"'http://${KEYSTONE_HOST}:8888/v1/AUTH_\$(tenant_id)s'",\
+             'adminurl':"'http://${KEYSTONE_HOST}:8888/v1'",\
+             'internalurl':"'http://${KEYSTONE_HOST}:8888/v1/AUTH_\$(tenant_id)s'"}
+
+    d.setVarFlags("SERVICECREATE_PARAM_%s-setup" % d.getVar('SRCNAME',True), flags)
+}
+
 do_install_append() {
     SWIFT_CONF_DIR=${D}${sysconfdir}/swift
 

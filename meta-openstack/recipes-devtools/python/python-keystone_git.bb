@@ -30,6 +30,33 @@ TOKEN_FORMAT ?= "PKI"
 
 LDAP_DN ?= "dc=my-domain,dc=com"
 
+SERVICECREATE_PACKAGES = "${SRCNAME}-setup"
+KEYSTONE_HOST="${CONTROLLER_IP}"
+
+# USERCREATE_PARAM and SERVICECREATE_PARAM contain the list of parameters to be set.
+# If the flag for a parameter in the list is not set here, the default value will be given to that parameter.
+# Parameters not in the list will be set to empty.
+
+USERCREATE_PARAM_${SRCNAME}-setup = "name pass tenant role email"
+python () {
+    flags = {'name':'${ADMIN_USER}',\
+             'pass':'${ADMIN_PASSWORD}',\
+             'tenant':'${ADMIN_TENANT}',\
+             'role':'${ADMIN_ROLE}',\
+             'email':'${ADMIN_USER_EMAIL}',\
+            }
+    d.setVarFlags("USERCREATE_PARAM_%s-setup" % d.getVar('SRCNAME',True), flags)
+}
+SERVICECREATE_PARAM_${SRCNAME}-setup = "name type description region publicurl adminurl internalurl"
+python () {
+    flags = {'type':'identity',\
+             'description':'OpenStack Identity',\
+             'publicurl':"'http://${KEYSTONE_HOST}:5000/v2.0'",\
+             'adminurl':"'http://${KEYSTONE_HOST}:35357/v2.0'",\
+             'internalurl':"'http://${KEYSTONE_HOST}:5000/v2.0'"}
+    d.setVarFlags("SERVICECREATE_PARAM_%s-setup" % d.getVar('SRCNAME',True), flags)
+}
+
 do_install_append() {
 
     KEYSTONE_CONF_DIR=${D}${sysconfdir}/keystone
@@ -40,7 +67,7 @@ do_install_append() {
     install -d ${D}${localstatedir}/log/${SRCNAME}
 
     install -m 600 ${WORKDIR}/keystone.conf ${KEYSTONE_CONF_DIR}/
-    install -m 600 ${WORKDIR}/identity.sh ${KEYSTONE_CONF_DIR}/
+    install -m 755 ${WORKDIR}/identity.sh ${KEYSTONE_CONF_DIR}/
     install -m 600 ${WORKDIR}/openrc ${KEYSTONE_CONF_DIR}/
     install -m 600 ${S}/etc/logging.conf.sample ${KEYSTONE_CONF_DIR}/logging.conf
     install -m 600 ${S}/etc/policy.json ${KEYSTONE_CONF_DIR}/policy.json
@@ -125,20 +152,15 @@ pkg_postinst_${SRCNAME}-setup () {
         sleep 2
     fi
 
-    sudo -u postgres createdb keystone
-    keystone-manage db_sync
-    keystone-manage pki_setup --keystone-user=root --keystone-group=root
+    # This is to make sure keystone is configured and running
+    PIDFILE="/var/run/keystone-all.pid"
+    if [ -z `cat $PIDFILE 2>/dev/null` ]; then
+       sudo -u postgres createdb keystone
+       keystone-manage db_sync
+       keystone-manage pki_setup --keystone-user=root --keystone-group=root
 
-    # Create users, services and endpoints
-    /etc/init.d/keystone start
-    sleep 2
-
-    ADMIN_PASSWORD=${ADMIN_PASSWORD} \
-    SERVICE_PASSWORD=${SERVICE_PASSWORD} \
-    SERVICE_TENANT_NAME=${SERVICE_TENANT_NAME} \
-             bash /etc/keystone/identity.sh
-
-    # end python-keystone postinst
+       /etc/init.d/keystone start
+    fi
 }
 
 # By default tokens are expired after 1 day so by default we can set
