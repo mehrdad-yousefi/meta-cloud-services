@@ -6,6 +6,8 @@ SRC_URI += "file://postgresql \
 
 inherit useradd update-rc.d identity hosts autotools-brokensep
 
+PACKAGECONFIG[libxml] = "--with-libxml CFLAGS=-I${STAGING_INCDIR}/libxml2,--without-libxml,libxml2,libxml2"
+
 # default
 DB_DATADIR ?= "/var/lib/postgres/data"
 
