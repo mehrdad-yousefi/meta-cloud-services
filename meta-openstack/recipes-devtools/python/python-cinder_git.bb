@@ -24,9 +24,28 @@ SRCREV="978b036a6467f7f6afb4419f92bf4fa7d1ff2347"
 PV="2014.1+git${SRCPV}"
 S = "${WORKDIR}/git"
 
-inherit setuptools update-rc.d identity default_configs
+inherit setuptools update-rc.d identity default_configs hosts
 
 CINDER_BACKUP_BACKEND_DRIVER ?= "cinder.backup.drivers.swift"
+
+SERVICECREATE_PACKAGES = "${SRCNAME}-setup"
+KEYSTONE_HOST="${CONTROLLER_IP}"
+
+# USERCREATE_PARAM and SERVICECREATE_PARAM contain the list of parameters to be set.
+# If the flag for a parameter in the list is not set here, the default value will be given to that parameter.
+# Parameters not in the list will be set to empty.
+
+USERCREATE_PARAM_${SRCNAME}-setup = "name pass tenant role email"
+SERVICECREATE_PARAM_${SRCNAME}-setup = "name type description region publicurl adminurl internalurl"
+python () {
+    flags = {'type':'volume',\
+             'description':'OpenStack Volume Service',\
+             'publicurl':"'http://${KEYSTONE_HOST}:8776/v1/\$(tenant_id)s'",\
+             'adminurl':"'http://${KEYSTONE_HOST}:8776/v1/\$(tenant_id)s'",\
+             'internalurl':"'http://${KEYSTONE_HOST}:8776/v1/\$(tenant_id)s'"}
+
+    d.setVarFlags("SERVICECREATE_PARAM_%s-setup" % d.getVar('SRCNAME',True), flags)
+}
 
 do_install_prepend() {
     sed 's:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g' -i ${S}/${SRCNAME}/tests/conf_fixture.py

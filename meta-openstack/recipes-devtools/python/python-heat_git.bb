@@ -20,6 +20,44 @@ SRCREV="69145518cb9a20d401c4213a030c39caaad1c326"
 PV="2014.1+git${SRCPV}"
 S = "${WORKDIR}/git"
 
+SERVICECREATE_PACKAGES = "${SRCNAME}-setup ${SRCNAME}-templates ${SRCNAME}-cfn"
+KEYSTONE_HOST="${CONTROLLER_IP}"
+
+# USERCREATE_PARAM and SERVICECREATE_PARAM contain the list of parameters to be set.
+# If the flag for a parameter in the list is not set here, the default value will be given to that parameter.
+# Parameters not in the list will be set to empty.
+
+USERCREATE_PARAM_${SRCNAME}-setup = "name pass tenant role email"
+SERVICECREATE_PARAM_${SRCNAME}-setup = "name type description region publicurl adminurl internalurl"
+python () {
+    flags = {'type':'orchestration',\
+             'description':'OpenStack Orchestration Service',\
+             'publicurl':"'http://${KEYSTONE_HOST}:8004/v1/\$(tenant_id)s'",\
+             'adminurl':"'http://${KEYSTONE_HOST}:8004/v1/\$(tenant_id)s'",\
+             'internalurl':"'http://${KEYSTONE_HOST}:8004/v1/\$(tenant_id)s'"}
+
+    d.setVarFlags("SERVICECREATE_PARAM_%s-setup" % d.getVar('SRCNAME',True), flags)
+}
+
+# heat stack template user role
+USERCREATE_PARAM_${SRCNAME}-templates = "role"
+python () {
+    flags = {'role':'heat_stack_user'}
+    d.setVarFlags("USERCREATE_PARAM_%s-templates" % d.getVar('SRCNAME',True), flags)
+}
+
+# api-cfn service
+SERVICECREATE_PARAM_${SRCNAME}-cfn = "name type description region publicurl adminurl internalurl"
+python () {
+    flags = {'name':'heat-cfn',\
+             'type':'cloudformation',\
+             'description':'OpenStack Cloudformation Service',\
+             'publicurl':"'http://${KEYSTONE_HOST}:8000/v1'",\
+             'adminurl':"'http://${KEYSTONE_HOST}:8000/v1'",\
+             'internalurl':"'http://${KEYSTONE_HOST}:8000/v1'"}
+    d.setVarFlags("SERVICECREATE_PARAM_%s-cfn" % d.getVar('SRCNAME',True), flags)
+}
+
 do_install_append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}/${SRCNAME}
     HEAT_CONF_DIR=${D}${sysconfdir}/${SRCNAME}
@@ -89,8 +127,11 @@ inherit setuptools identity hosts update-rc.d default_configs
 
 PACKAGES += "${SRCNAME}-tests ${SRCNAME}-templates ${SRCNAME}-common ${SRCNAME}-api ${SRCNAME}-api-cfn ${SRCNAME}-engine"
 PACKAGES += "${SRCNAME}-setup"
+PACKAGES += "${SRCNAME}-cfn"
 
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
+ALLOW_EMPTY_${SRCNAME}-templates = "1"
+ALLOW_EMPTY_${SRCNAME}-cfn = "1"
 
 FILES_${PN} = "${libdir}/*"
 
@@ -164,10 +205,12 @@ RDEPENDS_${PN} += " \
         python-pbr \
 	"
 
-RDEPENDS_${SRCNAME}-engine = "${PN} ${SRCNAME}-templates ${SRCNAME}-common postgresql postgresql-client python-psycopg2 tgt"
+RDEPENDS_${SRCNAME}-engine = "${PN} ${SRCNAME}-templates ${SRCNAME}-common postgresql postgresql-client python-psycopg2 tgt ${SRCNAME}-cfn"
 RDEPENDS_${SRCNAME}-api = "${SRCNAME}-engine"
 RDEPENDS_${SRCNAME}-api-cfn = "${SRCNAME}-engine"
 RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-engine"
+RDEPENDS_${SRCNAME}-templates = "postgresql sudo"
+RDEPENDS_${SRCNAME}-cfn = "postgresql sudo"
 
 INITSCRIPT_PACKAGES = "${SRCNAME}-api ${SRCNAME}-api-cfn ${SRCNAME}-engine"
 INITSCRIPT_NAME_${SRCNAME}-api = "${SRCNAME}-api"

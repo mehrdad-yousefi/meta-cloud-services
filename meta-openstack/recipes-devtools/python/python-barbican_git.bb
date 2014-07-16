@@ -21,6 +21,24 @@ S = "${WORKDIR}/git"
 
 inherit update-rc.d setuptools identity hosts useradd default_configs
 
+SERVICECREATE_PACKAGES = "${SRCNAME}-setup"
+KEYSTONE_HOST="${CONTROLLER_IP}"
+
+# USERCREATE_PARAM and SERVICECREATE_PARAM contain the list of parameters to be set.
+# If the flag for a parameter in the list is not set here, the default value will be given to that parameter.
+# Parameters not in the list will be set to empty.
+
+USERCREATE_PARAM_${SRCNAME}-setup = "name pass tenant role email"
+SERVICECREATE_PARAM_${SRCNAME}-setup = "name type description region publicurl adminurl internalurl"
+python () {
+    flags = {'type':'keystore',\
+             'description':'Barbican Key Management Service',\
+             'publicurl':"'http://${KEYSTONE_HOST}:9311/v1'",\
+             'adminurl':"'http://${KEYSTONE_HOST}:9312/v1'",\
+             'internalurl':"'http://${KEYSTONE_HOST}:9313/v1'"}
+    d.setVarFlags("SERVICECREATE_PARAM_%s-setup" % d.getVar('SRCNAME',True), flags)
+}
+
 do_install_append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}/${SRCNAME}
     BARBICAN_CONF_DIR=${D}${sysconfdir}/${SRCNAME}
