@@ -1,23 +1,20 @@
 #!/bin/bash
 
-# Modify these variables as needed
-ADMIN_PASSWORD=${ADMIN_PASSWORD:-password}
-SERVICE_PASSWORD=${SERVICE_PASSWORD:-$ADMIN_PASSWORD}
-DEMO_PASSWORD=${DEMO_PASSWORD:-$ADMIN_PASSWORD}
+#
+# Copyright (C) 2014 Wind River Systems, Inc.
+#
+# The identity.sh provides utilities for services to add tenant/role/users,
+# and service/endpoints into keystone database
+#
+
+# Use shared secret for authentication before any user created.
 export OS_SERVICE_TOKEN="password"
 export OS_SERVICE_ENDPOINT="http://localhost:35357/v2.0"
-SERVICE_TENANT_NAME=${SERVICE_TENANT_NAME:-service}
-#
-MYSQL_USER=keystone
-MYSQL_DATABASE=keystone
-MYSQL_HOST=localhost
-MYSQL_PASSWORD=password
-#
-KEYSTONE_REGION=RegionOne
-KEYSTONE_HOST=%CONTROLLER_IP%
+
+declare -A PARAMS
 
 # Shortcut function to get a newly generated ID
-function get_field() {
+function get_field () {
     while read data; do
         if [ "$1" -lt 0 ]; then
             field="(\$(NF$1))"
@@ -28,179 +25,202 @@ function get_field() {
     done
 }
 
-# Tenants
-keystone tenant-get admin
-if [ $? -eq 1 ]; then
-    ADMIN_TENANT=$(keystone tenant-create --name=admin | grep " id " | get_field 2)
-else
-    ADMIN_TENANT=$(keystone tenant-get admin | grep " id " | get_field 2)
-fi
-keystone tenant-get demo
-if [ $? -eq 1 ]; then
-    DEMO_TENANT=$(keystone tenant-create --name=demo | grep " id " | get_field 2)
-else
-    DEMO_TENANT=$(keystone tenant-get demo | grep " id " | get_field 2)
-fi
-keystone tenant-get alt_demo
-if [ $? -eq 1 ]; then
-    ALT_DEMO_TENANT=$(keystone tenant-create --name=alt_demo | grep " id " | get_field 2)
-else
-    ALT_DEMO_TENANT=$(keystone tenant-get alt_demo | grep " id " | get_field 2)
-fi
-keystone tenant-get $SERVICE_TENANT_NAME
-if [ $? -eq 1 ]; then
-    SERVICE_TENANT=$(keystone tenant-create --name=$SERVICE_TENANT_NAME | grep " id " | get_field 2)
-else
-    SERVICE_TENANT=$(keystone tenant-get $SERVICE_TENANT_NAME | grep " id " | get_field 2)
-fi
+# Usage help
+help () {
+    if [ $# -eq 0 ]; then
+        echo "Usage: $0 <subcommand> ..."
+        echo ""
+        echo "Keystone CLI wrapper to create tenant/user/role, and service/endpoint."
+        echo "It uses the default tenant, user and password from environment variables"
+        echo "(OS_TENANT_NAME, OS_USERNAME, OS_PASSWORD) to authenticate with keystone."
+        echo ""
+        echo "Positional arguments:"
+        echo "  <subcommand>"
+        echo "    user-create"
+        echo "    service-create"
+        echo ""
+        echo "See \"identity.sh help COMMAND\" for help on a specific command."
+        exit 0
+    fi
 
-# Users
-keystone user-get admin
-if [ $? -eq 1 ]; then
-    ADMIN_USER=$(keystone user-create --name=admin --pass="$ADMIN_PASSWORD" --email=admin@domain.com | grep " id " | get_field 2)
-else
-    ADMIN_USER=$(keystone user-get admin | grep " id " | get_field 2)
-fi
-keystone user-get demo
-if [ $? -eq 1 ]; then                                                                                                                           
-    DEMO_USER=$(keystone user-create --name=demo --pass="$DEMO_PASSWORD" --email=demo@domain.com --tenant-id=$DEMO_TENANT | grep " id " | get_field 2)
-else
-    DEMO_USER=$(keystone user-get demo | grep " id " | get_field 2)
-fi
-keystone user-get alt_demo
-if [ $? -eq 1 ]; then
-    ALT_DEMO_USER=$(keystone user-create --name=alt_demo --pass="$DEMO_PASSWORD" --email=alt_demo@domain.com --tenant-id=$ALT_DEMO_TENANT | grep " id " | get_field 2)
-else
-    ALT_DEMO_USER=$(keystone user-get alt_demo | grep " id " | get_field 2)
-fi
-keystone user-get nova
-if [ $? -eq 1 ]; then                                                                                                                           
-    NOVA_USER=$(keystone user-create --name=nova --pass="$SERVICE_PASSWORD" --tenant-id $SERVICE_TENANT --email=nova@domain.com | grep " id " | get_field 2)
-else
-    NOVA_USER=$(keystone user-get nova | grep " id " | get_field 2)
-fi
-keystone user-get glance
-if [ $? -eq 1 ]; then                                                                                                                           
-    GLANCE_USER=$(keystone user-create --name=glance --pass="$SERVICE_PASSWORD" --tenant-id $SERVICE_TENANT --email=glance@domain.com | grep " id " | get_field 2)
-else
-    GLANCE_USER=$(keystone user-get glance | grep " id " | get_field 2)
-fi
-keystone user-get neutron
-if [ $? -eq 1 ]; then                                                                                                                           
-    NEUTRON_USER=$(keystone user-create --name=neutron --pass="$SERVICE_PASSWORD" --tenant-id $SERVICE_TENANT --email=neutron@domain.com | grep " id " | get_field 2)
-else
-    NEUTRON_USER=$(keystone user-get neutron | grep " id " | get_field 2)
-fi
-keystone user-get cinder
-if [ $? -eq 1 ]; then                                                                                                                           
-    CINDER_USER=$(keystone user-create --name=cinder --pass="$SERVICE_PASSWORD" --tenant-id $SERVICE_TENANT --email=cinder@domain.com | grep " id " | get_field 2)
-else
-    CINDER_USER=$(keystone user-get cinder | grep " id " | get_field 2)
-fi
-keystone user-get ceilometer
-if [ $? -eq 1 ]; then
-    CEILOMETER_USER=$(keystone user-create --name=ceilometer --pass="$SERVICE_PASSWORD" --tenant-id $SERVICE_TENANT --email=ceilometer@domain.com | grep " id " | get_field 2)
-else
-    CEILOMETER_USER=$(keystone user-get ceilometer | grep " id " | get_field 2)
-fi
-keystone user-get heat
-if [ $? -eq 1 ]; then
-    HEAT_USER=$(keystone user-create --name=heat --pass="$SERVICE_PASSWORD" --tenant-id $SERVICE_TENANT --email=heat@domain.com | grep " id " | get_field 2)
-else
-    HEAT_USER=$(keystone user-get heat | grep " id " | get_field 2)
-fi
-keystone user-get swift
-if [ $? -eq 1 ]; then
-    SWIFT_USER=$(keystone user-create --name=swift --pass="$SERVICE_PASSWORD" --tenant-id $SERVICE_TENANT --email=swift@domain.com | grep " id " | get_field 2)
-else
-    SWIFT_USER=$(keystone user-get swift | grep " id " | get_field 2)
-fi
-keystone user-get barbican
-if [ $? -eq 1 ]; then                                                                                                                           
-    BARBICAN_USER=$(keystone user-create --name=barbican --pass="$SERVICE_PASSWORD" --tenant-id $SERVICE_TENANT --email=barbican@domain.com | grep " id " | get_field 2)
-else
-    BARBICAN_USER=$(keystone user-get barbican | grep " id " | get_field 2)
-fi
+    case "$2" in
+        service-create)
+            echo "Usage: $0 $2 [--name=<name>] [--type=<type>] [--description=<description>] [--region=<region>] [--publicurl=<public url>] [--adminurl=<admin url>] [--internalurl=<internal url>]"
+            echo ""
+            echo "Create service and endpoint in keystone."
+            echo ""
+            echo "Arguments:"
+            echo "  --name=<name>"
+            echo "                  The name of the service"
+            echo "  --type=<type>"
+            echo "                  The type of the service"
+            echo "  --description=<description>"
+            echo "                  Description of the service"
+            echo "  --region=<region>"
+            echo "                  The region of the service"
+            echo "  --publicurl=<public url>"
+            echo "                  Public URL of the service endpoint"
+            echo "  --adminurl=<admin url>"
+            echo "                  Admin URL of the service endpoint"
+            echo "  --internalurl=<internal url>"
+            echo "                  Internal URL of the service endpoint"
+            ;;
+        user-create)
+            echo "Usage: $0 $2 [--name=<name>] [--pass=<password>] [--tenant=<tenant>] [--role=<role>] [--email=<email>]"
+            echo ""
+            echo "Arguments:"
+            echo "  --name=<name>"
+            echo "                  The name of the user"
+            echo "  --pass=<password>"
+            echo "                  The password of the user"
+            echo "  --tenant=<tenant>"
+            echo "                  The tenant of the user belongs to"
+            echo "  --role=<role>"
+            echo "                  The role of the user in the <tenant>"
+            echo "  --email=<email>"
+            echo "                  The email of the user"
+            ;;
+        *)
+            echo "Usage: $0 help <subcommand> ..."
+            echo ""
+            exit 0
+            ;;
+    esac
+}
 
-# Roles
-keystone role-get admin
-if [ $? -eq 1 ]; then
-    ADMIN_ROLE=$(keystone role-create --name=admin | grep " id " | get_field 2)
-else
-    ADMIN_ROLE=$(keystone role-get admin | grep " id " | get_field 2)
-fi
-keystone role-get Member
-if [ $? -eq 1 ]; then
-    MEMBER_ROLE=$(keystone role-create --name=Member | grep " id " | get_field 2)
-else
-    MEMBER_ROLE=$(keystone role-get Member | grep " id " | get_field 2)
-fi
-keystone role-get ResellerAdmin
-if [ $? -eq 1 ]; then
-    RESELLER_ADMIN_ROLE=$(keystone role-create --name=ResellerAdmin | grep " id " | get_field 2)
-else
-    RESELLER_ADMIN_ROLE=$(keystone role-get ResellerAdmin | grep " id " | get_field 2)
-fi
-#  heat stack template user role
-keystone role-create --name heat_stack_user
+# Parse the command line parameters in an map
+parse_param () {
+    while [ $# -ne 0 ]; do
+    param=$1
+    shift
 
-# Add Roles to Users in Tenants
-keystone user-role-list --user-id $ADMIN_USER --tenant-id $ADMIN_TENANT &> /dev/null
-keystone user-role-add --tenant-id $ADMIN_TENANT --user-id $ADMIN_USER --role-id $ADMIN_ROLE
-keystone user-role-add --tenant-id $DEMO_TENANT --user-id $ADMIN_USER --role-id $ADMIN_ROLE
+    key=`echo $param | cut -d '=' -f 1`
+    key=`echo $key | tr -d '[-*2]'`
+    PARAMS[$key]=`echo $param | cut -d '=' -f 2`
+    done
+}
 
-keystone user-role-list --user-id $NOVA_USER --tenant-id $SERVICE_TENANT &> /dev/null
-keystone user-role-add --tenant-id $SERVICE_TENANT --user-id $NOVA_USER --role-id $ADMIN_ROLE
+# Create tenant/role/user, and add user to the tenant as role
+user-create () {
+    # validation checking
+    if [[ "$@" =~ ^--name=.*\ --pass=.*\ --tenant=.*\ --role=.*\ --email=.*$ ]]; then
+        params=`echo "$@" | sed -e 's%--name=\(.*\) --pass=\(.*\) --tenant=\(.*\) --role=\(.*\) --email=\(.*\)%--name=\1|--pass=\2|--tenant=\3|--role=\4|--email=\5%g'`
+    else
+        help
+        exit 1
+    fi
 
-keystone user-role-list --user-id $GLANCE_USER --tenant-id $SERVICE_TENANT &> /dev/null
-keystone user-role-add --tenant-id $SERVICE_TENANT --user-id $GLANCE_USER --role-id $ADMIN_ROLE
+    # parse the cmdline parameters
+    IFS="|"
+    parse_param $params
+    unset IFS
 
-keystone user-role-list --user-id $NEUTRON_USER --tenant-id $SERVICE_TENANT &> /dev/null
-keystone user-role-add --tenant-id $SERVICE_TENANT --user-id $NEUTRON_USER --role-id $ADMIN_ROLE
+    echo "Adding user in keystone ..."
 
-keystone user-role-list --user-id $CINDER_USER --tenant-id $SERVICE_TENANT &> /dev/null
-keystone user-role-add --tenant-id $SERVICE_TENANT --user-id $CINDER_USER --role-id $ADMIN_ROLE
+    if [ "x${PARAMS["tenant"]}" != "x" ]; then
+        # check if tenant exist, create it if not
+        TENANT_ID=$(keystone tenant-get ${PARAMS["tenant"]} | grep " id " | get_field 2)
+        if [ "x$TENANT_ID" == "x" ]; then
+            echo "Creating tenant ${PARAMS["tenant"]} in keystone ..."
+            TENANT_ID=$(keystone tenant-create --name=${PARAMS["tenant"]} | grep " id " | get_field 2)
+        fi
+        echo "Tenant list:"
+        keystone tenant-list
+    fi
 
-keystone user-role-list --user-id $DEMO_USER --tenant-id $DEMO_TENANT &> /dev/null
-keystone user-role-add --tenant-id $DEMO_TENANT --user-id $DEMO_USER --role-id $MEMBER_ROLE
+    if [ "x${PARAMS["role"]}" != "x" ]; then
+        # check if role exist, create it if not
+        ROLE_ID=$(keystone role-get ${PARAMS["role"]} | grep " id " | get_field 2)
+        if [ "x$ROLE_ID" == "x" ]; then
+            echo "Creating role ${PARAMS["role"]} in keystone ..."
+            ROLE_ID=$(keystone role-create --name=${PARAMS["role"]} | grep " id " | get_field 2)
+        fi
+        echo "Role list:"
+        keystone role-list
+    fi
 
-keystone user-role-list --user-id $ALT_DEMO_USER --tenant-id $ALT_DEMO_TENANT &> /dev/null
-keystone user-role-add --tenant-id $ALT_DEMO_TENANT --user-id $ALT_DEMO_USER --role-id $MEMBER_ROLE
+    if [ "x${PARAMS["name"]}" != "x" ]; then
+        # check if user exist, create it if not
+        USER_ID=$(keystone user-get ${PARAMS["name"]} | grep " id " | get_field 2)
+        if [ "x$USER_ID" == "x" ]; then
+            echo "Creating user ${PARAMS["name"]} in keystone ..."
+            USER_ID=$(keystone user-create --name=${PARAMS["name"]} --pass=${PARAMS["pass"]} --tenant-id $TENANT_ID --email=${PARAMS["email"]} | grep " id " | get_field 2)
+        fi
+        echo "User list:"
+        keystone user-list
+    fi
 
-keystone user-role-list --user-id $CEILOMETER_USER --tenant_id $SERVICE_TENANT &> /dev/null
-keystone user-role-add --tenant-id $SERVICE_TENANT --user-id $CEILOMETER_USER --role-id $ADMIN_ROLE
-keystone user-role-add --tenant_id $SERVICE_TENANT --user_id $CEILOMETER_USER --role-id $RESELLER_ADMIN_ROLE
+    if [ "x$USER_ID" != "x" ] && [ "x$TENANT_ID" != "x" ] && [ "x$ROLE_ID" != "x" ]; then
+        # add the user to the tenant as role
+        keystone user-role-list --user-id $USER_ID --tenant-id $TENANT_ID | grep $ROLE_ID &> /dev/null
+        if [ $? -eq 1 ]; then
+            echo "Adding user ${PARAMS["name"]} in tenant ${PARAMS["tenant"]} as ${PARAMS["role"]} ..."
+            keystone user-role-add --tenant-id $TENANT_ID --user-id $USER_ID --role-id $ROLE_ID
+        fi
+    fi
 
-keystone user-role-add --tenant_id $SERVICE_TENANT --user-id $HEAT_USER --role-id $ADMIN_ROLE
+    if [ "x$USER_ID" != "x" ] && [ "x$TENANT_ID" != "x" ]; then
+        echo "User ${PARAMS["name"]} in Tenant ${PARAMS["tenant"]} role list:"
+        keystone user-role-list --user-id $USER_ID --tenant-id $TENANT_ID
+    fi
+}
 
-keystone user-role-list --user-id $SWIFT_USER --tenant_id $SERVICE_TENANT &> /dev/null
-keystone user-role-add --tenant-id $SERVICE_TENANT --user-id $SWIFT_USER --role-id $ADMIN_ROLE
+# Create service and its endpoint
+service-create () {
+    # validation checking
+    if [[ "$@" =~ ^--name=.*\ --type=.*\ --description=.*\ --region=.*\ --publicurl=.*\ --adminurl=.*\ --internalurl=.*$ ]]; then
+        params=`echo "$@" | sed -e 's%--name=\(.*\) --type=\(.*\) --description=\(.*\) --region=\(.*\) --publicurl=\(.*\) --adminurl=\(.*\) --internalurl=\(.*\)%--name=\1|--type=\2|--description=\3|--region=\4|--publicurl=\5|--adminurl=\6|--internalurl=\7%g'`
+    else
+        help
+        exit 1
+    fi
 
-keystone user-role-list --user-id $BARBICAN_USER --tenant_id $SERVICE_TENANT &> /dev/null
-keystone user-role-add --tenant-id $SERVICE_TENANT --user-id $BARBICAN_USER --role-id $ADMIN_ROLE
+    # parse the cmdline parameters
+    IFS=$"|"
+    parse_param $params
+    unset IFS
 
-# Create services
-COMPUTE_SERVICE=$(keystone service-create --name nova --type compute --description 'OpenStack Compute Service' | grep " id " | get_field 2)
-VOLUME_SERVICE=$(keystone service-create --name cinder --type volume --description 'OpenStack Volume Service' | grep " id " | get_field 2)
-IMAGE_SERVICE=$(keystone service-create --name glance --type image --description 'OpenStack Image Service' | grep " id " | get_field 2)
-IDENTITY_SERVICE=$(keystone service-create --name keystone --type identity --description 'OpenStack Identity' | grep " id " | get_field 2)
-EC2_SERVICE=$(keystone service-create --name ec2 --type ec2 --description 'OpenStack EC2 service' | grep " id " | get_field 2)
-NETWORK_SERVICE=$(keystone service-create --name neutron --type network --description 'OpenStack Networking service' | grep " id " | get_field 2)
-METERING_SERVICE=$(keystone service-create --name ceilometer --type=metering --description='OpenStack Metering Service' | grep " id " | get_field 2)
-ORCHESTRATION_SERVICE=$(keystone service-create --name heat --type=orchestration --description='OpenStack Orchestration Service' | grep " id " | get_field 2)
-CLOUDFORMATION_SERVICE=$(keystone service-create --name heat-cfn --type=cloudformation --description='OpenStack Cloudformation Service' | grep " id " | get_field 2)
-SWIFT_SERVICE=$(keystone service-create --name swift --type=object-store --description='OpenStack object-store' | grep " id " | get_field 2)
-BARBICAN_SERVICE=$(keystone service-create --name barbican --type=keystore --description='Barbican Key Management Service' | grep " id " | get_field 2)
+    echo "Creating service in keystone ..."
 
-# Create endpoints
-keystone endpoint-create --region $KEYSTONE_REGION --service-id $COMPUTE_SERVICE --publicurl 'http://'"$KEYSTONE_HOST"':8774/v2/$(tenant_id)s' --adminurl 'http://'"$KEYSTONE_HOST"':8774/v2/$(tenant_id)s' --internalurl 'http://'"$KEYSTONE_HOST"':8774/v2/$(tenant_id)s'
-keystone endpoint-create --region $KEYSTONE_REGION --service-id $VOLUME_SERVICE --publicurl 'http://'"$KEYSTONE_HOST"':8776/v1/$(tenant_id)s' --adminurl 'http://'"$KEYSTONE_HOST"':8776/v1/$(tenant_id)s' --internalurl 'http://'"$KEYSTONE_HOST"':8776/v1/$(tenant_id)s'
-keystone endpoint-create --region $KEYSTONE_REGION --service-id $IMAGE_SERVICE --publicurl 'http://'"$KEYSTONE_HOST"':9292/v2' --adminurl 'http://'"$KEYSTONE_HOST"':9292/v2' --internalurl 'http://'"$KEYSTONE_HOST"':9292/v2'
-keystone endpoint-create --region $KEYSTONE_REGION --service-id $IDENTITY_SERVICE --publicurl 'http://'"$KEYSTONE_HOST"':5000/v2.0' --adminurl 'http://'"$KEYSTONE_HOST"':35357/v2.0' --internalurl 'http://'"$KEYSTONE_HOST"':5000/v2.0'
-keystone endpoint-create --region $KEYSTONE_REGION --service-id $EC2_SERVICE --publicurl 'http://'"$KEYSTONE_HOST"':8773/services/Cloud' --adminurl 'http://'"$KEYSTONE_HOST"':8773/services/Admin' --internalurl 'http://'"$KEYSTONE_HOST"':8773/services/Cloud'
-keystone endpoint-create --region $KEYSTONE_REGION --service-id $NETWORK_SERVICE --publicurl 'http://'"$KEYSTONE_HOST"':9696/' --adminurl 'http://'"$KEYSTONE_HOST"':9696/' --internalurl 'http://'"$KEYSTONE_HOST"':9696/'
-keystone endpoint-create --region $KEYSTONE_REGION --service_id $METERING_SERVICE --publicurl 'http://'"$KEYSTONE_HOST"':8777/' --adminurl 'http://'"$KEYSTONE_HOST"':8777/' --internalurl 'http://'"$KEYSTONE_HOST"':8777/'
-keystone endpoint-create --region $KEYSTONE_REGION --service_id $ORCHESTRATION_SERVICE --publicurl 'http://'"$KEYSTONE_HOST"':8004/v1/%(tenant_id)s' --adminurl 'http://'"$KEYSTONE_HOST"':8004/v1/%(tenant_id)s' --internalurl 'http://'"$KEYSTONE_HOST"':8004/v1/%(tenant_id)s'
-keystone endpoint-create --region $KEYSTONE_REGION --service_id $CLOUDFORMATION_SERVICE --publicurl 'http://'"$KEYSTONE_HOST"':8000/v1' --adminurl 'http://'"$KEYSTONE_HOST"':8000/v1' --internalurl 'http://'"$KEYSTONE_HOST"':8000/v1'
-keystone endpoint-create --region $KEYSTONE_REGION --service_id $SWIFT_SERVICE --publicurl 'http://'"$KEYSTONE_HOST"':8888/v1/AUTH_%(tenant_id)s' --adminurl 'http://'"$KEYSTONE_HOST"':8888/v1' --internalurl 'http://'"$KEYSTONE_HOST"':8888/v1/AUTH_%(tenant_id)s'
-keystone endpoint-create --region $KEYSTONE_REGION --service_id $BARBICAN_SERVICE --publicurl 'http://'"$KEYSTONE_HOST"':9311/v1' --adminurl 'http://'"$KEYSTONE_HOST"':9312/v1' --internalurl 'http://'"$KEYSTONE_HOST"':9313/v1'
+    if [ "x${PARAMS["name"]}" != "x" ]; then
+        # check if service already created, create it if not
+        SERVICE_ID=$(keystone service-get ${PARAMS["name"]} | grep " id " | get_field 2)
+        if [ "x$SERVICE_ID" == "x" ]; then
+            echo "Adding service ${PARAMS["name"]} in keystone ..."
+            SERVICE_ID=$(keystone service-create --name ${PARAMS["name"]} --type ${PARAMS["type"]} --description "${PARAMS["description"]}" | grep " id " | get_field 2)
+        fi
+        echo "Service list:"
+        keystone service-list
+    fi
+
+    if [ "x$SERVICE_ID" != "x" ]; then
+        # create its endpoint
+        keystone endpoint-list | grep $SERVICE_ID | grep ${PARAMS["region"]} | grep ${PARAMS["publicurl"]} | grep ${PARAMS["adminurl"]} | grep ${PARAMS["internalurl"]}
+        if [ $? -eq 1 ]; then
+            echo "Creating endpoint for ${PARAMS["name"]} in keystone ..."
+            keystone endpoint-create --region ${PARAMS["region"]} --service-id $SERVICE_ID --publicurl ${PARAMS["publicurl"]} --adminurl ${PARAMS["adminurl"]} --internalurl ${PARAMS["internalurl"]}
+        fi
+        echo "Endpoints list:"
+        keystone endpoint-list
+    fi
+}
+
+case "$1" in
+    service-create)
+        shift
+        service-create $@
+        ;;
+    user-create)
+        shift
+        user-create $@
+        ;;
+    help)
+        help $@
+        ;;
+    *)
+        help
+        exit 0
+        ;;
+esac
+
+exit 0
