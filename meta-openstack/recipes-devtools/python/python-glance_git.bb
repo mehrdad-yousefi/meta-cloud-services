@@ -17,9 +17,28 @@ PV="2013.2.3+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit setuptools update-rc.d identity default_configs
+inherit setuptools update-rc.d identity default_configs hosts
 
 GLANCE_DEFAULT_STORE ?= "file"
+
+SERVICECREATE_PACKAGES = "${SRCNAME}-setup"
+KEYSTONE_HOST="${CONTROLLER_IP}"
+
+# USERCREATE_PARAM and SERVICECREATE_PARAM contain the list of parameters to be set.
+# If the flag for a parameter in the list is not set here, the default value will be given to that parameter.
+# Parameters not in the list will be set to empty.
+
+USERCREATE_PARAM_${SRCNAME}-setup = "name pass tenant role email"
+SERVICECREATE_PARAM_${SRCNAME}-setup = "name type description region publicurl adminurl internalurl"
+python () {
+    flags = {'type':'image',\
+             'description':'OpenStack Image Service',\
+             'publicurl':"'http://${KEYSTONE_HOST}:9292/v2'",\
+             'adminurl':"'http://${KEYSTONE_HOST}:9292/v2'",\
+             'internalurl':"'http://${KEYSTONE_HOST}:9292/v2'"}
+
+    d.setVarFlags("SERVICECREATE_PARAM_%s-setup" % d.getVar('SRCNAME',True), flags)
+}
 
 do_install_prepend() {
     sed 's:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g' -i ${S}/${SRCNAME}/tests/functional/__init__.py

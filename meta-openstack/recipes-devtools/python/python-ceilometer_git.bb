@@ -23,6 +23,32 @@ S = "${WORKDIR}/git"
 
 CEILOMETER_SECRET ?= "12121212"
 
+SERVICECREATE_PACKAGES = "${SRCNAME}-setup ${SRCNAME}-reseller"
+KEYSTONE_HOST="${CONTROLLER_IP}"
+
+# USERCREATE_PARAM and SERVICECREATE_PARAM contain the list of parameters to be set.
+# If the flag for a parameter in the list is not set here, the default value will be given to that parameter.
+# Parameters not in the list will be set to empty.
+
+USERCREATE_PARAM_${SRCNAME}-setup = "name pass tenant role email"
+SERVICECREATE_PARAM_${SRCNAME}-setup = "name type description region publicurl adminurl internalurl"
+python () {
+    flags = {'type':'metering',\
+             'description':'OpenStack Metering Service',\
+             'publicurl':"'http://${KEYSTONE_HOST}:8777/'",\
+             'adminurl':"'http://${KEYSTONE_HOST}:8777/'",\
+             'internalurl':"'http://${KEYSTONE_HOST}:8777/'"}
+
+    d.setVarFlags("SERVICECREATE_PARAM_%s-setup" % d.getVar('SRCNAME',True), flags)
+}
+
+# Add service user to service tenant as ResellerAdmin role
+USERCREATE_PARAM_${SRCNAME}-reseller = "name pass tenant role email"
+python () {
+    flags = {'role':'ResellerAdmin'}
+    d.setVarFlags("USERCREATE_PARAM_%s-reseller" % d.getVar('SRCNAME',True), flags)
+}
+
 do_configure_append() {
     # We are using postgresql support, hence this requirement is not valid
     # removing it, to avoid on-target runtime issues
@@ -104,8 +130,10 @@ PACKAGES += "${SRCNAME}-setup ${SRCNAME}-common ${SRCNAME}-api"
 PACKAGES += "${SRCNAME}-alarm-notifier ${SRCNAME}-alarm-evaluator"
 PACKAGES += "${SRCNAME}-agent-notification"
 PACKAGES += "${SRCNAME}-collector ${SRCNAME}-compute ${SRCNAME}-controller"
+PACKAGES += " ${SRCNAME}-reseller"
 
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
+ALLOW_EMPTY_${SRCNAME}-reseller = "1"
 
 FILES_${PN} = "${libdir}/*"
 
@@ -199,12 +227,13 @@ RDEPENDS_${PN} += " \
 	python-pysnmp \
 	"
 
-RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common ${SRCNAME}-alarm-notifier ${SRCNAME}-alarm-evaluator ${SRCNAME}-agent-notification \
+RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common ${SRCNAME}-alarm-notifier ${SRCNAME}-alarm-evaluator ${SRCNAME}-agent-notification ${SRCNAME}-reseller \
                                   postgresql postgresql-client python-psycopg2 tgt"
 RDEPENDS_${SRCNAME}-api = "${SRCNAME}-controller"
 RDEPENDS_${SRCNAME}-collector = "${SRCNAME}-controller"
 RDEPENDS_${SRCNAME}-compute = "${PN} ${SRCNAME}-common python-ceilometerclient libvirt"
 RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-controller"
+RDEPENDS_${SRCNAME}-reseller = "postgresql sudo ${SRCNAME}-controller"
 
 INITSCRIPT_PACKAGES =  "${SRCNAME}-api ${SRCNAME}-collector ${SRCNAME}-compute ${SRCNAME}-controller"
 INITSCRIPT_PACKAGES += "${SRCNAME}-alarm-notifier ${SRCNAME}-alarm-evaluator ${SRCNAME}-agent-notification"

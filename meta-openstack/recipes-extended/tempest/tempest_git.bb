@@ -21,6 +21,49 @@ SRCREV="6273339e2da725b01560b6a2db11a3bf7a6659d7"
 PV="2013.2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
+SERVICECREATE_PACKAGES = "${SRCNAME}-setup ${SRCNAME}-setup-altdemo ${SRCNAME}-setup-admin"
+KEYSTONE_HOST="${CONTROLLER_IP}"
+
+# USERCREATE_PARAM and SERVICECREATE_PARAM contain the list of parameters to be set.
+# If the flag for a parameter in the list is not set here, the default value will be given to that parameter.
+# Parameters not in the list will be set to empty.
+
+# create demo user
+USERCREATE_PARAM_${SRCNAME}-setup = "name pass tenant role email"
+python () {
+    flags = {'name':'demo',\
+             'pass':'password',\
+             'tenant':'demo',\
+             'role':'${MEMBER_ROLE}',\
+             'email':'demo@domain.com',\
+            }
+    d.setVarFlags("USERCREATE_PARAM_%s-setup" % d.getVar('SRCNAME',True), flags)
+}
+
+# create alt-demo user
+USERCREATE_PARAM_${SRCNAME}-setup-altdemo = "name pass tenant role email"
+python () {
+    flags = {'name':'alt_demo',\
+             'pass':'password',\
+             'tenant':'alt_demo',\
+             'role':'${MEMBER_ROLE}',\
+             'email':'alt_demo@domain.com',\
+            }
+    d.setVarFlags("USERCREATE_PARAM_%s-setup-altdemo" % d.getVar('SRCNAME',True), flags)
+}
+
+# add admin user to demo tenant as admin role
+USERCREATE_PARAM_${SRCNAME}-setup-admin = "name pass tenant role email"
+python () {
+    flags = {'name':'${ADMIN_USER}',\
+             'pass':'${ADMIN_PASSWORD}',\
+             'tenant':'demo',\
+             'role':'${ADMIN_ROLE}',\
+             'email':'${ADMIN_USER_EMAIL}',\
+            }
+    d.setVarFlags("USERCREATE_PARAM_%s-setup-admin" % d.getVar('SRCNAME',True), flags)
+}
+
 do_install_append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}/
     TEMPEST_CONF_DIR=${D}${sysconfdir}/${SRCNAME}
@@ -60,15 +103,27 @@ do_install_append() {
     cp -r tools ${TEMPEST_CONF_DIR}
 }
 
-PACKAGES =+ "${SRCNAME}-tests"
+PACKAGES =+ "${SRCNAME}-tests \
+             ${SRCNAME}-setup \
+             ${SRCNAME}-setup-altdemo \
+             ${SRCNAME}-setup-admin \
+             "
 
 FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/tests/*"
 
 FILES_${PN} = "${libdir}/* \
                ${sysconfdir}/* \
 "
+
+ALLOW_EMPTY_${SRCNAME}-setup = "1"
+ALLOW_EMPTY_${SRCNAME}-setup-altdemo = "1"
+ALLOW_EMPTY_${SRCNAME}-setup-admin = "1"
+
 RDEPENDS_${PN} += " \
         ${SRCNAME}-tests \
+        ${SRCNAME}-setup \
+        ${SRCNAME}-setup-altdemo \
+        ${SRCNAME}-setup-admin \
 	python-mox \
 	python-mock \
 	python-hp3parclient \
