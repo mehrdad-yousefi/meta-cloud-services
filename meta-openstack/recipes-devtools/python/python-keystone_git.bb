@@ -7,18 +7,17 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r0"
 SRCNAME = "keystone"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://keystone.conf \
            file://identity.sh \
            file://keystone \
            file://openrc \
            file://keystone-search-in-etc-directory-for-config-files.patch \
-           file://keystone-fix-location-of-files-for-tests.patch \
            file://keystone-remove-git-commands-in-tests.patch \
            "
 
-SRCREV="a96d1a44bc0f074729c312e5c2a0f0875edf1765"
-PV="2013.2.2+git${SRCPV}"
+SRCREV="1070afe2cb8707ad28d43c4ea76116a941cf2131"
+PV="2014.2.b1+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -62,7 +61,9 @@ do_install_append() {
 
     install -d ${KEYSTONE_PACKAGE_DIR}/tests/tmp
 
-    sed -e "s:%KEYSTONE_PACKAGE_DIR%:${PYTHON_SITEPACKAGES_DIR}/keystone:g" -i ${KEYSTONE_PACKAGE_DIR}/tests/test_overrides.conf
+    if [ -e "${KEYSTONE_PACKAGE_DIR}/tests/test_overrides.conf" ];then
+        sed -e "s:%KEYSTONE_PACKAGE_DIR%:${PYTHON_SITEPACKAGES_DIR}/keystone:g" -i ${KEYSTONE_PACKAGE_DIR}/tests/test_overrides.conf
+    fi
 
     cp run_tests.sh ${KEYSTONE_CONF_DIR}
 }
@@ -128,6 +129,8 @@ DEPENDS += " \
         "
 
 RDEPENDS_${PN} += " \
+        python-pycadf \
+        python-oslo.db \
         python-pam \
         python-webob \
         python-eventlet \
