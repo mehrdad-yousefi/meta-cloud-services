@@ -13,10 +13,10 @@ Index: git/cinder/tests/conf_fixture.py
 ===================================================================
 --- git.orig/cinder/tests/conf_fixture.py
 +++ git/cinder/tests/conf_fixture.py
-@@ -43,7 +43,7 @@ def set_defaults(conf):
+@@ -43,7 +43,7 @@
      conf.set_default('iscsi_num_targets', 8)
      conf.set_default('connection', 'sqlite://', group='database')
-     conf.set_default('sqlite_synchronous', False)
+     conf.set_default('sqlite_synchronous', False, group='database')
 -    conf.set_default('policy_file', 'cinder/tests/policy.json')
 +    conf.set_default('policy_file', '%PYTHON_SITEPACKAGES_DIR%/cinder/tests/policy.json')
      conf.set_default(

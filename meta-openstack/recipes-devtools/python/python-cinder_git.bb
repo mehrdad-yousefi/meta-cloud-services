@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r0"
 SRCNAME = "cinder"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
     file://cinder.conf \
     file://cinder.init \
     file://cinder-volume \
@@ -20,8 +20,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
     file://cinder-builtin-tests-config-location.patch \
 	"
 
-SRCREV="978b036a6467f7f6afb4419f92bf4fa7d1ff2347"
-PV="2014.1+git${SRCPV}"
+SRCREV="116f54dbf188a17b5e3dd966658e98bf19b8912b"
+PV="2014.2.b1+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d identity default_configs
