@@ -11,7 +11,7 @@ SRCNAME = "nova"
 
 FILESEXTRAPATHS := "${THISDIR}/${PN}"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://nova-add-migrate.cfg-to-the-MANIFEST.patch \
            file://nova-convert-path-from-relative-to-absolute.patch \
            file://nova-fix-location-to-doc-directory.patch \
@@ -24,8 +24,8 @@ SRC_URI += "file://nova-all \
             file://nova.conf \
             file://openrc \
            "
-SRCREV="e1e140b295ea9ea6fd6cc2b6dc10981020e48adb"
-PV="2014.1+git${SRCPV}"
+SRCREV="e0331cfe9d49f25b8a23f5fc473f610415bb07ac"
+PV="2014.2.b1+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -230,6 +230,8 @@ DEPENDS += " \
         "
 
 RDEPENDS_${PN} = " libvirt \
+		   python-keystone \
+		   python-keystonemiddleware \
 		   python-modules \
 		   python-misc \
 		   python-amqplib \
@@ -269,6 +271,7 @@ RDEPENDS_${PN} = " libvirt \
 		   python-websockify \
 		   python-pbr \
 		   spice-html5 \
+		   python-posix-ipc \
     "
 
 RDEPENDS_${SRCNAME}-common = "${PN} openssl openssl-misc libxml2 libxslt \
