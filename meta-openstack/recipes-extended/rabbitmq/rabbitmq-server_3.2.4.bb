@@ -39,6 +39,8 @@ do_install() {
     install -d ${D}${sysconfdir}/init.d
     install -m 0755 ${WORKDIR}/rabbitmq-server ${D}${sysconfdir}/init.d/rabbitmq-server
 
+    sed -e "s:%ROOT_HOME%:${ROOT_HOME}:" -i ${D}${sysconfdir}/init.d/rabbitmq-server
+
     mv ${D}/ebin ${RABBIT_LIB_DIR}/ebin
     mv ${D}/include ${RABBIT_LIB_DIR}/include
     mv ${D}/plugins ${RABBIT_LIB_DIR}/plugins
