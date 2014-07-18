@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r0"
 SRCNAME = "neutron"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://ovs_neutron_plugin.ini \
            file://linuxbridge_conf.ini \
            file://neutron-server.init \
@@ -20,8 +20,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
            file://uuid_wscheck.patch \
            file://neutron-test-nec-plugin-extensions-location.patch \
 	  "
-SRCREV="e0deffc71e5031059530b9b6c2ef3b0765de3d10"
-PV="2014.1+git${SRCPV}"
+SRCREV="57011b901f0c26c840c207e007e392ba9ff5890b"
+PV="2014.2.b1+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
