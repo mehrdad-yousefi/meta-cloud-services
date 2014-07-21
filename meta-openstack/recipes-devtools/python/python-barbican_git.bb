@@ -15,7 +15,7 @@ SRC_URI = "git://github.com/openstack/barbican.git;branch=master \
            file://barbican-handle-white-space-in-date-strings.patch \
           "
 
-SRCREV="177d4499af6b261f48814503e3565f433e86cc66"
+SRCREV="84408b7148234f6e5adbe43e838afe0ad020586e"
 PV="2014.1+git${SRCPV}"
 S = "${WORKDIR}/git"
 
