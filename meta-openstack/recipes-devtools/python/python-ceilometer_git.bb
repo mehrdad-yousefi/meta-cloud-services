@@ -7,17 +7,15 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r0"
 SRCNAME = "ceilometer"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://ceilometer.conf \
            file://ceilometer.init \
-           file://0001-sqlalchemy-fix-grouping-for-postgresql-databases.patch \
            file://fix_ceilometer_memory_leak.patch \
            file://ceilometer-builtin-tests-config-location.patch \
-           file://skip-failed-unsupported-db-ceilometer-builtin-tests.patch \
 "
 
-SRCREV="c8733b2bc1301bc8dd5119a630d855ace1c747bf"
-PV="2014.1+git${SRCPV}"
+SRCREV="d4baab8a135b88ccb673b8e6dd35386786b52281"
+PV="2014.2.b1+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 CEILOMETER_SECRET ?= "12121212"
