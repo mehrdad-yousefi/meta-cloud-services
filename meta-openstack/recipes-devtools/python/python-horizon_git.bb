@@ -33,7 +33,7 @@ RDEPENDS_${PN} += "python-django \
 PR = "r2"
 SRCNAME = "horizon"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
     file://horizon.init \
     file://fix_bindir_path.patch \
     file://openstack-dashboard-apache.conf \
@@ -41,8 +41,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
     file://horizon-use-full-package-path-to-test-directories.patch \
     "
 
-SRCREV="0c3b71055c0d169b8245aee773438dbcb46c2bcf"
-PV="2014.1+git${SRCPV}"
+SRCREV="826444b9eabbaab11cb64018be0777493f1a5fc1"
+PV="2014.2.b1+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d python-dir default_configs
@@ -131,6 +131,8 @@ RDEPENDS_${PN} += " python-django \
     python-glanceclient \
     python-heatclient \
     python-keystoneclient \
+    python-troveclient \
+    python-saharaclient \
     python-lesscpy \
     python-novaclient \
     python-nose-exclude \
@@ -140,6 +142,10 @@ RDEPENDS_${PN} += " python-django \
     python-swiftclient \
     python-lockfile \
     python-pyyaml \
+    python-xstatic \
+    python-xstatic-jquery \
+    python-pyscss \
+    python-django-pyscss \
     ${RDEP_ARCH_VAR} \
     "
 
