@@ -12,8 +12,8 @@ SRC_URI = "\
 	file://novaclient-specify-full-path-to-test-certificate.patch \
 	"
 
-PV="2.16.0+git${SRCPV}"
-SRCREV="9344f02649df65af26ca13b4d3443be73beb5d4e"
+PV="2.18.1+git${SRCPV}"
+SRCREV="b21d6775685fc2ca9bd5c13e817343789d7ad6c5"
 S = "${WORKDIR}/git"
 
 inherit setuptools 

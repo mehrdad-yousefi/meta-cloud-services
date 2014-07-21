@@ -5,9 +5,11 @@
  novaclient/v3/client.py                         |    6 ++++++
  4 files changed, 32 insertions(+)
 
---- a/novaclient/client.py
-+++ b/novaclient/client.py
-@@ -87,6 +87,7 @@
+Index: git/novaclient/client.py
+===================================================================
+--- git.orig/novaclient/client.py
++++ git/novaclient/client.py
+@@ -266,6 +266,7 @@
              self.timeout = None
  
          self.times = []  # [("item", starttime, endtime), ...]
@@ -15,9 +17,9 @@
  
          self.management_url = self.bypass_url or None
          self.auth_token = auth_token
-@@ -139,6 +140,12 @@
-     def reset_timings(self):
-         self.times = []
+@@ -328,6 +329,12 @@
+         else:
+             return name, value
  
 +    def get_timings_max_len(self):
 +        return self.times_max_len
@@ -28,7 +30,7 @@
      def http_log_req(self, method, url, kwargs):
          if not self.http_log_debug:
              return
-@@ -214,6 +221,9 @@
+@@ -441,6 +448,9 @@
          resp, body = self.request(url, method, **kwargs)
          self.times.append(("%s %s" % (method, url),
                             start_time, time.time()))
@@ -38,9 +40,11 @@
          return resp, body
  
      def _cs_request(self, url, method, **kwargs):
---- a/novaclient/openstack/common/apiclient/client.py
-+++ b/novaclient/openstack/common/apiclient/client.py
-@@ -90,6 +90,7 @@
+Index: git/novaclient/openstack/common/apiclient/client.py
+===================================================================
+--- git.orig/novaclient/openstack/common/apiclient/client.py
++++ git/novaclient/openstack/common/apiclient/client.py
+@@ -92,6 +92,7 @@
          self.user_agent = user_agent or self.user_agent
  
          self.times = []  # [("item", starttime, endtime), ...]
@@ -48,7 +52,7 @@
          self.timings = timings
  
          # requests within the same session can reuse TCP connections from pool
-@@ -142,6 +143,12 @@
+@@ -144,6 +145,12 @@
      def reset_timings(self):
          self.times = []
  
@@ -61,7 +65,7 @@
      def request(self, method, url, **kwargs):
          """Send an http request with the specified characteristics.
  
-@@ -173,6 +180,9 @@
+@@ -175,6 +182,9 @@
          if self.timings:
              self.times.append(("%s %s" % (method, url),
                                 start_time, time.time()))
@@ -71,33 +75,31 @@
          self._http_log_resp(resp)
  
          if resp.status_code >= 400:
---- a/novaclient/v1_1/client.py
-+++ b/novaclient/v1_1/client.py
-@@ -156,6 +156,12 @@
-     def reset_timings(self):
-         self.client.reset_timings()
- 
+Index: git/novaclient/v1_1/client.py
+===================================================================
+--- git.orig/novaclient/v1_1/client.py
++++ git/novaclient/v1_1/client.py
+@@ -232,3 +232,9 @@
+         credentials are wrong.
+         """
+         self.client.authenticate()
++
 +    def get_timings_max_len(self):
 +        return self.client.get_timings_max_len()
 +
 +    def set_timings_max_len(self, new_len):
 +        self.client.set_timings_max_len(new_len)
-+
-     def authenticate(self):
+Index: git/novaclient/v3/client.py
+===================================================================
+--- git.orig/novaclient/v3/client.py
++++ git/novaclient/v3/client.py
+@@ -194,3 +194,9 @@
+         credentials are wrong.
          """
-         Authenticate against the server.
---- a/novaclient/v3/client.py
-+++ b/novaclient/v3/client.py
-@@ -121,6 +121,12 @@
-     def reset_timings(self):
-         self.client.reset_timings()
- 
+         self.client.authenticate()
++
 +    def get_timings_max_len(self):
 +        return self.client.get_timings_max_len()
 +
 +    def set_timings_max_len(self, new_len):
 +        self.client.set_timings_max_len(new_len)
-+
-     def authenticate(self):
-         """
-         Authenticate against the server.

@@ -17,19 +17,16 @@ Signed-off-by: Keith Holman <Keith.Holman@windriver.com>
  novaclient/tests/v1_1/test_servers.py | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/novaclient/tests/v1_1/test_servers.py b/novaclient/tests/v1_1/test_servers.py
-index a48204c..443adc3 100644
---- a/novaclient/tests/v1_1/test_servers.py
-+++ b/novaclient/tests/v1_1/test_servers.py
-@@ -462,7 +462,7 @@ class ServersTest(utils.TestCase):
+Index: git/novaclient/tests/v1_1/test_servers.py
+===================================================================
+--- git.orig/novaclient/tests/v1_1/test_servers.py
++++ git/novaclient/tests/v1_1/test_servers.py
+@@ -489,7 +489,7 @@
  
      def test_get_password(self):
-         s = cs.servers.get(1234)
+         s = self.cs.servers.get(1234)
 -        self.assertEqual(s.get_password('novaclient/tests/idfake.pem'),
 +        self.assertEqual(s.get_password('%PYTHON_SITEPACKAGES_DIR%/novaclient/tests/idfake.pem'),
                           b'FooBar123')
-         cs.assert_called('GET', '/servers/1234/os-server-password')
+         self.assert_called('GET', '/servers/1234/os-server-password')
  
--- 
-1.9.3
-
