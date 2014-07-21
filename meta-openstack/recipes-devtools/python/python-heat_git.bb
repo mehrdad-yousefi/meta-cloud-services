@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r0"
 SRCNAME = "heat"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://heat.conf \
            file://heat.init \
            file://autoscaling_example.template \
@@ -16,8 +16,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
            file://heat-tests-change-project_dir-path.patch \
 "
 
-SRCREV="69145518cb9a20d401c4213a030c39caaad1c326"
-PV="2014.1+git${SRCPV}"
+SRCREV="45f97e6a840bbba2a467558e60549e664496633e"
+PV="2014.2.b1+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 do_install_append() {
