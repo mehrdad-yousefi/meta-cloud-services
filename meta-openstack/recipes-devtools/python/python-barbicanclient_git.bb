@@ -10,8 +10,8 @@ SRC_URI = "\
 	git://github.com/openstack/python-barbicanclient.git;branch=master \
 	"
 
-PV="2.1.0+git${SRCPV}"
-SRCREV="80cd5724397d0c9c3371f7290591f9b06f610f88"
+PV="2.2.1+git${SRCPV}"
+SRCREV="ac30643631b6bc1c40116061f8eb280a7881e422"
 S = "${WORKDIR}/git"
 
 inherit setuptools

@@ -13,8 +13,8 @@ SRC_URI = "\
 	file://fix_cinderclient_memory_leak.patch \
 	"
 
-PV="1.0.8+git${SRCPV}"
-SRCREV="5278bdb0c53e34a6c647a0f8f6158f37236a9d2f"
+PV="1.0.9+git${SRCPV}"
+SRCREV="0c4010e7fbc9939905e8647afbe1358c384dc658"
 S = "${WORKDIR}/git"
 
 inherit setuptools

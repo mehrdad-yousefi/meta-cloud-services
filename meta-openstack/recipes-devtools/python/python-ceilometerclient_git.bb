@@ -25,8 +25,8 @@ SRC_URI = "\
 	file://fix_ceilometerclient_memory_leak.patch \
 	"
 
-PV="1.0.9+git${SRCPV}"
-SRCREV="defbb95855443047c3fb0a90ca4a9c9d1a51180b"
+PV="1.0.10+git${SRCPV}"
+SRCREV="5c8a85e3861c0e90ef63325956ca809edca5719a"
 S = "${WORKDIR}/git"
 
 inherit setuptools
