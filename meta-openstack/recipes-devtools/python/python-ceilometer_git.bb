@@ -35,6 +35,8 @@ do_install_append() {
     install -m 600 ${TEMPLATE_CONF_DIR}/*.json ${CEILOMETER_CONF_DIR}
     install -m 600 ${TEMPLATE_CONF_DIR}/*.yaml ${CEILOMETER_CONF_DIR}
 
+    install -m 600 ${TEMPLATE_CONF_DIR}/api_paste.ini ${CEILOMETER_CONF_DIR}
+
     sed -e "s:%CEILOMETER_SECRET%:${CEILOMETER_SECRET}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
 
     sed -e "s:%DB_USER%:${DB_USER}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
