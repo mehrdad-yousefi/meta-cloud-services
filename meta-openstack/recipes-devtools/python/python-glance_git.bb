@@ -7,14 +7,14 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r0"
 SRCNAME = "glance"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/icehouse \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://0001-glance-store-only-load-known-stores-not-all-stores.patch \
            file://glance.init \
            file://glance-change-builtin-tests-config-location.patch \
            "
 
-SRCREV="556eebb7780b55af87c0fe49b76593f833ea189a"
-PV="2014.1+git${SRCPV}"
+SRCREV="c3596aef1ef2904c06eb01b02549541df51fbe65"
+PV="2014.2.b1+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -153,6 +153,8 @@ RDEPENDS_${PN} += "python-greenlet \
 	python-keystoneclient \
 	python-swiftclient \
 	python-pbr \
+	python-i18n \
+	python-oslo.i18n \
 	"
 
 RDEPENDS_${SRCNAME} = "${PN} \
