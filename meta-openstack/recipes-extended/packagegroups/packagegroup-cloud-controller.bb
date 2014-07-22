@@ -52,6 +52,7 @@ RDEPENDS_${PN} = " postgresql-setup \
     fuse \
     ${@base_contains('CINDER_EXTRA_FEATURES', 'glusterfs', 'glusterfs glusterfs-fuse glusterfs-server', '', d)} \
     ${@base_contains('CINDER_EXTRA_FEATURES', 'ceph', 'task-ceph ceph-setup xfsprogs', '', d)} \
+    ${@base_contains('DISTRO_FEATURES', 'OpenLDAP', 'openldap python-ldap cyrus-sasl nss-pam-ldapd libsasl2-modules pam-plugin-mkhomedir python-keystone-hybrid-backend', '', d)} \
     "
 
 RRECOMMENDS_${PN} = " \
