@@ -4,7 +4,7 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-PR = "r0"
+PR = "r1"
 SRCNAME = "keystone"
 
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
@@ -15,6 +15,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://keystone-search-in-etc-directory-for-config-files.patch \
            file://keystone-fix-location-of-files-for-tests.patch \
            file://keystone-remove-git-commands-in-tests.patch \
+           file://hybrid-backend-setup \
+           file://convert_keystone_backend.py \
            "
 
 SRCREV="a96d1a44bc0f074729c312e5c2a0f0875edf1765"
@@ -73,14 +75,6 @@ do_install_append() {
     sed -e "s/%SERVICE_TENANT_NAME%/${SERVICE_TENANT_NAME}/g" -i ${D}${sysconfdir}/init.d/keystone
 
     if ${@base_contains('DISTRO_FEATURES', 'OpenLDAP', 'true', 'false', d)}; then
-        sed -i -e '/^\[identity\]/a \
-# Uncomment the following lines to enable the hybrid backend \
-# driver = keystone.identity.backends.hybrid_identity.Identity \
-#\
-# [assignment] \
-# driver = keystone.assignment.backends.hybrid_assignment.Assignment \
-' ${D}/etc/keystone/keystone.conf
-
         sed -i -e '/^\[ldap\]/a \
 url = ldap://localhost \
 user = cn=Manager,${LDAP_DN} \
@@ -111,6 +105,9 @@ role_id_attribute = cn \
 role_name_attribute = ou \
 role_tree_dn = ou=Roles,${LDAP_DN} \
 ' ${D}/etc/keystone/keystone.conf
+
+	install -m 0755 ${WORKDIR}/hybrid-backend-setup ${D}${sysconfdir}/keystone/hybrid-backend-setup
+	install -m 0755 ${WORKDIR}/convert_keystone_backend.py ${D}${sysconfdir}/keystone/convert_keystone_backend.py
     fi
 }
 
