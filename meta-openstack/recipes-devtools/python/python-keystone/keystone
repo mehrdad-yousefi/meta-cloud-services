@@ -98,7 +98,7 @@ reset()
     ADMIN_PASSWORD=%ADMIN_PASSWORD% \
     SERVICE_PASSWORD=%SERVICE_PASSWORD% \
     SERVICE_TENANT_NAME=%SERVICE_TENANT_NAME% \
-        bash /etc/keystone/identity.sh
+        bash /etc/keystone/service-user-setup
 }
 
 case "$1" in
