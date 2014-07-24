@@ -32,6 +32,12 @@ do_install_prepend() {
     sed 's:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g' -i ${S}/${SRCNAME}/tests/conf_fixture.py
 }
 
+CINDER_LVM_VOLUME_BACKING_FILE_SIZE ?= "2G"
+CINDER_NFS_VOLUME_SERVERS_DEFAULT = "controller:/etc/cinder/nfs_volumes"
+CINDER_NFS_VOLUME_SERVERS ?= "${CINDER_NFS_VOLUME_SERVERS_DEFAULT}"
+CINDER_GLUSTERFS_VOLUME_SERVERS_DEFAULT = "controller:/glusterfs_volumes"
+CINDER_GLUSTERFS_VOLUME_SERVERS ?= "${CINDER_GLUSTERFS_VOLUME_SERVERS_DEFAULT}"
+
 do_install_append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}/${SRCNAME}
     CINDER_CONF_DIR=${D}${sysconfdir}/${SRCNAME}
@@ -76,13 +82,24 @@ do_install_append() {
     # test setup
     cp run_tests.sh ${CINDER_CONF_DIR}
     cp -r tools ${CINDER_CONF_DIR}
-}
 
-CINDER_LVM_VOLUME_BACKING_FILE_SIZE ?= "2G"
-CINDER_NFS_VOLUME_SERVERS_DEFAULT = "controller:/etc/cinder/nfs_volumes"
-CINDER_NFS_VOLUME_SERVERS ?= "${CINDER_NFS_VOLUME_SERVERS_DEFAULT}"
-CINDER_GLUSTERFS_VOLUME_SERVERS_DEFAULT = "controller:/glusterfs_volumes"
-CINDER_GLUSTERFS_VOLUME_SERVERS ?= "${CINDER_GLUSTERFS_VOLUME_SERVERS_DEFAULT}"
+    #Create cinder volume group backing file
+    sed 's/%CINDER_LVM_VOLUME_BACKING_FILE_SIZE%/${CINDER_LVM_VOLUME_BACKING_FILE_SIZE}/g' -i ${D}/etc/cinder/drivers/lvm_iscsi_setup.sh
+    mkdir -p ${D}/etc/tgt/
+    echo "include /etc/cinder/data/volumes/*" > ${D}/etc/tgt/targets.conf
+
+    # Create Cinder nfs_share config file with default nfs server
+    echo "${CINDER_NFS_VOLUME_SERVERS}" > ${D}/etc/cinder/nfs_shares
+    sed 's/\s\+/\n/g' -i ${D}/etc/cinder/nfs_shares
+    [ "x${CINDER_NFS_VOLUME_SERVERS}" = "x${CINDER_NFS_VOLUME_SERVERS_DEFAULT}" ] && is_default="1" || is_default="0"
+    sed -e "s:%IS_DEFAULT%:${is_default}:g" -i ${D}/etc/cinder/drivers/nfs_setup.sh
+
+    # Create Cinder glusterfs_share config file with default glusterfs server
+    echo "${CINDER_GLUSTERFS_VOLUME_SERVERS}" > ${D}/etc/cinder/glusterfs_shares
+    sed 's/\s\+/\n/g' -i ${D}/etc/cinder/glusterfs_shares
+    [ "x${CINDER_GLUSTERFS_VOLUME_SERVERS}" = "x${CINDER_GLUSTERFS_VOLUME_SERVERS_DEFAULT}" ] && is_default="1" || is_default="0"
+    sed -e "s:%IS_DEFAULT%:${is_default}:g" -i ${D}/etc/cinder/drivers/glusterfs_setup.sh
+}
 
 pkg_postinst_${SRCNAME}-setup () {
     if [ "x$D" != "x" ]; then
@@ -102,31 +119,21 @@ pkg_postinst_${SRCNAME}-setup () {
     sudo -u postgres createdb cinder
     cinder-manage db sync
 
-    #Create cinder volume group backing file
-    sed 's/%CINDER_LVM_VOLUME_BACKING_FILE_SIZE%/${CINDER_LVM_VOLUME_BACKING_FILE_SIZE}/g' -i /etc/cinder/drivers/lvm_iscsi_setup.sh
-    echo "include /etc/cinder/data/volumes/*" >> /etc/tgt/targets.conf
-
     # Create Cinder nfs_share config file with default nfs server
     if [ ! -f /etc/cinder/nfs_shares ]; then
-        echo "${CINDER_NFS_VOLUME_SERVERS}" > /etc/cinder/nfs_shares
-        sed 's/\s\+/\n/g' -i /etc/cinder/nfs_shares
-        [[ "x${CINDER_NFS_VOLUME_SERVERS}" == "x${CINDER_NFS_VOLUME_SERVERS_DEFAULT}" ]] && is_default="1" || is_default="0"
-        /bin/bash /etc/cinder/drivers/nfs_setup.sh ${is_default}
+        /bin/bash /etc/cinder/drivers/nfs_setup.sh
     fi
 
     # Create Cinder glusterfs_share config file with default glusterfs server
     if [ ! -f /etc/cinder/glusterfs_shares ] && [ -f /usr/sbin/glusterfsd ]; then
-        echo "${CINDER_GLUSTERFS_VOLUME_SERVERS}" > /etc/cinder/glusterfs_shares
-        sed 's/\s\+/\n/g' -i /etc/cinder/glusterfs_shares
-        [[ "x${CINDER_GLUSTERFS_VOLUME_SERVERS}" == "x${CINDER_GLUSTERFS_VOLUME_SERVERS_DEFAULT}" ]] && is_default="1" || is_default="0"
-        /bin/bash /etc/cinder/drivers/glusterfs_setup.sh ${is_default}
+        /bin/bash /etc/cinder/drivers/glusterfs_setup.sh
     fi
 }
 
 PACKAGES += "${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-setup ${SRCNAME}-api ${SRCNAME}-volume ${SRCNAME}-scheduler ${SRCNAME}-backup"
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
 
-FILES_${PN} = "${libdir}/*"
+FILES_${PN} = "${libdir}/* /etc/tgt"
 
 FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh \
                           ${sysconfdir}/${SRCNAME}/tools"
