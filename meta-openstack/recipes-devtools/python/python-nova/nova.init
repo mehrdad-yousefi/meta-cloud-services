@@ -86,6 +86,30 @@ status()
     echo "$DESC is not running"
 }
 
+reset()
+{
+    . /etc/nova/openrc
+
+    # Nova comute
+    simple_delete "nova list --all-tenant" "nova delete" 1 "vm"
+
+    stop
+
+    # This is to make sure postgres is configured and running
+    if ! pidof postmaster > /dev/null; then
+       /etc/init.d/postgresql-init
+       /etc/init.d/postgresql start
+       sleep 5
+    fi
+
+    sudo -u postgres dropdb nova
+    sudo -u postgres createdb nova
+    sleep 2
+    nova-manage db sync
+
+    start
+}
+
 case "$1" in
     start)
         start
@@ -100,8 +124,11 @@ case "$1" in
     status)
 	status
         ;;
+    reset)
+	reset
+        ;;
     *)
-        echo "Usage: $0 {start|stop|force-reload|restart|reload|status}"
+        echo "Usage: $0 {start|stop|force-reload|restart|reload|status|reset}"
         exit 1
         ;;
 esac

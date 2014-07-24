@@ -84,6 +84,9 @@ do_install_append() {
 
     cp -r test ${D}/${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}/
     grep -rl '^from test' ${D}/${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}/test | xargs sed 's/^from test/from swift\.test/g' -i
+
+    sed "s/%SWIFT_BACKING_FILE_SIZE%/${SWIFT_BACKING_FILE_SIZE}/g" -i ${D}${sysconfdir}/init.d/swift
+    sed "s/%CONTROLLER_IP%/${CONTROLLER_IP}/g" -i ${D}${sysconfdir}/init.d/swift
 }
 
 pkg_postinst_${SRCNAME}-setup () {

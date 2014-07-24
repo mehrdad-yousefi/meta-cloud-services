@@ -69,6 +69,39 @@ status()
     echo "$DESC is not running"
 }
 
+reset()
+{
+    . /etc/nova/openrc
+
+    # Cleanup cinder volume
+    simple_delete "cinder list --all-tenant" "cinder delete" 1 "cinder volume"
+
+    # Cleanup cinder backup
+    simple_delete "cinder backup-list" "cinder backup-delete" 1 "cinder backup"
+
+    stop
+
+    if ! pidof postmaster > /dev/null; then
+        /etc/init.d/postgresql-init
+        /etc/init.d/postgresql start
+    fi
+    [ ! -d /var/log/cinder ] && mkdir /var/log/cinder
+    sudo -u postgres dropdb cinder
+    sudo -u postgres createdb cinder
+    cinder-manage db sync
+
+    if [ ! -f /etc/cinder/nfs_shares ]; then
+        /bin/bash /etc/cinder/drivers/nfs_setup.sh
+    fi
+
+    # Create Cinder glusterfs_share config file with default glusterfs server
+    if [ ! -f /etc/cinder/glusterfs_shares ] && [ -f /usr/sbin/glusterfsd ]; then
+        /bin/bash /etc/cinder/drivers/glusterfs_setup.sh
+    fi
+
+    start
+}
+
 case "$1" in
     start)
         start
@@ -83,8 +116,11 @@ case "$1" in
     status)
 	status
         ;;
+    reset)
+	reset
+        ;;
     *)
-        echo "Usage: $0 {start|stop|force-reload|restart|reload|status}"
+        echo "Usage: $0 {start|stop|force-reload|restart|reload|status|reset}"
         exit 1
         ;;
 esac

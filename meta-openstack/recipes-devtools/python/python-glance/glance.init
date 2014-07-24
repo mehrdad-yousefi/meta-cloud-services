@@ -70,6 +70,30 @@ status()
     echo "$DESC is not running"
 }
 
+reset()
+{
+    . /etc/nova/openrc
+
+    # Cleanup all glance images
+    simple_delete "glance image-list --all-tenant" "glance image-delete" 1 "glance image"
+
+    stop
+
+    # This is to make sure postgres is configured and running
+    if ! pidof postmaster > /dev/null; then
+       /etc/init.d/postgresql-init
+       /etc/init.d/postgresql start
+       sleep 5
+    fi
+
+    [ ! -d /var/log/glance ] && mkdir /var/log/glance
+    sudo -u postgres dropdb glance
+    sudo -u postgres createdb glance
+    glance-manage db_sync
+
+    start
+}
+
 case "$1" in
     start)
         start
@@ -84,8 +108,11 @@ case "$1" in
     status)
 	status
         ;;
+    reset)
+	reset
+        ;;
     *)
-        echo "Usage: $0 {start|stop|force-reload|restart|reload|status}"
+        echo "Usage: $0 {start|stop|force-reload|restart|reload|status|reset}"
         exit 1
         ;;
 esac

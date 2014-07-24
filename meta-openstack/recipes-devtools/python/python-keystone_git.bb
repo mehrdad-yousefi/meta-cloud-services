@@ -65,6 +65,10 @@ do_install_append() {
     sed -e "s:%KEYSTONE_PACKAGE_DIR%:${PYTHON_SITEPACKAGES_DIR}/keystone:g" -i ${KEYSTONE_PACKAGE_DIR}/tests/test_overrides.conf
 
     cp run_tests.sh ${KEYSTONE_CONF_DIR}
+
+    sed -e "s/%ADMIN_PASSWORD%/${ADMIN_PASSWORD}/g" -i ${D}${sysconfdir}/init.d/keystone
+    sed -e "s/%SERVICE_PASSWORD%/${SERVICE_PASSWORD}/g" -i ${D}${sysconfdir}/init.d/keystone
+    sed -e "s/%SERVICE_TENANT_NAME%/${SERVICE_TENANT_NAME}/g" -i ${D}${sysconfdir}/init.d/keystone
 }
 
 pkg_postinst_${SRCNAME}-setup () {

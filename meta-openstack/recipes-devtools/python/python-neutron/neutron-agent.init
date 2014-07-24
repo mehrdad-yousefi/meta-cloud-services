@@ -75,7 +75,7 @@ case "$1" in
     stop)
         stop
         ;;
-    restart|force-reload|reload)
+    restart|force-reload|reload|reset)
         stop
         start
         ;;
@@ -83,7 +83,7 @@ case "$1" in
 	status
         ;;
     *)
-        echo "Usage: $0 {start|stop|force-reload|restart|reload|status}"
+        echo "Usage: $0 {start|stop|force-reload|restart|reload|status|reset}"
         exit 1
         ;;
 esac
