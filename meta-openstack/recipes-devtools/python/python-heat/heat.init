@@ -76,6 +76,25 @@ status()
     echo "$DESC is not running"
 }
 
+reset()
+{
+    stop
+
+    # This is to make sure postgres is configured and running
+    if ! pidof postmaster > /dev/null; then
+       /etc/init.d/postgresql-init
+       /etc/init.d/postgresql start
+       sleep 2
+    fi
+
+    [ ! -d /var/log/heat ] && mkdir /var/log/heat
+    sudo -u postgres dropdb heat
+    sudo -u postgres createdb heat
+    heat-manage db_sync
+
+    start
+}
+
 case "$1" in
     start)
         start
@@ -90,8 +109,11 @@ case "$1" in
     status)
 	status
         ;;
+    reset)
+	reset
+        ;;
     *)
-        echo "Usage: $0 {start|stop|force-reload|restart|reload|status}"
+        echo "Usage: $0 {start|stop|force-reload|restart|reload|status|reset}"
         exit 1
         ;;
 esac

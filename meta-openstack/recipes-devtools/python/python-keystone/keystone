@@ -67,6 +67,40 @@ status()
     echo "$DESC is not running"
 }
 
+reset()
+{
+    # Cleanup keystone tenant
+    . /etc/nova/openrc
+    simple_delete "keystone user-list" "keystone user-delete" 1 "keystone user"
+    simple_delete "keystone tenant-list" "keystone tenant-delete" 1 "keystone tenant"
+    simple_delete "keystone role-list" "keystone role-delete" 1 "keystone role"
+    simple_delete "keystone endpoint-list" "keystone endpoint-delete" 1 "keystone endpoint"
+    simple_delete "keystone service-list" "keystone service-delete" 1 "keystone service"
+
+    stop
+
+    # This is to make sure postgres is configured and running
+    if ! pidof postmaster > /dev/null; then
+        /etc/init.d/postgresql-init
+        /etc/init.d/postgresql start
+        sleep 2
+    fi
+
+    sudo -u postgres dropdb keystone
+    sudo -u postgres createdb keystone
+    keystone-manage db_sync
+    keystone-manage pki_setup --keystone-user=root --keystone-group=root
+
+    start
+
+    sleep 2
+
+    ADMIN_PASSWORD=%ADMIN_PASSWORD% \
+    SERVICE_PASSWORD=%SERVICE_PASSWORD% \
+    SERVICE_TENANT_NAME=%SERVICE_TENANT_NAME% \
+        bash /etc/keystone/identity.sh
+}
+
 case "$1" in
     start)
         start
@@ -81,8 +115,11 @@ case "$1" in
     status)
 	status
         ;;
+    reset)
+	reset
+        ;;
     *)
-        echo "Usage: $0 {start|stop|force-reload|restart|reload|status}"
+        echo "Usage: $0 {start|stop|force-reload|restart|reload|status|reset}"
         exit 1
         ;;
 esac
