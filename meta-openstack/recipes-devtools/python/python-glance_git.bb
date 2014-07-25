@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://glance-change-builtin-tests-config-location.patch \
            "
 
-SRCREV="49f8e17d3a44737734a50feb9193fae6ede0cada"
+SRCREV="5148c9648fc959c1d807313176afe3fcf84b89cf"
 PV="2014.2.b1+git${SRCPV}"
 
 S = "${WORKDIR}/git"
@@ -155,6 +155,7 @@ RDEPENDS_${PN} += "python-greenlet \
 	python-pbr \
 	python-i18n \
 	python-oslo.i18n \
+	python-retrying \
 	"
 
 RDEPENDS_${SRCNAME} = "${PN} \
