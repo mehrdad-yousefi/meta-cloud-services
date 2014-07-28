@@ -39,7 +39,7 @@ if [ -f ${POST_SERVICE_SETUP_COMMAND} ]; then
 fi
 
 # run hybrid backend setup
-if [ -f ${POST_KEYSTONE_SETUP_COMMAND} ]; then
+if [ -f "${POST_KEYSTONE_SETUP_COMMAND}" ]; then
     chmod 755 ${POST_KEYSTONE_SETUP_COMMAND}
     ${POST_KEYSTONE_SETUP_COMMAND}
 fi
