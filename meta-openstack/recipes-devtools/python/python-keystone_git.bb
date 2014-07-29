@@ -27,6 +27,8 @@ inherit setuptools update-rc.d identity hosts default_configs
 SERVICE_TOKEN = "password"
 TOKEN_FORMAT ?= "PKI"
 
+LDAP_DN ?= "dc=my-domain,dc=com"
+
 do_install_append() {
 
     KEYSTONE_CONF_DIR=${D}${sysconfdir}/keystone
@@ -69,6 +71,47 @@ do_install_append() {
     sed -e "s/%ADMIN_PASSWORD%/${ADMIN_PASSWORD}/g" -i ${D}${sysconfdir}/init.d/keystone
     sed -e "s/%SERVICE_PASSWORD%/${SERVICE_PASSWORD}/g" -i ${D}${sysconfdir}/init.d/keystone
     sed -e "s/%SERVICE_TENANT_NAME%/${SERVICE_TENANT_NAME}/g" -i ${D}${sysconfdir}/init.d/keystone
+
+    if ${@base_contains('DISTRO_FEATURES', 'OpenLDAP', 'true', 'false', d)}; then
+        sed -i -e '/^\[identity\]/a \
+# Uncomment the following lines to enable the hybrid backend \
+# driver = keystone.identity.backends.hybrid_identity.Identity \
+#\
+# [assignment] \
+# driver = keystone.assignment.backends.hybrid_assignment.Assignment \
+' ${D}/etc/keystone/keystone.conf
+
+        sed -i -e '/^\[ldap\]/a \
+url = ldap://localhost \
+user = cn=Manager,${LDAP_DN} \
+password = secret \
+suffix = ${LDAP_DN} \
+use_dumb_member = True \
+\
+user_tree_dn = ou=Users,${LDAP_DN} \
+user_attribute_ignore = enabled,email,tenants,default_project_id \
+user_id_attribute = uid \
+user_name_attribute = uid \
+user_mail_attribute = email \
+user_pass_attribute = keystonePassword \
+\
+tenant_tree_dn = ou=Groups,${LDAP_DN} \
+tenant_desc_attribute = description \
+tenant_domain_id_attribute = businessCategory \
+tenant_attribute_ignore = enabled \
+tenant_objectclass = groupOfNames \
+tenant_id_attribute = cn \
+tenant_member_attribute = member \
+tenant_name_attribute = ou \
+\
+role_attribute_ignore = enabled \
+role_objectclass = groupOfNames \
+role_member_attribute = member \
+role_id_attribute = cn \
+role_name_attribute = ou \
+role_tree_dn = ou=Roles,${LDAP_DN} \
+' ${D}/etc/keystone/keystone.conf
+    fi
 }
 
 pkg_postinst_${SRCNAME}-setup () {
@@ -151,6 +194,9 @@ RDEPENDS_${PN} += " \
         python-dogpile.cache \
         python-pbr \
         "
+
+PACKAGECONFIG ?= "${@base_contains('DISTRO_FEATURES', 'OpenLDAP', 'OpenLDAP', '', d)}"
+PACKAGECONFIG[OpenLDAP] = ",,,python-ldap python-keystone-hybrid-backend"
 
 # TODO:
 #    if DISTRO_FEATURE contains "tempest" then add *-tests to the main RDEPENDS
