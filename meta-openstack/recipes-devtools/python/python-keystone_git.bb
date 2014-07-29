@@ -15,7 +15,6 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://keystone-search-in-etc-directory-for-config-files.patch \
            file://keystone-fix-location-of-files-for-tests.patch \
            file://keystone-remove-git-commands-in-tests.patch \
-           file://hybrid-backend-setup \
            file://convert_keystone_backend.py \
            "
 
@@ -102,6 +101,13 @@ do_install_append() {
     sed -e "s/%SERVICE_TENANT_NAME%/${SERVICE_TENANT_NAME}/g" -i ${D}${sysconfdir}/init.d/keystone
 
     if ${@base_contains('DISTRO_FEATURES', 'OpenLDAP', 'true', 'false', d)}; then
+        sed -i -e '/^\[identity\]/a \
+driver = keystone.identity.backends.hybrid_identity.Identity \
+\
+[assignment]\
+driver = keystone.assignment.backends.hybrid_assignment.Assignment\
+' ${D}/etc/keystone/keystone.conf
+
         sed -i -e '/^\[ldap\]/a \
 url = ldap://localhost \
 user = cn=Manager,${LDAP_DN} \
@@ -133,7 +139,6 @@ role_name_attribute = ou \
 role_tree_dn = ou=Roles,${LDAP_DN} \
 ' ${D}/etc/keystone/keystone.conf
 
-	install -m 0755 ${WORKDIR}/hybrid-backend-setup ${D}${sysconfdir}/keystone/hybrid-backend-setup
 	install -m 0755 ${WORKDIR}/convert_keystone_backend.py ${D}${sysconfdir}/keystone/convert_keystone_backend.py
     fi
 }
@@ -158,6 +163,9 @@ pkg_postinst_${SRCNAME}-setup () {
        keystone-manage db_sync
        keystone-manage pki_setup --keystone-user=root --keystone-group=root
 
+       if ${@base_contains('DISTRO_FEATURES', 'OpenLDAP', 'true', 'false', d)}; then
+           /etc/init.d/openldap start
+       fi
        /etc/init.d/keystone start
     fi
 }
