@@ -1,5 +1,5 @@
 #!/bin/bash
-# service-shutdown
+# run-openstackchef
 #
 # Copyright (c) 2014 Wind River Systems, Inc.
 #
@@ -22,20 +22,9 @@
 # THE SOFTWARE.
 #
 #
-source /opt/deploychef/deploychef-inc
-
-make_log_dir
-start_stop_services 'shutdown-list'
-#Clean up swift installation and all stale files
-if [ -f /etc/swift/swift_setup.sh ]; then
-    /etc/swift/swift_setup.sh clean
-fi
-#Now stop postgresql and delete database directory
-if [ -e ${INITD_DIR}/postgresql ]; then
-    ${INITD_DIR}/postgresql stop
-    killall postgres &
-    wait
-    rm -rf /etc/postgresql &
-    wait
-fi
-
+# This script just runs chefsolo to generate our configuration files
+#
+#
+#Use chefsolo to generate configuration files/scripts base on 
+#templates if templates/default
+chef-solo -f -c config.rb  -j attributes.json

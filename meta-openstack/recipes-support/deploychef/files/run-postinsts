@@ -25,40 +25,10 @@
 # to run the posinstall script and start the services
 #
 #
-RPM_POSTINSTS_DIR=$1
-LOG_DIR='/var/log/%PACKAGE_NAME%/'
-mkdir -p $LOG_DIR
-if [ ! -d $RPM_POSTINSTS_DIR ]; then
-     echo "Post Install script dir not set"
-     exit 1
-fi
-cd / #work-around for cinder-volume config file location
-echo "x$RPM_POSTINSTS_DIR" > "$LOD_DIR"log.run-postinsts
-for i in `ls $RPM_POSTINSTS_DIR 2> /dev/null`; do
-	i=$RPM_POSTINSTS_DIR$i
-	echo "Running postinst $i..."
-	if [ -f $i ] && $i; then
-		rm $i
-	else
-		echo "ERROR: postinst $i failed. $? " >> "$LOG_DIR"log.run-postinsts
-	fi
-done
-
-
+source /opt/deploychef/deploychef-inc
+#Run postinsts scripts
+execute_all_postinsts
 #Start all the modules specified in startup-list
-INITD_DIR=/etc/init.d/
-services=$(cat %DEPLOYCHEF_ROOT_DIR%/startup-list)
-for service in $services; do
-    service=$(echo $service | awk -F'S..' '{print $2}')
-    if [ -e $INITD_DIR$service ]; then
-        if [ $service = 'cinder-volume' ]; then
-            $INITD_DIR$service reload
-        else
-            $INITD_DIR$service start
-        fi
-        sleep 1
-    fi
-done
-
+start_stop_services 'startup-list'
 #Restart cloud service cloud-init
 /etc/init.d/cloud-init start

@@ -1,5 +1,5 @@
 #!/bin/bash
-# run-chefsolo
+# run-deploychef
 #
 # Copyright (c) 2014 Wind River Systems, Inc.
 #
@@ -22,16 +22,12 @@
 # THE SOFTWARE.
 #
 #
-# This file is the main file that the install will call in order to reconfig
-# and Openstack node
-# bash run-chefsolo
+# This file is the main script file that reconfigures the stack when any of 
+# the attributes variables change at run-time.
 #
-#
-#Shutdown all openstack modules
-bash service-shutdown
-#Use chefsolo to bake our recipe and generate configuration files/scripts
-chef-solo -f -c config.rb  -j attributes.json
-#Workaround to force the files to be copied from postinsts dir
-chef-solo -f -c config.rb  -j attributes.json
-#Restart services
-bash run-postinsts /etc/%POSTINSTS_DIR%/
+#Shutdown all registered services
+. service-shutdown
+#Re-generate configuration files from template files
+. run-openstackchef
+#Run post-install script and then start services
+. run-postinsts
