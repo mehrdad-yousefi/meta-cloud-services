@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://keystone.conf \
            file://identity.sh \
            file://keystone \
-           file://openrc \
            file://keystone-search-in-etc-directory-for-config-files.patch \
            file://keystone-remove-git-commands-in-tests.patch \
            file://convert_keystone_backend.py \
@@ -67,7 +66,6 @@ do_install_append() {
 
     install -m 600 ${WORKDIR}/keystone.conf ${KEYSTONE_CONF_DIR}/
     install -m 755 ${WORKDIR}/identity.sh ${KEYSTONE_CONF_DIR}/
-    install -m 600 ${WORKDIR}/openrc ${KEYSTONE_CONF_DIR}/
     install -m 600 ${S}/etc/logging.conf.sample ${KEYSTONE_CONF_DIR}/logging.conf
     install -m 600 ${S}/etc/policy.json ${KEYSTONE_CONF_DIR}/policy.json
     install -m 600 ${S}/etc/keystone.conf.sample ${KEYSTONE_CONF_DIR}/keystone.conf.sample
