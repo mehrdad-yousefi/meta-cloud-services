@@ -2,13 +2,13 @@
 # Copyright (C) 2014 Wind River Systems, Inc.
 #
 SUMMARY = "For the provisioning of OpenStack nodes"
-DESCRIPTION = "There are a number of variables that are backed into Openstack \
-at build time, for example the ip address of compute or controller node. \
+DESCRIPTION = "There are a number of variables that are baked into Openstack \
+at build time, for example the ip address of a compute or controller node. \
 This means that when a new compute or controller node boots up, it will \
 have an ip address that differs from its currently assigned ip address \
-This package facilitates the recreation or script and configuration files and their \
-placement in the appropriate places on the files system on a compute/controller or \
-all in one node at runtime"
+This package facilitates the recreation of openstack script and \ 
+configuration files, as well as their placement in the appropriate directories on \
+the files system on a compute/controller/allinone node at runtime"
 
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690 \
