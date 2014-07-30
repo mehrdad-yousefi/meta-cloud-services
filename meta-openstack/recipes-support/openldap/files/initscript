@@ -6,7 +6,7 @@
 #
 
 
-slapd=/usr/libexec/slapd
+slapd=%LIBEXEC%/slapd
 test -x "$slapd" || exit 0
 
 src_data_dir=/etc/openldap/
