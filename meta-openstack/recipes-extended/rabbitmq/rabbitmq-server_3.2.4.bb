@@ -46,7 +46,7 @@ do_install() {
     mv ${D}/plugins ${RABBIT_LIB_DIR}/plugins
 }
 
-inherit useradd update-rc.d
+inherit useradd update-rc.d openstackchef
 
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "--system rabbitmq"

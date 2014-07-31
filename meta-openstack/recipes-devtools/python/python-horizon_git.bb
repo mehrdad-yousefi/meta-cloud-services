@@ -60,7 +60,7 @@ SRCREV="bd998fb6094fb16d084c90de1eed619aca4c31ef"
 PV="2014.2.b3+git${SRCPV}"
 S = "${WORKDIR}/git"
 
-inherit setuptools update-rc.d python-dir default_configs
+inherit setuptools update-rc.d python-dir default_configs openstackchef
 
 # no longer required. kept as reference.
 # do_install[dirs] += "${D}/usr/share/bin"
