@@ -22,7 +22,7 @@ PV="2014.2.b3+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit setuptools update-rc.d identity hosts default_configs
+inherit setuptools update-rc.d identity hosts default_configs openstackchef
 
 SERVICE_TOKEN = "password"
 TOKEN_FORMAT ?= "PKI"
@@ -97,27 +97,36 @@ do_install_append() {
         ${KEYSTONE_CGI_DIR}/main
 
     cp -r ${S}/examples ${KEYSTONE_PACKAGE_DIR}
+    
+    if [ -z "${OPENSTACKCHEF_ENABLED}" ]; then
+        sed -e "s:%SERVICE_TOKEN%:${SERVICE_TOKEN}:g" \
+            -i ${KEYSTONE_CONF_DIR}/keystone.conf
+        sed -e "s:%DB_USER%:${DB_USER}:g" -i ${KEYSTONE_CONF_DIR}/keystone.conf
+        sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" \
+            -i ${KEYSTONE_CONF_DIR}/keystone.conf
 
-    sed -e "s:%SERVICE_TOKEN%:${SERVICE_TOKEN}:g" \
-        -i ${KEYSTONE_CONF_DIR}/keystone.conf
-    sed -e "s:%DB_USER%:${DB_USER}:g" -i ${KEYSTONE_CONF_DIR}/keystone.conf
-    sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" \
-        -i ${KEYSTONE_CONF_DIR}/keystone.conf
+        sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" \
+            -i ${KEYSTONE_CONF_DIR}/keystone.conf
+        sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" \
+            -i ${KEYSTONE_CONF_DIR}/identity.sh
 
-    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" \
-        -i ${KEYSTONE_CONF_DIR}/keystone.conf
-    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" \
-        -i ${KEYSTONE_CONF_DIR}/identity.sh
-
-    sed -e "s:%TOKEN_FORMAT%:${TOKEN_FORMAT}:g" \
+        sed -e "s:%TOKEN_FORMAT%:${TOKEN_FORMAT}:g" \
+            -i ${KEYSTONE_CONF_DIR}/keystone.conf
+        
+        sed -e "s/%ADMIN_PASSWORD%/${ADMIN_PASSWORD}/g" \
+            -i ${D}${sysconfdir}/init.d/keystone
+        sed -e "s/%SERVICE_PASSWORD%/${SERVICE_PASSWORD}/g" \
+            -i ${D}${sysconfdir}/init.d/keystone
+        sed -e "s/%SERVICE_TENANT_NAME%/${SERVICE_TENANT_NAME}/g" \
+            -i ${D}${sysconfdir}/init.d/keystone
+    fi    
+    
+    sed "/# admin_endpoint = .*/a \
+        public_endpoint = http://%CONTROLLER_IP%:8081/keystone/main/ " \
         -i ${KEYSTONE_CONF_DIR}/keystone.conf
 
     sed "/# admin_endpoint = .*/a \
-        public_endpoint = http://${CONTROLLER_IP}:8081/keystone/main/ " \
-        -i ${KEYSTONE_CONF_DIR}/keystone.conf
-
-    sed "/# admin_endpoint = .*/a \
-        admin_endpoint = http://${CONTROLLER_IP}:8081/keystone/admin/ " \
+        admin_endpoint = http://%CONTROLLER_IP%:8081/keystone/admin/ " \
         -i ${KEYSTONE_CONF_DIR}/keystone.conf
 
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)};
@@ -135,12 +144,6 @@ do_install_append() {
 
     cp run_tests.sh ${KEYSTONE_CONF_DIR}
 
-    sed -e "s/%ADMIN_PASSWORD%/${ADMIN_PASSWORD}/g" \
-        -i ${D}${sysconfdir}/init.d/keystone
-    sed -e "s/%SERVICE_PASSWORD%/${SERVICE_PASSWORD}/g" \
-        -i ${D}${sysconfdir}/init.d/keystone
-    sed -e "s/%SERVICE_TENANT_NAME%/${SERVICE_TENANT_NAME}/g" \
-        -i ${D}${sysconfdir}/init.d/keystone
 
     if ${@base_contains('DISTRO_FEATURES', 'OpenLDAP', 'true', 'false', d)};
     then
@@ -186,6 +189,12 @@ role_tree_dn = ou=Roles,${LDAP_DN} \
             ${D}${sysconfdir}/keystone/convert_keystone_backend.py
     fi
 }
+
+CHEF_SERVICES_CONF_FILES := "\
+    ${sysconfdir}/${SRCNAME}/keystone.conf \
+    ${sysconfdir}/${SRCNAME}/identity.sh \
+    ${sysconfdir}/init.d/keystone \
+    "
 
 pkg_postinst_${SRCNAME}-setup () {
     # python-keystone postinst start

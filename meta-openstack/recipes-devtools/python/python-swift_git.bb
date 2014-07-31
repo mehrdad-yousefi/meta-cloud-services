@@ -20,7 +20,7 @@ SRCREV="d4da726f6f45187dc053578f11246d6b36679142"
 PV="2.1.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
-inherit setuptools python-dir update-rc.d hosts identity
+inherit setuptools python-dir update-rc.d hosts identity openstackchef
 
 # The size of the backing file (in Gigabytes) of loopback devices
 # which are used for setting up Swift storage devices.  The value
@@ -82,30 +82,38 @@ do_install_append() {
     sed 's/^# swift_dir =.*/swift_dir = \/etc\/swift/' -i ${SWIFT_CONF_DIR}/object-server.conf
     sed 's/^# devices =.*/devices = \/etc\/swift\/node/' -i ${SWIFT_CONF_DIR}/object-server.conf
     sed 's/^# mount_check =.*/mount_check = false/' -i ${SWIFT_CONF_DIR}/object-server.conf
+    if [ -z "${OPENSTACKCHEF_ENABLED}" ]; then
+        sed "s/%SERVICE_TENANT_NAME%/${SERVICE_TENANT_NAME}/g" -i ${SWIFT_CONF_DIR}/proxy-server.conf
+        sed "s/%SERVICE_USER%/${SRCNAME}/g" -i ${SWIFT_CONF_DIR}/proxy-server.conf
+        sed "s/%SERVICE_PASSWORD%/${SERVICE_PASSWORD}/g" -i ${SWIFT_CONF_DIR}/proxy-server.conf
 
-    sed "s/%SERVICE_TENANT_NAME%/${SERVICE_TENANT_NAME}/g" -i ${SWIFT_CONF_DIR}/proxy-server.conf
-    sed "s/%SERVICE_USER%/${SRCNAME}/g" -i ${SWIFT_CONF_DIR}/proxy-server.conf
-    sed "s/%SERVICE_PASSWORD%/${SERVICE_PASSWORD}/g" -i ${SWIFT_CONF_DIR}/proxy-server.conf
+        sed "s/%SERVICE_TENANT_NAME%/${SERVICE_TENANT_NAME}/g" -i ${SWIFT_CONF_DIR}/dispersion.conf
+        sed "s/%SERVICE_USER%/${SRCNAME}/g" -i ${SWIFT_CONF_DIR}/dispersion.conf
+        sed "s/%SERVICE_PASSWORD%/${SERVICE_PASSWORD}/g" -i ${SWIFT_CONF_DIR}/dispersion.conf
 
-    sed "s/%SERVICE_TENANT_NAME%/${SERVICE_TENANT_NAME}/g" -i ${SWIFT_CONF_DIR}/dispersion.conf
-    sed "s/%SERVICE_USER%/${SRCNAME}/g" -i ${SWIFT_CONF_DIR}/dispersion.conf
-    sed "s/%SERVICE_PASSWORD%/${SERVICE_PASSWORD}/g" -i ${SWIFT_CONF_DIR}/dispersion.conf
+        sed "s/%ADMIN_TENANT_NAME%/admin/g" -i ${SWIFT_CONF_DIR}/test.conf
+        sed "s/%ADMIN_USER%/admin/g" -i ${SWIFT_CONF_DIR}/test.conf
+        sed "s/%ADMIN_PASSWORD%/${ADMIN_PASSWORD}/g" -i ${SWIFT_CONF_DIR}/test.conf
+        sed "s/%SERVICE_TENANT_NAME%/${SERVICE_TENANT_NAME}/g" -i ${SWIFT_CONF_DIR}/test.conf
+        sed "s/%SERVICE_USER%/${SRCNAME}/g" -i ${SWIFT_CONF_DIR}/test.conf
+        sed "s/%SERVICE_PASSWORD%/${SERVICE_PASSWORD}/g" -i ${SWIFT_CONF_DIR}/test.conf
+        sed "s/%DEMO_USER%/demo/g" -i ${SWIFT_CONF_DIR}/test.conf
+        sed "s/%DEMO_PASSWORD%/${ADMIN_PASSWORD}/g" -i ${SWIFT_CONF_DIR}/test.conf
 
-    sed "s/%ADMIN_TENANT_NAME%/admin/g" -i ${SWIFT_CONF_DIR}/test.conf
-    sed "s/%ADMIN_USER%/admin/g" -i ${SWIFT_CONF_DIR}/test.conf
-    sed "s/%ADMIN_PASSWORD%/${ADMIN_PASSWORD}/g" -i ${SWIFT_CONF_DIR}/test.conf
-    sed "s/%SERVICE_TENANT_NAME%/${SERVICE_TENANT_NAME}/g" -i ${SWIFT_CONF_DIR}/test.conf
-    sed "s/%SERVICE_USER%/${SRCNAME}/g" -i ${SWIFT_CONF_DIR}/test.conf
-    sed "s/%SERVICE_PASSWORD%/${SERVICE_PASSWORD}/g" -i ${SWIFT_CONF_DIR}/test.conf
-    sed "s/%DEMO_USER%/demo/g" -i ${SWIFT_CONF_DIR}/test.conf
-    sed "s/%DEMO_PASSWORD%/${ADMIN_PASSWORD}/g" -i ${SWIFT_CONF_DIR}/test.conf
-
+        sed "s/%SWIFT_BACKING_FILE_SIZE%/${SWIFT_BACKING_FILE_SIZE}/g" -i ${D}${sysconfdir}/init.d/swift
+        sed "s/%CONTROLLER_IP%/${CONTROLLER_IP}/g" -i ${D}${sysconfdir}/init.d/swift
+    fi
     cp -r test ${D}/${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}/
     grep -rl '^from test' ${D}/${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}/test | xargs sed 's/^from test/from swift\.test/g' -i
 
-    sed "s/%SWIFT_BACKING_FILE_SIZE%/${SWIFT_BACKING_FILE_SIZE}/g" -i ${D}${sysconfdir}/init.d/swift
-    sed "s/%CONTROLLER_IP%/${CONTROLLER_IP}/g" -i ${D}${sysconfdir}/init.d/swift
 }
+
+CHEF_SERVICES_CONF_FILES := " \
+    ${sysconfdir}/${SRCNAME}/test.conf \
+    ${sysconfdir}/${SRCNAME}/dispersion.conf \
+    ${sysconfdir}/${SRCNAME}/proxy-server.conf \
+    ${sysconfdir}/init.d/swift \
+    "
 
 pkg_postinst_${SRCNAME}-setup () {
     if [ "x$D" != "x" ]; then

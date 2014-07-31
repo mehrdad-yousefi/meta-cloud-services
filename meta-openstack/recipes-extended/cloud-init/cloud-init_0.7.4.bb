@@ -27,15 +27,20 @@ do_install_prepend() {
 }
 
 do_install_append() {
-    sed -e "s:%MANAGE_HOSTS%:${MANAGE_HOSTS}:g" -i ${WORKDIR}/cloud.cfg
-    sed -e "s:%HOSTNAME%:${HOSTNAME}:g" -i ${WORKDIR}/cloud.cfg
     install -m 0755 ${WORKDIR}/cloud.cfg ${D}${sysconfdir}/cloud/cloud.cfg
-
+    if [ -z "${OPENSTACKCHEF_ENABLED}" ]; then
+        sed -e "s:%MANAGE_HOSTS%:${MANAGE_HOSTS}:g" -i ${D}${sysconfdir}/cloud/cloud.cfg
+        sed -e "s:%HOSTNAME%:${HOSTNAME}:g" -i ${D}${sysconfdir}/cloud/cloud.cfg
+    fi
     ln -s ${libdir}/${BPN}/uncloud-init ${D}${sysconfdir}/cloud/uncloud-init
     ln -s ${libdir}/${BPN}/write-ssh-key-fingerprints ${D}${sysconfdir}/cloud/write-ssh-key-fingerprints
 }
 
-inherit setuptools update-rc.d
+inherit setuptools update-rc.d openstackchef
+
+CHEF_SERVICES_CONF_FILES := " \
+    ${sysconfdir}/cloud/cloud.cfg \
+    "
 
 FILES_${PN} += "${sysconfdir}/* \
                 ${datadir}/*"

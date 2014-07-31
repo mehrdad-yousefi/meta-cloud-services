@@ -64,21 +64,21 @@ do_install_append() {
     install -m 600 ${TEMPLATE_CONF_DIR}/*.yaml ${CEILOMETER_CONF_DIR}
 
     install -m 600 ${TEMPLATE_CONF_DIR}/api_paste.ini ${CEILOMETER_CONF_DIR}
+    if [ -z "${OPENSTACKCHEF_ENABLED}" ]; then
+        sed -e "s:%CEILOMETER_SECRET%:${CEILOMETER_SECRET}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
 
-    sed -e "s:%CEILOMETER_SECRET%:${CEILOMETER_SECRET}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
+        sed -e "s:%DB_USER%:${DB_USER}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
+        sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
 
-    sed -e "s:%DB_USER%:${DB_USER}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
-    sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
+        sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
+        sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
 
-    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
-    sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
+        sed -e "s:%COMPUTE_IP%:${COMPUTE_IP}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
+        sed -e "s:%COMPUTE_HOST%:${COMPUTE_HOST}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
 
-    sed -e "s:%COMPUTE_IP%:${COMPUTE_IP}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
-    sed -e "s:%COMPUTE_HOST%:${COMPUTE_HOST}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
-
-    sed -e "s:%ADMIN_PASSWORD%:${ADMIN_PASSWORD}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
-    sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
-
+        sed -e "s:%ADMIN_PASSWORD%:${ADMIN_PASSWORD}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
+        sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
+    fi
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
 
@@ -107,6 +107,9 @@ do_install_append() {
     cp setup-test-env.sh ${CEILOMETER_CONF_DIR}
 }
 
+CHEF_SERVICES_CONF_FILES :="\
+    ${sysconfdir}/${SRCNAME}/ceilometer.conf \
+    "
 pkg_postinst_${SRCNAME}-setup () {
     if [ "x$D" != "x" ]; then
         exit 1
@@ -124,7 +127,7 @@ pkg_postinst_${SRCNAME}-setup () {
     ceilometer-dbsync
 }
 
-inherit setuptools identity hosts update-rc.d default_configs
+inherit setuptools identity hosts update-rc.d default_configs openstackchef
 
 PACKAGES += " ${SRCNAME}-tests"
 PACKAGES += "${SRCNAME}-setup ${SRCNAME}-common ${SRCNAME}-api"
