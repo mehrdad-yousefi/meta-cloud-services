@@ -38,4 +38,5 @@ RRECOMMENDS_${PN} = " \
     kernel-module-libiscsi \
     kernel-module-fuse \
     kernel-module-softdog \
+    kernel-module-veth \
     "
