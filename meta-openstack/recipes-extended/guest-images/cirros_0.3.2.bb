@@ -14,9 +14,9 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=80
 INHIBIT_PACKAGE_STRIP="1"
 
 do_install() {
-	     install -d ${D}/root/images
-	     install -m 755 ${WORKDIR}/${PN}-${PV}-x86_64-disk.img ${D}/root/images
+	     install -d ${D}/${ROOT_HOME}/images
+	     install -m 755 ${WORKDIR}/${PN}-${PV}-x86_64-disk.img ${D}/${ROOT_HOME}/images
 }
 
 PACKAGES = "cirros-guest-image"
-FILES_cirros-guest-image = "/root/images/*"
+FILES_cirros-guest-image = "${ROOT_HOME}/images/*"
