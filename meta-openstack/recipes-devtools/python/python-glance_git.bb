@@ -19,7 +19,7 @@ PV="2014.2.b3+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit setuptools update-rc.d identity default_configs hosts
+inherit setuptools update-rc.d identity default_configs hosts openstackchef
 
 GLANCE_DEFAULT_STORE ?= "file"
 GLANCE_KNOWN_STORES ?= "glance.store.rbd.Store,\
@@ -58,18 +58,15 @@ do_install_prepend() {
 do_install_append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}
     GLANCE_CONF_DIR=${D}${sysconfdir}/glance
-
+    
     for file in api registry cache
     do
-        sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
-            ${TEMPLATE_CONF_DIR}/glance-$file.conf > ${WORKDIR}/glance-$file.conf
-        sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${WORKDIR}/glance-$file.conf
-        sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
-            -i ${WORKDIR}/glance-$file.conf
-        sed -e "s!^#connection =.*!connection = postgresql://${DB_USER}:${DB_PASSWORD}@localhost/glance!g" \
-            -i ${WORKDIR}/glance-$file.conf
+        install -m 0600 ${TEMPLATE_CONF_DIR}/glance-$file.conf ${WORKDIR}
+        sed -e "s!^#connection =.*!connection = postgresql://%DB_USER%:%DB_PASSWORD%@localhost/glance!g" \
+        -i ${WORKDIR}/glance-$file.conf
         sed -i '/\[keystone_authtoken\]/aidentity_uri=http://127.0.0.1:8081/keystone/admin' ${WORKDIR}/glance-$file.conf
     done
+
     sed -e "s:^filesystem_store_datadir =.*:filesystem_store_datadir = ${sysconfdir}/${SRCNAME}/images/:g" \
         -i ${WORKDIR}/glance-api.conf
 
@@ -79,8 +76,8 @@ do_install_append() {
 
     sed 's:^default_store =.*:default_store = ${GLANCE_DEFAULT_STORE}:g' -i ${WORKDIR}/glance-api.conf
     sed 's:^swift_store_auth_address =.*:swift_store_auth_address = http\://127.0.0.1\:8081/keystone/main/:g' -i ${WORKDIR}/glance-api.conf
-    sed 's:^swift_store_user =.*:swift_store_user = ${SERVICE_TENANT_NAME}\:${SRCNAME}:g' -i ${WORKDIR}/glance-api.conf
-    sed 's:^swift_store_key =.*:swift_store_key = ${SERVICE_PASSWORD}:g' -i ${WORKDIR}/glance-api.conf
+    sed 's:^swift_store_user =.*:swift_store_user = %SERVICE_TENANT_NAME%\:${SRCNAME}:g' -i ${WORKDIR}/glance-api.conf
+    sed 's:^swift_store_key =.*:swift_store_key = %SERVICE_PASSWORD%:g' -i ${WORKDIR}/glance-api.conf
     sed 's:^swift_store_create_container_on_put =.*:swift_store_create_container_on_put = True:g' -i ${WORKDIR}/glance-api.conf
 
     # multi line match, replace the known stores with the ones we support.
@@ -101,6 +98,21 @@ do_install_append() {
 
     install -d ${D}${localstatedir}/log/${SRCNAME}
 
+    if [ -z "${OPENSTACKCHEF_ENABLED}" ]; then
+        for file in api registry cache
+        do
+            sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
+                -i ${GLANCE_CONF_DIR}/glance-$file.conf
+            sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${GLANCE_CONF_DIR}/glance-$file.conf
+            sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
+                -i ${GLANCE_CONF_DIR}/glance-$file.conf
+            sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" \
+                -i ${GLANCE_CONF_DIR}/glance-$file.conf
+            sed -e "s:%DB_USER%:${DB_USER}:g" \
+                -i ${GLANCE_CONF_DIR}/glance-$file.conf
+        done
+    fi
+
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
         sed 's:@suffix@:api:' < ${WORKDIR}/glance.init >${WORKDIR}/glance-api.init.sh
@@ -111,6 +123,12 @@ do_install_append() {
 
     cp run_tests.sh ${GLANCE_CONF_DIR}
 }
+
+CHEF_SERVICES_CONF_FILES := "\
+    ${sysconfdir}/${SRCNAME}/glance-api.conf \
+    ${sysconfdir}/${SRCNAME}/glance-cache.conf \
+    ${sysconfdir}/${SRCNAME}/glance-registry.conf \
+    "
 
 pkg_postinst_${SRCNAME}-setup () {
     if [ "x$D" != "x" ]; then

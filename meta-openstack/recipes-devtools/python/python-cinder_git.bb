@@ -24,7 +24,7 @@ SRCREV="58eda5d1f41082a7e1ffef66239be30b8ac1321a"
 PV="2014.2.b3+git${SRCPV}"
 S = "${WORKDIR}/git"
 
-inherit setuptools update-rc.d identity default_configs hosts
+inherit setuptools update-rc.d identity default_configs hosts openstackchef
 
 CINDER_BACKUP_BACKEND_DRIVER ?= "cinder.backup.drivers.swift"
 
@@ -61,23 +61,12 @@ CINDER_GLUSTERFS_VOLUME_SERVERS ?= "${CINDER_GLUSTERFS_VOLUME_SERVERS_DEFAULT}"
 do_install_append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}/${SRCNAME}
     CINDER_CONF_DIR=${D}${sysconfdir}/${SRCNAME}
-
-    sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
-        ${TEMPLATE_CONF_DIR}/api-paste.ini > ${WORKDIR}/api-paste.ini
-    sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${WORKDIR}/api-paste.ini
-    sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
-        -i ${WORKDIR}/api-paste.ini
-
-    sed -e "s:%DB_USER%:${DB_USER}:g" -i ${WORKDIR}/cinder.conf
-    sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${WORKDIR}/cinder.conf
-    sed -e "s:%CINDER_BACKUP_BACKEND_DRIVER%:${CINDER_BACKUP_BACKEND_DRIVER}:g" -i ${WORKDIR}/cinder.conf
-    sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" -i ${WORKDIR}/cinder.conf
-    sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${WORKDIR}/cinder.conf
-    sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" -i ${WORKDIR}/cinder.conf
-
+    
+    #Instead of substituting api-paste.ini from the WORKDIR,
+    #move it over to the image's directory and do the substitution there
     install -d ${CINDER_CONF_DIR}
     install -m 600 ${WORKDIR}/cinder.conf ${CINDER_CONF_DIR}/
-    install -m 600 ${WORKDIR}/api-paste.ini ${CINDER_CONF_DIR}/
+    install -m 600 ${TEMPLATE_CONF_DIR}/api-paste.ini ${CINDER_CONF_DIR}/
     install -m 600 ${S}/etc/cinder/policy.json ${CINDER_CONF_DIR}/
 
     install -d ${CINDER_CONF_DIR}/drivers
@@ -87,6 +76,21 @@ do_install_append() {
     install -m 700 ${WORKDIR}/add-cinder-volume-types.sh ${CINDER_CONF_DIR}/
 
     install -d ${D}${localstatedir}/log/${SRCNAME}
+    
+    if [ -z "${OPENSTACKCHEF_ENABLED}" ]; then
+        for file in api-paste.ini cinder.conf; do
+        sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
+            -i ${CINDER_CONF_DIR}/$file
+        sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${CINDER_CONF_DIR}/$file
+        sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
+            -i ${CINDER_CONF_DIR}/$file
+
+        sed -e "s:%DB_USER%:${DB_USER}:g" -i ${CINDER_CONF_DIR}/$file
+        sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${CINDER_CONF_DIR}/$file
+        sed -e "s:%CINDER_BACKUP_BACKEND_DRIVER%:${CINDER_BACKUP_BACKEND_DRIVER}:g" \
+        -i ${CINDER_CONF_DIR}/$file
+        done
+    fi
 
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
@@ -121,6 +125,10 @@ do_install_append() {
     sed -e "s:%IS_DEFAULT%:${is_default}:g" -i ${D}/etc/cinder/drivers/glusterfs_setup.sh
 }
 
+CHEF_SERVICES_CONF_FILES :="\
+    ${sysconfdir}/${SRCNAME}/cinder.conf \
+    ${sysconfdir}/${SRCNAME}/api-paste.ini \
+    "
 pkg_postinst_${SRCNAME}-setup () {
     if [ "x$D" != "x" ]; then
         exit 1

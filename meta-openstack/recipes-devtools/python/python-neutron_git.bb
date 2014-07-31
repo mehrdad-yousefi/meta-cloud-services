@@ -25,7 +25,7 @@ PV="2014.2.b3+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit setuptools update-rc.d identity hosts default_configs
+inherit setuptools update-rc.d identity hosts default_configs openstackchef
 
 SERVICECREATE_PACKAGES = "${SRCNAME}-setup"
 KEYSTONE_HOST="${CONTROLLER_IP}"
@@ -60,11 +60,11 @@ do_install_append() {
     install -m 600 ${S}/etc/api-paste.ini ${NEUTRON_CONF_DIR}/
     install -m 600 ${S}/etc/policy.json ${NEUTRON_CONF_DIR}/
 
-    sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
-        -i ${NEUTRON_CONF_DIR}/neutron.conf
-    sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${NEUTRON_CONF_DIR}/neutron.conf
-    sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
-        -i ${NEUTRON_CONF_DIR}/neutron.conf
+    #sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
+    #    -i ${NEUTRON_CONF_DIR}/neutron.conf
+    #sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${NEUTRON_CONF_DIR}/neutron.conf
+    #sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
+    #    -i ${NEUTRON_CONF_DIR}/neutron.conf
     sed -e "s:^# core_plugin.*:core_plugin = neutron.plugins.openvswitch.ovs_neutron_plugin.OVSNeutronPluginV2:g" \
         -i ${NEUTRON_CONF_DIR}/neutron.conf
 
@@ -74,15 +74,7 @@ do_install_append() {
     sed -e "s:^# notify_nova_on_port_data_changes.*:notify_nova_on_port_data_changes = False:g" \
         -i ${NEUTRON_CONF_DIR}/neutron.conf
 
-    sed -e "s:^# rabbit_host =.*:rabbit_host = ${CONTROLLER_IP}:" -i ${NEUTRON_CONF_DIR}/neutron.conf
-
-    for file in plugins/openvswitch/ovs_neutron_plugin.ini plugins/linuxbridge/linuxbridge_conf.ini
-    do
-        sed -e "s:%DB_USER%:${DB_USER}:g" -i ${NEUTRON_CONF_DIR}/${file}
-        sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${NEUTRON_CONF_DIR}/${file}
-        sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${NEUTRON_CONF_DIR}/${file}
-        sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${NEUTRON_CONF_DIR}/${file}
-    done
+    sed -e "s:^# rabbit_host =.*:rabbit_host = %CONTROLLER_IP%:" -i ${NEUTRON_CONF_DIR}/neutron.conf
 
     PLUGIN=openvswitch
     ARGS="--config-file=${sysconfdir}/${SRCNAME}/neutron.conf --config-file=${sysconfdir}/${SRCNAME}/plugins/openvswitch/ovs_neutron_plugin.ini"
@@ -121,15 +113,23 @@ do_install_append() {
         install -m 0755 ${WORKDIR}/neutron-$AGENT.init.sh ${D}${sysconfdir}/init.d/neutron-$AGENT-agent
         install -m 600 ${WORKDIR}/${AGENT}_agent.ini ${NEUTRON_CONF_DIR}/
     fi
-    sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
-        -i ${NEUTRON_CONF_DIR}/metadata_agent.ini
-    sed -e "s:%SERVICE_USER%:${SRCNAME}:g" \
-        -i ${NEUTRON_CONF_DIR}/metadata_agent.ini
-    sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
-        -i ${NEUTRON_CONF_DIR}/metadata_agent.ini
-    sed -e "s:%METADATA_SHARED_SECRET%:${METADATA_SHARED_SECRET}:g" \
-        -i ${NEUTRON_CONF_DIR}/metadata_agent.ini
-
+    if [ -z "${OPENSTACKCHEF_ENABLED}" ]; then
+        for file in plugins/openvswitch/ovs_neutron_plugin.ini \
+            plugins/linuxbridge/linuxbridge_conf.ini neutron.conf metadata_agent.ini; do
+        sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
+            -i ${NEUTRON_CONF_DIR}/$file
+        sed -e "s:%SERVICE_USER%:${SRCNAME}:g" \
+            -i ${NEUTRON_CONF_DIR}/$file
+        sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
+            -i ${NEUTRON_CONF_DIR}/$file
+        sed -e "s:%METADATA_SHARED_SECRET%:${METADATA_SHARED_SECRET}:g" \
+            -i ${NEUTRON_CONF_DIR}/$file
+        sed -e "s:%DB_USER%:${DB_USER}:g" -i ${NEUTRON_CONF_DIR}/$file
+        sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${NEUTRON_CONF_DIR}/$file
+        sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${NEUTRON_CONF_DIR}/$file
+        sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${NEUTRON_CONF_DIR}/$file
+        done
+    fi
     sed -e "s:^auth_host.*:#auth_host:g" -i ${NEUTRON_CONF_DIR}/neutron.conf
     sed -e "s:^auth_port.*:#auth_port:g" -i ${NEUTRON_CONF_DIR}/neutron.conf
     sed -e "s:^auth_protocol.*:#auth_protocol:g" -i ${NEUTRON_CONF_DIR}/neutron.conf
@@ -156,6 +156,25 @@ pkg_postinst_${SRCNAME}-setup () {
     sudo neutron-db-manage --config-file /etc/neutron/neutron.conf  \
                            --config-file /etc/neutron/plugins/openvswitch/ovs_neutron_plugin.ini upgrade head
 }
+
+CHEF_SERVICES_CONF_FILES := " \
+    ${sysconfdir}/${SRCNAME}/neutron.conf \
+    ${sysconfdir}/${SRCNAME}/metadata_agent.ini \
+    ${sysconfdir}/${SRCNAME}/plugins/openvswitch/ovs_neutron_plugin.ini \
+    ${sysconfdir}/${SRCNAME}/plugins/linuxbridge/linuxbridge_conf.ini \
+    "
+deploychef_services_special_func(){
+    #This function is a callback function for the deploychef .bbclass
+    #We define this special callback funtion because we are doing 
+    #more than a placeholder substitution. The variable CHEF_SERVICES_FILE_NAME
+    #is defined in deploychef_framework.bbclass
+    if [ -n "${CHEF_SERVICES_FILE_NAME}" ]; then
+        sed "s:^# rabbit_host =.*:rabbit_host = %CONTROLLER_IP%:" -i \
+        ${CHEF_SERVICES_FILE_NAME}
+    fi
+}
+
+CHEF_SERVICES_SPECIAL_FUNC := "deploychef_services_special_func"
 
 pkg_postinst_${SRCNAME}-plugin-openvswitch-setup () {
     if [ "x$D" != "x" ]; then
