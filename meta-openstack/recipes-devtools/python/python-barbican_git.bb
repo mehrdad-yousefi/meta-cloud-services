@@ -38,6 +38,7 @@ python () {
              'internalurl':"'http://${KEYSTONE_HOST}:9313/v1'"}
     d.setVarFlags("SERVICECREATE_PARAM_%s-setup" % d.getVar('SRCNAME',True), flags)
 }
+SERVICECREATE_PACKAGES[vardeps] += "KEYSTONE_HOST"
 
 do_install_append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}/${SRCNAME}

@@ -46,6 +46,7 @@ python () {
 
     d.setVarFlags("SERVICECREATE_PARAM_%s-setup" % d.getVar('SRCNAME',True), flags)
 }
+SERVICECREATE_PACKAGES[vardeps] += "KEYSTONE_HOST"
 
 do_install_prepend() {
     sed 's:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g' -i ${S}/${SRCNAME}/tests/functional/__init__.py
