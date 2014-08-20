@@ -9,7 +9,7 @@ DEPENDS += " \
         python-pbr \
         "
 
-SRCREV = "68c1d1fbc614d11b95f2fd6da26fd669e40f4186"
+SRCREV = "69361a146ecd0cd775579e5dcf34692e9c6328bc"
 PV = "0.13.1+git${SRCPV}"
 PR = "0"
 
