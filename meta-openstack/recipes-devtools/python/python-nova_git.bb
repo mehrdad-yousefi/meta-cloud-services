@@ -9,7 +9,7 @@ DEPENDS = "sudo libvirt"
 PR = "r0"
 SRCNAME = "nova"
 
-FILESEXTRAPATHS := "${THISDIR}/${PN}"
+FILESEXTRAPATHS_append := "${THISDIR}/${PN}"
 
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://0001-nova-api-paste.ini-make-controller-IP-configurable.patch \
