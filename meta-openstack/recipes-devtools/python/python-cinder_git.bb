@@ -20,8 +20,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
     file://cinder-builtin-tests-config-location.patch \
 	"
 
-SRCREV="81259f36f57e91b31009fbd209ea2a07a2ceb213"
-PV="2013.2.3+git${SRCPV}"
+SRCREV="34179609ed312ba65c8ac7ca78ea8fec39b28987"
+PV="2013.2.4+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d identity default_configs hosts

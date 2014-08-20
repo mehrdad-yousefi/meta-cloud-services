@@ -16,8 +16,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://heat-tests-change-project_dir-path.patch \
 "
 
-SRCREV="58de9e6415f5bdabde708c8584b21b59b7e96a88"
-PV="2013.2.3+git${SRCPV}"
+SRCREV="b8ef3e94e4e6d378a59d64e1585ce3360c870b8c"
+PV="2013.2.4+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 SERVICECREATE_PACKAGES = "${SRCNAME}-setup ${SRCNAME}-templates ${SRCNAME}-cfn"

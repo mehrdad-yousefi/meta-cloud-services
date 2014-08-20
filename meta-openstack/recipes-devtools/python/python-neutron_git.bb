@@ -19,8 +19,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://uuid_wscheck.patch \
            file://neutron-test-nec-plugin-extensions-location.patch \
 	  "
-SRCREV="a8417d78c2675a2ceb5dbfcee70948a88d69e747"
-PV="2013.2.3+git${SRCPV}"
+SRCREV="5499b63215c59150a9095736b9c7b2b79489ebf8"
+PV="2013.2.4+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 

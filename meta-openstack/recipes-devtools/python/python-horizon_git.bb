@@ -41,8 +41,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
     file://horizon-use-full-package-path-to-test-directories.patch \
     "
 
-SRCREV="cd1de75ee2a8c246d5564e96ccc48185816c2290"
-PV="2013.2.3+git${SRCPV}"
+SRCREV="df782fc2b51f5e9d2e38e3e33a4ebdc0705a50b4"
+PV="2013.2.4+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d python-dir default_configs

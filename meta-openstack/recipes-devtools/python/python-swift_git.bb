@@ -14,11 +14,10 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://swift.init \
            file://swift_setup.sh \
            file://cluster.conf \
-           file://CVE-2014-0006-swift-1265665.patch \
 "
 
-SRCREV="2f3526c559fe53ce904b735a81dee6de46127176"
-PV="2013.2.2+git${SRCPV}"
+SRCREV="f9c44df6e2d32edf663814670c21ef552bef37db"
+PV="1.10.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools python-dir update-rc.d hosts identity

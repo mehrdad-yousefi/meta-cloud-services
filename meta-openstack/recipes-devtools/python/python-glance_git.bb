@@ -12,8 +12,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://glance-change-builtin-tests-config-location.patch \
            "
 
-SRCREV="396ca82f7e359b430a6cb0a6162d7bc937367705"
-PV="2013.2.3+git${SRCPV}"
+SRCREV="85584018b27bb08f3f727d4b4dc2a54ba693e375"
+PV="2013.2.4+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 

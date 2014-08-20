@@ -17,8 +17,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
            file://convert_keystone_backend.py \
            "
 
-SRCREV="e7c29874e5a0e43f4f0e9970556c701af508152f"
-PV="2013.2.3+git${SRCPV}"
+SRCREV="7f1feaaf1fa5eca4b1cd541fca4f4203eeaebf8f"
+PV="2013.2.4+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
