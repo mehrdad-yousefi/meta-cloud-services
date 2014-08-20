@@ -9,7 +9,7 @@ DEPENDS = "sudo libvirt"
 PR = "r0"
 SRCNAME = "nova"
 
-FILESEXTRAPATHS := "${THISDIR}/${PN}"
+FILESEXTRAPATHS_append := "${THISDIR}/${PN}"
 
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://nova-add-migrate.cfg-to-the-MANIFEST.patch \
