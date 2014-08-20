@@ -9,8 +9,8 @@ SRCNAME = "eventlet"
 
 SRC_URI = "http://pypi.python.org/packages/source/e/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "d40439ab93bd1d22757819a6a1a1737b"
-SRC_URI[sha256sum] = "fdd5075ba72688ecb845ddde2b374e8c2c617d02ddd95d68e7505c8aa782637f"
+SRC_URI[md5sum] = "7155780824bb6344651a573838416f21"
+SRC_URI[sha256sum] = "2b2ec222aba392bde157168000f0827c493f756a06dab7bc346b46439fd0f6ae"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
