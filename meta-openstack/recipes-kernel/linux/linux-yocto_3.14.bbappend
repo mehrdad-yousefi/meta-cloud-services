@@ -6,4 +6,5 @@ SRC_URI += "file://enable-veth.cfg \
             file://enable-nbd.cfg \
             file://enable-rtlink.cfg \
             file://nf.scc \
+            file://nfs.scc \
 	"
