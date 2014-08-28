@@ -31,9 +31,10 @@ LDAP_DN ?= "dc=my-domain,dc=com"
 SERVICECREATE_PACKAGES = "${SRCNAME}-setup"
 KEYSTONE_HOST="${CONTROLLER_IP}"
 
-# USERCREATE_PARAM and SERVICECREATE_PARAM contain the list of parameters to be set.
-# If the flag for a parameter in the list is not set here, the default value will be given to that parameter.
-# Parameters not in the list will be set to empty.
+# USERCREATE_PARAM and SERVICECREATE_PARAM contain the list of parameters to be
+# set.  If the flag for a parameter in the list is not set here, the default
+# value will be given to that parameter. Parameters not in the list will be set
+# to empty.
 
 USERCREATE_PARAM_${SRCNAME}-setup = "name pass tenant role email"
 python () {
@@ -45,6 +46,7 @@ python () {
             }
     d.setVarFlags("USERCREATE_PARAM_%s-setup" % d.getVar('SRCNAME',True), flags)
 }
+
 SERVICECREATE_PARAM_${SRCNAME}-setup = "name type description region publicurl adminurl internalurl"
 python () {
     flags = {'type':'identity',\
@@ -66,23 +68,32 @@ do_install_append() {
 
     install -m 600 ${WORKDIR}/keystone.conf ${KEYSTONE_CONF_DIR}/
     install -m 755 ${WORKDIR}/identity.sh ${KEYSTONE_CONF_DIR}/
-    install -m 600 ${S}/etc/logging.conf.sample ${KEYSTONE_CONF_DIR}/logging.conf
+    install -m 600 ${S}/etc/logging.conf.sample \
+        ${KEYSTONE_CONF_DIR}/logging.conf
     install -m 600 ${S}/etc/policy.json ${KEYSTONE_CONF_DIR}/policy.json
-    install -m 600 ${S}/etc/keystone.conf.sample ${KEYSTONE_CONF_DIR}/keystone.conf.sample
-    install -m 600 ${S}/etc/keystone-paste.ini ${KEYSTONE_CONF_DIR}/keystone-paste.ini
+    install -m 600 ${S}/etc/keystone.conf.sample \
+        ${KEYSTONE_CONF_DIR}/keystone.conf.sample
+    install -m 600 ${S}/etc/keystone-paste.ini \
+        ${KEYSTONE_CONF_DIR}/keystone-paste.ini
 
     cp -r ${S}/examples ${KEYSTONE_PACKAGE_DIR}
 
-    sed -e "s:%SERVICE_TOKEN%:${SERVICE_TOKEN}:g" -i ${KEYSTONE_CONF_DIR}/keystone.conf
+    sed -e "s:%SERVICE_TOKEN%:${SERVICE_TOKEN}:g" \
+        -i ${KEYSTONE_CONF_DIR}/keystone.conf
     sed -e "s:%DB_USER%:${DB_USER}:g" -i ${KEYSTONE_CONF_DIR}/keystone.conf
-    sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${KEYSTONE_CONF_DIR}/keystone.conf
+    sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" \
+        -i ${KEYSTONE_CONF_DIR}/keystone.conf
 
-    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${KEYSTONE_CONF_DIR}/keystone.conf
-    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${KEYSTONE_CONF_DIR}/identity.sh
+    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" \
+        -i ${KEYSTONE_CONF_DIR}/keystone.conf
+    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" \
+        -i ${KEYSTONE_CONF_DIR}/identity.sh
 
-    sed -e "s:%TOKEN_FORMAT%:${TOKEN_FORMAT}:g" -i ${KEYSTONE_CONF_DIR}/keystone.conf
+    sed -e "s:%TOKEN_FORMAT%:${TOKEN_FORMAT}:g" \
+        -i ${KEYSTONE_CONF_DIR}/keystone.conf
 
-    if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
+    if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)};
+    then
         install -d ${D}${sysconfdir}/init.d
         install -m 0755 ${WORKDIR}/keystone ${D}${sysconfdir}/init.d/keystone
     fi
@@ -90,16 +101,21 @@ do_install_append() {
     install -d ${KEYSTONE_PACKAGE_DIR}/tests/tmp
 
     if [ -e "${KEYSTONE_PACKAGE_DIR}/tests/test_overrides.conf" ];then
-        sed -e "s:%KEYSTONE_PACKAGE_DIR%:${PYTHON_SITEPACKAGES_DIR}/keystone:g" -i ${KEYSTONE_PACKAGE_DIR}/tests/test_overrides.conf
+        sed -e "s:%KEYSTONE_PACKAGE_DIR%:${PYTHON_SITEPACKAGES_DIR}/keystone:g" \
+            -i ${KEYSTONE_PACKAGE_DIR}/tests/test_overrides.conf
     fi
 
     cp run_tests.sh ${KEYSTONE_CONF_DIR}
 
-    sed -e "s/%ADMIN_PASSWORD%/${ADMIN_PASSWORD}/g" -i ${D}${sysconfdir}/init.d/keystone
-    sed -e "s/%SERVICE_PASSWORD%/${SERVICE_PASSWORD}/g" -i ${D}${sysconfdir}/init.d/keystone
-    sed -e "s/%SERVICE_TENANT_NAME%/${SERVICE_TENANT_NAME}/g" -i ${D}${sysconfdir}/init.d/keystone
+    sed -e "s/%ADMIN_PASSWORD%/${ADMIN_PASSWORD}/g" \
+        -i ${D}${sysconfdir}/init.d/keystone
+    sed -e "s/%SERVICE_PASSWORD%/${SERVICE_PASSWORD}/g" \
+        -i ${D}${sysconfdir}/init.d/keystone
+    sed -e "s/%SERVICE_TENANT_NAME%/${SERVICE_TENANT_NAME}/g" \
+        -i ${D}${sysconfdir}/init.d/keystone
 
-    if ${@base_contains('DISTRO_FEATURES', 'OpenLDAP', 'true', 'false', d)}; then
+    if ${@base_contains('DISTRO_FEATURES', 'OpenLDAP', 'true', 'false', d)};
+    then
         sed -i -e '/^\[identity\]/a \
 driver = keystone.identity.backends.hybrid_identity.Identity \
 \
@@ -138,7 +154,8 @@ role_name_attribute = ou \
 role_tree_dn = ou=Roles,${LDAP_DN} \
 ' ${D}/etc/keystone/keystone.conf
 
-	install -m 0755 ${WORKDIR}/convert_keystone_backend.py ${D}${sysconfdir}/keystone/convert_keystone_backend.py
+        install -m 0755 ${WORKDIR}/convert_keystone_backend.py \
+            ${D}${sysconfdir}/keystone/convert_keystone_backend.py
     fi
 }
 
@@ -158,14 +175,15 @@ pkg_postinst_${SRCNAME}-setup () {
     # This is to make sure keystone is configured and running
     PIDFILE="/var/run/keystone-all.pid"
     if [ -z `cat $PIDFILE 2>/dev/null` ]; then
-       sudo -u postgres createdb keystone
-       keystone-manage db_sync
-       keystone-manage pki_setup --keystone-user=root --keystone-group=root
+        sudo -u postgres createdb keystone
+        keystone-manage db_sync
+        keystone-manage pki_setup --keystone-user=root --keystone-group=root
 
-       if ${@base_contains('DISTRO_FEATURES', 'OpenLDAP', 'true', 'false', d)}; then
-           /etc/init.d/openldap start
-       fi
-       /etc/init.d/keystone start
+        if ${@base_contains('DISTRO_FEATURES', 'OpenLDAP', 'true', 'false', d)};
+        then
+            /etc/init.d/openldap start
+        fi
+        /etc/init.d/keystone start
     fi
 }
 
@@ -190,7 +208,7 @@ FILES_${PN} = "${libdir}/*"
 FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
 
 FILES_${SRCNAME} = "${bindir}/* \
-    ${sysconfdir}/${SRCNAME}/* \ 
+    ${sysconfdir}/${SRCNAME}/* \
     ${sysconfdir}/init.d/* \
     ${localstatedir}/* \
     "
