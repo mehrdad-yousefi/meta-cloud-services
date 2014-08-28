@@ -62,17 +62,21 @@ do_install_append() {
     sed -e "s:^LANGUAGE_CODE =.*:LANGUAGE_CODE = 'en-us':g" \
         -i ${DASHBOARD_DIR}/settings.py
     sed -e "s:^# from horizon.utils:from horizon.utils:g" \
-        ${DASHBOARD_DIR}/local/local_settings.py.example > ${DASHBOARD_DIR}/local/local_settings.py
+        ${DASHBOARD_DIR}/local/local_settings.py.example > \
+        ${DASHBOARD_DIR}/local/local_settings.py
     sed -e "s:^# SECRET_KEY =:SECRET_KEY =:g" \
         -i ${DASHBOARD_DIR}/local/local_settings.py
     install -m 644 ${S}/manage.py ${DASHBOARD_DIR}/manage.py
 
-    if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
+    if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)};
+    then
         install -d ${D}${sysconfdir}/init.d
-        sed 's:@PYTHON_SITEPACKAGES@:${PYTHON_SITEPACKAGES_DIR}:' ${WORKDIR}/horizon.init >${WORKDIR}/horizon
+        sed 's:@PYTHON_SITEPACKAGES@:${PYTHON_SITEPACKAGES_DIR}:' \
+            ${WORKDIR}/horizon.init >${WORKDIR}/horizon
         install -m 0755 ${WORKDIR}/horizon ${D}${sysconfdir}/init.d/horizon
     fi
-    sed -i -e 's#%PYTHON_SITEPACKAGES%#${PYTHON_SITEPACKAGES_DIR}#g' ${D}${PYTHON_SITEPACKAGES_DIR}/horizon/test/settings.py
+    sed -i -e 's#%PYTHON_SITEPACKAGES%#${PYTHON_SITEPACKAGES_DIR}#g' \
+        ${D}${PYTHON_SITEPACKAGES_DIR}/horizon/test/settings.py
 
     # no longer required. kept as reference.
     # mv ${D}${datadir}/bin ${DASHBOARD_DIR}/bin
@@ -85,14 +89,16 @@ do_install_append() {
     cp ${S}/manage.py  ${DASHBOARD_SHARE_DIR}
 
     install -D -m 644 ${WORKDIR}/local_settings.py \
-       ${DASHBOARD_CONF_DIR}/local_settings.py
+        ${DASHBOARD_CONF_DIR}/local_settings.py
     ln -fs ${sysconfdir}/openstack-dashboard/local_settings.py \
-       ${DASHBOARD_SHARE_DIR}/openstack_dashboard/local/local_settings.py
+        ${DASHBOARD_SHARE_DIR}/openstack_dashboard/local/local_settings.py
 
     install -D -m 644 ${WORKDIR}/openstack-dashboard-apache.conf \
       ${SYSCONF_DIR}/apache2/conf.d/openstack-dashboard-apache.conf
-    sed -i -e 's#%PYTHON_SITEPACKAGES%#${PYTHON_SITEPACKAGES_DIR}#' ${SYSCONF_DIR}/apache2/conf.d/openstack-dashboard-apache.conf
-    sed -i -e 's#%LIBDIR%#${libdir}#' ${SYSCONF_DIR}/apache2/conf.d/openstack-dashboard-apache.conf
+    sed -i -e 's#%PYTHON_SITEPACKAGES%#${PYTHON_SITEPACKAGES_DIR}#' \
+        ${SYSCONF_DIR}/apache2/conf.d/openstack-dashboard-apache.conf
+    sed -i -e 's#%LIBDIR%#${libdir}#' \
+        ${SYSCONF_DIR}/apache2/conf.d/openstack-dashboard-apache.conf
 
     ln -fs openstack_dashboard/static ${DASHBOARD_SHARE_DIR}/static
 
