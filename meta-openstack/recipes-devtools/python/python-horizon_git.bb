@@ -64,6 +64,9 @@ inherit setuptools update-rc.d python-dir default_configs
 # do_install[dirs] += "${D}/usr/share/bin"
 
 do_install_append() {
+    SYSCONF_DIR=${D}${sysconfdir}
+    DASHBOARD_CONF_DIR=${SYSCONF_DIR}/openstack-dashboard
+    DASHBOARD_SHARE_DIR=${D}${datadir}/openstack-dashboard
     HORIZON_CONF_DIR=${D}${sysconfdir}/horizon
 
     install -d ${HORIZON_CONF_DIR}
@@ -90,24 +93,24 @@ do_install_append() {
     cp run_tests.sh ${HORIZON_CONF_DIR}
 
     # the following are setup required for horizon-apache
-    install -d ${D}/usr/share/openstack-dashboard
-    cp -a ${S}/openstack_dashboard ${D}/usr/share/openstack-dashboard/
-    cp ${S}/manage.py ${D}/usr/share/openstack-dashboard
+    install -d ${DASHBOARD_SHARE_DIR}
+    cp -a ${S}/openstack_dashboard  ${DASHBOARD_SHARE_DIR}
+    cp ${S}/manage.py  ${DASHBOARD_SHARE_DIR}
 
     install -D -m 644 ${WORKDIR}/local_settings.py \
-      ${D}/etc/openstack-dashboard/local_settings.py
-    ln -fs /etc/openstack-dashboard/local_settings.py \
-      ${D}/usr/share/openstack-dashboard/openstack_dashboard/local/local_settings.py
+       ${DASHBOARD_CONF_DIR}/local_settings.py
+    ln -fs ${sysconfdir}/openstack-dashboard/local_settings.py \
+       ${DASHBOARD_SHARE_DIR}/openstack_dashboard/local/local_settings.py
 
     install -D -m 644 ${WORKDIR}/openstack-dashboard-apache.conf \
-      ${D}/etc/apache2/conf.d/openstack-dashboard-apache.conf
-    sed -i -e 's#%PYTHON_SITEPACKAGES%#${PYTHON_SITEPACKAGES_DIR}#' ${D}/etc/apache2/conf.d/openstack-dashboard-apache.conf
-    sed -i -e 's#%LIBDIR%#${libdir}#' ${D}/etc/apache2/conf.d/openstack-dashboard-apache.conf
+      ${SYSCONF_DIR}/apache2/conf.d/openstack-dashboard-apache.conf
+    sed -i -e 's#%PYTHON_SITEPACKAGES%#${PYTHON_SITEPACKAGES_DIR}#' ${SYSCONF_DIR}/apache2/conf.d/openstack-dashboard-apache.conf
+    sed -i -e 's#%LIBDIR%#${libdir}#' ${SYSCONF_DIR}/apache2/conf.d/openstack-dashboard-apache.conf
 
-    ln -fs openstack_dashboard/static ${D}/usr/share/openstack-dashboard/static
+    ln -fs openstack_dashboard/static ${DASHBOARD_SHARE_DIR}/static
 
     # daemon is UID 1
-    chown -R 1 ${D}/usr/share/openstack-dashboard/openstack_dashboard/static
+    chown -R 1 ${DASHBOARD_SHARE_DIR}/openstack_dashboard/static
 }
 
 PACKAGES += "${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-apache ${SRCNAME}-standalone"
@@ -122,9 +125,10 @@ FILES_${SRCNAME} = "${bindir}/* \
 
 FILES_${SRCNAME}-standalone = "${sysconfdir}/init.d/horizon"
 
-FILES_${SRCNAME}-apache = "/etc/apache2 \
-    /etc/openstack-dashboard/ \
-    /usr/share/openstack-dashboard/ \
+FILES_${SRCNAME}-apache = " \
+    ${sysconfdir}/apache2 \
+    ${sysconfdir}/openstack-dashboard/ \
+    ${datadir}/openstack-dashboard/ \
     "
 
 RDEP_ARCH_VAR = ""
