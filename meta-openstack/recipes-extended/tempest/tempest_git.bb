@@ -14,7 +14,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://logging.conf \
 "
 
-SRCREV="064e965b70190c2446a9355a5f5e83de0df5250e"
+SRCREV="2707a0f065e52d8331d12c983ead95de1224cb32"
 PV="2014.1+git${SRCPV}"
 S = "${WORKDIR}/git"
 

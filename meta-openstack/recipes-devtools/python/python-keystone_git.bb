@@ -16,8 +16,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://convert_keystone_backend.py \
            "
 
-SRCREV="1070afe2cb8707ad28d43c4ea76116a941cf2131"
-PV="2014.2.b1+git${SRCPV}"
+SRCREV="dbede9c262168ff9ef9fd3b7f5ed2bc20ebd01f8"
+PV="2014.2.b2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -221,6 +221,7 @@ RDEPENDS_${PN} += " \
         python-dogpile.core \
         python-dogpile.cache \
         python-pbr \
+        python-oslo.utils \
         "
 
 PACKAGECONFIG ?= "${@base_contains('DISTRO_FEATURES', 'OpenLDAP', 'OpenLDAP', '', d)}"

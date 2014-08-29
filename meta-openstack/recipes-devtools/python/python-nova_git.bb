@@ -24,8 +24,8 @@ SRC_URI += "file://nova-all \
             file://nova.conf \
             file://openrc \
            "
-SRCREV="e0331cfe9d49f25b8a23f5fc473f610415bb07ac"
-PV="2014.2.b1+git${SRCPV}"
+SRCREV="e15ce7735e492f9eb0914efb621211e315ea40d9"
+PV="2014.2.b2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -304,6 +304,7 @@ RDEPENDS_${PN} = " libvirt \
 		   python-pbr \
 		   spice-html5 \
 		   python-posix-ipc \
+		   python-rfc3986 \
     "
 
 RDEPENDS_${SRCNAME}-common = "${PN} openssl openssl-misc libxml2 libxslt \

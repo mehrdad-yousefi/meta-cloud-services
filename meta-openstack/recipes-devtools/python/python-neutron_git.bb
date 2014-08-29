@@ -20,8 +20,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://uuid_wscheck.patch \
            file://neutron-test-nec-plugin-extensions-location.patch \
 	  "
-SRCREV="57011b901f0c26c840c207e007e392ba9ff5890b"
-PV="2014.2.b1+git${SRCPV}"
+SRCREV="dca18ad307fdc9f33ab3421478c7fce373a1264d"
+PV="2014.2.b2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -148,6 +148,8 @@ pkg_postinst_${SRCNAME}-setup () {
     fi
 
     sudo -u postgres createdb ovs_neutron
+    sudo neutron-db-manage --config-file /etc/neutron/neutron.conf  \
+                           --config-file /etc/neutron/plugins/openvswitch/ovs_neutron_plugin.ini upgrade head
 }
 
 pkg_postinst_${SRCNAME}-plugin-openvswitch-setup () {

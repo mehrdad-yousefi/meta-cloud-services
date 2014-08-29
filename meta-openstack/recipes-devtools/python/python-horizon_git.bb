@@ -41,8 +41,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
     file://horizon-use-full-package-path-to-test-directories.patch \
     "
 
-SRCREV="826444b9eabbaab11cb64018be0777493f1a5fc1"
-PV="2014.2.b1+git${SRCPV}"
+SRCREV="8f808a69f6f64c7d92571989b72da1d1801a1c86"
+PV="2014.2.b2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d python-dir default_configs

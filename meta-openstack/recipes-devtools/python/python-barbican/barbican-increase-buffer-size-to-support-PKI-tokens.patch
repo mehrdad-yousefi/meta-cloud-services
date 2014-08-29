@@ -15,24 +15,22 @@ Signed-off-by: Keith Holman <Keith.Holman@windriver.com>
  etc/barbican/vassals/barbican-api.ini   | 1 +
  2 files changed, 2 insertions(+)
 
-diff --git a/etc/barbican/vassals/barbican-admin.ini b/etc/barbican/vassals/barbican-admin.ini
-index e270b13..3b58430 100644
---- a/etc/barbican/vassals/barbican-admin.ini
-+++ b/etc/barbican/vassals/barbican-admin.ini
-@@ -8,3 +8,4 @@ no-default-app = true
- memory-report = true
+Index: git/etc/barbican/vassals/barbican-admin.ini
+===================================================================
+--- git.orig/etc/barbican/vassals/barbican-admin.ini
++++ git/etc/barbican/vassals/barbican-admin.ini
+@@ -9,3 +9,4 @@
  plugins = python
  paste = config:/etc/barbican/barbican-admin-paste.ini
+ add-header = Connection: close
 +buffer-size = %BARBICAN_MAX_PACKET_SIZE%
-diff --git a/etc/barbican/vassals/barbican-api.ini b/etc/barbican/vassals/barbican-api.ini
-index 8f6f504..82de732 100644
---- a/etc/barbican/vassals/barbican-api.ini
-+++ b/etc/barbican/vassals/barbican-api.ini
-@@ -8,3 +8,4 @@ no-default-app = true
- memory-report = true
+Index: git/etc/barbican/vassals/barbican-api.ini
+===================================================================
+--- git.orig/etc/barbican/vassals/barbican-api.ini
++++ git/etc/barbican/vassals/barbican-api.ini
+@@ -9,3 +9,4 @@
  plugins = python
  paste = config:/etc/barbican/barbican-api-paste.ini
+ add-header = Connection: close
 +buffer-size = %BARBICAN_MAX_PACKET_SIZE%
--- 
-1.9.0
-
+\ No newline at end of file

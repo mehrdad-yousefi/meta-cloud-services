@@ -13,8 +13,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://glance-change-builtin-tests-config-location.patch \
            "
 
-SRCREV="92ab00fca6926eaf3f7f92a955a5e07140063718"
-PV="2014.2.b1+git${SRCPV}"
+SRCREV="e66ecfee4eacfe25a18cd05d3f88e25c91fa112c"
+PV="2014.2.b2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 

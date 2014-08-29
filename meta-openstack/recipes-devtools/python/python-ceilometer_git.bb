@@ -11,11 +11,13 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://ceilometer.conf \
            file://ceilometer.init \
            file://fix_ceilometer_memory_leak.patch \
-           file://ceilometer-builtin-tests-config-location.patch \
 "
+# dropped for juno:
+#   file://ceilometer-builtin-tests-config-location.patch
 
-SRCREV="d4baab8a135b88ccb673b8e6dd35386786b52281"
-PV="2014.2.b1+git${SRCPV}"
+
+SRCREV="fec77dbc85fed701fdbc3a96bae57e5ae3a705cb"
+PV="2014.2.b2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 CEILOMETER_SECRET ?= "12121212"
