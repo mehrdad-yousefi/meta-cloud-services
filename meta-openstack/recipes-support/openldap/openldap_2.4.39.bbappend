@@ -1,5 +1,3 @@
-PRINC = "2"
-
 DEPEND_${PN} += "cyrus-sasl" 
 RDEPEND_${PN} += "libsasl2-modules"
 
