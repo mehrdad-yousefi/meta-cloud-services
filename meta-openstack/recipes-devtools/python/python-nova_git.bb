@@ -305,6 +305,7 @@ RDEPENDS_${PN} = " libvirt \
 		   spice-html5 \
 		   python-posix-ipc \
 		   python-rfc3986 \
+		   python-oslo.i18n \
     "
 
 RDEPENDS_${SRCNAME}-common = "${PN} openssl openssl-misc libxml2 libxslt \
