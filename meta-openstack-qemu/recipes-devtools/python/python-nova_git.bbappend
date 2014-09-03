@@ -6,6 +6,6 @@ do_install_append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}/${SRCNAME}
     NOVA_CONF_DIR=${D}/${sysconfdir}/nova
 
-    sed -e "s:^libvirt_type.*=.*$:libvirt_type = qemu:" \
+    sed -e "s:^virt_type.*=.*$:virt_type = qemu:" \
         -i ${NOVA_CONF_DIR}/nova.conf
 }
