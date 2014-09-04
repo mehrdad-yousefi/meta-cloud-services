@@ -28,6 +28,19 @@ RDEPENDS_${PN} += "python-django \
     python-lockfile \
     python-pbr \
     python-troveclient \
+    python-xstatic-angular \
+    python-xstatic-angular-cookies \
+    python-xstatic-angular-mock \
+    python-xstatic-d3 \
+    python-xstatic-hogan \
+    python-xstatic-jasmine \
+    python-xstatic-jquery-migrate \
+    python-xstatic-jquery-quicksearch \
+    python-xstatic-jquery-tablesorter \
+    python-xstatic-jsencrypt \
+    python-xstatic-qunit \
+    python-xstatic-rickshaw \
+    python-xstatic-spin \
     "
 
 PR = "r2"
