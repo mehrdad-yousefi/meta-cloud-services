@@ -272,6 +272,7 @@ RDEPENDS_${SRCNAME} = " \
     ${SRCNAME}-conductor \
     ${SRCNAME}-setup \
     ${SRCNAME}-taskmanager \
+    troveclient \
     "
 
 RDEPENDS_${SRCNAME}-api = " \

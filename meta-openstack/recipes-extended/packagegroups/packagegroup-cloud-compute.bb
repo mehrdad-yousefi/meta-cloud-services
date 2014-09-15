@@ -19,6 +19,7 @@ RDEPENDS_${PN} = " \
     python-novaclient \
     neutron-plugin-openvswitch \
     openvswitch-switch \
+    troveclient \
     ${@base_contains('CINDER_EXTRA_FEATURES', 'open-iscsi-user', 'open-iscsi-user', '', d)} \
     ${@base_contains('CINDER_EXTRA_FEATURES', 'iscsi-initiator-utils', 'iscsi-initiator-utils', '', d)} \
     nfs-utils-client \
