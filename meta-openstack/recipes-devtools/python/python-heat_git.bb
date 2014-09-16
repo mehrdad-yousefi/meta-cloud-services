@@ -16,8 +16,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://heat-tests-change-project_dir-path.patch \
 "
 
-SRCREV="04de60093b602c2eac4a612df5d4a2e31424a25d"
-PV="2014.2.b2+git${SRCPV}"
+SRCREV="9b700a1b6e1c806d8deba64ffb9a804790765678"
+PV="2014.2.b3+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 SERVICECREATE_PACKAGES = "${SRCNAME}-setup ${SRCNAME}-templates ${SRCNAME}-cfn"

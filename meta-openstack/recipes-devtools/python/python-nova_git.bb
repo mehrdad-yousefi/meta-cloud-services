@@ -16,6 +16,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://nova-convert-path-from-relative-to-absolute.patch \
            file://nova-fix-location-to-doc-directory.patch \
            file://nova-fix-location-to-plugin-directory.patch \
+           file://neutron-api-set-default-binding-vnic_type.patch \
            "
 
 SRC_URI += "file://nova-all \
@@ -24,8 +25,8 @@ SRC_URI += "file://nova-all \
             file://nova.conf \
             file://openrc \
            "
-SRCREV="e15ce7735e492f9eb0914efb621211e315ea40d9"
-PV="2014.2.b2+git${SRCPV}"
+SRCREV="a5f09ddddfba65b8fdc6bac994750e5980b27521"
+PV="2014.2.b3+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 

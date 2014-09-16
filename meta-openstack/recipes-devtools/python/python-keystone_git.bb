@@ -16,8 +16,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://convert_keystone_backend.py \
            "
 
-SRCREV="dbede9c262168ff9ef9fd3b7f5ed2bc20ebd01f8"
-PV="2014.2.b2+git${SRCPV}"
+SRCREV="73ad4036d62b3aa7cf50e11ddf7bee8278bbe4d0"
+PV="2014.2.b3+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 

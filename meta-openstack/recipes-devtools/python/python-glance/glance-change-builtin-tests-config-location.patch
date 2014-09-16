@@ -10,11 +10,11 @@ these configuration files using absolute path.
 
 Signed-off-by: Vu Tran <vu.tran@windriver.com>
 
-diff --git a/glance/tests/functional/__init__.py b/glance/tests/functional/__init__.py
-index 1256133..01adb81 100644
---- a/glance/tests/functional/__init__.py
-+++ b/glance/tests/functional/__init__.py
-@@ -900,7 +900,7 @@ class FunctionalTest(test_utils.BaseTestCase):
+Index: git/glance/tests/functional/__init__.py
+===================================================================
+--- git.orig/glance/tests/functional/__init__.py
++++ git/glance/tests/functional/__init__.py
+@@ -849,7 +849,7 @@
          return engine.execute(sql)
  
      def copy_data_file(self, file_name, dst_dir):
@@ -23,11 +23,11 @@ index 1256133..01adb81 100644
          shutil.copy(src_file_name, dst_dir)
          dst_file_name = os.path.join(dst_dir, file_name)
          return dst_file_name
-diff --git a/glance/tests/unit/api/test_common.py b/glance/tests/unit/api/test_common.py
-index 8892025..2aac6b7 100644
---- a/glance/tests/unit/api/test_common.py
-+++ b/glance/tests/unit/api/test_common.py
-@@ -137,7 +137,7 @@ class TestMalformedRequest(test_utils.BaseTestCase):
+Index: git/glance/tests/unit/api/test_common.py
+===================================================================
+--- git.orig/glance/tests/unit/api/test_common.py
++++ git/glance/tests/unit/api/test_common.py
+@@ -135,7 +135,7 @@
          super(TestMalformedRequest, self).setUp()
          self.config(flavor='',
                      group='paste_deploy',
@@ -36,11 +36,11 @@ index 8892025..2aac6b7 100644
          self.api = config.load_paste_app('glance-api')
  
      def test_redirect_incomplete_url(self):
-diff --git a/glance/tests/unit/base.py b/glance/tests/unit/base.py
-index 4a19730..16ec103 100644
---- a/glance/tests/unit/base.py
-+++ b/glance/tests/unit/base.py
-@@ -76,7 +76,7 @@ class IsolatedUnitTest(StoreClearingUnitTest):
+Index: git/glance/tests/unit/base.py
+===================================================================
+--- git.orig/glance/tests/unit/base.py
++++ git/glance/tests/unit/base.py
+@@ -80,7 +80,7 @@
                                                   registry=self.registry)
  
      def _copy_data_file(self, file_name, dst_dir):
@@ -49,11 +49,11 @@ index 4a19730..16ec103 100644
          shutil.copy(src_file_name, dst_dir)
          dst_file_name = os.path.join(dst_dir, file_name)
          return dst_file_name
-diff --git a/glance/tests/unit/common/test_config.py b/glance/tests/unit/common/test_config.py
-index 2dfede1..422a458 100644
---- a/glance/tests/unit/common/test_config.py
-+++ b/glance/tests/unit/common/test_config.py
-@@ -64,8 +64,7 @@ class TestPasteApp(test_utils.BaseTestCase):
+Index: git/glance/tests/unit/common/test_config.py
+===================================================================
+--- git.orig/glance/tests/unit/common/test_config.py
++++ git/glance/tests/unit/common/test_config.py
+@@ -63,8 +63,7 @@
  
          paste_to = temp_file.replace('.conf', '-paste.ini')
          if not paste_config_file and make_paste_file:
@@ -63,22 +63,22 @@ index 2dfede1..422a458 100644
              _appendto(paste_from, paste_to, paste_append)
  
          app = config.load_paste_app('glance-registry')
-@@ -90,8 +89,7 @@ class TestPasteApp(test_utils.BaseTestCase):
+@@ -89,8 +88,7 @@
                                       paste_append=pipeline)
  
      def test_load_paste_app_with_paste_config_file(self):
 -        paste_config_file = os.path.join(os.getcwd(),
 -                                         'etc/glance-registry-paste.ini')
 +        paste_config_file = '/etc/glance/glance-registry-paste.ini'
-         expected_middleware = context.UnauthenticatedContextMiddleware
+         expected_middleware = osprofiler.web.WsgiMiddleware
          self._do_test_load_paste_app(expected_middleware,
                                       paste_config_file=paste_config_file)
-diff --git a/glance/tests/utils.py b/glance/tests/utils.py
-index 760824c..db598ba 100644
---- a/glance/tests/utils.py
-+++ b/glance/tests/utils.py
-@@ -67,7 +67,7 @@ class BaseTestCase(testtools.TestCase):
-         self.config(property_protection_file=self.property_file)
+Index: git/glance/tests/utils.py
+===================================================================
+--- git.orig/glance/tests/utils.py
++++ git/glance/tests/utils.py
+@@ -76,7 +76,7 @@
+             property_utils.CONFIG.remove_section(section)
  
      def _copy_data_file(self, file_name, dst_dir):
 -        src_file_name = os.path.join('glance/tests/etc', file_name)

@@ -20,8 +20,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
     file://cinder-builtin-tests-config-location.patch \
 	"
 
-SRCREV="ddcad011db507cde66b6b1e655d5ffc91ab8880f"
-PV="2014.2.b2+git${SRCPV}"
+SRCREV="58eda5d1f41082a7e1ffef66239be30b8ac1321a"
+PV="2014.2.b3+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d identity default_configs hosts

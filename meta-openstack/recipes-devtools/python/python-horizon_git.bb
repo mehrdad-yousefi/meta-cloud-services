@@ -41,6 +41,8 @@ RDEPENDS_${PN} += "python-django \
     python-xstatic-qunit \
     python-xstatic-rickshaw \
     python-xstatic-spin \
+    python-xstatic-bootstrap-datepicker \
+    python-xstatic-font-awesome \
     "
 
 PR = "r2"
@@ -54,8 +56,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
     file://horizon-use-full-package-path-to-test-directories.patch \
     "
 
-SRCREV="8f808a69f6f64c7d92571989b72da1d1801a1c86"
-PV="2014.2.b2+git${SRCPV}"
+SRCREV="bd998fb6094fb16d084c90de1eed619aca4c31ef"
+PV="2014.2.b3+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d python-dir default_configs

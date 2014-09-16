@@ -8,13 +8,14 @@ PR = "r0"
 SRCNAME = "glance"
 
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
-           file://0001-glance-store-only-load-known-stores-not-all-stores.patch \
            file://glance.init \
            file://glance-change-builtin-tests-config-location.patch \
            "
 
-SRCREV="e66ecfee4eacfe25a18cd05d3f88e25c91fa112c"
-PV="2014.2.b2+git${SRCPV}"
+# removed. juno uses store library: file://0001-glance-store-only-load-known-stores-not-all-stores.patch
+
+SRCREV="7374d9347eeb6b354484984f06fd7e58fed50046"
+PV="2014.2.b3+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -177,6 +178,7 @@ RDEPENDS_${PN} += "python-greenlet \
 	python-oslo.i18n \
 	python-osprofiler \
 	python-retrying \
+        python-glancestore \
 	"
 
 RDEPENDS_${SRCNAME} = "${PN} \

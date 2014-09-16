@@ -11,8 +11,8 @@ SRC_URI = "\
 	git://git.openstack.org/openstack/keystonemiddleware;branch=master \
 	"
 
-PV="1.0.0+git${SRCPV}"
-SRCREV="ce965ead938015cb7410f21141f5d76df4b3a0ce"
+PV="1.1.1+git${SRCPV}"
+SRCREV="a4c13473aa09edee3c16733a4ff16f2cc206ad66"
 S = "${WORKDIR}/git"
 
 inherit setuptools
