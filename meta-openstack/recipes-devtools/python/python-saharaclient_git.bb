@@ -17,8 +17,8 @@ SRCNAME = "saharaclient"
 
 SRC_URI = "git://github.com/openstack/python-saharaclient.git;branch=master"
 
-PV="0.7.0+git${SRCPV}"
-SRCREV="6531965b9719e4ea3a9986afa16daaf12fbba516"
+PV="0.7.2+git${SRCPV}"
+SRCREV="5be2179d8c5c1e806537849559bea52a1145028f"
 S = "${WORKDIR}/git"
 
 inherit setuptools

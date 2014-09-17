@@ -9,8 +9,8 @@ SRCNAME = "swiftclient"
 
 SRC_URI = "git://github.com/openstack/python-swiftclient.git;branch=master"
 
-PV="2.1.0+git${SRCPV}"
-SRCREV="4cc2201e21a68c61adc3ce572b979553b786fc0f"
+PV="2.2.0+git${SRCPV}"
+SRCREV="d13441d26244cc0947b85287d3fba298cb532c9a"
 S = "${WORKDIR}/git"
 
 inherit setuptools python-dir

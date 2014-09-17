@@ -13,8 +13,8 @@ SRC_URI = "\
 	file://keystoneclient-fix-test-path-to-example-certificates.patch \
 	"
 
-PV="0.9.0+git${SRCPV}"
-SRCREV="679689f70748b1b28a14ecd29161f98881d80662"
+PV="0.10.1+git${SRCPV}"
+SRCREV="3305c7be4b726de4dcc889006d0be30eb46d3ad9"
 S = "${WORKDIR}/git"
 
 inherit setuptools

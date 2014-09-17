@@ -24,8 +24,8 @@ SRC_URI = "git://github.com/openstack/python-neutronclient.git;branch=master \
            file://neutronclient-use-csv-flag-instead-of-json.patch \
           "
 
-PV="2.3.5+git${SRCPV}"
-SRCREV="bfec80a776a53b554a8f2d023d2974539edef3ce"
+PV="2.3.7+git${SRCPV}"
+SRCREV="1452193f935f5be0bb2f5f01b54bd4947d27331b"
 S = "${WORKDIR}/git"
 
 inherit setuptools
