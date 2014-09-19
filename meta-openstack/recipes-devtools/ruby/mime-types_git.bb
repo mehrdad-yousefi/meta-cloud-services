@@ -19,7 +19,7 @@ SRCREV = "6be836f59a041893cfc1c25668b3aa3552a7e334"
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
-    git://github.com/halostatue/mime-types.git \
+    git://github.com/halostatue/mime-types.git;branch=v1-bug-fixes \
     "
 
 inherit ruby

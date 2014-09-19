@@ -20,7 +20,7 @@ SRCREV = "b306186701201bfc78b7bcc8908ee3524434cc93"
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
-    git://github.com/opscode/ohai.git \
+    git://github.com/opscode/ohai.git;branch=7-stable \
     "
 
 inherit ruby

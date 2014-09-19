@@ -18,7 +18,7 @@ SRCREV = "047788c4225b25bb0462e06715616964e4f0da15"
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
-    git://github.com/pry/pry.git \
+    git://github.com/pry/pry.git;branch=0-9-12-stable \
     file://rdoc-fixup-opt.banner-heredoc.patch \
     "
 

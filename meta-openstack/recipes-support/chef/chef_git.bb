@@ -21,7 +21,7 @@ SRCREV = "410af3e88cf9f0793c56363563be8fa173244d3a"
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
-    git://github.com/opscode/chef.git \
+    git://github.com/opscode/chef.git;branch=11-stable \
     "
 
 inherit ruby
