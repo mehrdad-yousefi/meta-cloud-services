@@ -14,6 +14,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://keystone-search-in-etc-directory-for-config-files.patch \
            file://keystone-remove-git-commands-in-tests.patch \
            file://convert_keystone_backend.py \
+           file://wsgi-keystone.conf \
            "
 
 SRCREV="73ad4036d62b3aa7cf50e11ddf7bee8278bbe4d0"
@@ -51,9 +52,9 @@ SERVICECREATE_PARAM_${SRCNAME}-setup = "name type description region publicurl a
 python () {
     flags = {'type':'identity',\
              'description':'OpenStack Identity',\
-             'publicurl':"'http://${KEYSTONE_HOST}:5000/v2.0'",\
-             'adminurl':"'http://${KEYSTONE_HOST}:35357/v2.0'",\
-             'internalurl':"'http://${KEYSTONE_HOST}:5000/v2.0'"}
+             'publicurl':"'http://${KEYSTONE_HOST}:8081/keystone/main/v2.0'",\
+             'adminurl':"'http://${KEYSTONE_HOST}:8081/keystone/admin/v2.0'",\
+             'internalurl':"'http://${KEYSTONE_HOST}:8081/keystone/main/v2.0'"}
     d.setVarFlags("SERVICECREATE_PARAM_%s-setup" % d.getVar('SRCNAME',True), flags)
 }
 
@@ -62,19 +63,38 @@ do_install_append() {
     KEYSTONE_CONF_DIR=${D}${sysconfdir}/keystone
     KEYSTONE_PACKAGE_DIR=${D}${PYTHON_SITEPACKAGES_DIR}/keystone
 
-    install -m 750 -d ${KEYSTONE_CONF_DIR}
+    APACHE_CONF_DIR=${D}${sysconfdir}/apache2/conf.d/
+    KEYSTONE_PY_DIR=${D}${datadir}/openstack-dashboard/openstack_dashboard/api/
+    KEYSTONE_CGI_DIR=${D}${localstatedir}/www/cgi-bin/keystone/
+
+    # Apache needs to read the configs.
+    install -m 755 -d ${KEYSTONE_CONF_DIR}
+    install -m 755 -d ${APACHE_CONF_DIR}
 
     install -d ${D}${localstatedir}/log/${SRCNAME}
+    install -g users -m 755 -d ${KEYSTONE_CGI_DIR}
+    install -g users -m 755 -d ${KEYSTONE_PY_DIR}
 
-    install -m 600 ${WORKDIR}/keystone.conf ${KEYSTONE_CONF_DIR}/
+    # Apache needs to read the keystone.conf
+    install -m 644 ${WORKDIR}/keystone.conf ${KEYSTONE_CONF_DIR}/
+    # Apache needs to read the wsgi-keystone.conf
+    install -m 644 ${WORKDIR}/wsgi-keystone.conf ${APACHE_CONF_DIR}
     install -m 755 ${WORKDIR}/identity.sh ${KEYSTONE_CONF_DIR}/
-    install -m 600 ${S}/etc/logging.conf.sample \
+    install -m 600 ${S}${sysconfdir}/logging.conf.sample \
         ${KEYSTONE_CONF_DIR}/logging.conf
-    install -m 600 ${S}/etc/policy.json ${KEYSTONE_CONF_DIR}/policy.json
-    install -m 600 ${S}/etc/keystone.conf.sample \
+    install -m 600 ${S}${sysconfdir}/keystone.conf.sample \
         ${KEYSTONE_CONF_DIR}/keystone.conf.sample
-    install -m 600 ${S}/etc/keystone-paste.ini \
+    # Apache user needs to read these files.
+    install -m 644 ${S}${sysconfdir}/policy.json \
+        ${KEYSTONE_CONF_DIR}/policy.json
+    install -m 644 ${S}${sysconfdir}/keystone-paste.ini \
         ${KEYSTONE_CONF_DIR}/keystone-paste.ini
+    install -g users -m 644 ${S}/httpd/keystone.py \
+        ${KEYSTONE_PY_DIR}/keystone-httpd.py
+    install -g users -m 644 ${S}/httpd/keystone.py \
+        ${KEYSTONE_CGI_DIR}/admin
+    install -g users -m 644 ${S}/httpd/keystone.py \
+        ${KEYSTONE_CGI_DIR}/main
 
     cp -r ${S}/examples ${KEYSTONE_PACKAGE_DIR}
 
@@ -90,6 +110,14 @@ do_install_append() {
         -i ${KEYSTONE_CONF_DIR}/identity.sh
 
     sed -e "s:%TOKEN_FORMAT%:${TOKEN_FORMAT}:g" \
+        -i ${KEYSTONE_CONF_DIR}/keystone.conf
+
+    sed "/# admin_endpoint = .*/a \
+        public_endpoint = http://${CONTROLLER_IP}:8081/keystone/main/ " \
+        -i ${KEYSTONE_CONF_DIR}/keystone.conf
+
+    sed "/# admin_endpoint = .*/a \
+        admin_endpoint = http://${CONTROLLER_IP}:8081/keystone/admin/ " \
         -i ${KEYSTONE_CONF_DIR}/keystone.conf
 
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)};
@@ -121,7 +149,7 @@ driver = keystone.identity.backends.hybrid_identity.Identity \
 \
 [assignment]\
 driver = keystone.assignment.backends.hybrid_assignment.Assignment\
-' ${D}/etc/keystone/keystone.conf
+' ${D}${sysconfdir}/keystone/keystone.conf
 
         sed -i -e '/^\[ldap\]/a \
 url = ldap://localhost \
@@ -152,7 +180,7 @@ role_member_attribute = member \
 role_id_attribute = cn \
 role_name_attribute = ou \
 role_tree_dn = ou=Roles,${LDAP_DN} \
-' ${D}/etc/keystone/keystone.conf
+' ${D}${sysconfdir}/keystone/keystone.conf
 
         install -m 0755 ${WORKDIR}/convert_keystone_backend.py \
             ${D}${sysconfdir}/keystone/convert_keystone_backend.py
@@ -177,10 +205,9 @@ pkg_postinst_${SRCNAME}-setup () {
     if [ -z `cat $PIDFILE 2>/dev/null` ]; then
         sudo -u postgres createdb keystone
         keystone-manage db_sync
-        keystone-manage pki_setup --keystone-user=root --keystone-group=root
+        keystone-manage pki_setup --keystone-user=root --keystone-group=daemon
 
-        if ${@base_contains('DISTRO_FEATURES', 'OpenLDAP', 'true', 'false', d)};
-        then
+        if ${@base_contains('DISTRO_FEATURES', 'OpenLDAP', 'true', 'false', d)}; then
             /etc/init.d/openldap start
         fi
         /etc/init.d/keystone start
@@ -203,7 +230,8 @@ ALLOW_EMPTY_${SRCNAME}-setup = "1"
 
 ALLOW_EMPTY_${SRCNAME}-cronjobs = "1"
 
-FILES_${PN} = "${libdir}/*"
+FILES_${PN} = "${libdir}/* \
+    "
 
 FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
 
@@ -211,6 +239,8 @@ FILES_${SRCNAME} = "${bindir}/* \
     ${sysconfdir}/${SRCNAME}/* \
     ${sysconfdir}/init.d/* \
     ${localstatedir}/* \
+    ${datadir}/openstack-dashboard/openstack_dashboard/api/keystone-httpd.py \
+    ${sysconfdir}/apache2/conf.d/wsgi-keystone.conf \
     "
 
 DEPENDS += " \
@@ -248,7 +278,14 @@ PACKAGECONFIG[OpenLDAP] = ",,,python-ldap python-keystone-hybrid-backend"
 # TODO:
 #    if DISTRO_FEATURE contains "tempest" then add *-tests to the main RDEPENDS
 
-RDEPENDS_${SRCNAME} = "${PN} postgresql postgresql-client python-psycopg2"
+RDEPENDS_${SRCNAME} = " \
+    ${PN} \
+    postgresql \
+    postgresql-client \
+    python-psycopg2 \
+    apache2 \
+    "
+
 RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}"
 RDEPENDS_${SRCNAME}-cronjobs = "cronie ${SRCNAME}"
 
