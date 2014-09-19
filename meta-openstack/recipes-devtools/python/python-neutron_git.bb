@@ -113,7 +113,7 @@ do_install_append() {
         install -m 0755 ${WORKDIR}/neutron-$AGENT.init.sh ${D}${sysconfdir}/init.d/neutron-$AGENT-agent
         install -m 600 ${WORKDIR}/${AGENT}_agent.ini ${NEUTRON_CONF_DIR}/
     fi
-    
+
     AGENT=metadata
     ARGS="--config-file=${sysconfdir}/${SRCNAME}/neutron.conf --config-file=${sysconfdir}/${SRCNAME}/metadata_agent.ini"
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
@@ -129,6 +129,11 @@ do_install_append() {
         -i ${NEUTRON_CONF_DIR}/metadata_agent.ini
     sed -e "s:%METADATA_SHARED_SECRET%:${METADATA_SHARED_SECRET}:g" \
         -i ${NEUTRON_CONF_DIR}/metadata_agent.ini
+
+    sed -e "s:^auth_host.*:#auth_host:g" -i ${NEUTRON_CONF_DIR}/neutron.conf
+    sed -e "s:^auth_port.*:#auth_port:g" -i ${NEUTRON_CONF_DIR}/neutron.conf
+    sed -e "s:^auth_protocol.*:#auth_protocol:g" -i ${NEUTRON_CONF_DIR}/neutron.conf
+    sed -i '/\[keystone_authtoken\]/aidentity_uri=http://127.0.0.1:8081/keystone/admin/' ${NEUTRON_CONF_DIR}/neutron.conf
 
     cp run_tests.sh ${NEUTRON_CONF_DIR}
 

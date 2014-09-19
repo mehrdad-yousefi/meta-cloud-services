@@ -68,6 +68,7 @@ do_install_append() {
             -i ${WORKDIR}/glance-$file.conf
         sed -e "s!^#connection =.*!connection = postgresql://${DB_USER}:${DB_PASSWORD}@localhost/glance!g" \
             -i ${WORKDIR}/glance-$file.conf
+        sed -i '/\[keystone_authtoken\]/aidentity_uri=http://127.0.0.1:8081/keystone/admin' ${WORKDIR}/glance-$file.conf
     done
     sed -e "s:^filesystem_store_datadir =.*:filesystem_store_datadir = ${sysconfdir}/${SRCNAME}/images/:g" \
         -i ${WORKDIR}/glance-api.conf
@@ -77,7 +78,7 @@ do_install_append() {
         -i ${WORKDIR}/glance-api.conf         
 
     sed 's:^default_store =.*:default_store = ${GLANCE_DEFAULT_STORE}:g' -i ${WORKDIR}/glance-api.conf
-    sed 's:^swift_store_auth_address =.*:swift_store_auth_address = http\://127.0.0.1\:5000/v2.0/:g' -i ${WORKDIR}/glance-api.conf
+    sed 's:^swift_store_auth_address =.*:swift_store_auth_address = http\://127.0.0.1\:8081/keystone/main/:g' -i ${WORKDIR}/glance-api.conf
     sed 's:^swift_store_user =.*:swift_store_user = ${SERVICE_TENANT_NAME}\:${SRCNAME}:g' -i ${WORKDIR}/glance-api.conf
     sed 's:^swift_store_key =.*:swift_store_key = ${SERVICE_PASSWORD}:g' -i ${WORKDIR}/glance-api.conf
     sed 's:^swift_store_create_container_on_put =.*:swift_store_create_container_on_put = True:g' -i ${WORKDIR}/glance-api.conf
