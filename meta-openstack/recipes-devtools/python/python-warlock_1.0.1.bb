@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://README.md;md5=97b002bcda83d22e7d3fd1427688a6a6"
 
 DEPENDS += "python-jsonschema python-jsonpatch"
 
-PR = "0"
+PR = "r0"
 SRCNAME = "warlock"
 
 SRC_URI = "http://pypi.python.org/packages/source/w/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"

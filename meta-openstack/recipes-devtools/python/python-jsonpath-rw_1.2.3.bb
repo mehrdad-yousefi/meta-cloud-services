@@ -4,7 +4,7 @@ SECTION = "devel/python"
 LICENSE = "BSD+"
 LIC_FILES_CHKSUM = "file://README.rst;md5=e3c17535d150260c7235db4e85145fa1"
 
-PR = "0"
+PR = "r0"
 SRCNAME = "jsonpath-rw"
 
 SRC_URI = "http://pypi.python.org/packages/source/j/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
