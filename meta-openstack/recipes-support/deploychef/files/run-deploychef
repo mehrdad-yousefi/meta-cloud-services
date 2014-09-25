@@ -26,8 +26,8 @@
 # the attributes variables change at run-time.
 #
 #Shutdown all registered services
-. service-shutdown
+. ./service-shutdown
 #Re-generate configuration files from template files
-. run-openstackchef
+. ./run-openstackchef
 #Run post-install script and then start services
-. run-postinsts
+. ./run-postinsts

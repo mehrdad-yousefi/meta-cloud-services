@@ -27,7 +27,21 @@
 #
 source /opt/deploychef/deploychef-inc
 #Run postinsts scripts
-execute_all_postinsts
+#execute_all_postinsts
+#The registration of tenants/user/services has moved from the postinstall
+#scriptis to a single setup file; /etc/keystone/service-user-setup, which 
+#handles the registration through /etc/keystone/identity.sh script.  
+#Therefore, execute /etc/init.d/run-postinsts which in-turn runs this script.
+if [ -f /etc/keystone/service-user-setup ]; then
+    #Remove stale tenants/users/services
+    rm -f /etc/keystone/service-user-setup
+fi
+if [ -e /etc/init.d/run-postinsts  ]; then
+    echo "Running postinstall scripts" >> $LOG_FILE
+    sh -c /etc/init.d/run-postinsts
+else
+    echo "EEROR: Tenants/users/services not registered with Keystone" >> $LOG_FILE
+fi
 #Start all the modules specified in startup-list
 start_stop_services 'startup-list'
 #Restart cloud service cloud-init
