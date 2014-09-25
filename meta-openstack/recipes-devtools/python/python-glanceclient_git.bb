@@ -11,7 +11,7 @@ DEPENDS += " \
 
 SRCREV = "69361a146ecd0cd775579e5dcf34692e9c6328bc"
 PV = "0.13.1+git${SRCPV}"
-PR = "0"
+PR = "r0"
 
 SRC_URI = "\
 	git://github.com/openstack/${BPN}.git;protocol=https \

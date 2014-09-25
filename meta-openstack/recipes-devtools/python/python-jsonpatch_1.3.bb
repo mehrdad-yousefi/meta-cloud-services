@@ -4,7 +4,7 @@ SECTION = "devel/python"
 LICENSE = "BSD+"
 LIC_FILES_CHKSUM = "file://jsonpatch.py;beginline=3;endline=30;md5=5cd7d1fbd6b236ed142e4285624f58fe"
 
-PR = "0"
+PR = "r0"
 SRCNAME = "jsonpatch"
 
 SRC_URI = "http://pypi.python.org/packages/source/j/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"

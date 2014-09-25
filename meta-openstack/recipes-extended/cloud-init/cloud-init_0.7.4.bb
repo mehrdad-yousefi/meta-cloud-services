@@ -4,7 +4,7 @@ SECTION = "devel/python"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
 
-PR = "0"
+PR = "r0"
 
 SRC_URI = "https://launchpad.net/cloud-init/trunk/${PV}/+download/${BPN}-${PV}.tar.gz \
            file://cloud-init-source-local-lsb-functions.patch \
