@@ -97,6 +97,12 @@ do_install_append() {
         ${KEYSTONE_CGI_DIR}/main
 
     cp -r ${S}/examples ${KEYSTONE_PACKAGE_DIR}
+
+    if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)};
+    then
+        install -d ${D}${sysconfdir}/init.d
+        install -m 0755 ${WORKDIR}/keystone ${D}${sysconfdir}/init.d/keystone
+    fi
     
     if [ -z "${OPENSTACKCHEF_ENABLED}" ]; then
         sed -e "s:%SERVICE_TOKEN%:${SERVICE_TOKEN}:g" \
@@ -128,12 +134,6 @@ do_install_append() {
     sed "/# admin_endpoint = .*/a \
         admin_endpoint = http://%CONTROLLER_IP%:8081/keystone/admin/ " \
         -i ${KEYSTONE_CONF_DIR}/keystone.conf
-
-    if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)};
-    then
-        install -d ${D}${sysconfdir}/init.d
-        install -m 0755 ${WORKDIR}/keystone ${D}${sysconfdir}/init.d/keystone
-    fi
 
     install -d ${KEYSTONE_PACKAGE_DIR}/tests/tmp
 
