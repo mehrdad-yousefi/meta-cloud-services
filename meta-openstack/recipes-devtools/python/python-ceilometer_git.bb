@@ -207,6 +207,8 @@ RDEPENDS_${PN} += " \
 	python-swiftclient \
 	python-ceilometerclient \
 	python-oslo.config \
+	python-oslo.serialization \
+	python-tooz \        
 	python-msgpack \
 	python-pecan \
 	python-amqp \
