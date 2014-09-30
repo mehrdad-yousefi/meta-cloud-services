@@ -26,6 +26,7 @@ RDEPENDS_${PN} = " \
     fuse \
     ${@base_contains('CINDER_EXTRA_FEATURES', 'glusterfs', 'glusterfs glusterfs-fuse', '', d)} \
     ${@base_contains('CINDER_EXTRA_FEATURES', 'ceph', 'packagegroup-ceph xfsprogs', '', d)} \
+    ${@base_contains('OPENSTACK_EXTRA_FEATURES', 'monitoring', 'packagegroup-monitoring-agent', '', d)} \
     "
 
 RRECOMMENDS_${PN} = " \
