@@ -22,13 +22,14 @@ PR = "r0"
 
 SRC_URI = "git://github.com/openstack/python-neutronclient.git;branch=master \
            file://neutronclient-use-csv-flag-instead-of-json.patch \
+           file://neutron-api-check.sh \
           "
 
 PV="2.3.7+git${SRCPV}"
 SRCREV="1452193f935f5be0bb2f5f01b54bd4947d27331b"
 S = "${WORKDIR}/git"
 
-inherit setuptools
+inherit setuptools monitor
 
 PACKAGECONFIG ?= "bash-completion"
 PACKAGECONFIG[bash-completion] = ",,bash-completion,bash-completion ${BPN}-bash-completion"
@@ -40,3 +41,7 @@ do_install_append() {
 
 PACKAGES =+ "${BPN}-bash-completion"
 FILES_${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"
+
+MONITOR_CHECKS_${PN} += "\
+	neutron-api-check.sh \
+"

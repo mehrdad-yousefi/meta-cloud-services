@@ -30,7 +30,7 @@ PV="2014.2.b3+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit update-rc.d setuptools identity hosts useradd default_configs openstackchef
+inherit update-rc.d setuptools identity hosts useradd default_configs openstackchef monitor
 
 LIBVIRT_IMAGES_TYPE ?= "default"
 
@@ -368,3 +368,6 @@ INITSCRIPT_PARAMS_${SRCNAME}-novncproxy = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 
 INITSCRIPT_NAME_${SRCNAME}-spicehtml5proxy = "nova-spicehtml5proxy"
 INITSCRIPT_PARAMS_${SRCNAME}-spicehtml5proxy = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+
+MONITOR_SERVICE_PACKAGES = "${SRCNAME}"
+MONITOR_SERVICE_${SRCNAME} = "nova-api nova-cert nova-conductor nova-consoleauth nova-scheduler"

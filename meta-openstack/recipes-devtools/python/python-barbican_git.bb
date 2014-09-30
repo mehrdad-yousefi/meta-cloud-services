@@ -19,7 +19,7 @@ SRCREV="ada968e162d9795613bfb346a1018f63ef7025cc"
 PV="2014.2.b3+git${SRCPV}"
 S = "${WORKDIR}/git"
 
-inherit update-rc.d setuptools identity hosts useradd default_configs openstackchef
+inherit update-rc.d setuptools identity hosts useradd default_configs openstackchef monitor
 
 SERVICECREATE_PACKAGES = "${SRCNAME}-setup"
 KEYSTONE_HOST="${CONTROLLER_IP}"
@@ -136,3 +136,6 @@ RDEPENDS_${PN} += " \
 INITSCRIPT_PACKAGES = "${SRCNAME}"
 INITSCRIPT_NAME_${SRCNAME} = "barbican-api"
 INITSCRIPT_PARAMS_${SRCNAME} = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+
+MONITOR_SERVICE_PACKAGES = "${SRCNAME}"
+MONITOR_SERVICE_${SRCNAME} = "barbican"

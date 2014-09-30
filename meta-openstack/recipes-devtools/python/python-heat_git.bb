@@ -127,7 +127,7 @@ pkg_postinst_${SRCNAME}-setup () {
     heat-manage db_sync
 }
 
-inherit setuptools identity hosts update-rc.d default_configs openstackchef
+inherit setuptools identity hosts update-rc.d default_configs openstackchef monitor
 
 PACKAGES += "${SRCNAME}-tests ${SRCNAME}-templates ${SRCNAME}-common ${SRCNAME}-api ${SRCNAME}-api-cfn ${SRCNAME}-engine"
 PACKAGES += "${SRCNAME}-setup"
@@ -224,3 +224,5 @@ INITSCRIPT_PARAMS_${SRCNAME}-api-cfn = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-engine = "${SRCNAME}-engine"
 INITSCRIPT_PARAMS_${SRCNAME}-engine = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 
+MONITOR_SERVICE_PACKAGES = "${SRCNAME}"
+MONITOR_SERVICE_${SRCNAME} = "heat"

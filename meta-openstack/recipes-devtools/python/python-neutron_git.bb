@@ -25,7 +25,7 @@ PV="2014.2.b3+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit setuptools update-rc.d identity hosts default_configs openstackchef
+inherit setuptools update-rc.d identity hosts default_configs openstackchef monitor
 
 SERVICECREATE_PACKAGES = "${SRCNAME}-setup"
 KEYSTONE_HOST="${CONTROLLER_IP}"
@@ -313,3 +313,6 @@ INITSCRIPT_NAME_${SRCNAME}-l3-agent = "neutron-l3-agent"
 INITSCRIPT_PARAMS_${SRCNAME}-l3-agent = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-metadata-agent = "neutron-metadata-agent"
 INITSCRIPT_PARAMS_${SRCNAME}-metadata-agent = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+
+MONITOR_SERVICE_PACKAGES = "${SRCNAME}"
+MONITOR_SERVICE_${SRCNAME} = "neutron"

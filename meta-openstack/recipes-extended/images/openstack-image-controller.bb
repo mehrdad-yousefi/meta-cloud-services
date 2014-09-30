@@ -21,6 +21,7 @@ POST_KEYSTONE_SETUP_COMMAND = "/etc/keystone/hybrid-backend-setup"
 inherit core-image
 inherit openstack-base
 inherit identity
+inherit monitor
 
 # Ensure extra space for guest images, and rabbit MQ has a hard coded
 # check for 2G of free space, so we use 5G as a starting point.

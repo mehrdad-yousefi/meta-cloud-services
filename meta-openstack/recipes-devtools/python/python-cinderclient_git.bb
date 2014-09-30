@@ -11,13 +11,14 @@ SRCNAME = "python-cinderclient"
 SRC_URI = "\
 	git://github.com/openstack/python-cinderclient.git;branch=master \
 	file://fix_cinderclient_memory_leak.patch \
+	file://cinder-api-check.sh \
 	"
 
 PV="1.1.0+git${SRCPV}"
 SRCREV="4c8464114f5539706cffc6888ce007d0d3ceba16"
 S = "${WORKDIR}/git"
 
-inherit setuptools
+inherit setuptools monitor
 
 DEPENDS += " \
         python-pip \
@@ -41,3 +42,7 @@ do_install_append() {
 
 PACKAGES =+ "${BPN}-bash-completion"
 FILES_${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"
+
+MONITOR_CHECKS_${PN} += "\
+	cinder-api-check.sh \
+"

@@ -16,11 +16,12 @@ PR = "r0"
 SRC_URI = "\
 	git://github.com/openstack/${BPN}.git;protocol=https \
 	file://fix_glanceclient_memory_leak.patch \
+	file://glance-api-check.sh \
 	"
 
 S = "${WORKDIR}/git"
 
-inherit setuptools
+inherit setuptools monitor
 
 FILES_${PN} += "${datadir}/${SRCNAME}"
 
@@ -32,3 +33,6 @@ RDEPENDS_${PN} = "gmp \
    python-pbr \
    "
 
+MONITOR_CHECKS_${PN} += "\
+	glance-api-check.sh \
+"

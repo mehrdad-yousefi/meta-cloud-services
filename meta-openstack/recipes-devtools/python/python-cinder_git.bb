@@ -24,7 +24,7 @@ SRCREV="58eda5d1f41082a7e1ffef66239be30b8ac1321a"
 PV="2014.2.b3+git${SRCPV}"
 S = "${WORKDIR}/git"
 
-inherit setuptools update-rc.d identity default_configs hosts openstackchef
+inherit setuptools update-rc.d identity default_configs hosts openstackchef monitor
 
 CINDER_BACKUP_BACKEND_DRIVER ?= "cinder.backup.drivers.swift"
 
@@ -235,3 +235,6 @@ INITSCRIPT_NAME_${SRCNAME}-scheduler = "cinder-scheduler"
 INITSCRIPT_PARAMS_${SRCNAME}-scheduler = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-backup = "cinder-backup"
 INITSCRIPT_PARAMS_${SRCNAME}-backup = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+
+MONITOR_SERVICE_PACKAGES = "${SRCNAME}"
+MONITOR_SERVICE_${SRCNAME} = "cinder"

@@ -127,7 +127,7 @@ pkg_postinst_${SRCNAME}-setup () {
     ceilometer-dbsync
 }
 
-inherit setuptools identity hosts update-rc.d default_configs openstackchef
+inherit setuptools identity hosts update-rc.d default_configs openstackchef monitor
 
 PACKAGES += " ${SRCNAME}-tests"
 PACKAGES += "${SRCNAME}-setup ${SRCNAME}-common ${SRCNAME}-api"
@@ -257,3 +257,6 @@ INITSCRIPT_NAME_${SRCNAME}-alarm-evaluator = "${SRCNAME}-alarm-evaluator"
 INITSCRIPT_PARAMS_${SRCNAME}-alarm-evaluator = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-agent-notification = "${SRCNAME}-agent-notification"
 INITSCRIPT_PARAMS_${SRCNAME}-agent-notification = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+
+MONITOR_SERVICE_PACKAGES = "${SRCNAME}"
+MONITOR_SERVICE_${SRCNAME} = "ceilometer"

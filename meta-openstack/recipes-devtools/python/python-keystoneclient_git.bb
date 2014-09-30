@@ -11,13 +11,14 @@ SRC_URI = "\
 	git://github.com/openstack/python-keystoneclient.git;branch=master \
 	file://fix_keystoneclient_memory_leak.patch \
 	file://keystoneclient-fix-test-path-to-example-certificates.patch \
+	file://keystone-api-check.sh \
 	"
 
 PV="0.10.1+git${SRCPV}"
 SRCREV="3305c7be4b726de4dcc889006d0be30eb46d3ad9"
 S = "${WORKDIR}/git"
 
-inherit setuptools
+inherit setuptools monitor
 
 FILES_${PN}-doc += "${datadir}/keystoneclient" 
 
@@ -54,3 +55,6 @@ RDEPENDS_${SRCNAME}-tests += " \
 	python-httpretty \
 	"
 
+MONITOR_CHECKS_${PN} += "\
+	keystone-api-check.sh \
+"

@@ -22,7 +22,7 @@ PV="2014.2.b3+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit setuptools update-rc.d identity hosts default_configs openstackchef
+inherit setuptools update-rc.d identity hosts default_configs openstackchef monitor
 
 SERVICE_TOKEN = "password"
 TOKEN_FORMAT ?= "PKI"
@@ -301,3 +301,6 @@ RDEPENDS_${SRCNAME}-cronjobs = "cronie ${SRCNAME}"
 INITSCRIPT_PACKAGES = "${SRCNAME}"
 INITSCRIPT_NAME_${SRCNAME} = "keystone"
 INITSCRIPT_PARAMS_${SRCNAME} = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+
+MONITOR_SERVICE_PACKAGES = "${SRCNAME}"
+MONITOR_SERVICE_${SRCNAME} = "keystone"

@@ -25,6 +25,7 @@ IMAGE_FEATURES += "ssh-server-openssh"
 inherit core-image
 inherit openstack-base
 inherit identity
+inherit monitor
 
 # check for 5G of free space, so we use 5G as a starting point.
 IMAGE_ROOTFS_EXTRA_SPACE_append += "+ 5000000"

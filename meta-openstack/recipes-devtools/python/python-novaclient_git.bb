@@ -10,13 +10,14 @@ SRC_URI = "\
 	git://github.com/openstack/python-novaclient.git;branch=master \
 	file://fix_novaclient_memory_leak.patch \
 	file://novaclient-specify-full-path-to-test-certificate.patch \
+	file://nova-api-check.sh \
 	"
 
 PV="2.18.1+git${SRCPV}"
 SRCREV="2a1c07e790cc95b1e847974e4c757f826507834f"
 S = "${WORKDIR}/git"
 
-inherit setuptools 
+inherit setuptools monitor
 
 DEPENDS = "python-setuptools-git"
 DEPENDS += " \
@@ -44,3 +45,7 @@ do_install_append() {
 
 PACKAGES =+ "${BPN}-bash-completion"
 FILES_${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"
+
+MONITOR_CHECKS_${PN} += "\
+	nova-api-check.sh \
+"

@@ -19,7 +19,7 @@ PV="2014.2.b3+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit setuptools update-rc.d identity default_configs hosts openstackchef
+inherit setuptools update-rc.d identity default_configs hosts openstackchef monitor
 
 GLANCE_DEFAULT_STORE ?= "file"
 GLANCE_KNOWN_STORES ?= "glance.store.rbd.Store,\
@@ -212,3 +212,6 @@ INITSCRIPT_NAME_${SRCNAME}-api = "glance-api"
 INITSCRIPT_PARAMS_${SRCNAME}-api = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-registry = "glance-registry"
 INITSCRIPT_PARAMS_${SRCNAME}-registry = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+
+MONITOR_SERVICE_PACKAGES = "${SRCNAME}"
+MONITOR_SERVICE_${SRCNAME} = "glance"
