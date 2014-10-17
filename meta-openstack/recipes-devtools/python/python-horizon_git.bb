@@ -42,6 +42,7 @@ RDEPENDS_${PN} += "python-django \
     python-xstatic-rickshaw \
     python-xstatic-spin \
     python-xstatic-bootstrap-datepicker \
+    python-xstatic-bootstrap-scss \
     python-xstatic-font-awesome \
     "
 
@@ -56,8 +57,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
     file://horizon-use-full-package-path-to-test-directories.patch \
     "
 
-SRCREV="bd998fb6094fb16d084c90de1eed619aca4c31ef"
-PV="2014.2.b3+git${SRCPV}"
+SRCREV="123840a43aaeff05becc08044b9cc33977ece2bb"
+PV="2014.2.rc1+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d python-dir default_configs openstackchef monitor
