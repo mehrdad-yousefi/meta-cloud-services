@@ -25,8 +25,8 @@ SRC_URI += "file://nova-all \
             file://nova.conf \
             file://openrc \
            "
-SRCREV="a5f09ddddfba65b8fdc6bac994750e5980b27521"
-PV="2014.2.b3+git${SRCPV}"
+SRCREV="ba0a08c11535a9cedc07e1329e8bf729af3d4b02"
+PV="2014.2.rc1+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 

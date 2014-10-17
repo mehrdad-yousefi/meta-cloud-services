@@ -14,8 +14,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
 
 # removed. juno uses store library: file://0001-glance-store-only-load-known-stores-not-all-stores.patch
 
-SRCREV="7374d9347eeb6b354484984f06fd7e58fed50046"
-PV="2014.2.b3+git${SRCPV}"
+SRCREV="675a39a74faad5f7fe4eb94e1dcf7f4359ed2285"
+PV="2014.2.rc1+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 

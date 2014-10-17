@@ -16,8 +16,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://cluster.conf \
 "
 
-SRCREV="d4da726f6f45187dc053578f11246d6b36679142"
-PV="2.1.0+git${SRCPV}"
+SRCREV="6986f7272ce6b4ada209bc84f1da19602c9e6b83"
+PV="2.2.0.rc1+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools python-dir update-rc.d hosts identity openstackchef

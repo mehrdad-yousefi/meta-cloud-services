@@ -16,8 +16,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
 #   file://ceilometer-builtin-tests-config-location.patch
 
 
-SRCREV="500388c3fe8be48be046908acd549f5e28608921"
-PV="2014.2.b3+git${SRCPV}"
+SRCREV="42c3d487aac5d383f5224ffc4d402387562895df"
+PV="2014.2.rc1+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 CEILOMETER_SECRET ?= "12121212"
@@ -104,7 +104,9 @@ do_install_append() {
         install -m 0755 ${WORKDIR}/ceilometer-agent-notification.init.sh ${D}${sysconfdir}/init.d/ceilometer-agent-notification
     fi
 
-    cp setup-test-env.sh ${CEILOMETER_CONF_DIR}
+    if [ -e "setup-test-env.sh" ]; then
+        cp setup-test-env.sh ${CEILOMETER_CONF_DIR}
+    fi 
 }
 
 CHEF_SERVICES_CONF_FILES :="\
@@ -138,6 +140,7 @@ PACKAGES += " ${SRCNAME}-reseller"
 
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
 ALLOW_EMPTY_${SRCNAME}-reseller = "1"
+ALLOW_EMPTY_${SRCNAME}-tests = "1"
 
 FILES_${PN} = "${libdir}/*"
 
