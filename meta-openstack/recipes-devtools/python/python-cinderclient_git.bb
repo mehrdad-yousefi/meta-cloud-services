@@ -14,8 +14,8 @@ SRC_URI = "\
 	file://cinder-api-check.sh \
 	"
 
-PV="1.1.0+git${SRCPV}"
-SRCREV="4c8464114f5539706cffc6888ce007d0d3ceba16"
+PV="1.1.1+git${SRCPV}"
+SRCREV="f5d090844aff09d9db597f3cc88ea2e439d9a6b7"
 S = "${WORKDIR}/git"
 
 inherit setuptools monitor

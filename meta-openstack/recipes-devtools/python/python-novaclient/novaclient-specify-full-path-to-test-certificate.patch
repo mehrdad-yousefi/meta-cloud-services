@@ -21,12 +21,12 @@ Index: git/novaclient/tests/v1_1/test_servers.py
 ===================================================================
 --- git.orig/novaclient/tests/v1_1/test_servers.py
 +++ git/novaclient/tests/v1_1/test_servers.py
-@@ -489,7 +489,7 @@
- 
+@@ -501,7 +501,7 @@
      def test_get_password(self):
          s = self.cs.servers.get(1234)
--        self.assertEqual(s.get_password('novaclient/tests/idfake.pem'),
-+        self.assertEqual(s.get_password('%PYTHON_SITEPACKAGES_DIR%/novaclient/tests/idfake.pem'),
-                          b'FooBar123')
+         self.assertEqual(b'FooBar123',
+-                         s.get_password('novaclient/tests/idfake.pem'))
++                         s.get_password('%PYTHON_SITEPACKAGES_DIR%/novaclient/tests/idfake.pem'))
          self.assert_called('GET', '/servers/1234/os-server-password')
  
+     def test_get_password_without_key(self):

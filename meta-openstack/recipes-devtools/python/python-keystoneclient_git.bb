@@ -14,8 +14,8 @@ SRC_URI = "\
 	file://keystone-api-check.sh \
 	"
 
-PV="0.10.1+git${SRCPV}"
-SRCREV="3305c7be4b726de4dcc889006d0be30eb46d3ad9"
+PV="0.11.1+git${SRCPV}"
+SRCREV="89dc951f7d5a603f0c34b7c2cb9f7d26d73d9916"
 S = "${WORKDIR}/git"
 
 inherit setuptools monitor
