@@ -4,7 +4,7 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-PR = "r1"
+PR = "r2"
 SRCNAME = "keystone"
 
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
@@ -13,6 +13,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://keystone \
            file://keystone-search-in-etc-directory-for-config-files.patch \
            file://keystone-remove-git-commands-in-tests.patch \
+           file://keystone-explicitly-import-localcontext-from-oslo.me.patch \
            file://convert_keystone_backend.py \
            file://wsgi-keystone.conf \
            "
@@ -103,6 +104,14 @@ do_install_append() {
         install -d ${D}${sysconfdir}/init.d
         install -m 0755 ${WORKDIR}/keystone ${D}${sysconfdir}/init.d/keystone
     fi
+
+    sed "/# admin_endpoint = .*/a \
+        public_endpoint = http://%CONTROLLER_IP%:8081/keystone/main/ " \
+        -i ${KEYSTONE_CONF_DIR}/keystone.conf
+
+    sed "/# admin_endpoint = .*/a \
+        admin_endpoint = http://%CONTROLLER_IP%:8081/keystone/admin/ " \
+        -i ${KEYSTONE_CONF_DIR}/keystone.conf
     
     if [ -z "${OPENSTACKCHEF_ENABLED}" ]; then
         sed -e "s:%SERVICE_TOKEN%:${SERVICE_TOKEN}:g" \
@@ -127,14 +136,6 @@ do_install_append() {
             -i ${D}${sysconfdir}/init.d/keystone
     fi    
     
-    sed "/# admin_endpoint = .*/a \
-        public_endpoint = http://%CONTROLLER_IP%:8081/keystone/main/ " \
-        -i ${KEYSTONE_CONF_DIR}/keystone.conf
-
-    sed "/# admin_endpoint = .*/a \
-        admin_endpoint = http://%CONTROLLER_IP%:8081/keystone/admin/ " \
-        -i ${KEYSTONE_CONF_DIR}/keystone.conf
-
     install -d ${KEYSTONE_PACKAGE_DIR}/tests/tmp
 
     if [ -e "${KEYSTONE_PACKAGE_DIR}/tests/test_overrides.conf" ];then
@@ -279,6 +280,7 @@ RDEPENDS_${PN} += " \
         python-dogpile.cache \
         python-pbr \
         python-oslo.utils \
+        python-oauthlib \
         "
 
 PACKAGECONFIG ?= "${@base_contains('DISTRO_FEATURES', 'OpenLDAP', 'OpenLDAP', '', d)}"
