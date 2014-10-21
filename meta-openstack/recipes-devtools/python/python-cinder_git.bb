@@ -214,8 +214,10 @@ RDEPENDS_${PN} += "lvm2 \
 	python-swiftclient \
 	python-cinderclient \
 	python-oslo.config \
+	python-oslo.rootwrap \
 	python-pbr \
 	python-taskflow \
+	python-rtslib-fb \
 	"
 
 RDEPENDS_${SRCNAME} = "${PN} \

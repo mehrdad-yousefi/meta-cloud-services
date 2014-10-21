@@ -292,6 +292,7 @@ RDEPENDS_${PN} = " libvirt \
 		   python-lxml \
 		   python-netaddr \
 		   python-oslo.config \
+		   python-oslo.rootwrap \
 		   python-paste \
 		   python-pastedeploy \
 		   python-paramiko \
