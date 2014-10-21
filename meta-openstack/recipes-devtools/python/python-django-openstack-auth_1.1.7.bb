@@ -10,8 +10,8 @@ SRCNAME = "django_openstack_auth"
 SRC_URI = "https://pypi.python.org/packages/source/d/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
 "
 
-SRC_URI[md5sum] = "01388af8675c3ddb72dbf9fe3fc1adee"
-SRC_URI[sha256sum] = "1eea7ac2cdf701fcc0afd6550f5b90ce821516699372bfe4940159c0653d6254"
+SRC_URI[md5sum] = "6afb0748dab95003b75f0d6f4f4a1100"
+SRC_URI[sha256sum] = "0884be8a97ff191799ed3f3d64b76c2f61299747af4a86d8a903766b2c175c6f"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 

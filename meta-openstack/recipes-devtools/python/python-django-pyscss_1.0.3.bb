@@ -9,8 +9,8 @@ PR = "r0"
 SRCNAME = "django-pyscss"
 SRC_URI = "http://pypi.python.org/packages/source/d/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "e6ec5c8165ff98d5ef5d660106843924"
-SRC_URI[sha256sum] = "9cfa2ac0a28df27b539ad00559dbc3a1b833057bb7f0ca302ac37b0d3a060bd5"
+SRC_URI[md5sum] = "edc449f7fbe375cdf7f6079d67fe41da"
+SRC_URI[sha256sum] = "255a097fa9c14a4a8b6b1bd1e2d775babb5814fd664d6e9dad399fca14ab9018"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 

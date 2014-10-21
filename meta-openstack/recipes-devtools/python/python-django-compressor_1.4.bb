@@ -2,7 +2,7 @@ DESCRIPTION = "Compresses linked and inline JavaScript or CSS into single cached
 HOMEPAGE = "http://django-compressor.readthedocs.org/en/latest/"
 SECTION = "devel/python"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=005b23b510258ab60c075b1623eafd14"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=9f8de96acfc347c41ce7c15f2e918ef6"
 
 PR = "r0"
 SRCNAME = "django_compressor"
@@ -10,8 +10,8 @@ SRCNAME = "django_compressor"
 SRC_URI = "https://pypi.python.org/packages/source/d/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
 "
 
-SRC_URI[md5sum] = "da8ee3c5908d648ded03dfe996499b15"
-SRC_URI[sha256sum] = "66ff1a845a6c1b16c4cf552ee3d746033979e46cd9bd5d999d4b5dae93327a52"
+SRC_URI[md5sum] = "dc050f1a85f83f927f94bcb09e8bdd0f"
+SRC_URI[sha256sum] = "b26034230efcef7d60e5267890eda656dfc49c567f27125d907eee4fe7f9a6ec"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 

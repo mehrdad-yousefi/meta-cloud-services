@@ -9,8 +9,8 @@ PR = "r0"
 SRCNAME = "oslo.messaging"
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git"
 
-PV = "1.4.0.0a4"
-SRCREV = "5be1b6a6a93e2be1fd6adef109a016f49ed98b0a"
+PV = "1.4.1"
+SRCREV = "a87aa3ef00907d5d9222a816df2298d2fc7c3683"
 S = "${WORKDIR}/git"
 
 inherit setuptools
