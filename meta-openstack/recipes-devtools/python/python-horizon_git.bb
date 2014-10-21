@@ -9,25 +9,31 @@ DEPENDS += " \
         python-pbr \
         "
 
-RDEPENDS_${PN} += "python-django \
+RDEPENDS_${PN} += " python-django \
+    python-django-appconf \
     python-django-compressor \
     python-django-nose \
     python-django-openstack-auth \
     python-netaddr \
+    python-ceilometerclient \
     python-cinderclient \
     python-glanceclient \
-    python-keystoneclient \
-    python-nose-exclude \
-    python-novaclient \
-    python-neutronclient \
     python-heatclient \
+    python-keystoneclient \
+    python-troveclient \
+    python-saharaclient \
+    python-lesscpy \
+    python-novaclient \
+    python-nose-exclude \
+    python-neutronclient \
     python-pytz \
-    python-django-appconf \
+    python-pbr \
     python-six \
     python-swiftclient \
     python-lockfile \
-    python-pbr \
-    python-troveclient \
+    python-pyyaml \
+    python-xstatic \
+    python-xstatic-jquery \
     python-xstatic-angular \
     python-xstatic-angular-cookies \
     python-xstatic-angular-mock \
@@ -44,9 +50,12 @@ RDEPENDS_${PN} += "python-django \
     python-xstatic-bootstrap-datepicker \
     python-xstatic-bootstrap-scss \
     python-xstatic-font-awesome \
+    python-xstatic-jquery-ui \
+    python-pyscss \
+    python-django-pyscss \
     "
 
-PR = "r2"
+PR = "r3"
 SRCNAME = "horizon"
 
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
@@ -146,32 +155,7 @@ RDEP_ARCH_VAR_i686 = "nodejs"
 RDEP_ARCH_VAR_x86-64 = "nodejs"
 RDEP_ARCH_VAR_ia32 = "nodejs"
 
-RDEPENDS_${PN} += " python-django \
-    python-django-appconf \
-    python-django-compressor \
-    python-django-nose \
-    python-django-openstack-auth \
-    python-netaddr \
-    python-ceilometerclient \
-    python-cinderclient \
-    python-glanceclient \
-    python-heatclient \
-    python-keystoneclient \
-    python-troveclient \
-    python-saharaclient \
-    python-lesscpy \
-    python-novaclient \
-    python-nose-exclude \
-    python-neutronclient \
-    python-pytz \
-    python-six \
-    python-swiftclient \
-    python-lockfile \
-    python-pyyaml \
-    python-xstatic \
-    python-xstatic-jquery \
-    python-pyscss \
-    python-django-pyscss \
+RDEPENDS_${PN} += " \
     ${RDEP_ARCH_VAR} \
     "
 
