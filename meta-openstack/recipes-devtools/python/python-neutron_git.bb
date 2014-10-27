@@ -4,12 +4,10 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-PR = "r0"
+PR = "r1"
 SRCNAME = "neutron"
 
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
-           file://ovs_neutron_plugin.ini \
-           file://linuxbridge_conf.ini \
            file://neutron-server.init \
            file://neutron-agent.init \
            file://l3_agent.ini \
@@ -51,36 +49,41 @@ do_install_append() {
     NEUTRON_CONF_DIR=${D}${sysconfdir}/neutron
 
     install -d ${NEUTRON_CONF_DIR}
-    install -d ${NEUTRON_CONF_DIR}/plugins/openvswitch
-    install -d ${NEUTRON_CONF_DIR}/plugins/linuxbridge
+    install -d ${NEUTRON_CONF_DIR}/plugins/ml2
 
     install -m 600 ${TEMPLATE_CONF_DIR}/neutron.conf ${NEUTRON_CONF_DIR}/
-    install -m 600 ${WORKDIR}/ovs_neutron_plugin.ini ${NEUTRON_CONF_DIR}/plugins/openvswitch/
-    install -m 600 ${WORKDIR}/linuxbridge_conf.ini ${NEUTRON_CONF_DIR}/plugins/linuxbridge/
     install -m 600 ${S}/etc/api-paste.ini ${NEUTRON_CONF_DIR}/
     install -m 600 ${S}/etc/policy.json ${NEUTRON_CONF_DIR}/
+    install -m 600 ${TEMPLATE_CONF_DIR}/neutron/plugins/ml2/* ${NEUTRON_CONF_DIR}/plugins/ml2
 
-    #sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
-    #    -i ${NEUTRON_CONF_DIR}/neutron.conf
-    #sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${NEUTRON_CONF_DIR}/neutron.conf
-    #sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
-    #    -i ${NEUTRON_CONF_DIR}/neutron.conf
-    sed -e "s:^# core_plugin.*:core_plugin = neutron.plugins.openvswitch.ovs_neutron_plugin.OVSNeutronPluginV2:g" \
-        -i ${NEUTRON_CONF_DIR}/neutron.conf
+    # Neutron.conf config changes (replace with .ini file editing)
+    sed -e "s:^# core_plugin.*:core_plugin = ml2:g" -i ${NEUTRON_CONF_DIR}/neutron.conf
+    sed -e "s:^# service_plugins =.*:service_plugins = router:g" -i ${NEUTRON_CONF_DIR}/neutron.conf
+    sed -e "s:^# allow_overlapping_ips = False:allow_overlapping_ips = True:g" -i ${NEUTRON_CONF_DIR}/neutron.conf
 
     # disable reporting of state changes to nova
-    sed -e "s:^# notify_nova_on_port_status_changes.*:notify_nova_on_port_status_changes = False:g" \
-        -i ${NEUTRON_CONF_DIR}/neutron.conf
-    sed -e "s:^# notify_nova_on_port_data_changes.*:notify_nova_on_port_data_changes = False:g" \
-        -i ${NEUTRON_CONF_DIR}/neutron.conf
+    sed -e "s:^# notify_nova_on_port_status_changes.*:notify_nova_on_port_status_changes = False:g" -i ${NEUTRON_CONF_DIR}/neutron.conf
+    sed -e "s:^# notify_nova_on_port_data_changes.*:notify_nova_on_port_data_changes = False:g" -i ${NEUTRON_CONF_DIR}/neutron.conf
 
-    sed -e "s:^# rabbit_host =.*:rabbit_host = %CONTROLLER_IP%:" -i ${NEUTRON_CONF_DIR}/neutron.conf
+    sed -e "s:^# connection = sq.*:connection = postgresql\://${ADMIN_USER}\:${ADMIN_PASSWORD}@localhost/neutron:g" -i ${NEUTRON_CONF_DIR}/neutron.conf
+    sed -e "s:^#.*rabbit_host=.*:rabbit_host = %CONTROLLER_IP%:" -i ${NEUTRON_CONF_DIR}/neutron.conf
+
+    # ml2_conf.ini changes (replace with .ini file editing)
+    sed -e "s:^# type_drivers = .*:type_drivers = gre:g" -i ${NEUTRON_CONF_DIR}/plugins/ml2/ml2_conf.ini
+    sed -e "s:^# tenant_network_types = .*:tenant_network_types = gre:g" -i ${NEUTRON_CONF_DIR}/plugins/ml2/ml2_conf.ini
+    sed -e "s:^# mechanism_drivers =.*:mechanism_drivers = openvswitch:g" -i ${NEUTRON_CONF_DIR}/plugins/ml2/ml2_conf.ini
+    sed -e "s:^# tunnel_id_ranges =.*:tunnel_id_ranges = 1\:1000:g" -i ${NEUTRON_CONF_DIR}/plugins/ml2/ml2_conf.ini
+
+    echo "[ovs]" >> ${NEUTRON_CONF_DIR}/plugins/ml2/ml2_conf.ini
+    echo "local_ip = ${MY_IP}" >> ${NEUTRON_CONF_DIR}/plugins/ml2/ml2_conf.ini
+    echo "tunnel_type = gre" >> ${NEUTRON_CONF_DIR}/plugins/ml2/ml2_conf.ini
+    echo "enable_tunneling = True" >> ${NEUTRON_CONF_DIR}/plugins/ml2/ml2_conf.ini
 
     PLUGIN=openvswitch
-    ARGS="--config-file=${sysconfdir}/${SRCNAME}/neutron.conf --config-file=${sysconfdir}/${SRCNAME}/plugins/openvswitch/ovs_neutron_plugin.ini"
+    ARGS="--config-file=${sysconfdir}/${SRCNAME}/neutron.conf --config-file=${sysconfdir}/${SRCNAME}/plugins/ml2/ml2_conf.ini"
     if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
-        sed "s:@plugin@:/etc/neutron/plugins/$PLUGIN/ovs_neutron_plugin.ini:" \
+        sed "s:@plugin@:/etc/neutron/plugins/ml2/ml2_conf.ini:" \
              < ${WORKDIR}/neutron-server.init >${WORKDIR}/neutron-server.init.sh
         install -m 0755 ${WORKDIR}/neutron-server.init.sh ${D}${sysconfdir}/init.d/neutron-server
         sed "s:@suffix@:$PLUGIN:;s:@args@:$ARGS:" < ${WORKDIR}/neutron-agent.init >${WORKDIR}/neutron-$PLUGIN.init.sh
@@ -114,16 +117,11 @@ do_install_append() {
         install -m 600 ${WORKDIR}/${AGENT}_agent.ini ${NEUTRON_CONF_DIR}/
     fi
     if [ -z "${OPENSTACKCHEF_ENABLED}" ]; then
-        for file in plugins/openvswitch/ovs_neutron_plugin.ini \
-            plugins/linuxbridge/linuxbridge_conf.ini neutron.conf metadata_agent.ini; do
-        sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
-            -i ${NEUTRON_CONF_DIR}/$file
-        sed -e "s:%SERVICE_USER%:${SRCNAME}:g" \
-            -i ${NEUTRON_CONF_DIR}/$file
-        sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
-            -i ${NEUTRON_CONF_DIR}/$file
-        sed -e "s:%METADATA_SHARED_SECRET%:${METADATA_SHARED_SECRET}:g" \
-            -i ${NEUTRON_CONF_DIR}/$file
+        for file in plugins/ml2/ml2_conf.ini neutron.conf metadata_agent.ini; do
+        sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" -i ${NEUTRON_CONF_DIR}/$file
+        sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${NEUTRON_CONF_DIR}/$file
+        sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" -i ${NEUTRON_CONF_DIR}/$file
+        sed -e "s:%METADATA_SHARED_SECRET%:${METADATA_SHARED_SECRET}:g" -i ${NEUTRON_CONF_DIR}/$file
         sed -e "s:%DB_USER%:${DB_USER}:g" -i ${NEUTRON_CONF_DIR}/$file
         sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${NEUTRON_CONF_DIR}/$file
         sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${NEUTRON_CONF_DIR}/$file
@@ -152,16 +150,15 @@ pkg_postinst_${SRCNAME}-setup () {
         sleep 2
     fi
 
-    sudo -u postgres createdb ovs_neutron
+    sudo -u postgres createdb neutron
     sudo neutron-db-manage --config-file /etc/neutron/neutron.conf  \
-                           --config-file /etc/neutron/plugins/openvswitch/ovs_neutron_plugin.ini upgrade head
+                           --config-file /etc/neutron/plugins/ml2/ml2_conf.ini upgrade head
 }
 
 CHEF_SERVICES_CONF_FILES := " \
     ${sysconfdir}/${SRCNAME}/neutron.conf \
     ${sysconfdir}/${SRCNAME}/metadata_agent.ini \
-    ${sysconfdir}/${SRCNAME}/plugins/openvswitch/ovs_neutron_plugin.ini \
-    ${sysconfdir}/${SRCNAME}/plugins/linuxbridge/linuxbridge_conf.ini \
+    ${sysconfdir}/${SRCNAME}/plugins/ml2/ml2_conf.ini \
     "
 deploychef_services_special_func(){
     #This function is a callback function for the deploychef .bbclass
@@ -194,7 +191,8 @@ PACKAGES += " \
      ${SRCNAME}-doc \
      ${SRCNAME}-server \
      ${SRCNAME}-plugin-openvswitch \
-     ${SRCNAME}-plugin-linuxbridge \
+     ${SRCNAME}-plugin-ml2 \
+     ${SRCNAME}-ml2 \
      ${SRCNAME}-dhcp-agent \
      ${SRCNAME}-l3-agent \
      ${SRCNAME}-metadata-agent \
@@ -223,16 +221,13 @@ FILES_${SRCNAME}-server = "${bindir}/neutron-server \
     ${sysconfdir}/init.d/neutron-server \
     "
 
-FILES_${SRCNAME}-plugin-openvswitch = " \
-    ${bindir}/neutron-openvswitch-agent \
-    ${sysconfdir}/${SRCNAME}/plugins/openvswitch/ovs_neutron_plugin.ini \
-    ${sysconfdir}/init.d/neutron-openvswitch-agent \
+FILES_${SRCNAME}-plugin-ml2 = " \
+    ${sysconfdir}/${SRCNAME}/plugins/ml2/* \
     "
 
-FILES_${SRCNAME}-plugin-linuxbridge = " \
-    ${bindir}/neutron-linuxbridge-agent \
-    ${sysconfdir}/${SRCNAME}/plugins/linuxbridge/linuxbridge_conf.ini \
-    ${sysconfdir}/init.d/neutron-linuxbridge-agent \
+FILES_${SRCNAME}-plugin-openvswitch = " \
+    ${bindir}/neutron-openvswitch-agent \
+    ${sysconfdir}/init.d/neutron-openvswitch-agent \
     "
 
 FILES_${SRCNAME}-dhcp-agent = "${bindir}/neutron-dhcp-agent \
@@ -279,6 +274,7 @@ RDEPENDS_${PN} += "python-paste \
 	python-webob \
 	python-keystoneclient \
 	python-oslo.config \
+	python-oslo.rootwrap \
 	python-pyudev \
 	python-novaclient \
 	python-mako \
@@ -291,22 +287,19 @@ RDEPENDS_${SRCNAME} = "${PN} \
         postgresql postgresql-client python-psycopg2"
 
 RDEPENDS_${SRCNAME}-server = "${SRCNAME}"
-RDEPENDS_${SRCNAME}-plugin-openvswitch = "${SRCNAME} ${SRCNAME}-plugin-openvswitch-setup openvswitch-switch iproute2"
+RDEPENDS_${SRCNAME}-plugin-openvswitch = "${SRCNAME} ${SRCNAME}-plugin-ml2 ${SRCNAME}-plugin-openvswitch-setup openvswitch-switch iproute2 bridge-utils"
 RDEPENDS_${SRCNAME}-plugin-openvswitch-setup = "openvswitch-switch "
-RDEPENDS_${SRCNAME}-plugin-linuxbridge = "${SRCNAME} bridge-utils"
 RDEPENDS_${SRCNAME}-dhcp-agent = "${SRCNAME} dnsmasq dhcp-server dhcp-server-config"
 RDEPENDS_${SRCNAME}-l3-agent = "${SRCNAME} ${SRCNAME}-metadata-agent iputils"
 RDEPENDS_${SRCNAME}-setup = "postgresql sudo"
 
 RRECOMMENDS_${SRCNAME}-server = "${SRCNAME}-plugin-openvswitch"
 
-INITSCRIPT_PACKAGES = "${SRCNAME}-server ${SRCNAME}-plugin-openvswitch ${SRCNAME}-plugin-linuxbridge ${SRCNAME}-dhcp-agent ${SRCNAME}-l3-agent ${SRCNAME}-metadata-agent"
+INITSCRIPT_PACKAGES = "${SRCNAME}-server ${SRCNAME}-plugin-openvswitch ${SRCNAME}-dhcp-agent ${SRCNAME}-l3-agent ${SRCNAME}-metadata-agent"
 INITSCRIPT_NAME_${SRCNAME}-server = "neutron-server"
 INITSCRIPT_PARAMS_${SRCNAME}-server = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-plugin-openvswitch = "neutron-openvswitch-agent"
 INITSCRIPT_PARAMS_${SRCNAME}-plugin-openvswitch = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
-INITSCRIPT_NAME_${SRCNAME}-plugin-linuxbridge = "neutron-linuxbridge-agent"
-INITSCRIPT_PARAMS_${SRCNAME}-plugin-linuxbridge = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-dhcp-agent = "neutron-dhcp-agent"
 INITSCRIPT_PARAMS_${SRCNAME}-dhcp-agent = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 INITSCRIPT_NAME_${SRCNAME}-l3-agent = "neutron-l3-agent"
