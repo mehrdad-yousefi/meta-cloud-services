@@ -17,6 +17,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://nova-fix-location-to-doc-directory.patch \
            file://nova-fix-location-to-plugin-directory.patch \
            file://neutron-api-set-default-binding-vnic_type.patch \
+           file://websocketproxy-allow-empty-schemes-at-python-2.7.3.patch \
            "
 
 SRC_URI += "file://nova-all \
