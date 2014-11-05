@@ -9,8 +9,8 @@ SRCNAME = "websockify"
 
 SRC_URI = "http://pypi.python.org/packages/source/w/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "cdee6d6754c85814e1e6dcdef18b9785"
-SRC_URI[sha256sum] = "e48d5c790c9ce5ac938d76fd0a9019aad2a33401fb1702b6b84263959f64522b"
+SRC_URI[md5sum] = "673a70d007c1a2445c8ef5c7a3067c07"
+SRC_URI[sha256sum] = "da4364f54fdcc5350059febe2e8fdf2b53d16cf04ee23c71315e561119f44529"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
