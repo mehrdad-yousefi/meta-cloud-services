@@ -11,8 +11,8 @@ SRC_URI = "git://github.com/openstack/trove.git;branch=master \
           file://trove-init \
           "
 
-SRCREV="a679d2626a91a20b42ce59364e4beb0c588b762b"
-PV="2014.2+git${SRCPV}"
+SRCREV="cd31f3d6b0a9cc02af1c50c719f6936679332f7e"
+PV="2014.2.rc1+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit update-rc.d setuptools identity hosts useradd default_configs
