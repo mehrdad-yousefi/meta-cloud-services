@@ -9,8 +9,8 @@ PR = "r0"
 SRCNAME = "oslo.i18n"
 SRC_URI = "http://pypi.python.org/packages/source/o/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "7a4e9139c8d0a28bb07ff4c4ec1218cb"
-SRC_URI[sha256sum] = "c682a261de6b0d75291478c422e9ff75c220fa5e58856735d988c09bf14773bb"
+SRC_URI[md5sum] = "24da570b208afd3cc569cbcdb169835b"
+SRC_URI[sha256sum] = "008f86bc297ee05c63b1e2e4a85985802f086c81b16b0853e8e47df0592b23bc"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 

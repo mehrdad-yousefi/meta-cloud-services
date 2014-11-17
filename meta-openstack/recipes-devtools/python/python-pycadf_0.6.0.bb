@@ -9,8 +9,8 @@ PR = "r0"
 SRCNAME = "pycadf"
 SRC_URI = "http://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "0386d95acb2045231fbcbe12fcaa2779"
-SRC_URI[sha256sum] = "3f88f1c5ea7db093261afb2fd5a235b3dff540d9e93fde5a01a577222b33723c"
+SRC_URI[md5sum] = "283ff62801098f499e37aa493c1d18bb"
+SRC_URI[sha256sum] = "9ba1e9ac52ee2a2d6d9cc89847323559cc2ffe7b4d80b703944a0a1f75c7093f"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 

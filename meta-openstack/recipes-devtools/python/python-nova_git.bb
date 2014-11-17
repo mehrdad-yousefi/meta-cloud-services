@@ -26,8 +26,8 @@ SRC_URI += "file://nova-all \
             file://nova.conf \
             file://openrc \
            "
-SRCREV="ba0a08c11535a9cedc07e1329e8bf729af3d4b02"
-PV="2014.2.rc1+git${SRCPV}"
+SRCREV="943f02f1a62f7eb131f62729d83d97ad431ee89f"
+PV="2014.2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -294,6 +294,8 @@ RDEPENDS_${PN} = " libvirt \
 		   python-netaddr \
 		   python-oslo.config \
 		   python-oslo.rootwrap \
+		   python-oslo.concurrency \
+		   python-oslo.middleware \
 		   python-paste \
 		   python-pastedeploy \
 		   python-paramiko \

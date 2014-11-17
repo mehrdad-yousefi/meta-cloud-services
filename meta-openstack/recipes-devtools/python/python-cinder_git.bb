@@ -20,7 +20,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
     file://cinder-builtin-tests-config-location.patch \
 	"
 
-SRCREV="9ba3603d8f2cf33b33265012b2cb2480eba7b35a"
+SRCREV="37e4a12652c803d60c18079b735d96e5c7890f07"
 PV="2014.2.rc1+git${SRCPV}"
 S = "${WORKDIR}/git"
 

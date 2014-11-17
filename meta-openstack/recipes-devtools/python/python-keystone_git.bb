@@ -18,7 +18,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://wsgi-keystone.conf \
            "
 
-SRCREV="b276f3dbc9ef1a6b2bd952c88eb45fde9b646f68"
+SRCREV="2b7fdb1ab5de54c2a610a0ee9fc635ddb81e7b38"
 PV="2014.2.rc1+git${SRCPV}"
 
 S = "${WORKDIR}/git"

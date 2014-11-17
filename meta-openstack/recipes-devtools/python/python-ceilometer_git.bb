@@ -16,7 +16,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
 #   file://ceilometer-builtin-tests-config-location.patch
 
 
-SRCREV="42c3d487aac5d383f5224ffc4d402387562895df"
+SRCREV="1c8e3dea7cf53b25f2b3ac4a06bcbc1787d6673b"
 PV="2014.2.rc1+git${SRCPV}"
 S = "${WORKDIR}/git"
 

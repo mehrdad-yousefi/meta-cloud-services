@@ -66,7 +66,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
     file://horizon-use-full-package-path-to-test-directories.patch \
     "
 
-SRCREV="123840a43aaeff05becc08044b9cc33977ece2bb"
+SRCREV="bb7fa11c7688c8d43b8fb71540d32f1908b8da5e"
 PV="2014.2.rc1+git${SRCPV}"
 S = "${WORKDIR}/git"
 

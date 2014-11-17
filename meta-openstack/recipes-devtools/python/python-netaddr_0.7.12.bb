@@ -2,15 +2,15 @@ DESCRIPTION = "A library for network address representation and manipulation"
 HOMEPAGE = "https://github.com/drkjam/netaddr"
 SECTION = "devel/python"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=64c24df6c6be03cf388a97f707e8405e"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=e0c5cc28e66c19626bc908b3a9402c2e"
 
 PR = "r0"
 SRCNAME = "netaddr"
 
-SRC_URI = "https://github.com/downloads/drkjam/${SRCNAME}/${SRCNAME}-${PV}.zip"
+SRC_URI = "https://pypi.python.org/packages/source/n/${SRCNAME}/${SRCNAME}-${PV}.zip"
 
-SRC_URI[md5sum] = "5ffc5ca81294cb76c0c89bc2bdd43912"
-SRC_URI[sha256sum] = "c17969b5522a48fee018970b0aa8104b088ebb97eabf3e11935845caabbcf3a0"
+SRC_URI[md5sum] = "6145afd46786ffbc6644ae1ea2bfefd7"
+SRC_URI[sha256sum] = "622b81e571fb974698d056d4825b21ee64eac96de8ef41327b03913ac4308d5b"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
