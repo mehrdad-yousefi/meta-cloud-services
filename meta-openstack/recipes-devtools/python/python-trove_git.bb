@@ -7,12 +7,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r0"
 SRCNAME = "trove"
 
-SRC_URI = "git://github.com/openstack/trove.git;branch=master \
+SRC_URI = "git://github.com/openstack/trove.git;branch=stable/juno \
           file://trove-init \
           "
 
-SRCREV="cd31f3d6b0a9cc02af1c50c719f6936679332f7e"
-PV="2014.2.rc1+git${SRCPV}"
+SRCREV="6c4ea5b845a4d6d71d3d3786517b5b358c30f3ec"
+PV="2014.2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit update-rc.d setuptools identity hosts useradd default_configs

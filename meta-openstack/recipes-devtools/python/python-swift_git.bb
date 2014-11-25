@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 PR = "r0"
 SRCNAME = "swift"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/juno \
            file://proxy-server.conf \
            file://dispersion.conf \
            file://test.conf \
@@ -16,7 +16,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://cluster.conf \
 "
 
-SRCREV="709187b54ff2e9b81ac53977d4283523ce16af38"
+SRCREV="4765537cba6a6970110953f11f4e1b419d0730d3"
 PV="2.2.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 

@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r2"
 SRCNAME = "keystone"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/juno \
            file://keystone.conf \
            file://identity.sh \
            file://keystone \
@@ -18,8 +18,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://wsgi-keystone.conf \
            "
 
-SRCREV="2b7fdb1ab5de54c2a610a0ee9fc635ddb81e7b38"
-PV="2014.2.rc1+git${SRCPV}"
+SRCREV="f54fa8fa56d3708d5ef5b0173d9f6e4dce7130f2"
+PV="2014.2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 

@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r0"
 SRCNAME = "cinder"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/juno \
     file://cinder.conf \
     file://cinder.init \
     file://cinder-volume \
@@ -20,8 +20,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
     file://cinder-builtin-tests-config-location.patch \
 	"
 
-SRCREV="37e4a12652c803d60c18079b735d96e5c7890f07"
-PV="2014.2.rc1+git${SRCPV}"
+SRCREV="7b1d7a31335bd8723551c9af5c270927ad830c3f"
+PV="2014.2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d identity default_configs hosts openstackchef monitor

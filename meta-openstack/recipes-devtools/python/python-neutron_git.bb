@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r1"
 SRCNAME = "neutron"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/juno \
            file://neutron-server.init \
            file://neutron-agent.init \
            file://l3_agent.ini \
@@ -18,8 +18,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://uuid_wscheck.patch \
            file://neutron-test-nec-plugin-extensions-location.patch \
 	  "
-SRCREV="49234a824c16164a56cbfbf644490d07bb22e241"
-PV="2014.2.rc1+git${SRCPV}"
+SRCREV="ad6fefcb4d4068b46b69284e277df6ab2ee30105"
+PV="2014.2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 

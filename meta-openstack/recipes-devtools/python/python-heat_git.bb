@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r0"
 SRCNAME = "heat"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/juno \
            file://heat.conf \
            file://heat.init \
            file://autoscaling_example.template \
@@ -16,7 +16,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://heat-tests-change-project_dir-path.patch \
 "
 
-SRCREV="2a91c1569d34b4e735e7cb2705b4cf663b3f5998"
+SRCREV="5664854f372b9810d040c615d8a678dbfdfb880e"
 PV="2014.2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
