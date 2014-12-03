@@ -67,7 +67,7 @@ do_install_append() {
     cp -r ${TEMPLATE_CONF_DIR}/* ${TROVE_CONF_DIR}
 
     for file in trove.conf trove-conductor.conf trove-taskmanager.conf trove-guestagent.conf; do
-        LOG_FILE=`basename -s .conf $file`
+        LOG_FILE=`basename $file .conf`
 
         # Install config files.
         install -m 600 "${TEMPLATE_CONF_DIR}/${file}.sample" \
