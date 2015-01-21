@@ -16,7 +16,7 @@ SRCREV = "a009587ec2c0cf07b38bd8f0b59baa244fdbce51"
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
-    git://github.com/leejarvis/slop.git \
+    git://github.com/leejarvis/slop.git;branch=v3 \
     "
 
 inherit ruby
