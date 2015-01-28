@@ -23,3 +23,4 @@ SRC_URI = " \
 inherit ruby
 
 BBCLASSEXTEND = "native"
+    file://0001-Don-t-compile-extensions.patch \
