@@ -18,9 +18,9 @@ S = "${WORKDIR}/git"
 
 SRC_URI = " \
     git://github.com/brianmario/yajl-ruby.git \
+    file://0001-Don-t-compile-extensions.patch \
     "
 
 inherit ruby
 
 BBCLASSEXTEND = "native"
-    file://0001-Don-t-compile-extensions.patch \

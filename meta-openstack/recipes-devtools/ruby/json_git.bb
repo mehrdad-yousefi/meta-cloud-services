@@ -17,9 +17,9 @@ S = "${WORKDIR}/git"
 
 SRC_URI = " \
     git://github.com/flori/json.git \
+    file://0001-Dont-compile-extensions.patch \
     "
 
 inherit ruby
 
 BBCLASSEXTEND = "native"
-    file://0001-Dont-compile-extensions.patch \
