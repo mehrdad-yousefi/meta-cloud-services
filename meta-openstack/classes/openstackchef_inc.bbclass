@@ -50,8 +50,8 @@ ERB_DEFAULT_SUFFIX="]"
 TEMPLATE_EXTENSION='.erb'
 #Build deploychef package since this class has run-time and buil-time dependency 
 #on it
-DEPENDS_${PN} += "deploychef"
-RDEPENDS_${PN} += "deploychef"
+DEPENDS_${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'chef', 'deploychef', '', d)}"
+RDEPENDS_${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'chef', 'deploychef', '', d)}"
 CHEF_VERSION = '1'
 #For classes that define a special substitution function, this variable is 
 #set by this class and specifies the file named passed back to these function
