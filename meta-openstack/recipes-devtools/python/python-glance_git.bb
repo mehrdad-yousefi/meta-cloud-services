@@ -205,7 +205,7 @@ RDEPENDS_${SRCNAME} = "${PN} \
 RDEPENDS_${SRCNAME}-api = "${SRCNAME}"
 RDEPENDS_${SRCNAME}-registry = "${SRCNAME}"
 RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}"
-RDEPENDS_${SRCNAME}-tests = "python-psutil qpid-python"
+RDEPENDS_${SRCNAME}-tests = "python-psutil qpid-python bash"
 
 INITSCRIPT_PACKAGES = "${SRCNAME}-api ${SRCNAME}-registry"
 INITSCRIPT_NAME_${SRCNAME}-api = "glance-api"

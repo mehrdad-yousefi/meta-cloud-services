@@ -133,6 +133,8 @@ do_install_append() {
 
 PACKAGES += "${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-apache ${SRCNAME}-standalone"
 
+RDEPENDS_${SRCNAME}-tests += " bash"
+
 FILES_${PN} = "${libdir}/*"
 
 FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"

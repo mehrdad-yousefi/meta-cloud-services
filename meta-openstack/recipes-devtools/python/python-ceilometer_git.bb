@@ -138,6 +138,8 @@ PACKAGES += "${SRCNAME}-agent-notification"
 PACKAGES += "${SRCNAME}-collector ${SRCNAME}-compute ${SRCNAME}-controller"
 PACKAGES += " ${SRCNAME}-reseller"
 
+RDEPENDS_${SRCNAME}-tests += " bash"
+
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
 ALLOW_EMPTY_${SRCNAME}-reseller = "1"
 ALLOW_EMPTY_${SRCNAME}-tests = "1"

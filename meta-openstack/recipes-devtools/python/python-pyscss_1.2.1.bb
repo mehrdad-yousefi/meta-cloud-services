@@ -20,6 +20,7 @@ inherit setuptools
 
 DEPENDS += " \
         python-pip \
+        libpcre \
         "
 
 # RDEPENDS_default: 

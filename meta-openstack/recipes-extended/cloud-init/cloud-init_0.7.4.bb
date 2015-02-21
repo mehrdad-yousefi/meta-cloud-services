@@ -49,4 +49,5 @@ INITSCRIPT_PACKAGES = "${PN}"
 INITSCRIPT_NAME_${BPN} = "cloud-init"
 
 RDEPENDS_${PN} = "sysklogd \
+                  python \
                  "

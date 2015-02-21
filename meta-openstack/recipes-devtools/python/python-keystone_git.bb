@@ -283,6 +283,8 @@ RDEPENDS_${PN} += " \
         python-oauthlib \
         "
 
+RDEPENDS_${SRCNAME}-tests += " bash"
+
 PACKAGECONFIG ?= "${@base_contains('DISTRO_FEATURES', 'OpenLDAP', 'OpenLDAP', '', d)}"
 PACKAGECONFIG[OpenLDAP] = ",,,python-ldap python-keystone-hybrid-backend"
 

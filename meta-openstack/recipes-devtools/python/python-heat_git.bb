@@ -133,6 +133,9 @@ PACKAGES += "${SRCNAME}-tests ${SRCNAME}-templates ${SRCNAME}-common ${SRCNAME}-
 PACKAGES += "${SRCNAME}-setup"
 PACKAGES += "${SRCNAME}-cfn"
 
+RDEPENDS_${SRCNAME}-tests += " bash"
+
+
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
 ALLOW_EMPTY_${SRCNAME}-templates = "1"
 ALLOW_EMPTY_${SRCNAME}-cfn = "1"

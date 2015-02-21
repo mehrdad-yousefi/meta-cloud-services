@@ -161,6 +161,8 @@ pkg_postinst_${SRCNAME}-setup () {
 PACKAGES += "${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-setup ${SRCNAME}-api ${SRCNAME}-volume ${SRCNAME}-scheduler ${SRCNAME}-backup"
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
 
+RDEPENDS_${SRCNAME}-tests += " bash"
+
 FILES_${PN} = "${libdir}/* /etc/tgt"
 
 FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh \
