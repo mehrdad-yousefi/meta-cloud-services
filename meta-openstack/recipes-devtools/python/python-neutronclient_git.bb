@@ -25,8 +25,8 @@ SRC_URI = "git://github.com/openstack/python-neutronclient.git;branch=master \
            file://neutron-api-check.sh \
           "
 
-PV="2.3.9+git${SRCPV}"
-SRCREV="170f8ca438bf17b5ec679cb3e5135c97dfdeb6c2"
+PV="2.3.11+git${SRCPV}"
+SRCREV="2fa6faaa9b67c0783c502d2b56bfbacc23ecfe64"
 S = "${WORKDIR}/git"
 
 inherit setuptools monitor

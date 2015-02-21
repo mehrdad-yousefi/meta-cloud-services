@@ -8,13 +8,11 @@ PR = "r0"
 
 SRC_URI = "\
 	git://github.com/openstack/python-novaclient.git;branch=master \
-	file://fix_novaclient_memory_leak.patch \
-	file://novaclient-specify-full-path-to-test-certificate.patch \
 	file://nova-api-check.sh \
 	"
 
-PV="2.20.0+git${SRCPV}"
-SRCREV="1eb1abe8700a137d017dbcd4a9dab3d4c0879c81"
+PV="2.21.0+git${SRCPV}"
+SRCREV="bfd029c8ef500af705159a5f3d5fa74e39c43096"
 S = "${WORKDIR}/git"
 
 inherit setuptools monitor
@@ -39,8 +37,10 @@ do_install_append() {
 	install -d ${D}/${sysconfdir}/bash_completion.d
 	install -m 664 ${S}/tools/nova.bash_completion ${D}/${sysconfdir}/bash_completion.d
 
-	sed -e "s:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g" \
-	    -i ${D}/${PYTHON_SITEPACKAGES_DIR}/novaclient/tests/v1_1/test_servers.py
+	if [ -e "${D}/${PYTHON_SITEPACKAGES_DIR}/novaclient/tests/v1_1/test_servers.py" ]; then
+		sed -e "s:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g" \
+		    -i ${D}/${PYTHON_SITEPACKAGES_DIR}/novaclient/tests/v1_1/test_servers.py
+	fi
 }
 
 PACKAGES =+ "${BPN}-bash-completion"

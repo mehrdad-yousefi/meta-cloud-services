@@ -10,12 +10,11 @@ SRCNAME = "keystoneclient"
 SRC_URI = "\
 	git://github.com/openstack/python-keystoneclient.git;branch=master \
 	file://fix_keystoneclient_memory_leak.patch \
-	file://keystoneclient-fix-test-path-to-example-certificates.patch \
 	file://keystone-api-check.sh \
 	"
 
-PV="0.11.1+git${SRCPV}"
-SRCREV="89dc951f7d5a603f0c34b7c2cb9f7d26d73d9916"
+PV="1.1.0+git${SRCPV}"
+SRCREV="b3cf5994ade5c4fda9792cfaea42bb821d176f8c"
 S = "${WORKDIR}/git"
 
 inherit setuptools monitor
