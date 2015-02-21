@@ -9,8 +9,8 @@ PR = "r0"
 SRCNAME = "oslo.middleware"
 SRC_URI = "http://pypi.python.org/packages/source/o/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "52fe009ad08c4ee9f9a3d26843ff41f0"
-SRC_URI[sha256sum] = "539d401f4496606ac36795e1238a66c40b6aa4d4df21fd0fecec3a27ec0b2340"
+SRC_URI[md5sum] = "bca65b0372bd1f13eefa4c7205c9df99"
+SRC_URI[sha256sum] = "d300f8342b5faaf712890d58da111789740aebb4b46874e41b45110b704719cb"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 

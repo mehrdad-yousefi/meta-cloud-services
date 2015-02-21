@@ -9,8 +9,8 @@ PR = "r0"
 SRCNAME = "oslo.concurrency"
 SRC_URI = "http://pypi.python.org/packages/source/o/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "dac550b3d2ae1102f686e76788668f06"
-SRC_URI[sha256sum] = "acebe17ad0509be62bcb26d33676336c3e622651fc47feb38753882b39a7efb4"
+SRC_URI[md5sum] = "83baf51766c3acf9929223762689ebfd"
+SRC_URI[sha256sum] = "89b62c029f0ecfcc92da22277e93fbe74363d459208bf62d2c9e7a3da0019e83"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 

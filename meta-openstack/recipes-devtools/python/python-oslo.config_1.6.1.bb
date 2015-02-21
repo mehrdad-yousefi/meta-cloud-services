@@ -9,8 +9,8 @@ SRCNAME = "oslo.config"
 
 SRC_URI = "https://pypi.python.org/packages/source/o/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "55bc1515401b92252685c94d556a7257"
-SRC_URI[sha256sum] = "739e76e0a83ec585a3c0415140d9e6ba1b14c7f207e33643e8af7eb4346ffe07"
+SRC_URI[md5sum] = "d51fd561300f46945dd24977c429280c"
+SRC_URI[sha256sum] = "4709df3a8ba05e6a47300770f1c90ade77b3d095f28e8f75191df8745268bb20"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 

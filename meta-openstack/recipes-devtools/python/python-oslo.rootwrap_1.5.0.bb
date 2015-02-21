@@ -9,8 +9,8 @@ PR = "r0"
 SRCNAME = "oslo.rootwrap"
 SRC_URI = "http://pypi.python.org/packages/source/o/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "b867d1670d7e744790e9c6b503ec8838"
-SRC_URI[sha256sum] = "42081a30779be0a8e33ee53f4e1235c17080278c4285505a6b65243740aab629"
+SRC_URI[md5sum] = "3a988feffa7a0fb022857db9287bf8b9"
+SRC_URI[sha256sum] = "d2842359c08d7ecc5e5255f9c97aa9c42300eaed556d8f46fc18537e5d00b97e"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 

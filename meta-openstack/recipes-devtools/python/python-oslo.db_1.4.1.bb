@@ -9,8 +9,8 @@ PR = "r0"
 SRCNAME = "oslo.db"
 SRC_URI = "http://pypi.python.org/packages/source/o/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "6c87294ce18252bef17e2552bc19a40c"
-SRC_URI[sha256sum] = "7092525eab0352748fc0c58a7facd3d6ae967d9130589b4afc12bfa171bee837"
+SRC_URI[md5sum] = "d49f8b663128698f2e094095f997519a"
+SRC_URI[sha256sum] = "e1fc76e17db9552c42ddca7b95ef8dce9a2049c68b90c0130ed2e27c7a9d82fb"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
