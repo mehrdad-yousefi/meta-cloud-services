@@ -9,8 +9,8 @@ PR = "r0"
 SRCNAME = "oslo.serialization"
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git"
 
-PV = "1.0.0"
-SRCREV = "ddde5a5a5ac4ff2ebaed7297bf35536b51aeabda"
+PV = "1.3.0"
+SRCREV = "c89b3f80393b224e4c93f546bc00a4a36c5fb279"
 S = "${WORKDIR}/git"
 
 inherit setuptools
