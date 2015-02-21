@@ -31,6 +31,8 @@ do_install() {
 }
 
 RDEPENDS_${PN} = " \
+    bash \
+    libaio \
     libconfig-general-perl \
     perl-module-english \
     perl-module-tie-hash-namedcapture \

@@ -342,6 +342,7 @@ RDEPENDS_${SRCNAME}-ec2 = "postgresql sudo ${SRCNAME}-common"
 
 RDEPENDS_${SRCNAME}-tests = " \
                             python-coverage \
+                            bash \
                             "
 
 INITSCRIPT_PACKAGES =  "${SRCNAME}-compute ${SRCNAME}-consoleauth ${SRCNAME}-novncproxy ${SRCNAME}-spicehtml5proxy"

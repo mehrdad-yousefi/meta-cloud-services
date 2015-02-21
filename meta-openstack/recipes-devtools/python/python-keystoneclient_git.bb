@@ -52,6 +52,7 @@ FILES_${SRCNAME}-tests = "${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}/examples \
         "
 RDEPENDS_${SRCNAME}-tests += " \
 	python-httpretty \
+        bash \
 	"
 
 MONITOR_CHECKS_${PN} += "\

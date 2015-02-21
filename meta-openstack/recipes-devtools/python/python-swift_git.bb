@@ -172,6 +172,7 @@ RDEPENDS_${PN} += " \
     python-xattr \
     python-pbr \
     python-dnspython \
+    bash \
     "
 
 RDEPENDS_${SRCNAME} = "${PN}"

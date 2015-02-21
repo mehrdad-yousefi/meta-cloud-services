@@ -204,6 +204,8 @@ PACKAGES += " \
 FILES_${PN} = "${libdir}/*"
 
 FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
+RDEPENDS_${SRCNAME}-tests += " bash"
+
 
 FILES_${SRCNAME} = " \
     ${bindir}/neutron-db-manage \
