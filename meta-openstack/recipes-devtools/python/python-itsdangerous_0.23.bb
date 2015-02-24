@@ -18,3 +18,5 @@ inherit setuptools
 
 RDEPENDS_${PN} += "python-json python-netclient python-zlib python-datetime python-lang python-crypt"
 
+CLEANBROKEN = "1"
+

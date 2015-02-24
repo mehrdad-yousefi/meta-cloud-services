@@ -20,3 +20,6 @@ inherit setuptools
 RDEPENDS_${PN} += "python-subunit \
                    python-extras \
 "
+
+CLEANBROKEN = "1"
+

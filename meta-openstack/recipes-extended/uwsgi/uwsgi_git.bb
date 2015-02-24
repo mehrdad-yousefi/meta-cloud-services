@@ -29,3 +29,6 @@ DEPENDS += " \
 # RDEPENDS_default: 
 RDEPENDS_${PN} += " \
         "
+
+CLEANBROKEN = "1"
+

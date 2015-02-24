@@ -21,8 +21,12 @@ inherit setuptools
 DEPENDS += " \
         python-pip \
         libpcre \
+        python-six \
         "
 
 # RDEPENDS_default: 
 RDEPENDS_${PN} += " \
         "
+
+CLEANBROKEN = "1"
+
