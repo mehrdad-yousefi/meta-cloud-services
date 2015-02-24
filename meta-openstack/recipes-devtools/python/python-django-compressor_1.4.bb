@@ -19,3 +19,5 @@ inherit setuptools
 
 RDEPENDS_${PN} += "python-django-appconf  \
 	"
+
+CLEANBROKEN = "1"

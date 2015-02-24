@@ -16,5 +16,16 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit setuptools
 
-RDEPENDS_${PN} += "python-io python-datetime python-email python-zlib python-pkgutil python-html python-shell python-pprint python-subprocess python-netserver"
+RDEPENDS_${PN} += "python-io \
+                   python-datetime \
+                   python-email \
+                   python-zlib \
+                   python-pkgutil \
+                   python-html \
+                   python-shell \
+                   python-pprint \
+                   python-subprocess \
+                   python-netserver"
+
+CLEANBROKEN = "1"
 
