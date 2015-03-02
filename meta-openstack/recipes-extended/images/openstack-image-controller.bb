@@ -15,7 +15,7 @@ IMAGE_INSTALL = "\
     ${OPENSTACK_CONTROLLER_EXTRA_INSTALL} \
     "
 
-IMAGE_FEATURES += " ssh-server-openssh"
+IMAGE_FEATURES += " ssh-server-openssh package-management"
 POST_KEYSTONE_SETUP_COMMAND = "/etc/keystone/hybrid-backend-setup"
 
 inherit core-image
