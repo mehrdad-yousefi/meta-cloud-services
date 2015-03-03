@@ -15,6 +15,8 @@ SRC_URI += "file://tgtd.init"
 
 S = "${WORKDIR}/git"
 
+CONFFILES_${PN} += "${sysconfdir}/tgt/targets.conf"
+
 inherit update-rc.d
 
 do_compile() {
