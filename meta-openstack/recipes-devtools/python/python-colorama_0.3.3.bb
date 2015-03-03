@@ -13,8 +13,8 @@ SRCNAME = "colorama"
 SRC_URI = "http://pypi.python.org/packages/source/c/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
           "
 
-SRC_URI[md5sum] = "95ce8bf32f5c25adea14b809db3509cb"
-SRC_URI[sha256sum] = "012261ba542a5b18076cac0eaa3892ebe6098e170591e08a8fc0fbf8ab3d5c90"
+SRC_URI[md5sum] = "a56b8dc55158a41ab3c89c4c8feb8824"
+SRC_URI[sha256sum] = "eb21f2ba718fbf357afdfdf6f641ab393901c7ca8d9f37edd0bee4806ffa269c"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 

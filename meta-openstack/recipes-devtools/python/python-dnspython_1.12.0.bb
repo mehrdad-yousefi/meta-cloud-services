@@ -8,8 +8,8 @@ PR = "r0"
 SRCNAME = "dnspython"
 SRC_URI = "http://www.dnspython.org/kits/${PV}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "6167344ca849bd2ba108a8aa6118cb2b"
-SRC_URI[sha256sum] = "c0c6fcf3ff52939e7eadd931282d083271f65cf0a174555a703563a400289768"
+SRC_URI[md5sum] = "3f2601ef3c8b77fc6d21a9c77a81efeb"
+SRC_URI[sha256sum] = "03fb82af866001c4afa58c48027bcc4b80bbf0a7f27e1d861cf06393eea4724f"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 

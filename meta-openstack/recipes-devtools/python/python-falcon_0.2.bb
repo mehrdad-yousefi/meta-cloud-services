@@ -2,15 +2,15 @@ DESCRIPTION = "An unladen web framework for building APIs and app backends."
 HOMEPAGE = "http://falconframework.org"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://README.rst;md5=795813ca586f7662f91b9ff2265f4bc5"
+LIC_FILES_CHKSUM = "file://README.rst;md5=2bf705a48be7b7799862ffe602c94b87"
 
 PR = "r0"
 
 SRCNAME = "falcon"
 SRC_URI = "http://pypi.python.org/packages/source/f/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "82049bd4a6a3e2ec4bb7ea59955a2493"
-SRC_URI[sha256sum] = "dafccf547df57324993c8c13a0e40629b61817e0462f04c7e44fed12f26ff556"
+SRC_URI[md5sum] = "bf9e8bdd20700f1ff7ce6397cd441fbd"
+SRC_URI[sha256sum] = "92bb899bf6e58e2299e3b1de1e628b90c38544ba3354a0141d108318b50c3402"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 

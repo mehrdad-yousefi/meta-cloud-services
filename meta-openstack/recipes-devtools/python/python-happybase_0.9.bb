@@ -9,8 +9,8 @@ SRCNAME = "happybase"
 
 SRC_URI = "https://pypi.python.org/packages/source/h/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "28905e2a334d6d7b42495f2c5ca46add"
-SRC_URI[sha256sum] = "74312a83c7f67d8a362649a822259fcf5983ea9b9e5f2e4e17d67109435cc00e"
+SRC_URI[md5sum] = "0d9ca6e22a7edb03ccd75e99d0acf1ea"
+SRC_URI[sha256sum] = "744e342936f6c9e384b203435c38ff21a339626a0d7c11aa177988b5e164ef2a"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
