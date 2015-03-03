@@ -12,9 +12,8 @@ SRCNAME = "django-nose"
 
 SRC_URI = "http://pypi.python.org/packages/source/d/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \ 
           "
-
-SRC_URI[md5sum] = "199d5358317a804b39fe05d806cab427"
-SRC_URI[sha256sum] = "9aae16b562866a4ddaa5e8978729abadbbed544728d88e0b9c9af7b31dd072ed"
+SRC_URI[md5sum] = "d39d72ac877cd67af6b41e129911fbfd"
+SRC_URI[sha256sum] = "3667d26a41fec30364a0ef72580832ca5328802d553f6d6e72af5ac21cb36365"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 

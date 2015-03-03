@@ -9,8 +9,8 @@ SRCNAME = "jsonschema"
 
 SRC_URI = "http://pypi.python.org/packages/source/j/${SRCNAME}/${SRCNAME}-${PV}.zip"
 
-SRC_URI[md5sum] = "0275f70c5f7c65657555ff478a4fc89c"
-SRC_URI[sha256sum] = "c085fca29eeb7e42500aa2769f933b003becd95a95819b4565a734170de84497"
+SRC_URI[md5sum] = "f645c88123189976058fcf550c02e50f"
+SRC_URI[sha256sum] = "acf1e360b4682d64ba6acc35dbc65d81d9bde68a291a97f14f16f4282733f5a4"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 

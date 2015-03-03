@@ -9,8 +9,8 @@ SRCNAME = "heat-cfntools"
 
 SRC_URI = "http://pypi.python.org/packages/source/h/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "db19fcae40b8f9de6ec8251bdb50ac3c"
-SRC_URI[sha256sum] = "da4a24908dd4b118b227252dba972a9b9b054bcc1002d4656b0e146747916f40"
+SRC_URI[md5sum] = "0d5f8e7685e7f9a34dbd2552ffa40984"
+SRC_URI[sha256sum] = "de7d93338d3afb71cc4c53d713740316ead0af3a9c869b1231617347e94a8326"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 

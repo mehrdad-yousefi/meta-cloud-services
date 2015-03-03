@@ -28,3 +28,5 @@ RDEPENDS_${PN} = "python-websockify"
 do_install() {
 	oe_runmake DESTDIR="${D}" datadir="${D}/${datadir}" install
 }
+
+CLEANBROKEN = "1"

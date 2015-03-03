@@ -9,8 +9,8 @@ SRCNAME = "jsonpath-rw"
 
 SRC_URI = "http://pypi.python.org/packages/source/j/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "fe75b54ce4ea5201e132504590db6140"
-SRC_URI[sha256sum] = "070f316dd172cdbb733f8da1b981ebcd3c8f90b75aca9f978c9ac145c1a25e86"
+SRC_URI[md5sum] = "5d1d8d10a21b38637cbd0a84f4b30843"
+SRC_URI[sha256sum] = "d4869e5c540e797189acca97f1fef2dfaf5dc3560fd25109d44e353e8eacabbc"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 

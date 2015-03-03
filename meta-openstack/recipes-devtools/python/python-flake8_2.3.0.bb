@@ -9,8 +9,8 @@ SRCNAME = "flake8"
 
 SRC_URI = "https://pypi.python.org/packages/source/f/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "cf326cfb88a1db6c5b29a3a6d9efb257"
-SRC_URI[sha256sum] = "098ab7991067c08cfaa4716de20066d90f66dbc71502114ea8cad9a9fd5c9512"
+SRC_URI[md5sum] = "488d6166f6b9ef9fe9d433b95e77dc07"
+SRC_URI[sha256sum] = "5ee1a43ccd0716d6061521eec6937c983efa027793013e572712c4da55c7c83e"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 

@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 PR = "r0"
 SRCNAME = "swift"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/juno \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://proxy-server.conf \
            file://dispersion.conf \
            file://test.conf \
@@ -16,8 +16,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/juno \
            file://cluster.conf \
 "
 
-SRCREV="4765537cba6a6970110953f11f4e1b419d0730d3"
-PV="2.2.0+git${SRCPV}"
+SRCREV="4ca08cc395e686265574366497a6869e94eebcb2"
+PV="2.2.2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools python-dir update-rc.d hosts identity openstackchef

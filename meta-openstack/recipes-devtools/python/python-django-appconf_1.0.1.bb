@@ -10,8 +10,8 @@ SRCNAME = "django-appconf"
 SRC_URI = "https://pypi.python.org/packages/source/d/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
 "
 
-SRC_URI[md5sum] = "40494042c3c8bd1e054c884e5ed4bb6c"
-SRC_URI[sha256sum] = "a88ed8fb923a53c70c2c46fbe4508b5f81646b4b01401f1568a821671b33215c"
+SRC_URI[md5sum] = "29c87a00f0d098b90f3ac6113ae6e52d"
+SRC_URI[sha256sum] = "ba1375fb1024e8e91547504d4392321795c989fde500b96ebc7c93884f786e60"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
