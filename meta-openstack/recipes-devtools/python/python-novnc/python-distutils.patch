@@ -17,35 +17,3 @@ Index: git/setup.py
 +      package_dir = {'novnc':'utils'},
 +      py_modules=['wsproxy','websocket','web','json2graph','img2js'],
 +)
-Index: git/utils/__init__.py
-===================================================================
---- /dev/null
-+++ git/utils/__init__.py
-@@ -0,0 +1 @@
-+# vim: tabstop=4 shiftwidth=4 softtabstop=4
-Index: git/utils/nova-novncproxy
-===================================================================
---- git.orig/utils/nova-novncproxy
-+++ git/utils/nova-novncproxy
-@@ -27,7 +27,7 @@ from oslo.config import cfg
- import socket
- import sys
- 
--import websockify
-+from novnc import wsproxy
- 
- from nova import config
- from nova import context
-Index: git/utils/websockify
-===================================================================
---- git.orig/utils/websockify
-+++ git/utils/websockify
-@@ -13,7 +13,7 @@ as taken from http://docs.python.org/dev
- 
- import signal, socket, optparse, time, os, sys, subprocess
- from select import select
--import websocket
-+from novnc import websocket
- try:
-     from urllib.parse import parse_qs, urlparse
- except:

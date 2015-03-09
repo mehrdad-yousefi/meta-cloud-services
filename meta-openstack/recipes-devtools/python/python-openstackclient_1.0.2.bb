@@ -9,8 +9,8 @@ SRCNAME = "python-openstackclient"
 
 SRC_URI = "http://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "e3c2b0ef8539a583f767427de8a4bdf9"
-SRC_URI[sha256sum] = "ca8df0a256ed48536b386cde215a3532f98707eef8dba3343850ca80d29ce086"
+SRC_URI[md5sum] = "44f33ac00cd47392688af959178eb5c3"
+SRC_URI[sha256sum] = "6d1d5c8100f37b96b7d6f9a8b429af790235cb33b54c6237c16b0b1534c851b7"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 

@@ -5,10 +5,10 @@ SECTION = "devel/python"
 PR = "r0"
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ac06308a999996ffc2d24d81b3a39f1b"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=6458695fb66dcd893becb5f9f912715e"
 
-SRCREV = "8f12ca7a5a64144fe548cada332d5d19ef26a1fe"
-PV = "0.4+git${SRCPV}"
+SRCREV = "3b8ec46fd26d644e6edbea4f46e630929297e448"
+PV = "0.5.1+git${SRCPV}"
 
 SRC_URI = "git://github.com/kanaka/noVNC.git \
            file://python-distutils.patch"
@@ -16,3 +16,5 @@ SRC_URI = "git://github.com/kanaka/noVNC.git \
 S = "${WORKDIR}/git"
 
 inherit distutils
+
+DEPENDS += " python-websockify"
