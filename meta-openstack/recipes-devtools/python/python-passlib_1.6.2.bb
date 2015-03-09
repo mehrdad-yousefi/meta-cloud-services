@@ -9,8 +9,8 @@ SRCNAME = "passlib"
 
 SRC_URI = "https://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "6354846f965694db402fba4125205315"
-SRC_URI[sha256sum] = "00cfb564feb2d97ebaf6b28acdc9277a0c73c3c1df7b2a7b65605c76e724177b"
+SRC_URI[md5sum] = "2f872ae7c72ca338634c618f2cff5863"
+SRC_URI[sha256sum] = "e987f6000d16272f75314c7147eb015727e8532a3b747b1a8fb58e154c68392d"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 

@@ -9,8 +9,8 @@ SRCNAME = "paramiko"
 
 SRC_URI = "http://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "4ba105e2d8535496fd633889396b20b7"
-SRC_URI[sha256sum] = "5fac0dbb3d7498bf4a7e1b8fac920cb8977a90e260d43d7e30fac2d6dd5fbabc"
+SRC_URI[md5sum] = "6bbfb328fe816c3d3652ba6528cc8b4c"
+SRC_URI[sha256sum] = "4f56a671a3eecbb76e6143e6e4ca007d503a39aa79aa9e14ade667fa53fd6e55"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
