@@ -11,15 +11,15 @@ SRCNAME = "nova"
 
 FILESEXTRAPATHS_append := "${THISDIR}/${PN}"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/juno \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://nova-add-migrate.cfg-to-the-MANIFEST.patch \
-           file://nova-convert-path-from-relative-to-absolute.patch \
-           file://nova-fix-location-to-doc-directory.patch \
-           file://nova-fix-location-to-plugin-directory.patch \
            file://neutron-api-set-default-binding-vnic_type.patch \
            "
 # restore post stable/juno:
 #           file://websocketproxy-allow-empty-schemes-at-python-2.7.3.patch
+#           file://nova-convert-path-from-relative-to-absolute.patch 
+#           file://nova-fix-location-to-doc-directory.patch
+#           file://nova-fix-location-to-plugin-directory.patch 
 
 SRC_URI += "file://nova-all \
             file://nova.init \
@@ -27,8 +27,8 @@ SRC_URI += "file://nova-all \
             file://nova.conf \
             file://openrc \
            "
-SRCREV="9c3ec16576e2f7c9d5aff6e4b620d708e6636568"
-PV="2014.2+git${SRCPV}"
+SRCREV="b6e11261a97bf96d5f9866f277d8ecc3be7891e5"
+PV="2015.1.0b2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -297,6 +297,7 @@ RDEPENDS_${PN} = " libvirt \
 		   python-oslo.rootwrap \
 		   python-oslo.concurrency \
 		   python-oslo.middleware \
+		   python-oslo.context \
 		   python-paste \
 		   python-pastedeploy \
 		   python-paramiko \

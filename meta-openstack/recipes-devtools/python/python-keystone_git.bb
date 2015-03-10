@@ -7,19 +7,21 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r2"
 SRCNAME = "keystone"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/juno \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://keystone.conf \
            file://identity.sh \
            file://keystone \
-           file://keystone-search-in-etc-directory-for-config-files.patch \
-           file://keystone-remove-git-commands-in-tests.patch \
-           file://keystone-explicitly-import-localcontext-from-oslo.me.patch \
            file://convert_keystone_backend.py \
            file://wsgi-keystone.conf \
            "
 
-SRCREV="f54fa8fa56d3708d5ef5b0173d9f6e4dce7130f2"
-PV="2014.2+git${SRCPV}"
+# TBD: update or drop
+# file://keystone-search-in-etc-directory-for-config-files.patch 
+# file://keystone-remove-git-commands-in-tests.patch 
+# file://keystone-explicitly-import-localcontext-from-oslo.me.patch
+
+SRCREV="0e633302e87261fdb3b0126c632fd676fc0a4d39"
+PV="2015.1.0b2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -279,6 +281,7 @@ RDEPENDS_${PN} += " \
         python-dogpile.core \
         python-dogpile.cache \
         python-pbr \
+        python-pysaml2 \
         python-oslo.utils \
         python-oauthlib \
         "

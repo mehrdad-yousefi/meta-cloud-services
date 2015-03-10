@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r1"
 SRCNAME = "neutron"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/juno \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://neutron-server.init \
            file://neutron-agent.init \
            file://l3_agent.ini \
@@ -15,11 +15,14 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/juno \
            file://metadata_agent.ini \
            file://neutron-dhcp-agent-netns-cleanup.cron \
            file://0001-neutron.conf-jumpstart-nova-state-reporting-configur.patch \
-           file://uuid_wscheck.patch \
            file://neutron-test-nec-plugin-extensions-location.patch \
 	  "
-SRCREV="ad6fefcb4d4068b46b69284e277df6ab2ee30105"
-PV="2014.2+git${SRCPV}"
+
+# TBD: update or drop
+# file://uuid_wscheck.patch
+
+SRCREV="1948efa261e47b08e2cde4828321614ee6e169be"
+PV="2015.1.0b2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 

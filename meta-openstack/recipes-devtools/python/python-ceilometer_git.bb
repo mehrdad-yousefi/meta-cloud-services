@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r0"
 SRCNAME = "ceilometer"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/juno \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://ceilometer.conf \
            file://ceilometer.init \
            file://fix_ceilometer_memory_leak.patch \
@@ -16,8 +16,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/juno \
 #   file://ceilometer-builtin-tests-config-location.patch
 
 
-SRCREV="b1fca33e5f4c5443389d131a212a058d2306ac23"
-PV="2014.2+git${SRCPV}"
+SRCREV="b2871217fec965c77581b0f4a33608dad7867d4b"
+PV="2015.1.0b2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 CEILOMETER_SECRET ?= "12121212"

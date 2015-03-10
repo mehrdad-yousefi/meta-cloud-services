@@ -37,6 +37,7 @@ RDEPENDS_${PN} += " python-django \
     python-xstatic-angular \
     python-xstatic-angular-cookies \
     python-xstatic-angular-mock \
+    python-xstatic-angular-bootstrap \
     python-xstatic-d3 \
     python-xstatic-hogan \
     python-xstatic-jasmine \
@@ -51,6 +52,8 @@ RDEPENDS_${PN} += " python-django \
     python-xstatic-bootstrap-scss \
     python-xstatic-font-awesome \
     python-xstatic-jquery-ui \
+    python-xstatic-smart-table \
+    python-xstatic-term.js \
     python-pyscss \
     python-django-pyscss \
     "
@@ -58,7 +61,7 @@ RDEPENDS_${PN} += " python-django \
 PR = "r3"
 SRCNAME = "horizon"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/juno \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
     file://horizon.init \
     file://fix_bindir_path.patch \
     file://openstack-dashboard-apache.conf \
@@ -66,8 +69,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/juno \
     file://horizon-use-full-package-path-to-test-directories.patch \
     "
 
-SRCREV="ed895a181db0c75000cd0ef34ac0d769a295424c"
-PV="2014.2+git${SRCPV}"
+SRCREV="9b37723a21e88c29732e2a4a9eeeecb9ecf19204"
+PV="2015.1.0b2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d python-dir default_configs openstackchef monitor
