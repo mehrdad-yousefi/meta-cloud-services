@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r0"
 SRCNAME = "heat"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/juno \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://heat.conf \
            file://heat.init \
            file://autoscaling_example.template \
@@ -16,8 +16,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/juno \
            file://heat-tests-change-project_dir-path.patch \
 "
 
-SRCREV="5664854f372b9810d040c615d8a678dbfdfb880e"
-PV="2014.2+git${SRCPV}"
+SRCREV="6d106dee26649202791596062b5a29049e962d80"
+PV="2015.1.0b2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 SERVICECREATE_PACKAGES = "${SRCNAME}-setup ${SRCNAME}-templates ${SRCNAME}-cfn"
@@ -103,7 +103,9 @@ do_install_append() {
         install -m 0755 ${WORKDIR}/heat-engine.init.sh ${D}${sysconfdir}/init.d/heat-engine
     fi
 
-    cp run_tests.sh ${HEAT_CONF_DIR}
+    if [ -e "run_tests.sh" ]; then
+        cp run_tests.sh ${HEAT_CONF_DIR}
+    fi
 }
 
 CHEF_SERVICES_CONF_FILES :="\
@@ -135,7 +137,7 @@ PACKAGES += "${SRCNAME}-cfn"
 
 RDEPENDS_${SRCNAME}-tests += " bash"
 
-
+ALLOW_EMPTY_${SRCNAME}-tests = "1"
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
 ALLOW_EMPTY_${SRCNAME}-templates = "1"
 ALLOW_EMPTY_${SRCNAME}-cfn = "1"
@@ -210,6 +212,7 @@ RDEPENDS_${PN} += " \
         python-pip \
         python-pytz \
         python-pbr \
+        python-oslo.log \
 	"
 
 RDEPENDS_${SRCNAME}-engine = "${PN} ${SRCNAME}-templates ${SRCNAME}-common postgresql postgresql-client python-psycopg2 tgt ${SRCNAME}-cfn"

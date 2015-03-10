@@ -15,8 +15,8 @@ SRC_URI = "git://github.com/openstack/barbican.git;branch=master \
            file://barbican-handle-white-space-in-date-strings.patch \
           "
 
-SRCREV="c171f491014ef504e05a3e86877e28763e72452f"
-PV="2014.2+git${SRCPV}"
+SRCREV="4744374458f14cc54c53daf946e7df2916f5c713"
+PV="2015.1.0b2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit update-rc.d setuptools identity hosts useradd default_configs openstackchef monitor
