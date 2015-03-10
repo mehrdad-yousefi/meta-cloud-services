@@ -33,6 +33,8 @@ EXTRA_OECONF = "\
 	--with-pam-seclib-dir=${base_libdir}/security \
 	"
 
+CONFFILES_${PN} += "${sysconfdir}/nslcd.conf"
+
 FILES_${PN} += "${base_libdir}/security ${datadir}"
 FILES_${PN}-dbg += "${base_libdir}/security/.debug"
 
