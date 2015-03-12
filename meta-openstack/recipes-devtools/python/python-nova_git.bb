@@ -304,6 +304,7 @@ RDEPENDS_${PN} = " libvirt \
 		   python-pyasn1 \
 		   python-setuptools-git \
 		   python-simplejson \
+		   python-jsonschema \
 		   python-six \
 		   python-setuptools \
 		   python-sqlalchemy \

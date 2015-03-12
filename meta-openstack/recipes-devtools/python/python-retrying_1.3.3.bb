@@ -9,8 +9,8 @@ PR = "r0"
 SRCNAME = "retrying"
 SRC_URI = "http://pypi.python.org/packages/source/r/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "534825ad47c3e317f52090f642113870"
-SRC_URI[sha256sum] = "fbeda85e94d103cf8bb36d29644abdc1e9ad367dd2c7160324fa60ee9d5193d0"
+SRC_URI[md5sum] = "2a126aeef8b21324ecdeac15ff46ef17"
+SRC_URI[sha256sum] = "08c039560a6da2fe4f2c426d0766e284d3b736e355f8dd24b37367b0bb41973b"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
