@@ -32,6 +32,7 @@ RDEPENDS_${PN} += " python-django \
     python-swiftclient \
     python-lockfile \
     python-pyyaml \
+    python-pint \
     python-xstatic \
     python-xstatic-jquery \
     python-xstatic-angular \
