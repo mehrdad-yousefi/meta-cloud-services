@@ -19,3 +19,5 @@ inherit setuptools
 RDEPENDS_${PN} += "python-prettytable \
             python-cmd2 \
             python-pyparsing"
+
+CLEANBROKEN = "1"

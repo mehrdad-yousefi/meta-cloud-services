@@ -16,4 +16,12 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit setuptools
 
+# DEPENDS_default: python-pip
 
+DEPENDS += " \
+        python-pip \
+        "
+
+# RDEPENDS_default:
+RDEPENDS_${PN} += " \
+        "

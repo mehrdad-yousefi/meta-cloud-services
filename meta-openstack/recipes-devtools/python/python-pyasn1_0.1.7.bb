@@ -2,15 +2,15 @@ DESCRIPTION = "ASN.1 types and codecs"
 HOMEPAGE = "http://sourceforge.net/projects/pyasn1/"
 SECTION = "devel/python"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=6ccc3f3f25785e9d645699e5d7433942"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=ae098273b2cf8b4af164ac20e32bddf7"
 
 PR = "r0"
 SRCNAME = "pyasn1"
 
-SRC_URI = "http://pypi.python.org/packages/source/p/pyasn1/pyasn1-0.1.6.tar.gz"
+SRC_URI = "http://pypi.python.org/packages/source/p/pyasn1/pyasn1-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "e1851ac1123c50f134cc29420fd5e0bd"
-SRC_URI[sha256sum] = "a7c51782cea4d823454915ad46a580fe53b9adfe6514560d4b9cb590e002be35"
+SRC_URI[md5sum] = "2cbd80fcd4c7b1c82180d3d76fee18c8"
+SRC_URI[sha256sum] = "e4f81d53c533f6bd9526b047f047f7b101c24ab17339c1a7ad8f98b25c101eab"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
