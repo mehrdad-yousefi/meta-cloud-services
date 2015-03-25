@@ -10,8 +10,8 @@ SRCNAME = "pecan"
 SRC_URI = "https://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
 "
 
-SRC_URI[md5sum] = "819ea890e8a0412717b8aa791595725f"
-SRC_URI[sha256sum] = "726d000cc2b5078de560a9a69e29637c59fc93b6707b292a56bdb0a466555922"
+SRC_URI[md5sum] = "e2b329c5088c2adb1510ac9d1af84bca"
+SRC_URI[sha256sum] = "ca6c31e1fb98e4ae780a44a40a88eacb7a19172d3f64d4e31f32049a784a1281"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 

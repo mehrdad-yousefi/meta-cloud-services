@@ -78,9 +78,10 @@ to the bblayers.conf file:
     /meta-cloud-services/meta-openstack-qemu \ # optional, add if using qemu
     /meta-cloud-services/meta-openstack \
     /meta-openembedded/meta-oe \
-    /meta-openembedded/meta-networking \   
-    /meta-openembedded/meta-filesystems
-    /meta-openembedded/meta-webserver
+    /meta-openembedded/meta-networking \
+    /meta-openembedded/meta-python \
+    /meta-openembedded/meta-filesystems \
+    /meta-openembedded/meta-webserver \
     /meta-openembedded/meta-ruby
 
 Package configurations

@@ -9,8 +9,8 @@ PR = "r0"
 SRCNAME = "posix_ipc"
 SRC_URI = "http://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "f3e78df4ab4e0f43ea04ef5c53563970"
-SRC_URI[sha256sum] = "271446eb133efb7410eb51265807aa54e0acb8eb7c2abcf027e51b4cb36d36dd"
+SRC_URI[md5sum] = "85607a392087715ac3a3c7ded2492d06"
+SRC_URI[sha256sum] = "9c93070374ca672725575e5c9874930c8cde69367fb90378b2255e048e31efcb"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
