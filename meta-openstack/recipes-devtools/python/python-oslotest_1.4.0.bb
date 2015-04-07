@@ -9,11 +9,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 PR = "r0"
 SRCNAME = "oslotest"
 
-SRC_URI = "https://pypi.python.org/packages/source/o/${SRCNAME}/${SRCNAME}-1.0.0.tar.gz \
+SRC_URI = "https://pypi.python.org/packages/source/o/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
 "
 
-SRC_URI[md5sum] = "1f7710e4d38b615990737f813704fd58"
-SRC_URI[sha256sum] = "cf05f4ff0cbf84ad0b5d1bef7c46d719eaf4408107e65a32a4500cf707d1a1e7"
+SRC_URI[md5sum] = "a573e1943869f0841f487cf94a121321"
+SRC_URI[sha256sum] = "4226c044198792da7e14ca76895656e8d6e4b256eab184a6c81477b373e059a6"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
@@ -26,4 +26,5 @@ RDEPENDS_${PN} = "python-fixtures \
                   python-testtools \
                   python-mock \
                   python-mox \
+                  bash \
 "
