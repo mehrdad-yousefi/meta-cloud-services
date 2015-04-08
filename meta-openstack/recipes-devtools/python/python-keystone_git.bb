@@ -284,6 +284,8 @@ RDEPENDS_${PN} += " \
         python-pysaml2 \
         python-oslo.utils \
         python-oauthlib \
+        python-fixtures \
+        python-oslotest \
         "
 
 RDEPENDS_${SRCNAME}-tests += " bash"
