@@ -11,8 +11,8 @@ SRC_URI = "https://launchpad.net/cloud-init/trunk/${PV}/+download/${BPN}-${PV}.t
            file://distros-add-windriver-skeleton-distro-file.patch \
            file://cloud.cfg"
 
-SRC_URI[md5sum] = "65053a7b2917ad1c26dc0a4d144b59c0"
-SRC_URI[sha256sum] = "34152e0168c2ffc06284b4fe01ff43f856219228ddb995d5afe4f9a77420d779"
+SRC_URI[md5sum] = "cd392e943dd0165e90a6d56afd0e4ad3"
+SRC_URI[sha256sum] = "9e8fd22eb7f6e40ae6a5f66173ddc3cc18f65ee406c460a728092b37db2f3ed7"
 
 S = "${WORKDIR}/${BPN}-${PV}"
 
