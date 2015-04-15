@@ -7,10 +7,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d2794c0df5b907fdace235a619d80314"
 PR = "r0"
 
 SRCNAME = "python-cephclient"
-SRC_URI = "http://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
+SRC_URI = "http://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-v${PV}.tar.gz"
 
-SRC_URI[md5sum] = "026aefd497c0426317d951f9a6e6f251"
-SRC_URI[sha256sum] = "23ceae1f30238f7f57912422cf9baa43b7c80ed88fc14ec749986eef5f2d6007"
+SRC_URI[md5sum] = "e3746607f1af1573a241b4995c10c938"
+SRC_URI[sha256sum] = "9776b786da2aebdc0439ea2f809cc8923f52bc0cf610f77a9c1348466961134b"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
