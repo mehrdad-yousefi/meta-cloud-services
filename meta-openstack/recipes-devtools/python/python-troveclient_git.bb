@@ -11,8 +11,8 @@ SRC_URI = "\
 	git://github.com/openstack/python-troveclient.git;branch=master \
 	"
 
-PV="1.0.8+git${SRCPV}"
-SRCREV="51aa1a8dbd1b45e6abdaf571d1d73a6d7405fd3a"
+PV = "1.0.9+git${SRCPV}"
+SRCREV = "a36ebe539ce0affef5388b7edd7a6a230a0fde6c"
 S = "${WORKDIR}/git"
 
 inherit setuptools hosts default_configs

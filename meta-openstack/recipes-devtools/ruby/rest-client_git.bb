@@ -7,13 +7,13 @@ Sinatra's microframework style of specifying actions: get, put, post, \
 delete."
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://README.rdoc;beginline=285;md5=f649e8be3b8f05776195b7aa04d974c6"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=8d4c0cdd6bc54a36dbe54c0f2fa70797"
 
 PR = "r0"
 
-BPV = "1.6.7"
+BPV = "1.7.3"
 PV = "${BPV}"
-SRCREV = "d96be9d1dc8b1b4c04d90a62244b87ded8d86f0c"
+SRCREV = "988d5a81ff3081c1c6a3ab267e81a9fff94bd9e4"
 
 S = "${WORKDIR}/git"
 

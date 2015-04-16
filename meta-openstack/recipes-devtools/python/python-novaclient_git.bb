@@ -11,8 +11,8 @@ SRC_URI = "\
 	file://nova-api-check.sh \
 	"
 
-PV="2.21.0+git${SRCPV}"
-SRCREV="bfd029c8ef500af705159a5f3d5fa74e39c43096"
+PV = "2.23.0+git${SRCPV}"
+SRCREV = "e0f5072907a00d48a183dd8fc91a6cf6038ca279"
 S = "${WORKDIR}/git"
 
 inherit setuptools monitor

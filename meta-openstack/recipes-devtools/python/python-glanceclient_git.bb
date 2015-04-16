@@ -9,8 +9,8 @@ DEPENDS += " \
         python-pbr \
         "
 
-SRCREV = "69361a146ecd0cd775579e5dcf34692e9c6328bc"
-PV = "0.13.1+git${SRCPV}"
+SRCREV = "26280ed58b5d16feed4ab27be063d305ef48a252"
+PV = "0.17.0+git${SRCPV}"
 PR = "r0"
 
 SRC_URI = "\

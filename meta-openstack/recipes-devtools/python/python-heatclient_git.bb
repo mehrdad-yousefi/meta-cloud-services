@@ -23,8 +23,8 @@ SRCNAME = "heatclient"
 
 SRC_URI = "git://github.com/openstack/python-heatclient.git;branch=master"
 
-PV="0.3.0+git${SRCPV}"
-SRCREV="065d02499ad77b9c481a83dce973cfa4fbb26711"
+PV = "0.4.0+git${SRCPV}"
+SRCREV = "6d528f005742263837d05250662bf6214a703da8"
 S = "${WORKDIR}/git"
 
 inherit setuptools
