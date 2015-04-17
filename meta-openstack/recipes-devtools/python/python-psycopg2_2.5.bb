@@ -1,7 +1,7 @@
 DESCRIPTION = "Python-PostgreSQL Database Adapter"
 HOMEPAGE = "http://initd.org/psycopg/"
 SECTION = "devel/python"
-LICENSE = "GPLv3+
+LICENSE = "GPLv3+"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2c9872d13fa571e7ba6de95055da1fe2"
 DEPENDS = "postgresql"
 
