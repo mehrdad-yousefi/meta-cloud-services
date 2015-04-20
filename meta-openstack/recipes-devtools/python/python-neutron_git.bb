@@ -15,14 +15,13 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://metadata_agent.ini \
            file://neutron-dhcp-agent-netns-cleanup.cron \
            file://0001-neutron.conf-jumpstart-nova-state-reporting-configur.patch \
-           file://neutron-test-nec-plugin-extensions-location.patch \
 	  "
 
 # TBD: update or drop
 # file://uuid_wscheck.patch
 
-SRCREV="1948efa261e47b08e2cde4828321614ee6e169be"
-PV="2015.1.0b2+git${SRCPV}"
+SRCREV = "e86077e8452891cc176841dd6b6316831e12abc1"
+PV = "2015.1.0b3+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -137,8 +136,6 @@ do_install_append() {
     sed -i '/\[keystone_authtoken\]/aidentity_uri=http://127.0.0.1:8081/keystone/admin/' ${NEUTRON_CONF_DIR}/neutron.conf
 
     cp run_tests.sh ${NEUTRON_CONF_DIR}
-
-    sed 's:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g' -i ${D}${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}/tests/unit/nec/test_nec_plugin.py
 }
 
 pkg_postinst_${SRCNAME}-setup () {
