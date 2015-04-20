@@ -20,8 +20,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
 # file://keystone-remove-git-commands-in-tests.patch 
 # file://keystone-explicitly-import-localcontext-from-oslo.me.patch
 
-SRCREV="0e633302e87261fdb3b0126c632fd676fc0a4d39"
-PV="2015.1.0b2+git${SRCPV}"
+SRCREV = "5933546ecbdb5a52abe31413ac7a18cc49ab23df"
+PV = "2015.1.0b3+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
