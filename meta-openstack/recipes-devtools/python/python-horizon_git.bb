@@ -70,8 +70,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
     file://horizon-use-full-package-path-to-test-directories.patch \
     "
 
-SRCREV="9b37723a21e88c29732e2a4a9eeeecb9ecf19204"
-PV="2015.1.0b2+git${SRCPV}"
+SRCREV = "a174b4294dd26967953d404207763828c83cc2f7"
+PV = "2015.1.0b3+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d python-dir default_configs openstackchef monitor
