@@ -23,7 +23,7 @@ MANAGE_HOSTS ?= "False"
 HOSTNAME ?= ""
 
 do_install_prepend() {
-    sed -e 's:/usr/lib/${BPN}:${libdir}/${BPN}:' -i ${S}/setup.py
+    sed -e 's:/lib/${BPN}:${base_libdir}/${BPN}:' -i ${S}/setup.py
 }
 
 do_install_append() {
