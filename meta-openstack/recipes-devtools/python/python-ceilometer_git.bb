@@ -16,8 +16,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
 #   file://ceilometer-builtin-tests-config-location.patch
 
 
-SRCREV="b2871217fec965c77581b0f4a33608dad7867d4b"
-PV="2015.1.0b2+git${SRCPV}"
+SRCREV = "348ecb0861637da5575b094f8fa3fab1e3770928"
+PV = "2015.1.0b3+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 CEILOMETER_SECRET ?= "12121212"
