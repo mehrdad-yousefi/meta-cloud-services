@@ -4,13 +4,12 @@ SECTION = "devel/python"
 LICENSE = "Apache-2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=03731a0e7dbcb30cecdcec77cc93ec29"
 
-PR = "r0"
 
 SRCNAME = "rfc3986"
 SRC_URI = "http://pypi.python.org/packages/source/r/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "a80b964a92c3a40e57ec95f7c0d68fa9"
-SRC_URI[sha256sum] = "8a7b3f6cfdfb969c2e876513e87c30ebe1e4bdc9fae4a63c701eee88bbec9b22"
+SRC_URI[md5sum] = "84151eec209c99e71edc760745510da4"
+SRC_URI[sha256sum] = "85aec4beb1edc4fa7cb7466cca1410237cb3e344968d07126e428bc62adb8f3c"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
