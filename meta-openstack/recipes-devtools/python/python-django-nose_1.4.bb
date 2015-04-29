@@ -7,13 +7,12 @@ SECTION = "devel/python"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7f88f52f66738ec7259424ce46e855c2"
 
-PR = "r0"
 SRCNAME = "django-nose"
 
 SRC_URI = "http://pypi.python.org/packages/source/d/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \ 
           "
-SRC_URI[md5sum] = "d39d72ac877cd67af6b41e129911fbfd"
-SRC_URI[sha256sum] = "3667d26a41fec30364a0ef72580832ca5328802d553f6d6e72af5ac21cb36365"
+SRC_URI[md5sum] = "2713d95286ea49860458a312d2efe653"
+SRC_URI[sha256sum] = "26cef3c6f62df2eee955a25195de6f793881317c0f5fd1a1c6f9e22f351a9313"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
