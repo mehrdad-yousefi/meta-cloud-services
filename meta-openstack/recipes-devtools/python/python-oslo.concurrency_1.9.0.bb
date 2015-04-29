@@ -4,13 +4,12 @@ SECTION = "devel/python"
 LICENSE = "Apache-2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 
-PR = "r0"
 
 SRCNAME = "oslo.concurrency"
 SRC_URI = "http://pypi.python.org/packages/source/o/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "83baf51766c3acf9929223762689ebfd"
-SRC_URI[sha256sum] = "89b62c029f0ecfcc92da22277e93fbe74363d459208bf62d2c9e7a3da0019e83"
+SRC_URI[md5sum] = "32d21336b17086521599f5e15891a2bb"
+SRC_URI[sha256sum] = "6b47dfdc8213226053b95def19ed3c7fc492b3d4c1b3c0a61381cddf8dbbf67c"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
