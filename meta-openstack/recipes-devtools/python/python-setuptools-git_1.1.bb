@@ -4,15 +4,14 @@ SECTION = "devel/python"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3775480a712fc46a69647678acb234cb"
 
-PR = "r0"
 SRCNAME = "setuptools-git"
 
-SRC_URI = "https://pypi.python.org/packages/source/s/${SRCNAME}/${SRCNAME}-${PV}b1.tar.gz"
+SRC_URI = "https://pypi.python.org/packages/source/s/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "ac67cbaa1336b7de25b1b5ff93b4e90d"
-SRC_URI[sha256sum] = "dccd496b4166315c2b6b842f3dcd417b22e2cb43aaa4a8983b1ea0ceae0fe328"
+SRC_URI[md5sum] = "7b5967e9527c789c3113b07a1f196f6e"
+SRC_URI[sha256sum] = "047d7595546635edebef226bc566579d422ccc48a8a91c7d32d8bd174f68f831"
 
-S = "${WORKDIR}/${SRCNAME}-${PV}b1"
+S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit setuptools
 
