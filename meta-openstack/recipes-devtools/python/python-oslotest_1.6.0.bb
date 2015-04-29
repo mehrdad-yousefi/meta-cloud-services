@@ -6,14 +6,13 @@ SECTION = "devel/python"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 
-PR = "r0"
 SRCNAME = "oslotest"
 
 SRC_URI = "https://pypi.python.org/packages/source/o/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
 "
 
-SRC_URI[md5sum] = "a573e1943869f0841f487cf94a121321"
-SRC_URI[sha256sum] = "4226c044198792da7e14ca76895656e8d6e4b256eab184a6c81477b373e059a6"
+SRC_URI[md5sum] = "54ba62e2e13619616ddce772fb267106"
+SRC_URI[sha256sum] = "cb65b53b753375b669dcdb4717c362a205d19e3d16ca26310c0916cfd359354c"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
