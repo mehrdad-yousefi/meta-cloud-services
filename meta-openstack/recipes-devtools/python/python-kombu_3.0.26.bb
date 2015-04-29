@@ -2,15 +2,14 @@ DESCRIPTION = "A messaging framework for Python"
 HOMEPAGE = "http://kombu.readthedocs.org"
 SECTION = "devel/python"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=34442d8097d82121c4a8c1ab10e7d471"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=a25a2e176842f3a9934f9d7ee8e0edae"
 
-PR = "r0"
 SRCNAME = "kombu"
 
 SRC_URI = "https://pypi.python.org/packages/source/k/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "8f33b7e9c4b5757e151b455f51a3a4be"
-SRC_URI[sha256sum] = "7da5e90cde3f8c9aea7210345ee15e66da4438bee56087cb0f00e8c7f03dd66a"
+SRC_URI[md5sum] = "dda05763cd4b72a131fe1ef9ba93d542"
+SRC_URI[sha256sum] = "1f565abd44c4b7dfaa4dd543d52f982d2f006aba0a2b3830542b4d25a801fe09"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
