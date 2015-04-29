@@ -7,14 +7,13 @@ SECTION = "devel/python"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD;md5=3775480a712fc46a69647678acb234cb"
 
-PR = "r0"
 SRCNAME = "coverage"
 
 SRC_URI = "http://pypi.python.org/packages/source/c/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
           "
 
-SRC_URI[md5sum] = "c47b36ceb17eaff3ecfab3bcd347d0df"
-SRC_URI[sha256sum] = "d1aea1c4aa61b8366d6a42dd3650622fbf9c634ed24eaf7f379c8b970e5ed44e"
+SRC_URI[md5sum] = "37f4d8ae679b2c43a87da8d519817a3b"
+SRC_URI[sha256sum] = "07a36ac3c82f5961c45565fd5575b4c568a8fc59e8d5d29a5b04dc8597a07e0e"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
