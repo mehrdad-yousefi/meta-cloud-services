@@ -4,13 +4,12 @@ SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://README.md;md5=7624ac071dec291ca8ef74e62e536a7a"
 
-PR = "r0"
 
 SRCNAME = "python-i18n"
 SRC_URI = "http://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "fb6a925052f6927a31d5fd8698e73a36"
-SRC_URI[sha256sum] = "f95d5e679e026424e7f75a548d9781daa1fa4454b4fd3ef915942a5615815c23"
+SRC_URI[md5sum] = "08b8c247add9f90806c4742a685fdb88"
+SRC_URI[sha256sum] = "e1d832ff7d1d39ce593793cc709b2344aa8fdf321cf707081335f146160d9f20"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
