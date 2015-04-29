@@ -4,13 +4,12 @@ SECTION = "devel/python"
 LICENSE = "Apache-2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 
-PR = "r0"
 
 SRCNAME = "oslo.middleware"
 SRC_URI = "http://pypi.python.org/packages/source/o/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "bca65b0372bd1f13eefa4c7205c9df99"
-SRC_URI[sha256sum] = "d300f8342b5faaf712890d58da111789740aebb4b46874e41b45110b704719cb"
+SRC_URI[md5sum] = "c5ba484ce671a81fa8620bac008796e3"
+SRC_URI[sha256sum] = "0647456ebf1611e2a0efc445673af3583780b0ccf694f61a8830d54fb5d6f63c"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
