@@ -4,14 +4,13 @@ SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9f8de96acfc347c41ce7c15f2e918ef6"
 
-PR = "r0"
 SRCNAME = "django_compressor"
 
 SRC_URI = "https://pypi.python.org/packages/source/d/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
 "
 
-SRC_URI[md5sum] = "dc050f1a85f83f927f94bcb09e8bdd0f"
-SRC_URI[sha256sum] = "b26034230efcef7d60e5267890eda656dfc49c567f27125d907eee4fe7f9a6ec"
+SRC_URI[md5sum] = "274dd82a45ddd13e111852dd101a5924"
+SRC_URI[sha256sum] = "0189fd1dbf87d802f4e4e21ebc9220f29bbb7771b252a958ad6119f61453e22e"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
