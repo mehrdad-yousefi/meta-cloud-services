@@ -4,13 +4,12 @@ SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=28155276e8df3f75bbd327335f66f2fa"
 
-PR = "r0"
 
 SRCNAME = "pyScss"
 SRC_URI = "http://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "9a5c24922643f6e90ea03d520700521b"
-SRC_URI[sha256sum] = "6f486363f5fac20d218dc5d11b8af4e5b52242a59e5067f42ca227152a7df3cc"
+SRC_URI[md5sum] = "9527b4864cd6023f77a8277e6fb773d7"
+SRC_URI[sha256sum] = "d0323110ecc7d3ead6b99cfec31301306928130e4d0a9eb13226bf390aba8c0e"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
