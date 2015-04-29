@@ -4,13 +4,12 @@ SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=56472ad6de4caf50e05332a34b66e778"
 
-PR = "r0"
 SRCNAME = "eventlet"
 
 SRC_URI = "http://pypi.python.org/packages/source/e/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "b66053e6dbfd5a6996750fa09b0af6ba"
-SRC_URI[sha256sum] = "de9c23eb94e55150b25150822a28f91656028987353fef3f687cc285d018dd5a"
+SRC_URI[md5sum] = "12c855e37dd688d3137ecc88d5b8f05b"
+SRC_URI[sha256sum] = "d39e4124a7b10055c78d5c51c2ee23789a8ebf4f8b811fee4533542ecd3ac99a"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
