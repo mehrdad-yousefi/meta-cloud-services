@@ -4,14 +4,13 @@ SECTION = "devel/python"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-PR = "r0"
 SRCNAME = "django_openstack_auth"
 
 SRC_URI = "https://pypi.python.org/packages/source/d/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
 "
 
-SRC_URI[md5sum] = "a201c7efbf552042f0bae64814454162"
-SRC_URI[sha256sum] = "650b3fd528d179a36cf629aa7dad53e03aed6cf9300ea4a337260887e71e9b53"
+SRC_URI[md5sum] = "a80e3b9660016336c5a2e4d4dd8a81a2"
+SRC_URI[sha256sum] = "d7cb1e15c8582d6ac217619a891371e6dbb6bd4e15959214198490ea68e45e26"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
