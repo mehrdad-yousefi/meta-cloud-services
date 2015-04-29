@@ -2,15 +2,14 @@ DESCRIPTION = "A python package that works to provide a nice set of testing util
 HOMEPAGE = "https://github.com/yahoo/Zake"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=7143f0ea4f9516655b2b2a360e8e71f7"
+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=33573af7505a94ff3d122a7920b2c735"
 
-PR = "r0"
 
 SRCNAME = "zake"
 SRC_URI = "http://pypi.python.org/packages/source/z/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "51a9570a1e93d7eee602a240b0f5ba21"
-SRC_URI[sha256sum] = "b6ed2f9c957225bf371a76dccf25a4300f33f61aa2fd560ab89673200e52abfc"
+SRC_URI[md5sum] = "bd8db293a78c22171ecfdd54f4d65c63"
+SRC_URI[sha256sum] = "2e5bcb215e366e682fd05dd1df4f2e6affceefa5d3781c2987a21fd597659a21"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
