@@ -2,15 +2,14 @@ DESCRIPTION = "A comprehensive HTTP client library"
 HOMEPAGE = "https://code.google.com/p/httplib2/"
 SECTION = "devel/python"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=baf943a2e2e7f980951b3c56e0c38421"
+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=6010ef08fe55505a5e11ad1f1fb90fb8"
 
-PR = "r0"
 SRCNAME = "httplib2"
 
 SRC_URI = "https://pypi.python.org/packages/source/h/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "09d8e8016911fc40e2e4c58f1aa3ec24"
-SRC_URI[sha256sum] = "39ea8c6a6d9f595c177a16134fc49a990ad8d382758cbf469c8659662f2f51ab"
+SRC_URI[md5sum] = "c49590437e4c5729505d034cd34a8528"
+SRC_URI[sha256sum] = "bc6339919a5235b9d1aaee011ca5464184098f0c47c9098001f91c97176583f5"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
