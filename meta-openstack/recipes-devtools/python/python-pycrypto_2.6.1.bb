@@ -4,14 +4,13 @@ SECTION = "devel/python"
 LICENSE = "PSFv2"
 LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=35f354d199e8cb7667b059a23578e63d"
 
-PR = "r0"
 SRCNAME = "pycrypto"
 
 SRC_URI = "https://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
            file://cross-compiling.patch"
 
-SRC_URI[md5sum] = "88dad0a270d1fe83a39e0467a66a22bb"
-SRC_URI[sha256sum] = "7293c9d7e8af2e44a82f86eb9c3b058880f4bcc884bf3ad6c8a34b64986edde8"
+SRC_URI[md5sum] = "55a61a054aa66812daf5161a0d5d7eda"
+SRC_URI[sha256sum] = "f2ce1e989b272cfcb677616763e0a2e7ec659effa67a88aa92b3a65528f60a3c"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
