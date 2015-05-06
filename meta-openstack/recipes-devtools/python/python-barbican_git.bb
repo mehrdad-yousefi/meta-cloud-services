@@ -8,15 +8,15 @@ PR = "r0"
 SRCNAME = "barbican"
 BARBICAN_MAX_PACKET_SIZE ?= "65535"
 
-SRC_URI = "git://github.com/openstack/barbican.git;branch=master \
+SRC_URI = "git://github.com/openstack/barbican.git;branch=stable/kilo \
            file://barbican.init \
            file://barbican-increase-buffer-size-to-support-PKI-tokens.patch \
            file://barbican-fix-path-to-find-configuration-files.patch \
            file://barbican-handle-white-space-in-date-strings.patch \
           "
 
-SRCREV = "12966ea7ad40622e4189d832d13f4d9bfb9f3ada"
-PV = "2015.1.0b3+git${SRCPV}"
+SRCREV = "e6f05febbe18a86e4e6b05acc5f4868fa3beb291"
+PV = "2015.1.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit update-rc.d setuptools identity hosts useradd default_configs openstackchef monitor
