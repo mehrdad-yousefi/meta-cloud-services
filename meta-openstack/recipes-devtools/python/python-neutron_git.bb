@@ -4,10 +4,9 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-PR = "r1"
 SRCNAME = "neutron"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
            file://neutron-server.init \
            file://neutron-agent.init \
            file://l3_agent.ini \
@@ -20,8 +19,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
 # TBD: update or drop
 # file://uuid_wscheck.patch
 
-SRCREV = "e86077e8452891cc176841dd6b6316831e12abc1"
-PV = "2015.1.0b3+git${SRCPV}"
+SRCREV = "7260e0e3fc2ea479e80e0962624aca7fd38a1f60"
+PV = "2015.1.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
