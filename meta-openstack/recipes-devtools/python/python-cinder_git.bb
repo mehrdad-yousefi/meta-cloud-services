@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r0"
 SRCNAME = "cinder"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
     file://cinder.conf \
     file://cinder.init \
     file://cinder-volume \
@@ -21,8 +21,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
 # file://0001-run_tests-respect-tools-dir.patch
 # file://fix_cinder_memory_leak.patch 
 
-SRCREV="f4f46e972004eca66e4751a836156c342e448621"
-PV="2015.1.0b2+git${SRCPV}"
+SRCREV = "5987bb2290f629e59b0bcced2f8fe22cdeb9cc6d"
+PV = "2015.1.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d identity default_configs hosts openstackchef monitor
