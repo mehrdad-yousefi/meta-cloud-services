@@ -6,12 +6,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
 DEPENDS = "sudo libvirt"
 
-PR = "r0"
 SRCNAME = "nova"
 
 FILESEXTRAPATHS_append := "${THISDIR}/${PN}"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
            file://nova-add-migrate.cfg-to-the-MANIFEST.patch \
            file://neutron-api-set-default-binding-vnic_type.patch \
            "
@@ -27,8 +26,8 @@ SRC_URI += "file://nova-all \
             file://nova.conf \
             file://openrc \
            "
-SRCREV = "dfcfa82af96bae12265875cb313d58109e536480"
-PV = "2015.1.0b3+git${SRCPV}"
+SRCREV = "8397b6464af520903f546ce4c6d51a2eb5b4c8a8"
+PV = "2015.1.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 

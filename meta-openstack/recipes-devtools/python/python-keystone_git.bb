@@ -4,10 +4,9 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-PR = "r2"
 SRCNAME = "keystone"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
            file://keystone.conf \
            file://identity.sh \
            file://keystone \
@@ -20,8 +19,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
 # file://keystone-remove-git-commands-in-tests.patch 
 # file://keystone-explicitly-import-localcontext-from-oslo.me.patch
 
-SRCREV = "5933546ecbdb5a52abe31413ac7a18cc49ab23df"
-PV = "2015.1.0b3+git${SRCPV}"
+SRCREV = "5d3b31f9c3d34599ff8a83eeb7530fc6e0b1b67b"
+PV = "2015.1.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 

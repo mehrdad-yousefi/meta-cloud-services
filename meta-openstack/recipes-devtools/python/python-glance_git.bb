@@ -7,15 +7,15 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r0"
 SRCNAME = "glance"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
            file://glance.init \
            "
 
 # removed. juno uses store library: file://0001-glance-store-only-load-known-stores-not-all-stores.patch
 #                                   file://glance-change-builtin-tests-config-location.patch
 
-SRCREV = "232a8786dd01d4effc2ba15802792b08d0373676"
-PV = "2015.1.0b3+git${SRCPV}"
+SRCREV = "93b0d5fce3a41e4a3a549f98f78b6681cbc3ea95"
+PV = "2015.1.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
