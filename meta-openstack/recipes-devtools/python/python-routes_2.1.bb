@@ -15,4 +15,4 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit setuptools
 
-
+RDEPENDS_${PN} += "python-repoze.lru"
