@@ -39,6 +39,7 @@ RDEPENDS_${PN} += " python-django \
     python-xstatic-angular-cookies \
     python-xstatic-angular-mock \
     python-xstatic-angular-bootstrap \
+    python-xstatic-angular-irdragndrop \
     python-xstatic-d3 \
     python-xstatic-hogan \
     python-xstatic-jasmine \
