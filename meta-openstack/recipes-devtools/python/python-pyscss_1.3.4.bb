@@ -25,6 +25,7 @@ DEPENDS += " \
 
 # RDEPENDS_default: 
 RDEPENDS_${PN} += " \
+        python-enum \
         "
 
 CLEANBROKEN = "1"

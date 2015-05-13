@@ -281,6 +281,7 @@ RDEPENDS_${PN} += " \
         python-dogpile.cache \
         python-pbr \
         python-pysaml2 \
+        python-oslo.policy \
         python-oslo.utils \
         python-oauthlib \
         python-fixtures \
