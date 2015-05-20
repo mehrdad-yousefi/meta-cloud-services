@@ -32,6 +32,7 @@ RDEPENDS_${PN} += " \
 	python-requests \
 	python-simplejson \
 	python-oslo.config \
+	python-oslo.serialization \
 	python-pbr \
 	"
 
