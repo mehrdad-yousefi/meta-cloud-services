@@ -7,7 +7,6 @@ DEPENDS = "\
            python-pyyaml \
            python-jinja2 \
            python-markupsafe \
-           python-requests \
            python-pyzmq \
            python-pycrypto \
            python-m2crypto \
@@ -28,8 +27,8 @@ SRC_URI = "http://pypi.python.org/packages/source/s/${SRCNAME}/${SRCNAME}-${PV}.
            file://roster \
 "
 
-SRC_URI[md5sum] = "622404c0a6c38224f82a4c7b2927db61"
-SRC_URI[sha256sum] = "0adf4c138ebd26745b1d1157be0772d89da3582fe8a6622a8031cbe32a28e9f3"
+SRC_URI[md5sum] = "5091f15202c852a3e92692035b05c872"
+SRC_URI[sha256sum] = "e0d5b3ec220d8c956120bf2faa00bb7013e500eef7a697bc428cb179a136a5d2"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
@@ -90,7 +89,7 @@ INITSCRIPT_PARAMS_${PN}-minion = "defaults"
 SUMMARY_${PN}-common = "shared libraries that salt requires for all packages"
 DESCRIPTION_${PN}-common ="${DESCRIPTION_COMMON} This particular package provides shared libraries that \
 salt-master, salt-minion, and salt-syndic require to function."
-RDEPENDS_${PN}-common = "python (>= 2.7) python (< 2.8) python-jinja2 python-pyyaml python-requests"
+RDEPENDS_${PN}-common = "python (>= 2.7) python (< 2.8) python-jinja2 python-pyyaml"
 RRECOMMENDS_${PN}-common = "lsb"
 RSUGGESTS_${PN}-common = "python-mako python-git"
 RCONFLICTS_${PN}-common = "python-mako (< 0.7.0)"
@@ -137,7 +136,7 @@ INITSCRIPT_PARAMS_${PN}-syndic = "defaults"
 
 SUMMARY_${PN}-cloud = "public cloud VM management system"
 DESCRIPTION_${PN}-cloud = "provision virtual machines on various public clouds via a cleanly controlled profile and mapping system."
-RDEPENDS_${PN}-cloud = "python ${PN}-common (= ${EXTENDPKGV}) python-msgpack"
+RDEPENDS_${PN}-cloud = "python ${PN}-common (= ${EXTENDPKGV}) python-msgpack python-requests"
 RSUGGESTS_${PN}-cloud = "python-netaddr python-botocore"
 CONFFILES_${PN}-cloud = "${sysconfdir}/${PN}/cloud"
 FILES_${PN}-cloud = "${bindir}/${PN}-cloud ${sysconfdir}/${PN}/cloud.conf.d/ ${sysconfdir}/${PN}/cloud.profiles.d/ ${sysconfdir}/${PN}/cloud.providers.d/ ${CONFFILES_${PN}-cloud}"
