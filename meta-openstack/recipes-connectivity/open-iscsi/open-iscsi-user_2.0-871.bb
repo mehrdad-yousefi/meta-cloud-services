@@ -1,6 +1,6 @@
 DESCRIPTION = "Open-iSCSI project is a high performance, transport independent, multi-platform implementation of RFC3720."
 HOMEPAGE = "http://www.open-iscsi.org/"
-LICENSE = "GPL"
+LICENSE = "GPLv2"
 PR = "r1"
 
 inherit systemd
@@ -38,15 +38,18 @@ SRC_URI_append = "  file://iscsi-initiator                                   \
                     file://iscsi-initiator.service                           \
                     file://iscsi-initiator-targets.service                   \
                  "
+RDEPENDS_${PN} += "bash"
 RDEPENDS_${PN}-systemd += "${PN}"
 FILES_${PN}-systemd +=  "   ${base_libdir}/systemd                  \
                             ${sysconfdir}/default/iscsi-initiator   \
                         "
 SYSTEMD_PACKAGES = "${PN}-systemd"
-SYSTEMD_SERVICE = " iscsi-initiator.service iscsi-initiator-targets.service "
-
+SYSTEMD_SERVICE_${PN}-systemd = "iscsi-initiator.service iscsi-initiator-targets.service"
 
 do_install_append () {
         install -d ${D}${sysconfdir}/default/
         install -m 0644 ${WORKDIR}/iscsi-initiator ${D}${sysconfdir}/default/
+        install -d ${D}${systemd_unitdir}/system
+        install -m 0644 ${WORKDIR}/iscsi-initiator.service ${D}${systemd_unitdir}/system/
+        install -m 0644 ${WORKDIR}/iscsi-initiator-targets.service ${D}${systemd_unitdir}/system/
 }
