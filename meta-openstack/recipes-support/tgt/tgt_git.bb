@@ -4,8 +4,8 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://scripts/tgtd.spec;beginline=7;endline=7;md5=21c19ea7dad04648b9c2f791b6e29b4c"
 DEPENDS = "sg3-utils"
 
-SRCREV = "0ee382bab57a8ecd9ece18d511bd098298478409"
-PV = "1.0.36+git${SRCPV}"
+SRCREV = "3f779c0338fa7a97d5d0defbdb3ad06167b791d3"
+PV = "1.0.37+git${SRCPV}"
 PR = "r0"
 
 SRC_URI = "git://github.com/fujita/tgt.git \
