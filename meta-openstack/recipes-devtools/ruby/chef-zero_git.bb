@@ -14,11 +14,9 @@ you start it."
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=8f7bb094c7232b058c7e9f2e431f389c"
 
-PR = "r0"
-
-BPV = "2.0.2"
+BPV = "4.2.3"
 PV = "${BPV}"
-SRCREV = "1c87a463637b3d0c58755e2362cc8ef35b6da1fd"
+SRCREV = "28fe2928469885b0138de4d4270c6eccac8ab482"
 
 S = "${WORKDIR}/git"
 
