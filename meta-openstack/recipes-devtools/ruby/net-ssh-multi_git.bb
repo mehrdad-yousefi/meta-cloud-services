@@ -13,9 +13,9 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=6c99c0cc0901fbc3607fe997f9898d69"
 
 PR = "r0"
 
-BPV = "1.2.0"
+BPV = "1.2.1"
 PV = "${BPV}"
-SRCREV = "b659f2884b2c9abdbe3bbf3c844937a0799ed5ac"
+SRCREV = "5b668d5ef34102c9ac159a8f21c889fdc7f99f1b"
 
 S = "${WORKDIR}/git"
 
