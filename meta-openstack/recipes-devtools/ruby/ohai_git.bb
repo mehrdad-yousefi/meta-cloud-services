@@ -13,14 +13,14 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8f7bb094c7232b058c7e9f2e431f389c"
 
 PR = "r0"
 
-BPV = "7.0.4"
+BPV = "8.5.0"
 PV = "${BPV}"
-SRCREV = "b306186701201bfc78b7bcc8908ee3524434cc93"
+SRCREV = "5c166cf3fa4b2af541ee54855aae73c809044b3d"
 
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
-    git://github.com/opscode/ohai.git;branch=7-stable \
+    git://github.com/opscode/ohai.git \
     "
 
 inherit ruby
