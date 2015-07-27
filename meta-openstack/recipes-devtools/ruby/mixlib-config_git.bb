@@ -10,9 +10,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8f7bb094c7232b058c7e9f2e431f389c"
 
 PR = "r0"
 
-BPV = "2.1.0"
+BPV = "2.2.1"
 PV = "${BPV}"
-SRCREV = "c5e2dee2beb5fdd17442ff92e520f2ef01d17ee5"
+SRCREV = "d7bdd7c999e13a0bd67607011731a536323dd51c"
 
 S = "${WORKDIR}/git"
 
