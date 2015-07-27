@@ -8,18 +8,18 @@ determine defined filename extensions for MIME types, or to use \
 filename extensions to look up the likely MIME type definitions."
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://Licence.rdoc;md5=4e3affb3326cd205b1b30bc0e1e8fd66"
+LIC_FILES_CHKSUM = "file://Licence.rdoc;md5=ea44698b8e6523aa4ebc4e71e0ed43f1"
 
 PR = "r0"
 
-BPV = "1.25.1"
+BPV = "2.5"
 PV = "${BPV}"
-SRCREV = "6be836f59a041893cfc1c25668b3aa3552a7e334"
+SRCREV = "bc15d62118b59aabbc9cb6e5734b65bf3bc273f0"
 
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
-    git://github.com/halostatue/mime-types.git;branch=v1-bug-fixes \
+    git://github.com/halostatue/mime-types.git \
     "
 
 inherit ruby
