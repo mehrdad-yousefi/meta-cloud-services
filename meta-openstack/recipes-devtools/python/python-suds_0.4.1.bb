@@ -9,7 +9,7 @@ SRCNAME = "suds"
 
 SRC_URI = "https://fedorahosted.org/releases/s/u/${SRCNAME}/${PN}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "05523dfd3fc0de3f19dde4aca5dd17e9"
-SRC_URI[sha256sum] = "66a2ee8dab56834d0a6b4ad88ed3daf2ff9824eeb9e5f66c93bf966d6db309d1"
+SRC_URI[md5sum] = "95a2f04378931e973cbb3cca8f8d9765"
+SRC_URI[sha256sum] = "dd711c2635483733cd3aebf5073edf338595a2d2cae1398041f0273e9bdaac66"
 
 inherit setuptools
