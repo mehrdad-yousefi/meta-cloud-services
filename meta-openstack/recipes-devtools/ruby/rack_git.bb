@@ -9,18 +9,18 @@ API for web servers, web frameworks, and software in between (the \
 so-called middleware) into a single method call."
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=53d9c9f5c6fd716007e621045f6caa49"
+LIC_FILES_CHKSUM = "file://COPYING;md5=ad65b6b9669213d45aa35a0730d58ac2"
 
 PR = "r0"
 
-BPV = "1.5.2"
+BPV = "1.6.3"
 PV = "${BPV}"
-SRCREV = "ac590d055c936bb9a618e955a690dc836c625211"
+SRCREV = "134d6218d0881d87ae6a522e88eafbddb6cd1bb7"
 
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
-    git://github.com/rack/rack.git \
+    git://github.com/rack/rack.git;branch=1-6-stable \
     "
 
 inherit ruby
