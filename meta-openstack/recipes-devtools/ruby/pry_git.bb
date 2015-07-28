@@ -7,18 +7,18 @@ for Ruby. It is written from scratch to provide a number of advanced \
 features."
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=7d1a6fbb73f604e1e716380490938bd4"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=dde93753687e16ab0c4669232fd27fd0"
 
 PR = "r0"
 
-BPV = "0.9.12.6"
+BPV = "0.10.1"
 PV = "${BPV}"
-SRCREV = "047788c4225b25bb0462e06715616964e4f0da15"
+SRCREV = "191dc519813402acd6db0d7f73e652ed61f8111f"
 
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
-    git://github.com/pry/pry.git;branch=0-9-12-stable \
+    git://github.com/pry/pry.git \
     file://rdoc-fixup-opt.banner-heredoc.patch \
     "
 
