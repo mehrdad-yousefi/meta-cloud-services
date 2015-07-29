@@ -5,18 +5,18 @@ SUMMARY = "A simple option parser with an simple syntax and API."
 DESCRIPTION = "A simple option parser with an simple syntax and API."
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=66a8da2a5bee25570ffc35aa5426d176"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=40575ded674b04c083ce6818c01f0282"
 
 PR = "r0"
 
-BPV = "3.5.0"
+BPV = "4.2.0"
 PV = "${BPV}"
-SRCREV = "a009587ec2c0cf07b38bd8f0b59baa244fdbce51"
+SRCREV = "50c4d5a6553c9d0b78dee35a092ea3a40c136fa1"
 
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
-    git://github.com/leejarvis/slop.git;branch=v3 \
+    git://github.com/leejarvis/slop.git \
     "
 
 inherit ruby
