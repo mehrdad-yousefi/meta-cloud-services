@@ -9,10 +9,10 @@ PR = "r0"
 SRCNAME = "psycopg2"
 
 SRC_URI = "https://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
-           file://remove-pg-config.patch"
+          "
 
-SRC_URI[md5sum] = "facd82faa067e99b80146a0ee2f842f6"
-SRC_URI[sha256sum] = "6b2f0cc9199de9eaa53ba10ff69b2741e73484b24657e69bdae259561c23bde4"
+SRC_URI[md5sum] = "842b44f8c95517ed5b792081a2370da1"
+SRC_URI[sha256sum] = "6acf9abbbe757ef75dc2ecd9d91ba749547941abaffbe69ff2086a9e37d4904c"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
