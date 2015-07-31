@@ -9,8 +9,8 @@ SRCNAME = "testtools"
 
 SRC_URI = "https://pypi.python.org/packages/source/t/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "310ce6fab8affecdc7415ff910a83c42"
-SRC_URI[sha256sum] = "5b62231fea71ccb2361d48286481b198ccb8768bf81f8aaec1c8d5fb98eaaca3"
+SRC_URI[md5sum] = "89965b0b39930c0d1f5e07c6f545e6a0"
+SRC_URI[sha256sum] = "8afd6400fb4e75adb0b29bd09695ecb2024cd7befab4677a58c147701afadd97"
 
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
