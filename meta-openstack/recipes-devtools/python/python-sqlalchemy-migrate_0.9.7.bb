@@ -8,8 +8,8 @@ SRCNAME = "sqlalchemy-migrate"
 
 SRC_URI = "https://pypi.python.org/packages/source/s/sqlalchemy-migrate/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "1cdb4583dc30c436c4a060d08c764632"
-SRC_URI[sha256sum] = "c2c73d8dbeb29a96459d8622e3bac2e97cf6f74ed0564469486fe7ffe0ef3d97"
+SRC_URI[md5sum] = "fd586f77b25f905d56d1847fc1f9c68b"
+SRC_URI[sha256sum] = "a6adc1c9593e4a4c824230375ce18a887e28e1e9bb5374f5996b58879519f4e5"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
