@@ -40,6 +40,8 @@ RDEPENDS_${PN} += " python-django \
     python-xstatic-angular-mock \
     python-xstatic-angular-bootstrap \
     python-xstatic-angular-irdragndrop \
+    python-xstatic-angular-lrdragndrop \
+    python-xstatic-magic-search \
     python-xstatic-d3 \
     python-xstatic-hogan \
     python-xstatic-jasmine \
@@ -71,7 +73,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
     "
 
 SRCREV = "b99cf48ff346494198fb9740495eacc14fa406bf"
-PV = "2015.1.0+git${SRCPV}"
+PV = "2015.1.0+git${SRCPV}p1"
 S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d python-dir default_configs openstackchef monitor
