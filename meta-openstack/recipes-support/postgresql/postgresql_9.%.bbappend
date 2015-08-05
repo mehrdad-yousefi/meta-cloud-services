@@ -3,7 +3,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 SRC_URI += "file://postgresql \
             file://postgresql-init"
 
-inherit useradd update-rc.d identity hosts autotools-brokensep openstackchef
+inherit useradd update-rc.d identity hosts openstackchef
 
 PACKAGECONFIG[libxml] = "--with-libxml CFLAGS=-I${STAGING_INCDIR}/libxml2,--without-libxml,libxml2,libxml2"
 
