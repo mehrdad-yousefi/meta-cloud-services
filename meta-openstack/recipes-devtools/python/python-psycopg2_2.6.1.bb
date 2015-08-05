@@ -9,6 +9,7 @@ PR = "r0"
 SRCNAME = "psycopg2"
 
 SRC_URI = "https://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
+           file://remove-pg-config.patch \
           "
 
 SRC_URI[md5sum] = "842b44f8c95517ed5b792081a2370da1"
@@ -17,3 +18,7 @@ SRC_URI[sha256sum] = "6acf9abbbe757ef75dc2ecd9d91ba749547941abaffbe69ff2086a9e37
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit distutils
+
+DEPENDS += " \
+    postgresql \
+"
