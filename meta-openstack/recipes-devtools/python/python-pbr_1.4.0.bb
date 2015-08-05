@@ -9,8 +9,8 @@ SRCNAME = "pbr"
 
 SRC_URI = "https://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "ccef0c0fa2ad7ee2c9997322a83d7e45"
-SRC_URI[sha256sum] = "a741650c697abe9dd3da00039a57a45a15a6eed017a16f6b7e4c0161fae2b4b2"
+SRC_URI[md5sum] = "21f847dd9d3f9bd37db402067024be98"
+SRC_URI[sha256sum] = "f080232fb6b208615b4c1854bf4277bb097d19c9ef89f94f203c1436fe600e92"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
