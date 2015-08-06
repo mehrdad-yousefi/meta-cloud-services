@@ -8,8 +8,8 @@ SRCNAME = "Paste"
 
 SRC_URI = "https://pypi.python.org/packages/source/P/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "5aa1890d20e6f93b46e855aa1e17ba27"
-SRC_URI[sha256sum] = "28383e843cb46a9375a90da6e2ec5fcd7704ed9f3f3b5e954928beb52b0e5b41"
+SRC_URI[md5sum] = "4bfc8a7eaf858f6309d2ac0f40fc951c"
+SRC_URI[sha256sum] = "adac3ac893a2dac6b8ffd49901377dd6819e05be3436b374d698641071daba99"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
