@@ -9,8 +9,8 @@ SRCNAME = "msgpack-python"
 
 SRC_URI = "https://pypi.python.org/packages/source/m/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "3b82bc542d5599896695512e7c32f42d"
-SRC_URI[sha256sum] = "a07cd6615a6bf38cfa2f010b121c7e77b74a3e7b971ef3e475c3d33308014cbb"
+SRC_URI[md5sum] = "8b317669314cf1bc881716cccdaccb30"
+SRC_URI[sha256sum] = "bfcc581c9dbbf07cc2f951baf30c3249a57e20dcbd60f7e6ffc43ab3cc614794"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
