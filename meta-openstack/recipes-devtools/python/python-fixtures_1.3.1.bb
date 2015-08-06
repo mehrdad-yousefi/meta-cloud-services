@@ -9,8 +9,8 @@ SRCNAME = "fixtures"
 
 SRC_URI = "https://pypi.python.org/packages/source/f/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "4f3225a80397796be85729b659241610"
-SRC_URI[sha256sum] = "4494c4862ad99ffb8354f7456f1c9a4ba68b607d9dabb912999d4ad60c7d9f54"
+SRC_URI[md5sum] = "72959be66e26b09641a1e3902f631e62"
+SRC_URI[sha256sum] = "b63cf3bb37f83ff815456e2d0e118535ae9a4bf43e76d9a1cf3286041bf717ce"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
