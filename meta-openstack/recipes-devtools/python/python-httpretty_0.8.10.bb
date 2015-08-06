@@ -13,8 +13,8 @@ SRCNAME = "httpretty"
 SRC_URI = "https://pypi.python.org/packages/source/h/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
           "
 
-SRC_URI[md5sum] = "753b82f3bf632fbfc595816a0f6691f0"
-SRC_URI[sha256sum] = "bff5e3320fae20e3e7650bed216847ec32f3e85329014edb4d7ec2bc1b68cae2"
+SRC_URI[md5sum] = "9c130b16726cbf85159574ae5761bce7"
+SRC_URI[sha256sum] = "474a72722d66841f0e59cee285d837e1c6263be5be7bf2f8e824fc849a99adda"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
