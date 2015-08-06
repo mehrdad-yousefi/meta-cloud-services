@@ -9,8 +9,8 @@ DEPENDS += " \
         python-pbr \
         "
 
-SRCREV = "26280ed58b5d16feed4ab27be063d305ef48a252"
-PV = "0.17.0+git${SRCPV}"
+SRCREV = "db6420b44779411d6d1f238f6b887f83f1988986"
+PV = "0.19.0+git${SRCPV}"
 PR = "r0"
 
 SRC_URI = "\
@@ -31,6 +31,7 @@ RDEPENDS_${PN} = "gmp \
    python-prettytable \
    python-setuptools-git \
    python-pbr \
+   bash \
    "
 
 MONITOR_CHECKS_${PN} += "\
