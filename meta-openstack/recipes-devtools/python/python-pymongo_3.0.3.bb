@@ -8,8 +8,8 @@ SRCNAME = "pymongo"
 
 SRC_URI = "https://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "f2aab37b56229981f975ad1daf61b774"
-SRC_URI[sha256sum] = "d26076e838335d33d10f35f5b94a5a618a7aea5519c889b9ec473b23200b1237"
+SRC_URI[md5sum] = "0425d99c2a453144b9c95cb37dbc46e9"
+SRC_URI[sha256sum] = "3c6b2317f8031bc1e200fd1ea35f00a96f4569e3f3f220a5e66ab6227d96ccaf"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
