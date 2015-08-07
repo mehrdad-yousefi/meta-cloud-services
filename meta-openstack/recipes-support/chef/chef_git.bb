@@ -11,17 +11,15 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8f7bb094c7232b058c7e9f2e431f389c"
 
 PR = "r0"
 
-#SRC_URI[md5sum] = "521d9184648b12e0ea331367d287314f"
-#SRC_URI[sha256sum] ="d00874468a4f9e43d6acb0d5238a50ebb4c79f17fd502741a0fc83d76eb253cf"
-
-BPV = "11.12.4"
+BPV = "12.4.1"
 PV = "${BPV}"
-SRCREV = "410af3e88cf9f0793c56363563be8fa173244d3a"
+SRCREV = "1dc20627aa5d742376269dc5b4d5c67f34d08008"
 
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
-    git://github.com/opscode/chef.git;branch=11-stable \
+    git://github.com/opscode/chef.git;branch=12.4-stable \
+    file://0001-chang-ksh-to-sh.patch \
     "
 
 inherit ruby
@@ -61,9 +59,13 @@ RDEPENDS_${PN} += " \
         systemu \
         yajl-ruby \
         make \
+        bash \
         "
 
 RUBY_INSTALL_GEMS = "pkg/chef-${BPV}.gem"
+
+FILES_${PN} += "${libdir}/ruby/gems/2.2.0/build_info"
+FILES_${PN} += "${libdir}/ruby/gems/2.2.0/extensions"
 
 do_install_prepend() {
 	rake gem
