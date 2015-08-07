@@ -114,6 +114,7 @@ FILES_${PN}-dbg += " \
         ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/gems/*/*/*/.debug \
         ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/gems/*/*/*/*/.debug \
         ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/gems/*/*/*/*/*/.debug \
+        ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/extensions/*/*/*/*/*/.debug \
         "
 
 FILES_${PN} += " \
