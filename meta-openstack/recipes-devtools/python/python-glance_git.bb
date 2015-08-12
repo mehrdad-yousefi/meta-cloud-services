@@ -197,7 +197,10 @@ RDEPENDS_${PN} += "python-greenlet \
 	python-oslo.i18n \
 	python-osprofiler \
 	python-retrying \
-        python-glancestore \
+	python-glancestore \
+	python-enum34 \
+	python-semantic-version \
+	python-oslo.vmware \
 	"
 
 RDEPENDS_${SRCNAME} = "${PN} \
