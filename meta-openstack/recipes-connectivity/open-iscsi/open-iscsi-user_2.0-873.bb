@@ -8,7 +8,7 @@ inherit systemd
 LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
 
 SRC_URI = "http://www.open-iscsi.org/bits/open-iscsi-${PV}.tar.gz   \
-           file://user.patch                                        \
+           file://0001-fix-build-error-of-cross-build.patch         \
            file://open-iscsi                                        \
            file://initiatorname.iscsi                               \
            "
@@ -16,7 +16,7 @@ SRC_URI = "http://www.open-iscsi.org/bits/open-iscsi-${PV}.tar.gz   \
 
 S = "${WORKDIR}/open-iscsi-${PV}"
 TARGET_CC_ARCH += "${LDFLAGS}"
-
+EXTRA_OEMAKE += "CONFIGURE_ARGS='--host=${HOST_SYS}'"
 
 do_compile () {
         oe_runmake user
@@ -29,8 +29,8 @@ do_install () {
 }
 
 
-SRC_URI[md5sum] = "0c403e8c9ad41607571ba0e6e8ff196e"
-SRC_URI[sha256sum] = "bcea8746ae82f2ada7bc05d2aa59bcda1ca0d5197f05f2e16744aae59f0a7dcb"
+SRC_URI[md5sum] = "8b8316d7c9469149a6cc6234478347f7"
+SRC_URI[sha256sum] = "7dd9f2f97da417560349a8da44ea4fcfe98bfd5ef284240a2cc4ff8e88ac7cd9"
 
 # systemd support
 PACKAGES =+ "${PN}-systemd"
