@@ -23,6 +23,7 @@ RDEPENDS_${PN} += " \
         ruby \
         facter \
         hiera \
+        ruby-shadow \
 "
 
 RUBY_INSTALL_GEMS = "puppet-${PV}.gem"
