@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f257790c70561550fd666c6e0044fd89"
 SRC_URI = " \
     https://downloads.puppetlabs.com/puppet/puppet-${PV}.tar.gz \
     file://add_puppet_gemspec.patch \
+    file://puppet.conf \
 "
 SRC_URI[md5sum] = "cc294da1d51df07bcc7f6cf78bd90ce0"
 SRC_URI[sha256sum] = "4a3bd7ddb51072c3dd898a8de158cde204a2d8fd0b84e8ac806b84c074348637"
@@ -34,4 +35,5 @@ do_install_append() {
     install -m 655 ${S}/conf/auth.conf ${D}${sysconfdir}/puppet/
     install -m 655 ${S}/conf/fileserver.conf ${D}${sysconfdir}/puppet/
     install -m 655 ${S}/conf/tagmail.conf ${D}${sysconfdir}/puppet/
+    install -m 655 ${WORKDIR}/puppet.conf ${D}${sysconfdir}/puppet/
 }
