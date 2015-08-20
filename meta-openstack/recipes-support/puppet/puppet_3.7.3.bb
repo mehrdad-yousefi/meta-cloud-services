@@ -18,6 +18,12 @@ DEPENDS += " \
         hiera \
 "
 
+RDEPENDS_${PN} += " \
+        ruby \
+        facter \
+        hiera \
+"
+
 RUBY_INSTALL_GEMS = "puppet-${PV}.gem"
 
 do_install_append() {
