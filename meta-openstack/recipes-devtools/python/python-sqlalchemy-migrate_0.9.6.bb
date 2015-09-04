@@ -1,5 +1,5 @@
 DESCRIPTION = "Database schema migration for SQLAlchemy"
-HOMEPAGE = "http://code.google.com/p/sqlalchemy-migrate/"
+HOMEPAGE = "https://github.com/stackforge/sqlalchemy-migrate"
 SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://setup.py;beginline=32;endline=32;md5=d41d8cd98f00b204e9800998ecf8427e"
@@ -24,4 +24,5 @@ RDEPENDS_${PN} += "python-sqlalchemy  \
 	python-decorator \
 	python-tempita  \
         python-pbr \
+	python-sqlparse \
     "
