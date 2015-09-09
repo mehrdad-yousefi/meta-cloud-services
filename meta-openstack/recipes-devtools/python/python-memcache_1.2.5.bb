@@ -20,8 +20,10 @@ inherit setuptools
 
 DEPENDS += " \
         python-pip \
+        python-nose \
         "
 
 # RDEPENDS_default: 
 RDEPENDS_${PN} += " \
+        python-nose \
         "
