@@ -16,8 +16,14 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit setuptools
 
+DEPENDS += " \
+	python-pbr \
+	"
+
 RDEPENDS_${PN} += "python-prettytable \
             python-cmd2 \
-            python-pyparsing"
+            python-pyparsing \
+            python-pbr \
+            "
 
 CLEANBROKEN = "1"
