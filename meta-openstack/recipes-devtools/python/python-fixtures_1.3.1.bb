@@ -21,4 +21,10 @@ DISTUTILS_INSTALL_ARGS = "--root=${D} \
     --install-lib=${PYTHON_SITEPACKAGES_DIR} \
     --install-data=${datadir}"
 
-RDEPENDS_${PN} += "python-testtools"
+DEPENDS += " \
+	python-pbr \
+	"
+
+RDEPENDS_${PN} += "python-testtools \
+	python-pbr \
+	"
