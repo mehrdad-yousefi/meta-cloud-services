@@ -17,6 +17,7 @@ start()
 {
 	need_init=0
 	if [ ! -e $data_dir/DB_CONFIG ]; then
+		mkdir -p $data_dir
 		cp $src_data_dir/DB_CONFIG.example $data_dir/DB_CONFIG
 		need_init=1
 	fi
