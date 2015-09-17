@@ -8,7 +8,7 @@ SRC_URI += "file://ops-base.ldif"
 LDAP_DN ?= "dc=my-domain,dc=com"
 LDAP_DATADIR ?= "/etc/openldap-data/"
 
-OPENLDAP_LIBEXECDIR = "/usr/libexec"
+OPENLDAP_LIBEXECDIR = "${libexecdir}"
 
 EXTRA_OECONF += "--libexecdir=${OPENLDAP_LIBEXECDIR}"
 
@@ -16,11 +16,12 @@ do_install_append() {
     install -D -m 0755 ${WORKDIR}/initscript ${D}${sysconfdir}/init.d/openldap
     sed -i -e 's/%DEFAULT_DN%/${LDAP_DN}/g' ${D}${sysconfdir}/init.d/openldap
     sed -i -e 's#%LDAP_DATADIR%#${LDAP_DATADIR}#g' ${D}${sysconfdir}/init.d/openldap
-    sed -i -e 's#%LIBEXEC%#${OPENLDAP_LIBEXECDIR}#g' ${D}${sysconfdir}/init.d/openldap
+    # Base openldat bb installs slapd under ${sbin}
+    sed -i -e 's#%LIBEXEC%#${sbindir}#g' ${D}${sysconfdir}/init.d/openldap
 
     # This is duplicated in /etc/openldap and is for slapd
     rm -f ${D}${localstatedir}/openldap-data/DB_CONFIG.example
-    rmdir "${D}${localstatedir}/run"
+    rm -rf "${D}${localstatedir}/run"
     rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
 
     # remove symlinks for backends, recreating in postinstall
@@ -68,5 +69,5 @@ inherit update-rc.d
 INITSCRIPT_NAME = "openldap"
 INITSCRIPT_PARAMS = "defaults"
 
-FILES_${PN} += "${OPENLDAP_LIBEXECDIR}/*"
+FILES_${PN} += "${OPENLDAP_LIBEXECDIR}/* ${sysconfdir}/openldap/ops-base.ldif"
 FILES_${PN}-dbg += "${OPENLDAP_LIBEXECDIR}/openldap/.debug ${OPENLDAP_LIBEXECDIR}/.debug"
