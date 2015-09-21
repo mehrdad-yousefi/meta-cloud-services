@@ -25,6 +25,10 @@ inherit setuptools monitor
 
 FILES_${PN} += "${datadir}/${SRCNAME}"
 
+DEPENDS += " \
+   python-pbr \
+   "
+
 RDEPENDS_${PN} = "gmp \
    python-warlock \
    python-pyopenssl \

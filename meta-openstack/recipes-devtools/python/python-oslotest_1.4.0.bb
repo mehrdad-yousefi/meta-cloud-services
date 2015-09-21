@@ -19,6 +19,10 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit setuptools
 
+DEPENDS += " \
+    python-pbr \
+"
+
 RDEPENDS_${PN} = "python-fixtures \
                   python-subunit \
                   python-testrepository \
@@ -26,5 +30,6 @@ RDEPENDS_${PN} = "python-fixtures \
                   python-testtools \
                   python-mock \
                   python-mox \
+                  python-pbr \
                   bash \
 "

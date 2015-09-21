@@ -20,6 +20,7 @@ inherit setuptools
 
 DEPENDS += " \
         python-pip \
+        python-pbr \
         "
 
 # RDEPENDS_default: 
@@ -28,4 +29,5 @@ RDEPENDS_${PN} += " \
         python-zake \
         python-sysv-ipc \
         python-memcache \
+        python-pbr \
         "

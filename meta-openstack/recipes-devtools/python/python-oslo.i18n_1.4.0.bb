@@ -20,9 +20,11 @@ inherit setuptools
 
 DEPENDS += " \
         python-pip \
+        python-pbr \
         "
 
 # RDEPENDS_default: 
 RDEPENDS_${PN} += " \
         python-babel \
+        python-pbr \
         "
