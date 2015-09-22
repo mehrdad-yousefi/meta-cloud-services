@@ -20,10 +20,12 @@ inherit setuptools
 
 DEPENDS += " \
         python-pip \
+        python-pbr \
         "
 
 # RDEPENDS_default: 
 RDEPENDS_${PN} += " \
         python-six \
         python-webob \
+        python-pbr \
         "

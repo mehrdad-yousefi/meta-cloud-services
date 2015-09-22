@@ -16,4 +16,11 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit setuptools
 
-RDEPENDS_${PN} += " python-testtools"
+DEPENDS += "\
+    python-pbr \
+    "
+
+RDEPENDS_${PN} += "\
+    python-testtools \
+    python-pbr \
+    "

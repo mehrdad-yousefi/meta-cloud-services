@@ -21,4 +21,7 @@ DEPENDS += " \
     python-pbr \
 "
 
-RDEPENDS_${PN} += "python-extras"
+RDEPENDS_${PN} += "\
+    python-extras \
+    python-pbr \
+    "

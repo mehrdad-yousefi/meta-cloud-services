@@ -14,3 +14,11 @@ SRC_URI[sha256sum] = "9e42252f17d1dd89ee31745e0c4fbe58862c25147eb0ef5295c9cd9bcb
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit distutils 
+
+DEPENDS += "\
+    python-pbr \
+    "
+
+RDEPENDS_${PN} += "\
+    python-pbr \
+    "

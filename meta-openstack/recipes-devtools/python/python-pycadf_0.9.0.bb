@@ -19,6 +19,7 @@ FILES_${PN} += "${datadir}/etc/${SRCNAME}/*"
 
 DEPENDS += " \
         python-pip \
+        python-pbr \
         "
 
 RDEPENDS_${PN} += " \
@@ -29,4 +30,5 @@ RDEPENDS_${PN} += " \
       python-pytz \
       python-six \
       python-webob \
+      python-pbr \
         "

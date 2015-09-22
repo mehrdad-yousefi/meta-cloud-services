@@ -21,4 +21,5 @@ DEPENDS += " \
         "
 
 RDEPENDS_${PN} += " \
+        python-pbr \
         "

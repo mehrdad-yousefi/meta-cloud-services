@@ -17,6 +17,7 @@ inherit setuptools
 
 DEPENDS += " \
         python-pip \
+        python-pbr \
         "
 
 RDEPENDS_${PN} += " \
@@ -28,4 +29,5 @@ RDEPENDS_${PN} += " \
        python-sqlalchemy \
        python-sqlalchemy-migrate \
        python-stevedore \
+       python-pbr \
         "

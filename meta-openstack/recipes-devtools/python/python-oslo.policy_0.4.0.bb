@@ -18,10 +18,12 @@ inherit setuptools
 
 DEPENDS += " \
         python-pip \
+        python-pbr \
 "
 
 RDEPENDS_${PN} += " \
         python-oslo.config \
         python-oslo.i18n \
         python-oslo.serialization \
+        python-pbr \
 "

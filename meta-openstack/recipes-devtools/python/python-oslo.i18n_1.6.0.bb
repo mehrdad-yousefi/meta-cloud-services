@@ -25,4 +25,5 @@ DEPENDS += " \
 # RDEPENDS_default: 
 RDEPENDS_${PN} += " \
         python-babel \
+        python-pbr \
         "
