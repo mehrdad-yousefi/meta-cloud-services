@@ -22,6 +22,7 @@ DEPENDS += " \
         "
 
 RDEPENDS_${PN} = " \
+   python-enum34 \
    python-eventlet \
    python-iso8601 \
    python-six \
