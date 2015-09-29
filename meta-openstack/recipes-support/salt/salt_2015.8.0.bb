@@ -1,7 +1,7 @@
 HOMEPAGE = "http://saltstack.com/"
 SECTION = "admin"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=5357642471cfab4740d1d0a20c51af6a"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=b59c9134761722281bb895f65cb15e9a"
 DEPENDS = "\
            python-msgpack \
            python-pyyaml \
@@ -9,7 +9,6 @@ DEPENDS = "\
            python-markupsafe \
            python-pyzmq \
            python-pycrypto \
-           python-m2crypto \
 "
 
 SRCNAME = "salt"
@@ -27,8 +26,8 @@ SRC_URI = "http://pypi.python.org/packages/source/s/${SRCNAME}/${SRCNAME}-${PV}.
            file://roster \
 "
 
-SRC_URI[md5sum] = "5091f15202c852a3e92692035b05c872"
-SRC_URI[sha256sum] = "e0d5b3ec220d8c956120bf2faa00bb7013e500eef7a697bc428cb179a136a5d2"
+SRC_URI[md5sum] = "a15842ef0582cca9d26143fe0a6180b7"
+SRC_URI[sha256sum] = "71e1cb2eb1d4b30f3247f5590c00a2089190b8f9a90c9330dc9a65fae517ec9b"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
@@ -78,18 +77,18 @@ Between the remote execution system, and state management Salt addresses the bac
 
 SUMMARY_${PN}-minion = "client package for salt, the distributed remote execution system"
 DESCRIPTION_${PN}-minion = "${DESCRIPTION_COMMON} This particular package provides the worker agent for salt."
-RDEPENDS_${PN}-minion = "python ${PN}-common (= ${EXTENDPKGV}) python-m2crypto python-pycrypto python-msgpack python-pyzmq (>= 13.1.0)"
+RDEPENDS_${PN}-minion = "python (>=2.6), ${PN}-common (= ${EXTENDPKGV}) python-pycrypto python-msgpack python-pyzmq (>= 13.1.0)"
 RRECOMMENDS_${PN}-minion_append_x64 = "dmidecode"
 RSUGGESTS_${PN}-minion = "python-augeas"
 CONFFILES_${PN}-minion = "${sysconfdir}/${PN}/minion ${sysconfdir}/init.d/${PN}-minion"
-FILES_${PN}-minion = "${bindir}/${PN}-minion ${sysconfdir}/${PN}/minion.d/ ${CONFFILES_${PN}-minion}"
+FILES_${PN}-minion = "${bindir}/${PN}-minion ${sysconfdir}/${PN}/minion.d/ ${CONFFILES_${PN}-minion} ${bindir}/${PN}-proxy"
 INITSCRIPT_NAME_${PN}-minion = "${PN}-minion"
 INITSCRIPT_PARAMS_${PN}-minion = "defaults"
 
 SUMMARY_${PN}-common = "shared libraries that salt requires for all packages"
 DESCRIPTION_${PN}-common ="${DESCRIPTION_COMMON} This particular package provides shared libraries that \
 salt-master, salt-minion, and salt-syndic require to function."
-RDEPENDS_${PN}-common = "python (>= 2.7) python (< 2.8) python-jinja2 python-pyyaml"
+RDEPENDS_${PN}-common = "python (>= 2.7.5-5) python (< 2.8) python-dateutil python-jinja2 python-pyyaml python-requests (>= 1.0.0) python-tornado (>= 4.2.1)"
 RRECOMMENDS_${PN}-common = "lsb"
 RSUGGESTS_${PN}-common = "python-mako python-git"
 RCONFLICTS_${PN}-common = "python-mako (< 0.7.0)"
@@ -100,7 +99,7 @@ SUMMARY_${PN}-ssh = "remote manager to administer servers via salt"
 DESCRIPTION_${PN}-ssh = "${DESCRIPTION_COMMON} This particular package provides the salt ssh controller. It \
 is able to run salt modules and states on remote hosts via ssh. No minion or other salt specific software needs\
  to be installed on the remote host."
-RDEPENDS_${PN}-ssh = "python ${PN}-common (= ${EXTENDPKGV}) python-msgpack"
+RDEPENDS_${PN}-ssh = "python (>= 2.6) ${PN}-common (= ${EXTENDPKGV}) python-msgpack"
 CONFFILES_${PN}-ssh="${sysconfdir}/${PN}/roster"
 FILES_${PN}-ssh = "${bindir}/${PN}-ssh ${CONFFILES_${PN}-ssh}"
 
@@ -110,7 +109,7 @@ running Salt system. It can start and manage multiple interfaces allowing a REST
 even a Websocket API. The Salt API system is used to expose the fundamental aspects of Salt control to external\
  sources. salt-api acts as the bridge between Salt itself and REST, Websockets, etc. Documentation is available\
  on Read the Docs: http://salt-api.readthedocs.org/"
-RDEPENDS_${PN}-api = "python ${PN}-master"
+RDEPENDS_${PN}-api = "python (>= 2.6) ${PN}-master"
 RSUGGESTS_${PN}-api = "python-cherrypy"
 CONFFILES_${PN}-api = "${sysconfdir}/init.d/${PN}-api"
 FILES_${PN}-api = "${bindir}/${PN}-api ${CONFFILES_${PN}-api}"
@@ -119,16 +118,17 @@ INITSCRIPT_PARAMS_${PN}-api = "defaults"
 
 SUMMARY_${PN}-master = "remote manager to administer servers via salt"
 DESCRIPTION_${PN}-master ="${DESCRIPTION_COMMON} This particular package provides the salt controller."
-RDEPENDS_${PN}-master = "python ${PN}-common (= ${EXTENDPKGV}) python-m2crypto python-pycrypto python-msgpack python-pyzmq (>= 13.1.0)"
+RDEPENDS_${PN}-master = "python (>= 2.6) ${PN}-common (= ${EXTENDPKGV}) python-pycrypto python-msgpack python-pyzmq (>= 13.1.0)"
 CONFFILES_${PN}-master="${sysconfdir}/init.d/${PN}-master  ${sysconfdir}/${PN}/master"
-FILES_${PN}-master = "${bindir}/${PN} ${bindir}/${PN}-cp ${bindir}/${PN}-key ${bindir}/${PN}-master ${bindir}/${PN}-run ${bindir}/${PN}-unity ${CONFFILES_${PN}-master}"
+RSUGGESTS_${PN}-master = "python-git"
+FILES_${PN}-master = "${bindir}/${PN} ${bindir}/${PN}-cp ${bindir}/${PN}-key ${bindir}/${PN}-master ${bindir}/${PN}-run ${bindir}/${PN}-unity ${bindir}/spm ${CONFFILES_${PN}-master}"
 INITSCRIPT_NAME_${PN}-master = "${PN}-master"
 INITSCRIPT_PARAMS_${PN}-master = "defaults"
 
 SUMMARY_${PN}-syndic = "master-of-masters for salt, the distributed remote execution system"
 DESCRIPTION_${PN}-syndic = "${DESCRIPTION_COMMON} This particular package provides the master of masters for \
 salt; it enables the management of multiple masters at a time."
-RDEPENDS_${PN}-syndic = "python ${PN}-master (= ${EXTENDPKGV})"
+RDEPENDS_${PN}-syndic = "python (>= 2.6) ${PN}-master (= ${EXTENDPKGV})"
 CONFFILES_${PN}-syndic="${sysconfdir}/init.d/${PN}-syndic"
 FILES_${PN}-syndic = "${bindir}/${PN}-syndic ${CONFFILES_${PN}-syndic}"
 INITSCRIPT_NAME_${PN}-syndic = "${PN}-syndic"
@@ -136,7 +136,7 @@ INITSCRIPT_PARAMS_${PN}-syndic = "defaults"
 
 SUMMARY_${PN}-cloud = "public cloud VM management system"
 DESCRIPTION_${PN}-cloud = "provision virtual machines on various public clouds via a cleanly controlled profile and mapping system."
-RDEPENDS_${PN}-cloud = "python ${PN}-common (= ${EXTENDPKGV}) python-msgpack python-requests"
+RDEPENDS_${PN}-cloud = "python (>= 2.6) ${PN}-common (= ${EXTENDPKGV})"
 RSUGGESTS_${PN}-cloud = "python-netaddr python-botocore"
 CONFFILES_${PN}-cloud = "${sysconfdir}/${PN}/cloud"
 FILES_${PN}-cloud = "${bindir}/${PN}-cloud ${sysconfdir}/${PN}/cloud.conf.d/ ${sysconfdir}/${PN}/cloud.profiles.d/ ${sysconfdir}/${PN}/cloud.providers.d/ ${CONFFILES_${PN}-cloud}"
