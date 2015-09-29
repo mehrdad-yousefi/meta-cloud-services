@@ -17,7 +17,7 @@ SRC_URI[sha256sum] = "31b80ba3c4773d288b4e6245e3b2048438386331d460f7a7b0794cbd20
 
 S = "${WORKDIR}/${PN}c-${PV}"
 
-inherit autotools python-dir perlnative cpan-base update-rc.d
+inherit autotools python-dir perlnative cpan-base update-rc.d pkgconfig
 
 # Env var which tells perl if it should use host (no) or target (yes) settings
 export PERLCONFIGTARGET = "${@is_target(d)}"
@@ -27,6 +27,7 @@ export PERL_ARCHLIB = "${STAGING_LIBDIR}${PERL_OWN_DIR}/perl/${@get_perl_version
 export PERL="${STAGING_BINDIR}/perl"
 
 EXTRA_OECONF += " --without-help2man SASL_PASSWD=/usr/sbin/saslpasswd2"
+EXTRA_OEMAKE += " CPPFLAGS=-Wno-unused-function "
 
 do_install_append() {
      install -d ${D}${sysconfdir}/init.d
