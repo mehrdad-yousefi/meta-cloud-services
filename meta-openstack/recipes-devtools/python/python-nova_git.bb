@@ -266,6 +266,7 @@ FILES_${SRCNAME}-api = " \
 "
 
 DEPENDS += " \
+        libvirt \
         python-pip \
         python-pbr \
         "
