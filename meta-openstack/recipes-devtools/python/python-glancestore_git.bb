@@ -29,5 +29,6 @@ RDEPENDS_${PN} = " \
    python-cinderclient \
    python-oslo.config \
    python-oslo.i18n \
+   python-oslo.vmware \
    "
 

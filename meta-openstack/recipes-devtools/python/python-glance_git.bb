@@ -198,6 +198,7 @@ RDEPENDS_${PN} += "python-greenlet \
 	python-osprofiler \
 	python-retrying \
         python-glancestore \
+        python-oslo.vmware \
 	"
 
 RDEPENDS_${SRCNAME} = "${PN} \
