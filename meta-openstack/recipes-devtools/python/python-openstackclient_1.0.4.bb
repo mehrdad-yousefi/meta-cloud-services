@@ -20,5 +20,20 @@ DEPENDS += "\
     "
 
 RDEPENDS_${PN} += "\
+    python-babel \
+    python-cinderclient \
+    python-cliff \
+    python-cliff-tablib \
+    python-glanceclient \
+    python-keystoneclient \
+    python-neutronclient \
+    python-novaclient \
+    python-oslo.config \
+    python-oslo.i18n \
+    python-oslo.serialization \
+    python-oslo.utils \
     python-pbr \
+    python-requests \
+    python-six \
+    python-stevedore \
     "
