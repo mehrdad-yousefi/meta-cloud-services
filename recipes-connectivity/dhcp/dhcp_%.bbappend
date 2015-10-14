@@ -12,5 +12,5 @@ do_install_append () {
 
 }
 
-FILES_dhcp-client += "${sysconfdir}/dhcp/dhclient-exit-hooks \
+FILES_${PN}-client += "${sysconfdir}/dhcp/dhclient-exit-hooks \
                      "
