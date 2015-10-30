@@ -286,6 +286,7 @@ RDEPENDS_${PN} += " \
         python-oauthlib \
         python-fixtures \
         python-oslotest \
+        python-functools32 \
         "
 
 RDEPENDS_${SRCNAME}-tests += " bash"
