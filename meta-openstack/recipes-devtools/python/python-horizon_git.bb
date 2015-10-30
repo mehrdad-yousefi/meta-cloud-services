@@ -70,6 +70,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
     file://openstack-dashboard-apache.conf \
     file://local_settings.py \
     file://horizon-use-full-package-path-to-test-directories.patch \
+    file://Compatibility-fix-for-pyscss-1.3.4.patch \
     "
 
 SRCREV = "b99cf48ff346494198fb9740495eacc14fa406bf"
