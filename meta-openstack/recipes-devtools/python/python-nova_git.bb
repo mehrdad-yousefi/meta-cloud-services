@@ -323,6 +323,8 @@ RDEPENDS_${PN} = " libvirt \
 		   python-rfc3986 \
 		   python-oslo.i18n \
 		   python-sqlparse \
+		   python-netifaces \
+		   python-retrying \
     "
 
 RDEPENDS_${SRCNAME}-common = "${PN} openssl openssl-misc libxml2 libxslt \
