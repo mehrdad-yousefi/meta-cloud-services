@@ -21,4 +21,7 @@ DEPENDS += "\
 
 RDEPENDS_${PN} += "\
     python-pbr \
+    python-os-client-config \
+    python-appdirs \
+    python-keystoneauth1 \
     "
