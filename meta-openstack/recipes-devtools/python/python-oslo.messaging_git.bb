@@ -4,26 +4,33 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c46f31914956e4579f9b488e71415ac8"
 
-PR = "r0"
-
 SRCNAME = "oslo.messaging"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo"
 
-PV = "1.6.0"
-SRCREV = "68cd8cfecc12a40b61a7b8557aad7b5a4e1f1c6d"
+PV = "1.8.3"
+SRCREV = "0f24108058fbf15752d384be4c13e4fbac801f2a"
 S = "${WORKDIR}/git"
 
 inherit setuptools
-
-# DEPENDS_default: python-pip
 
 DEPENDS += " \
         python-pip \
         python-pbr \
         "
 
-# RDEPENDS_default: 
 RDEPENDS_${PN} += " \
         bash \
         python-pbr \
+        python-oslo.config \
+        python-oslo.utils \
+        python-oslo.serialization \
+        python-oslo.i18n \
+        python-stevedore \
+        python-six \
+        python-eventlet \
+        python-pyyaml \
+        python-kombu \
+        python-oslo.middleware \
+        python-futures \
+        python-aioeventlet \
         "
