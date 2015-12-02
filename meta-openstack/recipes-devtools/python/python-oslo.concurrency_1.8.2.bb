@@ -4,13 +4,11 @@ SECTION = "devel/python"
 LICENSE = "Apache-2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 
-PR = "r0"
-
 SRCNAME = "oslo.concurrency"
 SRC_URI = "http://pypi.python.org/packages/source/o/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "83baf51766c3acf9929223762689ebfd"
-SRC_URI[sha256sum] = "89b62c029f0ecfcc92da22277e93fbe74363d459208bf62d2c9e7a3da0019e83"
+SRC_URI[md5sum] = "1ba5ae8bdbb9c12c1b6baa8e3d400b7f"
+SRC_URI[sha256sum] = "149f4c972916f14c14c97d7be7b92ba59497c1bbd09c114ee3681bef0773daca"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
@@ -25,5 +23,13 @@ DEPENDS += " \
 
 # RDEPENDS_default: 
 RDEPENDS_${PN} += " \
+        python-babel \
+        python-fixtures \
+        python-iso8601 \
+        python-oslo.i18n \
+        python-oslo.utils \
         python-pbr \
+        python-posix-ipc \
+        python-retrying \
+        python-six \
         "
