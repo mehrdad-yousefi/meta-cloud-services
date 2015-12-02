@@ -3,18 +3,12 @@ HOMEPAGE = "https://github.com/openstack/python-glanceclient"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
-DEPENDS += " \
-        gmp \
-        python-pip \
-        python-pbr \
-        "
 
-SRCREV = "26280ed58b5d16feed4ab27be063d305ef48a252"
-PV = "0.17.0+git${SRCPV}"
-PR = "r0"
+SRCREV = "9333d0e4f2b47cf9a0dd52d71bb3a231422b84d2"
+PV = "0.17.3+git${SRCPV}"
 
 SRC_URI = "\
-	git://github.com/openstack/${BPN}.git;protocol=https \
+	git://github.com/openstack/${BPN}.git;protocol=https;branch=stable/kilo \
 	file://fix_glanceclient_memory_leak.patch \
 	file://glance-api-check.sh \
 	"
@@ -26,8 +20,10 @@ inherit setuptools monitor
 FILES_${PN} += "${datadir}/${SRCNAME}"
 
 DEPENDS += " \
-   python-pbr \
-   "
+    gmp \
+    python-pip \
+    python-pbr \
+    "
 
 RDEPENDS_${PN} = "gmp \
    python-warlock \
