@@ -4,15 +4,14 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4a4d0e932ffae1c0131528d30d419c55"
 
-PR = "r0"
 SRCNAME = "keystonemiddleware"
 
 SRC_URI = "\
-	git://git.openstack.org/openstack/keystonemiddleware;branch=master \
+	git://git.openstack.org/openstack/keystonemiddleware;branch=stable/kilo \
 	"
 
-PV="1.4.0+git${SRCPV}"
-SRCREV="782fb0129d2eb7f181f890068767ce2b6906b2bd"
+PV="1.5.2+git${SRCPV}"
+SRCREV="fd12825acb92db08aea588522f9a91d7091f3a32"
 S = "${WORKDIR}/git"
 
 inherit setuptools
