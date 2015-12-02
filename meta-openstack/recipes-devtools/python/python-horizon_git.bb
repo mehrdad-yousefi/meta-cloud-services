@@ -22,7 +22,6 @@ RDEPENDS_${PN} += " python-django \
     python-keystoneclient \
     python-troveclient \
     python-saharaclient \
-    python-lesscpy \
     python-novaclient \
     python-nose-exclude \
     python-neutronclient \
@@ -176,7 +175,6 @@ INITSCRIPT_PARAMS_${SRCNAME} = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 RDEPENDS_${SRCNAME}-apache = "\
     apache2 \
     mod-wsgi \
-    python-lesscpy \
     memcached \
     python-memcached \
     "
