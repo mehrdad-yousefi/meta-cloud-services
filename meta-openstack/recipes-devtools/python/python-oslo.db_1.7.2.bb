@@ -23,7 +23,6 @@ RDEPENDS_${PN} += " \
        python-alembic \
        python-babel \
        python-iso8601 \
-       python-lockfile \
        python-oslo.config \
        python-sqlalchemy \
        python-sqlalchemy-migrate \

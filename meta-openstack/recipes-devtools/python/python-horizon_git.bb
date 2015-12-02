@@ -29,7 +29,6 @@ RDEPENDS_${PN} += " python-django \
     python-pbr \
     python-six \
     python-swiftclient \
-    python-lockfile \
     python-pyyaml \
     python-pint \
     python-xstatic \

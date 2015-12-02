@@ -197,7 +197,6 @@ RDEPENDS_${PN} += " \
 	python-routes \
 	python-webob \
 	python-greenlet \
-	python-lockfile \
 	python-pastedeploy \
 	python-paste \
 	python-sqlalchemy-migrate \
