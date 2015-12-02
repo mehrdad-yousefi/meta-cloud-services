@@ -79,6 +79,8 @@ do_install_append() {
     echo "local_ip = ${MY_IP}" >> ${NEUTRON_CONF_DIR}/plugins/ml2/ml2_conf.ini
     echo "tunnel_type = gre" >> ${NEUTRON_CONF_DIR}/plugins/ml2/ml2_conf.ini
     echo "enable_tunneling = True" >> ${NEUTRON_CONF_DIR}/plugins/ml2/ml2_conf.ini
+    echo "[agent]" >> ${NEUTRON_CONF_DIR}/plugins/ml2/ml2_conf.ini
+    echo "tunnel_types = gre" >> ${NEUTRON_CONF_DIR}/plugins/ml2/ml2_conf.ini
 
     PLUGIN=openvswitch
     ARGS="--config-file=${sysconfdir}/${SRCNAME}/neutron.conf --config-file=${sysconfdir}/${SRCNAME}/plugins/ml2/ml2_conf.ini"
