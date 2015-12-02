@@ -62,10 +62,9 @@ RDEPENDS_${PN} += " python-django \
     python-django-pyscss \
     "
 
-PR = "r3"
 SRCNAME = "horizon"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
     file://horizon.init \
     file://fix_bindir_path.patch \
     file://openstack-dashboard-apache.conf \
@@ -73,8 +72,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
     file://horizon-use-full-package-path-to-test-directories.patch \
     "
 
-SRCREV = "b99cf48ff346494198fb9740495eacc14fa406bf"
-PV = "2015.1.0+git${SRCPV}p1"
+SRCREV = "bccc3dcba65275e099137c8ca37f1077e87120d5"
+PV = "2015.1.2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d python-dir default_configs openstackchef monitor
