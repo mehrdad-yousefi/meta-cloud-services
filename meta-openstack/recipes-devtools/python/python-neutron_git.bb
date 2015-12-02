@@ -4,10 +4,9 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-PR = "r1"
 SRCNAME = "neutron"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
            file://neutron-server.init \
            file://neutron-agent.init \
            file://l3_agent.ini \
@@ -15,14 +14,13 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://metadata_agent.ini \
            file://neutron-dhcp-agent-netns-cleanup.cron \
            file://0001-neutron.conf-jumpstart-nova-state-reporting-configur.patch \
-           file://neutron-test-nec-plugin-extensions-location.patch \
 	  "
 
 # TBD: update or drop
 # file://uuid_wscheck.patch
 
-SRCREV="1948efa261e47b08e2cde4828321614ee6e169be"
-PV="2015.1.0b2+git${SRCPV}"
+SRCREV="b175e03b12527d23c05fc45016e927a20c98d2f1"
+PV="2015.1.2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -137,8 +135,6 @@ do_install_append() {
     sed -i '/\[keystone_authtoken\]/aidentity_uri=http://127.0.0.1:8081/keystone/admin/' ${NEUTRON_CONF_DIR}/neutron.conf
 
     cp run_tests.sh ${NEUTRON_CONF_DIR}
-
-    sed 's:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g' -i ${D}${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}/tests/unit/nec/test_nec_plugin.py
 }
 
 pkg_postinst_${SRCNAME}-setup () {
@@ -286,6 +282,7 @@ RDEPENDS_${PN} += "python-paste \
 	python-markupsafe \
 	python-pyparsing \
 	python-pbr \
+	python-jsonrpclib \
 	"
 
 RDEPENDS_${SRCNAME} = "${PN} \
