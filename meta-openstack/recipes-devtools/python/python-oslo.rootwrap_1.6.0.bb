@@ -4,13 +4,11 @@ SECTION = "devel/python"
 LICENSE = "Apache-2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c46f31914956e4579f9b488e71415ac8"
 
-PR = "r0"
-
 SRCNAME = "oslo.rootwrap"
 SRC_URI = "http://pypi.python.org/packages/source/o/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "3a988feffa7a0fb022857db9287bf8b9"
-SRC_URI[sha256sum] = "d2842359c08d7ecc5e5255f9c97aa9c42300eaed556d8f46fc18537e5d00b97e"
+SRC_URI[md5sum] = "dde8877cf09581a7dd24673806f778dd"
+SRC_URI[sha256sum] = "5fe6d1619a5306f9181899c7cc5251ba5a0de0d3c60f85b2172a2f7d400a4962"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
@@ -26,4 +24,5 @@ DEPENDS += " \
 # RDEPENDS_default: 
 RDEPENDS_${PN} += " \
         python-pbr \
+        python-six \
         "
