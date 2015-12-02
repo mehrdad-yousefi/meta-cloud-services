@@ -4,10 +4,9 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-PR = "r2"
 SRCNAME = "keystone"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
            file://keystone.conf \
            file://identity.sh \
            file://keystone \
@@ -20,8 +19,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
 # file://keystone-remove-git-commands-in-tests.patch 
 # file://keystone-explicitly-import-localcontext-from-oslo.me.patch
 
-SRCREV="0e633302e87261fdb3b0126c632fd676fc0a4d39"
-PV="2015.1.0b2+git${SRCPV}"
+SRCREV="8a2da01cb8b4a8369af4f5cf5cc7e20b1bf4453a"
+PV="2015.1.2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -282,10 +281,12 @@ RDEPENDS_${PN} += " \
         python-dogpile.cache \
         python-pbr \
         python-pysaml2 \
+        python-oslo.policy \
         python-oslo.utils \
         python-oauthlib \
         python-fixtures \
         python-oslotest \
+        python-cryptography \
         "
 
 RDEPENDS_${SRCNAME}-tests += " bash"
