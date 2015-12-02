@@ -11,11 +11,11 @@ SRCNAME = "nova"
 
 FILESEXTRAPATHS_append := "${THISDIR}/${PN}"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
            file://nova-add-migrate.cfg-to-the-MANIFEST.patch \
-           file://neutron-api-set-default-binding-vnic_type.patch \
            "
 # restore post stable/juno:
+#           file://neutron-api-set-default-binding-vnic_type.patch \
 #           file://websocketproxy-allow-empty-schemes-at-python-2.7.3.patch
 #           file://nova-convert-path-from-relative-to-absolute.patch 
 #           file://nova-fix-location-to-doc-directory.patch
@@ -27,8 +27,9 @@ SRC_URI += "file://nova-all \
             file://nova.conf \
             file://openrc \
            "
-SRCREV="b6e11261a97bf96d5f9866f277d8ecc3be7891e5"
-PV="2015.1.0b2+git${SRCPV}"
+SRCREV="24c6b904f75b6a544edc9d34ca0163df7d164a1a"
+# 2015.1.2 is 24c6b904f75b6a544edc9d34ca0163df7d164a1a
+PV="2015.1.2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
