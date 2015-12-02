@@ -39,6 +39,9 @@ RDEPENDS_${PN} += " python-django \
     python-xstatic-angular-cookies \
     python-xstatic-angular-mock \
     python-xstatic-angular-bootstrap \
+    python-xstatic-angular-irdragndrop \
+    python-xstatic-angular-lrdragndrop \
+    python-xstatic-magic-search \
     python-xstatic-d3 \
     python-xstatic-hogan \
     python-xstatic-jasmine \
@@ -70,8 +73,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
     file://horizon-use-full-package-path-to-test-directories.patch \
     "
 
-SRCREV="9b37723a21e88c29732e2a4a9eeeecb9ecf19204"
-PV="2015.1.0b2+git${SRCPV}"
+SRCREV = "b99cf48ff346494198fb9740495eacc14fa406bf"
+PV = "2015.1.0+git${SRCPV}p1"
 S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d python-dir default_configs openstackchef monitor
