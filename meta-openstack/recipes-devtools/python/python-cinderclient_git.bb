@@ -5,17 +5,16 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3572962e13e5e739b30b0864365e0795"
 DEPENDS = "python-setuptools-git"
 
-PR = "r0"
 SRCNAME = "python-cinderclient"
 
 SRC_URI = "\
-	git://github.com/openstack/python-cinderclient.git;branch=master \
+	git://github.com/openstack/python-cinderclient.git;branch=stable/kilo \
 	file://fix_cinderclient_memory_leak.patch \
 	file://cinder-api-check.sh \
 	"
 
-PV="1.1.1+git${SRCPV}"
-SRCREV="9e94d814c6ae07c3d5e8242754aebcce150265cc"
+PV="1.1.2+git${SRCPV}"
+SRCREV="b44d32d02b014748044b5b18d27a9d1f8312145c"
 S = "${WORKDIR}/git"
 
 inherit setuptools monitor
