@@ -4,17 +4,16 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4a4d0e932ffae1c0131528d30d419c55"
 
-PR = "r0"
 SRCNAME = "keystoneclient"
 
 SRC_URI = "\
-	git://github.com/openstack/python-keystoneclient.git;branch=master \
+	git://github.com/openstack/python-keystoneclient.git;branch=stable/kilo \
 	file://fix_keystoneclient_memory_leak.patch \
 	file://keystone-api-check.sh \
 	"
 
-PV = "1.3.0+git${SRCPV}"
-SRCREV = "a84b5ac115dd5775f7380a204811aa939fd5c242"
+PV = "1.3.3+git${SRCPV}"
+SRCREV = "ec70eb02f8a5889828cde786694283240f64c5c4"
 S = "${WORKDIR}/git"
 
 inherit setuptools monitor
@@ -32,6 +31,7 @@ RDEPENDS_${PN} += " \
 	python-requests \
 	python-simplejson \
 	python-oslo.config \
+	python-oslo.serialization \
 	python-pbr \
 	"
 
