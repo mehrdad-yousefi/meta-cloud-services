@@ -345,7 +345,9 @@ RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common \
 				  postgresql postgresql-client python-psycopg2"
 
 RDEPENDS_${SRCNAME}-compute = "${PN} ${SRCNAME}-common python-oslo.messaging \
-			       qemu libvirt libvirt-libvirtd libvirt-python libvirt-virsh"
+			       qemu libvirt libvirt-libvirtd libvirt-python libvirt-virsh \
+			       util-linux-blkid \
+			       "
 RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-common"
 RDEPENDS_${SRCNAME}-ec2 = "postgresql sudo ${SRCNAME}-common"
 
