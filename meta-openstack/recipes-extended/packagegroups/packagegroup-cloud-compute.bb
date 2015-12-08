@@ -42,4 +42,5 @@ RRECOMMENDS_${PN} = " \
     kernel-module-softdog \
     kernel-module-veth \
     kernel-module-openvswitch \
+    kernel-module-tun \
     "
