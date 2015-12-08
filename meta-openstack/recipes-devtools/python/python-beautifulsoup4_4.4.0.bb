@@ -2,15 +2,15 @@ DESCRIPTION = "Screen-scraping library"
 HOMEPAGE = "https://pypi.python.org/pypi/beautifulsoup4/"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://COPYING.txt;md5=83e365dc17176bd72ba7d08ca0555efa"
+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=39dacabe5494f61c8680f6fa7323b596"
 
 PR = "r0"
 SRCNAME = "beautifulsoup4"
 
 SRC_URI = "https://pypi.python.org/packages/source/b/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "b8d157a204d56512a4cc196e53e7d8ee"
-SRC_URI[sha256sum] = "a2b29bd048ca2fe54a046b29770964738872a9747003a371344a93eedf7ad58e"
+SRC_URI[md5sum] = "63d1f33e6524f408cb6efbc5da1ae8a5"
+SRC_URI[sha256sum] = "fad91da88f69438b9ba939ab1b2cabaa31b1d914f1cccb4bb157a993ed2917f6"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
