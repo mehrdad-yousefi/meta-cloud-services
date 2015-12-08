@@ -199,6 +199,9 @@ RDEPENDS_${PN} += "python-greenlet \
 	python-retrying \
         python-glancestore \
         python-oslo.vmware \
+	python-glancestore \
+	python-enum34 \
+	python-semantic-version \
 	"
 
 RDEPENDS_${SRCNAME} = "${PN} \
