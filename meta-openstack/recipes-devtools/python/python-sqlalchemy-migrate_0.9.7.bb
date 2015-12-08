@@ -24,4 +24,5 @@ RDEPENDS_${PN} += "python-sqlalchemy  \
 	python-decorator \
 	python-tempita  \
         python-pbr \
+        python-sqlparse \
     "
