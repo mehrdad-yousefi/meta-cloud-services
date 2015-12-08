@@ -61,4 +61,5 @@ RRECOMMENDS_${PN} = " \
     kernel-module-fuse \
     cloud-init \
     kernel-module-softdog \
+    kernel-module-openvswitch \
     "

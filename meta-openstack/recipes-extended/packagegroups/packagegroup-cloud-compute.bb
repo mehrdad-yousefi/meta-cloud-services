@@ -41,4 +41,5 @@ RRECOMMENDS_${PN} = " \
     kernel-module-fuse \
     kernel-module-softdog \
     kernel-module-veth \
+    kernel-module-openvswitch \
     "
