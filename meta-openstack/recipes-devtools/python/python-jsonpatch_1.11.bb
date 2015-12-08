@@ -9,8 +9,8 @@ SRCNAME = "jsonpatch"
 
 SRC_URI = "http://pypi.python.org/packages/source/j/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "5eee76359052a1c289cf61eaf037332d"
-SRC_URI[sha256sum] = "e997076450992aa7af2f4ae6c3e7767d390ddb6746979c74fd2092bb8fbdf5b2"
+SRC_URI[md5sum] = "9f2d0aa31f99cc97089a203c5bed3924"
+SRC_URI[sha256sum] = "22d0bc0f5522a4a03dd9fb4c4cdf7c1f03256546c88be4c61e5ceabd22280e47"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
