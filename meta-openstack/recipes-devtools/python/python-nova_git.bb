@@ -277,6 +277,7 @@ RDEPENDS_${PN} = " libvirt \
 		   python-keystonemiddleware \
 		   python-modules \
 		   python-misc \
+		   python-amqp \
 		   python-amqplib \
 		   python-anyjson \
 		   python-babel \
@@ -300,9 +301,11 @@ RDEPENDS_${PN} = " libvirt \
 		   python-oslo.concurrency \
 		   python-oslo.middleware \
 		   python-oslo.context \
+		   python-oslo.log \
 		   python-paste \
 		   python-pastedeploy \
 		   python-paramiko \
+		   python-psutil \
 		   python-pyasn1 \
 		   python-setuptools-git \
 		   python-simplejson \
