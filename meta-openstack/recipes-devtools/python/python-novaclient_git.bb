@@ -4,15 +4,13 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7cdb54622cacc9bc9b2883091e6dd669"
 
-PR = "r0"
-
 SRC_URI = "\
-	git://github.com/openstack/python-novaclient.git;branch=master \
+	git://github.com/openstack/python-novaclient.git;branch=stable/kilo \
 	file://nova-api-check.sh \
 	"
 
-PV = "2.23.0+git${SRCPV}"
-SRCREV = "e0f5072907a00d48a183dd8fc91a6cf6038ca279"
+PV = "2.23.2+git${SRCPV}"
+SRCREV = "4ab9db648653f7ea6b9f8b1c78bff672b20b913f"
 S = "${WORKDIR}/git"
 
 inherit setuptools monitor
