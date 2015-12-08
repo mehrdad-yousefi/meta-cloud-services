@@ -287,6 +287,7 @@ RDEPENDS_${PN} += " \
         python-fixtures \
         python-oslotest \
         python-cryptography \
+        python-functools32 \
         "
 
 RDEPENDS_${SRCNAME}-tests += " bash"
