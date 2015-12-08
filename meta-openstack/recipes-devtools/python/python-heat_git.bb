@@ -4,10 +4,9 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-PR = "r0"
 SRCNAME = "heat"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
            file://heat.conf \
            file://heat.init \
            file://autoscaling_example.template \
@@ -16,8 +15,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://heat-tests-change-project_dir-path.patch \
 "
 
-SRCREV="6d106dee26649202791596062b5a29049e962d80"
-PV="2015.1.0b2+git${SRCPV}"
+SRCREV="a4aafba0c2b387df888dfd805594b78b39b5f495"
+PV="2015.1.2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 SERVICECREATE_PACKAGES = "${SRCNAME}-setup ${SRCNAME}-templates ${SRCNAME}-cfn"
@@ -212,6 +211,7 @@ RDEPENDS_${PN} += " \
         python-pytz \
         python-pbr \
         python-oslo.log \
+        python-oslo.versionedobjects \
 	"
 
 RDEPENDS_${SRCNAME}-engine = "${PN} ${SRCNAME}-templates ${SRCNAME}-common postgresql postgresql-client python-psycopg2 tgt ${SRCNAME}-cfn"
