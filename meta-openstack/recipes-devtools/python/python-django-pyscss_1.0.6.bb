@@ -26,4 +26,5 @@ DEPENDS += " \
 RDEPENDS_${PN} += " \
         python-django \
         python-pyscss \        
+        python-pathlib \
         "
