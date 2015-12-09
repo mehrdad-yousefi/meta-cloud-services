@@ -15,7 +15,7 @@ SRC_URI[sha256sum] = "209882e199fdf98aeed0db44b922aa688e5a66d81c45148a5743804f9a
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
-inherit setuptools
+inherit setuptools rmargparse
 
 DEPENDS += " \
 	python-pbr \

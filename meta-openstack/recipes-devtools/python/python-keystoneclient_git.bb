@@ -16,7 +16,7 @@ PV = "1.3.3+git${SRCPV}"
 SRCREV = "ec70eb02f8a5889828cde786694283240f64c5c4"
 S = "${WORKDIR}/git"
 
-inherit setuptools monitor
+inherit setuptools monitor rmargparse
 
 FILES_${PN}-doc += "${datadir}/keystoneclient" 
 

@@ -13,7 +13,7 @@ PV = "2.23.2+git${SRCPV}"
 SRCREV = "4ab9db648653f7ea6b9f8b1c78bff672b20b913f"
 S = "${WORKDIR}/git"
 
-inherit setuptools monitor
+inherit setuptools monitor rmargparse
 
 DEPENDS = "python-setuptools-git"
 DEPENDS += " \

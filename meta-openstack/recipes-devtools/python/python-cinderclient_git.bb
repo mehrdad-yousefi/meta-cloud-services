@@ -17,7 +17,7 @@ PV="1.1.2+git${SRCPV}"
 SRCREV="b44d32d02b014748044b5b18d27a9d1f8312145c"
 S = "${WORKDIR}/git"
 
-inherit setuptools monitor
+inherit setuptools monitor rmargparse
 
 DEPENDS += " \
         python-pip \
