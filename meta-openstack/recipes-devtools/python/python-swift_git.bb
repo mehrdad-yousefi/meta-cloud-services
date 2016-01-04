@@ -4,10 +4,9 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-PR = "r0"
 SRCNAME = "swift"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
            file://proxy-server.conf \
            file://dispersion.conf \
            file://test.conf \
@@ -16,8 +15,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://cluster.conf \
 "
 
-SRCREV="4ca08cc395e686265574366497a6869e94eebcb2"
-PV="2.2.2+git${SRCPV}"
+SRCREV="f8dee761bd36f857aa1288c27e095907032fad68"
+PV="2.3.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools python-dir update-rc.d hosts identity openstackchef
