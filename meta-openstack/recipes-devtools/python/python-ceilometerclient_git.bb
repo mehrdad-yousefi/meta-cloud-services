@@ -18,15 +18,13 @@ RDEPENDS_${PN} +="python-cliff \
 	python-pbr \
 	"
 
-PR = "r0"
-
 SRC_URI = "\
-	git://github.com/openstack/python-ceilometerclient.git;branch=master \
+	git://github.com/openstack/python-ceilometerclient.git;branch=stable/kilo \
 	file://fix_ceilometerclient_memory_leak.patch \
 	"
 
-PV = "1.0.13+git${SRCPV}"
-SRCREV = "f8765ce532a45391c5366be8fa0f583f96a30d22"
+PV = "1.1.2+git${SRCPV}"
+SRCREV = "44c2a21adcfb3092d5e66706612fe14ec2282717"
 S = "${WORKDIR}/git"
 
 inherit setuptools
