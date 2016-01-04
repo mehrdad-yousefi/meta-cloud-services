@@ -4,18 +4,17 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-PR = "r0"
 SRCNAME = "glance"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
            file://glance.init \
            "
 
 # removed. juno uses store library: file://0001-glance-store-only-load-known-stores-not-all-stores.patch
 #                                   file://glance-change-builtin-tests-config-location.patch
 
-SRCREV="c84d8c98bc0dd64d79bd1e659b9561d47b3428c1"
-PV="2015.1.0b2+git${SRCPV}"
+SRCREV="0303c5c3e43da29501b8b26c82e5a0cc9b7a3ed7"
+PV="2015.1.2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
