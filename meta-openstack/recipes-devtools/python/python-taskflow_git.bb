@@ -4,14 +4,12 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4476c4be31402271e101d9a4a3430d52"
 
-PR = "r0"
-
 SRC_URI = "\
-	git://git.openstack.org/openstack/taskflow.git;branch=master \
+	git://git.openstack.org/openstack/taskflow.git;branch=stable/kilo \
 	"
 
-PV="0.2+git${SRCPV}"
-SRCREV="8800572da240b1f1856898952ce804936dafe49f"
+PV="0.7.1+git${SRCPV}"
+SRCREV="28bece7c7c97199b8d941b16865c3670c323589a"
 S = "${WORKDIR}/git"
 
 inherit setuptools
@@ -30,4 +28,6 @@ RDEPENDS_${PN} += " \
         python-babel \
         python-stevedore \
         python-futures \
+        python-oslo.utils \
+        python-oslo.serialization \
 	"
