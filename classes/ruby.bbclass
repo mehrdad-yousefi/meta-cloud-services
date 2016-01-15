@@ -83,10 +83,41 @@ RUBY_INSTALL_GEMS ?= "${BPN}-${BPV}.gem"
 
 RUBY_COMPILE_FLAGS ?= 'LANG="en_US.UTF-8" LC_ALL="en_US.UTF-8"'
 
+ruby_gen_extconf_fix() {
+	cat<<EOF>append
+  RbConfig::MAKEFILE_CONFIG['CPPFLAGS'] = ENV['CPPFLAGS'] if ENV['CPPFLAGS']
+  \$CPPFLAGS = ENV['CPPFLAGS'] if ENV['CPPFLAGS']
+  RbConfig::MAKEFILE_CONFIG['CC'] = ENV['CC'] if ENV['CC']
+  RbConfig::MAKEFILE_CONFIG['LD'] = ENV['LD'] if ENV['LD']
+  RbConfig::MAKEFILE_CONFIG['CFLAGS'] = ENV['CFLAGS'] if ENV['CFLAGS']
+  RbConfig::MAKEFILE_CONFIG['CXXFLAGS'] = ENV['CXXFLAGS'] if ENV['CXXFLAGS']
+EOF
+	cat append2>>append
+	sysroot_ruby=${STAGING_INCDIR}/ruby-${RUBY_GEM_VERSION}
+	ruby_arch=`ls -1 ${sysroot_ruby} |grep -v ruby |tail -1 2> /dev/null`
+	cat<<EOF>>append
+  system("perl -p -i -e 's#^topdir.*#topdir = ${sysroot_ruby}#' Makefile")
+  system("perl -p -i -e 's#^hdrdir.*#hdrdir = ${sysroot_ruby}#' Makefile")
+  system("perl -p -i -e 's#^arch_hdrdir.*#arch_hdrdir = ${sysroot_ruby}/\\\\\$(arch)#' Makefile")
+  system("perl -p -i -e 's#^arch =.*#arch = ${ruby_arch}#' Makefile")
+  system("perl -p -i -e 's#^LIBPATH =.*#LIBPATH = -L.#' Makefile")
+EOF
+}
+
 ruby_do_compile() {
+	if [ -f extconf.rb -a ! -f extconf.rb.orig ] ; then
+		grep create_makefile extconf.rb > append2 || (exit 0)
+		ruby_gen_extconf_fix
+		cp extconf.rb extconf.rb.orig
+		# Patch extconf.rb for cross compile
+		cat append >> extconf.rb
+	fi
 	for gem in ${RUBY_BUILD_GEMS}; do
 		${RUBY_COMPILE_FLAGS} gem build $gem
 	done
+	if [ -f extconf.rb.orig ] ; then
+		mv extconf.rb.orig extconf.rb
+	fi
 }
 
 
