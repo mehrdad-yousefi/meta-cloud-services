@@ -8,12 +8,12 @@ SRCNAME = "cliff"
 
 SRC_URI = "https://pypi.python.org/packages/source/c/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "188212b80ee152ee65b2018975193418"
-SRC_URI[sha256sum] = "2b92d12cf1aa59c0cf1914b4b6b02b78daadac890a53d0e6b71b5220661ab9e0"
+SRC_URI[md5sum] = "23f9187d6d7ffa70d8f725381bb1094f"
+SRC_URI[sha256sum] = "f5ba6fe0940547549947d5a24ca3354145a603d3a9ba054f209d20b66dc02be7"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
-inherit setuptools
+inherit setuptools rmargparse
 
 DEPENDS += "\
     python-pbr \
@@ -22,6 +22,13 @@ DEPENDS += "\
 RDEPENDS_${PN} += "python-prettytable \
             python-cmd2 \
             python-pbr \
-            python-pyparsing"
+            python-pyparsing \
+            python-prettytable \
+            python-pyparsing \
+            python-six \
+            python-stevedore \
+            python-unicodecsv \
+            python-pyyaml \
+"
 
 CLEANBROKEN = "1"

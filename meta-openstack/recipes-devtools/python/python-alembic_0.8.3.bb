@@ -8,12 +8,15 @@ SRCNAME = "alembic"
 
 SRC_URI = "https://pypi.python.org/packages/source/a/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "1814563f5042b28c5c452f2faa895d8e"
-SRC_URI[sha256sum] = "f998184b8cd6d522249e88bb0e7f6ccd80cdd73df50189e85c7c35740b17e7d4"
+SRC_URI[md5sum] = "2e4ef17675316af9f09d749b0aee390e"
+SRC_URI[sha256sum] = "eeac36589c1bf393e2040de01514a0d101ef17039957300209b0b44f3ddffce9"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit setuptools 
 
-RDEPENDS_${PN} += "python-sqlalchemy"
+RDEPENDS_${PN} += " \
+    python-sqlalchemy \
+    python-python-editor \
+    "
 

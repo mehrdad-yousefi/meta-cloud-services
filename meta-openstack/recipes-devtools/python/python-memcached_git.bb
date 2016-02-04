@@ -8,11 +8,16 @@ SECTION = "devel/python"
 LICENSE = "PSF"
 LIC_FILES_CHKSUM = "file://PSF.LICENSE;md5=7dd786e8594f1e787da94a946557b40e"
 
-PR = "r0"
+PV = "1.57+git${SRCPV}"
+SRCREV = "664bd3e23fe500fbde4c70636e2d24c8fd2f35af"
 
-SRC_URI = "http://ftp.tummy.com/pub/python-memcached/old-releases/${PN}-${PV}.tar.gz"
+SRC_URI = "git://github.com/linsomniac/${BPN}.git"
 
-SRC_URI[md5sum] = "e0e2b44613bb5443e3411b20f16664e0"
-SRC_URI[sha256sum] = "af04ea031b271a54f085166773e028fe053fc1d9a58cd8b3c3a57945990bfb48"
+S = "${WORKDIR}/git"
 
 inherit setuptools
+
+RDEPENDS_${PN} += " \
+    python-six \
+    "
+
