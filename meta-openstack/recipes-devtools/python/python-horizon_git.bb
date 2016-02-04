@@ -9,72 +9,79 @@ DEPENDS += " \
         python-pbr \
         "
 
-RDEPENDS_${PN} += " python-django \
-    python-django-appconf \
-    python-django-compressor \
-    python-django-nose \
-    python-django-openstack-auth \
-    python-netaddr \
-    python-ceilometerclient \
-    python-cinderclient \
-    python-glanceclient \
-    python-heatclient \
-    python-keystoneclient \
-    python-troveclient \
-    python-saharaclient \
-    python-lesscpy \
-    python-novaclient \
-    python-nose-exclude \
-    python-neutronclient \
-    python-pytz \
-    python-pbr \
-    python-six \
-    python-swiftclient \
-    python-lockfile \
-    python-pyyaml \
-    python-pint \
-    python-xstatic \
-    python-xstatic-jquery \
-    python-xstatic-angular \
-    python-xstatic-angular-cookies \
-    python-xstatic-angular-mock \
-    python-xstatic-angular-bootstrap \
-    python-xstatic-angular-irdragndrop \
-    python-xstatic-angular-lrdragndrop \
-    python-xstatic-magic-search \
-    python-xstatic-d3 \
-    python-xstatic-hogan \
-    python-xstatic-jasmine \
-    python-xstatic-jquery-migrate \
-    python-xstatic-jquery-quicksearch \
-    python-xstatic-jquery-tablesorter \
-    python-xstatic-jsencrypt \
-    python-xstatic-qunit \
-    python-xstatic-rickshaw \
-    python-xstatic-spin \
-    python-xstatic-bootstrap-datepicker \
-    python-xstatic-bootstrap-scss \
-    python-xstatic-font-awesome \
-    python-xstatic-jquery-ui \
-    python-xstatic-smart-table \
-    python-xstatic-term.js \
-    python-pyscss \
-    python-django-pyscss \
-    "
+RDEPENDS_${PN} += " \
+        python-pbr \
+        python-babel \
+        python-django \
+        python-pint \
+        python-django-babel \
+        python-django-compressor \
+        python-django-openstack-auth \
+        python-django-pyscss \
+        python-eventlet \
+        python-httplib2 \
+        python-iso8601 \
+        python-kombu \
+        python-netaddr \
+        python-oslo.concurrency \
+        python-oslo.config \
+        python-oslo.i18n \
+        python-oslo.policy \
+        python-oslo.serialization \
+        python-oslo.utils \
+        python-pyscss \
+        python-ceilometerclient \
+        python-cinderclient \
+        python-glanceclient \
+        python-heatclient \
+        python-keystoneclient \
+        python-neutronclient \
+        python-novaclient \
+        python-saharaclient \
+        python-swiftclient \
+        python-troveclient \
+        python-pytz \
+        python-pyyaml \
+        python-six \
+        python-xstatic \
+        python-xstatic-angular \
+        python-xstatic-angular-bootstrap \
+        python-xstatic-angular-gettext \
+        python-xstatic-angular-lrdragndrop \
+        python-xstatic-bootstrap-datepicker \
+        python-xstatic-bootstrap-scss \
+        python-xstatic-bootswatch \
+        python-xstatic-d3 \
+        python-xstatic-hogan \
+        python-xstatic-font-awesome \
+        python-xstatic-jasmine \
+        python-xstatic-jquery \
+        python-xstatic-jquery-migrate \
+        python-xstatic-jquery-quicksearch \
+        python-xstatic-jquery-tablesorter \
+        python-xstatic-jquery-ui \
+        python-xstatic-jsencrypt \
+        python-xstatic-magic-search \
+        python-xstatic-mdi \
+        python-xstatic-rickshaw \
+        python-xstatic-roboto-fontface \
+        python-xstatic-smart-table \
+        python-xstatic-spin \
+        python-xstatic-term.js \
+        "
 
 SRCNAME = "horizon"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
     file://horizon.init \
     file://fix_bindir_path.patch \
     file://openstack-dashboard-apache.conf \
     file://local_settings.py \
     file://horizon-use-full-package-path-to-test-directories.patch \
-    file://Compatibility-fix-for-pyscss-1.3.4.patch \
     "
 
-SRCREV = "b99cf48ff346494198fb9740495eacc14fa406bf"
-PV = "2015.1.0+git${SRCPV}p1"
+SRCREV = "593f0b78eea8efbb6d833d66acc7ab4dc852159b"
+PV = "8.0.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d python-dir default_configs openstackchef monitor
