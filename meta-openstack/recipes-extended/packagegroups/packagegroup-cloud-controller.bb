@@ -23,7 +23,6 @@ RDEPENDS_${PN} = " postgresql-setup \
     neutron-setup \
     neutron-server \
     neutron-plugin-openvswitch \
-    openvswitch-controller \
     cinder-api \
     cinder-volume \
     cinder-scheduler \

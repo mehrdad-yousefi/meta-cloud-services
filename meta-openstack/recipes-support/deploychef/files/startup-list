@@ -38,4 +38,3 @@ S30nova-spicehtml5proxy
 S70lighttpd
 S71openvswitch-switch
 S72libvirtd
-S72openvswitch-controller
