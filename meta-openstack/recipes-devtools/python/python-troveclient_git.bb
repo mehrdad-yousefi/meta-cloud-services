@@ -4,18 +4,17 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-PR = "r0"
 SRCNAME = "troveclient"
 
 SRC_URI = "\
 	git://github.com/openstack/python-troveclient.git;branch=master \
 	"
 
-PV = "1.0.9+git${SRCPV}"
-SRCREV = "a36ebe539ce0affef5388b7edd7a6a230a0fde6c"
+PV = "1.3.0+git${SRCPV}"
+SRCREV = "7132f5ff78af75645c3430d35094b3c9aba49200"
 S = "${WORKDIR}/git"
 
-inherit setuptools hosts default_configs
+inherit setuptools hosts default_configs rmargparse
 
 
 USERADD_PACKAGES = "${PN}"
@@ -62,6 +61,8 @@ RDEPENDS_${PN} += " \
         python-simplejson \
         python-babel \
         python-six \
+        python-oslo.utils \
+        python-keystoneclient \
 	"
 
 RDEPENDS_${SRCNAME}-tests += "python-mock"

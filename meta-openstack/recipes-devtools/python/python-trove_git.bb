@@ -4,15 +4,14 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-PR = "r0"
 SRCNAME = "trove"
 
-SRC_URI = "git://github.com/openstack/trove.git;branch=stable/juno \
+SRC_URI = "git://github.com/openstack/trove.git;branch=master \
           file://trove-init \
           "
 
-SRCREV="6c4ea5b845a4d6d71d3d3786517b5b358c30f3ec"
-PV="2014.2+git${SRCPV}"
+SRCREV="11996635299396f181f5aec3c6825f8011d45e2c"
+PV="4.0.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit update-rc.d setuptools identity hosts useradd default_configs
@@ -77,13 +76,13 @@ do_install_append() {
         sed -e "s:#log_dir.*:log_dir = ${TROVE_LOG_DIR}:g" \
                 -i ${TROVE_CONF_DIR}/$file
 
-        sed -e "s:^sql_connection = mysql\(.*\):#sql_connection = mysql\1:g" \
+        sed -e "s:^connection = mysql\(.*\):#connection = mysql\1:g" \
                 -i ${TROVE_CONF_DIR}/$file
 
-        sed -e "s,^#sql_connection = postgresql://.*,sql_connection = postgresql://${ADMIN_USER}:${ADMIN_PASSWORD}@localhost/trove,g" \
+        sed -e "s,^#connection = postgresql://.*,connection = postgresql://${ADMIN_USER}:${ADMIN_PASSWORD}@localhost/trove,g" \
                 -i ${TROVE_CONF_DIR}/$file
 
-        sed -i "/sql_connection = postgres.*n/adefault_datastore = postgresql" \
+        sed -i "/connection = postgres.*n/adefault_datastore = postgresql" \
                 ${TROVE_CONF_DIR}/$file
 
         sed -e "s,dns_auth_url = .*,dns_auth_url = http://127.0.0.1:8081/keystone/main/v2.0,g" \
@@ -255,6 +254,7 @@ RDEPENDS_${PN} += " \
     python-neutronclient \
     python-novaclient \
     python-oslo.config \
+    python-oslo.service \
     python-passlib \
     python-paste \
     python-pastedeploy \
@@ -262,6 +262,7 @@ RDEPENDS_${PN} += " \
     python-sqlalchemy-migrate \
     python-swiftclient \
     python-webob \
+    python-monotonic \
     uwsgi \
     "
 
