@@ -21,4 +21,18 @@ DEPENDS += " \
 
 RDEPENDS_${PN} += " \
         python-pbr \
+        python-babel \
+        python-webob \
+        python-eventlet \
+        python-greenlet \
+        python-monotonic \
+        python-oslo.utils \
+        python-oslo.concurrency \
+        python-oslo.config \
+        python-oslo.log \
+        python-six \
+        python-oslo.i18n \
+        python-pastedeploy \
+        python-paste \
+        python-routes \
         "
