@@ -10,8 +10,7 @@ SRCNAME = "nova"
 
 FILESEXTRAPATHS_append := "${THISDIR}/${PN}"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
-           file://nova-add-migrate.cfg-to-the-MANIFEST.patch \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://neutron-api-set-default-binding-vnic_type.patch \
            "
 # restore post stable/juno:
@@ -26,8 +25,8 @@ SRC_URI += "file://nova-all \
             file://nova.conf \
             file://openrc \
            "
-SRCREV = "8397b6464af520903f546ce4c6d51a2eb5b4c8a8"
-PV = "2015.1.0+git${SRCPV}"
+SRCREV = "6df6ad3ff32f2b1fe2978df1032002548ad8eb66"
+PV = "12.0.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -312,7 +311,7 @@ RDEPENDS_${PN} = " libvirt \
 		   python-sqlalchemy \
 		   python-sqlalchemy-migrate \
 		   python-stevedore \
-		   python-suds \
+		   python-suds-jurko \
 		   python-neutronclient \
 		   python-routes \
 		   python-webob \
@@ -325,6 +324,14 @@ RDEPENDS_${PN} = " libvirt \
 		   python-sqlparse \
 		   python-netifaces \
 		   python-retrying \
+		   python-debtcollector \
+		   python-ecdsa \
+		   python-wrapt \
+		   python-oslo.versionedobjects \
+		   python-oslo.reports \
+		   python-monotonic \
+		   python-oslo.service \
+		   python-os-brick \
     "
 
 RDEPENDS_${SRCNAME}-common = "${PN} openssl openssl-misc libxml2 libxslt \
