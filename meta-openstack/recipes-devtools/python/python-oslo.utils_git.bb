@@ -4,13 +4,11 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 
-PR = "r0"
-
 SRCNAME = "oslo.utils"
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git"
 
-PV = "1.3.0"
-SRCREV = "ed4e2d775a56b9d47ed314f96dccd9221a91e241"
+PV = "2.7.0+git${SRCPV}"
+SRCREV = "6aa24675e890e0bb61967a3e4c5e6aa8cf3dedcf"
 S = "${WORKDIR}/git"
 
 inherit setuptools
@@ -25,4 +23,13 @@ DEPENDS += " \
 # RDEPENDS_default: 
 RDEPENDS_${PN} += " \
         python-pbr \
+        python-babel \
+        python-six \
+        python-iso8601 \
+        python-oslo.i18n \
+        python-monotonic \
+        python-pytz \
+        python-netaddr \
+        python-netifaces \
+        python-debtcollector \
         "
