@@ -9,9 +9,8 @@ DEPENDS += " \
         python-pbr \
         "
 
-SRCREV = "db6420b44779411d6d1f238f6b887f83f1988986"
-PV = "0.19.0+git${SRCPV}"
-PR = "r0"
+SRCREV = "86635868c1eb3aec0c065c12cb9928c613940f36"
+PV = "1.1.0+git${SRCPV}"
 
 SRC_URI = "\
 	git://github.com/openstack/${BPN}.git;protocol=https \
