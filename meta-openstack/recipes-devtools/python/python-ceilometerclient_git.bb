@@ -9,27 +9,33 @@ DEPENDS += " \
         python-pbr \
         "
 
-RDEPENDS_${PN} +="python-cliff \
+RDEPENDS_${PN} +=" \
+        python-cliff \
 	python-httplib2 \
 	python-iso8601 \
 	python-prettytable \
 	python-pyparsing \
 	python-simplejson \
 	python-pbr \
+        python-oslo.i18n \
+        python-oslo.serialization \
+        python-oslo.utils \
+        python-keystoneclient \
+        python-requests \
+        python-six \
+        python-stevedore \
 	"
-
-PR = "r0"
 
 SRC_URI = "\
 	git://github.com/openstack/python-ceilometerclient.git;branch=master \
 	file://fix_ceilometerclient_memory_leak.patch \
 	"
 
-PV = "1.0.13+git${SRCPV}"
-SRCREV = "f8765ce532a45391c5366be8fa0f583f96a30d22"
+PV = "1.5.0+git${SRCPV}"
+SRCREV = "daed7e59c383f1ca74d75160cbc99fbd89675648"
 S = "${WORKDIR}/git"
 
-inherit setuptools
+inherit setuptools rmargparse
 
 
 PACKAGECONFIG ?= "bash-completion"

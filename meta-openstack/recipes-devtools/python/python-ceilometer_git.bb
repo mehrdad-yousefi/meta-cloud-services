@@ -4,10 +4,9 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-PR = "r0"
 SRCNAME = "ceilometer"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://ceilometer.conf \
            file://ceilometer.init \
            file://fix_ceilometer_memory_leak.patch \
@@ -16,8 +15,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
 #   file://ceilometer-builtin-tests-config-location.patch
 
 
-SRCREV = "b0447ed8e7bee371bf7095c86e47d717abe89edc"
-PV = "2015.1.0+git${SRCPV}"
+SRCREV = "026a5d475e1958bf761e41c2bb426b09e0f3d270"
+PV = "5.0.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 CEILOMETER_SECRET ?= "12121212"
@@ -202,7 +201,7 @@ RDEPENDS_${PN} += " \
 	python-paste \
 	python-sqlalchemy-migrate \
 	python-stevedore \
-	python-suds \
+	python-suds-jurko \
 	python-paramiko \
 	python-babel \
 	python-iso8601 \
@@ -237,6 +236,27 @@ RDEPENDS_${PN} += " \
 	python-croniter \
 	python-ipaddr \
 	python-pysnmp \
+        python-retrying \
+        python-jsonpath-rw-ext \
+        python-jsonschema \
+        python-kafka \
+        python-keystonemiddleware \
+        python-oslo.context \
+        python-oslo.db \
+        python-oslo.concurrency \
+        python-oslo.i18n \
+        python-oslo.log \
+        python-oslo.policy \
+        python-oslo.reports \
+        python-oslo.service \
+        python-oslo.messaging \
+        python-oslo.middleware \
+        python-oslo.utils \
+        python-neutronclient \
+        python-novaclient \
+        python-requests \
+        python-six \
+        python-tooz \
 	"
 
 RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common ${SRCNAME}-alarm-notifier ${SRCNAME}-alarm-evaluator ${SRCNAME}-agent-notification ${SRCNAME}-reseller \
