@@ -4,10 +4,9 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-PR = "r0"
 SRCNAME = "heat"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://heat.conf \
            file://heat.init \
            file://autoscaling_example.template \
@@ -16,8 +15,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
            file://heat-tests-change-project_dir-path.patch \
 "
 
-SRCREV = "6db88597dba0b79b2501f43b704c93b2728a5ec6"
-PV = "2015.1.0+git${SRCPV}"
+SRCREV = "4348b7ababd1048e17ec354ca38c903c908cd74e"
+PV = "5.0.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 SERVICECREATE_PACKAGES = "${SRCNAME}-setup ${SRCNAME}-templates ${SRCNAME}-cfn"
@@ -184,7 +183,7 @@ RDEPENDS_${PN} += " \
 	python-paste \
 	python-sqlalchemy-migrate \
 	python-stevedore \
-	python-suds \
+	python-suds-jurko \
 	python-paramiko \
 	python-babel \
 	python-iso8601 \
@@ -213,6 +212,39 @@ RDEPENDS_${PN} += " \
         python-pytz \
         python-pbr \
         python-oslo.log \
+        python-croniter \
+        python-cryptography \
+        python-keystonemiddleware \
+        python-netaddr \
+        python-oslo.cache \
+        python-oslo.concurrency \
+        python-oslo.context \
+        python-oslo.db \
+        python-oslo.i18n \
+        python-oslo.messaging \
+        python-oslo.middleware \
+        python-oslo.policy \
+        python-oslo.reports \
+        python-oslo.serialization \
+        python-oslo.service \
+        python-oslo.utils \
+        python-osprofiler \
+        python-oslo.versionedobjects \
+        python-pycrypto \
+        python-barbicanclient \
+        python-ceilometerclient \
+        python-cinderclient \
+        python-designateclient \
+        python-magnumclient \
+        python-manilaclient \
+        python-mistralclient \
+        python-neutronclient \
+        python-novaclient \
+        python-saharaclient \
+        python-troveclient \
+        python-zaqarclient \
+        python-requests \
+        python-six \
 	"
 
 RDEPENDS_${SRCNAME}-engine = "${PN} ${SRCNAME}-templates ${SRCNAME}-common postgresql postgresql-client python-psycopg2 tgt ${SRCNAME}-cfn"
