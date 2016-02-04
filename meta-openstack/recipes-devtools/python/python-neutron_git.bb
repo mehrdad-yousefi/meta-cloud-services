@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
 SRCNAME = "neutron"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://neutron-server.init \
            file://neutron-agent.init \
            file://l3_agent.ini \
@@ -19,8 +19,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
 # TBD: update or drop
 # file://uuid_wscheck.patch
 
-SRCREV = "7260e0e3fc2ea479e80e0962624aca7fd38a1f60"
-PV = "2015.1.0+git${SRCPV}"
+SRCREV = "6dcfe3a9362ae5fcf18e5cfb59663e43446cd59c"
+PV = "7.0.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -258,30 +258,44 @@ DEPENDS += " \
         python-pbr \
         "
 
-RDEPENDS_${PN} += "python-paste \
-	python-pastedeploy \
-	python-routes \
-	python-amqplib \
-	python-anyjson \
-	python-alembic \
-	python-eventlet \
-	python-greenlet \
-	python-httplib2 \
-	python-iso8601 \
-	python-kombu \
-	python-netaddr \
-	python-neutronclient \
-	python-sqlalchemy \
-	python-webob \
-	python-keystoneclient \
-	python-oslo.config \
-	python-oslo.rootwrap \
-	python-pyudev \
-	python-novaclient \
-	python-mako \
-	python-markupsafe \
-	python-pyparsing \
-	python-pbr \
+RDEPENDS_${PN} += " \
+        python-pbr \
+        python-paste \
+        python-pastedeploy \
+        python-debtcollector \
+        python-eventlet \
+        python-pecan \
+        python-greenlet \
+        python-httplib2 \
+        python-requests \
+        python-jinja2 \
+        python-keystonemiddleware \
+        python-netaddr \
+        python-neutronclient \
+        python-retrying \
+        python-ryu \
+        python-sqlalchemy \
+        python-webob \
+        python-keystoneclient \
+        python-alembic \
+        python-six \
+        python-stevedore \
+        python-oslo.concurrency \
+        python-oslo.config \
+        python-oslo.context \
+        python-oslo.db \
+        python-oslo.i18n \
+        python-oslo.log \
+        python-oslo.messaging \
+        python-oslo.middleware \
+        python-oslo.policy \
+        python-oslo.rootwrap \
+        python-oslo.serialization \
+        python-oslo.service \
+        python-oslo.utils \
+        python-oslo.versionedobjects \
+        python-novaclient \
+        python-routes \
 	"
 
 RDEPENDS_${SRCNAME} = "${PN} \

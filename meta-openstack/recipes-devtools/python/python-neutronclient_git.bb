@@ -9,24 +9,28 @@ DEPENDS += " \
         python-pbr \
         "
 
-RDEPENDS_${PN} +="python-cliff \
-	python-httplib2 \
-	python-iso8601 \
-	python-prettytable \
-	python-pyparsing \
-	python-simplejson \
-	python-pbr \
+RDEPENDS_${PN} +="\
+        python-pbr \
+        python-cliff \
+        python-iso8601 \
+        python-netaddr \
+        python-oslo.i18n \
+        python-oslo.serialization \
+        python-oslo.utils \
+        python-requests \
+        python-keystoneclient \
+        python-simplejson \
+        python-six \
+        python-babel \
 	"
-
-PR = "r0"
 
 SRC_URI = "git://github.com/openstack/python-neutronclient.git;branch=master \
            file://neutronclient-use-csv-flag-instead-of-json.patch \
            file://neutron-api-check.sh \
           "
 
-PV = "2.4.0+git${SRCPV}"
-SRCREV = "aa1215a5ad063b299d32ef319eb63d5210249a9b"
+PV = "3.1.0+git${SRCPV}"
+SRCREV = "3e115991c1cf9ec7cf4252440fa8d6015a5f53ce"
 S = "${WORKDIR}/git"
 
 inherit setuptools monitor rmargparse
