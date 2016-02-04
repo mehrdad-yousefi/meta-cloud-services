@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
 SRCNAME = "keystone"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://keystone.conf \
            file://identity.sh \
            file://keystone \
@@ -19,8 +19,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
 # file://keystone-remove-git-commands-in-tests.patch 
 # file://keystone-explicitly-import-localcontext-from-oslo.me.patch
 
-SRCREV = "5d3b31f9c3d34599ff8a83eeb7530fc6e0b1b67b"
-PV = "2015.1.0+git${SRCPV}"
+SRCREV = "8dcd82fb9c76d43f26338bee293b32f4af473ad9"
+PV = "8.0.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -143,9 +143,6 @@ do_install_append() {
         sed -e "s:%KEYSTONE_PACKAGE_DIR%:${PYTHON_SITEPACKAGES_DIR}/keystone:g" \
             -i ${KEYSTONE_PACKAGE_DIR}/tests/test_overrides.conf
     fi
-
-    cp run_tests.sh ${KEYSTONE_CONF_DIR}
-
 
     if ${@base_contains('DISTRO_FEATURES', 'OpenLDAP', 'true', 'false', d)};
     then
@@ -287,6 +284,10 @@ RDEPENDS_${PN} += " \
         python-fixtures \
         python-oslotest \
         python-functools32 \
+        python-six \
+        python-routes \
+        python-pycadf \
+        python-cryptography \
         "
 
 RDEPENDS_${SRCNAME}-tests += " bash"

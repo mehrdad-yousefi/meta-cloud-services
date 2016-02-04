@@ -4,7 +4,6 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4a4d0e932ffae1c0131528d30d419c55"
 
-PR = "r0"
 SRCNAME = "keystoneclient"
 
 SRC_URI = "\
@@ -13,8 +12,8 @@ SRC_URI = "\
 	file://keystone-api-check.sh \
 	"
 
-PV = "1.6.0+git${SRCPV}"
-SRCREV = "f6ab133f25f00e041cd84aa8bbfb422594d1942f"
+PV = "1.7.1+git${SRCPV}"
+SRCREV = "28138b588224c6b0503620ac2e24bd37dad25370"
 S = "${WORKDIR}/git"
 
 inherit setuptools monitor rmargparse
@@ -34,6 +33,7 @@ RDEPENDS_${PN} += " \
 	python-oslo.config \
 	python-oslo.serialization \
 	python-pbr \
+	python-argparse \
 	"
 
 PACKAGECONFIG ?= "bash-completion"
