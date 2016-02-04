@@ -4,10 +4,9 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-PR = "r0"
 SRCNAME = "cinder"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
     file://cinder.conf \
     file://cinder.init \
     file://cinder-volume \
@@ -15,14 +14,14 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/kilo \
     file://glusterfs_setup.sh \
     file://lvm_iscsi_setup.sh \
     file://add-cinder-volume-types.sh \
-    file://cinder-builtin-tests-config-location.patch \
     "
 
 # file://0001-run_tests-respect-tools-dir.patch
 # file://fix_cinder_memory_leak.patch 
+# file://cinder-builtin-tests-config-location.patch
 
-SRCREV = "5987bb2290f629e59b0bcced2f8fe22cdeb9cc6d"
-PV = "2015.1.0+git${SRCPV}"
+SRCREV = "61026d4e4f2a58dd84ffb2e4e40ab99860b9316a"
+PV = "7.0.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d identity default_configs hosts openstackchef monitor
@@ -49,9 +48,9 @@ python () {
 }
 SERVICECREATE_PACKAGES[vardeps] += "KEYSTONE_HOST"
 
-do_install_prepend() {
-    sed 's:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g' -i ${S}/${SRCNAME}/tests/conf_fixture.py
-}
+#do_install_prepend() {
+#    sed 's:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g' -i ${S}/${SRCNAME}/tests/conf_fixture.py
+#}
 
 CINDER_LVM_VOLUME_BACKING_FILE_SIZE ?= "2G"
 CINDER_NFS_VOLUME_SERVERS_DEFAULT = "controller:/etc/cinder/nfs_volumes"
@@ -162,7 +161,7 @@ pkg_postinst_${SRCNAME}-setup () {
 PACKAGES += "${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-setup ${SRCNAME}-api ${SRCNAME}-volume ${SRCNAME}-scheduler ${SRCNAME}-backup"
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
 
-RDEPENDS_${SRCNAME}-tests += " bash"
+RDEPENDS_${SRCNAME}-tests += " bash python"
 
 FILES_${PN} = "${libdir}/* /etc/tgt"
 
@@ -207,7 +206,7 @@ RDEPENDS_${PN} += "lvm2 \
 	python-paste \
 	python-sqlalchemy-migrate \
 	python-stevedore \
-	python-suds \
+	python-suds-jurko \
 	python-paramiko \
 	python-babel \
 	python-iso8601 \
@@ -218,9 +217,40 @@ RDEPENDS_${PN} += "lvm2 \
 	python-cinderclient \
 	python-oslo.config \
 	python-oslo.rootwrap \
+        python-oslo.concurrency \
+        python-oslo.context \
+        python-oslo.db \
+        python-oslo.log \
+        python-oslo.messaging \
+        python-oslo.middleware \
+        python-oslo.policy \
+        python-oslo.reports \
+        python-oslo.serialization \
+        python-oslo.service \
+        python-oslo.utils \
+        python-oslo.versionedobjects \
 	python-pbr \
 	python-taskflow \
 	python-rtslib-fb \
+        python-keystonemiddleware \
+        python-netaddr \
+        python-osprofiler \
+        python-pycrypto \
+        python-pyparsing \
+        python-barbicanclient \
+        python-glanceclient \
+        python-novaclient \
+        python-swiftclient \
+        python-requests \
+        python-retrying \
+        python-taskflow \
+        python-rtslib-fb \
+        python-six \
+        python-oslo.i18n \
+        python-oslo.vmware \
+        python-os-brick \
+        python-enum34 \
+        python-routes \
 	"
 
 RDEPENDS_${SRCNAME} = "${PN} \

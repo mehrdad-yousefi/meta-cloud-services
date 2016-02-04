@@ -5,7 +5,6 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3572962e13e5e739b30b0864365e0795"
 DEPENDS = "python-setuptools-git"
 
-PR = "r0"
 SRCNAME = "python-cinderclient"
 
 SRC_URI = "\
@@ -14,8 +13,8 @@ SRC_URI = "\
 	file://cinder-api-check.sh \
 	"
 
-PV="1.1.1+git${SRCPV}"
-SRCREV="9e94d814c6ae07c3d5e8242754aebcce150265cc"
+PV="1.4.0+git${SRCPV}"
+SRCREV="c167dda40cc65fe437a12b815ef91bbde4efb6bb"
 S = "${WORKDIR}/git"
 
 inherit setuptools monitor rmargparse
@@ -30,6 +29,9 @@ RDEPENDS_${PN} += "python-prettytable \
                    python-requests \
                    python-setuptools-git \
                    python-pbr \
+                   python-keystoneclient \
+                   python-babel \
+                   python-six \
 	           "
 
 PACKAGECONFIG ?= "bash-completion"
