@@ -621,7 +621,7 @@ def deploychef_add_file_to_FILES_PN(d, conf_file=None):
     ldata.setVar("OVERRIDES", "%s:%s" % (pkg_files, overrides))
     bb.data.update_data(ldata)
 
-    dest_base = d.getVar('CHEF_TEMPLATE_BASE')
+    dest_base = d.getVar('CHEF_TEMPLATE_BASE', True)
     pkg_imagedir = d.getVar('CHEF_ROOTFS_BASE', True)
     #Add the packages image base directory if it does not already exist
     if re.search(pkg_imagedir, files) == None:
