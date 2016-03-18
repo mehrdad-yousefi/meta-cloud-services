@@ -4,9 +4,8 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://scripts/tgtd.spec;beginline=7;endline=7;md5=21c19ea7dad04648b9c2f791b6e29b4c"
 DEPENDS = "sg3-utils"
 
-SRCREV = "ab51727a361bf296b1c2036375b5e45479059921"
-PV = "1.0.60+git${SRCPV}"
-PR = "r0"
+SRCREV = "eca74a72d2595f126a020111943928c3ea9e6fe8"
+PV = "1.0.63+git${SRCPV}"
 
 SRC_URI = "git://github.com/fujita/tgt.git \
 	file://0001-Correct-the-path-of-header-files-check-in-Yocto-buil.patch \
@@ -19,6 +18,8 @@ S = "${WORKDIR}/git"
 CONFFILES_${PN} += "${sysconfdir}/tgt/targets.conf"
 
 inherit update-rc.d
+
+CFLAGS += ' -I. -DUSE_SIGNALFD -DUSE_TIMERFD -D_GNU_SOURCE -DTGT_VERSION=\\"1.0.63\\" -DBSDIR=\\"${libdir}/backing-store\\"'
 
 do_compile() {
     oe_runmake SYSROOT="${STAGING_DIR_TARGET}" -e programs conf scripts
