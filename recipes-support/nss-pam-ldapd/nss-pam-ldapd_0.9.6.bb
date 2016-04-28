@@ -16,7 +16,8 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 SRC_URI = "\
 	http://arthurdejong.org/nss-pam-ldapd/${PN}-${PV}.tar.gz \
-	file://nslcd.init\
+	file://nslcd.init \
+	file://nslcd.service \
 	"
 
 inherit autotools
@@ -45,9 +46,14 @@ do_install_append() {
 	sed -i -e 's/^uid nslcd/# uid nslcd/;' ${D}${sysconfdir}/nslcd.conf
 	sed -i -e 's/^gid nslcd/# gid nslcd/;' ${D}${sysconfdir}/nslcd.conf
 	sed -i -e 's/^base dc=example,dc=com/base ${LDAP_DN}/;' ${D}${sysconfdir}/nslcd.conf
+
+	install -d ${D}${systemd_unitdir}/system
+	install -m 0644 ${WORKDIR}/nslcd.service ${D}${systemd_unitdir}/system
 }
 
-inherit update-rc.d
+inherit update-rc.d systemd
 
 INITSCRIPT_NAME = "nslcd"
 INITSCRIPT_PARAMS = "defaults"
+
+SYSTEMD_SERVICE_${PN} = "nslcd.service"
