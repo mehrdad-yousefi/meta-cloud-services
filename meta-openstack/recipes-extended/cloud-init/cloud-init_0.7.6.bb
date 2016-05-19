@@ -42,8 +42,12 @@ CHEF_SERVICES_CONF_FILES := " \
     ${sysconfdir}/cloud/cloud.cfg \
     "
 
+PACKAGES += "${PN}-systemd"
+
 FILES_${PN} += "${sysconfdir}/* \
                 ${datadir}/*"
+
+FILES_${PN}-systemd += "${systemd_unitdir}/*"
 
 INITSCRIPT_PACKAGES = "${PN}"
 INITSCRIPT_NAME_${BPN} = "cloud-init"
