@@ -1,7 +1,7 @@
 DESCRIPTION = "An identification and authentication framework for WSGI"
 HOMEPAGE = "http://repoze.org/"
 SECTION = "devel/python"
-LICENSE = "BSD-derived"
+LICENSE = "BSD-Modification"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2c33cdbc6bc9ae6e5d64152fdb754292"
 
 
