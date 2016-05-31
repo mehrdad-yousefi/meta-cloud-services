@@ -53,6 +53,7 @@ PACKAGECONFIG[sasl] = "--with-sasl,--without-sasl,cyrus-sasl,"
 PACKAGECONFIG[client] = "--enable-client,--disable-client,,"
 PACKAGECONFIG[gui] = "--enable-gui,--disable-gui,,"
 PACKAGECONFIG[opengl] = "--enable-opengl,--disable-opengl,,"
+PACKAGECONFIG[xinerama] = "--enable-xinerama,--disable-xinerama,libxinerama,"
 
 PACKAGES =+ "${PN}-protocol"
 LICENSE_${PN}-protocol = "BSD"
