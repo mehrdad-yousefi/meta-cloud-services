@@ -66,7 +66,7 @@ def get_rubygemsversion(p):
     version = subprocess.Popen([cmd, "env", "gemdir"], stdout=subprocess.PIPE).communicate()[0]
     
     r = re.compile(".*([0-9]+\.[0-9]+\.[0-9]+)$")
-    m = r.match(version)
+    m = r.match(version.decode("utf-8"))
     if m:
         found_version = m.group(1)
 
