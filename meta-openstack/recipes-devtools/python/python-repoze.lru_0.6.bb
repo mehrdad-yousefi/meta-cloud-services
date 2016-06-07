@@ -5,7 +5,7 @@ than keys and values that are used frequently. \
 "
 HOMEPAGE = "https://pypi.python.org/pypi/repoze.lru"
 SECTION = "devel/python"
-LICENSE = "BSD-derived"
+LICENSE = "BSD-Modification-copyright"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2c33cdbc6bc9ae6e5d64152fdb754292"
 
 SRCNAME = "repoze.lru"
