@@ -91,11 +91,11 @@ do_install_append() {
         ${KEYSTONE_CONF_DIR}/policy.json
     install -m 644 ${S}${sysconfdir}/keystone-paste.ini \
         ${KEYSTONE_CONF_DIR}/keystone-paste.ini
-    install -g users -m 644 ${S}/httpd/keystone.py \
+    install -m 644 ${S}/httpd/keystone.py \
         ${KEYSTONE_PY_DIR}/keystone-httpd.py
-    install -g users -m 644 ${S}/httpd/keystone.py \
+    install -m 644 ${S}/httpd/keystone.py \
         ${KEYSTONE_CGI_DIR}/admin
-    install -g users -m 644 ${S}/httpd/keystone.py \
+    install -m 644 ${S}/httpd/keystone.py \
         ${KEYSTONE_CGI_DIR}/main
 
     cp -r ${S}/examples ${KEYSTONE_PACKAGE_DIR}
