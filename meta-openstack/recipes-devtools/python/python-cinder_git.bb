@@ -109,8 +109,8 @@ do_install_append() {
 
     #Create cinder volume group backing file
     sed 's/%CINDER_LVM_VOLUME_BACKING_FILE_SIZE%/${CINDER_LVM_VOLUME_BACKING_FILE_SIZE}/g' -i ${D}/etc/cinder/drivers/lvm_iscsi_setup.sh
-    mkdir -p ${D}/etc/tgt/
-    echo "include /etc/cinder/data/volumes/*" > ${D}/etc/tgt/targets.conf
+    mkdir -p ${D}/etc/tgt/conf.d/
+    echo "include /etc/cinder/data/volumes/*" > ${D}/etc/tgt/conf.d/python-cinder.conf
 
     # Create Cinder nfs_share config file with default nfs server
     echo "${CINDER_NFS_VOLUME_SERVERS}" > ${D}/etc/cinder/nfs_shares
