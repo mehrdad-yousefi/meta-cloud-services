@@ -35,7 +35,10 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit setuptools update-rc.d
 
+# Note ${PN}-tests must be before ${PN}-common in the PACKAGES variable
+# in order for ${PN}-tests to own the correct FILES.
 PACKAGES += "\
+           ${PN}-tests \
            ${PN}-api \
            ${PN}-cloud \
            ${PN}-common \
@@ -62,6 +65,9 @@ do_install_append() {
         install -m 0644 ${WORKDIR}/cloud ${D}${sysconfdir}/${PN}/cloud
         install -m 0644 ${WORKDIR}/roster ${D}${sysconfdir}/${PN}/roster
         install -d ${D}${sysconfdir}/${PN}/cloud.conf.d ${D}${sysconfdir}/${PN}/cloud.profiles.d ${D}${sysconfdir}/${PN}/cloud.providers.d
+
+        install -d ${D}${PYTHON_SITEPACKAGES_DIR}/${PN}-tests/
+        cp -r ${S}/tests/ ${D}${PYTHON_SITEPACKAGES_DIR}/${PN}-tests/
 }
 
 ALLOW_EMPTY_${PN} = "1"
@@ -146,5 +152,10 @@ RDEPENDS_${PN}-cloud = "python (>= 2.6) ${PN}-common (= ${EXTENDPKGV})"
 RSUGGESTS_${PN}-cloud = "python-netaddr python-botocore"
 CONFFILES_${PN}-cloud = "${sysconfdir}/${PN}/cloud"
 FILES_${PN}-cloud = "${bindir}/${PN}-cloud ${sysconfdir}/${PN}/cloud.conf.d/ ${sysconfdir}/${PN}/cloud.profiles.d/ ${sysconfdir}/${PN}/cloud.providers.d/ ${CONFFILES_${PN}-cloud}"
+
+SUMMARY_${PN}-tests = "salt stack test suite"
+DESCRIPTION_${PN}-tests ="${DESCRIPTION_COMMON} This particular package provides the salt unit test suite."
+RDEPENDS_${PN}-tests = "${PN}-common python-salttesting python-tests python-image bash"
+FILES_${PN}-tests = "${PYTHON_SITEPACKAGES_DIR}/salt-tests/tests/"
 
 FILES_${PN}-bash-completion = "${sysconfdir}/bash_completion.d/${PN}-common"
