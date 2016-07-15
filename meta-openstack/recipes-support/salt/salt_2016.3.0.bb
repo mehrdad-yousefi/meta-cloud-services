@@ -35,6 +35,10 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit setuptools update-rc.d
 
+# Avoid a QA Warning triggered by the test package including a file
+# with a .a extension
+INSANE_SKIP_${PN}-tests += "staticdev"
+
 # Note ${PN}-tests must be before ${PN}-common in the PACKAGES variable
 # in order for ${PN}-tests to own the correct FILES.
 PACKAGES += "\
