@@ -101,6 +101,7 @@ EOF
   system("perl -p -i -e 's#^arch_hdrdir.*#arch_hdrdir = ${sysroot_ruby}/\\\\\$(arch)#' Makefile")
   system("perl -p -i -e 's#^arch =.*#arch = ${ruby_arch}#' Makefile")
   system("perl -p -i -e 's#^LIBPATH =.*#LIBPATH = -L.#' Makefile")
+  system("perl -p -i -e 's#^dldflags =.*#dldflags = ${LDFLAGS}#' Makefile")
 EOF
 }
 
