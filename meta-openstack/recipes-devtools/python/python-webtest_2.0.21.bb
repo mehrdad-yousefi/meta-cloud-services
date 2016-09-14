@@ -8,10 +8,10 @@ SRCNAME = "WebTest"
 
 RDEPENDS_${PN} += "python-beautifulsoup4"
 
-SRC_URI = "https://pypi.python.org/packages/source/W/${SRCNAME}/${SRCNAME}-${PV}.zip"
+SRC_URI = "https://pypi.python.org/packages/source/W/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "444a4160408670a50d7cb149a4035cf5"
-SRC_URI[sha256sum] = "beb569e6d707cb4cd82c226c97b7e1f41cd62bae656d89e687107eef8376c7fd"
+SRC_URI[md5sum] = "98e8b59da3cc6c150cebca8c92b66041"
+SRC_URI[sha256sum] = "3dc92ecd7604e21fc7c97578e4c43aff2a67cebdd4884a2aa804d85e85b34b55"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
