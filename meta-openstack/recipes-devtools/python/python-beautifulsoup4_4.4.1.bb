@@ -9,8 +9,8 @@ SRCNAME = "beautifulsoup4"
 
 SRC_URI = "https://pypi.python.org/packages/source/b/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "63d1f33e6524f408cb6efbc5da1ae8a5"
-SRC_URI[sha256sum] = "fad91da88f69438b9ba939ab1b2cabaa31b1d914f1cccb4bb157a993ed2917f6"
+SRC_URI[md5sum] = "8fbd9a7cac0704645fa20d1419036815"
+SRC_URI[sha256sum] = "87d4013d0625d4789a4f56b8d79a04d5ce6db1152bb65f1d39744f7709a366b4"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
