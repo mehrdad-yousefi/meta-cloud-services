@@ -22,8 +22,8 @@ SRC_URI = "\
 
 inherit autotools
 
-SRC_URI[md5sum] = "fa5ec49cb54428d6c73e244a11021695"
-SRC_URI[sha256sum] = "101d5a7fa10549cc77be48d07f2b8141f59182f10f2cc0fea93efd13c3a5a6f2"
+SRC_URI[md5sum] = "912f2a5ead193d2defc6c525423e84e8"
+SRC_URI[sha256sum] = "0db88d6518bf7ffb01b44f8f8841ece5162906982ce2c9e45e6afff90d3783eb"
 
 DEPENDS += "libpam openldap"
 
