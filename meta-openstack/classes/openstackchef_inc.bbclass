@@ -248,7 +248,7 @@ def deploychef_make_startup_shutdown_list(d):
                     raise bb.build.FuncFailed(msg)
             hStartup.close()
             hShutdown.close()
-        except IOError, e:
+        except IOError as e:
             bb.error("Error opening startup/shutdown files %s %s,  %s %s" % \
             (startup_file, shutdown_file, d.getVar('FILE'), e))
     else:
@@ -381,7 +381,7 @@ def deploychef_make_templates( d, conf_tuple=tuple()):
                         deploychef_make_substitutions(d, sub_dict, attr_file, file_name)
                     else:
                         bb.build.FuncFailed(msg)
-        except IOError, e:
+        except IOError as e:
             bb.error("Could not write to attribute file %s: in %s,  %s" % \
             (attr_file, d.getVar('FILE'), e))
 
