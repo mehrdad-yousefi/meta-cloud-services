@@ -21,21 +21,22 @@ diff --git a/usr/Makefile b/usr/Makefile
 index 453eb1a..191503d 100644
 --- a/usr/Makefile
 +++ b/usr/Makefile
-@@ -1,10 +1,10 @@
+@@ -1,11 +1,11 @@
  sbindir ?= $(PREFIX)/sbin
- 
+ libdir ?= $(PREFIX)/lib/tgt
+
 -ifneq ($(shell test -e /usr/include/linux/signalfd.h && echo 1),)
 +ifneq ($(shell test -e $(SYSROOT)/usr/include/linux/signalfd.h && echo 1),)
  CFLAGS += -DUSE_SIGNALFD
  endif
  
--ifneq ($(shell test -e /usr/include/sys/timerfd.h && echo 1),)
-+ifneq ($(shell test -e $(SYSROOT)/usr/include/sys/timerfd.h && echo 1),)
+-ifneq ($(shell test -n $(shell find /usr/include -name "timerfd.h" | head -n1) && echo 1),)
++ifneq ($(shell test -n $(shell find $(SYSROOT)/usr/include -name "timerfd.h" | head -n1) && echo 1),)
  CFLAGS += -DUSE_TIMERFD
  endif
  
-@@ -18,7 +18,7 @@ TGTD_OBJS += bs_rbd.o
- LIBS += -lrados -lrbd
+@@ -25,7 +25,7 @@ TGTD_OBJS += bs_rbd.o
+ CFLAGS += -DUSE_TIMERFD
  endif
  
 -ifneq ($(shell test -e /usr/include/sys/eventfd.h && test -e /usr/include/libaio.h && echo 1),)
