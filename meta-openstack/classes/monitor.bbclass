@@ -19,7 +19,8 @@ def copy_check_files(d, check_var_name, src, dest):
         for check in mon_checks.split():
             if os.path.exists(src + "/" + check):
                 shutil.copy(src + "/" + check, dest)
-                os.chmod(dest + "/" + check, 0755)
+                os.chmod(dest + "/" + check, 0o755)
+
 
 python do_monitor_install() {
     import shutil
