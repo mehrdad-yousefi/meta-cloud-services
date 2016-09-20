@@ -85,7 +85,7 @@ def sanity_check(d):
     for pkg in servicecreate_packages.split():
         # User parameters checking.
         if not d.getVar('USERCREATE_PARAM_%s' % pkg, True) and not d.getVar('SERVICECREATE_PARAM_%s' % pkg, True):
-            raise bb.build.FuncFailed, "%s SERVICECREATE_PACKAGES includes %s, but neither USERCREATE_PARAM_%s nor SERVICECREATE_PARAM_%s is set" % (d.getVar('FILE'), pkg, pkg, pkg)
+            raise bb.build.FuncFailed("%s SERVICECREATE_PACKAGES includes %s, but neither USERCREATE_PARAM_%s nor SERVICECREATE_PARAM_%s is set" % (d.getVar('FILE'), pkg, pkg, pkg))
 
 python __anonymous() {
     sanity_check(d)
