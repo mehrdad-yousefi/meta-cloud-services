@@ -12,7 +12,7 @@ addtask monitor_clean before do_clean
 def copy_check_files(d, check_var_name, src, dest):
     import shutil
 
-    mon_checks = bb.data.getVar(check_var_name, d, 1)
+    mon_checks = d.getVar(check_var_name, 1)
     if mon_checks != None:
         if not os.path.exists(dest):
             os.makedirs(dest)
@@ -29,9 +29,9 @@ python do_monitor_install() {
         bb.debug(1, 'OpenStack monitoring feature is disabled, skipping do_monitor_install')
         return
 
-    mon_dir = bb.data.getVar('MONITOR_STAGING_DIR', d, 1)
-    mon_services_dir = bb.data.getVar('MONITOR_STAGING_SERVICES_DIR', d, 1)
-    mon_checks_dir = bb.data.getVar('MONITOR_STAGING_CHECKS_DIR', d, 1)
+    mon_dir = d.getVar('MONITOR_STAGING_DIR', 1)
+    mon_services_dir = d.getVar('MONITOR_STAGING_SERVICES_DIR', 1)
+    mon_checks_dir = d.getVar('MONITOR_STAGING_CHECKS_DIR', 1)
     if not os.path.exists(mon_dir):
         os.makedirs(mon_dir)
     if not os.path.exists(mon_services_dir):
@@ -41,13 +41,13 @@ python do_monitor_install() {
     workdir = d.getVar('WORKDIR', True)
 
     # Process monitor SERVICE catagory
-    mon_service_pkgs = bb.data.getVar('MONITOR_SERVICE_PACKAGES', d, 1)
+    mon_service_pkgs = d.getVar('MONITOR_SERVICE_PACKAGES', 1)
     if mon_service_pkgs != None:
         for pkg in mon_service_pkgs.split():
             f_name = os.path.join(mon_services_dir, pkg + '.service')
             if os.path.exists(f_name):
                 os.remove(f_name)
-            data = bb.data.getVar('MONITOR_SERVICE_' + pkg, d, 1)
+            data = d.getVar('MONITOR_SERVICE_' + pkg, 1)
             if data != None:
                 f = open(f_name, 'w')
                 f.write(d.getVar('MONITOR_SERVICE_' + pkg))
@@ -62,14 +62,14 @@ python do_monitor_install() {
 python do_monitor_clean() {
     import shutil
 
-    mon_dir = bb.data.getVar('MONITOR_STAGING_DIR', d, 1)
-    mon_services_dir = bb.data.getVar('MONITOR_STAGING_SERVICES_DIR', d, 1)
-    mon_checks_dir = bb.data.getVar('MONITOR_STAGING_CHECKS_DIR', d, 1)
+    mon_dir = d.getVar('MONITOR_STAGING_DIR', 1)
+    mon_services_dir = d.getVar('MONITOR_STAGING_SERVICES_DIR', 1)
+    mon_checks_dir = d.getVar('MONITOR_STAGING_CHECKS_DIR', 1)
     if not os.path.exists(mon_dir):
         return
 
     # Clean up monitor SERVICE catagory
-    mon_service_pkgs = bb.data.getVar('MONITOR_SERVICE_PACKAGES', d, 1)
+    mon_service_pkgs = d.getVar('MONITOR_SERVICE_PACKAGES', 1)
     if mon_service_pkgs != None and os.path.exists(mon_services_dir):
         for pkg in mon_service_pkgs.split():
             f_name = os.path.join(mon_services_dir, pkg + '.service')
@@ -80,7 +80,7 @@ python do_monitor_clean() {
     packages = (d.getVar('PACKAGES', True) or "").split()
     if len(packages) >= 1 and os.path.exists(mon_checks_dir):
         for pkg in packages:
-            if bb.data.getVar('MONITOR_CHECKS_' + pkg, d, 1) != None:
+            if d.getVar('MONITOR_CHECKS_' + pkg, 1) != None:
                 shutil.rmtree(mon_checks_dir + "/" + pkg, True)
 }
 

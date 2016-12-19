@@ -184,12 +184,12 @@ def deploychef_make_startup_shutdown_list(d):
 
     import os
     if d.getVar('INITSCRIPT_PACKAGES') or d.getVar('INITSCRIPT_NAME'):
-        #script_list = bb.data.getVar('INITSCRIPT_PACKAGES', d , 1)
+        #script_list = d.getVar('INITSCRIPT_PACKAGES', 1)
         script_list = d.getVar('INITSCRIPT_PACKAGES', True) or \ 
          d.getVar('INITSCRIPT_NAME', True)  #Some package do not define INITSCRIPT_PACKAGES
         msg="list of start/stop services: %s" % str(script_list)
         bb.debug(2, msg)
-        base_dir = bb.data.getVar('CHEF_TEMPLATE_BASE', d, 1 )
+        base_dir = d.getVar('CHEF_TEMPLATE_BASE', 1 )
         if not os.path.exists(base_dir):
             os.mkdir(base_dir)
         startup_file = os.path.join(base_dir, d.getVar('SRCNAME', True) +'-startup-list')
@@ -311,15 +311,15 @@ def deploychef_make_substitutions(d, sub_dict, attr_filename, sed_filename):
             hFile.close()
             if False:
                 msg = "Cannot read/write to attributes file %s as expected:%s"\
-                % (attr_filename, bb.data.getVar('FILE', d))
+                % (attr_filename, d.getVar('FILE'))
                 bb.build.FuncFailed(msg)
         else:
             msg = "The substitution dictionary variable sub_dict is not set  %s as expected "\
-            % bb.data.getVar('FILE')
+            % d.getVar('FILE')
             bb.error(msg)
     else:
         msg = "Null file names passsed to function %s %s "\
-        % (bb.data.getVar('FUNC',d), bb.data.getVar('FILE', d))
+        % (d.getVar('FUNC'), d.getVar('FILE'))
         bb.error(msg)
 
 
@@ -338,7 +338,7 @@ def deploychef_make_templates( d, conf_tuple=tuple()):
 
     if len(conf_tuple):
         import os, ast
-        base_dir = bb.data.getVar('CHEF_TEMPLATE_BASE', d, 1 )
+        base_dir = d.getVar('CHEF_TEMPLATE_BASE', 1 )
         attr_file = os.path.join(base_dir, d.getVar('SRCNAME', True) + '-attributes.rb')
         msg ="Default attributes saved to %s" % attr_file
         if os.path.exists(attr_file):
@@ -357,9 +357,9 @@ def deploychef_make_templates( d, conf_tuple=tuple()):
                 
                 #Make the necessary susbstitutions using the default
                 #substitutiin dictionary
-                sub_dict = bb.data.getVar('CHEF_SERVICES_DEFAULT_CONF_SUBS', d , 1)
+                sub_dict = d.getVar('CHEF_SERVICES_DEFAULT_CONF_SUBS', 1)
                 msg = "The variable %s is not set in %s as a dictionary as expected "\
-                % ('CHEF_SERVICES_DEFAULT_CONF_SUBS', bb.data.getVar('FILE', d))
+                % ('CHEF_SERVICES_DEFAULT_CONF_SUBS', d.getVar('FILE'))
                 if sub_dict:
                     #Safely retrieve our python data structure
                     sub_dict = ast.literal_eval(sub_dict)
@@ -371,11 +371,11 @@ def deploychef_make_templates( d, conf_tuple=tuple()):
                     raise bb.build.FuncFailed(msg)
                 #Make the necessary susbstitutions using auxilliary dictionary
                 #if provided by inheriting class
-                sub_dict = bb.data.getVar('CHEF_SERVICES_CONF_SUBS', d , 1)
+                sub_dict = d.getVar('CHEF_SERVICES_CONF_SUBS', 1)
                 if sub_dict:
                     sub_dict = ast.literal_eval(sub_dict)
                     msg = "The variable %s is not set in %s as a dictionary as expected "\
-                    % ('CHEF_SERVICES_CONF_SUB', bb.data.getVar('FILE', d))
+                    % ('CHEF_SERVICES_CONF_SUB', d.getVar('FILE'))
                     if type(sub_dict) is dict:
                         pass
                         deploychef_make_substitutions(d, sub_dict, attr_file, file_name)
@@ -530,11 +530,11 @@ def deploychef_postinst_substitutions(d, sub_dict, postinst):
                 hFile.close()
         else:
             msg = "The substitution dictionary variable sub_dict is not set  %s as expected "\
-            % bb.data.getVar('FILE')
+            % d.getVar('FILE')
             bb.build.FuncFailed(msg)
     else:
         msg = "Null string passsed to function %s %s "\
-        % (bb.data.getVar('FUNC',d), bb.data.getVar('FILE', d))
+        % (d.getVar('FUNC'), d.getVar('FILE'))
         bb.build.FuncFailed(msg)
     return postinst
 
@@ -565,9 +565,9 @@ def deploychef_update_package_postinsts(d):
             overrides = d.getVar("OVERRIDES", True)
             msg = "%s The override variable is %s :\n %s " % (pkg, overrides, postinst)
             bb.note(msg)
-            sub_dict = bb.data.getVar('CHEF_SERVICES_DEFAULT_CONF_SUBS', d , 1)
+            sub_dict = d.getVar('CHEF_SERVICES_DEFAULT_CONF_SUBS', 1)
             msg = "The variable %s is not set in %s as a dictionary as expected "\
-            % ('CHEF_SERVICES_DEFAULT_CONF_SUBS', bb.data.getVar('FILE', d))
+            % ('CHEF_SERVICES_DEFAULT_CONF_SUBS', d.getVar('FILE'))
             if sub_dict:
                 import ast
                 #Safely retrieve our python data structure
