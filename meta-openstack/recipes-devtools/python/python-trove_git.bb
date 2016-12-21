@@ -50,7 +50,7 @@ do_install_append() {
     install -d ${TROVE_CONF_DIR}
 
     # init.
-    if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)};
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)};
     then
         install -d ${D}${sysconfdir}/init.d
         for suffix in api taskmanager conductor; do

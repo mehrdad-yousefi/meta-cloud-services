@@ -25,7 +25,7 @@ def copy_check_files(d, check_var_name, src, dest):
 python do_monitor_install() {
     import shutil
 
-    if base_contains('OPENSTACK_EXTRA_FEATURES', 'monitoring', "0", "1", d) == "1":
+    if bb.utils.contains('OPENSTACK_EXTRA_FEATURES', 'monitoring', "0", "1", d) == "1":
         bb.debug(1, 'OpenStack monitoring feature is disabled, skipping do_monitor_install')
         return
 
@@ -85,7 +85,7 @@ python do_monitor_clean() {
 }
 
 monitor_rootfs_postprocess() {
-    if ${@base_contains('OPENSTACK_EXTRA_FEATURES', 'monitoring', "false", "true", d)}; then
+    if ${@bb.utils.contains('OPENSTACK_EXTRA_FEATURES', 'monitoring', "false", "true", d)}; then
         echo "OpenStack monitoring feature is disabled, skipping monitor_rootfs_postprocess"
         exit
     fi

@@ -55,7 +55,7 @@ FILES_${PN} += " \
 #Read the module config files and make them into
 #chef-solo templates
 do_install() {
-    if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         #This script will make templates out of postinst script before they
         #have a chance to run
         install -d ${D}${sysconfdir}/init.d

@@ -100,7 +100,7 @@ do_install_append() {
 
     cp -r ${S}/examples ${KEYSTONE_PACKAGE_DIR}
 
-    if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)};
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)};
     then
         install -d ${D}${sysconfdir}/init.d
         install -m 0755 ${WORKDIR}/keystone ${D}${sysconfdir}/init.d/keystone
@@ -144,7 +144,7 @@ do_install_append() {
             -i ${KEYSTONE_PACKAGE_DIR}/tests/test_overrides.conf
     fi
 
-    if ${@base_contains('DISTRO_FEATURES', 'OpenLDAP', 'true', 'false', d)};
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'OpenLDAP', 'true', 'false', d)};
     then
         sed -i -e '/^\[identity\]/a \
 driver = keystone.identity.backends.hybrid_identity.Identity \
@@ -215,7 +215,7 @@ pkg_postinst_${SRCNAME}-setup () {
         keystone-manage db_sync
         keystone-manage pki_setup --keystone-user=root --keystone-group=daemon
 
-        if ${@base_contains('DISTRO_FEATURES', 'OpenLDAP', 'true', 'false', d)}; then
+        if ${@bb.utils.contains('DISTRO_FEATURES', 'OpenLDAP', 'true', 'false', d)}; then
             /etc/init.d/openldap start
         fi
         /etc/init.d/keystone start
@@ -292,7 +292,7 @@ RDEPENDS_${PN} += " \
 
 RDEPENDS_${SRCNAME}-tests += " bash"
 
-PACKAGECONFIG ?= "${@base_contains('DISTRO_FEATURES', 'OpenLDAP', 'OpenLDAP', '', d)}"
+PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'OpenLDAP', 'OpenLDAP', '', d)}"
 PACKAGECONFIG[OpenLDAP] = ",,,python-ldap python-keystone-hybrid-backend"
 
 # TODO:

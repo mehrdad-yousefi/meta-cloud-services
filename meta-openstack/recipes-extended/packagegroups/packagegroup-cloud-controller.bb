@@ -50,10 +50,10 @@ RDEPENDS_${PN} = " postgresql-setup \
     chkconfig \
     qemu \
     fuse \
-    ${@base_contains('CINDER_EXTRA_FEATURES', 'glusterfs', 'glusterfs glusterfs-fuse glusterfs-server', '', d)} \
-    ${@base_contains('CINDER_EXTRA_FEATURES', 'ceph', 'packagegroup-ceph ceph-setup xfsprogs', '', d)} \
-    ${@base_contains('DISTRO_FEATURES', 'OpenLDAP', 'openldap python-ldap cyrus-sasl nss-pam-ldapd pam-plugin-mkhomedir python-keystone-hybrid-backend', '', d)} \
-    ${@base_contains('OPENSTACK_EXTRA_FEATURES', 'monitoring', 'packagegroup-monitoring-core', '', d)} \
+    ${@bb.utils.contains('CINDER_EXTRA_FEATURES', 'glusterfs', 'glusterfs glusterfs-fuse glusterfs-server', '', d)} \
+    ${@bb.utils.contains('CINDER_EXTRA_FEATURES', 'ceph', 'packagegroup-ceph ceph-setup xfsprogs', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'OpenLDAP', 'openldap python-ldap cyrus-sasl nss-pam-ldapd pam-plugin-mkhomedir python-keystone-hybrid-backend', '', d)} \
+    ${@bb.utils.contains('OPENSTACK_EXTRA_FEATURES', 'monitoring', 'packagegroup-monitoring-core', '', d)} \
     "
 
 RRECOMMENDS_${PN} = " \

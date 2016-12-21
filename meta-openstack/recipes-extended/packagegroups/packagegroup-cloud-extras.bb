@@ -8,7 +8,7 @@ inherit packagegroup
 
 RDEPENDS_${PN} = " \
     vim \
-    ${@base_contains('DISTRO_FEATURES', 'x11', 'xterm', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xterm', '', d)} \
     "
 
 IMAGE_FEATURES += "package-management"

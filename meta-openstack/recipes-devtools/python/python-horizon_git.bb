@@ -107,7 +107,7 @@ do_install_append() {
         -i ${DASHBOARD_DIR}/local/local_settings.py
     install -m 644 ${S}/manage.py ${DASHBOARD_DIR}/manage.py
 
-    if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)};
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)};
     then
         install -d ${D}${sysconfdir}/init.d
         sed 's:@PYTHON_SITEPACKAGES@:${PYTHON_SITEPACKAGES_DIR}:' \

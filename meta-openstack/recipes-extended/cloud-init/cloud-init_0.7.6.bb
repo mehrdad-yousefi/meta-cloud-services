@@ -16,8 +16,8 @@ SRC_URI[sha256sum] = "9e8fd22eb7f6e40ae6a5f66173ddc3cc18f65ee406c460a728092b37db
 
 S = "${WORKDIR}/${BPN}-${PV}"
 
-DISTUTILS_INSTALL_ARGS_append = " ${@base_contains('DISTRO_FEATURES', 'sysvinit', '--init-system=sysvinit_deb', '', d)}"
-DISTUTILS_INSTALL_ARGS_append = " ${@base_contains('DISTRO_FEATURES', 'systemd', '--init-system=systemd', '', d)}"
+DISTUTILS_INSTALL_ARGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '--init-system=sysvinit_deb', '', d)}"
+DISTUTILS_INSTALL_ARGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--init-system=systemd', '', d)}"
 
 MANAGE_HOSTS ?= "False"
 HOSTNAME ?= ""

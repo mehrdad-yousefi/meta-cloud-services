@@ -17,7 +17,7 @@ IMAGE_INSTALL = " \
     ${OPENSTACK_CONTROLLER_EXTRA_INSTALL} \
     ${OPENSTACK_COMPUTE_EXTRA_INSTALL} \
     ${OPENSTACK_AIO_EXTRA_INSTALL} \
-    ${@base_contains('OPENSTACK_EXTRA_FEATURES', 'benchmarking', 'task-cloud-benchmarking', '', d)} \
+    ${@bb.utils.contains('OPENSTACK_EXTRA_FEATURES', 'benchmarking', 'task-cloud-benchmarking', '', d)} \
     "
 
 IMAGE_FEATURES += "ssh-server-openssh"

@@ -22,7 +22,7 @@ ADMIN_USER_EMAIL = "admin@domain.com"
 
 MEMBER_ROLE = "Member"
 
-RUN_POSTINSTS_FILE = "${@base_contains('DISTRO_FEATURES', 'sysvinit', '/etc/rcS.d/S99run-postinsts', '', d)}"
+RUN_POSTINSTS_FILE = "${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '/etc/rcS.d/S99run-postinsts', '', d)}"
 
 # Add service and user setup into S99run-postinst running list
 ROOTFS_POSTPROCESS_COMMAND += "update_run_postinsts ; "

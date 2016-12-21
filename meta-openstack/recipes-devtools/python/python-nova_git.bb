@@ -137,7 +137,7 @@ do_install_append() {
     fi
     install -o nova -d ${NOVA_CONF_DIR}/instances
 
-    if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
 
 	# nova-all is installed (and packaged), but not used as an initscript by default
