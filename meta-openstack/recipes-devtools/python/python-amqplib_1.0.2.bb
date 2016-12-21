@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1702a92c723f09e3fab3583b165a8d90"
 PR = "r1"
 SRCNAME = "amqplib"
 
-SRC_URI = "http://py-${SRCNAME}.googlecode.com/files/${SRCNAME}-${PV}.tgz"
+SRC_URI = "https://github.com/barryp/py-amqplib/archive/${PV}.tar.gz"
 
-SRC_URI[md5sum] = "5c92f17fbedd99b2b4a836d4352d1e2f"
-SRC_URI[sha256sum] = "843d69b681a60afd21fbf50f310404ec67fcdf9d13dfcf6e9d41f3b456217e5b"
+SRC_URI[md5sum] = "ff405a7b57aa98cdf07d02bd8090fa29"
+SRC_URI[sha256sum] = "9461d73f75ca704e6b656738b5dad42a1948e61dfbc8233077d84d00f74c3936"
 
-S = "${WORKDIR}/${SRCNAME}-${PV}"
+S = "${WORKDIR}/py-amqplib-${PV}"
 
 inherit setuptools
