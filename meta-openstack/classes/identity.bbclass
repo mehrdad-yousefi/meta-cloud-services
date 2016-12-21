@@ -105,7 +105,7 @@ def usercreate_param(d, pkg):
 
     for key, value in param_defaults.items():
         if key in param.split():
-            if param_flags.has_key(key):
+            if key in param_flags:
                 param_defaults[key] = param_flags[key]
         else:
             param_defaults[key] = ''
@@ -135,7 +135,7 @@ def servicecreate_param(d, pkg):
 
     for key, value in param_defaults.items():
         if key in param.split():
-            if param_flags.has_key(key):
+            if key in param_flags:
                 param_defaults[key] = param_flags[key]
         else:
             param_defaults[key] = ''
