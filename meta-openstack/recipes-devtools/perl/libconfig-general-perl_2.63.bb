@@ -8,8 +8,8 @@ SRCNAME = "Config-General"
 
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/T/TL/TLINDEN/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "79397bfbf32dbe772bdc2167afc5c5a6"
-SRC_URI[sha256sum] = "d63cf3f4c600a87de336db806a7def0385ba5e3a9be427e0c65e407558b82eef"
+SRC_URI[md5sum] = "e3ea2a6dc76931cf638b5227aceabf60"
+SRC_URI[sha256sum] = "0a9bf977b8aabe76343e88095d2296c8a422410fd2a05a1901f2b20e2e1f6fad"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
