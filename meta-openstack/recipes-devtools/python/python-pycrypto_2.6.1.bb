@@ -25,6 +25,8 @@ inherit autotools autotools-brokensep distutils
 
 DEPENDS += " gmp"
 
+do_compile[noexec] = "1"
+
 # We explicitly call distutils_do_install, since we want it to run, but
 # *don't* want the autotools install to run, since this package doesn't
 # provide a "make install" target.
