@@ -3,7 +3,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 SRC_URI += "file://postgresql \
             file://postgresql-init"
 
-inherit useradd update-rc.d identity hosts openstackchef
+inherit useradd update-rc.d identity hosts
 
 PACKAGECONFIG[libxml] = "--with-libxml CFLAGS=-I${STAGING_INCDIR}/libxml2,--without-libxml,libxml2,libxml2"
 
@@ -16,25 +16,19 @@ do_install_append() {
     install -d ${D}${sysconfdir}/init.d/
     install -m 0755 ${WORKDIR}/postgresql ${INIT_D_DEST_DIR}/postgresql
     install -m 0755 ${WORKDIR}/postgresql-init ${INIT_D_DEST_DIR}/postgresql-init
-    if [ -z "${OPENSTACKCHEF_ENABLED}" ]; then
-        sed -e "s:%DB_DATADIR%:${DB_DATADIR}:g" -i ${INIT_D_DEST_DIR}/postgresql
-        sed -e "s:%DB_DATADIR%:${DB_DATADIR}:g" -i ${INIT_D_DEST_DIR}/postgresql-init
 
-        sed -e "s:%DB_USER%:${DB_USER}:g" -i ${INIT_D_DEST_DIR}/postgresql-init
-        sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${INIT_D_DEST_DIR}/postgresql-init
+    sed -e "s:%DB_DATADIR%:${DB_DATADIR}:g" -i ${INIT_D_DEST_DIR}/postgresql
+    sed -e "s:%DB_DATADIR%:${DB_DATADIR}:g" -i ${INIT_D_DEST_DIR}/postgresql-init
 
-        sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${INIT_D_DEST_DIR}/postgresql-init
-        sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${INIT_D_DEST_DIR}/postgresql-init
+    sed -e "s:%DB_USER%:${DB_USER}:g" -i ${INIT_D_DEST_DIR}/postgresql-init
+    sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${INIT_D_DEST_DIR}/postgresql-init
 
-        sed -e "s:%COMPUTE_IP%:${COMPUTE_IP}:g" -i ${INIT_D_DEST_DIR}/postgresql-init
-        sed -e "s:%COMPUTE_HOST%:${COMPUTE_HOST}:g" -i ${INIT_D_DEST_DIR}/postgresql-init
-    fi
+    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${INIT_D_DEST_DIR}/postgresql-init
+    sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${INIT_D_DEST_DIR}/postgresql-init
+
+    sed -e "s:%COMPUTE_IP%:${COMPUTE_IP}:g" -i ${INIT_D_DEST_DIR}/postgresql-init
+    sed -e "s:%COMPUTE_HOST%:${COMPUTE_HOST}:g" -i ${INIT_D_DEST_DIR}/postgresql-init
 }
-
-CHEF_SERVICES_CONF_FILES := "\
-    ${sysconfdir}/init.d/postgresql \
-    ${sysconfdir}/init.d/postgresql-init \
-    "
 
 RDEPENDS_${PN} += "postgresql-timezone eglibc-utils update-rc.d"
 USERADD_PACKAGES = "${PN}"

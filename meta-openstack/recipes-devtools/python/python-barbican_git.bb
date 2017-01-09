@@ -19,7 +19,7 @@ SRCREV = "e6f05febbe18a86e4e6b05acc5f4868fa3beb291"
 PV = "2015.1.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
-inherit update-rc.d setuptools identity hosts useradd default_configs openstackchef monitor
+inherit update-rc.d setuptools identity hosts useradd default_configs monitor
 
 SERVICECREATE_PACKAGES = "${SRCNAME}-setup"
 KEYSTONE_HOST="${CONTROLLER_IP}"
@@ -48,10 +48,8 @@ do_install_append() {
     cp -r ${TEMPLATE_CONF_DIR}/* ${BARBICAN_CONF_DIR}
 
     install -d ${D}${localstatedir}/lib/barbican
-    if [ -z "${OPENSTACKCHEF_ENABLED}" ]; then
-        sed -e "s:%BARBICAN_MAX_PACKET_SIZE%:${BARBICAN_MAX_PACKET_SIZE}:g" -i ${BARBICAN_CONF_DIR}/vassals/barbican-api.ini
-        sed -e "s:%BARBICAN_MAX_PACKET_SIZE%:${BARBICAN_MAX_PACKET_SIZE}:g" -i ${BARBICAN_CONF_DIR}/vassals/barbican-admin.ini
-    fi
+    sed -e "s:%BARBICAN_MAX_PACKET_SIZE%:${BARBICAN_MAX_PACKET_SIZE}:g" -i ${BARBICAN_CONF_DIR}/vassals/barbican-api.ini
+    sed -e "s:%BARBICAN_MAX_PACKET_SIZE%:${BARBICAN_MAX_PACKET_SIZE}:g" -i ${BARBICAN_CONF_DIR}/vassals/barbican-admin.ini
     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
 
@@ -68,10 +66,6 @@ do_install_append() {
         -i ${D}/${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}/tests/api/test_resources_policy.py
 }
 
-CHEF_SERVICES_CONF_FILES :="\
-    ${sysconfdir}/${SRCNAME}/vassals/barbican-api.ini \
-    ${sysconfdir}/${SRCNAME}/vassals/barbican-admin.ini \
-    "
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "--system barbican"
 USERADD_PARAM_${PN}  = "--system --home /var/lib/barbican -g barbican \

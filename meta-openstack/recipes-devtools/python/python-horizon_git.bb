@@ -84,7 +84,7 @@ SRCREV = "593f0b78eea8efbb6d833d66acc7ab4dc852159b"
 PV = "8.0.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
-inherit setuptools update-rc.d python-dir default_configs openstackchef monitor
+inherit setuptools update-rc.d python-dir default_configs monitor
 
 # no longer required. kept as reference.
 # do_install[dirs] += "${D}/usr/share/bin"

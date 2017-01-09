@@ -30,7 +30,7 @@ PV = "12.0.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit update-rc.d setuptools identity hosts useradd default_configs openstackchef monitor
+inherit update-rc.d setuptools identity hosts useradd default_configs monitor
 
 LIBVIRT_IMAGES_TYPE ?= "default"
 
@@ -103,38 +103,38 @@ do_install_append() {
     install -o nova -m 664 ${WORKDIR}/nova.conf               ${NOVA_CONF_DIR}/nova.conf
     install -o nova -m 664 ${TEMPLATE_CONF_DIR}/api-paste.ini ${NOVA_CONF_DIR}
     install -o nova -m 664 ${WORKDIR}/openrc                  ${NOVA_CONF_DIR}
-    if [ -z "${OPENSTACKCHEF_ENABLED}" ]; then
-        # Configuration options
-        sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
-            -i ${NOVA_CONF_DIR}/api-paste.ini
-        sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${NOVA_CONF_DIR}/api-paste.ini
-        sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
-            -i ${NOVA_CONF_DIR}/api-paste.ini
-        sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${NOVA_CONF_DIR}/api-paste.ini
 
-        sed -e "s:%DB_USER%:${DB_USER}:g" -i ${NOVA_CONF_DIR}/nova.conf
-        sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${NOVA_CONF_DIR}/nova.conf
+    # Configuration options
+    sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
+	-i ${NOVA_CONF_DIR}/api-paste.ini
+    sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${NOVA_CONF_DIR}/api-paste.ini
+    sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
+	-i ${NOVA_CONF_DIR}/api-paste.ini
+    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${NOVA_CONF_DIR}/api-paste.ini
 
-        sed -e "s:%METADATA_SHARED_SECRET%:${METADATA_SHARED_SECRET}:g" -i ${NOVA_CONF_DIR}/nova.conf
+    sed -e "s:%DB_USER%:${DB_USER}:g" -i ${NOVA_CONF_DIR}/nova.conf
+    sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${NOVA_CONF_DIR}/nova.conf
 
-        sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${NOVA_CONF_DIR}/nova.conf
-        sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${NOVA_CONF_DIR}/nova.conf
+    sed -e "s:%METADATA_SHARED_SECRET%:${METADATA_SHARED_SECRET}:g" -i ${NOVA_CONF_DIR}/nova.conf
 
-        sed -e "s:%COMPUTE_IP%:${COMPUTE_IP}:g" -i ${NOVA_CONF_DIR}/nova.conf
-        sed -e "s:%COMPUTE_HOST%:${COMPUTE_HOST}:g" -i ${NOVA_CONF_DIR}/nova.conf
+    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${NOVA_CONF_DIR}/nova.conf
+    sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${NOVA_CONF_DIR}/nova.conf
 
-        sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" -i ${NOVA_CONF_DIR}/nova.conf
-        sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${NOVA_CONF_DIR}/nova.conf
-        sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" -i ${NOVA_CONF_DIR}/nova.conf
+    sed -e "s:%COMPUTE_IP%:${COMPUTE_IP}:g" -i ${NOVA_CONF_DIR}/nova.conf
+    sed -e "s:%COMPUTE_HOST%:${COMPUTE_HOST}:g" -i ${NOVA_CONF_DIR}/nova.conf
 
-        sed -e "s:%LIBVIRT_IMAGES_TYPE%:${LIBVIRT_IMAGES_TYPE}:g" -i ${NOVA_CONF_DIR}/nova.conf
+    sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" -i ${NOVA_CONF_DIR}/nova.conf
+    sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${NOVA_CONF_DIR}/nova.conf
+    sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" -i ${NOVA_CONF_DIR}/nova.conf
 
-        sed -e "s:%OS_PASSWORD%:${ADMIN_PASSWORD}:g" -i ${NOVA_CONF_DIR}/openrc
-        sed -e "s:%SERVICE_TOKEN%:${SERVICE_TOKEN}:g" -i ${NOVA_CONF_DIR}/openrc
+    sed -e "s:%LIBVIRT_IMAGES_TYPE%:${LIBVIRT_IMAGES_TYPE}:g" -i ${NOVA_CONF_DIR}/nova.conf
 
-        sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${NOVA_CONF_DIR}/openrc
-        sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${NOVA_CONF_DIR}/openrc
-    fi
+    sed -e "s:%OS_PASSWORD%:${ADMIN_PASSWORD}:g" -i ${NOVA_CONF_DIR}/openrc
+    sed -e "s:%SERVICE_TOKEN%:${SERVICE_TOKEN}:g" -i ${NOVA_CONF_DIR}/openrc
+
+    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${NOVA_CONF_DIR}/openrc
+    sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${NOVA_CONF_DIR}/openrc
+
     install -o nova -d ${NOVA_CONF_DIR}/instances
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
@@ -158,12 +158,6 @@ do_install_append() {
     cp -r "${S}/doc" "${D}/${PYTHON_SITEPACKAGES_DIR}/nova"
     cp -r "${S}/plugins" "${D}/${PYTHON_SITEPACKAGES_DIR}/nova"
 }
-
-CHEF_SERVICES_CONF_FILES := "\
-    ${sysconfdir}/${SRCNAME}/nova.conf \
-    ${sysconfdir}/${SRCNAME}/api-paste.ini \
-    ${sysconfdir}/${SRCNAME}/openrc \
-    "
 
 pkg_postinst_${SRCNAME}-setup () {
     if [ "x$D" != "x" ]; then

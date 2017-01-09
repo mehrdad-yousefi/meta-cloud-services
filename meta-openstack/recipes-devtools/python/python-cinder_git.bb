@@ -24,7 +24,7 @@ SRCREV = "61026d4e4f2a58dd84ffb2e4e40ab99860b9316a"
 PV = "7.0.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
-inherit setuptools update-rc.d identity default_configs hosts openstackchef monitor
+inherit setuptools update-rc.d identity default_configs hosts monitor
 
 CINDER_BACKUP_BACKEND_DRIVER ?= "cinder.backup.drivers.swift"
 
@@ -77,8 +77,7 @@ do_install_append() {
 
     install -d ${D}${localstatedir}/log/${SRCNAME}
     
-    if [ -z "${OPENSTACKCHEF_ENABLED}" ]; then
-        for file in api-paste.ini cinder.conf; do
+    for file in api-paste.ini cinder.conf; do
         sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
             -i ${CINDER_CONF_DIR}/$file
         sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${CINDER_CONF_DIR}/$file
@@ -89,8 +88,7 @@ do_install_append() {
         sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${CINDER_CONF_DIR}/$file
         sed -e "s:%CINDER_BACKUP_BACKEND_DRIVER%:${CINDER_BACKUP_BACKEND_DRIVER}:g" \
         -i ${CINDER_CONF_DIR}/$file
-        done
-    fi
+    done
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
@@ -125,10 +123,6 @@ do_install_append() {
     sed -e "s:%IS_DEFAULT%:${is_default}:g" -i ${D}/etc/cinder/drivers/glusterfs_setup.sh
 }
 
-CHEF_SERVICES_CONF_FILES :="\
-    ${sysconfdir}/${SRCNAME}/cinder.conf \
-    ${sysconfdir}/${SRCNAME}/api-paste.ini \
-    "
 pkg_postinst_${SRCNAME}-setup () {
     if [ "x$D" != "x" ]; then
         exit 1

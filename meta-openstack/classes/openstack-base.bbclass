@@ -1,4 +1,4 @@
-inherit hosts openstackchef
+inherit hosts
 
 ROOTFS_POSTPROCESS_COMMAND += "openstack_configure_hosts ; "
 

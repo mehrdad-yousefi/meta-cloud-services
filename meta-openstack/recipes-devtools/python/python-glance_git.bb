@@ -18,7 +18,7 @@ PV = "11.0.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit setuptools update-rc.d identity default_configs hosts openstackchef monitor
+inherit setuptools update-rc.d identity default_configs hosts monitor
 
 GLANCE_DEFAULT_STORE ?= "file"
 GLANCE_KNOWN_STORES ?= "glance.store.rbd.Store,\
@@ -97,20 +97,18 @@ do_install_append() {
 
     install -d ${D}${localstatedir}/log/${SRCNAME}
 
-    if [ -z "${OPENSTACKCHEF_ENABLED}" ]; then
-        for file in api registry cache
-        do
-            sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
-                -i ${GLANCE_CONF_DIR}/glance-$file.conf
-            sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${GLANCE_CONF_DIR}/glance-$file.conf
-            sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
-                -i ${GLANCE_CONF_DIR}/glance-$file.conf
-            sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" \
-                -i ${GLANCE_CONF_DIR}/glance-$file.conf
-            sed -e "s:%DB_USER%:${DB_USER}:g" \
-                -i ${GLANCE_CONF_DIR}/glance-$file.conf
-        done
-    fi
+    for file in api registry cache
+    do
+	sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
+	    -i ${GLANCE_CONF_DIR}/glance-$file.conf
+	sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${GLANCE_CONF_DIR}/glance-$file.conf
+	sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
+	    -i ${GLANCE_CONF_DIR}/glance-$file.conf
+	sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" \
+	    -i ${GLANCE_CONF_DIR}/glance-$file.conf
+	sed -e "s:%DB_USER%:${DB_USER}:g" \
+	    -i ${GLANCE_CONF_DIR}/glance-$file.conf
+    done
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
@@ -122,12 +120,6 @@ do_install_append() {
 
     cp run_tests.sh ${GLANCE_CONF_DIR}
 }
-
-CHEF_SERVICES_CONF_FILES := "\
-    ${sysconfdir}/${SRCNAME}/glance-api.conf \
-    ${sysconfdir}/${SRCNAME}/glance-cache.conf \
-    ${sysconfdir}/${SRCNAME}/glance-registry.conf \
-    "
 
 pkg_postinst_${SRCNAME}-setup () {
     if [ "x$D" != "x" ]; then
