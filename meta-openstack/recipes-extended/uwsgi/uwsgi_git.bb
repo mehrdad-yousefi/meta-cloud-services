@@ -4,14 +4,12 @@ SECTION = "net"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=33ab1ce13e2312dddfad07f97f66321f"
 
-PR = "r0"
-
 SRCNAME = "uwsgi"
-SRC_URI = "git://github.com/unbit/uwsgi.git;branch=master \
+SRC_URI = "git://github.com/unbit/uwsgi.git;branch=uwsgi-2.0 \
 "
 
-SRCREV="7604c6701809602804e3961f7fdb201049b8c993"
-PV="2.0.4+git${SRCPV}"
+SRCREV="af44211739136e22471a2897383f34586284bf86"
+PV="2.0.14+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools pkgconfig
