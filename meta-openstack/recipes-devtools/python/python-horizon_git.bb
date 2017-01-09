@@ -124,7 +124,7 @@ do_install_append() {
 
     # the following are setup required for horizon-apache
     install -d ${DASHBOARD_SHARE_DIR}
-    cp -a ${S}/openstack_dashboard  ${DASHBOARD_SHARE_DIR}
+    cp -a --no-preserve=ownership ${S}/openstack_dashboard  ${DASHBOARD_SHARE_DIR}
     cp ${S}/manage.py  ${DASHBOARD_SHARE_DIR}
 
     install -D -m 644 ${WORKDIR}/local_settings.py \
