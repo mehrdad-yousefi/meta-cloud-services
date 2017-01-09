@@ -10,6 +10,7 @@ PV = "1.0.67+git${SRCPV}"
 SRC_URI = "git://github.com/fujita/tgt.git \
 	file://0001-Correct-the-path-of-header-files-check-in-Yocto-buil.patch \
         file://0001-usr-Makefile-WARNING-fix.patch \
+        file://usr-Makefile-apply-LDFLAGS-to-all-executables.patch \
 "
 SRC_URI += "file://tgtd.init"
 
@@ -21,9 +22,10 @@ inherit update-rc.d
 
 CFLAGS += ' -I. -DUSE_SIGNALFD -DUSE_TIMERFD -D_GNU_SOURCE -DTGT_VERSION=\\"1.0.63\\" -DBSDIR=\\"${libdir}/backing-store\\"'
 
-do_compile() {
-    oe_runmake SYSROOT="${STAGING_DIR_TARGET}" -e programs conf scripts
-}
+#do_compile() {
+#    oe_runmake SYSROOT="${STAGING_DIR_TARGET}" -e programs conf scripts
+#}
+EXTRA_OEMAKE = "-e programs conf scripts"
 
 do_install() {
     oe_runmake -e DESTDIR="${D}" install-programs install-conf install-scripts

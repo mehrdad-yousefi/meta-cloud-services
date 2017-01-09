@@ -22,7 +22,7 @@ index 1fae7e7..2db109c 100644
  TGTD_DEP = $(TGTD_OBJS:.o=.d)
  
 -LDFLAGS = -Wl,-E,-rpath=$(libdir)
-+LDFLAGS = -Wl,-E
++LDFLAGS += -Wl,-E
  
  .PHONY:all
  all: $(PROGRAMS) $(MODULES)
