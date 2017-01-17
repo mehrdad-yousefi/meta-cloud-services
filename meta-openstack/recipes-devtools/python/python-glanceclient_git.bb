@@ -24,6 +24,11 @@ inherit setuptools monitor rmargparse
 
 FILES_${PN} += "${datadir}/${SRCNAME}"
 
+# Satisfy setup.py 'setup_requires'
+DEPENDS += " \
+    python-pbr-native \
+    "
+
 RDEPENDS_${PN} = "gmp \
    python-warlock \
    python-pyopenssl \

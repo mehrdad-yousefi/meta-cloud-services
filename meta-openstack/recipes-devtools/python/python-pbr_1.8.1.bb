@@ -21,6 +21,10 @@ DEPENDS += " \
         python-pip \
         "
 
+DEPENDS_class-native += ""
+
 # RDEPENDS_default:
 RDEPENDS_${PN} += " \
         "
+
+BBCLASSEXTEND = "native"
