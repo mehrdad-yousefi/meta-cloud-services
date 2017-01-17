@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=03731a0e7dbcb30cecdcec77cc93ec29"
 
 
 SRCNAME = "rfc3986"
-SRC_URI = "http://pypi.python.org/packages/source/r/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
+SRC_URI = "http://pypi.io/packages/source/r/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "84151eec209c99e71edc760745510da4"
-SRC_URI[sha256sum] = "85aec4beb1edc4fa7cb7466cca1410237cb3e344968d07126e428bc62adb8f3c"
+SRC_URI[md5sum] = "b2b48cd36dabb82d5eaa54bbfb20d382"
+SRC_URI[sha256sum] = "5ac85eb132fae7bbd811fa48d11984ae3104be30d44d397a351d004c633a68d2"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
