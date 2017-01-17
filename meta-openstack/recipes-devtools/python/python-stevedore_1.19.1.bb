@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 
 SRCNAME = "stevedore"
-SRC_URI = "http://pypi.python.org/packages/source/s/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
+SRC_URI = "http://pypi.io/packages/source/s/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "53e2bc3b49dd9c920cfce7f63822b1a5"
-SRC_URI[sha256sum] = "cc19908840498ed5f7cb5cf59bbe47b41aa9d65821548e2b3c8a99a571cbec06"
+SRC_URI[md5sum] = "f02de21fc0efac440db3a6d716068669"
+SRC_URI[sha256sum] = "c963858176fdbac899859a9e215411d024e3a46655034a853e0f3b57947c9856"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
@@ -28,4 +28,5 @@ DEPENDS += " \
 RDEPENDS_${PN} += " \
         python-pbr \
         python-argparse \
+        python-six \
         "
