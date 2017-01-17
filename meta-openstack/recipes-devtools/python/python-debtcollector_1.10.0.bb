@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 SRCNAME = "debtcollector"
 
-SRC_URI = "https://pypi.python.org/packages/source/d/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
+SRC_URI = "https://pypi.io/packages/source/d/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "aaf95f5e44af17be4d6421512d4cf6c3"
-SRC_URI[sha256sum] = "8cc22cf2223af7789692ef0b1cb5c0c3a00da7d6e34cbfce125a956cb4d2f21e"
+SRC_URI[md5sum] = "c85d9e0e7d4d00577695214cb425c5b4"
+SRC_URI[sha256sum] = "1a3bd886d6aea3775e5366d7335c856449144c0218209af6c660f6be111714a3"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
@@ -23,4 +23,5 @@ DEPENDS += " \
 # RDEPENDS_default:
 RDEPENDS_${PN} += " \
         python-pbr \
+        python-funcsigs \
         "
