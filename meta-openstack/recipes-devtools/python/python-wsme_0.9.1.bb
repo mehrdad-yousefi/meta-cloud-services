@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5a9126e7f56a0cf3247050de7f10d0f4"
 
 SRCNAME = "WSME"
 
-SRC_URI = "https://pypi.python.org/packages/source/W/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
+SRC_URI = "https://pypi.python.org/packages/8d/c5/0d0ba34f228aa1b5512cbfa833aba24755523ed2eca3ece043702ea19911/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "0d50fffead72d8a9fcb6152082d5b61b"
-SRC_URI[sha256sum] = "1cae2c4df4af93db345ef7a52204b8facab8318aee6b9b56f54f8cb4aac79849"
+SRC_URI[md5sum] = "23b0269af3f4c1db8cfa35054703f0db"
+SRC_URI[sha256sum] = "afdd3ba14f815837239d6dead652de460bd61a869e39430b459be77d1a928197"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
