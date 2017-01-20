@@ -7,10 +7,10 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 PR = "r0"
 
 SRCNAME = "mox3"
-SRC_URI = "https://pypi.python.org/packages/source/m/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
+SRC_URI = "https://pypi.python.org/packages/d8/a8/64e78823c52d719181100e9e01dd3485a6e064e79e402089ba4e33cfaed6/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "7574eabaa0f1d8f83289f33aaf2c4884"
-SRC_URI[sha256sum] = "8469f35690077f888fbb49a7e31251de9f78bd319ebd4e1af0bbb1349c1ad1be"
+SRC_URI[md5sum] = "53be7bf2d109c8bdf477c75b369773b8"
+SRC_URI[sha256sum] = "7b1549222353f6cc5b705734ef186fe2cc323d30c3987df50eceb77273595606"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
