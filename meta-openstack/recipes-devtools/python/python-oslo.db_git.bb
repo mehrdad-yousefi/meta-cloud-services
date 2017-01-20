@@ -4,11 +4,11 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 
-PV = "3.1.0+git${SRCPV}"
-SRCREV = "3afd58f6ab0fc2acb1dd92f652cec48e87763cf6"
+PV = "4.13.5+git${SRCPV}"
+SRCREV = "086be4ac91b17942370980a35d67d48d2e42567a"
 
 SRCNAME = "oslo.db"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/newton"
 
 S = "${WORKDIR}/git"
 
@@ -33,4 +33,5 @@ RDEPENDS_${PN} += " \
        python-sqlalchemy-migrate \
        python-stevedore \
        python-pbr \
+       python-debtcollector \
        "
