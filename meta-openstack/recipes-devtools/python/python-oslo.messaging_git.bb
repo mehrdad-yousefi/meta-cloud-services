@@ -5,10 +5,10 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c46f31914956e4579f9b488e71415ac8"
 
 SRCNAME = "oslo.messaging"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/newton"
 
-PV = "2.7.0+git${SRCPV}"
-SRCREV = "4f49b7e25373d624ae9146dd46d92b90022c979f"
+PV = "5.10.1+git${SRCPV}"
+SRCREV = "cc1ec4e7f3b395d5f25e7d4922e6359b58a2206a"
 S = "${WORKDIR}/git"
 
 inherit setuptools
@@ -25,8 +25,6 @@ RDEPENDS_${PN} += " \
         bash \
         python-pbr \
         python-cachetools \
-        python-trollius \
-        python-aioeventlet \
         python-futurist \
         python-oslo.config \
         python-oslo.context \
@@ -37,6 +35,8 @@ RDEPENDS_${PN} += " \
         python-oslo.service \
         python-oslo.i18n \
         python-stevedore \
+        python-debtcollector \
+        python-monotonic \
         python-six \
         python-eventlet \
         python-greenlet \
@@ -44,5 +44,8 @@ RDEPENDS_${PN} += " \
         python-pyyaml \
         python-amqp \
         python-kombu \
-        python-aioeventlet \
+        python-pika \
+        python-pika-pool \
+        python-futures \
+        python-retrying \
         "
