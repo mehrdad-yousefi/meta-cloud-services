@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5ae97ab65116b8d7890c59de57577b46"
 
 SRCNAME = "django-babel"
 
-PV = "0.4.0+git${SRCPV}"
-SRCREV = "37f2919bfc58215ab4f26d386a4e65670e3297b9"
+PV = "0.5.1+git${SRCPV}"
+SRCREV = "88b389381c0e269605311ae07029555b65a86bc5"
 
 SRC_URI = "git://github.com/python-babel/${SRCNAME}.git \
           "
@@ -22,6 +22,6 @@ DEPENDS += " \
 
 RDEPENDS_${PN} += " \
         python-django \
-        python-nose \
+        python-babel \
         "
 
