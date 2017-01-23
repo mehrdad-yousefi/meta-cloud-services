@@ -4,11 +4,11 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 
-PV = "1.23.0+git${SRCPV}"
-SRCREV = "9fa40986c259d22a3dee8155b4bce793505d53e1"
+PV = "2.14.0+git${SRCPV}"
+SRCREV = "bfd1e0ffd435e637d00ba54ec99aeafe4488eca1"
 
 SRCNAME = "oslo.vmware"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/newton"
 
 S = "${WORKDIR}/git"
 
@@ -23,13 +23,12 @@ RDEPENDS_${PN} += " \
         python-pbr \
         python-stevedore \
         python-netaddr \
-        python-iso8601 \
         python-six \
         python-oslo.i18n \
         python-oslo.utils \
         python-oslo.concurrency \
-        python-babel \
         python-pyyaml \
+        python-lxml \
         python-suds-jurko \
         python-eventlet \
         python-requests \
