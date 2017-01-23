@@ -4,13 +4,11 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=19cbd64715b51267a47bf3750cc6a8a5"
 
-PR = "r0"
-
 SRCNAME = "osprofiler"
-SRC_URI = "http://pypi.python.org/packages/source/o/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
+SRC_URI = "http://pypi.io/packages/source/o/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "519f299f5e6040a9abf8453751225540"
-SRC_URI[sha256sum] = "7d7e1d0b93ce96901f7a307a712196273818a8f20e59916ff099589b48f53207"
+SRC_URI[md5sum] = "6762b5420fd95646a26c4eaca1af9e64"
+SRC_URI[sha256sum] = "aee63cfd888e6049ea82535ce458ce4844b4ac893dcb18060eda24192505627e"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
@@ -25,7 +23,13 @@ DEPENDS += " \
 
 # RDEPENDS_default: 
 RDEPENDS_${PN} += " \
-        python-six \
-        python-webob \
         python-pbr \
+        python-six \
+        python-oslo.messaging \
+        python-oslo.log \
+        python-oslo.utils \
+        python-webob \
+        python-requests \
+        python-netaddr \
+        python-oslo.concurrency \
         "
