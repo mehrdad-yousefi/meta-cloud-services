@@ -7,10 +7,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=fd0120fc2e9f841c73ac707a30389af5"
 PR = "r0"
 SRCNAME = "paramiko"
 
-SRC_URI = "http://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
+SRC_URI = "https://pypi.python.org/packages/d1/5a/ebd00d884f30baf208359a027eb7b38372d81d0c004724bb1aa71ae43b37/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "6bbfb328fe816c3d3652ba6528cc8b4c"
-SRC_URI[sha256sum] = "4f56a671a3eecbb76e6143e6e4ca007d503a39aa79aa9e14ade667fa53fd6e55"
+SRC_URI[md5sum] = "9e8abe635baa6bb75a4cd55dcb56a264"
+SRC_URI[sha256sum] = "d51dada7ad0736c116f8bfe3263627925947e4a50e61436a83d58bfe7055b575"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
