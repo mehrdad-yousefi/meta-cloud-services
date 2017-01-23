@@ -5,11 +5,11 @@ SECTION = "devel/python"
 LICENSE = "Apache-2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-PV = "0.12.0+git${SRCPV}"
-SRCREV = "dee7171326e138128486f1d2c3f7e639af875198"
+PV = "1.14.0+git${SRCPV}"
+SRCREV = "018c7475c9dd75da0f902bbe3ec5d01855fa50d6"
 
 SRCNAME = "oslo.policy"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/newton"
 
 S = "${WORKDIR}/git"
 
@@ -26,5 +26,6 @@ RDEPENDS_${PN} += " \
         python-oslo.serialization \
         python-oslo.utils \
         python-six \
+        python-pyyaml \
         python-requests \
 "
