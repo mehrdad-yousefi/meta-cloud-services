@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 SRCNAME = "cliff"
 
-SRC_URI = "https://pypi.python.org/packages/source/c/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
+SRC_URI = "https://pypi.python.org/packages/5a/86/61cb36713a6feb28cfb3201022a218c359dc988cf9f65b2e2681cb33cf8d/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "23f9187d6d7ffa70d8f725381bb1094f"
-SRC_URI[sha256sum] = "f5ba6fe0940547549947d5a24ca3354145a603d3a9ba054f209d20b66dc02be7"
+SRC_URI[md5sum] = "26ef765d200e54aebf72984dfce5f255"
+SRC_URI[sha256sum] = "cc9175e3c2a42bc06343290a1218bc6b70f36883520b2948f743c5f9ae917675"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
