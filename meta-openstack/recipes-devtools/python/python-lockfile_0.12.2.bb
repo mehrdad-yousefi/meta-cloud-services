@@ -8,8 +8,8 @@ SRCNAME = "lockfile"
 
 SRC_URI = "https://pypi.python.org/packages/source/l/lockfile/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "1aa6175a6d57f082cd12e7ac6102ab15"
-SRC_URI[sha256sum] = "9e42252f17d1dd89ee31745e0c4fbe58862c25147eb0ef5295c9cd9bcb4ea2c1"
+SRC_URI[md5sum] = "a6a1a82957a23afdf44cfdd039b65ff9"
+SRC_URI[sha256sum] = "6aed02de03cba24efabcd600b30540140634fc06cfa603822d508d5361e9f799"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
