@@ -5,10 +5,10 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 
 SRCNAME = "oslo.serialization"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/newton"
 
-PV = "1.11.0+git${SRCPV}"
-SRCREV = "a8626ea9f9e37bf4129096cc2295f63516fb768e"
+PV = "2.13.0+git${SRCPV}"
+SRCREV = "be02fdbebc2d9f92a959aa34e0cb5a30934dfa0d"
 S = "${WORKDIR}/git"
 
 inherit setuptools
@@ -29,8 +29,6 @@ DEPENDS += " \
 RDEPENDS_${PN} += " \
         python-pbr \
         python-six \
-        python-babel \
-        python-iso8601 \
         python-oslo.utils \
         python-pytz \
         python-msgpack \
