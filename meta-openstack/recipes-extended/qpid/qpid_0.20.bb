@@ -27,7 +27,10 @@ export PERL_ARCHLIB = "${STAGING_LIBDIR}${PERL_OWN_DIR}/perl/${@get_perl_version
 export PERL="${STAGING_BINDIR}/perl"
 
 EXTRA_OECONF += " --without-help2man SASL_PASSWD=/usr/sbin/saslpasswd2"
-EXTRA_OEMAKE += " CPPFLAGS=-Wno-unused-function "
+EXTRA_OEMAKE += " CPPFLAGS=-Wno-unused-function \
+        pyexecdir=${PYTHON_SITEPACKAGES_DIR} \
+        pythondir=${PYTHON_SITEPACKAGES_DIR} \
+"
 
 do_install_append() {
      install -d ${D}${sysconfdir}/init.d
