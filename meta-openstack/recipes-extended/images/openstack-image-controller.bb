@@ -5,7 +5,6 @@ OPENSTACK_CONTROLLER_EXTRA_INSTALL ?= ""
 
 IMAGE_INSTALL = "\
     ${CORE_IMAGE_BASE_INSTALL} \
-    ${ROOTFS_PKGMANAGE_BOOTSTRAP} \
     packagegroup-core-full-cmdline \
     packagegroup-cloud-controller \
     packagegroup-cloud-network \
