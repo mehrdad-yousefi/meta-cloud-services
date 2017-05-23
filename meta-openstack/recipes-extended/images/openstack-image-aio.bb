@@ -6,7 +6,6 @@ OPENSTACK_COMPUTE_EXTRA_INSTALL ?= ""
 OPENSTACK_AIO_EXTRA_INSTALL ?= ""
 
 IMAGE_INSTALL = " \
-    ${ROOTFS_PKGMANAGE_BOOTSTRAP} \
     ${CORE_IMAGE_BASE_INSTALL} \
     packagegroup-core-full-cmdline \
     packagegroup-cloud-compute \
