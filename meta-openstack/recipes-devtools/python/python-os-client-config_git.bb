@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/newton"
 
 S = "${WORKDIR}/git"
 
-inherit distutils
+inherit setuptools
 
 DEPENDS += " \
         python-pbr \

@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/ActiveState/${SRCNAME}.git"
 
 S = "${WORKDIR}/git"
 
-inherit distutils
+inherit setuptools
 
 DEPENDS += " \
         python-pip \
