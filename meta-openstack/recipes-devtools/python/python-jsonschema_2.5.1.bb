@@ -17,3 +17,8 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
 inherit setuptools
 
 DEPENDS += "python-vcversioner"
+
+# Satisfy setup.py 'setup_requires'
+DEPENDS += " \
+        python-vcversioner-native \
+        "
