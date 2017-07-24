@@ -36,6 +36,7 @@ SRC_URI += " \
         file://configure.ac-add-subdir-objects-to-AM_INIT_AUTOMAKE.patch \
         file://build-allow-separated-src-and-build-dirs.patch \
         file://0001-red_parse_qxl-Fix-BITMAP_FMT_IS_RGB-defined-but-not-.patch \
+        file://0001-Use-PRI-macros-in-printf-to-keep-compatibility-betwe.patch \
         "
 
 S = "${WORKDIR}/git"
