@@ -71,3 +71,5 @@ do_install_append() {
 	oe_runmake DESTDIR="${D}" install
 	cd -
 }
+
+COMPATIBLE_HOST = '(x86_64|i.86).*-linux'
