@@ -1,0 +1,49 @@
+glusterfs: change default nfs port number
+
+Currently both native nfs and glusterfs-nfs use NFS well
+known port 2049.  This causes native nfs not to be able
+to run on the same machine if glusterfs is already running
+with the following error:
+
+starting 8 nfsd kernel threads: rpc.nfsd: unable to bind inet TCP
+socket: errno 98 (Address already in use) rpc.nfsd: unable to set
+any sockets for nfsd
+done
+starting mountd: done
+
+This error will be seen if there are gluster volumes started.
+
+This patch changes the default glusterfs NFS port from 2049
+to 38467.
+
+This patch infact inverses the commit
+3bee716c7a740c3cb6adececcea84bac0ba8abaa
+upstream https://github.com/gluster/glusterfs.git branch
+remotes/origin/release-3.4.
+
+Upstream-Status: Pending
+
+Signed-off-by: Vu Tran <vu.tran@windriver.com>
+Signed-off-by: Xulin Sun <xulin.sun@windriver.com>
+[Yi: minor adjust to apply the patch on 3.11.1]
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ libglusterfs/src/common-utils.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/libglusterfs/src/common-utils.h b/libglusterfs/src/common-utils.h
+index 6bd2417..25a92b0 100644
+--- a/libglusterfs/src/common-utils.h
++++ b/libglusterfs/src/common-utils.h
+@@ -94,7 +94,7 @@ void trap (void);
+ /* Defining this here as it is needed by glusterd for setting
+  * nfs port in volume status.
+  */
+-#define GF_NFS3_PORT    2049
++#define GF_NFS3_PORT    38467
+ 
+ #define GF_CLIENT_PORT_CEILING 1024
+ #define GF_IANA_PRIV_PORTS_START 49152 /* RFC 6335 */
+-- 
+1.9.1
+

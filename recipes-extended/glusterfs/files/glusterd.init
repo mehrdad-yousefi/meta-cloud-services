@@ -58,13 +58,13 @@ stop()
        #pidof -c -o %PPID -x $GLUSTERFS &> /dev/null
        #[ $? -eq 0 ] && start-stop-daemon --stop --quiet --name $GLUSTERFS
 
-    if [ -f /etc/glusterd/nfs/run/nfs.pid ] ;then
-        pid=`cat /etc/glusterd/nfs/run/nfs.pid`;
+    if [ -f /var/lib/glusterd/nfs/run/nfs.pid ] ;then
+        pid=`cat /var/lib/glusterd/nfs/run/nfs.pid`;
         cmd=`ps -p $pid -o comm=`
 
         if [ $cmd == "glusterfs" ]; then
 	    start-stop-daemon --stop --quiet \
-	      --pidfile /etc/glusterd/nfs/run/nfs.pid
+	      --pidfile /var/lib/glusterd/nfs/run/nfs.pid
         fi
     fi
 }

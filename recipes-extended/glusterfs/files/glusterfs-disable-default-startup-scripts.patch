@@ -2,24 +2,34 @@ The glusterfs code for installing start-up scripts checks for systemd
 directories on the build host, and if it finds them, it chooses systemd
 style scripts, otherwise init.d style scripts.  This behavior might
 conceivably be suitable for self-hosted builds, but it's grossly broken
-for cross-build environments.  Since we want to install custom WR scripts
+for cross-build environments.  Since we want to install custom scripts
 regardless of which script style we support, we patch glusterfs so that
 it doesn't install any of its default start-up scripts.
 
-Upstream-Status: Inappropriate [WR-specific change]
+Upstream-Status: Inappropriate [embedded specific]
+
 Signed-off-by: Donn Seeley <donn.seeley@windriver.com>
+[Xulin: minor adjust to apply the patch]
+Signed-off-by: Xulin Sun <xulin.sun@windriver.com>
+[Yi: minor adjust to apply the patch on 3.11.1]
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- extras/Makefile.am |    2 +-
+ extras/Makefile.am | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/extras/Makefile.am b/extras/Makefile.am
+index 3af1103..8978dde 100644
 --- a/extras/Makefile.am
 +++ b/extras/Makefile.am
-@@ -2,7 +2,7 @@
+@@ -4,7 +4,7 @@ addonexec_SCRIPTS = peer_add_secret_pub
  EditorModedir = $(docdir)
  EditorMode_DATA = glusterfs-mode.el glusterfs.vim
  
--SUBDIRS = init.d systemd benchmarking hook-scripts $(OCF_SUBDIR) LinuxRPM
-+SUBDIRS = benchmarking hook-scripts $(OCF_SUBDIR) LinuxRPM
+-SUBDIRS = init.d systemd benchmarking hook-scripts $(OCF_SUBDIR) LinuxRPM \
++SUBDIRS = benchmarking hook-scripts $(OCF_SUBDIR) LinuxRPM \
+           $(GEOREP_EXTRAS_SUBDIR) snap_scheduler firewalld cliutils
  
  confdir = $(sysconfdir)/glusterfs
- conf_DATA = glusterfs-logrotate
+-- 
+1.9.1
+

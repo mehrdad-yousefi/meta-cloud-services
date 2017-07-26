@@ -1,0 +1,32 @@
+From f5bb2a133292b37cd45e3c393e4d43364fe9a11a Mon Sep 17 00:00:00 2001
+From: Xulin Sun <xulin.sun@windriver.com>
+Date: Tue, 22 Mar 2016 16:05:32 +0800
+Subject: [PATCH] dependence on correct header file path
+
+To avoid the below building error, use the correct header file path.
+xlators/features/glupy/src/glupy.c:13:20: fatal error: Python.h:
+No such file or directory
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Xulin Sun <xulin.sun@windriver.com>
+---
+ xlators/features/glupy/src/glupy.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/xlators/features/glupy/src/glupy.c b/xlators/features/glupy/src/glupy.c
+index 7bb88c0..648b966 100644
+--- a/xlators/features/glupy/src/glupy.c
++++ b/xlators/features/glupy/src/glupy.c
+@@ -10,7 +10,7 @@
+ 
+ #include <ctype.h>
+ #include <sys/uio.h>
+-#include <Python.h>
++#include <python2.7/Python.h>
+ 
+ #ifndef _CONFIG_H
+ #define _CONFIG_H
+-- 
+1.9.1
+

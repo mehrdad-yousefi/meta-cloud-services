@@ -1,0 +1,39 @@
+glusterd: change port range
+
+glusterfsd chooses tcp ports within the dynamic
+range [49152-65535] to provide its service.  When
+libvirt performs migration it indicates qemu
+to use tcp port within dynamic range [49152-49216]
+as well.
+
+When both glusterfsd and qemu/libvirt use the same
+port (e.g. 49152) then libvirtd crashes and
+causes migration failed.
+
+Modify the base-port for glusterfsd starting from
+59152 to avoid port conflict with qemu/libvirt
+
+Upstream-Status: Pending
+
+Signed-off-by: Vu Tran <vu.tran@windriver.com>
+Signed-off-by: Xulin Sun <xulin.sun@windriver.com>
+[Yi: minor adjust to apply the patch on 3.11.1]
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ extras/glusterd.vol | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/extras/glusterd.vol b/extras/glusterd.vol
+index d882007..c8dfe91 100644
+--- a/extras/glusterd.vol
++++ b/extras/glusterd.vol
+@@ -8,5 +8,5 @@ volume management
+     option ping-timeout 0
+     option event-threads 1
+ #   option transport.address-family inet6
+-#   option base-port 49152
++#   option base-port 59152
+ end-volume
+-- 
+1.9.1
+

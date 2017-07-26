@@ -1,0 +1,31 @@
+From a7e6549389f7358cad6a04544b2c1e4d2d5615d0 Mon Sep 17 00:00:00 2001
+From: Jim Somerville <Jim.Somerville@windriver.com>
+Date: Wed, 12 Feb 2014 15:41:50 +0000
+Subject: [PATCH] glusterfs-api remove unnecessary library options
+
+These cause QA errors when users of the api such
+as qemu generate their packages.  The reported
+error is unnecessary or redundant RPATH specified.
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Jim Somerville <Jim.Somerville@windriver.com>
+Signed-off-by: Xulin Sun <xulin.sun@windriver.com>
+---
+ glusterfs-api.pc.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/glusterfs-api.pc.in b/glusterfs-api.pc.in
+index 5d23454..8a602f6 100644
+--- a/glusterfs-api.pc.in
++++ b/glusterfs-api.pc.in
+@@ -8,5 +8,5 @@ Description: GlusterFS API
+ /* This is the API version, NOT package version */
+ Version: @GFAPI_VERSION@
+ Requires: @PKGCONFIG_UUID@
+-Libs: -L${libdir} @GFAPI_LIBS@ -lgfapi -lglusterfs -lgfrpc -lgfxdr
++Libs: -lgfapi -lglusterfs -lgfrpc -lgfxdr
+ Cflags: -I${includedir}/glusterfs -D_FILE_OFFSET_BITS=64 -D__USE_FILE_OFFSET64 -DUSE_POSIX_ACLS=@USE_POSIX_ACLS@
+-- 
+1.9.1
+

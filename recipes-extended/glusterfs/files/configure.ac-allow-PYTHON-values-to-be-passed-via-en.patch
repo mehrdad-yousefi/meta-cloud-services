@@ -1,0 +1,67 @@
+From d535a5448191d433e328b0a25a0710da203c44e7 Mon Sep 17 00:00:00 2001
+From: Yi Zhao <yi.zhao@windriver.com>
+Date: Wed, 19 Jul 2017 09:40:57 +0800
+Subject: [PATCH] configure.ac: allow PYTHON values to be passed via env
+
+Allow the recipe can specify specific values for PYTHON.
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ configure.ac | 26 ++++++++++----------------
+ 1 file changed, 10 insertions(+), 16 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 43efd6d..7a31038 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -544,9 +544,6 @@ fi
+ dnl Check if version matches that we require
+ PYTHONDEV_CPPFLAGS=
+ PYTHONDEV_LDFLAGS=
+-BUILD_PYTHON_SITE_PACKAGES=
+-BUILD_PYTHON_INC=
+-BUILD_PYTHON_LIB=
+ have_python2=no
+ have_Python_h=no
+ 
+@@ -555,25 +552,22 @@ if echo $PYTHON_VERSION | grep -q ^2; then
+ 
+    dnl Use pkg-config to get runtime search patch missing from ${PYTHON}-config
+    dnl Just do "true" on failure so that configure does not bail out
+-   PKG_CHECK_MODULES([PYTHON], "python-$PYTHON_VERSION",,true)
++   PKG_CHECK_MODULES([PYTHONDEV], "python-$PYTHON_VERSION", [AC_SUBST(PYTHONDEV_CPPFLAGS) AC_SUBST(PYTHONDEV_LDFLAGS)], AC_MSG_ERROR([Can not find python]))
+ 
+-   PYTHONDEV_CPPFLAGS="`${PYTHON}-config --cflags`"
+-   dnl Edit out the flags that are not required or are conflicting
+-   PYTHONDEV_CPPFLAGS=`echo ${PYTHONDEV_CPPFLAGS} | sed -e 's/-Wp,-D_FORTIFY_SOURCE=[[0-9]]//g'`
+-
+-   dnl Find python libs at user configured libdir and also "lib" under prefix
+-   PYTHONDEV_LDFLAGS="${PYTHON_LIBS} -L`${PYTHON}-config --prefix`/lib -L`${PYTHON}-config --prefix`/$libdir `${PYTHON}-config --ldflags`"
+-
+-   BUILD_PYTHON_SITE_PACKAGES=${pythondir}
+-   BUILD_PYTHON_INC=`$PYTHON -c "import sys; from distutils import sysconfig; sys.stdout.write(sysconfig.get_python_inc())" 2>/dev/null`
+-   BUILD_PYTHON_LIB=python$PYTHON_VERSION
++   if test -z "${BUILD_PYTHON_SITE_PACKAGES}"; then
++      BUILD_PYTHON_SITE_PACKAGES=${pythondir}
++   fi
++   if test -z "${BUILD_PYTHON_INC}"; then
++      BUILD_PYTHON_INC=`$PYTHON -c "import sys; from distutils import sysconfig; sys.stdout.write(sysconfig.get_python_inc())" 2>/dev/null`
++   fi
++   if test -z "${BUILD_PYTHON_LIB}"; then
++      BUILD_PYTHON_LIB=python$PYTHON_VERSION
++   fi
+ 
+    dnl Now check for python header using the include path obtained above
+    AC_CHECK_HEADERS([${BUILD_PYTHON_INC}/Python.h],[have_Python_h=yes],[])
+ fi
+ 
+-AC_SUBST(PYTHONDEV_CPPFLAGS)
+-AC_SUBST(PYTHONDEV_LDFLAGS)
+ AC_SUBST(BUILD_PYTHON_SITE_PACKAGES)
+ AC_SUBST(BUILD_PYTHON_INC)
+ AC_SUBST(BUILD_PYTHON_LIB)
+-- 
+1.9.1
+

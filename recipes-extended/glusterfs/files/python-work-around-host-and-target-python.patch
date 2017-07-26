@@ -1,0 +1,81 @@
+From 485cf109af4adf3050b558cf16c61b620d7b9fb0 Mon Sep 17 00:00:00 2001
+From: Mark Asselstine <mark.asselstine@windriver.com>
+Date: Thu, 27 Feb 2014 21:50:40 -0500
+Subject: [PATCH] python: work around host and target python
+
+In order to allow for the build system to make use of python but not
+influence the installed software we create a split between PYTHON and
+TARGET_PYTHON.
+
+gsyncd.c is the only use of PYTHON on the insalled system so we can
+restrict the introduction of TARGET_PYTHON to gsyncd.c and the
+associated Makefile.
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
+[Xulin: minor adjust the code to apply the patch]
+Signed-off-by: Xulin Sun <xulin.sun@windriver.com>
+[Yi: minor adjust the code to apply the patch on 3.11.1]
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ configure.ac                    | 2 ++
+ geo-replication/src/Makefile.am | 3 ++-
+ geo-replication/src/gsyncd.c    | 6 +++---
+ 3 files changed, 7 insertions(+), 4 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 7a31038..e54d92b 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -270,6 +270,8 @@ AC_CANONICAL_HOST
+ AC_PROG_CC
+ AC_DISABLE_STATIC
+ AC_PROG_LIBTOOL
++AC_SUBST(TARGET_PYTHON)
++
+ AC_SUBST([shrext_cmds])
+ 
+ AC_CHECK_PROG([RPCGEN], [rpcgen], [yes], [no])
+diff --git a/geo-replication/src/Makefile.am b/geo-replication/src/Makefile.am
+index 9937a0b..07456fb 100644
+--- a/geo-replication/src/Makefile.am
++++ b/geo-replication/src/Makefile.am
+@@ -22,7 +22,8 @@ noinst_HEADERS = procdiggy.h
+ AM_CPPFLAGS = $(GF_CPPFLAGS) -I$(top_srcdir)/libglusterfs/src \
+ 	-I$(top_srcdir)/rpc/xdr/src -I$(top_builddir)/rpc/xdr/src \
+ 	-DGSYNCD_PREFIX=\"$(GLUSTERFS_LIBEXECDIR)\" -DUSE_LIBGLUSTERFS \
+-	-DSBIN_DIR=\"$(sbindir)\" -DPYTHON=\"$(PYTHON)\"
++	-DSBIN_DIR=\"$(sbindir)\" -DPYTHON=\"$(PYTHON)\"\
++	-DTARGET_PYTHON=\"$(TARGET_PYTHON)\"
+ 
+ AM_CFLAGS = -Wall $(GF_CFLAGS)
+ 
+diff --git a/geo-replication/src/gsyncd.c b/geo-replication/src/gsyncd.c
+index 2c48ca5..b1d1126 100644
+--- a/geo-replication/src/gsyncd.c
++++ b/geo-replication/src/gsyncd.c
+@@ -153,9 +153,9 @@ invoke_gsyncd (int argc, char **argv)
+                 goto error;
+ 
+         j = 0;
+-        python = getenv("PYTHON");
++        python = getenv("TARGET_PYTHON");
+         if(!python)
+-                python = PYTHON;
++                python = TARGET_PYTHON;
+         nargv[j++] = python;
+         nargv[j++] = GSYNCD_PREFIX"/python/syncdaemon/"GSYNCD_PY;
+         for (i = 1; i < argc; i++)
+@@ -205,7 +205,7 @@ find_gsyncd (pid_t pid, pid_t ppid, char *name, void *data)
+         ret = 0;
+         switch (zeros) {
+         case 2:
+-                if ((strcmp (basename (buf), basename (PYTHON)) ||
++                if ((strcmp (basename (buf), basename (TARGET_PYTHON)) ||
+                      strcmp (basename (buf + strlen (buf) + 1), GSYNCD_PY)) == 0) {
+                         ret = 1;
+                         break;
+-- 
+1.9.1
+
