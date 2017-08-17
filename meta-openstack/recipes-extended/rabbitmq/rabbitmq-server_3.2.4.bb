@@ -10,6 +10,8 @@ SRC_URI = "http://www.rabbitmq.com/releases/rabbitmq-server/v${PV}/${PN}-${PV}.t
            file://rabbitmq-server \
            file://remove-docs.patch \
            file://cleanup_install.patch \
+           file://rabbitmq-server.service \
+           file://rabbitmq-server-setup \
            "
 
 SRC_URI[md5sum] = "09d1af64c005bc680d6790b90655d021"
@@ -44,9 +46,17 @@ do_install() {
     mv ${D}/ebin ${RABBIT_LIB_DIR}/ebin
     mv ${D}/include ${RABBIT_LIB_DIR}/include
     mv ${D}/plugins ${RABBIT_LIB_DIR}/plugins
+
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/rabbitmq-server.service ${D}${systemd_unitdir}/system
+
+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+	install -d ${D}${bindir}
+	install -m 0755 ${WORKDIR}/rabbitmq-server-setup ${D}${bindir}
+    fi
 }
 
-inherit useradd update-rc.d
+inherit useradd update-rc.d systemd
 
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "--system rabbitmq"
@@ -55,6 +65,8 @@ USERADD_PARAM_${PN}  = "--system --create-home --home /var/lib/rabbitmq \
 
 INITSCRIPT_NAME = "rabbitmq-server"
 INITSCRIPT_PARAMS = "defaults"
+
+SYSTEMD_SERVICE_${PN} = "rabbitmq-server.service"
 
 FILES_${PN} += " ${libdir}/rabbitmq/lib/${PN}-${PV}/* \
                  ${localstatedir}/* \ 
