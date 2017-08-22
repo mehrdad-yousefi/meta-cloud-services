@@ -15,7 +15,6 @@ S = "${WORKDIR}/git"
 
 inherit setuptools monitor rmargparse
 
-DEPENDS = "python-setuptools-git"
 DEPENDS += " \
         python-pip \
         python-pbr \
