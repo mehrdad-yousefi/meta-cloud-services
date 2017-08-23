@@ -2,7 +2,7 @@ include erlang.inc
 
 inherit native
 
-PR = "r0"
+DEPENDS += "ncurses-native"
 
 EXTRA_OECONF = '--without-ssl'
 
