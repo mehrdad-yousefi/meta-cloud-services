@@ -37,6 +37,7 @@ SRC_URI += " \
         file://build-allow-separated-src-and-build-dirs.patch \
         file://0001-red_parse_qxl-Fix-BITMAP_FMT_IS_RGB-defined-but-not-.patch \
         file://0001-Use-PRI-macros-in-printf-to-keep-compatibility-betwe.patch \
+        file://Fix-build-issues-with-gcc-7.patch \
         "
 
 S = "${WORKDIR}/git"
