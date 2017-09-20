@@ -10,12 +10,12 @@ Dependencies
 
 This layer depends on:
 
-URI: git://github.com/openembedded/oe-core.git
+URI: git://git.openembedded.org/openembedded-core
 branch: master
 revision: HEAD
 prio: default
 
-URI: git://github.com/openembedded/meta-oe.git
+URI: git://git.openembedded.org/meta-openembedded
 revision: HEAD
 layers: meta-oe
 	meta-networking
