@@ -38,6 +38,9 @@ SRC_URI += " \
         file://0001-red_parse_qxl-Fix-BITMAP_FMT_IS_RGB-defined-but-not-.patch \
         file://0001-Use-PRI-macros-in-printf-to-keep-compatibility-betwe.patch \
         file://Fix-build-issues-with-gcc-7.patch \
+        file://CVE-2017-7506-1.patch \
+        file://CVE-2017-7506-2.patch \
+        file://CVE-2017-7506-3.patch \
         "
 
 S = "${WORKDIR}/git"
