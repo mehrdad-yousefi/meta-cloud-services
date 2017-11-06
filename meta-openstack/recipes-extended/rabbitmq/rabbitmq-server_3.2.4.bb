@@ -3,7 +3,6 @@ HOMEPAGE = "http://www.rabbitmq.com/"
 LICENSE = "MPL-1.1"
 LIC_FILES_CHKSUM = "file://LICENSE-MPL-RabbitMQ;md5=b651d0a6feaaf2bf5eb9d36b2495c510"
 SECTION = "network"
-DEPENDS = "erlang-native libxslt python-simplejson zip-native unzip-native libxslt-native"
 PR = "r2"
 
 SRC_URI = "http://www.rabbitmq.com/releases/rabbitmq-server/v${PV}/${PN}-${PV}.tar.gz \
@@ -16,6 +15,16 @@ SRC_URI = "http://www.rabbitmq.com/releases/rabbitmq-server/v${PV}/${PN}-${PV}.t
 
 SRC_URI[md5sum] = "09d1af64c005bc680d6790b90655d021"
 SRC_URI[sha256sum] = "a930f92b362df2f292ec5f0281aa2011eb0c668faf6e24c4653a9fc53ec43b9f"
+
+DEPENDS = " \
+    erlang-native \
+    libxslt \
+    python-simplejson \
+    zip-native \
+    unzip-native \
+    libxslt-native \
+    coreutils-native\
+"
 
 RDEPENDS_${PN} = "erlang erlang-modules"
 
