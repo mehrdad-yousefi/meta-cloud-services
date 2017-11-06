@@ -88,7 +88,7 @@ do_install_append() {
     chown root:root $NOVA_CONF_DIR/rootwrap.conf
 
     # Set up the rootwrap sudoers for nova
-    install -d ${D}${sysconfdir}/sudoers.d
+    install -d -m 750 ${D}${sysconfdir}/sudoers.d
     touch ${D}${sysconfdir}/sudoers.d/nova-rootwrap
     chmod 0440 ${D}${sysconfdir}/sudoers.d/nova-rootwrap
     chown root:root ${D}${sysconfdir}/sudoers.d/nova-rootwrap
