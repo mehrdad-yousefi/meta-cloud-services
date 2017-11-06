@@ -19,7 +19,6 @@ URI: git://git.openembedded.org/meta-openembedded
 revision: HEAD
 layers: meta-oe
 	meta-networking
-        meta-ruby
         meta-filesystems
         meta-webserver
         meta-python
