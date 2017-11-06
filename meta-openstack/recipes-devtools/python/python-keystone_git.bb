@@ -74,8 +74,8 @@ do_install_append() {
     install -m 755 -d ${APACHE_CONF_DIR}
 
     install -d ${D}${localstatedir}/log/${SRCNAME}
-    install -g users -m 755 -d ${KEYSTONE_CGI_DIR}
-    install -g users -m 755 -d ${KEYSTONE_PY_DIR}
+    install -m 755 -d ${KEYSTONE_CGI_DIR}
+    install -m 755 -d ${KEYSTONE_PY_DIR}
 
     # Apache needs to read the keystone.conf
     install -m 644 ${WORKDIR}/keystone.conf ${KEYSTONE_CONF_DIR}/
