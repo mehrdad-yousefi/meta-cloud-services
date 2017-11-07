@@ -4,13 +4,11 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d273d63619c9aeaf15cdaf76422c4f87"
 
-PR = "r0"
-
 SRCNAME = "requestsexceptions"
 SRC_URI = "http://pypi.io/packages/source/r/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "edf208c247261157bf7a97d7c792d914"
-SRC_URI[sha256sum] = "d678b872f51f76d875e00e6667f4ddbf013b3a99490ae5fe07cf3e4f846e283e"
+SRC_URI[md5sum] = "85c9a2c5c5ecbd2deb0a491613fbdd12"
+SRC_URI[sha256sum] = "8f141ba636d6748cd29208c1955bde38bf00fcdda1a685bc09d8ed133700353e"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
