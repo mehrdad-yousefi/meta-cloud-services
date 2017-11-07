@@ -4,11 +4,11 @@ SECTION = "devel/python"
 LICENSE = "Apache-2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 
-PV = "3.14.0+git${SRCPV}"
-SRCREV = "9ac99b675eae255b660b03d3a1e61599d09f8316"
+PV = "3.21.1+git${SRCPV}"
+SRCREV = "8adf9b1f0d69dca7372b967ef4f894487f1a9d64"
 
 SRCNAME = "oslo.concurrency"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/newton"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike"
 
 S = "${WORKDIR}/git"
 
@@ -25,11 +25,9 @@ DEPENDS += " \
 RDEPENDS_${PN} += " \
         python-pbr \
         python-fasteners \
-        python-iso8601 \
         python-oslo.config \
         python-oslo.i18n \
         python-oslo.utils \
         python-six \
-        python-retrying \
         python-enum34 \
         "

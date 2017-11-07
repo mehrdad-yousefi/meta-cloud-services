@@ -6,11 +6,11 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 
-PV = "2.10.0+git${SRCPV}"
-SRCREV = "a8c5ed4008963a3436f4a4932ac544f5ee4c283b"
+PV = "2.17.0+git${SRCPV}"
+SRCREV = "aea2b5cfd6442195f7ee479e21664631825af924"
 
 SRCNAME = "oslotest"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/newton"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike"
 
 S = "${WORKDIR}/git"
 
@@ -24,12 +24,11 @@ RDEPENDS_${PN} = "python-fixtures \
                   python-subunit \
                   python-six \
                   python-testrepository \
-                  python-testscenarios \
                   python-testtools \
                   python-mock \
                   python-mox3 \
                   python-os-client-config \
                   python-debtcollector \
-                  python-pbr \
                   bash \
 "
+	

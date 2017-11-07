@@ -5,10 +5,10 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 
 SRCNAME = "oslo.log"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/newton"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike"
 
-PV = "3.16.0+git${SRCPV}"
-SRCREV = "a6efc0e714171d4f5ec8baef46cc8734fb4139dc"
+PV = "3.30.0+git${SRCPV}"
+SRCREV = "ad776e84b51223b85b7dfa85a7e77bb2f3848f4b"
 S = "${WORKDIR}/git"
 
 inherit setuptools
@@ -37,4 +37,5 @@ RDEPENDS_${PN} += " \
         python-pyinotify \
         python-debtcollector \
         python-dateutil \
+        python-monotonic \
         "

@@ -4,11 +4,11 @@ SECTION = "devel/python"
 LICENSE = "Apache-2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-PV = "1.17.0+git${SRCPV}"
-SRCREV = "9f33bd4c74949ebe42bffe39c529aa6a1c94e531"
+PV = "1.26.0+git${SRCPV}"
+SRCREV = "78cd10662f20c4ae43e20a2dfa844cfd4e5cae26"
 
 SRCNAME = "oslo.versionedobjects"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/newton"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike"
 
 S = "${WORKDIR}/git"
 

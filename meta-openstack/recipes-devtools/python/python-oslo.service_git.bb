@@ -4,11 +4,11 @@ SECTION = "devel/python"
 LICENSE = "Apache-2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-PV = "1.16.0"
-SRCREV = "e11a2880777249674664ec330004fda5e605ac73"
+PV = "1.25.0"
+SRCREV = "0020bef6a503905aca5cdb70aee54e1c5f2ff472"
 
 SRCNAME = "oslo.service"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/newton"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike"
 
 S = "${WORKDIR}/git"
 
@@ -35,3 +35,4 @@ RDEPENDS_${PN} += " \
         python-paste \
         python-routes \
         "
+	

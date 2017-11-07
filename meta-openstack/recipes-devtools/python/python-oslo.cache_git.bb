@@ -5,10 +5,10 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
 PV = "1.14.0+git${SRCPV}"
-SRCREV = "ff5bbb96d73a83c1e25759c42a30f01608de5b8a"
+SRCREV = "f5b6ddf7d18a7e06e19712ca7a2509d658a08c4d"
 
 SRCNAME = "oslo.cache"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/newton"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike"
 
 S = "${WORKDIR}/git"
 

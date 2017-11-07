@@ -5,11 +5,11 @@ SECTION = "devel/python"
 LICENSE = "Apache-2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-PV = "1.14.0+git${SRCPV}"
-SRCREV = "018c7475c9dd75da0f902bbe3ec5d01855fa50d6"
+PV = "1.25.1+git${SRCPV}"
+SRCREV = "cb9ab34cd40a7cd9eff0e40ccc2df4ee88edae4e"
 
 SRCNAME = "oslo.policy"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/newton"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike"
 
 S = "${WORKDIR}/git"
 
