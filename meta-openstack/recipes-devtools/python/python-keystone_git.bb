@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
 SRCNAME = "keystone"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike \
            file://keystone.conf \
            file://identity.sh \
            file://keystone \
@@ -19,8 +19,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
 # file://keystone-remove-git-commands-in-tests.patch 
 # file://keystone-explicitly-import-localcontext-from-oslo.me.patch
 
-SRCREV = "8dcd82fb9c76d43f26338bee293b32f4af473ad9"
-PV = "8.0.0+git${SRCPV}"
+SRCREV = "d07677aba54362a4a3aa2d165b155105ffe30d73"
+PV = "12.0.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -75,7 +75,7 @@ do_install_append() {
 
     install -d ${D}${localstatedir}/log/${SRCNAME}
     install -m 755 -d ${KEYSTONE_CGI_DIR}
-    install -m 755 -d ${KEYSTONE_PY_DIR}
+    #install -m 755 -d ${KEYSTONE_PY_DIR}
 
     # Apache needs to read the keystone.conf
     install -m 644 ${WORKDIR}/keystone.conf ${KEYSTONE_CONF_DIR}/
@@ -87,16 +87,16 @@ do_install_append() {
     install -m 600 ${S}${sysconfdir}/keystone.conf.sample \
         ${KEYSTONE_CONF_DIR}/keystone.conf.sample
     # Apache user needs to read these files.
-    install -m 644 ${S}${sysconfdir}/policy.json \
-        ${KEYSTONE_CONF_DIR}/policy.json
+    #install -m 644 ${S}${sysconfdir}/policy.json \
+    #    ${KEYSTONE_CONF_DIR}/policy.json
     install -m 644 ${S}${sysconfdir}/keystone-paste.ini \
         ${KEYSTONE_CONF_DIR}/keystone-paste.ini
-    install -m 644 ${S}/httpd/keystone.py \
-        ${KEYSTONE_PY_DIR}/keystone-httpd.py
-    install -m 644 ${S}/httpd/keystone.py \
-        ${KEYSTONE_CGI_DIR}/admin
-    install -m 644 ${S}/httpd/keystone.py \
-        ${KEYSTONE_CGI_DIR}/main
+    #install -m 644 ${S}/httpd/keystone.py \
+    #    ${KEYSTONE_PY_DIR}/keystone-httpd.py
+    #install -m 644 ${S}/httpd/keystone.py \
+    #    ${KEYSTONE_CGI_DIR}/admin
+    #install -m 644 ${S}/httpd/keystone.py \
+    #    ${KEYSTONE_CGI_DIR}/main
 
     cp -r ${S}/examples ${KEYSTONE_PACKAGE_DIR}
 
@@ -249,37 +249,42 @@ DEPENDS += " \
         "
 
 RDEPENDS_${PN} += " \
-        python-pycadf \
-        python-oslo.db \
-        python-pam \
+        python-babel \
+        python-pbr \
         python-webob \
-        python-eventlet \
-        python-greenlet \
         python-pastedeploy \
         python-paste \
         python-routes \
+        python-cryptography \
+        python-six \
         python-sqlalchemy \
         python-sqlalchemy-migrate \
+        python-stevedore \
         python-passlib \
-        python-lxml \
-        python-iso8601 \
         python-keystoneclient \
-        python-openstack-nose \
+        python-keystonemiddleware \
+        python-bcrypt \
+        python-scrypt \
+        python-oslo.cache \
+        python-oslo.concurrency \
         python-oslo.config \
-        python-dogpile.core \
-        python-dogpile.cache \
-        python-pbr \
-        python-pysaml2 \
+        python-oslo.context \
+        python-oslo.messaging \
+        python-oslo.db \
+        python-oslo.i18n \
+        python-oslo.log \
+        python-oslo.middleware \
         python-oslo.policy \
+        python-oslo.serialization \
         python-oslo.utils \
         python-oauthlib \
-        python-fixtures \
-        python-oslotest \
-        python-functools32 \
-        python-six \
-        python-routes \
+        python-pysaml2 \
+        python-dogpile.cache \
+        python-jsonschema \
         python-pycadf \
-        python-cryptography \
+        python-msgpack \
+        python-osprofiler \
+        python-pytz \
         "
 
 RDEPENDS_${SRCNAME}-tests += " bash"
