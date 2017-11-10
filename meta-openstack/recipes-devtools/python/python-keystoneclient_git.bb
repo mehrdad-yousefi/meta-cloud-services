@@ -7,16 +7,15 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4a4d0e932ffae1c0131528d30d419c55"
 SRCNAME = "keystoneclient"
 
 SRC_URI = "\
-	git://github.com/openstack/python-keystoneclient.git;branch=master \
-	file://fix_keystoneclient_memory_leak.patch \
+	git://github.com/openstack/python-keystoneclient.git;branch=stable/pike \
 	file://keystone-api-check.sh \
 	"
 
-PV = "1.7.1+git${SRCPV}"
-SRCREV = "28138b588224c6b0503620ac2e24bd37dad25370"
+PV = "3.13.0+git${SRCPV}"
+SRCREV = "7ff05baa1fa56f152173651f16fc6fd181291292"
 S = "${WORKDIR}/git"
 
-inherit setuptools monitor rmargparse
+inherit setuptools monitor
 
 FILES_${PN}-doc += "${datadir}/keystoneclient" 
 
@@ -31,28 +30,25 @@ DEPENDS += " \
         "
 
 RDEPENDS_${PN} += " \
-	python-iso8601 \
-	python-prettytable \
-	python-requests \
-	python-simplejson \
-	python-oslo.config \
-	python-oslo.serialization \
-	python-pbr \
-	python-argparse \
-	"
-
-PACKAGECONFIG ?= "bash-completion"
-PACKAGECONFIG[bash-completion] = ",,bash-completion,bash-completion ${BPN}-bash-completion"
+        bash \
+        python-pbr \
+        python-debtcollector \
+        python-keystoneauth1 \
+        python-oslo.config \
+        python-oslo.i18n \
+        python-oslo.serialization \
+        python-oslo.utils \
+        python-positional \
+        python-requests \
+        python-six \
+        python-stevedore \
+        "
 
 do_install_append() {
-	install -d ${D}/${sysconfdir}/bash_completion.d
-	install -m 664 ${S}/tools/keystone.bash_completion ${D}/${sysconfdir}/bash_completion.d
-
 	cp -r ${S}/examples ${D}${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}
 }
 
-PACKAGES =+ " ${SRCNAME}-tests ${BPN}-bash-completion"
-FILES_${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"
+PACKAGES =+ " ${SRCNAME}-tests"
 
 FILES_${SRCNAME}-tests = "${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}/examples \
         "
