@@ -8,32 +8,32 @@ DEPENDS = "python-setuptools-git"
 SRCNAME = "python-cinderclient"
 
 SRC_URI = "\
-	git://github.com/openstack/python-cinderclient.git;branch=master \
-	file://fix_cinderclient_memory_leak.patch \
+	git://github.com/openstack/python-cinderclient.git;branch=stable/pike \
 	file://cinder-api-check.sh \
 	"
 
-PV="1.4.0+git${SRCPV}"
-SRCREV="c167dda40cc65fe437a12b815ef91bbde4efb6bb"
+PV="3.1.0+git${SRCPV}"
+SRCREV="3640aeab6e11987288a2f149fbeedb1c026045e2"
 S = "${WORKDIR}/git"
 
-inherit setuptools monitor rmargparse
+inherit setuptools monitor
 
 DEPENDS += " \
         python-pip \
         python-pbr \
         "
 
-RDEPENDS_${PN} += "python-prettytable \
-                   python-simplejson \
-                   python-requests \
-                   python-setuptools-git \
-                   python-pbr \
-                   python-keystoneclient \
-                   python-babel \
-                   python-six \
-	           "
-
+RDEPENDS_${PN} += " \
+        python-pbr \
+        python-prettytable \
+        python-keystoneauth1 \
+        python-simplejson \
+        python-babel \
+        python-six \
+        python-oslo.i18n \
+        python-oslo.utils \
+        "
+	
 PACKAGECONFIG ?= "bash-completion"
 PACKAGECONFIG[bash-completion] = ",,bash-completion,bash-completion ${BPN}-bash-completion"
 
