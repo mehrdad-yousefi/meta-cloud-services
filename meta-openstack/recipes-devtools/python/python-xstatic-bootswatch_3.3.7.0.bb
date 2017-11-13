@@ -4,15 +4,12 @@ SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
-SRCNAME = "XStatic-bootswatch"
-SRC_URI = "https://pypi.python.org/packages/source/X/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
+PYPI_PACKAGE = "XStatic-bootswatch"
 
-SRC_URI[md5sum] = "b7c76560828274bdcfee3f5e6fc5a147"
-SRC_URI[sha256sum] = "3c018cb0fdf591a520b2832a4ba8d8face633c765f29f9ccca8275b47be8aa94"
+SRC_URI[md5sum] = "422f09e076ff1741b76a9f7554ceca32"
+SRC_URI[sha256sum] = "93ee5863c1ec07212fe12ae137a10708b4102720391d460f061dd3f441ba3b6e"
 
-S = "${WORKDIR}/${SRCNAME}-${PV}"
-
-inherit setuptools
+inherit setuptools pypi
 
 DEPENDS += " \
         python-pip \
