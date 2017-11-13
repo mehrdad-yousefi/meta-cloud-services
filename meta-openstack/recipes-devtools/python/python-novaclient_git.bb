@@ -5,12 +5,12 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7cdb54622cacc9bc9b2883091e6dd669"
 
 SRC_URI = "\
-	git://github.com/openstack/python-novaclient.git;branch=master \
+	git://github.com/openstack/python-novaclient.git;branch=stable/pike \
 	file://nova-api-check.sh \
 	"
 
-PV = "2.33.0+git${SRCPV}"
-SRCREV = "a5363ae0d60d41feff23f6cca44fcd7aa9fc5b8b"
+PV = "9.1.1+git${SRCPV}"
+SRCREV = "204eff6dc7b234d2807a6caa24a2fc58ebee520b"
 S = "${WORKDIR}/git"
 
 inherit setuptools monitor rmargparse
@@ -20,12 +20,18 @@ DEPENDS += " \
         python-pbr \
         "
 
-RDEPENDS_${PN} += "python-iso8601 \
-	python-prettytable \
-	python-requests \
-	python-simplejson \
-	python-pbr \
-	"
+RDEPENDS_${PN} += " \
+        python-pbr \
+        python-keystoneauth1 \
+        python-iso8601 \
+        python-oslo.i18n \
+        python-oslo.serialization \
+        python-oslo.utils \
+        python-prettytable \
+        python-simplejson \
+        python-six \
+        python-babel \
+        "
 
 PACKAGECONFIG ?= "bash-completion"
 PACKAGECONFIG[bash-completion] = ",,bash-completion,bash-completion ${BPN}-bash-completion"
