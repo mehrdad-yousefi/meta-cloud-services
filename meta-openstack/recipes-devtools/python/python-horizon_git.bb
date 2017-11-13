@@ -18,10 +18,8 @@ RDEPENDS_${PN} += " \
         python-django-compressor \
         python-django-openstack-auth \
         python-django-pyscss \
-        python-eventlet \
-        python-httplib2 \
+        python-futurist \
         python-iso8601 \
-        python-kombu \
         python-netaddr \
         python-oslo.concurrency \
         python-oslo.config \
@@ -29,25 +27,27 @@ RDEPENDS_${PN} += " \
         python-oslo.policy \
         python-oslo.serialization \
         python-oslo.utils \
+        python-osprofiler \
+        python-pymongo \
         python-pyscss \
-        python-ceilometerclient \
         python-cinderclient \
         python-glanceclient \
         python-heatclient \
         python-keystoneclient \
         python-neutronclient \
         python-novaclient \
-        python-saharaclient \
         python-swiftclient \
-        python-troveclient \
         python-pytz \
         python-pyyaml \
+        python-semantic-version \
         python-six \
         python-xstatic \
         python-xstatic-angular \
         python-xstatic-angular-bootstrap \
+        python-xstatic-angular-fileupload \
         python-xstatic-angular-gettext \
         python-xstatic-angular-lrdragndrop \
+        python-xstatic-angular-schema-form \
         python-xstatic-bootstrap-datepicker \
         python-xstatic-bootstrap-scss \
         python-xstatic-bootswatch \
@@ -57,22 +57,23 @@ RDEPENDS_${PN} += " \
         python-xstatic-jasmine \
         python-xstatic-jquery \
         python-xstatic-jquery-migrate \
-        python-xstatic-jquery-quicksearch \
-        python-xstatic-jquery-tablesorter \
+        python-xstatic-jquery.quicksearch \
+        python-xstatic-jquery.tablesorter \
         python-xstatic-jquery-ui \
         python-xstatic-jsencrypt \
-        python-xstatic-magic-search \
         python-xstatic-mdi \
+        python-xstatic-objectpath \
         python-xstatic-rickshaw \
         python-xstatic-roboto-fontface \
         python-xstatic-smart-table \
         python-xstatic-spin \
         python-xstatic-term.js \
+        python-xstatic-tv4 \
         "
 
 SRCNAME = "horizon"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike \
     file://horizon.init \
     file://fix_bindir_path.patch \
     file://openstack-dashboard-apache.conf \
@@ -80,8 +81,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
     file://horizon-use-full-package-path-to-test-directories.patch \
     "
 
-SRCREV = "593f0b78eea8efbb6d833d66acc7ab4dc852159b"
-PV = "8.0.0+git${SRCPV}"
+SRCREV = "246ff9f81248a00a434e66d18fad70519ba811cc"
+PV = "12.0.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools update-rc.d python-dir default_configs monitor
