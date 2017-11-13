@@ -4,17 +4,10 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-SRCNAME = "osc-lib"
+SRC_URI[md5sum] = "8bae654318c8c82d341f7228cfa3ec2d"
+SRC_URI[sha256sum] = "7dee72f13e5478f8d3d836267fa019b99ed4d5e478fc08bbcc9e23029d11ec78"
 
-SRC_URI = "https://pypi.io/packages/source/o/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
-"
-
-SRC_URI[md5sum] = "08bf2b46089da52240893d99a3892897"
-SRC_URI[sha256sum] = "e06ca111b2702d442f5cf70c754b6331cc7742231f0fe0b634cbd03c502610ba"
-
-S = "${WORKDIR}/${SRCNAME}-${PV}"
-
-inherit setuptools
+inherit setuptools pypi
 
 RDEPENDS_${PN} += " \
         python-pbr \
