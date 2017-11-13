@@ -4,17 +4,15 @@ SECTION = "devel/python"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d92bb5439aee694c0a87bfb51579e37b"
 
-PR = "r0"
+PYPI_PACKAGE = "posix_ipc"
 
-SRCNAME = "posix_ipc"
-SRC_URI = "http://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
+# Archived version so we need to overwrite what the pypi class will derive
+PYPI_SRC_URI = "https://pypi.python.org/packages/source/p/${PYPI_PACKAGE}/${PYPI_PACKAGE}-${PV}.tar.gz"
 
 SRC_URI[md5sum] = "85607a392087715ac3a3c7ded2492d06"
 SRC_URI[sha256sum] = "9c93070374ca672725575e5c9874930c8cde69367fb90378b2255e048e31efcb"
 
-S = "${WORKDIR}/${SRCNAME}-${PV}"
-
-inherit setuptools
+inherit setuptools pypi
 
 # DEPENDS_default: python-pip
 

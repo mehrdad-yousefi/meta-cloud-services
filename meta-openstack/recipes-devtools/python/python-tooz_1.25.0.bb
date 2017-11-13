@@ -4,16 +4,10 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-
-SRCNAME = "tooz"
-SRC_URI = "http://pypi.python.org/packages/source/t/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
-
 SRC_URI[md5sum] = "939eaf6c5e49d3a41e8c9f2e92126cfc"
 SRC_URI[sha256sum] = "d61639640b8e4fc64195306f8fae92cf271a002c690bf693ee51f9790cf8141e"
 
-S = "${WORKDIR}/${SRCNAME}-${PV}"
-
-inherit setuptools
+inherit setuptools pypi
 
 # DEPENDS_default: python-pip
 

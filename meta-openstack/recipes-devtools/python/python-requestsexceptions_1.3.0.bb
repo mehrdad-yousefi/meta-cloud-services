@@ -4,15 +4,10 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d273d63619c9aeaf15cdaf76422c4f87"
 
-SRCNAME = "requestsexceptions"
-SRC_URI = "http://pypi.io/packages/source/r/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
-
 SRC_URI[md5sum] = "85c9a2c5c5ecbd2deb0a491613fbdd12"
 SRC_URI[sha256sum] = "8f141ba636d6748cd29208c1955bde38bf00fcdda1a685bc09d8ed133700353e"
 
-S = "${WORKDIR}/${SRCNAME}-${PV}"
-
-inherit setuptools
+inherit setuptools pypi
 
 # conflicting file prevention
 do_install_append() {
