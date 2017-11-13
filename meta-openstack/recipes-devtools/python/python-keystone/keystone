@@ -11,7 +11,8 @@
 ### END INIT INFO
 
 DESC="keystone"
-DAEMON="/usr/bin/keystone-all"
+DAEMON="uwsgi"
+DAEMON_OPTIONS="--http 127.0.0.1:35357 --wsgi-file $(which keystone-wsgi-admin)"
 PIDFILE="/var/run/keystone-all.pid"
 
 start ()
@@ -34,7 +35,7 @@ start ()
 
     start-stop-daemon --start --quiet --background \
         --pidfile ${PIDFILE} --make-pidfile --exec ${DAEMON} \
-	-- --log-dir=/var/log/keystone
+	-- ${DAEMON_OPTIONS}
 
     if [ $? -eq 0 ]; then
         echo "done."
