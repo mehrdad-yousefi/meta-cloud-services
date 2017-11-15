@@ -189,28 +189,26 @@ role_tree_dn = ou=Roles,${LDAP_DN} \
 
 pkg_postinst_${SRCNAME}-setup () {
     # python-keystone postinst start
-    if [ "x$D" != "x" ]; then
-        exit 1
-    fi
+    if [ -z "$D" ]; then
+	# This is to make sure postgres is configured and running
+	if ! pidof postmaster > /dev/null; then
+	    /etc/init.d/postgresql-init
+	    /etc/init.d/postgresql start
+	    sleep 2
+	fi
 
-    # This is to make sure postgres is configured and running
-    if ! pidof postmaster > /dev/null; then
-        /etc/init.d/postgresql-init
-        /etc/init.d/postgresql start
-        sleep 2
-    fi
+	# This is to make sure keystone is configured and running
+	PIDFILE="/var/run/keystone-all.pid"
+	if [ -z `cat $PIDFILE 2>/dev/null` ]; then
+	    sudo -u postgres createdb keystone
+	    keystone-manage db_sync
+	    keystone-manage pki_setup --keystone-user=root --keystone-group=daemon
 
-    # This is to make sure keystone is configured and running
-    PIDFILE="/var/run/keystone-all.pid"
-    if [ -z `cat $PIDFILE 2>/dev/null` ]; then
-        sudo -u postgres createdb keystone
-        keystone-manage db_sync
-        keystone-manage pki_setup --keystone-user=root --keystone-group=daemon
-
-        if ${@bb.utils.contains('DISTRO_FEATURES', 'OpenLDAP', 'true', 'false', d)}; then
-            /etc/init.d/openldap start
-        fi
-        /etc/init.d/keystone start
+	    if ${@bb.utils.contains('DISTRO_FEATURES', 'OpenLDAP', 'true', 'false', d)}; then
+		/etc/init.d/openldap start
+	    fi
+	    /etc/init.d/keystone start
+	fi
     fi
 }
 
@@ -219,9 +217,11 @@ pkg_postinst_${SRCNAME}-setup () {
 KEYSTONE_TOKEN_FLUSH_TIME ??= "0 0 */2 * *"
 
 pkg_postinst_${SRCNAME}-cronjobs () {
-    # By default keystone expired tokens are not automatic removed out of the
-    # database.  So we create a cronjob for cleaning these expired tokens.
-    echo "${KEYSTONE_TOKEN_FLUSH_TIME} root /usr/bin/keystone-manage token_flush" >> /etc/crontab
+    if [ -z "$D" ]; then
+	# By default keystone expired tokens are not automatic removed out of the
+	# database.  So we create a cronjob for cleaning these expired tokens.
+	echo "${KEYSTONE_TOKEN_FLUSH_TIME} root /usr/bin/keystone-manage token_flush" >> /etc/crontab
+    fi
 }
 
 PACKAGES += " ${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-setup ${SRCNAME}-cronjobs"

@@ -138,29 +138,25 @@ do_install_append() {
 }
 
 pkg_postinst_${SRCNAME}-setup () {
-    if [ "x$D" != "x" ]; then
-        exit 1
-    fi
+    if [ -z "$D" ]; then
+	# This is to make sure postgres is configured and running
+	if ! pidof postmaster > /dev/null; then
+	    /etc/init.d/postgresql-init
+	    /etc/init.d/postgresql start
+	    sleep 2
+	fi
 
-    # This is to make sure postgres is configured and running
-    if ! pidof postmaster > /dev/null; then
-        /etc/init.d/postgresql-init
-        /etc/init.d/postgresql start
-        sleep 2
+	sudo -u postgres createdb neutron
+	sudo neutron-db-manage --config-file /etc/neutron/neutron.conf  \
+			       --config-file /etc/neutron/plugins/ml2/ml2_conf.ini upgrade head
     fi
-
-    sudo -u postgres createdb neutron
-    sudo neutron-db-manage --config-file /etc/neutron/neutron.conf  \
-                           --config-file /etc/neutron/plugins/ml2/ml2_conf.ini upgrade head
 }
 
 pkg_postinst_${SRCNAME}-plugin-openvswitch-setup () {
-    if [ "x$D" != "x" ]; then
-        exit 1
+    if [ -z "$D" ]; then
+	/etc/init.d/openvswitch-switch start
+	ovs-vsctl --no-wait -- --may-exist add-br br-int
     fi
-   
-    /etc/init.d/openvswitch-switch start
-    ovs-vsctl --no-wait -- --may-exist add-br br-int
 }
 
 ALLOW_EMPTY_${SRCNAME}-setup = "1"

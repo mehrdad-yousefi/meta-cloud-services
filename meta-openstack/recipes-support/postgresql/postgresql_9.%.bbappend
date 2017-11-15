@@ -41,14 +41,12 @@ ALLOW_EMPTY_${PN}-setup = "1"
 
 pkg_postinst_${PN}-setup () {
     # postgres 9.2.4 postinst
-    if [ "x$D" != "x" ]; then
-        exit 1
-    fi
-      
-    /etc/init.d/postgresql-init
-    if [ $? -ne 0 ]; then
-        echo "[ERROR] postgres: unable to create admin account"
-        exit 1
+    if [ -z "$D" ]; then
+	/etc/init.d/postgresql-init
+	if [ $? -ne 0 ]; then
+	    echo "[ERROR] postgres: unable to create admin account"
+	    exit 1
+	fi
     fi
 }
 

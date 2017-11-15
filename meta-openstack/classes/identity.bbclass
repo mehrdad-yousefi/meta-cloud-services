@@ -163,9 +163,11 @@ python populate_packages_append () {
 
         postinst = d.getVar('pkg_postinst_%s' % pkg, True) or d.getVar('pkg_postinst', True)
         if not postinst:
-            postinst = '    if [ "x$D" != "x" ]; then\n' + \
-                       '        exit 1\n' + \
-                       '    fi\n'
+            postinst = ''
+
+        # Only execute on target. Header.
+        postinst += '    if [ -z "$D" ]; then\n'
+
         postinst += servicecreate_postinst_common_copy
 
         if d.getVar('USERCREATE_PARAM_%s' % pkg, True):
@@ -175,6 +177,9 @@ python populate_packages_append () {
         if d.getVar('SERVICECREATE_PARAM_%s' % pkg, True):
             servicecreate_postinst_service = servicecreate_postinst_service_copy.replace("SERVICECREATE_PARAM", servicecreate_param(d, pkg))
             postinst += servicecreate_postinst_service
+
+        # Footer.
+        postinst += '    fi\n'
 
         d.setVar('pkg_postinst_%s' % pkg, postinst)
         bb.debug(1, 'pkg_postinst_%s = %s' % (pkg, d.getVar('pkg_postinst_%s' % pkg, True)))

@@ -160,33 +160,29 @@ do_install_append() {
 }
 
 pkg_postinst_${SRCNAME}-setup () {
-    if [ "x$D" != "x" ]; then
-        exit 1
-    fi
+    if [ -z "$D" ]; then
+	# This is to make sure postgres is configured and running
+	if ! pidof postmaster > /dev/null; then
+	   /etc/init.d/postgresql-init
+	   /etc/init.d/postgresql start
+	   sleep 5
+	fi
 
-    # This is to make sure postgres is configured and running
-    if ! pidof postmaster > /dev/null; then
-       /etc/init.d/postgresql-init
-       /etc/init.d/postgresql start
-       sleep 5
+	sudo -u postgres createdb nova
+	sleep 2
+	nova-manage db sync
     fi
-
-    sudo -u postgres createdb nova
-    sleep 2
-    nova-manage db sync
 }
 
 pkg_postinst_${SRCNAME}-common () {
-    if [ "x$D" != "x" ]; then
-        exit 1
-    fi
-
-    if [ -d  /home/root ]; then
-        echo "source /etc/nova/openrc" >> /home/root/.bashrc
-	echo "source /etc/nova/openrc" >> /home/root/.profile
-    else
-        echo "source /etc/nova/openrc" >> /root/.bashrc
-	echo "source /etc/nova/openrc" >> /root/.profile
+    if [ -z "$D" ]; then
+	if [ -d  /home/root ]; then
+	    echo "source /etc/nova/openrc" >> /home/root/.bashrc
+	    echo "source /etc/nova/openrc" >> /home/root/.profile
+	else
+	    echo "source /etc/nova/openrc" >> /root/.bashrc
+	    echo "source /etc/nova/openrc" >> /root/.profile
+	fi
     fi
 }
 

@@ -122,20 +122,18 @@ do_install_append() {
 }
 
 pkg_postinst_${SRCNAME}-setup () {
-    if [ "x$D" != "x" ]; then
-        exit 1
+    if [ -z "$D" ]; then
+	# This is to make sure postgres is configured and running
+	if ! pidof postmaster > /dev/null; then
+	   /etc/init.d/postgresql-init
+	   /etc/init.d/postgresql start
+	   sleep 5
+	fi
+
+	mkdir /var/log/glance
+	sudo -u postgres createdb glance
+	glance-manage db_sync
     fi
-    
-    # This is to make sure postgres is configured and running
-    if ! pidof postmaster > /dev/null; then
-       /etc/init.d/postgresql-init
-       /etc/init.d/postgresql start
-       sleep 5
-    fi
-    
-    mkdir /var/log/glance
-    sudo -u postgres createdb glance
-    glance-manage db_sync
 }
 
 PACKAGES += " ${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-setup ${SRCNAME}-api ${SRCNAME}-registry"

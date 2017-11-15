@@ -124,31 +124,29 @@ do_install_append() {
 }
 
 pkg_postinst_${SRCNAME}-setup () {
-    if [ "x$D" != "x" ]; then
-        exit 1
-    fi
+    if [ -z "$D" ]; then
+	 # This is to make sure postgres is configured and running
+	 if ! pidof postmaster > /dev/null; then
+	    /etc/init.d/postgresql-init
+	    /etc/init.d/postgresql start
+	 fi
 
-    # This is to make sure postgres is configured and running
-    if ! pidof postmaster > /dev/null; then
-       /etc/init.d/postgresql-init
-       /etc/init.d/postgresql start
-    fi
+	 if [ ! -d /var/log/cinder ]; then
+	    mkdir /var/log/cinder
+	 fi
 
-    if [ ! -d /var/log/cinder ]; then
-       mkdir /var/log/cinder
-    fi
+	 sudo -u postgres createdb cinder
+	 cinder-manage db sync
 
-    sudo -u postgres createdb cinder
-    cinder-manage db sync
+	 # Create Cinder nfs_share config file with default nfs server
+	 if [ ! -f /etc/cinder/nfs_shares ]; then
+	     /bin/bash /etc/cinder/drivers/nfs_setup.sh
+	 fi
 
-    # Create Cinder nfs_share config file with default nfs server
-    if [ ! -f /etc/cinder/nfs_shares ]; then
-        /bin/bash /etc/cinder/drivers/nfs_setup.sh
-    fi
-
-    # Create Cinder glusterfs_share config file with default glusterfs server
-    if [ ! -f /etc/cinder/glusterfs_shares ] && [ -f /usr/sbin/glusterfsd ]; then
-        /bin/bash /etc/cinder/drivers/glusterfs_setup.sh
+	 # Create Cinder glusterfs_share config file with default glusterfs server
+	 if [ ! -f /etc/cinder/glusterfs_shares ] && [ -f /usr/sbin/glusterfsd ]; then
+	     /bin/bash /etc/cinder/drivers/glusterfs_setup.sh
+	 fi
     fi
 }
 

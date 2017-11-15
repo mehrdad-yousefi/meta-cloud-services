@@ -109,28 +109,26 @@ do_install_append() {
 }
 
 pkg_postinst_${SRCNAME}-setup () {
-    if [ "x$D" != "x" ]; then
-        exit 1
+    if [ -z "x$D" ]; then
+	CLUSTER_CONF=/etc/swift/cluster.conf
+	SWIFT_SETUP='/bin/bash /etc/swift/swift_setup.sh'
+
+	for i in `seq 1 3`; do
+	    BACKING_FILE=/etc/swift/swift_backing_$i
+	    if [ "x${SWIFT_BACKING_FILE_SIZE}" != "x0G" ]; then
+		truncate -s ${SWIFT_BACKING_FILE_SIZE} $BACKING_FILE
+		sed "s:%SWIFT_BACKING_FILE_${i}%:$BACKING_FILE:g" -i $CLUSTER_CONF
+	    else
+		sed "s:%SWIFT_BACKING_FILE_${i}%::g" -i $CLUSTER_CONF
+	    fi
+	done
+
+	$SWIFT_SETUP createrings
+	$SWIFT_SETUP formatdevs
+	$SWIFT_SETUP mountdevs
+	$SWIFT_SETUP -i "${CONTROLLER_IP}" adddevs
+	$SWIFT_SETUP unmountdevs
     fi
-
-    CLUSTER_CONF=/etc/swift/cluster.conf
-    SWIFT_SETUP='/bin/bash /etc/swift/swift_setup.sh'
-
-    for i in `seq 1 3`; do
-        BACKING_FILE=/etc/swift/swift_backing_$i
-        if [ "x${SWIFT_BACKING_FILE_SIZE}" != "x0G" ]; then
-            truncate -s ${SWIFT_BACKING_FILE_SIZE} $BACKING_FILE
-            sed "s:%SWIFT_BACKING_FILE_${i}%:$BACKING_FILE:g" -i $CLUSTER_CONF
-        else
-            sed "s:%SWIFT_BACKING_FILE_${i}%::g" -i $CLUSTER_CONF
-        fi
-    done
-
-    $SWIFT_SETUP createrings
-    $SWIFT_SETUP formatdevs
-    $SWIFT_SETUP mountdevs
-    $SWIFT_SETUP -i "${CONTROLLER_IP}" adddevs
-    $SWIFT_SETUP unmountdevs
 }
 
 PACKAGES += "${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-setup"

@@ -146,30 +146,29 @@ do_install_append() {
 
 pkg_postinst_${SRCNAME}-setup () {
     # python-trove-setup postinst start
-    if [ "x$D" != "x" ]; then
-        exit 1
+    if [ -z "$D" ]; then
+	source /etc/nova/openrc
+
+	# This is to make sure postgres is configured and running
+	if ! pidof postmaster > /dev/null; then
+	   /etc/init.d/postgresql-init
+	   /etc/init.d/postgresql start
+	   sleep 5
+	fi
+
+	mkdir /var/log/trove
+	# Create database for trove.
+	sudo -u postgres createdb trove
+
+	# Create default trove database.
+	trove-manage db_sync
+	# Create new datastore.
+	trove-manage datastore_update "postgresql" ""
+	# Set up new version
+	trove-manage datastore_version_update "postgresql" "9.1" "postgresql" 1 "postgresql-server-9.1" 1
+	# Set new default version.
+	trove-manage datastore_update "postgresql" "9.1"
     fi
-    source /etc/nova/openrc
-
-    # This is to make sure postgres is configured and running
-    if ! pidof postmaster > /dev/null; then
-       /etc/init.d/postgresql-init
-       /etc/init.d/postgresql start
-       sleep 5
-    fi
-
-    mkdir /var/log/trove
-    # Create database for trove.
-    sudo -u postgres createdb trove
-
-    # Create default trove database.
-    trove-manage db_sync
-    # Create new datastore.
-    trove-manage datastore_update "postgresql" ""
-    # Set up new version
-    trove-manage datastore_version_update "postgresql" "9.1" "postgresql" 1 "postgresql-server-9.1" 1
-    # Set new default version.
-    trove-manage datastore_update "postgresql" "9.1"
 }
 
 

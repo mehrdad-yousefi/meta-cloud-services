@@ -85,12 +85,10 @@ FILES_${SRCNAME} = "${sysconfdir}/${SRCNAME}/* \
 
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
 pkg_postinst_${SRCNAME}-setup () {
-    if [ "x$D" != "x" ]; then
-        exit 1
+    if [ -z "$D" ]; then
+        chown -R barbican:barbican ${sysconfdir}/${SRCNAME}
+        chown -R barbican:barbican ${localstatedir}/lib/barbican
     fi
-
-    chown -R barbican:barbican ${sysconfdir}/${SRCNAME}
-    chown -R barbican:barbican ${localstatedir}/lib/barbican
 }
 
 DEPENDS += " \

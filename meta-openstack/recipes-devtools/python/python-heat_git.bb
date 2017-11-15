@@ -107,20 +107,18 @@ do_install_append() {
 }
 
 pkg_postinst_${SRCNAME}-setup () {
-    if [ "x$D" != "x" ]; then
-        exit 1
+    if [ -z "$D" ]; then
+	# This is to make sure postgres is configured and running
+	if ! pidof postmaster > /dev/null; then
+	   /etc/init.d/postgresql-init
+	   /etc/init.d/postgresql start
+	   sleep 2
+	fi
+
+	mkdir /var/log/heat
+	sudo -u postgres createdb heat
+	heat-manage db_sync
     fi
-    
-    # This is to make sure postgres is configured and running
-    if ! pidof postmaster > /dev/null; then
-       /etc/init.d/postgresql-init
-       /etc/init.d/postgresql start
-       sleep 2
-    fi
-    
-    mkdir /var/log/heat
-    sudo -u postgres createdb heat
-    heat-manage db_sync
 }
 
 inherit setuptools identity hosts update-rc.d default_configs monitor
