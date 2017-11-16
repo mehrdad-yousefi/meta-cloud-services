@@ -4,18 +4,14 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8f7bb094c7232b058c7e9f2e431f389c"
 
-SRCNAME = "aioeventlet"
-
-SRC_URI = "https://pypi.python.org/packages/source/a/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
+SRC_URI += " \
     file://Makefile-skip-building-docs.patch \
     "
 
 SRC_URI[md5sum] = "678ea30265ae0326bddc767f80efd144"
 SRC_URI[sha256sum] = "fe78c2b227ce077b1581e2ae2c071f351111d0878ec1b0216435f6a898df79a6"
 
-S = "${WORKDIR}/${SRCNAME}-${PV}"
-
-inherit setuptools 
+inherit setuptools pypi
 
 DEPENDS += " \
         python-pip \

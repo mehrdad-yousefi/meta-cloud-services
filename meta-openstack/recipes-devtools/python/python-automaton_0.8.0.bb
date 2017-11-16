@@ -4,16 +4,10 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d2794c0df5b907fdace235a619d80314"
 
-SRCNAME = "automaton"
-
-SRC_URI = "https://pypi.python.org/packages/source/a/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
-
 SRC_URI[md5sum] = "230a7bd8bb9a4bc9ba5a3faf0de12c90"
 SRC_URI[sha256sum] = "ca8bfbea03b9f39a536b4b261d90fbe8b1b0e1766bff5d8222e35691f8e11910"
 
-S = "${WORKDIR}/${SRCNAME}-${PV}"
-
-inherit setuptools 
+inherit setuptools pypi
 
 DEPENDS += " \
         python-pip \
