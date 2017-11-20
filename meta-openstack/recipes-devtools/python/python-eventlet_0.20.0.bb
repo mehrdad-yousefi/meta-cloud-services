@@ -11,5 +11,6 @@ inherit setuptools pypi pypi
 
 RDEPENDS_${PN} += " \
     python-enum34 \
+    python-enum-compat \
     python-greenlet \
     "
