@@ -18,11 +18,14 @@ if [ -e $DATA_DIR/PG_VERSION ]; then
     exit 0
 fi
 
+# Create the DB
 sudo -u postgres initdb -D $DATA_DIR
+
+# Allow readers/writers by IP
 echo "listen_addresses = '*'" >> $DATA_DIR/postgresql.conf
 echo "host   all   all   ${CONTROLLER_IP}/32   trust" >> $DATA_DIR/pg_hba.conf
 echo "host   all   all   ${COMPUTE_IP}/32   trust" >> $DATA_DIR/pg_hba.conf
-/etc/init.d/postgresql start
+systemctl restart postgresql
 
 count=0
 done=0
@@ -30,9 +33,9 @@ while [ $count -le 10 ] && [ $done -eq 0 ]; do
     sudo -u postgres psql -c "CREATE ROLE ${DB_USER} WITH SUPERUSER LOGIN PASSWORD '${DB_PASSWORD}'" 2> /dev/null
     if [ $? -ne 0 ]; then
         echo "[INFO] postgres: failed to create account for ${DB_USER}, trying again"
-        /etc/init.d/postgresql stop
+        systemctl stop postresql
 	sleep 3
-        /etc/init.d/postgresql start
+        systemctl start postgresql
 	sleep 3
     else
         echo "[INFO] postgres: created account for ${DB_USER}, continuing .. "
