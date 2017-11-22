@@ -7,9 +7,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 SRCNAME = "keystone"
 
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike \
+           file://keystone-init \
+           file://keystone-init.service \
            file://keystone.conf \
            file://identity.sh \
-           file://keystone \
            file://convert_keystone_backend.py \
            file://wsgi-keystone.conf \
            "
@@ -24,10 +25,13 @@ PV = "12.0.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit setuptools update-rc.d identity hosts default_configs monitor
+inherit setuptools identity hosts default_configs monitor useradd systemd
 
 SERVICE_TOKEN = "password"
 TOKEN_FORMAT ?= "PKI"
+
+USERADD_PACKAGES = "${PN}"
+USERADD_PARAM_${PN} = "--system -m -s /bin/false keystone"
 
 LDAP_DN ?= "dc=my-domain,dc=com"
 
@@ -64,79 +68,67 @@ do_install_append() {
 
     KEYSTONE_CONF_DIR=${D}${sysconfdir}/keystone
     KEYSTONE_PACKAGE_DIR=${D}${PYTHON_SITEPACKAGES_DIR}/keystone
-
     APACHE_CONF_DIR=${D}${sysconfdir}/apache2/conf.d/
-    KEYSTONE_PY_DIR=${D}${datadir}/openstack-dashboard/openstack_dashboard/api/
-    KEYSTONE_CGI_DIR=${D}${localstatedir}/www/cgi-bin/keystone/
 
-    # Apache needs to read the configs.
+    # Create directories
     install -m 755 -d ${KEYSTONE_CONF_DIR}
     install -m 755 -d ${APACHE_CONF_DIR}
-
     install -d ${D}${localstatedir}/log/${SRCNAME}
-    install -m 755 -d ${KEYSTONE_CGI_DIR}
-    #install -m 755 -d ${KEYSTONE_PY_DIR}
 
+    # Setup the systemd service file
+    install -d ${D}${systemd_unitdir}/system/
+    KS_INIT_SERVICE_FILE=${D}${systemd_unitdir}/system/keystone-init.service
+    install -m 644 ${WORKDIR}/keystone-init.service ${KS_INIT_SERVICE_FILE}
+    sed -e "s:%SYSCONFIGDIR%:${sysconfdir}:g" -i ${KS_INIT_SERVICE_FILE}
+
+    # Setup the keystone initialization script
+    KS_INIT_FILE=${KEYSTONE_CONF_DIR}/keystone-init
+    install -m 755 ${WORKDIR}/keystone-init ${KS_INIT_FILE}
+    sed -e "s:%DB_USER%:${DB_USER}:g" -i ${KS_INIT_FILE}
+    sed -e "s:%KEYSTONE_USER%:keystone:g" -i ${KS_INIT_FILE}
+    sed -e "s:%KEYSTONE_GROUP%:keystone:g" -i ${KS_INIT_FILE}
+    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${KS_INIT_FILE}
+    sed -e "s:%ADMIN_USER%:${ADMIN_USER}:g" -i ${KS_INIT_FILE}
+    sed -e "s:%ADMIN_PASSWORD%:${ADMIN_PASSWORD}:g" -i ${KS_INIT_FILE}
+    sed -e "s:%ADMIN_ROLE%:${ADMIN_ROLE}:g" -i ${KS_INIT_FILE}
+
+    # Install various configuration files. We have to select suitable
+    # permissions as packages such as Apache require read access.
+    #
     # Apache needs to read the keystone.conf
     install -m 644 ${WORKDIR}/keystone.conf ${KEYSTONE_CONF_DIR}/
     # Apache needs to read the wsgi-keystone.conf
-    install -m 644 ${WORKDIR}/wsgi-keystone.conf ${APACHE_CONF_DIR}
+    install -m 644 ${WORKDIR}/wsgi-keystone.conf \
+        ${APACHE_CONF_DIR}/keystone.conf
     install -m 755 ${WORKDIR}/identity.sh ${KEYSTONE_CONF_DIR}/
     install -m 600 ${S}${sysconfdir}/logging.conf.sample \
         ${KEYSTONE_CONF_DIR}/logging.conf
     install -m 600 ${S}${sysconfdir}/keystone.conf.sample \
         ${KEYSTONE_CONF_DIR}/keystone.conf.sample
-    # Apache user needs to read these files.
-    #install -m 644 ${S}${sysconfdir}/policy.json \
-    #    ${KEYSTONE_CONF_DIR}/policy.json
     install -m 644 ${S}${sysconfdir}/keystone-paste.ini \
         ${KEYSTONE_CONF_DIR}/keystone-paste.ini
-    #install -m 644 ${S}/httpd/keystone.py \
-    #    ${KEYSTONE_PY_DIR}/keystone-httpd.py
-    #install -m 644 ${S}/httpd/keystone.py \
-    #    ${KEYSTONE_CGI_DIR}/admin
-    #install -m 644 ${S}/httpd/keystone.py \
-    #    ${KEYSTONE_CGI_DIR}/main
 
+    # Copy examples from upstream
     cp -r ${S}/examples ${KEYSTONE_PACKAGE_DIR}
 
-    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)};
-    then
-        install -d ${D}${sysconfdir}/init.d
-        install -m 0755 ${WORKDIR}/keystone ${D}${sysconfdir}/init.d/keystone
-    fi
-
+    # Edit the configuration to allow it to work out of the box
+    KEYSTONE_CONF_FILE=${KEYSTONE_CONF_DIR}/keystone.conf
     sed "/# admin_endpoint = .*/a \
         public_endpoint = http://%CONTROLLER_IP%:8081/keystone/main/ " \
-        -i ${KEYSTONE_CONF_DIR}/keystone.conf
+        -i ${KEYSTONE_CONF_FILE}
 
     sed "/# admin_endpoint = .*/a \
         admin_endpoint = http://%CONTROLLER_IP%:8081/keystone/admin/ " \
-        -i ${KEYSTONE_CONF_DIR}/keystone.conf
+        -i ${KEYSTONE_CONF_FILE}
     
-    sed -e "s:%SERVICE_TOKEN%:${SERVICE_TOKEN}:g" \
-	-i ${KEYSTONE_CONF_DIR}/keystone.conf
-    sed -e "s:%DB_USER%:${DB_USER}:g" -i ${KEYSTONE_CONF_DIR}/keystone.conf
-    sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" \
-	-i ${KEYSTONE_CONF_DIR}/keystone.conf
-
-    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" \
-	-i ${KEYSTONE_CONF_DIR}/keystone.conf
-    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" \
-	-i ${KEYSTONE_CONF_DIR}/identity.sh
-
-    sed -e "s:%TOKEN_FORMAT%:${TOKEN_FORMAT}:g" \
-	-i ${KEYSTONE_CONF_DIR}/keystone.conf
-
-#    sed -e "s/%ADMIN_PASSWORD%/${ADMIN_PASSWORD}/g" \
-#	-i ${D}${sysconfdir}/init.d/keystone
-#    sed -e "s/%SERVICE_PASSWORD%/${SERVICE_PASSWORD}/g" \
-#	-i ${D}${sysconfdir}/init.d/keystone
-#    sed -e "s/%SERVICE_TENANT_NAME%/${SERVICE_TENANT_NAME}/g" \
-#	-i ${D}${sysconfdir}/init.d/keystone
+    sed -e "s:%SERVICE_TOKEN%:${SERVICE_TOKEN}:g" -i ${KEYSTONE_CONF_FILE}
+    sed -e "s:%DB_USER%:${DB_USER}:g" -i ${KEYSTONE_CONF_FILE}
+    sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${KEYSTONE_CONF_FILE}
+    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${KEYSTONE_CONF_FILE}
+    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${KEYSTONE_CONF_FILE}
+    sed -e "s:%TOKEN_FORMAT%:${TOKEN_FORMAT}:g" -i ${KEYSTONE_CONF_FILE}
     
     install -d ${KEYSTONE_PACKAGE_DIR}/tests/tmp
-
     if [ -e "${KEYSTONE_PACKAGE_DIR}/tests/test_overrides.conf" ];then
         sed -e "s:%KEYSTONE_PACKAGE_DIR%:${PYTHON_SITEPACKAGES_DIR}/keystone:g" \
             -i ${KEYSTONE_PACKAGE_DIR}/tests/test_overrides.conf
@@ -180,35 +172,10 @@ role_member_attribute = member \
 role_id_attribute = cn \
 role_name_attribute = ou \
 role_tree_dn = ou=Roles,${LDAP_DN} \
-' ${D}${sysconfdir}/keystone/keystone.conf
+' ${KEYSTONE_CONF_FILE}
 
         install -m 0755 ${WORKDIR}/convert_keystone_backend.py \
             ${D}${sysconfdir}/keystone/convert_keystone_backend.py
-    fi
-}
-
-pkg_postinst_${SRCNAME}-setup () {
-    # python-keystone postinst start
-    if [ -z "$D" ]; then
-	# This is to make sure postgres is configured and running
-	if ! pidof postmaster > /dev/null; then
-	    /etc/init.d/postgresql-init
-	    /etc/init.d/postgresql start
-	    sleep 2
-	fi
-
-	# This is to make sure keystone is configured and running
-	PIDFILE="/var/run/keystone-all.pid"
-	if [ -z `cat $PIDFILE 2>/dev/null` ]; then
-	    sudo -u postgres createdb keystone
-	    keystone-manage db_sync
-	    keystone-manage pki_setup --keystone-user=root --keystone-group=daemon
-
-	    if ${@bb.utils.contains('DISTRO_FEATURES', 'OpenLDAP', 'true', 'false', d)}; then
-		/etc/init.d/openldap start
-	    fi
-	    /etc/init.d/keystone start
-	fi
     fi
 }
 
@@ -226,7 +193,12 @@ pkg_postinst_${SRCNAME}-cronjobs () {
 
 PACKAGES += " ${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-setup ${SRCNAME}-cronjobs"
 
-ALLOW_EMPTY_${SRCNAME}-setup = "1"
+SYSTEMD_PACKAGES += "${SRCNAME}-setup"
+SYSTEMD_SERVICE_${SRCNAME}-setup = "keystone-init.service"
+
+FILES_${SRCNAME}-setup = " \
+    ${systemd_unitdir}/system \
+    "
 
 ALLOW_EMPTY_${SRCNAME}-cronjobs = "1"
 
@@ -237,10 +209,9 @@ FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
 
 FILES_${SRCNAME} = "${bindir}/* \
     ${sysconfdir}/${SRCNAME}/* \
-    ${sysconfdir}/init.d/* \
     ${localstatedir}/* \
     ${datadir}/openstack-dashboard/openstack_dashboard/api/keystone-httpd.py \
-    ${sysconfdir}/apache2/conf.d/wsgi-keystone.conf \
+    ${sysconfdir}/apache2/conf.d/keystone.conf \
     "
 
 DEPENDS += " \
@@ -305,10 +276,6 @@ RDEPENDS_${SRCNAME} = " \
 
 RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}"
 RDEPENDS_${SRCNAME}-cronjobs = "cronie ${SRCNAME}"
-
-INITSCRIPT_PACKAGES = "${SRCNAME}"
-INITSCRIPT_NAME_${SRCNAME} = "keystone"
-INITSCRIPT_PARAMS_${SRCNAME} = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 
 MONITOR_SERVICE_PACKAGES = "${SRCNAME}"
 MONITOR_SERVICE_${SRCNAME} = "keystone"
