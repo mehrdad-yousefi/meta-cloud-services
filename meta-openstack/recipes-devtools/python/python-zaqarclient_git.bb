@@ -16,14 +16,17 @@ RDEPENDS_${PN} +=" \
         python-stevedore \
         python-jsonschema \
         python-oslo.i18n \
-        python-keystoneclient \
+        python-oslo.log \
+        python-oslo.utils \
+        python-keystoneauth1 \
+        python-osc-lib \
 	"
-
+	
 SRCNAME = "zaqarclient"
-SRC_URI = "git://github.com/openstack/${BPN}.git;branch=master"
+SRC_URI = "git://github.com/openstack/${BPN}.git;branch=stable/pike"
 
-PV = "0.2.0+git${SRCPV}"
-SRCREV = "c1a0ea98b6f0aad5764ce197172b41d3efc1e485"
+PV = "0.7.0+git${SRCPV}"
+SRCREV = "a1c2de74c56c6ddb11dc6aec78e8c438629ca8e8"
 S = "${WORKDIR}/git"
 
 inherit setuptools
