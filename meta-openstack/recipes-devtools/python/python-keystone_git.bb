@@ -114,11 +114,11 @@ do_install_append() {
     # Edit the configuration to allow it to work out of the box
     KEYSTONE_CONF_FILE=${KEYSTONE_CONF_DIR}/keystone.conf
     sed "/# admin_endpoint = .*/a \
-        public_endpoint = http://%CONTROLLER_IP%:8081/keystone/main/ " \
+        public_endpoint = http://%CONTROLLER_IP%:5000/ " \
         -i ${KEYSTONE_CONF_FILE}
 
     sed "/# admin_endpoint = .*/a \
-        admin_endpoint = http://%CONTROLLER_IP%:8081/keystone/admin/ " \
+        admin_endpoint = http://%CONTROLLER_IP%:35357/ " \
         -i ${KEYSTONE_CONF_FILE}
     
     sed -e "s:%SERVICE_TOKEN%:${SERVICE_TOKEN}:g" -i ${KEYSTONE_CONF_FILE}
