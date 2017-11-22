@@ -74,18 +74,25 @@ RDEPENDS_${PN} += " \
 SRCNAME = "horizon"
 
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike \
-    file://horizon.init \
+    file://wsgi-horizon.conf \
     file://fix_bindir_path.patch \
-    file://openstack-dashboard-apache.conf \
     file://local_settings.py \
     file://horizon-use-full-package-path-to-test-directories.patch \
     "
+#    file://openstack-dashboard-apache.conf
 
 SRCREV = "246ff9f81248a00a434e66d18fad70519ba811cc"
 PV = "12.0.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
-inherit setuptools update-rc.d python-dir default_configs monitor
+inherit setuptools systemd python-dir default_configs monitor useradd
+
+USER = "horizon"
+GROUP = "horizon"
+
+USERADD_PACKAGES = "${PN}"
+GROUPADD_PARAM_${PN} = "--system ${GROUP}"
+USERADD_PARAM_${PN} = "--system -m -d ${localstatedir}/lib/openstack-dashboard -s /bin/false -g ${GROUP} ${USER}"
 
 # no longer required. kept as reference.
 # do_install[dirs] += "${D}/usr/share/bin"
@@ -94,56 +101,70 @@ do_install_append() {
     SYSCONF_DIR=${D}${sysconfdir}
     DASHBOARD_CONF_DIR=${SYSCONF_DIR}/openstack-dashboard
     DASHBOARD_SHARE_DIR=${D}${datadir}/openstack-dashboard
-    HORIZON_CONF_DIR=${D}${sysconfdir}/horizon
+    APACHE_CONF_DIR=${D}${sysconfdir}/apache2/conf.d/
 
-    install -d ${HORIZON_CONF_DIR}
-
+    # Fixup to allow running standalone. Currently broken.
     DASHBOARD_DIR=${D}${PYTHON_SITEPACKAGES_DIR}/openstack_dashboard
-    sed -e "s:^LANGUAGE_CODE =.*:LANGUAGE_CODE = 'en-us':g" \
-        -i ${DASHBOARD_DIR}/settings.py
-    sed -e "s:^# from horizon.utils:from horizon.utils:g" \
-        ${DASHBOARD_DIR}/local/local_settings.py.example > \
-        ${DASHBOARD_DIR}/local/local_settings.py
-    sed -e "s:^# SECRET_KEY =:SECRET_KEY =:g" \
-        -i ${DASHBOARD_DIR}/local/local_settings.py
+    #sed -e "s:^LANGUAGE_CODE =.*:LANGUAGE_CODE = 'en-us':g" \
+    #    -i ${DASHBOARD_DIR}/settings.py
+    #sed -e "s:^# from horizon.utils:from horizon.utils:g" \
+    #    ${DASHBOARD_DIR}/local/local_settings.py.example > \
+    #    ${DASHBOARD_DIR}/local/local_settings.py
+    #sed -e "s:^# SECRET_KEY =:SECRET_KEY =:g" \
+    #    -i ${DASHBOARD_DIR}/local/local_settings.py
     install -m 644 ${S}/manage.py ${DASHBOARD_DIR}/manage.py
 
-    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)};
-    then
-        install -d ${D}${sysconfdir}/init.d
-        sed 's:@PYTHON_SITEPACKAGES@:${PYTHON_SITEPACKAGES_DIR}:' \
-            ${WORKDIR}/horizon.init >${WORKDIR}/horizon
-        install -m 0755 ${WORKDIR}/horizon ${D}${sysconfdir}/init.d/horizon
-    fi
     sed -i -e 's#%PYTHON_SITEPACKAGES%#${PYTHON_SITEPACKAGES_DIR}#g' \
         ${D}${PYTHON_SITEPACKAGES_DIR}/horizon/test/settings.py
 
     # no longer required. kept as reference.
     # mv ${D}${datadir}/bin ${DASHBOARD_DIR}/bin
 
-    cp run_tests.sh ${HORIZON_CONF_DIR}
+    install -d ${DASHBOARD_CONF_DIR}
+    cp run_tests.sh ${DASHBOARD_CONF_DIR}
 
-    # the following are setup required for horizon-apache
+    # The following allows horizon to be run from apache. This
+    # is the preffered way to run horizon.
     install -d ${DASHBOARD_SHARE_DIR}
     cp -a --no-preserve=ownership ${S}/openstack_dashboard  ${DASHBOARD_SHARE_DIR}
     cp ${S}/manage.py  ${DASHBOARD_SHARE_DIR}
 
-    install -D -m 644 ${WORKDIR}/local_settings.py \
-        ${DASHBOARD_CONF_DIR}/local_settings.py
+    # Copy our version of the local-settings.py file, create a convienence link
+    # between /etc/openstack-dashboard and the apache2 files installed above,
+    # lastly make a few substitions to match our installation locations.
+    SETTINGS_FILE=${DASHBOARD_CONF_DIR}/local_settings.py
+    install -D -m 644 ${WORKDIR}/local_settings.py ${SETTINGS_FILE}
+    # Link only valid on the target.
     ln -fs ${sysconfdir}/openstack-dashboard/local_settings.py \
         ${DASHBOARD_SHARE_DIR}/openstack_dashboard/local/local_settings.py
+    # Be sure to edit the real file in ${D}${sysconfdir}
+    sed -e "s:%LOCAL_PATH%:${localstatedir}/lib/openstack-dashboard/static:g" \
+        -i ${SETTINGS_FILE}
 
-    install -D -m 644 ${WORKDIR}/openstack-dashboard-apache.conf \
-      ${SYSCONF_DIR}/apache2/conf.d/openstack-dashboard-apache.conf
-    sed -i -e 's#%PYTHON_SITEPACKAGES%#${PYTHON_SITEPACKAGES_DIR}#' \
-        ${SYSCONF_DIR}/apache2/conf.d/openstack-dashboard-apache.conf
-    sed -i -e 's#%LIBDIR%#${libdir}#' \
-        ${SYSCONF_DIR}/apache2/conf.d/openstack-dashboard-apache.conf
+    # Configure apache to run horizon at http://localhost/horizon
+    install -m 755 -d ${APACHE_CONF_DIR}
+    APACHE_WSGI_FILE=${APACHE_CONF_DIR}/openstack-dashboard.conf
+    install -m 644 ${WORKDIR}/wsgi-horizon.conf ${APACHE_WSGI_FILE}
+    sed -e "s#%DATADIR%#${datadir}#g" -i ${APACHE_WSGI_FILE}
+    sed -e "s#%USER%#${USER}#g" -i ${APACHE_WSGI_FILE}
+    sed -e "s#%GROUP%#${GROUP}#g" -i ${APACHE_WSGI_FILE}
+    sed -e "s#%LOCALSTATEDIR%#${localstatedir}#g" -i ${APACHE_WSGI_FILE}
+
+    #HZ_SETTINGS_FILE=${DASHBOARD_SHARE_DIR}/openstack_dashboard/settings.py
+    #sed -e "s:^\(WEBROOT\ =\ \).*$:\1'/horizon':" -i ${HZ_SETTINGS_FILE}
+    #sed -e "s:^\(STATIC_ROOT\ =\ \).*$:\1'${localstatedir}/lib/openstack-dashboard/static':" \
+    #    -i ${HZ_SETTINGS_FILE}
 
     ln -fs openstack_dashboard/static ${DASHBOARD_SHARE_DIR}/static
+}
 
-    # daemon is UID 1
-    chown -R 1 ${DASHBOARD_SHARE_DIR}/openstack_dashboard/static
+pkg_postinst_${SRCNAME} () {
+    if [ -n "$D" ]; then
+        exit 1
+    else
+        # Regenerate the django static files
+        sudo -u horizon /usr/bin/env python ${datadir}/openstack-dashboard/manage.py collectstatic --noinput --clear 
+    fi
 }
 
 PACKAGES += "${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-apache ${SRCNAME}-standalone"
@@ -153,7 +174,7 @@ RDEPENDS_${SRCNAME}-tests += " bash"
 
 FILES_${PN} = "${libdir}/*"
 
-FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
+FILES_${SRCNAME}-tests = "${sysconfdir}/openstack-dashboard/run_tests.sh"
 
 FILES_${SRCNAME} = "${bindir}/* \
     ${datadir}/* \
@@ -178,10 +199,6 @@ RDEPENDS_${PN} += " \
     "
 
 RDEPENDS_${SRCNAME} = "${PN}"
-
-INITSCRIPT_PACKAGES = "${SRCNAME}"
-INITSCRIPT_NAME_${SRCNAME} = "horizon"
-INITSCRIPT_PARAMS_${SRCNAME} = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 
 RDEPENDS_${SRCNAME}-apache = "\
     apache2 \
