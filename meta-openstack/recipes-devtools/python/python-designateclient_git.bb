@@ -9,23 +9,24 @@ DEPENDS += " \
         python-pbr \
         "
 
-RDEPENDS_${PN} +=" \
+RDEPENDS_${PN} += " \
         python-cliff \
         python-jsonschema \
+        python-osc-lib \
         python-oslo.utils \
         python-pbr \
-        python-keystoneclient \
+        python-keystoneauth1 \
         python-requests \
         python-six \
         python-stevedore \
         python-debtcollector \
-	"
+        "
 
 SRCNAME = "designateclient"
-SRC_URI = "git://github.com/openstack/${BPN}.git;branch=master"
+SRC_URI = "git://github.com/openstack/${BPN}.git;branch=stable/pike"
 
-PV = "1.5.0+git${SRCPV}"
-SRCREV = "b97ae05612522180cc6f64485212811329da9645"
+PV = "2.7.0+git${SRCPV}"
+SRCREV = "77a705857f2c303a03fdbccd4460a68b61d92fd0"
 S = "${WORKDIR}/git"
 
 inherit setuptools
