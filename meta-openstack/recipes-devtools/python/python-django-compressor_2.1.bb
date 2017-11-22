@@ -17,4 +17,11 @@ RDEPENDS_${PN} += " \
         python-rjsmin  \
         "
 
+do_install_append() {
+    # Ensure permisive perms are granted
+    find -L "${D}${PYTHON_SITEPACKAGES_DIR}/compressor" -type f -exec chmod 644 {} \;
+    find -L "${D}${PYTHON_SITEPACKAGES_DIR}/compressor" -type d -exec chmod 755 {} \;
+}
+
+
 CLEANBROKEN = "1"
