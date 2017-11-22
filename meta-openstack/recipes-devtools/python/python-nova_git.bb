@@ -212,6 +212,18 @@ FILES_${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"
 
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
 ALLOW_EMPTY_${SRCNAME}-ec2 = "1"
+ALLOW_EMPTY_${SRCNAME}-api = "1"
+ALLOW_EMPTY_${SRCNAME}-compute = "1"
+ALLOW_EMPTY_${SRCNAME}-controller = "1"
+ALLOW_EMPTY_${SRCNAME}-consoleauth = "1"
+ALLOW_EMPTY_${SRCNAME}-cert = "1"
+ALLOW_EMPTY_${SRCNAME}-conductor = "1"
+ALLOW_EMPTY_${SRCNAME}-network = "1"
+ALLOW_EMPTY_${SRCNAME}-novncproxy = "1"
+ALLOW_EMPTY_${SRCNAME}-scheduler = "1"
+ALLOW_EMPTY_${SRCNAME}-spicehtml5proxy = "1"
+
+
 
 FILES_${PN} = "${libdir}/*"
 

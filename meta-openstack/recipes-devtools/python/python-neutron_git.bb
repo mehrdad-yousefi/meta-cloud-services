@@ -56,6 +56,7 @@ do_install_append() {
     install -m 600 ${S}/etc/api-paste.ini ${NEUTRON_CONF_DIR}/
     install -m 600 ${S}/etc/policy.json ${NEUTRON_CONF_DIR}/
     install -m 600 ${TEMPLATE_CONF_DIR}/neutron/plugins/ml2/* ${NEUTRON_CONF_DIR}/plugins/ml2
+    install -m 600 ${WORKDIR}/metadata_agent.ini ${NEUTRON_CONF_DIR}/
 
     # Neutron.conf config changes (replace with .ini file editing)
     sed -e "s:^# core_plugin.*:core_plugin = ml2:g" -i ${NEUTRON_CONF_DIR}/neutron.conf

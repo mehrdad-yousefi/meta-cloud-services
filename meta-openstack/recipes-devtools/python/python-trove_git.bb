@@ -210,6 +210,7 @@ FILES_${SRCNAME} = " \
 FILES_${SRCNAME}-api = " \
     ${sysconfdir}/init.d/trove-api \
     "
+ALLOW_EMPTY_${SRCNAME}-api = "1"
 
 FILES_${SRCNAME}-bin = " \
     ${bindir}/* \
@@ -218,10 +219,12 @@ FILES_${SRCNAME}-bin = " \
 FILES_${SRCNAME}-conductor = " \
     ${sysconfdir}/init.d/trove-conductor \
     "
+ALLOW_EMPTY_${SRCNAME}-conductor = "1"
 
 FILES_${SRCNAME}-taskmanager = " \
     ${sysconfdir}/init.d/trove-taskmanager \
     "
+ALLOW_EMPTY_${SRCNAME}-taskmanager = "1"
 
 FILES_${SRCNAME}-setup = " \
     ${localstatedir}/* \

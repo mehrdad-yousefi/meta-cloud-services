@@ -147,6 +147,7 @@ do_install_append() {
 }
 
 PACKAGES += "${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-apache ${SRCNAME}-standalone"
+ALLOW_EMPTY_${SRCNAME}-standalone = "1"
 
 RDEPENDS_${SRCNAME}-tests += " bash"
 

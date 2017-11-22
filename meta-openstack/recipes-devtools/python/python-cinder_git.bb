@@ -152,6 +152,10 @@ pkg_postinst_${SRCNAME}-setup () {
 
 PACKAGES += "${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-setup ${SRCNAME}-api ${SRCNAME}-volume ${SRCNAME}-scheduler ${SRCNAME}-backup"
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
+ALLOW_EMPTY_${SRCNAME}-backup = "1"
+ALLOW_EMPTY_${SRCNAME}-scheduler = "1"
+ALLOW_EMPTY_${SRCNAME}-volume = "1"
+ALLOW_EMPTY_${SRCNAME}-api = "1"
 
 RDEPENDS_${SRCNAME}-tests += " bash python"
 

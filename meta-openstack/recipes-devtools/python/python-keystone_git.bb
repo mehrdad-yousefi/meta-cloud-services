@@ -128,12 +128,12 @@ do_install_append() {
     sed -e "s:%TOKEN_FORMAT%:${TOKEN_FORMAT}:g" \
 	-i ${KEYSTONE_CONF_DIR}/keystone.conf
 
-    sed -e "s/%ADMIN_PASSWORD%/${ADMIN_PASSWORD}/g" \
-	-i ${D}${sysconfdir}/init.d/keystone
-    sed -e "s/%SERVICE_PASSWORD%/${SERVICE_PASSWORD}/g" \
-	-i ${D}${sysconfdir}/init.d/keystone
-    sed -e "s/%SERVICE_TENANT_NAME%/${SERVICE_TENANT_NAME}/g" \
-	-i ${D}${sysconfdir}/init.d/keystone
+#    sed -e "s/%ADMIN_PASSWORD%/${ADMIN_PASSWORD}/g" \
+#	-i ${D}${sysconfdir}/init.d/keystone
+#    sed -e "s/%SERVICE_PASSWORD%/${SERVICE_PASSWORD}/g" \
+#	-i ${D}${sysconfdir}/init.d/keystone
+#    sed -e "s/%SERVICE_TENANT_NAME%/${SERVICE_TENANT_NAME}/g" \
+#	-i ${D}${sysconfdir}/init.d/keystone
     
     install -d ${KEYSTONE_PACKAGE_DIR}/tests/tmp
 

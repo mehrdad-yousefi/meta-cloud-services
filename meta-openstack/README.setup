@@ -84,6 +84,20 @@ to the bblayers.conf file:
     /meta-openembedded/meta-webserver \
     /meta-openembedded/meta-ruby
 
+* All images must use systemd init system. After the builddir has been
+initialized you have to append the necessary variables to ensure that
+systemd will be used in your images:
+
+    DISTRO_FEATURES_append = " systemd"
+    DISTRO_FEATURES_BACKFILL_CONSIDERED += "sysvinit"
+    VIRTUAL-RUNTIME_init_manager = "systemd"
+    VIRTUAL-RUNTIME_initscripts = "systemd-compat-units"
+
+Additionally activiate the meta-virtualization layer:
+
+    DISTRO_FEATURES_append += "virtualization kvm"
+
+
 Package configurations
 ----------------------
 

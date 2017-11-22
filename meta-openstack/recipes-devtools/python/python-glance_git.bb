@@ -138,6 +138,8 @@ pkg_postinst_${SRCNAME}-setup () {
 
 PACKAGES += " ${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-setup ${SRCNAME}-api ${SRCNAME}-registry"
 ALLOW_EMPTY_${SRCNAME}-setup = "1"
+ALLOW_EMPTY_${SRCNAME}-registry = "1"
+ALLOW_EMPTY_${SRCNAME}-api = "1"
 
 FILES_${PN} = " \
     ${libdir}/* \
