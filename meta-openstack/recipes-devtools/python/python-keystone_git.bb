@@ -13,6 +13,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike \
            file://identity.sh \
            file://convert_keystone_backend.py \
            file://wsgi-keystone.conf \
+           file://admin-openrc \
            "
 
 # TBD: update or drop
@@ -91,6 +92,13 @@ do_install_append() {
     sed -e "s:%ADMIN_USER%:${ADMIN_USER}:g" -i ${KS_INIT_FILE}
     sed -e "s:%ADMIN_PASSWORD%:${ADMIN_PASSWORD}:g" -i ${KS_INIT_FILE}
     sed -e "s:%ADMIN_ROLE%:${ADMIN_ROLE}:g" -i ${KS_INIT_FILE}
+
+    # Setup the admin-openrc file
+    KS_OPENRC_FILE=${KEYSTONE_CONF_DIR}/admin-openrc
+    install -m 600 ${WORKDIR}/admin-openrc ${KS_OPENRC_FILE}
+    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${KS_OPENRC_FILE}
+    sed -e "s:%ADMIN_USER%:${ADMIN_USER}:g" -i ${KS_OPENRC_FILE}
+    sed -e "s:%ADMIN_PASSWORD%:${ADMIN_PASSWORD}:g" -i ${KS_OPENRC_FILE}
 
     # Install various configuration files. We have to select suitable
     # permissions as packages such as Apache require read access.
