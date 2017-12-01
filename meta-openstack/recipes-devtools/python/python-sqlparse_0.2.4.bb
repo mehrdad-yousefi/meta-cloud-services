@@ -2,10 +2,10 @@ DESCRIPTION = "Non-validating SQL parser module"
 HOMEPAGE = "http://pypi.python.org/pypi/sqlparse"
 SECTION = "devel/python"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://COPYING;md5=13ec2f893997ca1f516b55496e019a81"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=2b136f573f5386001ea3b7b9016222fc"
 
-SRC_URI[md5sum] = "370962a307ebaaa70a28b6b0ccb53980"
-SRC_URI[sha256sum] = "678c6c36ca4b01405177da8b84eecf92ec92c9f6c762396c965bb5d305f20f81"
+SRC_URI[md5sum] = "8f753105167f35ea94ae6387e8af152f"
+SRC_URI[sha256sum] = "ce028444cfab83be538752a2ffdb56bc417b7784ff35bb9a3062413717807dec"
 
 export BUILD_SYS
 export HOST_SYS
