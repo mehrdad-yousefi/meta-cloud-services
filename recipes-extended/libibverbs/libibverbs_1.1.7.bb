@@ -26,4 +26,5 @@ do_install_append() {
         rm -f ${D}${libdir}/libibverbs.la
 }
 
-RCONFLICTS_${PN} = "dpdk-dev-libibverbs"
+PROVIDES = "virtual/libibverbs"
+RPROVIDES_${PN} = "virtual/libibverbs"
