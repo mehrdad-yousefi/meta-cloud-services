@@ -48,7 +48,7 @@ PACKAGECONFIG ??= "georeplication libibverbs"
 PACKAGECONFIG[bd-xlator] = "--enable-bd-xlator,--disable-bd-xlator,lvm2,"
 PACKAGECONFIG[debug] = "--enable-debug,--disable-debug,,"
 PACKAGECONFIG[georeplication] = "--enable-georeplication,--disable-georeplication,,rsync"
-PACKAGECONFIG[libibverbs] = "--enable-ibverbs,--disable-ibverbs,libibverbs librdmacm,"
+PACKAGECONFIG[libibverbs] = "--enable-ibverbs,--disable-ibverbs,virtual/libibverbs librdmacm,"
 PACKAGECONFIG[ocf] = "--with-ocf,--without-ocf,,"
 PACKAGECONFIG[valgrind] = "--with-valgrind,--without-valgrind,valgrind,"
 
