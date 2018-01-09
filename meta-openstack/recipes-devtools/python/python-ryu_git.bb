@@ -4,8 +4,8 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-PV = "3.27+git${SRCPV}"
-SRCREV = "0aefad7048079656cdaad138be58f017e6b4f1ce"
+PV = "4.19+git${SRCPV}"
+SRCREV = "51a1130f6cdcb029a51b6a75d43ac5e4cdde7072"
 
 SRCNAME = "ryu"
 SRC_URI = "git://github.com/osrg/${SRCNAME}.git"
@@ -26,7 +26,9 @@ RDEPENDS_${PN} += " \
         python-msgpack \
         python-netaddr \
         python-oslo.config \
+        python-ovs \
         python-routes \
         python-six \
+        python-tinyrpc \
         python-webob \
         "
