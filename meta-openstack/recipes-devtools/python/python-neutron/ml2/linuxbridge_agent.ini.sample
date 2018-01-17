@@ -1,93 +1,6 @@
 [DEFAULT]
 
 #
-# From neutron.base.agent
-#
-
-# Name of Open vSwitch bridge to use (string value)
-#ovs_integration_bridge = br-int
-
-# Uses veth for an OVS interface or not. Support kernels with limited namespace
-# support (e.g. RHEL 6.5) so long as ovs_use_veth is set to True. (boolean
-# value)
-#ovs_use_veth = false
-
-# The driver used to manage the virtual interface. (string value)
-#interface_driver = <None>
-
-# Timeout in seconds for ovs-vsctl commands. If the timeout expires, ovs
-# commands will fail with ALARMCLOCK error. (integer value)
-#ovs_vsctl_timeout = 10
-
-#
-# From neutron.dhcp.agent
-#
-
-# The DHCP agent will resync its state with Neutron to recover from any
-# transient notification or RPC errors. The interval is number of seconds
-# between attempts. (integer value)
-#resync_interval = 5
-
-# The driver used to manage the DHCP server. (string value)
-#dhcp_driver = neutron.agent.linux.dhcp.Dnsmasq
-
-# The DHCP server can assist with providing metadata support on isolated
-# networks. Setting this value to True will cause the DHCP server to append
-# specific host routes to the DHCP request. The metadata service will only be
-# activated when the subnet does not contain any router port. The guest
-# instance must be configured to request host routes via DHCP (Option 121).
-# This option doesn't have any effect when force_metadata is set to True.
-# (boolean value)
-#enable_isolated_metadata = false
-
-# In some cases the Neutron router is not present to provide the metadata IP
-# but the DHCP server can be used to provide this info. Setting this value will
-# force the DHCP server to append specific host routes to the DHCP request. If
-# this option is set, then the metadata service will be activated for all the
-# networks. (boolean value)
-#force_metadata = false
-
-# Allows for serving metadata requests coming from a dedicated metadata access
-# network whose CIDR is 169.254.169.254/16 (or larger prefix), and is connected
-# to a Neutron router from which the VMs send metadata:1 request. In this case
-# DHCP Option 121 will not be injected in VMs, as they will be able to reach
-# 169.254.169.254 through a router. This option requires
-# enable_isolated_metadata = True. (boolean value)
-#enable_metadata_network = false
-
-# Number of threads to use during sync process. Should not exceed connection
-# pool size configured on server. (integer value)
-#num_sync_threads = 4
-
-# Location to store DHCP server config files. (string value)
-#dhcp_confs = $state_path/dhcp
-
-# Override the default dnsmasq settings with this file. (string value)
-#dnsmasq_config_file =
-
-# Comma-separated list of the DNS servers which will be used as forwarders.
-# (list value)
-#dnsmasq_dns_servers =
-
-# Base log dir for dnsmasq logging. The log contains DHCP and DNS log
-# information and is useful for debugging issues with either DHCP or DNS. If
-# this section is null, disable dnsmasq log. (string value)
-#dnsmasq_base_log_dir = <None>
-
-# Enables the dnsmasq service to provide name resolution for instances via DNS
-# resolvers on the host running the DHCP agent. Effectively removes the '--no-
-# resolv' option from the dnsmasq process arguments. Adding custom DNS
-# resolvers to the 'dnsmasq_dns_servers' option disables this feature. (boolean
-# value)
-#dnsmasq_local_resolv = false
-
-# Limit number of leases to prevent a denial-of-service. (integer value)
-#dnsmasq_lease_max = 16777216
-
-# Use broadcast in DHCP replies. (boolean value)
-#dhcp_broadcast_reply = false
-
-#
 # From oslo.log
 #
 
@@ -200,36 +113,119 @@
 [agent]
 
 #
-# From neutron.az.agent
+# From neutron.ml2.linuxbridge.agent
 #
 
-# Availability zone of this node (string value)
-#availability_zone = nova
+# The number of seconds the agent will wait between polling for local device
+# changes. (integer value)
+#polling_interval = 2
+
+# Set new timeout in seconds for new rpc calls after agent receives SIGTERM. If
+# value is set to 0, rpc timeout won't be changed (integer value)
+#quitting_rpc_timeout = 10
+
+# Extensions list to use (list value)
+#extensions =
+
+
+[linux_bridge]
 
 #
-# From neutron.base.agent
+# From neutron.ml2.linuxbridge.agent
 #
 
-# Seconds between nodes reporting state to server; should be less than
-# agent_down_time, best if it is half or less than agent_down_time. (floating
-# point value)
-#report_interval = 30
+# Comma-separated list of <physical_network>:<physical_interface> tuples
+# mapping physical network names to the agent's node-specific physical network
+# interfaces to be used for flat and VLAN networks. All physical networks
+# listed in network_vlan_ranges on the server should have mappings to
+# appropriate interfaces on each agent. (list value)
+#physical_interface_mappings =
 
-# Log agent heartbeats (boolean value)
-#log_agent_heartbeats = false
+# List of <physical_network>:<physical_bridge> (list value)
+#bridge_mappings =
 
 
-[ovs]
+[securitygroup]
 
 #
-# From neutron.base.agent
+# From neutron.ml2.linuxbridge.agent
 #
 
-# The interface for interacting with the OVSDB (string value)
-# Allowed values: vsctl, native
-#ovsdb_interface = native
+# Driver for security groups firewall in the L2 agent (string value)
+#firewall_driver = <None>
 
-# The connection string for the OVSDB backend. Will be used by ovsdb-client
-# when monitoring and used for the all ovsdb commands when native
-# ovsdb_interface is enabled (string value)
-#ovsdb_connection = tcp:127.0.0.1:6640
+# Controls whether the neutron security group API is enabled in the server. It
+# should be false when using no security groups or using the nova security
+# group API. (boolean value)
+#enable_security_group = true
+
+# Use ipset to speed-up the iptables based security groups. Enabling ipset
+# support requires that ipset is installed on L2 agent node. (boolean value)
+#enable_ipset = true
+
+
+[vxlan]
+
+#
+# From neutron.ml2.linuxbridge.agent
+#
+
+# Enable VXLAN on the agent. Can be enabled when agent is managed by ml2 plugin
+# using linuxbridge mechanism driver (boolean value)
+#enable_vxlan = true
+
+# TTL for vxlan interface protocol packets. (integer value)
+#ttl = <None>
+
+# TOS for vxlan interface protocol packets. (integer value)
+#tos = <None>
+
+# Multicast group(s) for vxlan interface. A range of group addresses may be
+# specified by using CIDR notation. Specifying a range allows different VNIs to
+# use different group addresses, reducing or eliminating spurious broadcast
+# traffic to the tunnel endpoints. To reserve a unique group for each possible
+# (24-bit) VNI, use a /8 such as 239.0.0.0/8. This setting must be the same on
+# all the agents. (string value)
+#vxlan_group = 224.0.0.1
+
+# IP address of local overlay (tunnel) network endpoint. Use either an IPv4 or
+# IPv6 address that resides on one of the host network interfaces. The IP
+# version of this value must match the value of the 'overlay_ip_version' option
+# in the ML2 plug-in configuration file on the neutron server node(s). (IP
+# address value)
+#local_ip = <None>
+
+# The minimum of the UDP source port range used for VXLAN communication. (port
+# value)
+# Minimum value: 0
+# Maximum value: 65535
+#udp_srcport_min = 0
+
+# The maximum of the UDP source port range used for VXLAN communication. (port
+# value)
+# Minimum value: 0
+# Maximum value: 65535
+#udp_srcport_max = 0
+
+# The UDP port used for VXLAN communication. By default, the Linux kernel
+# doesn't use the IANA assigned standard value, so if you want to use it, this
+# option must be set to 4789. It is not set by default because of backward
+# compatibiltiy. (port value)
+# Minimum value: 0
+# Maximum value: 65535
+#udp_dstport = <None>
+
+# Extension to use alongside ml2 plugin's l2population mechanism driver. It
+# enables the plugin to populate VXLAN forwarding table. (boolean value)
+#l2_population = false
+
+# Enable local ARP responder which provides local responses instead of
+# performing ARP broadcast into the overlay. Enabling local ARP responder is
+# not fully compatible with the allowed-address-pairs extension. (boolean
+# value)
+#arp_responder = false
+
+# Optional comma-separated list of <multicast address>:<vni_min>:<vni_max>
+# triples describing how to assign a multicast address to VXLAN according to
+# its VNI ID. (list value)
+#multicast_ranges =

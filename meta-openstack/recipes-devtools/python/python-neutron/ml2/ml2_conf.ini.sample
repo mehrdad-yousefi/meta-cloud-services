@@ -1,93 +1,6 @@
 [DEFAULT]
 
 #
-# From neutron.base.agent
-#
-
-# Name of Open vSwitch bridge to use (string value)
-#ovs_integration_bridge = br-int
-
-# Uses veth for an OVS interface or not. Support kernels with limited namespace
-# support (e.g. RHEL 6.5) so long as ovs_use_veth is set to True. (boolean
-# value)
-#ovs_use_veth = false
-
-# The driver used to manage the virtual interface. (string value)
-#interface_driver = <None>
-
-# Timeout in seconds for ovs-vsctl commands. If the timeout expires, ovs
-# commands will fail with ALARMCLOCK error. (integer value)
-#ovs_vsctl_timeout = 10
-
-#
-# From neutron.dhcp.agent
-#
-
-# The DHCP agent will resync its state with Neutron to recover from any
-# transient notification or RPC errors. The interval is number of seconds
-# between attempts. (integer value)
-#resync_interval = 5
-
-# The driver used to manage the DHCP server. (string value)
-#dhcp_driver = neutron.agent.linux.dhcp.Dnsmasq
-
-# The DHCP server can assist with providing metadata support on isolated
-# networks. Setting this value to True will cause the DHCP server to append
-# specific host routes to the DHCP request. The metadata service will only be
-# activated when the subnet does not contain any router port. The guest
-# instance must be configured to request host routes via DHCP (Option 121).
-# This option doesn't have any effect when force_metadata is set to True.
-# (boolean value)
-#enable_isolated_metadata = false
-
-# In some cases the Neutron router is not present to provide the metadata IP
-# but the DHCP server can be used to provide this info. Setting this value will
-# force the DHCP server to append specific host routes to the DHCP request. If
-# this option is set, then the metadata service will be activated for all the
-# networks. (boolean value)
-#force_metadata = false
-
-# Allows for serving metadata requests coming from a dedicated metadata access
-# network whose CIDR is 169.254.169.254/16 (or larger prefix), and is connected
-# to a Neutron router from which the VMs send metadata:1 request. In this case
-# DHCP Option 121 will not be injected in VMs, as they will be able to reach
-# 169.254.169.254 through a router. This option requires
-# enable_isolated_metadata = True. (boolean value)
-#enable_metadata_network = false
-
-# Number of threads to use during sync process. Should not exceed connection
-# pool size configured on server. (integer value)
-#num_sync_threads = 4
-
-# Location to store DHCP server config files. (string value)
-#dhcp_confs = $state_path/dhcp
-
-# Override the default dnsmasq settings with this file. (string value)
-#dnsmasq_config_file =
-
-# Comma-separated list of the DNS servers which will be used as forwarders.
-# (list value)
-#dnsmasq_dns_servers =
-
-# Base log dir for dnsmasq logging. The log contains DHCP and DNS log
-# information and is useful for debugging issues with either DHCP or DNS. If
-# this section is null, disable dnsmasq log. (string value)
-#dnsmasq_base_log_dir = <None>
-
-# Enables the dnsmasq service to provide name resolution for instances via DNS
-# resolvers on the host running the DHCP agent. Effectively removes the '--no-
-# resolv' option from the dnsmasq process arguments. Adding custom DNS
-# resolvers to the 'dnsmasq_dns_servers' option disables this feature. (boolean
-# value)
-#dnsmasq_local_resolv = false
-
-# Limit number of leases to prevent a denial-of-service. (integer value)
-#dnsmasq_lease_max = 16777216
-
-# Use broadcast in DHCP replies. (boolean value)
-#dhcp_broadcast_reply = false
-
-#
 # From oslo.log
 #
 
@@ -197,39 +110,150 @@
 #fatal_deprecations = false
 
 
-[agent]
+[l2pop]
 
 #
-# From neutron.az.agent
+# From neutron.ml2
 #
 
-# Availability zone of this node (string value)
-#availability_zone = nova
+# Delay within which agent is expected to update existing ports when it
+# restarts (integer value)
+#agent_boot_time = 180
+
+
+[ml2]
 
 #
-# From neutron.base.agent
+# From neutron.ml2
 #
 
-# Seconds between nodes reporting state to server; should be less than
-# agent_down_time, best if it is half or less than agent_down_time. (floating
-# point value)
-#report_interval = 30
+# List of network type driver entrypoints to be loaded from the
+# neutron.ml2.type_drivers namespace. (list value)
+#type_drivers = local,flat,vlan,gre,vxlan,geneve
 
-# Log agent heartbeats (boolean value)
-#log_agent_heartbeats = false
+# Ordered list of network_types to allocate as tenant networks. The default
+# value 'local' is useful for single-box testing but provides no connectivity
+# between hosts. (list value)
+#tenant_network_types = local
+
+# An ordered list of networking mechanism driver entrypoints to be loaded from
+# the neutron.ml2.mechanism_drivers namespace. (list value)
+#mechanism_drivers =
+
+# An ordered list of extension driver entrypoints to be loaded from the
+# neutron.ml2.extension_drivers namespace. For example: extension_drivers =
+# port_security,qos (list value)
+#extension_drivers =
+
+# Maximum size of an IP packet (MTU) that can traverse the underlying physical
+# network infrastructure without fragmentation when using an overlay/tunnel
+# protocol. This option allows specifying a physical network MTU value that
+# differs from the default global_physnet_mtu value. (integer value)
+#path_mtu = 0
+
+# A list of mappings of physical networks to MTU values. The format of the
+# mapping is <physnet>:<mtu val>. This mapping allows specifying a physical
+# network MTU value that differs from the default global_physnet_mtu value.
+# (list value)
+#physical_network_mtus =
+
+# Default network type for external networks when no provider attributes are
+# specified. By default it is None, which means that if provider attributes are
+# not specified while creating external networks then they will have the same
+# type as tenant networks. Allowed values for external_network_type config
+# option depend on the network type values configured in type_drivers config
+# option. (string value)
+#external_network_type = <None>
+
+# IP version of all overlay (tunnel) network endpoints. Use a value of 4 for
+# IPv4 or 6 for IPv6. (integer value)
+#overlay_ip_version = 4
 
 
-[ovs]
+[ml2_type_flat]
 
 #
-# From neutron.base.agent
+# From neutron.ml2
 #
 
-# The interface for interacting with the OVSDB (string value)
-# Allowed values: vsctl, native
-#ovsdb_interface = native
+# List of physical_network names with which flat networks can be created. Use
+# default '*' to allow flat networks with arbitrary physical_network names. Use
+# an empty list to disable flat networks. (list value)
+#flat_networks = *
 
-# The connection string for the OVSDB backend. Will be used by ovsdb-client
-# when monitoring and used for the all ovsdb commands when native
-# ovsdb_interface is enabled (string value)
-#ovsdb_connection = tcp:127.0.0.1:6640
+
+[ml2_type_geneve]
+
+#
+# From neutron.ml2
+#
+
+# Comma-separated list of <vni_min>:<vni_max> tuples enumerating ranges of
+# Geneve VNI IDs that are available for tenant network allocation (list value)
+#vni_ranges =
+
+# Geneve encapsulation header size is dynamic, this value is used to calculate
+# the maximum MTU for the driver. This is the sum of the sizes of the outer ETH
+# + IP + UDP + GENEVE header sizes. The default size for this field is 50,
+# which is the size of the Geneve header without any additional option headers.
+# (integer value)
+#max_header_size = 30
+
+
+[ml2_type_gre]
+
+#
+# From neutron.ml2
+#
+
+# Comma-separated list of <tun_min>:<tun_max> tuples enumerating ranges of GRE
+# tunnel IDs that are available for tenant network allocation (list value)
+#tunnel_id_ranges =
+
+
+[ml2_type_vlan]
+
+#
+# From neutron.ml2
+#
+
+# List of <physical_network>:<vlan_min>:<vlan_max> or <physical_network>
+# specifying physical_network names usable for VLAN provider and tenant
+# networks, as well as ranges of VLAN tags on each available for allocation to
+# tenant networks. (list value)
+#network_vlan_ranges =
+
+
+[ml2_type_vxlan]
+
+#
+# From neutron.ml2
+#
+
+# Comma-separated list of <vni_min>:<vni_max> tuples enumerating ranges of
+# VXLAN VNI IDs that are available for tenant network allocation (list value)
+#vni_ranges =
+
+# Multicast group for VXLAN. When configured, will enable sending all broadcast
+# traffic to this multicast group. When left unconfigured, will disable
+# multicast VXLAN mode. (string value)
+#vxlan_group = <None>
+
+
+[securitygroup]
+
+#
+# From neutron.ml2
+#
+
+# Driver for security groups firewall in the L2 agent (string value)
+#firewall_driver = <None>
+
+# Controls whether the neutron security group API is enabled in the server. It
+# should be false when using no security groups or using the nova security
+# group API. (boolean value)
+#enable_security_group = true
+
+# Use ipset to speed-up the iptables based security groups. Enabling ipset
+# support requires that ipset is installed on L2 agent node. (boolean value)
+#enable_ipset = true
