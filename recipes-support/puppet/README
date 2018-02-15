@@ -6,11 +6,17 @@ state of your IT infrastructure, then automatically enforces the correct state.
 
 Basic Requirements
 ------------------------
-Ruby 1.8.7 or later
-Facter 1.7.0 or later
-Hiera 1.0 or later
+Ruby 2.4 or later
+Facter 3.10.0 or later
+Hiera 5 or later [1]
 The json gem (any modern version)
 
+[1] Hiera isn’t separate from Puppet anymore
+    Hiera began as an independent Ruby library that worked with Puppet.
+    Over time, it became a requirement and was even included in the
+    puppet-agent package, but it was limited by its original design.
+
+    https://puppet.com/docs/puppet/4.10/hiera_intro.html
 
 Simple Demo
 ------------------------

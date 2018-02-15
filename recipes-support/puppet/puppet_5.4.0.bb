@@ -1,36 +1,40 @@
 SUMMARY = "Open source Puppet is a configuration management system"
 HOMEPAGE = "https://puppetlabs.com/puppet/puppet-open-source"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=f257790c70561550fd666c6e0044fd89"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=7c9045ec00cc0d6b6e0e09ee811da4a0"
 
 SRC_URI = " \
     https://downloads.puppetlabs.com/puppet/puppet-${PV}.tar.gz \
     file://add_puppet_gemspec.patch \
     file://puppet.conf \
-    file://maint-Change-spec-test-to-pass-on-ruby-2.2.patch \
-    file://MAINT-Fix-duplicate-key-which-ruby-2.2-complains-abo.patch \
-    file://safe_yaml-syck-isn-t-available-for-Ruby-2.0.0.patch \
+    file://puppet.init \
+    file://puppet.service \
 "
-SRC_URI[md5sum] = "cc294da1d51df07bcc7f6cf78bd90ce0"
-SRC_URI[sha256sum] = "4a3bd7ddb51072c3dd898a8de158cde204a2d8fd0b84e8ac806b84c074348637"
+SRC_URI[md5sum] = "e26702fbfb464121d8d60e639ea254d9"
+SRC_URI[sha256sum] = "8db3a89c9ced01b43c57f89e42d099a763d02f38bcea5d6c73e1245556932bb2"
 
-inherit ruby
+inherit ruby update-rc.d systemd
 
 DEPENDS += " \
         ruby \
         facter \
-        hiera \
 "
 
 RDEPENDS_${PN} += " \
         ruby \
         facter \
-        hiera \
         ruby-shadow \
         bash \
 "
 
 RUBY_INSTALL_GEMS = "puppet-${PV}.gem"
+
+INITSCRIPT_NAME = "${BPN}"
+INITSCRIPT_PARAMS = "start 02 5 3 2 . stop 20 0 1 6 ."
+
+SYSTEMD_AUTO_ENABLE = "enable"
+SYSTEMD_PACKAGES = "${PN}"
+SYSTEMD_SERVICE_${PN} = "${BPN}.service"
 
 do_install_append() {
     install -d ${D}${sysconfdir}/puppet
@@ -39,6 +43,12 @@ do_install_append() {
 
     install -m 655 ${S}/conf/auth.conf ${D}${sysconfdir}/puppet/
     install -m 655 ${S}/conf/fileserver.conf ${D}${sysconfdir}/puppet/
-    install -m 655 ${S}/conf/tagmail.conf ${D}${sysconfdir}/puppet/
+    install -m 655 ${S}/conf/environment.conf ${D}${sysconfdir}/puppet/
     install -m 655 ${WORKDIR}/puppet.conf ${D}${sysconfdir}/puppet/
+
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/puppet.service ${D}${systemd_unitdir}/system
+
+    install -d ${D}${sysconfdir}/init.d
+    install -m 0755 ${WORKDIR}/puppet.init ${D}${sysconfdir}/init.d/puppet
 }
