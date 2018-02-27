@@ -4,7 +4,7 @@ SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fb46329938e6bc829b256e37d5c1e31a"
 
-SRC_URI[md5sum] = "dc7036a6f1ab01c3baed3d97af8d77c0"
-SRC_URI[sha256sum] = "7e1766ee747cca79fe172b670fd53ef58fc55d2b1804fd6c66d857abb62d143a"
+SRC_URI[md5sum] = "37adec94104b98591507218bc82e7c31"
+SRC_URI[sha256sum] = "0007cd3f008eba4a203f1f6b4b133ddc352552c8808b694c88c23db56416e4e4"
 
 inherit distutils pypi
