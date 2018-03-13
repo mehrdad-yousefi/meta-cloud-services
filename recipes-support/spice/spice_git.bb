@@ -35,7 +35,6 @@ SRC_URI += " \
         file://spice-fix-CVE-2013-4282.patch \
         file://configure.ac-add-subdir-objects-to-AM_INIT_AUTOMAKE.patch \
         file://build-allow-separated-src-and-build-dirs.patch \
-        file://v0.12.4_0001-spice-Fix-compile-problems-against-spice-0.12.4-with.patch \
         file://0001-red_parse_qxl-Fix-BITMAP_FMT_IS_RGB-defined-but-not-.patch \
         file://0001-Use-PRI-macros-in-printf-to-keep-compatibility-betwe.patch \
         file://Fix-build-issues-with-gcc-7.patch \
