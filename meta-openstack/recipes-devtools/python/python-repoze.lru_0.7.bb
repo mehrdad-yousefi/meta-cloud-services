@@ -8,7 +8,7 @@ SECTION = "devel/python"
 LICENSE = "BSD-Modification-copyright"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2c33cdbc6bc9ae6e5d64152fdb754292"
 
-SRC_URI[md5sum] = "2c3b64b17a8e18b405f55d46173e14dd"
-SRC_URI[sha256sum] = "0f7a323bf716d3cb6cb3910cd4fccbee0b3d3793322738566ecce163b01bbd31"
+SRC_URI[md5sum] = "c08cc030387e0b1fc53c5c7d964b35e2"
+SRC_URI[sha256sum] = "0429a75e19380e4ed50c0694e26ac8819b4ea7851ee1fc7583c8572db80aff77"
 
 inherit setuptools pypi
