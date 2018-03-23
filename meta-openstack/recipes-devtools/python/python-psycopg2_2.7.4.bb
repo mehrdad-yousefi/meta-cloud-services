@@ -9,8 +9,8 @@ SRC_URI += " \
            file://remove-pg-config.patch \
           "
 
-SRC_URI[md5sum] = "4a392949ba31a378a18ed3e775a4693f"
-SRC_URI[sha256sum] = "70490e12ed9c5c818ecd85d185d363335cc8a8cbf7212e3c185431c79ff8c05c"
+SRC_URI[md5sum] = "70fc57072e084565a42689d416cf2c5c"
+SRC_URI[sha256sum] = "8bf51191d60f6987482ef0cfe8511bbf4877a5aa7f313d7b488b53189cf26209"
 
 inherit distutils pypi
 

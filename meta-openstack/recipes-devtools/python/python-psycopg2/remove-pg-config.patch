@@ -14,13 +14,14 @@ diff --git a/setup.cfg b/setup.cfg
 index d00ce92..4b45aac 100644
 --- a/setup.cfg
 +++ b/setup.cfg
-@@ -1,5 +1,6 @@
+@@ -1,6 +1,6 @@
  [build_ext]
  define = 
+-pg_config = 
 +pg_config="/bin/true"
  use_pydatetime = 1
+ mx_include_dir = 
  have_ssl = 0
- 
 diff --git a/setup.py b/setup.py
 index d71d489..b101696 100644
 --- a/setup.py
@@ -42,7 +43,7 @@ index d71d489..b101696 100644
 +                pgversion = "9.4.4"
  
              verre = re.compile(
-                 r"(\d+)\.(\d+)(?:(?:\.(\d+))|(devel|(alpha|beta|rc)\d+))")
+                 r"(\d+)(?:\.(\d+))?(?:(?:\.(\d+))|(devel|(?:alpha|beta|rc)\d+))?")
 -- 
 2.7.4
 
