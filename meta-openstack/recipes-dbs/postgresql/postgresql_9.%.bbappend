@@ -19,7 +19,6 @@ do_install_append() {
     install -m 0755 ${WORKDIR}/postgresql-init ${D_DEST_DIR}/postgresql-init
 
     sed -e "s:%DB_DATADIR%:${DB_DATADIR}:g" -i ${D_DEST_DIR}/postgresql-init
-    sed -e "s:\(PGDATA=\).*$:\1${DB_DATADIR}:g" -i ${D}${systemd_unitdir}/system/postgresql.service
 
     sed -e "s:%DB_USER%:${DB_USER}:g" -i ${D_DEST_DIR}/postgresql-init
     sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${D_DEST_DIR}/postgresql-init
@@ -34,6 +33,16 @@ do_install_append() {
     PG_INIT_SERVICE_FILE=${D}${systemd_unitdir}/system/postgresql-init.service
     install -m 644 ${WORKDIR}/postgresql-init.service ${PG_INIT_SERVICE_FILE}
     sed -e "s:%SYSCONFIGDIR%:${sysconfdir}:g" -i ${PG_INIT_SERVICE_FILE}
+
+    # Update PGDATA throughout
+    files="${D}${localstatedir}/lib/${BPN}/.bash_profile"
+    files="$files ${D}${systemd_unitdir}/system/postgresql.service"
+    files="$files ${D}${bindir}/${BPN}-setup"
+    files="$files ${D}${sysconfdir}/init.d/${BPN}-server"
+    for f in $files
+    do
+        sed -e "s:\(PGDATA=\).*$:\1${DB_DATADIR}:g" -i $f
+    done
 }
 
 PACKAGES += " ${PN}-setup"
