@@ -43,6 +43,11 @@ do_install_append() {
     do
         sed -e "s:\(PGDATA=\).*$:\1${DB_DATADIR}:g" -i $f
     done
+
+    # Ensure DB is initialize before we attempt to start the service
+    FILE=${D}${systemd_unitdir}/system/postgresql.service
+    sed -e '/ExecStart=.*/i ExecStartPre=-${sysconfdir}/postgresql/postgresql-init initdb' -i $FILE
+    sed -e '/ExecStartPre=.*/i PermissionsStartOnly=true' -i $FILE
 }
 
 PACKAGES += " ${PN}-setup"
