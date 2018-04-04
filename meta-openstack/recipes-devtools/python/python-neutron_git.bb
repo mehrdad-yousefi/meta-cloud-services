@@ -418,5 +418,12 @@ SYSTEMD_SERVICE_${SRCNAME}-linuxbridge-agent = "neutron-linuxbridge-agent.servic
 SYSTEMD_SERVICE_${SRCNAME}-metadata-agent = "neutron-metadata-agent.service"
 SYSTEMD_SERVICE_${SRCNAME}-setup = "neutron-init.service"
 
+# Disable unconfigured services
+SYSTEMD_AUTO_ENABLE_${SRCNAME}-server = "disable"
+SYSTEMD_AUTO_ENABLE_${SRCNAME}-dhcp-agent = "disable"
+SYSTEMD_AUTO_ENABLE_${SRCNAME}-linuxbridge-agent = "disable"
+SYSTEMD_AUTO_ENABLE_${SRCNAME}-metadata-agent = "disable"
+
+
 MONITOR_SERVICE_PACKAGES = "${SRCNAME}"
 MONITOR_SERVICE_${SRCNAME} = "neutron"
