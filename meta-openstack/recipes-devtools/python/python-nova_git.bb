@@ -4,35 +4,53 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-DEPENDS = "sudo libvirt"
+DEPENDS = " \
+    sudo \
+    libvirt \
+"
 
 SRCNAME = "nova"
 
 FILESEXTRAPATHS_append := "${THISDIR}/${PN}"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike \
            file://neutron-api-set-default-binding-vnic_type.patch \
            "
-# restore post stable/juno:
-#           file://websocketproxy-allow-empty-schemes-at-python-2.7.3.patch
-#           file://nova-convert-path-from-relative-to-absolute.patch 
-#           file://nova-fix-location-to-doc-directory.patch
-#           file://nova-fix-location-to-plugin-directory.patch 
 
-SRC_URI += "file://nova-all \
-            file://nova.init \
-            file://nova-consoleauth \
+SRC_URI += " \
+            file://nova-compute.service \
+            file://nova-init.service \
+            file://nova-init \
             file://nova.conf \
             file://openrc \
+            file://nova-console.service \
+            file://nova-consoleauth.service \
+            file://nova-xvpvncproxy.service \
+            file://nova-novncproxy.service \
+            file://nova-conductor.service \
+            file://nova-network.service \
+            file://nova-api.service \
+            file://nova-scheduler.service \
+            file://nova-spicehtml5proxy.service \
            "
-SRCREV = "6df6ad3ff32f2b1fe2978df1032002548ad8eb66"
-PV = "12.0.0+git${SRCPV}"
+SRCREV = "b535f0808526c8eba37f15e83cede536e4e06029"
+PV = "16.0.4+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit update-rc.d setuptools identity hosts useradd default_configs monitor
+inherit systemd setuptools identity hosts useradd default_configs monitor
 
 LIBVIRT_IMAGES_TYPE ?= "default"
+
+USER = "nova"
+GROUP = "nova"
+
+USERADD_PACKAGES = "${PN}"
+GROUPADD_PARAM_${PN} = "--system ${GROUP}"
+USERADD_PARAM_${PN} = "--system -m -d ${localstatedir}/lib/nova -s /bin/false -g ${GROUP} ${USER}"
+
+# Need to create the user?
+PLACEMENT_USER = "placement"
 
 SERVICECREATE_PACKAGES = "${SRCNAME}-setup ${SRCNAME}-ec2"
 KEYSTONE_HOST="${CONTROLLER_IP}"
@@ -73,7 +91,32 @@ do_install_append() {
     NOVA_CONF_DIR=${D}/${sysconfdir}/nova
 
     install -d ${NOVA_CONF_DIR}
-    install -o nova -m 664 ${S}/etc/nova/policy.json ${NOVA_CONF_DIR}/
+
+    # install systemd service files
+    install -d ${D}${systemd_system_unitdir}/
+    for j in nova-api nova-compute nova-init nova-network nova-console nova-consoleauth \
+             nova-xvpvncproxy nova-novncproxy nova-conductor nova-scheduler \
+	     nova-spicehtml5proxy
+    do
+        SERVICE_FILE=${D}${systemd_system_unitdir}/$j.service
+        install -m 644 ${WORKDIR}/$j.service ${SERVICE_FILE}
+	sed -e "s#%LOCALSTATEDIR%#${localstatedir}#g" -i ${SERVICE_FILE}
+	sed -e "s#%SYSCONFDIR%#${sysconfdir}#g" -i ${SERVICE_FILE}
+    done
+
+    # Setup the neutron initialization script
+    INIT_FILE=${NOVA_CONF_DIR}/nova-init
+    install -g ${USER} -m 750 ${WORKDIR}/nova-init ${INIT_FILE}
+    sed -e "s:%DB_USER%:${DB_USER}:g" -i ${INIT_FILE}
+    sed -e "s:%NOVA_USER%:${USER}:g" -i ${INIT_FILE}
+    sed -e "s:%NOVA_GROUP%:${GROUP}:g" -i ${INIT_FILE}
+    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${INIT_FILE}
+    sed -e "s:%ADMIN_USER%:${ADMIN_USER}:g" -i ${INIT_FILE}
+    sed -e "s:%ADMIN_PASSWORD%:${ADMIN_PASSWORD}:g" -i ${INIT_FILE}
+    sed -e "s:%ADMIN_ROLE%:${ADMIN_ROLE}:g" -i ${INIT_FILE}
+    sed -e "s:%SYSCONFDIR%:${sysconfdir}:g" -i ${INIT_FILE}
+    sed -e "s:%ROOT_HOME%:${ROOT_HOME}:g" -i ${INIT_FILE}
+    sed -e "s:%PLACEMENT_USER%:${PLACEMENT_USER}:g" -i ${INIT_FILE}
 
     # Deploy filters to /etc/nova/rootwrap.d
     install -m 755 -d ${NOVA_CONF_DIR}/rootwrap.d
@@ -104,54 +147,58 @@ do_install_append() {
     install -o nova -m 664 ${TEMPLATE_CONF_DIR}/api-paste.ini ${NOVA_CONF_DIR}
     install -o nova -m 664 ${WORKDIR}/openrc                  ${NOVA_CONF_DIR}
 
-    # Configuration options
-    sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" \
-	-i ${NOVA_CONF_DIR}/api-paste.ini
-    sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${NOVA_CONF_DIR}/api-paste.ini
-    sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" \
-	-i ${NOVA_CONF_DIR}/api-paste.ini
-    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${NOVA_CONF_DIR}/api-paste.ini
-
-    sed -e "s:%DB_USER%:${DB_USER}:g" -i ${NOVA_CONF_DIR}/nova.conf
-    sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${NOVA_CONF_DIR}/nova.conf
-
-    sed -e "s:%METADATA_SHARED_SECRET%:${METADATA_SHARED_SECRET}:g" -i ${NOVA_CONF_DIR}/nova.conf
-
-    sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${NOVA_CONF_DIR}/nova.conf
-    sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${NOVA_CONF_DIR}/nova.conf
-
-    sed -e "s:%COMPUTE_IP%:${COMPUTE_IP}:g" -i ${NOVA_CONF_DIR}/nova.conf
-    sed -e "s:%COMPUTE_HOST%:${COMPUTE_HOST}:g" -i ${NOVA_CONF_DIR}/nova.conf
-
-    sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" -i ${NOVA_CONF_DIR}/nova.conf
-    sed -e "s:%SERVICE_USER%:${SRCNAME}:g" -i ${NOVA_CONF_DIR}/nova.conf
-    sed -e "s:%SERVICE_PASSWORD%:${SERVICE_PASSWORD}:g" -i ${NOVA_CONF_DIR}/nova.conf
-
-    sed -e "s:%LIBVIRT_IMAGES_TYPE%:${LIBVIRT_IMAGES_TYPE}:g" -i ${NOVA_CONF_DIR}/nova.conf
-
+    # openrc substitutions
     sed -e "s:%OS_PASSWORD%:${ADMIN_PASSWORD}:g" -i ${NOVA_CONF_DIR}/openrc
     sed -e "s:%SERVICE_TOKEN%:${SERVICE_TOKEN}:g" -i ${NOVA_CONF_DIR}/openrc
-
     sed -e "s:%CONTROLLER_IP%:${CONTROLLER_IP}:g" -i ${NOVA_CONF_DIR}/openrc
     sed -e "s:%CONTROLLER_HOST%:${CONTROLLER_HOST}:g" -i ${NOVA_CONF_DIR}/openrc
 
     install -o nova -d ${NOVA_CONF_DIR}/instances
 
-    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
-        install -d ${D}${sysconfdir}/init.d
+    #
+    # Per https://docs.openstack.org/nova/pike/install/controller-install-ubuntu.html
+    #
+    CONF_FILE="${NOVA_CONF_DIR}/nova.conf"
+    sed -e "/^\[api_database\]/aconnection = postgresql+psycopg2://${DB_USER}:${DB_PASSWORD}@${CONTROLLER_IP}/nova-api" \
+           -i ${CONF_FILE}
+    sed -e "/^\[database\]/aconnection = postgresql+psycopg2://${DB_USER}:${DB_PASSWORD}@${CONTROLLER_IP}/nova" \
+           -i ${CONF_FILE}
+    sed -e "/#transport_url =/atransport_url = rabbit://openstack:${ADMIN_PASSWORD}@${CONTROLLER_IP}" -i ${CONF_FILE}
+    sed -e "/#auth_strategy =/aauth_strategy = keystone" -i ${CONF_FILE}
 
-	# nova-all is installed (and packaged), but not used as an initscript by default
-        install -m 0755 ${WORKDIR}/nova-all ${D}${sysconfdir}/init.d/nova-all
-        install -m 0755 ${WORKDIR}/nova-consoleauth ${D}${sysconfdir}/init.d/nova-consoleauth
+    str="auth_uri = http://${CONTROLLER_IP}:5000"
+    str="$str\nauth_url = http://${CONTROLLER_IP}:35357"
+    str="$str\nmemcached_servers = ${CONTROLLER_IP}:11211"
+    str="$str\nauth_type = password"
+    str="$str\nproject_domain_name = Default"
+    str="$str\nuser_domain_name = Default"
+    str="$str\nproject_name = service"
+    str="$str\nusername = ${USER}"
+    str="$str\npassword = ${ADMIN_PASSWORD}"
+    sed -e "/^\[keystone_authtoken\].*/a$str" -i ${CONF_FILE}
 
-	for binary in api compute network scheduler cert conductor novncproxy spicehtml5proxy; do
-	    sed "s:@suffix@:$binary:" < ${WORKDIR}/nova.init >${WORKDIR}/nova-$binary.init.sh
-            install -m 0755 ${WORKDIR}/nova-$binary.init.sh ${D}${sysconfdir}/init.d/nova-$binary
-	done	
-    fi
+    sed -e "/#my_ip =/amy_ip = ${MY_IP}" -i ${CONF_FILE}
+    sed -e "/#use_neutron =/ause_neutron = true" -i ${CONF_FILE}
+    sed -e "/#firewall_driver =/afirewall_driver = nova.virt.firewall.NoopFirewallDriver" -i ${CONF_FILE}
 
-    cp run_tests.sh ${NOVA_CONF_DIR}
+    sed -e "/^\[vnc\].*/aenabled = true" -i ${CONF_FILE}
+    sed -e "/#vncserver_listen =/avncserver_listen = ${MY_IP}" -i ${CONF_FILE}
+    sed -e "/#vncserver_proxyclient_address =/avncserver_proxyclient_address = ${MY_IP}" -i ${CONF_FILE}
 
+    sed -e "/#api_servers =/aapi_servers = ${CONTROLLER_IP}:9292" -i ${CONF_FILE}
+    sed -e "/#lock_path =/alock_path = /var/lib/nova/tmp" -i ${CONF_FILE}
+
+    str="os_region_name = RegionOne"
+    str="$str\nproject_domain_name = Default"
+    str="$str\nproject_name = service"
+    str="$str\nauth_type = password"
+    str="$str\nuser_domain_name = Default"
+    str="$str\nauth_url = http://${CONTROLLER_IP}:35357"
+    str="$str\nusername = ${PLACEMENT_USER}"
+    str="$str\npassword = ${ADMIN_PASSWORD}"
+    sed -e "/^\[placement\].*/a$str" -i ${CONF_FILE}
+
+    # Install bash completions, docs and plugins
     install -d ${D}/${sysconfdir}/bash_completion.d
     install -m 664 ${S}/tools/nova-manage.bash_completion ${D}/${sysconfdir}/bash_completion.d
 
@@ -159,46 +206,16 @@ do_install_append() {
     cp -r "${S}/plugins" "${D}/${PYTHON_SITEPACKAGES_DIR}/nova"
 }
 
-pkg_postinst_${SRCNAME}-setup () {
-    if [ -z "$D" ]; then
-	# This is to make sure postgres is configured and running
-	if ! pidof postmaster > /dev/null; then
-	   /etc/init.d/postgresql-init
-	   /etc/init.d/postgresql start
-	   sleep 5
-	fi
-
-	sudo -u postgres createdb nova
-	sleep 2
-	nova-manage db sync
-    fi
-}
-
-pkg_postinst_${SRCNAME}-common () {
-    if [ -z "$D" ]; then
-	if [ -d  /home/root ]; then
-	    echo "source /etc/nova/openrc" >> /home/root/.bashrc
-	    echo "source /etc/nova/openrc" >> /home/root/.profile
-	else
-	    echo "source /etc/nova/openrc" >> /root/.bashrc
-	    echo "source /etc/nova/openrc" >> /root/.profile
-	fi
-    fi
-}
-
-USERADD_PACKAGES = "${PN}"
-GROUPADD_PARAM_${PN} = "--system nova"
-USERADD_PARAM_${PN}  = "--system --home /var/lib/nova -g nova -G libvirt \
-                        --no-create-home --shell /bin/false nova"
-
 PACKAGES += " ${SRCNAME}-tests"
-PACKAGES += " ${SRCNAME}-setup ${SRCNAME}-common ${SRCNAME}-compute ${SRCNAME}-controller"
-PACKAGES += " ${SRCNAME}-consoleauth"
+PACKAGES += " ${SRCNAME}-setup"
+PACKAGES += " ${SRCNAME}-common"
+PACKAGES += " ${SRCNAME}-compute"
+PACKAGES += " ${SRCNAME}-controller"
+PACKAGES += " ${SRCNAME}-console"
 PACKAGES += " ${SRCNAME}-novncproxy"
 PACKAGES += " ${SRCNAME}-spicehtml5proxy"
 PACKAGES += " ${SRCNAME}-network"
 PACKAGES += " ${SRCNAME}-scheduler"
-PACKAGES += " ${SRCNAME}-cert"
 PACKAGES += " ${SRCNAME}-conductor"
 PACKAGES += " ${SRCNAME}-api"
 PACKAGES += " ${SRCNAME}-ec2"
@@ -215,8 +232,7 @@ ALLOW_EMPTY_${SRCNAME}-ec2 = "1"
 ALLOW_EMPTY_${SRCNAME}-api = "1"
 ALLOW_EMPTY_${SRCNAME}-compute = "1"
 ALLOW_EMPTY_${SRCNAME}-controller = "1"
-ALLOW_EMPTY_${SRCNAME}-consoleauth = "1"
-ALLOW_EMPTY_${SRCNAME}-cert = "1"
+ALLOW_EMPTY_${SRCNAME}-console = "1"
 ALLOW_EMPTY_${SRCNAME}-conductor = "1"
 ALLOW_EMPTY_${SRCNAME}-network = "1"
 ALLOW_EMPTY_${SRCNAME}-novncproxy = "1"
@@ -227,7 +243,8 @@ ALLOW_EMPTY_${SRCNAME}-spicehtml5proxy = "1"
 
 FILES_${PN} = "${libdir}/*"
 
-FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
+# MAA FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
+FILES_${SRCNAME}-tests = ""
 
 FILES_${SRCNAME}-common = "${bindir}/nova-manage \
                            ${bindir}/nova-rootwrap \
@@ -240,113 +257,84 @@ FILES_${SRCNAME}-compute = "${bindir}/nova-compute \
 FILES_${SRCNAME}-controller = "${bindir}/* \
  			       ${sysconfdir}/init.d/nova-all "
 
-FILES_${SRCNAME}-consoleauth = " \
-	${sysconfdir}/init.d/nova-consoleauth \
-"
-FILES_${SRCNAME}-novncproxy = " \
-	${sysconfdir}/init.d/nova-novncproxy \
-"
-FILES_${SRCNAME}-spicehtml5proxy = " \
-	${sysconfdir}/init.d/nova-spicehtml5proxy \
-"
-FILES_${SRCNAME}-network = " \
-	${sysconfdir}/init.d/nova-network \
-"
-FILES_${SRCNAME}-scheduler = " \
-	${sysconfdir}/init.d/nova-scheduler \
-"
-FILES_${SRCNAME}-cert = " \
-	${sysconfdir}/init.d/nova-cert \
-"
-FILES_${SRCNAME}-conductor = " \
-	${sysconfdir}/init.d/nova-conductor \
-"
-FILES_${SRCNAME}-api = " \
-	${sysconfdir}/init.d/nova-api \
-"
-
 DEPENDS += " \
         python-pip \
         python-pbr \
         "
 
-RDEPENDS_${PN} = " libvirt \
-		   python-keystone \
-		   python-keystonemiddleware \
-		   python-modules \
-		   python-misc \
-		   python-amqp \
-		   python-amqplib \
-		   python-anyjson \
-		   python-babel \
-		   python-boto \
-		   python-novaclient \
-		   python-cinderclient \
-		   python-cliff \
-		   python-cheetah \
+RDEPENDS_${PN} += " \
+		   libvirt \
+		   python-pbr \
+		   python-sqlalchemy \
+		   python-decorator \
 		   python-eventlet \
-		   python-feedparser \
-		   python-glanceclient \
-		   python-greenlet \
-		   python-httplib2 \
-		   python-iso8601 \
 		   python-jinja2 \
-		   python-kombu \
+		   python-keystonemiddleware \
 		   python-lxml \
+		   python-routes \
+		   python-cryptography \
+		   python-webob \
+		   python-greenlet \
+		   python-pastedeploy \
+		   python-paste \
+		   python-prettytable \
+		   python-sqlalchemy-migrate \
 		   python-netaddr \
-		   python-oslo.config \
-		   python-oslo.rootwrap \
+		   python-netifaces \
+		   python-paramiko \
+		   python-babel \
+		   python-iso8601 \
+		   python-jsonschema \
+		   python-cinderclient \
+		   python-keystoneauth1 \
+		   python-neutronclient \
+		   python-glanceclient \
+		   python-requests \
+		   python-six \
+		   python-stevedore \
+		   python-setuptools \
+		   python-websockify \
+		   python-oslo.cache \
 		   python-oslo.concurrency \
-		   python-oslo.middleware \
+		   python-oslo.config \
 		   python-oslo.context \
 		   python-oslo.log \
-		   python-paste \
-		   python-pastedeploy \
-		   python-paramiko \
-		   python-psutil \
-		   python-pyasn1 \
-		   python-setuptools-git \
-		   python-simplejson \
-		   python-jsonschema \
-		   python-six \
-		   python-setuptools \
-		   python-sqlalchemy \
-		   python-sqlalchemy-migrate \
-		   python-stevedore \
-		   python-suds-jurko \
-		   python-neutronclient \
-		   python-routes \
-		   python-webob \
-		   python-websockify \
-		   python-pbr \
-		   spice-html5 \
-		   python-posix-ipc \
-		   python-rfc3986 \
-		   python-oslo.i18n \
-		   python-sqlparse \
-		   python-netifaces \
-		   python-retrying \
-		   python-debtcollector \
-		   python-ecdsa \
-		   python-wrapt \
-		   python-oslo.versionedobjects \
 		   python-oslo.reports \
-		   python-monotonic \
+		   python-oslo.serialization \
+		   python-oslo.utils \
+		   python-oslo.db \
+		   python-oslo.rootwrap \
+		   python-oslo.messaging \
+		   python-oslo.policy \
+		   python-oslo.privsep \
+		   python-oslo.i18n \
 		   python-oslo.service \
+		   python-rfc3986 \
+		   python-oslo.middleware \
+		   python-psutil \
+		   python-oslo.versionedobjects \
 		   python-os-brick \
-    "
+		   python-os-traits \
+		   python-os-vif \
+		   python-os-win \
+		   python-castellan \
+		   python-microversion-parse \
+		   python-os-xenapi \
+		   python-tooz \
+		   python-cursive \
+		   python-pypowervm \
+   "
 
 RDEPENDS_${SRCNAME}-common = "${PN} openssl openssl-misc libxml2 libxslt \
                               iptables curl dnsmasq sudo procps"
 
 RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common \
 				  ${SRCNAME}-ec2 \
-				  ${SRCNAME}-consoleauth \
+				  ${SRCNAME}-console \
 				  ${SRCNAME}-novncproxy \
 				  ${SRCNAME}-spicehtml5proxy \
 				  ${SRCNAME}-network \
 				  ${SRCNAME}-scheduler \
-				  ${SRCNAME}-cert \
 				  ${SRCNAME}-conductor \
                                   ${SRCNAME}-api \
 				  postgresql postgresql-client python-psycopg2"
@@ -361,35 +349,35 @@ RDEPENDS_${SRCNAME}-tests = " \
                             bash \
                             "
 
-INITSCRIPT_PACKAGES =  "${SRCNAME}-compute ${SRCNAME}-consoleauth ${SRCNAME}-novncproxy ${SRCNAME}-spicehtml5proxy"
-INITSCRIPT_PACKAGES += "${SRCNAME}-network ${SRCNAME}-scheduler ${SRCNAME}-cert ${SRCNAME}-conductor"
-INITSCRIPT_PACKAGES += "${SRCNAME}-api"
 
-# nova-all can replace: network, scheduler, cert, conductor and api. 
-# by default we go for the more granular initscripts, but this is left
-# in case nova-all is desired.
-# INITSCRIPT_PACKAGES += "${SRCNAME}-controller"
-# INITSCRIPT_NAME_${SRCNAME}-controller = "nova-all"
-INITSCRIPT_NAME_${SRCNAME}-network = "nova-network"
-INITSCRIPT_PARAMS_${SRCNAME}-network = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
-INITSCRIPT_NAME_${SRCNAME}-scheduler = "nova-scheduler"
-INITSCRIPT_PARAMS_${SRCNAME}-scheduler = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
-INITSCRIPT_NAME_${SRCNAME}-cert = "nova-cert"
-INITSCRIPT_PARAMS_${SRCNAME}-cert = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
-INITSCRIPT_NAME_${SRCNAME}-conductor = "nova-conductor"
-INITSCRIPT_PARAMS_${SRCNAME}-conductor = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
-INITSCRIPT_NAME_${SRCNAME}-api = "nova-api"
-INITSCRIPT_PARAMS_${SRCNAME}-api = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+SYSTEMD_PACKAGES = " \
+    ${SRCNAME}-setup \
+    ${SRCNAME}-compute \
+    ${SRCNAME}-console \
+    ${SRCNAME}-novncproxy \
+    ${SRCNAME}-spicehtml5proxy \
+    ${SRCNAME}-network \
+    ${SRCNAME}-scheduler \
+    ${SRCNAME}-conductor \
+    ${SRCNAME}-api \
+    "
 
-INITSCRIPT_NAME_${SRCNAME}-compute = "nova-compute"
-INITSCRIPT_PARAMS_${SRCNAME}-compute = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
-INITSCRIPT_NAME_${SRCNAME}-consoleauth = "nova-consoleauth"
-INITSCRIPT_PARAMS_${SRCNAME}-consoleauth = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
-INITSCRIPT_NAME_${SRCNAME}-novncproxy = "nova-novncproxy"
-INITSCRIPT_PARAMS_${SRCNAME}-novncproxy = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+SYSTEMD_SERVICE_${SRCNAME}-setup = "nova-init.service"
+SYSTEMD_SERVICE_${SRCNAME}-compute = "nova-compute.service"
+SYSTEMD_SERVICE_${SRCNAME}-console = "nova-console.service nova-consoleauth.service nova-xvpvncproxy.service"
+SYSTEMD_SERVICE_${SRCNAME}-novncproxy = "nova-novncproxy.service"
+SYSTEMD_SERVICE_${SRCNAME}-spicehtml5proxy = "nova-spicehtml5proxy.service"
+SYSTEMD_SERVICE_${SRCNAME}-network = "nova-network.service"
+SYSTEMD_SERVICE_${SRCNAME}-scheduler = "nova-scheduler.service"
+SYSTEMD_SERVICE_${SRCNAME}-conductor = "nova-conductor.service"
+SYSTEMD_SERVICE_${SRCNAME}-api = "nova-api.service"
 
-INITSCRIPT_NAME_${SRCNAME}-spicehtml5proxy = "nova-spicehtml5proxy"
-INITSCRIPT_PARAMS_${SRCNAME}-spicehtml5proxy = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+# Disable services on first boot to avoid having them run when not configured
+SYSTEMD_AUTO_ENABLE_${SRCNAME}-api = "disable"
+SYSTEMD_AUTO_ENABLE_${SRCNAME}-consoleauth = "disable"
+SYSTEMD_AUTO_ENABLE_${SRCNAME}-scheduler = "disable"
+SYSTEMD_AUTO_ENABLE_${SRCNAME}-conductor = "disable"
+SYSTEMD_AUTO_ENABLE_${SRCNAME}-novncproxy = "disable"
 
 MONITOR_SERVICE_PACKAGES = "${SRCNAME}"
-MONITOR_SERVICE_${SRCNAME} = "nova-api nova-cert nova-conductor nova-consoleauth nova-scheduler"
+MONITOR_SERVICE_${SRCNAME} = "nova-api nova-conductor nova-console nova-scheduler"
