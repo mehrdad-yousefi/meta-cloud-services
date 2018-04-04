@@ -4,8 +4,8 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-SRC_URI[md5sum] = "939eaf6c5e49d3a41e8c9f2e92126cfc"
-SRC_URI[sha256sum] = "d61639640b8e4fc64195306f8fae92cf271a002c690bf693ee51f9790cf8141e"
+SRC_URI[md5sum] = "8b39e07002f21c15d2a463b63d8a2952"
+SRC_URI[sha256sum] = "c1b17935207e9c4809feff91b679883928aa5bd3fce75e09b4945c261b513e60"
 
 inherit setuptools pypi
 
@@ -16,22 +16,17 @@ DEPENDS += " \
         python-pbr \
         "
 
-# RDEPENDS_default: 
+# RDEPENDS_default:
 RDEPENDS_${PN} += " \
-        python-kazoo \
-        python-zake \
-        python-sysv-ipc \
-        python-memcache \
         python-pbr \
-        python-babel \
         python-stevedore \
         python-six \
-        python-iso8601 \
+        python-voluptuous \
         python-msgpack \
         python-fasteners \
-        python-retrying \
+        python-tenacity \
+        python-futures \
         python-futurist \
         python-oslo.utils \
         python-oslo.serialization \
-        python-futures \
         "
