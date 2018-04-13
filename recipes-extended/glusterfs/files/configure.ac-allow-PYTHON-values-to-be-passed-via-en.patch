@@ -1,4 +1,4 @@
-From d535a5448191d433e328b0a25a0710da203c44e7 Mon Sep 17 00:00:00 2001
+From ff524f14ba93eb422963c8009a108516639d9b3a Mon Sep 17 00:00:00 2001
 From: Yi Zhao <yi.zhao@windriver.com>
 Date: Wed, 19 Jul 2017 09:40:57 +0800
 Subject: [PATCH] configure.ac: allow PYTHON values to be passed via env
@@ -8,15 +8,16 @@ Allow the recipe can specify specific values for PYTHON.
 Upstream-Status: Inappropriate [embedded specific]
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+
 ---
  configure.ac | 26 ++++++++++----------------
  1 file changed, 10 insertions(+), 16 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 43efd6d..7a31038 100644
+index 8e0652a..f49b9b3 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -544,9 +544,6 @@ fi
+@@ -546,9 +546,6 @@ fi
  dnl Check if version matches that we require
  PYTHONDEV_CPPFLAGS=
  PYTHONDEV_LDFLAGS=
@@ -26,7 +27,7 @@ index 43efd6d..7a31038 100644
  have_python2=no
  have_Python_h=no
  
-@@ -555,25 +552,22 @@ if echo $PYTHON_VERSION | grep -q ^2; then
+@@ -557,25 +554,22 @@ if echo $PYTHON_VERSION | grep -q ^2; then
  
     dnl Use pkg-config to get runtime search patch missing from ${PYTHON}-config
     dnl Just do "true" on failure so that configure does not bail out
@@ -62,6 +63,3 @@ index 43efd6d..7a31038 100644
  AC_SUBST(BUILD_PYTHON_SITE_PACKAGES)
  AC_SUBST(BUILD_PYTHON_INC)
  AC_SUBST(BUILD_PYTHON_LIB)
--- 
-1.9.1
-

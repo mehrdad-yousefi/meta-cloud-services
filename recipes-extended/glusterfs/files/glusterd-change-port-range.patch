@@ -1,4 +1,7 @@
-glusterd: change port range
+From 0102ca092047f51b936d39af966f19b23548c606 Mon Sep 17 00:00:00 2001
+From: Vu Tran <vu.tran@windriver.com>
+Date: Wed, 26 Jul 2017 08:42:09 +0800
+Subject: [PATCH] glusterd: change port range
 
 glusterfsd chooses tcp ports within the dynamic
 range [49152-65535] to provide its service.  When
@@ -19,6 +22,7 @@ Signed-off-by: Vu Tran <vu.tran@windriver.com>
 Signed-off-by: Xulin Sun <xulin.sun@windriver.com>
 [Yi: minor adjust to apply the patch on 3.11.1]
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+
 ---
  extras/glusterd.vol | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
@@ -34,6 +38,3 @@ index d882007..c8dfe91 100644
 -#   option base-port 49152
 +#   option base-port 59152
  end-volume
--- 
-1.9.1
-

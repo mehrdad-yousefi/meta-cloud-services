@@ -1,4 +1,4 @@
-From 32dffb85c81480d53e639ef84242ccfca26461f9 Mon Sep 17 00:00:00 2001
+From bb34fd21ae26005cf099928f41e68a0d98685eba Mon Sep 17 00:00:00 2001
 From: Xulin Sun <xulin.sun@windriver.com>
 Date: Mon, 21 Mar 2016 17:32:50 +0800
 Subject: [PATCH] glusterfs: configure: automake with subdir-objects & foreign
@@ -10,12 +10,13 @@ autoconf execution failed when using automake 1.14 around version.
 Upstream-Status: Pending
 
 Signed-off-by: Xulin Sun <xulin.sun@windriver.com>
+
 ---
  configure.ac | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index ff746ff..983572e 100644
+index 43efd6d..8ce28f6 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -13,11 +13,11 @@ AC_INIT([glusterfs],
@@ -32,6 +33,3 @@ index ff746ff..983572e 100644
  
  m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES(yes)])
  
--- 
-1.9.1
-

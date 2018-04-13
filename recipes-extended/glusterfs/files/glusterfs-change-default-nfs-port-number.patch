@@ -1,4 +1,7 @@
-glusterfs: change default nfs port number
+From 9fdaa80b4c933e8f0e97dfde2ba25ed4cea834d5 Mon Sep 17 00:00:00 2001
+From: Vu Tran <vu.tran@windriver.com>
+Date: Wed, 26 Jul 2017 08:42:09 +0800
+Subject: [PATCH] glusterfs: change default nfs port number
 
 Currently both native nfs and glusterfs-nfs use NFS well
 known port 2049.  This causes native nfs not to be able
@@ -27,6 +30,7 @@ Signed-off-by: Vu Tran <vu.tran@windriver.com>
 Signed-off-by: Xulin Sun <xulin.sun@windriver.com>
 [Yi: minor adjust to apply the patch on 3.11.1]
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+
 ---
  libglusterfs/src/common-utils.h | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
@@ -44,6 +48,3 @@ index 6bd2417..25a92b0 100644
  
  #define GF_CLIENT_PORT_CEILING 1024
  #define GF_IANA_PRIV_PORTS_START 49152 /* RFC 6335 */
--- 
-1.9.1
-
