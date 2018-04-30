@@ -188,6 +188,9 @@ do_install_append() {
     sed -e "/#api_servers =/aapi_servers = ${CONTROLLER_IP}:9292" -i ${CONF_FILE}
     sed -e "/#lock_path =/alock_path = /var/lib/nova/tmp" -i ${CONF_FILE}
 
+    # Configure cinder
+    sed -e "/^\[cinder\].*/aos_region_name = RegionOne" -i ${CONF_FILE}
+
     str="os_region_name = RegionOne"
     str="$str\nproject_domain_name = Default"
     str="$str\nproject_name = service"
