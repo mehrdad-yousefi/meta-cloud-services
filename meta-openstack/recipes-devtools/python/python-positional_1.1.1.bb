@@ -11,6 +11,11 @@ inherit setuptools pypi
 
 CLEANBROKEN = "1"
 
+# Satisfy setup.py 'setup_requires'
+DEPENDS += " \
+        python-pbr-native \
+        "
+
 RDEPENDS_${PN} += " \
     python-wrapt \
 "
