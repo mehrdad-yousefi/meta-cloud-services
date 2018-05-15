@@ -11,6 +11,11 @@ SRC_URI[sha256sum] = "e5eb0009d7fef345ffd27e43122ec288418b460952aeefde60df8e62c3
 
 inherit setuptools
 
+# Satisfy setup.py 'setup_requires'
+DEPENDS += " \
+        python-pbr-native \
+        "
+
 RDEPENDS_${PN} += " \
         python-six \
         python-futures \
