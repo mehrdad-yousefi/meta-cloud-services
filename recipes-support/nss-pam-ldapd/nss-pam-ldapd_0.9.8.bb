@@ -15,7 +15,7 @@ SECTION = "base"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 SRC_URI = "\
-	http://arthurdejong.org/nss-pam-ldapd/${PN}-${PV}.tar.gz \
+	http://arthurdejong.org/nss-pam-ldapd/${BPN}-${PV}.tar.gz \
 	file://nslcd.init \
 	file://nslcd.service \
 	"
@@ -25,7 +25,7 @@ inherit autotools
 SRC_URI[md5sum] = "8c99fdc54f4bf9aca8c5f53fdb1403ff"
 SRC_URI[sha256sum] = "ef7362e7f2003da8c7beb7bcc03c30494acf712625aaac8badc6e7eb16f3453f"
 
-DEPENDS += "libpam openldap"
+DEPENDS += "libpam openldap krb5"
 
 EXTRA_OECONF = "\
 	--disable-pynslcd \
