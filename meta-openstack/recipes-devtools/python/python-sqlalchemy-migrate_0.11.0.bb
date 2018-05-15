@@ -11,6 +11,11 @@ SRC_URI[sha256sum] = "e68af5e3e0561f629d4eb23d9d0ea77d2649747f2eff37fd29aece7461
 
 inherit setuptools
 
+# Satisfy setup.py 'setup_requires'
+DEPENDS += " \
+        python-pbr-native \
+        "
+
 RDEPENDS_${PN} += " \
         python-pbr \
         python-sqlalchemy \
