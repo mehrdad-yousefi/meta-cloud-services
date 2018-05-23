@@ -29,8 +29,13 @@ LIC_FILES_CHKSUM = "file://COPYING-GPLV2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 
 inherit autotools pkgconfig distutils-base update-rc.d systemd
 
-DEPENDS += "bison-native flex-native python-native fuse libaio libxml2 ncurses \
+DEPENDS += "bison-native flex-native python-native fuse libaio libtirpc libxml2 ncurses \
             openssl python readline zlib liburcu util-linux glib-2.0 acl"
+
+# rpc now comes from libtirpc instead of glibc
+#
+CFLAGS += "-I${STAGING_INCDIR}/tirpc"
+LDFLAGS += " -ltirpc"
 
 EXTRA_OECONF = "ac_cv_file__etc_debian_version=no \
                 ac_cv_file__etc_SuSE_release=no \
