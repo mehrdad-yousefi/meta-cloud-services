@@ -72,6 +72,11 @@ RDEPENDS_${SRCNAME} += " \
     ${SRCNAME}-bin \
     "
 
+# Satisfy setup.py 'setup_requires'
+DEPENDS += " \
+        python-pbr-native \
+        "
+
 RDEPENDS_${SRCNAME}-bin += " \
     ${PN} \
     "
