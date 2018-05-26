@@ -20,6 +20,11 @@ DEPENDS += " \
         python-pbr \
 "
 
+# Satisfy setup.py 'setup_requires'
+DEPENDS += " \
+        python-pbr-native \
+        "
+
 RDEPENDS_${PN} += " \
         python-oslo.config \
         python-oslo.i18n \
