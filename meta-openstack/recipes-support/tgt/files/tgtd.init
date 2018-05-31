@@ -39,7 +39,7 @@ start ()
     # if it's not ready.
     tgtadm --op update --mode sys --name State -v offline
     # Configure the targets.
-    tgt-admin -e -c $TGTD_CONFIG
+    tgt-admin -f -e -c $TGTD_CONFIG
     # Put tgtd into "ready" state.
     tgtadm --op update --mode sys --name State -v ready
 
