@@ -1,7 +1,7 @@
 DESCRIPTION = "Simplify the writing of REST APIs, and extend them with additional protocols"
 HOMEPAGE = "https://pypi.python.org/pypi/WSME/"
 SECTION = "devel/python"
-LICENSE = "Apache-2.0"
+LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=5a9126e7f56a0cf3247050de7f10d0f4"
 
 PYPI_PACKAGE = "WSME"
