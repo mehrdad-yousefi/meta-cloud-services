@@ -1,7 +1,7 @@
 DESCRIPTION = "Waitress WSGI server"
 HOMEPAGE = "https://pypi.python.org/pypi/waitress/"
 SECTION = "devel/python"
-LICENSE = "Apache-2.0"
+LICENSE = "ZPL-2.1"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=78ccb3640dc841e1baecb3e27a6966b2"
 
 SRC_URI[md5sum] = "0f1eb7fdfdbf2e6d18decbda1733045c"
