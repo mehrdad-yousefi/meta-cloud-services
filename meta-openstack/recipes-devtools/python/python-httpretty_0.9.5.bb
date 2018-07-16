@@ -5,10 +5,10 @@ DESCRIPTION = "HTTP client mock for Python"
 HOMEPAGE = "https://pypi.python.org/pypi/httpretty"
 SECTION = "devel/python"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=88d874c445b42d9bcea5d211bbc6b8bd"
+LIC_FILES_CHKSUM = "file://COPYING;md5=113a91608a1d89039af9393c39bcaa2c"
 
-SRC_URI[md5sum] = "2a6bbf270fafc77647b0479d95d0544c"
-SRC_URI[sha256sum] = "83c176bbac9d68a45a5cca54f2d5be7e6b16a063adf6f334e7fd0eee272e976e"
+SRC_URI[md5sum] = "e0e4294987c02181b1141c9ceb81783f"
+SRC_URI[sha256sum] = "543fa2bd9c319bfa1e1de9e37d7c9c08fa926a692b65b0be5df4b2f069fd0ad7"
 
 inherit setuptools pypi
 
