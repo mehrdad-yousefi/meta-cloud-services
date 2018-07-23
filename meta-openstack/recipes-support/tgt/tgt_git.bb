@@ -4,8 +4,8 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://scripts/tgtd.spec;beginline=7;endline=7;md5=21c19ea7dad04648b9c2f791b6e29b4c"
 DEPENDS = "sg3-utils"
 
-SRCREV = "cb7971cfeecaa43c15eed4719dc82516d7e87b6c"
-PV = "1.0.67+git${SRCPV}"
+SRCREV = "013223dc886a03719ca02db52162056249d99448"
+PV = "1.0.73+git${SRCPV}"
 
 SRC_URI = "git://github.com/fujita/tgt.git \
 	file://0001-Correct-the-path-of-header-files-check-in-Yocto-buil.patch \
