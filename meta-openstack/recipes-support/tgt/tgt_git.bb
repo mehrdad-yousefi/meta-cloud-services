@@ -12,13 +12,19 @@ SRC_URI = "git://github.com/fujita/tgt.git \
         file://0001-usr-Makefile-WARNING-fix.patch \
         file://usr-Makefile-apply-LDFLAGS-to-all-executables.patch \
 "
-SRC_URI += "file://tgtd.init"
+SRC_URI += "file://tgtd.init \
+            file://tgtd.service \
+            file://tgtd \
+"
 
 S = "${WORKDIR}/git"
 
 CONFFILES_${PN} += "${sysconfdir}/tgt/targets.conf"
 
-inherit update-rc.d
+inherit update-rc.d systemd
+
+SYSTEMD_SERVICE_${PN} = "tgtd.service"
+SYSTEMD_AUTO_ENABLE_${PN} = "disable"
 
 CFLAGS += ' -I. -DUSE_SIGNALFD -DUSE_TIMERFD -D_GNU_SOURCE -DTGT_VERSION=\\"1.0.63\\" -DBSDIR=\\"${libdir}/backing-store\\"'
 
@@ -33,8 +39,20 @@ do_install() {
     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
         install -m 0755 ${WORKDIR}/tgtd.init ${D}${sysconfdir}/init.d/tgtd
+    elif ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+        install -d ${D}${systemd_unitdir}/system
+        install -m 0644 ${WORKDIR}/tgtd.service ${D}${systemd_unitdir}/system/tgtd.service
+        install -d ${D}${sysconfdir}/sysconfig
+        install -m 0644 ${WORKDIR}/tgtd ${D}${sysconfdir}/sysconfig/tgtd
+        sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/tgtd.service
+        sed -i -e 's,@BASE_BINDIR@,${base_bindir},g' ${D}${systemd_unitdir}/system/tgtd.service
+        sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' ${D}${systemd_unitdir}/system/tgtd.service
     fi
 }
+
+FILES_${PN} += "${systemd_unitdir}/system/tgtd.service \
+                ${sysconfdir}/sysconfig/tgtd \
+"
 
 RDEPENDS_${PN} = " \
     bash \
