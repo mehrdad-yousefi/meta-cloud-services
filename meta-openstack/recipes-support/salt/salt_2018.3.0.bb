@@ -13,8 +13,7 @@ PACKAGECONFIG ??= "zeromq"
 PACKAGECONFIG[zeromq] = ",,python-pyzmq python-pycrypto,"
 PACKAGECONFIG[tcp] = ",,python-pycrypto"
 
-SRCNAME = "salt"
-SRC_URI = "https://files.pythonhosted.org/packages/source/s/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
+SRC_URI = "https://files.pythonhosted.org/packages/source/s/${PN}/${PN}-${PV}.tar.gz \
            file://set_python_location_hashbang.patch \
            file://minion \
            file://salt-minion \
@@ -28,10 +27,10 @@ SRC_URI = "https://files.pythonhosted.org/packages/source/s/${SRCNAME}/${SRCNAME
            file://roster \
 "
 
-SRC_URI[md5sum] = "eced07a652cc6a31870fc098d5325a9c"
-SRC_URI[sha256sum] = "b516285926ee95cedc64ecddab05d14422b7c8819c9f6d046a431c41d608e6bc"
+SRC_URI[md5sum] = "b6ec271b59554b9af7ff4005028434b5"
+SRC_URI[sha256sum] = "a0a45d22fdf6961542a419b7e09568a3118e2b019ffe7bab9dee5aeb55b56b31"
 
-S = "${WORKDIR}/${SRCNAME}-${PV}"
+S = "${WORKDIR}/${PN}-${PV}"
 
 inherit setuptools update-rc.d
 
@@ -89,7 +88,7 @@ Between the remote execution system, and state management Salt addresses the bac
 
 SUMMARY_${PN}-minion = "client package for salt, the distributed remote execution system"
 DESCRIPTION_${PN}-minion = "${DESCRIPTION_COMMON} This particular package provides the worker agent for salt."
-RDEPENDS_${PN}-minion = "python (>=2.6), ${PN}-common (= ${EXTENDPKGV}) python-msgpack"
+RDEPENDS_${PN}-minion = "${PN}-common (= ${EXTENDPKGV}) python-msgpack"
 RDEPENDS_${PN}-minion += "${@bb.utils.contains('PACKAGECONFIG', 'zeromq', 'python-pycrypto python-pyzmq (>= 13.1.0)', '',d)}"
 RDEPENDS_${PN}-minion += "${@bb.utils.contains('PACKAGECONFIG', 'tcp', 'python-pycrypto', '',d)}"
 RRECOMMENDS_${PN}-minion_append_x64 = "dmidecode"
@@ -102,7 +101,7 @@ INITSCRIPT_PARAMS_${PN}-minion = "defaults"
 SUMMARY_${PN}-common = "shared libraries that salt requires for all packages"
 DESCRIPTION_${PN}-common ="${DESCRIPTION_COMMON} This particular package provides shared libraries that \
 salt-master, salt-minion, and salt-syndic require to function."
-RDEPENDS_${PN}-common = "python (>= 2.7.5-5) python (< 2.8) python-dateutil python-jinja2 python-pyyaml python-requests (>= 1.0.0) python-tornado (>= 4.2.1)"
+RDEPENDS_${PN}-common = "python-dateutil python-jinja2 python-pyyaml python-requests (>= 1.0.0) python-tornado (>= 4.2.1)"
 RRECOMMENDS_${PN}-common = "lsb python-futures"
 RSUGGESTS_${PN}-common = "python-mako python-git"
 RCONFLICTS_${PN}-common = "python-mako (< 0.7.0)"
@@ -113,7 +112,7 @@ SUMMARY_${PN}-ssh = "remote manager to administer servers via salt"
 DESCRIPTION_${PN}-ssh = "${DESCRIPTION_COMMON} This particular package provides the salt ssh controller. It \
 is able to run salt modules and states on remote hosts via ssh. No minion or other salt specific software needs\
  to be installed on the remote host."
-RDEPENDS_${PN}-ssh = "python (>= 2.6) ${PN}-common (= ${EXTENDPKGV}) python-msgpack"
+RDEPENDS_${PN}-ssh = "${PN}-common (= ${EXTENDPKGV}) python-msgpack"
 CONFFILES_${PN}-ssh="${sysconfdir}/${PN}/roster"
 FILES_${PN}-ssh = "${bindir}/${PN}-ssh ${CONFFILES_${PN}-ssh}"
 
@@ -123,7 +122,7 @@ running Salt system. It can start and manage multiple interfaces allowing a REST
 even a Websocket API. The Salt API system is used to expose the fundamental aspects of Salt control to external\
  sources. salt-api acts as the bridge between Salt itself and REST, Websockets, etc. Documentation is available\
  on Read the Docs: http://salt-api.readthedocs.org/"
-RDEPENDS_${PN}-api = "python (>= 2.6) ${PN}-master"
+RDEPENDS_${PN}-api = "${PN}-master"
 RSUGGESTS_${PN}-api = "python-cherrypy"
 CONFFILES_${PN}-api = "${sysconfdir}/init.d/${PN}-api"
 FILES_${PN}-api = "${bindir}/${PN}-api ${CONFFILES_${PN}-api}"
@@ -132,7 +131,7 @@ INITSCRIPT_PARAMS_${PN}-api = "defaults"
 
 SUMMARY_${PN}-master = "remote manager to administer servers via salt"
 DESCRIPTION_${PN}-master ="${DESCRIPTION_COMMON} This particular package provides the salt controller."
-RDEPENDS_${PN}-master = "python (>= 2.6) ${PN}-common (= ${EXTENDPKGV}) python-msgpack"
+RDEPENDS_${PN}-master = "${PN}-common (= ${EXTENDPKGV}) python-msgpack"
 RDEPENDS_${PN}-master += "${@bb.utils.contains('PACKAGECONFIG', 'zeromq', 'python-pycrypto python-pyzmq (>= 13.1.0)', '',d)}"
 RDEPENDS_${PN}-master += "${@bb.utils.contains('PACKAGECONFIG', 'tcp', 'python-pycrypto', '',d)}"
 CONFFILES_${PN}-master="${sysconfdir}/init.d/${PN}-master  ${sysconfdir}/${PN}/master"
@@ -144,7 +143,7 @@ INITSCRIPT_PARAMS_${PN}-master = "defaults"
 SUMMARY_${PN}-syndic = "master-of-masters for salt, the distributed remote execution system"
 DESCRIPTION_${PN}-syndic = "${DESCRIPTION_COMMON} This particular package provides the master of masters for \
 salt; it enables the management of multiple masters at a time."
-RDEPENDS_${PN}-syndic = "python (>= 2.6) ${PN}-master (= ${EXTENDPKGV})"
+RDEPENDS_${PN}-syndic = "${PN}-master (= ${EXTENDPKGV})"
 CONFFILES_${PN}-syndic="${sysconfdir}/init.d/${PN}-syndic"
 FILES_${PN}-syndic = "${bindir}/${PN}-syndic ${CONFFILES_${PN}-syndic}"
 INITSCRIPT_NAME_${PN}-syndic = "${PN}-syndic"
@@ -152,14 +151,14 @@ INITSCRIPT_PARAMS_${PN}-syndic = "defaults"
 
 SUMMARY_${PN}-cloud = "public cloud VM management system"
 DESCRIPTION_${PN}-cloud = "provision virtual machines on various public clouds via a cleanly controlled profile and mapping system."
-RDEPENDS_${PN}-cloud = "python (>= 2.6) ${PN}-common (= ${EXTENDPKGV})"
+RDEPENDS_${PN}-cloud = "${PN}-common (= ${EXTENDPKGV})"
 RSUGGESTS_${PN}-cloud = "python-netaddr python-botocore"
 CONFFILES_${PN}-cloud = "${sysconfdir}/${PN}/cloud"
 FILES_${PN}-cloud = "${bindir}/${PN}-cloud ${sysconfdir}/${PN}/cloud.conf.d/ ${sysconfdir}/${PN}/cloud.profiles.d/ ${sysconfdir}/${PN}/cloud.providers.d/ ${CONFFILES_${PN}-cloud}"
 
 SUMMARY_${PN}-tests = "salt stack test suite"
 DESCRIPTION_${PN}-tests ="${DESCRIPTION_COMMON} This particular package provides the salt unit test suite."
-RDEPENDS_${PN}-tests = "${PN}-common python-salttesting python-tests python-image bash"
+RDEPENDS_${PN}-tests = "${PN}-common python-pytest-salt python-tests python-image bash"
 FILES_${PN}-tests = "${PYTHON_SITEPACKAGES_DIR}/salt-tests/tests/"
 
 FILES_${PN}-bash-completion = "${sysconfdir}/bash_completion.d/${PN}-common"
