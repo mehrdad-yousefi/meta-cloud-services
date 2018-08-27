@@ -1,3 +1,3 @@
 require python-pika.inc
 
-inherit setuptools
+inherit setuptools3
