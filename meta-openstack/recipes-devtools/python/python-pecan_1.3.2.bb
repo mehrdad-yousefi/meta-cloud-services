@@ -4,13 +4,12 @@ SECTION = "devel/python"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d846877d24bbb3d7a00a985c90378e8c"
 
-SRC_URI[md5sum] = "d0ad387dbc77d1803ad3573fe38a4e0a"
-SRC_URI[sha256sum] = "8d95457b9cedcfda9b467f5cc7dde8cdf72ddba6b402d6a5902843d1b2186c46"
+SRC_URI[md5sum] = "42bff04c3a90c32d78560fe7921658d4"
+SRC_URI[sha256sum] = "24f06cf88a488b75f433e62b33c1c97e4575d0cd91eec9eec841a81cecfd6de3"
 
 inherit setuptools pypi
 
-RDEPENDS_${PN} = "python-webob \
-                  python-mako \
+RDEPENDS_${PN} = "python-mako \
                   python-webtest \
                   python-six \
                   python-logutils \
