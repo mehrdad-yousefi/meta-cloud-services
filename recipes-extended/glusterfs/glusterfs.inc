@@ -20,6 +20,8 @@ SRC_URI += "file://glusterd.init \
             file://libglusterfs-Don-t-link-against-libfl.patch \
             file://glusterd-change-port-range.patch \
             file://configure.ac-allow-PYTHON-values-to-be-passed-via-en.patch \
+            file://0001-shared-storage-Prevent-mounting-shared-storage-from-.patch \
+            file://0002-server-auth-add-option-for-strict-authentication.patch \
            "
 
 LICENSE = "(LGPLv3+ | GPLv2) & GPLv3+ & LGPLv3+ & GPLv2+ & LGPLv2+ & LGPLv2.1+ & Apache-2.0"

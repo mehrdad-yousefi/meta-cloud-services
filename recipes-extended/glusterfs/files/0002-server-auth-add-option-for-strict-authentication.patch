@@ -1,0 +1,280 @@
+From a74ab3ab169add1e86aae0a99855211b948be021 Mon Sep 17 00:00:00 2001
+From: Mohammed Rafi KC <rkavunga@redhat.com>
+Date: Mon, 2 Apr 2018 12:20:47 +0530
+Subject: [PATCH 2/3] server/auth: add option for strict authentication
+
+When this option is enabled, we will check for a matching
+username and password, if not found then the connection will
+be rejected. This also does a checksum validation of volfile
+
+The option is invalid when SSL/TLS is in use, at which point
+the SSL/TLS certificate user name is used to validate and
+hence authorize the right user. This expects TLS allow rules
+to be setup correctly rather than the default *.
+
+This option is not settable, as a result this cannot be enabled
+for volumes using the CLI. This is used with the shared storage
+volume, to restrict access to the same in non-SSL/TLS environments
+to the gluster peers only.
+
+Tested:
+  ./tests/bugs/protocol/bug-1321578.t
+  ./tests/features/ssl-authz.t
+  - Ran tests on volumes with and without strict auth
+    checking (as brick vol file needed to be edited to test,
+    or rather to enable the option)
+  - Ran tests on volumes to ensure existing mounts are
+    disconnected when we enable strict checking
+
+Change-Id: I2ac4f0cfa5b59cc789cc5a265358389b04556b59
+fixes: bz#1568844
+Signed-off-by: Mohammed Rafi KC <rkavunga@redhat.com>
+Signed-off-by: ShyamsundarR <srangana@redhat.com>
+
+Upstream-Status: Backport
+Fix CVE-2018-1088
+
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+
+---
+ xlators/mgmt/glusterd/src/glusterd-volgen.c    | 16 +++++++-
+ xlators/protocol/auth/login/src/login.c        | 51 ++++++++++++++++++++++----
+ xlators/protocol/server/src/authenticate.h     |  4 +-
+ xlators/protocol/server/src/server-handshake.c |  2 +-
+ xlators/protocol/server/src/server.c           | 18 +++++++++
+ xlators/protocol/server/src/server.h           |  2 +
+ 6 files changed, 81 insertions(+), 12 deletions(-)
+
+diff --git a/xlators/mgmt/glusterd/src/glusterd-volgen.c b/xlators/mgmt/glusterd/src/glusterd-volgen.c
+index 308c41f..8dd4907 100644
+--- a/xlators/mgmt/glusterd/src/glusterd-volgen.c
++++ b/xlators/mgmt/glusterd/src/glusterd-volgen.c
+@@ -2250,6 +2250,7 @@ brick_graph_add_server (volgen_graph_t *graph, glusterd_volinfo_t *volinfo,
+         char            *password = NULL;
+         char            key[1024] = {0};
+         char            *ssl_user = NULL;
++        char            *volname = NULL;
+         char            *address_family_data = NULL;
+ 
+         if (!graph || !volinfo || !set_dict || !brickinfo)
+@@ -2325,6 +2326,19 @@ brick_graph_add_server (volgen_graph_t *graph, glusterd_volinfo_t *volinfo,
+         if (ret)
+                 return -1;
+ 
++        volname = volinfo->is_snap_volume ?
++                  volinfo->parent_volname : volinfo->volname;
++
++
++        if (volname && !strcmp (volname, GLUSTER_SHARED_STORAGE)) {
++                memset (key, 0, sizeof (key));
++                snprintf (key, sizeof (key), "strict-auth-accept");
++
++                ret = xlator_set_option (xl, key, "true");
++                if (ret)
++                        return -1;
++        }
++
+         if (dict_get_str (volinfo->dict, "auth.ssl-allow", &ssl_user) == 0) {
+                 memset (key, 0, sizeof (key));
+                 snprintf (key, sizeof (key), "auth.login.%s.ssl-allow",
+@@ -5734,7 +5748,7 @@ generate_client_volfiles (glusterd_volinfo_t *volinfo,
+ 
+ 
+         if (volname && !strcmp (volname, GLUSTER_SHARED_STORAGE) &&
+-             client_type != GF_CLIENT_TRUSTED) {
++            client_type != GF_CLIENT_TRUSTED) {
+                 /*
+                  * shared storage volume cannot be mounted from non trusted
+                  * nodes. So we are not creating volfiles for non-trusted
+diff --git a/xlators/protocol/auth/login/src/login.c b/xlators/protocol/auth/login/src/login.c
+index e799dd2..da10d0b 100644
+--- a/xlators/protocol/auth/login/src/login.c
++++ b/xlators/protocol/auth/login/src/login.c
+@@ -11,6 +11,16 @@
+ #include <fnmatch.h>
+ #include "authenticate.h"
+ 
++/* Note on strict_auth
++ * - Strict auth kicks in when authentication is using the username, password
++ *   in the volfile to login
++ * - If enabled, auth is rejected if the username and password is not matched
++ *   or is not present
++ * - When using SSL names, this is automatically strict, and allows only those
++ *   names that are present in the allow list, IOW strict auth checking has no
++ *   implication when using SSL names
++*/
++
+ auth_result_t gf_auth (dict_t *input_params, dict_t *config_params)
+ {
+         auth_result_t  result  = AUTH_DONT_CARE;
+@@ -27,6 +37,7 @@ auth_result_t gf_auth (dict_t *input_params, dict_t *config_params)
+         char            *tmp            = NULL;
+         char            *username_cpy   = NULL;
+         gf_boolean_t    using_ssl       = _gf_false;
++        gf_boolean_t    strict_auth     = _gf_false;
+ 
+         username_data = dict_get (input_params, "ssl-name");
+         if (username_data) {
+@@ -35,16 +46,39 @@ auth_result_t gf_auth (dict_t *input_params, dict_t *config_params)
+                 using_ssl = _gf_true;
+         }
+         else {
++                ret = dict_get_str_boolean (config_params, "strict-auth-accept",
++                                            _gf_false);
++                if (ret == -1)
++                        strict_auth = _gf_false;
++                else
++                        strict_auth = ret;
++
+                 username_data = dict_get (input_params, "username");
+                 if (!username_data) {
+-                        gf_log ("auth/login", GF_LOG_DEBUG,
+-                                "username not found, returning DONT-CARE");
++                        if (strict_auth) {
++                                gf_log ("auth/login", GF_LOG_DEBUG,
++                                        "username not found, strict auth"
++                                        " configured returning REJECT");
++                                result = AUTH_REJECT;
++                        } else {
++                                gf_log ("auth/login", GF_LOG_DEBUG,
++                                        "username not found, returning"
++                                        " DONT-CARE");
++                        }
+                         goto out;
+                 }
+                 password_data = dict_get (input_params, "password");
+                 if (!password_data) {
+-                        gf_log ("auth/login", GF_LOG_WARNING,
+-                                "password not found, returning DONT-CARE");
++                        if (strict_auth) {
++                                gf_log ("auth/login", GF_LOG_DEBUG,
++                                        "password not found, strict auth"
++                                        " configured returning REJECT");
++                                result = AUTH_REJECT;
++                        } else {
++                                gf_log ("auth/login", GF_LOG_WARNING,
++                                        "password not found, returning"
++                                        " DONT-CARE");
++                        }
+                         goto out;
+                 }
+                 password = data_to_str (password_data);
+@@ -62,9 +96,10 @@ auth_result_t gf_auth (dict_t *input_params, dict_t *config_params)
+         ret = gf_asprintf (&searchstr, "auth.login.%s.%s", brick_name,
+                            using_ssl ? "ssl-allow" : "allow");
+         if (-1 == ret) {
+-                gf_log ("auth/login", GF_LOG_WARNING,
++                gf_log ("auth/login", GF_LOG_ERROR,
+                         "asprintf failed while setting search string, "
+-                        "returning DONT-CARE");
++                        "returning REJECT");
++                result = AUTH_REJECT;
+                 goto out;
+         }
+ 
+@@ -92,8 +127,10 @@ auth_result_t gf_auth (dict_t *input_params, dict_t *config_params)
+                  * ssl-allow=* case as well) authorization is effectively
+                  * disabled, though authentication and encryption are still
+                  * active.
++                 *
++                 * Read NOTE on strict_auth above.
+                  */
+-                if (using_ssl) {
++                if (using_ssl || strict_auth) {
+                         result = AUTH_REJECT;
+                 }
+                 username_cpy = gf_strdup (allow_user->data);
+diff --git a/xlators/protocol/server/src/authenticate.h b/xlators/protocol/server/src/authenticate.h
+index 3f80231..5f92183 100644
+--- a/xlators/protocol/server/src/authenticate.h
++++ b/xlators/protocol/server/src/authenticate.h
+@@ -37,10 +37,8 @@ typedef struct {
+         volume_opt_list_t *vol_opt;
+ } auth_handle_t;
+ 
+-auth_result_t gf_authenticate (dict_t *input_params,
+-                               dict_t *config_params,
+-                               dict_t *auth_modules);
+ int32_t gf_auth_init (xlator_t *xl, dict_t *auth_modules);
+ void gf_auth_fini (dict_t *auth_modules);
++auth_result_t gf_authenticate (dict_t *, dict_t *, dict_t *);
+ 
+ #endif /* _AUTHENTICATE_H */
+diff --git a/xlators/protocol/server/src/server-handshake.c b/xlators/protocol/server/src/server-handshake.c
+index f00804a..392a101 100644
+--- a/xlators/protocol/server/src/server-handshake.c
++++ b/xlators/protocol/server/src/server-handshake.c
+@@ -631,7 +631,7 @@ server_setvolume (rpcsvc_request_t *req)
+                         ret = dict_get_str (params, "volfile-key",
+                                             &volfile_key);
+                         if (ret)
+-                                gf_msg_debug (this->name, 0, "failed to set "
++                                gf_msg_debug (this->name, 0, "failed to get "
+                                               "'volfile-key'");
+ 
+                         ret = _validate_volfile_checksum (this, volfile_key,
+diff --git a/xlators/protocol/server/src/server.c b/xlators/protocol/server/src/server.c
+index 202fe71..61c6194 100644
+--- a/xlators/protocol/server/src/server.c
++++ b/xlators/protocol/server/src/server.c
+@@ -883,6 +883,10 @@ do_rpc:
+                 goto out;
+         }
+ 
++        GF_OPTION_RECONF ("strict-auth-accept", conf->strict_auth_enabled,
++                          options, bool, out);
++
++
+         GF_OPTION_RECONF ("dynamic-auth", conf->dync_auth, options,
+                         bool, out);
+ 
+@@ -1113,6 +1117,14 @@ init (xlator_t *this)
+                         "Failed to initialize group cache.");
+                 goto out;
+         }
++
++        ret = dict_get_str_boolean (this->options, "strict-auth-accept",
++                                    _gf_false);
++        if (ret == -1)
++                conf->strict_auth_enabled = _gf_false;
++        else
++                conf->strict_auth_enabled = ret;
++
+         ret = dict_get_str_boolean (this->options, "dynamic-auth",
+                         _gf_true);
+         if (ret == -1)
+@@ -1667,5 +1679,11 @@ struct volume_options options[] = {
+                            "transport connection immediately in response to "
+                            "*.allow | *.reject volume set options."
+         },
++        { .key   = {"strict-auth-accept"},
++          .type  = GF_OPTION_TYPE_BOOL,
++          .default_value = "off",
++          .description   = "strict-auth-accept reject connection with out"
++                           "a valid username and password."
++        },
+         { .key   = {NULL} },
+ };
+diff --git a/xlators/protocol/server/src/server.h b/xlators/protocol/server/src/server.h
+index 0b37eb1..7eea291 100644
+--- a/xlators/protocol/server/src/server.h
++++ b/xlators/protocol/server/src/server.h
+@@ -24,6 +24,7 @@
+ #include "client_t.h"
+ #include "gidcache.h"
+ #include "defaults.h"
++#include "authenticate.h"
+ 
+ #define DEFAULT_BLOCK_SIZE         4194304   /* 4MB */
+ #define DEFAULT_VOLUME_FILE_PATH   CONFDIR "/glusterfs.vol"
+@@ -105,6 +106,7 @@ struct server_conf {
+                                            * false, when child is down */
+ 
+         gf_lock_t               itable_lock;
++        gf_boolean_t            strict_auth_enabled;
+ };
+ typedef struct server_conf server_conf_t;
+ 
+-- 
+2.7.4
+
