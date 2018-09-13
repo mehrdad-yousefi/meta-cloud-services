@@ -22,6 +22,7 @@ SRC_URI += "file://glusterd.init \
             file://configure.ac-allow-PYTHON-values-to-be-passed-via-en.patch \
             file://0001-shared-storage-Prevent-mounting-shared-storage-from-.patch \
             file://0002-server-auth-add-option-for-strict-authentication.patch \
+            file://0003-glusterfs-access-trusted-peer-group-via-remote-host-.patch \
            "
 
 LICENSE = "(LGPLv3+ | GPLv2) & GPLv3+ & LGPLv3+ & GPLv2+ & LGPLv2+ & LGPLv2.1+ & Apache-2.0"
