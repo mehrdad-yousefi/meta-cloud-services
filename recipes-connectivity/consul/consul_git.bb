@@ -3,40 +3,6 @@ HOMEPAGE = "https://www.consul.io/"
 LICENSE = "MPL-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b278a92d2c1509760384428817710378"
 
-DEPENDS += "circbuf \
-    consul-migrate \
-    go-checkpoint \
-    go-msgpack \
-    go-metrics \
-    go-bindata \
-    go-sys \
-    go-syslog \
-    dockerclient \
-    logutils \
-    memberlist \
-    raft \
-    raft-boltdb \
-    scada-client \
-    serf-go \
-    yamux \
-    muxado \
-    dns \
-    cli \
-    mapstructure \
-    copystructure \
-    reflectwalk \
-    columnize \
-    go-radix \
-    golang-lru \
-    hashicorp-hil \
-    hashicorp-hcl \
-    hashicorp-go-cleanhttp \
-    hashicorp-go-memdb \
-    hashicorp-go-reap \
-    hashicorp-go-uuid \
-    net-rpc-msgpackrpc \
-    "
-
 PKG_NAME = "github.com/hashicorp/consul"
 SRC_URI = "git://${PKG_NAME}.git \
            file://consul.service \
