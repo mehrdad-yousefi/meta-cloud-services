@@ -8,13 +8,13 @@ lock contention, so we drop the copy and use the regex directly.
 
 Signed-off-by: Bruce Ashfield <bruce.ashfield@windriver.com>
 ---
- consul/prepared_query/template.go | 4 ++--
+ src/github.com/hashicorp/consul/consul/prepared_query/template.go | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/consul/prepared_query/template.go b/consul/prepared_query/template.go
+diff --git a/src/github.com/hashicorp/consul/consul/prepared_query/template.go b/src/github.com/hashicorp/consul/consul/prepared_query/template.go
 index 984f0bcf9cc6..1c61910c1526 100644
---- a/consul/prepared_query/template.go
-+++ b/consul/prepared_query/template.go
+--- a/src/github.com/hashicorp/consul/consul/prepared_query/template.go
++++ b/src/github.com/hashicorp/consul/consul/prepared_query/template.go
 @@ -116,8 +116,8 @@ func (ct *CompiledTemplate) Render(name string) (*structs.PreparedQuery, error)
  	// from multiple goroutines.
  	var matches []string
