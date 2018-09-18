@@ -1,11 +1,13 @@
 SUMMARY = "Provides data migration for Consul server nodes"
 HOMEPAGE = "https://github.com/hashicorp/consul-migrate"
-LICENSE = "MPL-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=b278a92d2c1509760384428817710378"
+LICENSE = "BSD & MPL-2.0 & MIT"
+LIC_FILES_CHKSUM = "file://src/github.com/hashicorp/consul-migrate/LICENSE;md5=b278a92d2c1509760384428817710378"
 
-PKG_NAME = "github.com/hashicorp/consul-migrate"
-SRC_URI = "git://${PKG_NAME}.git"
+GO_IMPORT = "github.com/hashicorp/consul-migrate"
+SRC_URI = "git://${GO_IMPORT}.git"
 SRCREV = "678fb10cdeae25ab309e99e655148f0bf65f9710"
+
+S = "${WORKDIR}/git"
 
 SRCREV_raft = "057b893fd996696719e98b6c44649ea14968c811"
 SRCREV_go-metrics = "f303b03b91d770a11a39677f1d3b55da4002bbcb"
@@ -25,18 +27,18 @@ SRC_URI += " \
    git://github.com/hashicorp/go-msgpack;name=go-msgpack;destsuffix=git/src/github.com/hashicorp/go-msgpack \
 "
 
-inherit golang
+inherit go
 
-SYSROOT_PREPROCESS_FUNCS += "consul_migrate_sysroot_preprocess"
+# GO packages shouldn't rely on external libs, but this one will
+# not build without this.
+LDFLAGS += "-lpthread"
 
-export GOROOT="${STAGING_DIR_NATIVE}/${nonarch_libdir}/${HOST_SYS}/go"
-
-consul_migrate_sysroot_preprocess () {
-    install -d ${SYSROOT_DESTDIR}${prefix}/local/go/src/${PKG_NAME}
-    cp -a ${D}${prefix}/local/go/src/${PKG_NAME} ${SYSROOT_DESTDIR}${prefix}/local/go/src/$(dirname ${PKG_NAME})
-    install -d ${SYSROOT_DESTDIR}${prefix}/bin
-    cp -a ${D}${prefix}/bin/* ${SYSROOT_DESTDIR}${prefix}/bin/
-}
-
-CLEANBROKEN = "1"
-INSANE_SKIP_${PN} = "ldflags"
+GO_INSTALL_FILTEROUT = " \
+   github.com/hashicorp/raft \
+   github.com/armon/go-metrics \
+   github.com/hashicorp/raft-boltdb \
+   github.com/hashicorp/raft-mdb \
+   github.com/armon/gomdb \
+   github.com/boltdb/bolt \
+   github.com/hashicorp/go-msgpack \
+"
