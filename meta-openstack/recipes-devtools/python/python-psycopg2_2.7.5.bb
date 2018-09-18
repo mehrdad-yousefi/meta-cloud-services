@@ -2,15 +2,15 @@ DESCRIPTION = "Python-PostgreSQL Database Adapter"
 HOMEPAGE = "http://initd.org/psycopg/"
 SECTION = "devel/python"
 LICENSE = "GPLv3+"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=2c9872d13fa571e7ba6de95055da1fe2"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=72bded22a37845c7d9dc3fd39d699a2d"
 DEPENDS = "postgresql"
 
 SRC_URI += " \
            file://remove-pg-config.patch \
           "
 
-SRC_URI[md5sum] = "70fc57072e084565a42689d416cf2c5c"
-SRC_URI[sha256sum] = "8bf51191d60f6987482ef0cfe8511bbf4877a5aa7f313d7b488b53189cf26209"
+SRC_URI[md5sum] = "9e7d6f695fc7f8d1c42a7905449246c9"
+SRC_URI[sha256sum] = "eccf962d41ca46e6326b97c8fe0a6687b58dfc1a5f6540ed071ff1474cea749e"
 
 inherit distutils pypi
 
