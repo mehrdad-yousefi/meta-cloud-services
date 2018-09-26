@@ -1,0 +1,93 @@
+From 08dc006aac79ee1d1f6a5b7044fc973df7f00ed6 Mon Sep 17 00:00:00 2001
+From: Chen Qi <Qi.Chen@windriver.com>
+Date: Tue, 25 Sep 2018 14:02:01 +0800
+Subject: [PATCH 2/7] posix: disable open/read/write on special files
+
+In the file system, the responsibility w.r.to the block and char device
+files is related to only support for 'creating' them (using mknod(2)).
+
+Once the device files are created, the read/write syscalls for the specific
+devices are handled by the device driver registered for the specific major
+number, and depending on the minor number, it knows where to read from.
+Hence, we are at risk of reading contents from devices which are handled
+by the host kernel on server nodes.
+
+By disabling open/read/write on the device file, we would be safe with
+the bypass one can achieve from client side (using gfapi)
+
+Fixes: bz#1625096
+
+Change-Id: I48c776b0af1cbd2a5240862826d3d8918601e47f
+Signed-off-by: Amar Tumballi <amarts@redhat.com>
+
+Upstream-Status: Backport
+
+Fix CVE-2018-10923
+Modified to suite the old version of glusterfs.
+
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+---
+ xlators/storage/posix/src/posix.c | 33 +++++++++++++++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
+
+diff --git a/xlators/storage/posix/src/posix.c b/xlators/storage/posix/src/posix.c
+index b1a529b..506ae91 100644
+--- a/xlators/storage/posix/src/posix.c
++++ b/xlators/storage/posix/src/posix.c
+@@ -3091,6 +3091,17 @@ posix_open (call_frame_t *frame, xlator_t *this,
+         priv = this->private;
+         VALIDATE_OR_GOTO (priv, out);
+ 
++        if (loc->inode &&
++            ((loc->inode->ia_type == IA_IFBLK) ||
++             (loc->inode->ia_type == IA_IFCHR))) {
++                gf_msg (this->name, GF_LOG_ERROR, EINVAL,
++                        P_MSG_INVALID_ARGUMENT,
++                        "open received on a block/char file (%s)",
++                        uuid_utoa (loc->inode->gfid));
++                op_errno = EINVAL;
++                goto out;
++        }
++
+         MAKE_INODE_HANDLE (real_path, this, loc, &stbuf);
+         if (!real_path) {
+                 op_ret = -1;
+@@ -3180,6 +3191,17 @@ posix_readv (call_frame_t *frame, xlator_t *this,
+         priv = this->private;
+         VALIDATE_OR_GOTO (priv, out);
+ 
++        if (fd->inode &&
++            ((fd->inode->ia_type == IA_IFBLK) ||
++             (fd->inode->ia_type == IA_IFCHR))) {
++                gf_msg (this->name, GF_LOG_ERROR, EINVAL,
++                        P_MSG_INVALID_ARGUMENT,
++                        "readv received on a block/char file (%s)",
++                        uuid_utoa (fd->inode->gfid));
++                op_errno = EINVAL;
++                goto out;
++        }
++
+         ret = posix_fd_ctx_get (fd, this, &pfd, &op_errno);
+         if (ret < 0) {
+                 gf_msg (this->name, GF_LOG_WARNING, op_errno, P_MSG_PFD_NULL,
+@@ -3415,6 +3437,17 @@ posix_writev (call_frame_t *frame, xlator_t *this, fd_t *fd,
+ 
+         VALIDATE_OR_GOTO (priv, out);
+ 
++        if (fd->inode &&
++            ((fd->inode->ia_type == IA_IFBLK) ||
++             (fd->inode->ia_type == IA_IFCHR))) {
++                gf_msg (this->name, GF_LOG_ERROR, EINVAL,
++                        P_MSG_INVALID_ARGUMENT,
++                        "writev received on a block/char file (%s)",
++                        uuid_utoa (fd->inode->gfid));
++                op_errno = EINVAL;
++                goto out;
++        }
++
+         ret = posix_fd_ctx_get (fd, this, &pfd, &op_errno);
+         if (ret < 0) {
+                 gf_msg (this->name, GF_LOG_WARNING, ret, P_MSG_PFD_NULL,
+-- 
+2.7.4
+

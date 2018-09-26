@@ -24,6 +24,7 @@ SRC_URI += "file://glusterd.init \
             file://0002-server-auth-add-option-for-strict-authentication.patch \
             file://0003-glusterfs-access-trusted-peer-group-via-remote-host-.patch \
             file://0001-dict-handle-negative-key-value-length-while-unserial.patch \
+            file://0002-posix-disable-open-read-write-on-special-files.patch \
            "
 
 LICENSE = "(LGPLv3+ | GPLv2) & GPLv3+ & LGPLv3+ & GPLv2+ & LGPLv2+ & LGPLv2.1+ & Apache-2.0"
