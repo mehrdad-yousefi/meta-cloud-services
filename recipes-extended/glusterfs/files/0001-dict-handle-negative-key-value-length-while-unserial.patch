@@ -1,0 +1,39 @@
+From 428ee988df7d6cbe6e18becffcee5cdfb0fa9d17 Mon Sep 17 00:00:00 2001
+From: Amar Tumballi <amarts@redhat.com>
+Date: Tue, 24 Jul 2018 13:25:12 +0530
+Subject: [PATCH 1/7] dict: handle negative key/value length while unserialize
+
+Fixes: bz#1625089
+Change-Id: Ie56df0da46c242846a1ba51ccb9e011af118b119
+Signed-off-by: Amar Tumballi <amarts@redhat.com>
+
+Upstream-Status: Backport
+
+Fix CVE-2018-10911
+
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+---
+ libglusterfs/src/dict.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/libglusterfs/src/dict.c b/libglusterfs/src/dict.c
+index 839b426..ac0a677 100644
+--- a/libglusterfs/src/dict.c
++++ b/libglusterfs/src/dict.c
+@@ -2751,6 +2751,13 @@ dict_unserialize (char *orig_buf, int32_t size, dict_t **fill)
+                 vallen = ntoh32 (hostord);
+                 buf += DICT_DATA_HDR_VAL_LEN;
+ 
++                if ((keylen < 0) || (vallen < 0)) {
++                        gf_msg_callingfn ("dict", GF_LOG_ERROR, 0,
++                                          LG_MSG_UNDERSIZED_BUF,
++                                          "undersized length passed "
++                                          "key:%d val:%d", keylen, vallen);
++                        goto out;
++                }
+                 if ((buf + keylen) > (orig_buf + size)) {
+                         gf_msg_callingfn ("dict", GF_LOG_ERROR, 0,
+                                           LG_MSG_UNDERSIZED_BUF,
+-- 
+2.7.4
+
