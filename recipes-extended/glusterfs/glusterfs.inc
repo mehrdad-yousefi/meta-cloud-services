@@ -26,6 +26,7 @@ SRC_URI += "file://glusterd.init \
             file://0001-dict-handle-negative-key-value-length-while-unserial.patch \
             file://0002-posix-disable-open-read-write-on-special-files.patch \
             file://0003-server-protocol-don-t-allow-.-path-in-name.patch \
+            file://0004-io-stats-dump-io-stats-info-in-var-run-gluster.patch \
            "
 
 LICENSE = "(LGPLv3+ | GPLv2) & GPLv3+ & LGPLv3+ & GPLv2+ & LGPLv2+ & LGPLv2.1+ & Apache-2.0"
