@@ -29,6 +29,7 @@ SRC_URI += "file://glusterd.init \
             file://0004-io-stats-dump-io-stats-info-in-var-run-gluster.patch \
             file://0005-cluster-afr-Fix-dict-leak-in-pre-op.patch \
             file://0006-posix-remove-not-supported-get-set-content.patch \
+            file://0007-protocol-don-t-use-alloca.patch \
            "
 
 LICENSE = "(LGPLv3+ | GPLv2) & GPLv3+ & LGPLv3+ & GPLv2+ & LGPLv2+ & LGPLv2.1+ & Apache-2.0"
