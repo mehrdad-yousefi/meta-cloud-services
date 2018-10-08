@@ -19,7 +19,6 @@ patches: 0001-python-sqlalchemy-update-to-0.7.9.patch
 revision: HEAD
 layers: meta-oe
 	meta-networking
-        meta-ruby
 
 URI: git://git.yoctoproject.org/meta-virtualization
 branch: master
