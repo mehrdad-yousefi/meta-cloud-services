@@ -23,3 +23,6 @@ do_install_append() {
 }
 
 FILES_${PN} += "${systemd_unitdir}/system"
+
+#for i586, executable consul contains textrel
+INSANE_SKIP_${PN} += "textrel"
