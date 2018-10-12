@@ -15,7 +15,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=39cc3044d68741f9005da73e9b92db95"
 DEPENDS = "virtual/libibverbs"
 
 # Repo is at http://git.openfabrics.org/git?p=~shefty/librdmacm.git
-SRC_URI = "http://www.openfabrics.org/downloads/rdmacm/${BPN}-${PV}.tar.gz \
+SRC_URI = "https://www.openfabrics.org/downloads/rdmacm/${BPN}-${PV}.tar.gz \
            file://librdmacm-needs-libdl.patch"
 
 SRC_URI[md5sum] = "da6fad887e9c24cb01b74b75f8449cb1"
