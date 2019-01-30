@@ -1,5 +1,5 @@
 DESCRIPTION = "mox3: mock object framework for Python"
-HOMEPAGE = "https://pypi.python.org/pypi/mox3/0.9.0"
+HOMEPAGE = "https://pypi.python.org/pypi/mox3"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
