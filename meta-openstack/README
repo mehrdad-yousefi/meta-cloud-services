@@ -54,7 +54,7 @@ Send pull requests, patches, comments or questions to meta-virtualization@yoctop
 When sending single patches, please using something like:
 'git send-email -1 -M --to meta-virtualization@yoctoproject.org --subject-prefix=meta-virtualization][m-c-s][PATCH'
 
-Maintainers: Bruce Ashfield <bruce.ashfield@windriver.com>
+Maintainers: Bruce Ashfield <bruce.ashfield@gmail.com>
 
 License
 -------
