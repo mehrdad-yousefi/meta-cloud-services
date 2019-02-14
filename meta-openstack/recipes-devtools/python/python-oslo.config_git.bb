@@ -1,5 +1,5 @@
 DESCRIPTION = "API supporting parsing command line arguments and .ini style configuration files."
-HOMEPAGE = "https://pypi.python.org/pypi/oslo.config/2.6.0"
+HOMEPAGE = "https://pypi.python.org/pypi/oslo.config/4.11.1"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c46f31914956e4579f9b488e71415ac8"
