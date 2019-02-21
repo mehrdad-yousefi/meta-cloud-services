@@ -14,6 +14,10 @@ S = "${WORKDIR}/git"
 
 inherit systemd go
 
+# Besides the hosts specified in goarch, we do not build for mips.
+#
+COMPATIBLE_HOST_mipsarch = "null"
+
 SYSTEMD_SERVICE_${PN} = "consul.service"
 SYSTEMD_AUTO_ENABLE_${PN} = "enable"
 
