@@ -4,13 +4,14 @@ LICENSE = "MPL-2.0 & BSD & Apache-2.0 & BSD-2-Clause & MIT"
 LIC_FILES_CHKSUM = "file://src/github.com/hashicorp/consul/LICENSE;md5=b278a92d2c1509760384428817710378"
 
 GO_IMPORT = "github.com/hashicorp/consul"
-SRCREV = "f97afda8e15046b41d951bf3b4220372c45df7ab"
+SRCREV = "567e41ff6b096a478333c804d5c18264050bc3f8"
 SRC_URI = "git://${GO_IMPORT}.git \
            file://consul.service \
-           file://0001-prepared_query-make-compatible-with-go1.5.patch \
           "
 
 S = "${WORKDIR}/git"
+
+RDEPENDS_${PN}-dev_append = " bash"
 
 inherit systemd go
 
