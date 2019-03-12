@@ -2,13 +2,13 @@ DESCRIPTION = "croniter provides iteration for datetime object with cron like fo
 HOMEPAGE = "https://pypi.python.org/pypi/croniter/0.3.4"
 SECTION = "devel/python"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=2c82e6382ef84397e2341a04f039abcc"
+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=21cc5101d5b0c940e3354fb1bd26c7e5"
 
 # Archived version so we have to overwrite what the pypi class will derive
-PYPI_SRC_URI = "https://pypi.python.org/packages/source/c/croniter/croniter-${PV}.zip"
+PYPI_SRC_URI = "https://pypi.python.org/packages/source/c/croniter/croniter-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "63cf9e4d6778dc4102a4794a39a1b45b"
-SRC_URI[sha256sum] = "ecd5cda855668ae11ed5ea341e9c2145bbab88bfd0763666951cfe15bab23f50"
+SRC_URI[md5sum] = "f5543f9f165fe725b2133b698f520380"
+SRC_URI[sha256sum] = "fbd72189a0ff38c27e953d15175c5fedafb953479559240a1afcf8e8e7523757"
 
 inherit setuptools pypi
 
