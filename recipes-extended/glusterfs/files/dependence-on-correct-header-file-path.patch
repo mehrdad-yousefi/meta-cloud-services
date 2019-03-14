@@ -1,6 +1,6 @@
-From e585cea1d27be3769c33cf1c0a38bf0de41e2bf9 Mon Sep 17 00:00:00 2001
-From: Xulin Sun <xulin.sun@windriver.com>
-Date: Tue, 22 Mar 2016 16:05:32 +0800
+From 204149d9b46ccec3a354ad4cfcc230c1fab93982 Mon Sep 17 00:00:00 2001
+From: "Hongzhi.Song" <hongzhi.song@windriver.com>
+Date: Tue, 12 Mar 2019 22:04:12 -0700
 Subject: [PATCH] dependence on correct header file path
 
 To avoid the below building error, use the correct header file path.
@@ -10,21 +10,25 @@ No such file or directory
 Upstream-Status: Inappropriate [embedded specific]
 
 Signed-off-by: Xulin Sun <xulin.sun@windriver.com>
-
+[Hongzhi:adjust the patch for v5.4]
+Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
 ---
  xlators/features/glupy/src/glupy.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/xlators/features/glupy/src/glupy.c b/xlators/features/glupy/src/glupy.c
-index bca4764..7c2b271 100644
+index d1a111e..58cdaf9 100644
 --- a/xlators/features/glupy/src/glupy.c
 +++ b/xlators/features/glupy/src/glupy.c
-@@ -10,7 +10,7 @@
- 
+@@ -11,7 +11,7 @@
  #include <ctype.h>
+ #include <dlfcn.h>
  #include <sys/uio.h>
 -#include <Python.h>
 +#include <python2.7/Python.h>
  
  #include "glusterfs.h"
  #include "xlator.h"
+-- 
+2.17.1
+

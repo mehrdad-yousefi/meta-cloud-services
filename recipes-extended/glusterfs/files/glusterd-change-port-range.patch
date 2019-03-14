@@ -1,6 +1,6 @@
-From 0102ca092047f51b936d39af966f19b23548c606 Mon Sep 17 00:00:00 2001
-From: Vu Tran <vu.tran@windriver.com>
-Date: Wed, 26 Jul 2017 08:42:09 +0800
+From a0ed85e0b268dba76d9c820571e1b9217b51e985 Mon Sep 17 00:00:00 2001
+From: "Hongzhi.Song" <hongzhi.song@windriver.com>
+Date: Tue, 12 Mar 2019 20:03:21 -0700
 Subject: [PATCH] glusterd: change port range
 
 glusterfsd chooses tcp ports within the dynamic
@@ -22,19 +22,24 @@ Signed-off-by: Vu Tran <vu.tran@windriver.com>
 Signed-off-by: Xulin Sun <xulin.sun@windriver.com>
 [Yi: minor adjust to apply the patch on 3.11.1]
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-
+[Hogzhi: minor adjust to apply the patch on v5.4]
+Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
 ---
  extras/glusterd.vol | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/extras/glusterd.vol b/extras/glusterd.vol
-index d882007..c8dfe91 100644
+index 88d412c..b89aa56 100644
 --- a/extras/glusterd.vol
 +++ b/extras/glusterd.vol
-@@ -8,5 +8,5 @@ volume management
-     option ping-timeout 0
+@@ -9,6 +9,6 @@ volume management
      option event-threads 1
+ #   option lock-timer 180
  #   option transport.address-family inet6
 -#   option base-port 49152
 +#   option base-port 59152
+ #   option max-port  65535
  end-volume
+-- 
+2.17.1
+

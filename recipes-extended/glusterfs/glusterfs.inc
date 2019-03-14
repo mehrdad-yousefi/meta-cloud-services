@@ -11,7 +11,7 @@ SECTION = "console/network"
 SRC_URI += "file://glusterd.init \
             file://glusterd.service \
             file://glusterfs-configure-automake-with-subdir-objects-for.patch \
-            file://xlator-host-contamination-3.4.patch \
+            file://xlator-host-contamination-5.4.patch \
             file://glusterfs-disable-default-startup-scripts.patch \
             file://glusterfs-api-remove-unnecessary-library-options.patch \
             file://python-work-around-host-and-target-python.patch \
@@ -20,15 +20,6 @@ SRC_URI += "file://glusterd.init \
             file://libglusterfs-Don-t-link-against-libfl.patch \
             file://glusterd-change-port-range.patch \
             file://configure.ac-allow-PYTHON-values-to-be-passed-via-en.patch \
-            file://0001-shared-storage-Prevent-mounting-shared-storage-from-.patch \
-            file://0002-server-auth-add-option-for-strict-authentication.patch \
-            file://0003-glusterfs-access-trusted-peer-group-via-remote-host-.patch \
-            file://0001-dict-handle-negative-key-value-length-while-unserial.patch \
-            file://0002-posix-disable-open-read-write-on-special-files.patch \
-            file://0003-server-protocol-don-t-allow-.-path-in-name.patch \
-            file://0004-io-stats-dump-io-stats-info-in-var-run-gluster.patch \
-            file://0006-posix-remove-not-supported-get-set-content.patch \
-            file://0007-protocol-don-t-use-alloca.patch \
            "
 
 LICENSE = "(LGPLv3+ | GPLv2) & GPLv3+ & LGPLv3+ & GPLv2+ & LGPLv2+ & LGPLv2.1+ & Apache-2.0"
@@ -38,8 +29,8 @@ LIC_FILES_CHKSUM = "file://COPYING-GPLV2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 
 inherit autotools pkgconfig distutils-base update-rc.d systemd
 
-DEPENDS += "bison-native flex-native python-native fuse libaio libtirpc libxml2 ncurses \
-            openssl python readline zlib liburcu util-linux glib-2.0 acl"
+DEPENDS += "bison-native flex-native python3-native fuse libaio libtirpc libxml2 ncurses \
+            openssl python3 readline zlib liburcu util-linux glib-2.0 acl"
 
 # rpc now comes from libtirpc instead of glibc
 #
@@ -49,6 +40,7 @@ LDFLAGS += " -ltirpc"
 EXTRA_OECONF = "ac_cv_file__etc_debian_version=no \
                 ac_cv_file__etc_SuSE_release=no \
                 ac_cv_file__etc_redhat_release=no \
+				ac_cv_file__etc_centos_release=no \
                 --with-mountutildir=${sbindir} \
                 --disable-fusermount \
                 TARGET_PYTHON=${bindir}/python \
@@ -64,7 +56,7 @@ PACKAGECONFIG[debug] = "--enable-debug,--disable-debug,,"
 PACKAGECONFIG[georeplication] = "--enable-georeplication,--disable-georeplication,,rsync"
 PACKAGECONFIG[libibverbs] = "--enable-ibverbs,--disable-ibverbs,virtual/libibverbs librdmacm,"
 PACKAGECONFIG[ocf] = "--with-ocf,--without-ocf,,"
-PACKAGECONFIG[valgrind] = "--with-valgrind,--without-valgrind,valgrind,"
+PACKAGECONFIG[valgrind] = "--enable-valgrind,--disable-valgrind,valgrind,"
 
 do_install_append() {
     install -d ${D}${sysconfdir}/init.d
@@ -123,9 +115,10 @@ INSANE_SKIP_${PN}-server += "dev-so"
 PACKAGES += "${PN}-rdma ${PN}-geo-replication ${PN}-fuse ${PN}-server \
              ${PN}-api ${PN}-ocf"
 
-RDEPENDS_${PN} += "python python-json python-ctypes bash"
+RDEPENDS_${PN} += "python3-core python-json python-ctypes bash"
 RDEPENDS_${PN}-ocf += "bash"
 RDEPENDS_${PN}-server += "bash"
+RDEPENDS_${PN}-geo-replication += "python3"
 
 FILES_${PN}-dbg += "${libdir}/glusterfs/${PV}/*/.debug \
                     ${libdir}/glusterfs/${PV}/*/*/.debug \
@@ -142,6 +135,7 @@ FILES_${PN} = "${libdir}/glusterfs/${PV}/auth \
                ${libdir}/glusterfs/${PV}/xlator/protocol/client* \
                ${libdir}/glusterfs/${PV}/xlator/system \
                ${libdir}/glusterfs/${PV}/xlator/testing \
+			   ${libdir}/glusterfs/${PV}/xlator/playground \
                ${libdir}/glusterfs/${PV}/xlator/meta.so \
                ${libdir}/glusterfs/ganesha \
                ${libdir}/glusterfs/glusterfs/glusterfind \
@@ -154,6 +148,7 @@ FILES_${PN} = "${libdir}/glusterfs/${PV}/auth \
                ${libdir}/libgfdb.so.* \
                ${libdir}/libgfxdr.so.* \
                ${libdir}/python*/site-packages \
+			   ${libexecdir}/glusterfs/gfevents \
                ${libexecdir}/glusterfs/events \
                ${libexecdir}/glusterfs/glusterfind \
                ${libexecdir}/glusterfs/gfind_missing_files \
@@ -174,6 +169,7 @@ FILES_${PN} = "${libdir}/glusterfs/${PV}/auth \
                ${sbindir}/glustereventsd \
                ${sbindir}/gf_attach \
                ${sbindir}/*.py \
+			   ${sbindir}/gluster-setgfid2path \
                ${bindir}/ \
                ${sysconfdir}/glusterfs \
                ${sysconfdir}/ganesha \

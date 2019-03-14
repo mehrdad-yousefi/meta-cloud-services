@@ -1,6 +1,6 @@
-From d4109317c70c86a67464b7deebbe0c3de88773e1 Mon Sep 17 00:00:00 2001
-From: Xulin Sun <xulin.sun@windriver.com>
-Date: Fri, 25 Mar 2016 12:33:04 +0800
+From 732bcca9f5fbb6defca8c327744d015d6747864b Mon Sep 17 00:00:00 2001
+From: "Hongzhi.Song" <hongzhi.song@windriver.com>
+Date: Tue, 12 Mar 2019 19:56:59 -0700
 Subject: [PATCH] libglusterfs: Don't link against libfl
 
 Remove reference to yywrap by adding "%option noyywrap" statements to
@@ -11,25 +11,11 @@ undefined references to yylex.
 Upstream-Status: Inappropriate [embedded specific]
 
 Signed-off-by: Xulin Sun <xulin.sun@windriver.com>
-
+Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
 ---
- libglusterfs/src/Makefile.am | 2 +-
- libglusterfs/src/graph.l     | 1 +
- 2 files changed, 2 insertions(+), 1 deletion(-)
+ libglusterfs/src/graph.l | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/libglusterfs/src/Makefile.am b/libglusterfs/src/Makefile.am
-index 52b7316..ab5567a 100644
---- a/libglusterfs/src/Makefile.am
-+++ b/libglusterfs/src/Makefile.am
-@@ -11,7 +11,7 @@ libglusterfs_la_CPPFLAGS = $(GF_CPPFLAGS) -D__USE_FILE_OFFSET64 \
- 	-I$(CONTRIBDIR)/libexecinfo ${ARGP_STANDALONE_CPPFLAGS} \
- 	-DSBIN_DIR=\"$(sbindir)\" -I$(CONTRIBDIR)/timer-wheel
- 
--libglusterfs_la_LIBADD = @LEXLIB@ $(ZLIB_LIBS) $(MATH_LIB) $(UUID_LIBS)
-+libglusterfs_la_LIBADD = $(ZLIB_LIBS) $(MATH_LIB) $(UUID_LIBS)
- libglusterfs_la_LDFLAGS = -version-info $(LIBGLUSTERFS_LT_VERSION)
- 
- lib_LTLIBRARIES = libglusterfs.la
 diff --git a/libglusterfs/src/graph.l b/libglusterfs/src/graph.l
 index 8af28a4..742d934 100644
 --- a/libglusterfs/src/graph.l
@@ -42,3 +28,6 @@ index 8af28a4..742d934 100644
  %{
  
  #define YYSTYPE char *
+-- 
+2.17.1
+

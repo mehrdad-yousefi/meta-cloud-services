@@ -1,6 +1,6 @@
-From fbe4fdfddb096e4e6650908929c366dcc9556ade Mon Sep 17 00:00:00 2001
-From: Mark Asselstine <mark.asselstine@windriver.com>
-Date: Thu, 27 Feb 2014 21:50:40 -0500
+From 80c38519224635e9fe2a21542b7dbb14e4c16dcc Mon Sep 17 00:00:00 2001
+From: "Hongzhi.Song" <hongzhi.song@windriver.com>
+Date: Tue, 12 Mar 2019 19:46:27 -0700
 Subject: [PATCH] python: work around host and target python
 
 In order to allow for the build system to make use of python but not
@@ -18,7 +18,8 @@ Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
 Signed-off-by: Xulin Sun <xulin.sun@windriver.com>
 [Yi: minor adjust the code to apply the patch on 3.11.1]
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-
+[Hongzhi: minor adjust the code to apply on v5.4]
+Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
 ---
  configure.ac                    | 2 ++
  geo-replication/src/Makefile.am | 3 ++-
@@ -26,10 +27,10 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
  3 files changed, 7 insertions(+), 4 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 8ce28f6..8e0652a 100644
+index bc4cf93..d55a7b2 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -270,6 +270,8 @@ AC_CANONICAL_HOST
+@@ -279,6 +279,8 @@ AC_CANONICAL_HOST
  AC_PROG_CC
  AC_DISABLE_STATIC
  AC_PROG_LIBTOOL
@@ -53,27 +54,30 @@ index 9937a0b..07456fb 100644
  AM_CFLAGS = -Wall $(GF_CFLAGS)
  
 diff --git a/geo-replication/src/gsyncd.c b/geo-replication/src/gsyncd.c
-index 2c48ca5..b1d1126 100644
+index 77af662..8cd0551 100644
 --- a/geo-replication/src/gsyncd.c
 +++ b/geo-replication/src/gsyncd.c
-@@ -153,9 +153,9 @@ invoke_gsyncd (int argc, char **argv)
-                 goto error;
+@@ -118,9 +118,9 @@ invoke_gsyncd(int argc, char **argv)
+         goto error;
  
-         j = 0;
--        python = getenv("PYTHON");
-+        python = getenv("TARGET_PYTHON");
-         if(!python)
--                python = PYTHON;
-+                python = TARGET_PYTHON;
-         nargv[j++] = python;
-         nargv[j++] = GSYNCD_PREFIX"/python/syncdaemon/"GSYNCD_PY;
-         for (i = 1; i < argc; i++)
-@@ -205,7 +205,7 @@ find_gsyncd (pid_t pid, pid_t ppid, char *name, void *data)
-         ret = 0;
-         switch (zeros) {
+     j = 0;
+-    python = getenv("PYTHON");
++	python = getenv("TARGET_PYTHON");
+     if (!python)
+-        python = PYTHON;
++		python = TARGET_PYTHON;
+     nargv[j++] = python;
+     nargv[j++] = GSYNCD_PREFIX "/python/syncdaemon/" GSYNCD_PY;
+     for (i = 1; i < argc; i++)
+@@ -170,7 +170,7 @@ find_gsyncd(pid_t pid, pid_t ppid, char *name, void *data)
+     ret = 0;
+     switch (zeros) {
          case 2:
--                if ((strcmp (basename (buf), basename (PYTHON)) ||
-+                if ((strcmp (basename (buf), basename (TARGET_PYTHON)) ||
-                      strcmp (basename (buf + strlen (buf) + 1), GSYNCD_PY)) == 0) {
-                         ret = 1;
-                         break;
+-            if ((strcmp(basename(buf), basename(PYTHON)) ||
++			if ((strcmp (basename (buf), basename (TARGET_PYTHON)) ||
+                  strcmp(basename(buf + strlen(buf) + 1), GSYNCD_PY)) == 0) {
+                 ret = 1;
+                 break;
+-- 
+2.17.1
+

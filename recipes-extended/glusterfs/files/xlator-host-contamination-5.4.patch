@@ -1,6 +1,6 @@
-From 79c943bba37cb10a462038ec56cd2b8045344951 Mon Sep 17 00:00:00 2001
-From: Donn Seeley <donn.seeley@windriver.com>
-Date: Fri, 28 Feb 2014 09:11:02 -0500
+From a18891a9807b209c7c0811e0e6ca08c4570809d0 Mon Sep 17 00:00:00 2001
+From: "Hongzhi.Song" <hongzhi.song@windriver.com>
+Date: Tue, 12 Mar 2019 22:00:46 -0700
 Subject: [PATCH] Add the glusterfs package
 
 Three of the translator makefiles in glusterfs add unnecessary
@@ -13,7 +13,8 @@ Upstream-Status: Pending
 Signed-off-by: Donn Seeley <donn.seeley@windriver.com>
 [Xulin: minor adjust to apply the patch]
 Signed-off-by: Xuin Sun <xulin.sun@windriver.com>
-
+[Hongzhi: minor adjust to apply the patch]
+Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
 ---
  xlators/mgmt/glusterd/src/Makefile.am    | 2 +-
  xlators/nfs/server/src/Makefile.am       | 2 --
@@ -21,12 +22,12 @@ Signed-off-by: Xuin Sun <xulin.sun@windriver.com>
  3 files changed, 1 insertion(+), 5 deletions(-)
 
 diff --git a/xlators/mgmt/glusterd/src/Makefile.am b/xlators/mgmt/glusterd/src/Makefile.am
-index b0f5a9b..0caad43 100644
+index aa75344..834c4b5 100644
 --- a/xlators/mgmt/glusterd/src/Makefile.am
 +++ b/xlators/mgmt/glusterd/src/Makefile.am
-@@ -55,7 +55,7 @@ AM_CPPFLAGS = $(GF_CPPFLAGS) -I$(top_srcdir)/libglusterfs/src \
+@@ -60,7 +60,7 @@ AM_CPPFLAGS = $(GF_CPPFLAGS) -I$(top_srcdir)/libglusterfs/src \
  
- AM_CFLAGS = -Wall $(GF_CFLAGS) $(URCU_CFLAGS) $(URCU_CDS_CFLAGS)
+ AM_CFLAGS = -Wall $(GF_CFLAGS) $(URCU_CFLAGS) $(URCU_CDS_CFLAGS) $(XML_CFLAGS)
  
 -AM_LDFLAGS = -L$(xlatordir) $(URCU_LIBS) $(URCU_CDS_LIBS)
 +AM_LDFLAGS = -L$(URCU_LIBS) $(URCU_CDS_LIBS)
@@ -34,10 +35,10 @@ index b0f5a9b..0caad43 100644
  CLEANFILES =
  
 diff --git a/xlators/nfs/server/src/Makefile.am b/xlators/nfs/server/src/Makefile.am
-index bc6f8e9..56086a1 100644
+index 01071a7..297d3cb 100644
 --- a/xlators/nfs/server/src/Makefile.am
 +++ b/xlators/nfs/server/src/Makefile.am
-@@ -25,8 +25,6 @@ AM_CPPFLAGS = $(GF_CPPFLAGS) \
+@@ -31,8 +31,6 @@ AM_CPPFLAGS = $(GF_CPPFLAGS) \
  
  AM_CFLAGS = -Wall $(GF_CFLAGS)
  
@@ -59,3 +60,6 @@ index f57070c..70080a6 100644
  CLEANFILES =
  
  access-control-compat:
+-- 
+2.17.1
+

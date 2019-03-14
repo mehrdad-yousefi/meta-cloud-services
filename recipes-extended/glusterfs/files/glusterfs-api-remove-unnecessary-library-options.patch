@@ -1,7 +1,7 @@
-From 61075d7e4459e4cb9168d1c423ac56db240bb463 Mon Sep 17 00:00:00 2001
-From: Jim Somerville <Jim.Somerville@windriver.com>
-Date: Wed, 12 Feb 2014 15:41:50 +0000
-Subject: [PATCH] glusterfs-api remove unnecessary library options
+From 2ef09531d1d14cd64d5ba4ffbd9a99af10ae1ec4 Mon Sep 17 00:00:00 2001
+From: "Hongzhi.Song" <hongzhi.song@windriver.com>
+Date: Tue, 12 Mar 2019 19:37:51 -0700
+Subject: [PATCH] glusterfs-api: remove unnecessary library options
 
 These cause QA errors when users of the api such
 as qemu generate their packages.  The reported
@@ -11,13 +11,13 @@ Upstream-Status: Inappropriate [embedded specific]
 
 Signed-off-by: Jim Somerville <Jim.Somerville@windriver.com>
 Signed-off-by: Xulin Sun <xulin.sun@windriver.com>
-
+Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
 ---
  glusterfs-api.pc.in | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/glusterfs-api.pc.in b/glusterfs-api.pc.in
-index 5d23454..8a602f6 100644
+index 6af4e10..01b9d0f 100644
 --- a/glusterfs-api.pc.in
 +++ b/glusterfs-api.pc.in
 @@ -8,5 +8,5 @@ Description: GlusterFS API
@@ -26,4 +26,7 @@ index 5d23454..8a602f6 100644
  Requires: @PKGCONFIG_UUID@
 -Libs: -L${libdir} @GFAPI_LIBS@ -lgfapi -lglusterfs -lgfrpc -lgfxdr
 +Libs: -lgfapi -lglusterfs -lgfrpc -lgfxdr
- Cflags: -I${includedir}/glusterfs -D_FILE_OFFSET_BITS=64 -D__USE_FILE_OFFSET64 -DUSE_POSIX_ACLS=@USE_POSIX_ACLS@
+ Cflags: -I${includedir} -D_FILE_OFFSET_BITS=64 -D__USE_FILE_OFFSET64 -DUSE_POSIX_ACLS=@USE_POSIX_ACLS@
+-- 
+2.17.1
+
