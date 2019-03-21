@@ -152,6 +152,7 @@ FILES_${PN} = "${libdir}/glusterfs/${PV}/auth \
                ${libexecdir}/glusterfs/events \
                ${libexecdir}/glusterfs/glusterfind \
                ${libexecdir}/glusterfs/gfind_missing_files \
+               ${libexecdir}/glusterfs/mount-shared-storage.sh \
                ${libexecdir}/glusterfs/peer_mountbroker.py \
                ${libexecdir}/glusterfs/peer_eventsapi.py \
                ${libexecdir}/glusterfs/peer_mountbroker \
