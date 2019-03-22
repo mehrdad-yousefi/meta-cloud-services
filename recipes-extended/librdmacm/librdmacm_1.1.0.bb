@@ -16,10 +16,10 @@ DEPENDS = "virtual/libibverbs"
 
 # Repo is at http://git.openfabrics.org/git?p=~shefty/librdmacm.git
 SRC_URI = "https://www.openfabrics.org/downloads/rdmacm/${BPN}-${PV}.tar.gz \
-           file://librdmacm-needs-libdl.patch"
+           file://0001-librdmacm-needs-libdl.patch"
 
-SRC_URI[md5sum] = "da6fad887e9c24cb01b74b75f8449cb1"
-SRC_URI[sha256sum] = "9381e1bf2c7079fc257b8eee74e731d3e7eec70e539bb4245084a7b05aeecb2a"
+SRC_URI[md5sum] = "9459e523002978ef6e7b852e01d8b29e"
+SRC_URI[sha256sum] = "8f10848d4810585d6d70b443abc876c1db8df5e9b8b07e095c7e6eaf4ac380c5"
 
 inherit autotools
 
