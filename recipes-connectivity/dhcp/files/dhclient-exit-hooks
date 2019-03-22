@@ -66,6 +66,9 @@ while [ $# -ne 0 ]; do
   elif [ $mask -gt 8 ]; then
     destination="-net $1.$2.0.0/$mask"
     shift; shift
+  #Add the default route
+  elif [ $mask -eq 0 ]; then
+    destination="default"
   else
     destination="-net $1.0.0.0/$mask"
     shift
