@@ -13,6 +13,11 @@ S = "${WORKDIR}/git"
 
 RDEPENDS_${PN}-dev_append = " bash"
 
+# Temporarily workaround an issue with GO 1.12.1
+# http://www.lyddzz.com/github_/golang/go/issues/30768
+# Disable experimental use of '-linkshared'.
+GO_LINKSHARED = ""
+
 inherit systemd go
 
 # Besides the hosts specified in goarch, we do not build for mips.
