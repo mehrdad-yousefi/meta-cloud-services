@@ -29,3 +29,6 @@ do_install_append() {
 
 PROVIDES = "virtual/libibverbs"
 RPROVIDES_${PN} = "virtual/libibverbs"
+
+COMPATIBLE_HOST_mipsarch = "none"
+COMPATIBLE_HOST_arm = "none"
