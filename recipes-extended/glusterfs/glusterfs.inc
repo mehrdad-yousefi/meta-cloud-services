@@ -16,7 +16,6 @@ SRC_URI += "file://glusterd.init \
             file://glusterfs-api-remove-unnecessary-library-options.patch \
             file://python-work-around-host-and-target-python.patch \
             file://glusterfs-change-default-nfs-port-number.patch \
-            file://dependence-on-correct-header-file-path.patch \
             file://libglusterfs-Don-t-link-against-libfl.patch \
             file://glusterd-change-port-range.patch \
             file://configure.ac-allow-PYTHON-values-to-be-passed-via-en.patch \
@@ -51,7 +50,6 @@ EXTRA_OECONF = "ac_cv_file__etc_debian_version=no \
                "
 
 PACKAGECONFIG ??= "georeplication libibverbs"
-PACKAGECONFIG[bd-xlator] = "--enable-bd-xlator,--disable-bd-xlator,lvm2,"
 PACKAGECONFIG[debug] = "--enable-debug,--disable-debug,,"
 PACKAGECONFIG[georeplication] = "--enable-georeplication,--disable-georeplication,,rsync"
 PACKAGECONFIG[libibverbs] = "--enable-ibverbs,--disable-ibverbs,virtual/libibverbs librdmacm,"

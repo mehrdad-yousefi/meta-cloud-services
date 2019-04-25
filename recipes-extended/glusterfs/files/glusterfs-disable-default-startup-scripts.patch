@@ -1,6 +1,6 @@
-From 08b55ee9ccb02db0519ddc9902025e191c1500b1 Mon Sep 17 00:00:00 2001
-From: Donn Seeley <donn.seeley@windriver.com>
-Date: Fri, 28 Feb 2014 09:11:02 -0500
+From bbc23b4723a5f60f2b6f4daf734194f9a3a315d8 Mon Sep 17 00:00:00 2001
+From: "Hongzhi.Song" <hongzhi.song@windriver.com>
+Date: Wed, 24 Apr 2019 22:41:04 -0400
 Subject: [PATCH] Add the glusterfs package
 
 The glusterfs code for installing start-up scripts checks for systemd
@@ -18,21 +18,25 @@ Signed-off-by: Donn Seeley <donn.seeley@windriver.com>
 Signed-off-by: Xulin Sun <xulin.sun@windriver.com>
 [Yi: minor adjust to apply the patch on 3.11.1]
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-
+[modify patch for release-6.1]
+Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
 ---
  extras/Makefile.am | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/extras/Makefile.am b/extras/Makefile.am
-index 3af1103..8978dde 100644
+index ff5ca9b..1f59746 100644
 --- a/extras/Makefile.am
 +++ b/extras/Makefile.am
-@@ -4,7 +4,7 @@ addonexec_SCRIPTS = peer_add_secret_pub
+@@ -10,7 +10,7 @@ endif
  EditorModedir = $(docdir)
  EditorMode_DATA = glusterfs-mode.el glusterfs.vim
  
 -SUBDIRS = init.d systemd benchmarking hook-scripts $(OCF_SUBDIR) LinuxRPM \
 +SUBDIRS = benchmarking hook-scripts $(OCF_SUBDIR) LinuxRPM \
-           $(GEOREP_EXTRAS_SUBDIR) snap_scheduler firewalld cliutils
+           $(GEOREP_EXTRAS_SUBDIR) snap_scheduler firewalld cliutils python
  
  confdir = $(sysconfdir)/glusterfs
+-- 
+2.8.1
+
