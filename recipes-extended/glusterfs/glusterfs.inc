@@ -211,3 +211,4 @@ pkg_postinst_${PN}() {
     fi
 }
 
+CVE_PRODUCT = "glusterfs gluster_storage"
