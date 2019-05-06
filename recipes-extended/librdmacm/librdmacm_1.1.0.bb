@@ -39,3 +39,6 @@ do_install_append() {
         rm -f ${D}${libdir}/librdmacm.la
         rm -f ${D}${libdir}/rsocket/librspreload.la
 }
+
+COMPATIBLE_HOST_mipsarch = "none"
+COMPATIBLE_HOST_arm = "none"
