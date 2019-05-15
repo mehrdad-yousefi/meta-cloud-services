@@ -4,8 +4,8 @@ SECTION = "devel/python"
 LICENSE = "PSF"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=43d1c7827e8fad6454b553caf0e1d734"
 
-SRC_URI[md5sum] = "ea687207db25f65552061db4a2c6727d"
-SRC_URI[sha256sum] = "55a5dc78f7a742a0e756645134ffb39bbe11da0fea2bc0f7070d40dac208b732"
+SRC_URI[md5sum] = "95fe420941ebc64951cd9d89edc41870"
+SRC_URI[sha256sum] = "509f9419ee91cdd00ba34443217d5ca51f5a364a404e1dce9e8979cea969ca48"
 
 inherit setuptools pypi
 
