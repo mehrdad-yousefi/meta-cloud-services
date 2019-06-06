@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5a9126e7f56a0cf3247050de7f10d0f4"
 
 PYPI_PACKAGE = "WSME"
 
-SRC_URI[md5sum] = "f7ab1fecd5fa64f579d6ef3aabf38f60"
-SRC_URI[sha256sum] = "e790ac755a7e36eaa796d3966d3878677896dbc7d1c2685cb85c06b744c21976"
+SRC_URI[md5sum] = "e6cb3864bae872acaa0cd0c2efacc94f"
+SRC_URI[sha256sum] = "e24fcff24392a0b176e560ffc6591b1f658342bbc992f84e0e8a3c53fd92580a"
 
 inherit setuptools pypi
 
