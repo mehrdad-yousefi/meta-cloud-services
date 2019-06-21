@@ -1,5 +1,5 @@
 From fcd612f75c2e99a0748bebbf530b730d0019d2bf Mon Sep 17 00:00:00 2001
-From: "Hongzhi.Song" <hongzhi.song@windriver.com>
+From: Xulin Sun <xulin.sun@windriver.com>
 Date: Wed, 24 Apr 2019 22:33:49 -0400
 Subject: [PATCH] glusterfs: configure: automake with subdir-objects & foreign
  parameters

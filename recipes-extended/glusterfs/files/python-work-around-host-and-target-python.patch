@@ -1,5 +1,5 @@
 From 80c38519224635e9fe2a21542b7dbb14e4c16dcc Mon Sep 17 00:00:00 2001
-From: "Hongzhi.Song" <hongzhi.song@windriver.com>
+From: Mark Asselstine <mark.asselstine@windriver.com>
 Date: Tue, 12 Mar 2019 19:46:27 -0700
 Subject: [PATCH] python: work around host and target python
 

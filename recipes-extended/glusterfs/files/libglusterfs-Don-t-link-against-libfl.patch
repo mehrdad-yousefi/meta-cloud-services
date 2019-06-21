@@ -1,5 +1,5 @@
 From 732bcca9f5fbb6defca8c327744d015d6747864b Mon Sep 17 00:00:00 2001
-From: "Hongzhi.Song" <hongzhi.song@windriver.com>
+From: Xulin Sun <xulin.sun@windriver.com>
 Date: Tue, 12 Mar 2019 19:56:59 -0700
 Subject: [PATCH] libglusterfs: Don't link against libfl
 

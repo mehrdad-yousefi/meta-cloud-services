@@ -1,5 +1,5 @@
 From b8b48d3c4ab92ce167db8137426fad45e938b11b Mon Sep 17 00:00:00 2001
-From: "Hongzhi.Song" <hongzhi.song@windriver.com>
+From: Vu Tran <vu.tran@windriver.com>
 Date: Wed, 24 Apr 2019 22:50:01 -0400
 Subject: [PATCH] glusterfs: change default nfs port number
 

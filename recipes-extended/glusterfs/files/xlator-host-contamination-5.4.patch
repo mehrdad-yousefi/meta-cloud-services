@@ -1,5 +1,5 @@
 From a18891a9807b209c7c0811e0e6ca08c4570809d0 Mon Sep 17 00:00:00 2001
-From: "Hongzhi.Song" <hongzhi.song@windriver.com>
+From: Donn Seeley <donn.seeley@windriver.com>
 Date: Tue, 12 Mar 2019 22:00:46 -0700
 Subject: [PATCH] Add the glusterfs package
 

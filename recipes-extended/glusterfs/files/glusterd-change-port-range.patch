@@ -1,5 +1,5 @@
 From 59d1b6fb5e6315df9fc55a74576b1bfde30303f0 Mon Sep 17 00:00:00 2001
-From: "Hongzhi.Song" <hongzhi.song@windriver.com>
+From: Vu Tran <vu.tran@windriver.com>
 Date: Wed, 24 Apr 2019 23:07:58 -0400
 Subject: [PATCH] glusterd: change port range
 

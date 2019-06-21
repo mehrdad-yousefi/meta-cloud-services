@@ -1,5 +1,5 @@
 From bbc23b4723a5f60f2b6f4daf734194f9a3a315d8 Mon Sep 17 00:00:00 2001
-From: "Hongzhi.Song" <hongzhi.song@windriver.com>
+From: Donn Seeley <donn.seeley@windriver.com>
 Date: Wed, 24 Apr 2019 22:41:04 -0400
 Subject: [PATCH] Add the glusterfs package
 
