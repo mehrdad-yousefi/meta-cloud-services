@@ -20,7 +20,8 @@ SRC_URI = "\
 	file://nslcd.service \
 	"
 
-inherit autotools
+inherit autotools distro_features_check
+REQUIRED_DISTRO_FEATURES = "pam"
 
 SRC_URI[md5sum] = "8c99fdc54f4bf9aca8c5f53fdb1403ff"
 SRC_URI[sha256sum] = "ef7362e7f2003da8c7beb7bcc03c30494acf712625aaac8badc6e7eb16f3453f"
