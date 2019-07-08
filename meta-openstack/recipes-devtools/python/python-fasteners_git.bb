@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4476c4be31402271e101d9a4a3430d52"
 
 SRCNAME = "fasteners"
 
-PV = "0.13.0+git${SRCPV}"
-SRCREV = "c055890c98f67c343ff445973cd4efee67f081ce"
+PV = "0.15+git${SRCPV}"
+SRCREV = "75148cb679c351966cd4ad5e9d177048a0ea8380"
 
 SRC_URI = "git://github.com/harlowja/${SRCNAME}.git"
 
