@@ -8,7 +8,6 @@ inherit packagegroup
 
 RDEPENDS_${PN} = " \
     cloud-init \
-    postgresql-setup \
     postgresql \
     qemu \
     libvirt \
