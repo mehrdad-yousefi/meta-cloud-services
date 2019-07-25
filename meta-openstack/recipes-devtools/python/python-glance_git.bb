@@ -222,7 +222,7 @@ RDEPENDS_${SRCNAME} = " \
 
 RDEPENDS_${SRCNAME}-api = "${SRCNAME}"
 RDEPENDS_${SRCNAME}-registry = "${SRCNAME}"
-RDEPENDS_${SRCNAME}-setup = "postgresql-setup keystone-setup sudo ${SRCNAME}"
+RDEPENDS_${SRCNAME}-setup = "postgresql keystone-setup sudo ${SRCNAME}"
 RDEPENDS_${SRCNAME}-tests = "python-psutil qpid-python bash"
 
 SYSTEMD_PACKAGES = "${SRCNAME}-api ${SRCNAME}-registry ${SRCNAME}-setup"
