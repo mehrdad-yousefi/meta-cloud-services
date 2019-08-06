@@ -31,7 +31,7 @@ SRC_URI = "\
 	git://github.com/openstack/python-ceilometerclient.git;branch=stable/pike \
 	"
 
-PV = "2.9.0+git${SRCPV}"
+PV = "2.9.1"
 SRCREV = "4ee321feeef39fa2a297ad8e58e931b8a03d8f14"
 S = "${WORKDIR}/git"
 
