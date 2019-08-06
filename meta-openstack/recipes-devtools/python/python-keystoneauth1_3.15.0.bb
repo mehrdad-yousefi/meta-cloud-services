@@ -4,8 +4,8 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=96f840d59b245a1c817fbcb901afc574"
 
-SRC_URI[md5sum] = "ada9836933f5aa6bd35faf01c314e81d"
-SRC_URI[sha256sum] = "b14f363d02142177c968cfffeb9eb37113682c03ac3c65d483424e203dd602c3"
+SRC_URI[md5sum] = "0f3e21362a74d1fb8959fc2bf7d28882"
+SRC_URI[sha256sum] = "439f7dcf6edde5ea5a16ef90603d198e118a03f529aba0f8a6d19d5f6433de95"
 
 inherit setuptools pypi
 
