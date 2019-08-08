@@ -4,8 +4,8 @@ SECTION = "devel/python"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=daea7c168428449fbee05e644df929f4"
 
-SRC_URI[md5sum] = "3543525c1bfaa74260cbf9a6e47dad2f"
-SRC_URI[sha256sum] = "27345bb569eb6bb583bca27dfc0ef181ca6c59c40c6e203cecaa0aeca84360be"
+SRC_URI[md5sum] = "adc9167ba3571c5465d6f7abe4945a12"
+SRC_URI[sha256sum] = "eb365ea795cd7e629ba2f1f398e0c3ba354b91ef4de225ffdf6ab45fdfc7d581"
 
 FILES_${PN}-doc += "${datadir}/${SRCNAME}"
 
