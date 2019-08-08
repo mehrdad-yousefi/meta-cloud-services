@@ -1,7 +1,8 @@
-inherit setuptools pypi
+inherit setuptools3 pypi
 require python-osc-lib.inc
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
+
