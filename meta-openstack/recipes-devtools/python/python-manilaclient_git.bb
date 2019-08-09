@@ -33,8 +33,8 @@ RDEPENDS_${PN} +=" \
 SRCNAME = "manilaclient"
 SRC_URI = "git://github.com/openstack/${BPN}.git;branch=master"
 
-PV = "1.4.0+git${SRCPV}"
-SRCREV = "0bbd2144f701df3408b1435b16611c2ba3c22221"
+PV = "1.27.0+git${SRCPV}"
+SRCREV = "07564879ae4bdcb73e856b3aedcb79e4420fa7eb"
 S = "${WORKDIR}/git"
 
 inherit setuptools rmargparse
