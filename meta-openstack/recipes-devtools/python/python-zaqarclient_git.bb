@@ -28,10 +28,10 @@ RDEPENDS_${PN} +=" \
 	"
 	
 SRCNAME = "zaqarclient"
-SRC_URI = "git://github.com/openstack/${BPN}.git;branch=stable/pike"
+SRC_URI = "git://github.com/openstack/${BPN}.git"
 
-PV = "0.7.0+git${SRCPV}"
-SRCREV = "a1c2de74c56c6ddb11dc6aec78e8c438629ca8e8"
+PV = "1.11.0+git${SRCPV}"
+SRCREV = "13e90a0ab5e296fb8cf21d09c666c06ed47a84c0"
 S = "${WORKDIR}/git"
 
 inherit setuptools
