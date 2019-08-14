@@ -5,11 +5,11 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e031cff4528978748f9cc064c6e6fa73"
 
 SRC_URI = "\
-	git://github.com/openstack/python-barbicanclient.git;branch=stable/pike \
+	git://github.com/openstack/python-barbicanclient.git \
 	"
 
-PV = "4.5.2+git${SRCPV}"
-SRCREV = "775de93a612db866bb39ba6828f3e7bd1aa3c9f5"
+PV = "4.8.1+git${SRCPV}"
+SRCREV = "1b282358166fe4c1d4dea896bd336b2850584f56"
 S = "${WORKDIR}/git"
 
 inherit setuptools
