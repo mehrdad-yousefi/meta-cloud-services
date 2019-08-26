@@ -1,2 +1,2 @@
-inherit setuptools3 pypi
+inherit setuptools3
 require python-kombu.inc
