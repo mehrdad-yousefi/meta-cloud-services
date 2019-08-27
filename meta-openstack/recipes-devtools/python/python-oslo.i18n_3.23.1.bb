@@ -4,7 +4,7 @@ SECTION = "devel/python"
 LICENSE = "Apache-2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 
-SRCREV = "172e20b10981069c36b0f42377e5b4fbe22a9864"
+SRCREV = "20bbee510b9714075b7f48f7c3968d7e2bd21a8a"
 
 SRCNAME = "oslo.i18n"
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master"
