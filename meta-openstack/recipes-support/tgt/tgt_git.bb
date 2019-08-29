@@ -2,7 +2,7 @@ DESCRIPTION = "Linux SCSI target framework (tgt)"
 HOMEPAGE = "http://stgt.sourceforge.net"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://scripts/tgtd.spec;beginline=7;endline=7;md5=21c19ea7dad04648b9c2f791b6e29b4c"
-DEPENDS = "sg3-utils"
+DEPENDS = "sg3-utils libaio"
 
 SRCREV = "b43dbc6711e43c0a32cc4d9df22884841d911d51"
 PV = "1.0.79+git${SRCPV}"
@@ -58,6 +58,7 @@ RDEPENDS_${PN} = " \
     bash \
     libaio \
     libconfig-general-perl \
+    perl \
     perl-module-english \
     perl-module-tie-hash-namedcapture \
     perl-module-xsloader \
