@@ -64,9 +64,11 @@ do_install_append() {
     install -m 0755 ${WORKDIR}/glusterd.init \
         ${D}${sysconfdir}/init.d/glusterd
 
-    # Mount looks for mount.* plug-ins in /sbin; fix it with a symlink.
-    mkdir -p ${D}${base_sbindir}
-    (cd ${D}${base_sbindir}; ln -s ..${sbindir}/mount.glusterfs .)
+    if ! ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','true','false',d)}; then
+        # Mount looks for mount.* plug-ins in /sbin; fix it with a symlink.
+        mkdir -p ${D}${base_sbindir}
+        (cd ${D}${base_sbindir}; ln -s ..${sbindir}/mount.glusterfs .)
+    fi
 
     # These are plug-ins, so they don't need libtool configs.
     find ${D}${libdir}/glusterfs/${PV} -name '*.la' -exec rm -f '{}' ';'
