@@ -121,7 +121,7 @@ PACKAGES += "${PN}-rdma ${PN}-geo-replication ${PN}-fuse ${PN}-server \
 RDEPENDS_${PN} += "python3-core python-json python-ctypes bash"
 RDEPENDS_${PN}-ocf += "bash"
 RDEPENDS_${PN}-server += "bash"
-RDEPENDS_${PN}-geo-replication += "python3"
+RDEPENDS_${PN}-geo-replication += "python3-core bash"
 
 FILES_${PN}-dbg += "${libdir}/glusterfs/${PV}/*/.debug \
                     ${libdir}/glusterfs/${PV}/*/*/.debug \
