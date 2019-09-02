@@ -3,21 +3,19 @@ HOMEPAGE = "https://github.com/openstack/python-glanceclient"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
+SRC_URI = "git://github.com/openstack/python-glanceclient.git \
+           file://glance-api-check.sh \
+        "
+
+PV = "2.16.0+git${SRCPV}"
+SRCREV = "44a4dbd6ce2642daeaca9f45ac99e2d1b39e805a"
+S = "${WORKDIR}/git"
+
 DEPENDS += " \
         gmp \
         python-pip \
         python-pbr \
         "
-
-SRCREV = "13b25ff1fed908cfe7b4e719a97efd7121e3be96"
-PV = "2.8.0+git${SRCPV}"
-
-SRC_URI = "\
-	git://github.com/openstack/${BPN}.git;branch=stable/pike \
-	file://glance-api-check.sh \
-	"
-
-S = "${WORKDIR}/git"
 
 inherit setuptools monitor rmargparse
 
