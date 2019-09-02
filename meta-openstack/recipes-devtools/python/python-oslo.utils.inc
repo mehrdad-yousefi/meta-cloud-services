@@ -11,8 +11,6 @@ PV = "3.28.0+git${SRCPV}"
 SRCREV = "8b3965b9bbe1e31a4939f2f69c5239d6d5c7f72c"
 S = "${WORKDIR}/git"
 
-inherit setuptools
-
 # DEPENDS_default: python-pip
 
 DEPENDS += " \
@@ -31,11 +29,9 @@ RDEPENDS_${PN} += " \
         ${PYTHON_PN}-six \
         ${PYTHON_PN}-iso8601 \
         ${PYTHON_PN}-oslo.i18n \
-        ${PYTHON_PN}-monotonic \
         ${PYTHON_PN}-pytz \
         ${PYTHON_PN}-netaddr \
         ${PYTHON_PN}-netifaces \
         ${PYTHON_PN}-debtcollector \
-        ${PYTHON_PN}-funcsigs \
         ${PYTHON_PN}-pyparsing \
         "
