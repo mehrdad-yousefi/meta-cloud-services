@@ -5,10 +5,10 @@ DESCRIPTION = "Simple cross-platform colored terminal text in Python"
 HOMEPAGE = "http://pypi.python.org/pypi/colorama"
 SECTION = "devel/python"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=14d0b64047ed8f510b51ce0495995358"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b4936429a56a652b84c5c01280dcaa26"
 
-SRC_URI[md5sum] = "a56b8dc55158a41ab3c89c4c8feb8824"
-SRC_URI[sha256sum] = "eb21f2ba718fbf357afdfdf6f641ab393901c7ca8d9f37edd0bee4806ffa269c"
+SRC_URI[md5sum] = "f927529cd1735f6f50ee2c61628e9c1f"
+SRC_URI[sha256sum] = "05eed71e2e327246ad6b38c540c4a3117230b19679b875190486ddd2d721422d"
 
 inherit setuptools pypi
 
