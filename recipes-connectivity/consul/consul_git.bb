@@ -4,7 +4,7 @@ LICENSE = "MPL-2.0 & BSD & Apache-2.0 & BSD-2-Clause & MIT"
 LIC_FILES_CHKSUM = "file://src/github.com/hashicorp/consul/LICENSE;md5=b278a92d2c1509760384428817710378"
 
 GO_IMPORT = "github.com/hashicorp/consul"
-SRCREV = "567e41ff6b096a478333c804d5c18264050bc3f8"
+SRCREV = "944cc71026c007e7de9467ec3f38f0ad14464fcc"
 SRC_URI = "git://${GO_IMPORT}.git \
            file://consul.service \
           "
