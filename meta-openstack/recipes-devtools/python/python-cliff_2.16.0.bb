@@ -1,32 +1,7 @@
-DESCRIPTION = "Command Line Interface Formulation Framework"
-HOMEPAGE = "https://github.com/dreamhost/cliff"
-SECTION = "devel/python"
-LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+inherit setuptools
+require python-cliff.inc
 
-SRC_URI[md5sum] = "89e96c6c8c5922832e124ed81c21a55b"
-SRC_URI[sha256sum] = "622e777b8ac2eb479708fe53893c37b2fd5469ce2c6c5b794a658246f05c6b81"
-
-inherit setuptools pypi
-
-DEPENDS += "\
-    python-pbr \
-    "
-
-# Satisfy setup.py 'setup_requires'
-DEPENDS += " \
-    python-pbr-native \
-    "
-
+# RDEPENDS only fot python2
 RDEPENDS_${PN} += " \
-            python-cmd2 \
-            python-pbr \
-            python-pyparsing \
-            python-prettytable \
-            python-six \
-            python-stevedore \
             python-unicodecsv \
-            python-pyyaml \
 "
-
-CLEANBROKEN = "1"
