@@ -10,8 +10,8 @@ SRC_URI = "\
 	git://github.com/openstack/python-troveclient.git;branch=master \
 	"
 
-PV = "2.19.0+git${SRCPV}"
-SRCREV = "855ca07481afbb90c6276a4ebbeb0d659b058197"
+PV = "3.0.0+git${SRCPV}"
+SRCREV = "960843de8142db6e61cc4d148a51f55862acbba0"
 S = "${WORKDIR}/git"
 
 inherit setuptools hosts default_configs rmargparse
