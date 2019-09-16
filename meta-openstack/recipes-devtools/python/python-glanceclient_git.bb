@@ -7,8 +7,8 @@ SRC_URI = "git://github.com/openstack/python-glanceclient.git \
            file://glance-api-check.sh \
         "
 
-PV = "2.16.0+git${SRCPV}"
-SRCREV = "44a4dbd6ce2642daeaca9f45ac99e2d1b39e805a"
+PV = "2.17.0+git${SRCPV}"
+SRCREV = "40c19aa44361e13ac997d325d357d3e4748fa063"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
