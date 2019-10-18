@@ -2,10 +2,10 @@ DESCRIPTION = "A comprehensive HTTP client library"
 HOMEPAGE = "https://code.google.com/p/httplib2/"
 SECTION = "devel/python"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=e199474a42f8d1baba57f39b790a557e"
+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=2d0e1e5a49b6ead3380e3ac544351eb9"
 
-SRC_URI[md5sum] = "ff90c595c6a58a954a65088b6a470999"
-SRC_URI[sha256sum] = "6901c8c0ffcf721f9ce270ad86da37bc2b4d32b8802d4a9cec38274898a64044"
+SRC_URI[md5sum] = "427cda9f4d55762db325bd2eb46b7fe0"
+SRC_URI[sha256sum] = "34537dcdd5e0f2386d29e0e2c6d4a1703a3b982d34c198a5102e6e5d6194b107"
 
 inherit pypi
 
