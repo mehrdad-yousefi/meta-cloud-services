@@ -7,8 +7,8 @@ SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=113a91608a1d89039af9393c39bcaa2c"
 
-SRC_URI[md5sum] = "3b881b519e0f405caaf8aaa63f3508c0"
-SRC_URI[sha256sum] = "01b52d45077e702eda491f4fe75328d3468fd886aed5dcc530003e7b2b5939dc"
+SRC_URI[md5sum] = "2fc3d0dc986200be95ce8ad3ef56bc04"
+SRC_URI[sha256sum] = "66216f26b9d2c52e81808f3e674a6fb65d4bf719721394a1a9be926177e55fbe"
 
 inherit pypi
 
