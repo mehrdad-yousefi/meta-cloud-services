@@ -28,10 +28,10 @@ RDEPENDS_${PN} += " \
         "
 
 SRCNAME = "designateclient"
-SRC_URI = "git://github.com/openstack/${BPN}.git;branch=stable/pike"
+SRC_URI = "git://github.com/openstack/${BPN}.git;branch=master"
 
-PV = "2.7.0+git${SRCPV}"
-SRCREV = "77a705857f2c303a03fdbccd4460a68b61d92fd0"
+PV = "3.0.0+git${SRCPV}"
+SRCREV = "093d8d7170cbf6ef8c7a7c0ff2a4dcd7ecd6361b"
 S = "${WORKDIR}/git"
 
 inherit setuptools
