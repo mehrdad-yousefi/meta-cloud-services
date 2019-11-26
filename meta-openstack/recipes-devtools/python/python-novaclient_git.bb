@@ -36,6 +36,7 @@ RDEPENDS_${PN} += " \
         python-simplejson \
         python-six \
         python-babel \
+        bash \
         "
 
 PACKAGECONFIG ?= "bash-completion"
