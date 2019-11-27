@@ -21,6 +21,7 @@ RDEPENDS_${PN} +="python-cliff \
 	python-pyparsing \
 	python-simplejson \
 	python-pbr \
+	bash \
 	"
 
 PR = "r0"
