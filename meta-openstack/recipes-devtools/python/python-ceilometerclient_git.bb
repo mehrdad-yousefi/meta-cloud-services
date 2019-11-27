@@ -25,6 +25,7 @@ RDEPENDS_${PN} += " \
         python-requests \
         python-six \
         python-stevedore \
+        bash \
         "
 
 SRC_URI = "\
