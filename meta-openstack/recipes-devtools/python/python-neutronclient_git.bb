@@ -31,6 +31,7 @@ RDEPENDS_${PN} += " \
         python-simplejson \
         python-six \
         python-babel \
+        bash \
         "
 
 SRC_URI = "git://github.com/openstack/python-neutronclient.git;branch=stable/pike \
