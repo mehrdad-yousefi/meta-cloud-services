@@ -37,6 +37,7 @@ RDEPENDS_${PN} += " \
         python-six \
         python-oslo.i18n \
         python-oslo.utils \
+        bash \
         "
 	
 PACKAGECONFIG ?= "bash-completion"
