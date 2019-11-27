@@ -243,9 +243,10 @@ RDEPENDS_${PN} += " \
         python-zaqarclient \
         python-requests \
         python-six \
+        bash \
 	"
 
-RDEPENDS_${SRCNAME}-engine = "${PN} ${SRCNAME}-templates ${SRCNAME}-common postgresql postgresql-client python-psycopg2 tgt ${SRCNAME}-cfn"
+RDEPENDS_${SRCNAME}-engine = "${PN} ${SRCNAME}-templates ${SRCNAME}-common postgresql postgresql-client python-psycopg2 tgt ${SRCNAME}-cfn bash"
 RDEPENDS_${SRCNAME}-api = "${SRCNAME}-engine"
 RDEPENDS_${SRCNAME}-api-cfn = "${SRCNAME}-engine"
 RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-engine"
