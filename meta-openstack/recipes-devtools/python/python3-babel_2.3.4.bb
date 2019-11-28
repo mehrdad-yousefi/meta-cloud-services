@@ -1,2 +1,2 @@
 require python-babel.inc
-inherit setuptools
+inherit setuptools3
