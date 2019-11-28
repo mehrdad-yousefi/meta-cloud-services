@@ -1,2 +1,2 @@
 require python-anyjson.inc
-inherit setuptools
+inherit setuptools3
