@@ -1,3 +1,3 @@
 require python-colorama.inc
-inherit setuptools
+inherit setuptools3
 
