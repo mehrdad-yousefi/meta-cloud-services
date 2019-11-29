@@ -1,4 +1,4 @@
 require python-dogpile.core.inc
-inherit setuptools
+inherit setuptools3
 
 
