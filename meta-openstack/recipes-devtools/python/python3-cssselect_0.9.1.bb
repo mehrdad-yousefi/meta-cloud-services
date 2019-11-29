@@ -1,2 +1,2 @@
 require python-cssselect.inc
-inherit setuptools
+inherit setuptools3
