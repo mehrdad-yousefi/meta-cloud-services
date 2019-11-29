@@ -1,2 +1,2 @@
 require python-cachetools.inc
-inherit setuptools
+inherit setuptools3
