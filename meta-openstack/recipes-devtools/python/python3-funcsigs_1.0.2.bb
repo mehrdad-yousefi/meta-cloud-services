@@ -1,2 +1,2 @@
 require python-funcsigs.inc
-inherit setuptools
+inherit setuptools3
