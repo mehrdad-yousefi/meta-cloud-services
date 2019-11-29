@@ -1,2 +1,2 @@
 require python-hgtools.inc
-inherit setuptools
+inherit setuptools3
