@@ -1,2 +1,2 @@
 require python-deprecation.inc
-inherit setuptools
+inherit setuptools3
