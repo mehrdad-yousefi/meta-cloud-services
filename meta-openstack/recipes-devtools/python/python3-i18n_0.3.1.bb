@@ -1,2 +1,2 @@
 require python-i18n.inc
-inherit setuptools
+inherit setuptools3
