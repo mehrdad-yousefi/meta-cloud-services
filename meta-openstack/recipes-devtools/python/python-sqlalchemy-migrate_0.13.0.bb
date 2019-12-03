@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://setup.py;beginline=32;endline=32;md5=d41d8cd98f00b204
 
 inherit pypi
 
-SRC_URI[md5sum] = "6a4920f2a2e07d193e95cf712d762b08"
-SRC_URI[sha256sum] = "8cfada30bbcf79a83b3a2d1bcd637de7e1f43e390d54de33e4f3249fd9aacfae"
+SRC_URI[md5sum] = "86572c92ae84334907f5e3a2cecc92a6"
+SRC_URI[sha256sum] = "0bc02e292a040ade5e35a01d3ea744119e1309cdddb704fdb99bac13236614f8"
 
 inherit setuptools
 
