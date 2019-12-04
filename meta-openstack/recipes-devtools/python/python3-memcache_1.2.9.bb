@@ -1,2 +1,2 @@
 require python-memcache.inc
-inherit setuptools
+inherit setuptools3
