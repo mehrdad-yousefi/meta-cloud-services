@@ -1,2 +1,2 @@
 require python-mccabe.inc
-inherit setuptools
+inherit setuptools3
