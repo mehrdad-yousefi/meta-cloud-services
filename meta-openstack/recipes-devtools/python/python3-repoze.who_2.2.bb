@@ -1,2 +1,2 @@
 require python-repoze.who.inc
-inherit setuptools
+inherit setuptools3
