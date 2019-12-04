@@ -1,2 +1,2 @@
 require python-pathlib.inc
-inherit setuptools
+inherit setuptools3
