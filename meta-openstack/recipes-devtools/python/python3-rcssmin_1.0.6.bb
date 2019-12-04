@@ -1,2 +1,2 @@
 require python-rcssmin.inc
-inherit setuptools
+inherit setuptools3
