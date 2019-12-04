@@ -1,2 +1,2 @@
 require python-pytest-salt.inc
-inherit setuptools
+inherit setuptools3
