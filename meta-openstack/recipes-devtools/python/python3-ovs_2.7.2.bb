@@ -1,2 +1,2 @@
 require python-ovs.inc
-inherit setuptools
+inherit setuptools3
