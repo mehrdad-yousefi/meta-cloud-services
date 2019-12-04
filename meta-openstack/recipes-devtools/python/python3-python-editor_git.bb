@@ -1,2 +1,2 @@
 require python-python-editor.inc
-inherit setuptools
+inherit setuptools3
