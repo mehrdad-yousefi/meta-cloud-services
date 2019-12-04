@@ -1,2 +1,2 @@
 require python-ordereddict.inc
-inherit setuptools
+inherit setuptools3
