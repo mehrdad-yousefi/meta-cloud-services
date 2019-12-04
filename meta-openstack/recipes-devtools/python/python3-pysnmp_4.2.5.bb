@@ -1,2 +1,2 @@
 require python-pysnmp.inc
-inherit setuptools
+inherit setuptools3
