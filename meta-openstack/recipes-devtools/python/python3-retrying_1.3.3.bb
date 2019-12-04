@@ -1,2 +1,2 @@
 require python-retrying.inc
-inherit setuptools
+inherit setuptools3
