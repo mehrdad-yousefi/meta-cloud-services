@@ -1,2 +1,2 @@
 require python-rjsmin.inc
-inherit setuptools
+inherit setuptools3
