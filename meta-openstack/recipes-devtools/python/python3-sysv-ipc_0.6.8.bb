@@ -1,2 +1,2 @@
 require python-sysv-ipc.inc
-inherit setuptools
+inherit setuptools3
