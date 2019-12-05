@@ -1,2 +1,2 @@
 require python-rtslib-fb.inc
-inherit setuptools
+inherit setuptools3
