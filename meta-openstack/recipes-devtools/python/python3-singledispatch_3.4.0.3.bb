@@ -1,2 +1,2 @@
 require python-singledispatch.inc
-inherit setuptools
+inherit setuptools3
