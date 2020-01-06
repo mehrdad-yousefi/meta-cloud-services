@@ -1,2 +1,2 @@
 require python-coverage.inc
-inherit setuptools 
+inherit setuptools3
