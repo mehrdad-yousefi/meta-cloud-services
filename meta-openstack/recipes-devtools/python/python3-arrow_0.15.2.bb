@@ -1,2 +1,2 @@
 require python-arrow.inc
-inherit setuptools
+inherit setuptools3
