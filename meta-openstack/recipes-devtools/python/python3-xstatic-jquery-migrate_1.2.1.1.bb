@@ -1,2 +1,2 @@
 require python-xstatic-jquery-migrate.inc
-inherit setuptools
+inherit setuptools3
