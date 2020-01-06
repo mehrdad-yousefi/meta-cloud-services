@@ -1,2 +1,2 @@
 require python-xstatic-angular-bootstrap.inc
-inherit setuptools
+inherit setuptools3
