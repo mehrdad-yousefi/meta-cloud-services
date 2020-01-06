@@ -1,2 +1,2 @@
 require python-xstatic-bootstrap-datepicker.inc
-inherit setuptools
+inherit setuptools3
