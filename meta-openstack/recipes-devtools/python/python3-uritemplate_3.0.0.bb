@@ -1,2 +1,2 @@
 require python-uritemplate.inc
-inherit setuptools
+inherit setuptools3
