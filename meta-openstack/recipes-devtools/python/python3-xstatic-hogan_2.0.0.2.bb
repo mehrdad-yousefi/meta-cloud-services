@@ -1,2 +1,2 @@
 require python-xstatic-hogan.inc
-inherit setuptools
+inherit setuptools3
