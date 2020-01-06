@@ -1,2 +1,2 @@
 require python-xstatic-jasmine.inc
-inherit setuptools
+inherit setuptools3
