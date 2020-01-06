@@ -1,2 +1,2 @@
 require python-django-appconf.inc
-inherit setuptools
+inherit setuptools3
