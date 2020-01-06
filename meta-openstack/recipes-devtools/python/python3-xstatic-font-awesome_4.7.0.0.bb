@@ -1,2 +1,2 @@
 require python-xstatic-font-awesome.inc
-inherit setuptools
+inherit setuptools3
