@@ -1,2 +1,2 @@
 require python-lesscpy.inc
-inherit setuptools
+inherit setuptools3
