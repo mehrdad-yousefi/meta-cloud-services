@@ -1,2 +1,2 @@
 require python-memcached.inc
-inherit setuptools
+inherit setuptools3
