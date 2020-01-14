@@ -1,2 +1,2 @@
 require python-semantic-version.inc
-inherit setuptools
+inherit setuptools3
