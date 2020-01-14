@@ -1,2 +1,2 @@
 require python-thrift.inc
-inherit setuptools
+inherit setuptools3
