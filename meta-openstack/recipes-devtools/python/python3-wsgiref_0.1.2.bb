@@ -1,2 +1,2 @@
 require python-wsgiref.inc
-inherit setuptools
+inherit setuptools3
