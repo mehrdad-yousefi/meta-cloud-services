@@ -1,2 +1,2 @@
 require python-virtualenv.inc
-inherit setuptools 
+inherit setuptools3
