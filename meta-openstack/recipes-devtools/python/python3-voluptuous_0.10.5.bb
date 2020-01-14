@@ -1,2 +1,2 @@
 require python-voluptuous.inc
-inherit setuptools
+inherit setuptools3
