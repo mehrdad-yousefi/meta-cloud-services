@@ -1,2 +1,2 @@
 require python-tempita.inc
-inherit setuptools
+inherit setuptools3
