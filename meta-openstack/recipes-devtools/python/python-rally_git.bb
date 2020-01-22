@@ -24,7 +24,7 @@ SRCREV="b297cf00750f263b8b5bdeb71f6952f672e87f5a"
 PV="git${SRCPV}"
 S = "${WORKDIR}/git"
 
-inherit setuptools update-rc.d hosts identity default_configs
+inherit setuptools3 update-rc.d hosts identity default_configs
 
 do_install_append() {
     RALLY_CONF_DIR=${D}${sysconfdir}/${SRCNAME}

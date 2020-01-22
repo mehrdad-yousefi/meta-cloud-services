@@ -9,7 +9,7 @@ PYPI_PACKAGE = "pyScss"
 SRC_URI[md5sum] = "9527b4864cd6023f77a8277e6fb773d7"
 SRC_URI[sha256sum] = "d0323110ecc7d3ead6b99cfec31301306928130e4d0a9eb13226bf390aba8c0e"
 
-inherit setuptools pypi
+inherit setuptools3 pypi
 
 # DEPENDS_default: python-pip
 

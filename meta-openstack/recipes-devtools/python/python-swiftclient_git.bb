@@ -13,7 +13,7 @@ PV = "3.8.1+git${SRCPV}"
 SRCREV = "72b90fed4c62cf75497a7d66714f5fb0aa91f18b"
 S = "${WORKDIR}/git"
 
-inherit setuptools python-dir
+inherit setuptools3 python3-dir
 
 do_install_append() {
     cp -r tests ${D}/${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}/

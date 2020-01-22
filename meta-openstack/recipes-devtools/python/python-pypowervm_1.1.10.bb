@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 SRC_URI[md5sum] = "54e4dfaa569350254b0a0f4c19686ded"
 SRC_URI[sha256sum] = "ab27d4efb59105555b6c9b1fe7792fd895ad9ca893058c39bba4106d6a0ad986"
 
-inherit setuptools pypi
+inherit setuptools3 pypi
 
 RDEPENDS_${PN} += " \
         python-lxml \

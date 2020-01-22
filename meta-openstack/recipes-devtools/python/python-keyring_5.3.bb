@@ -9,6 +9,6 @@ PYPI_PACKAGE_EXT = "zip"
 SRC_URI[md5sum] = "fd50a2be4a44a78efb09a7c046b6410d"
 SRC_URI[sha256sum] = "ac2b4dc17e6edfb804b09ade15df79f251522e442976ea0c8ea0051474502cf5"
 
-inherit setuptools pypi
+inherit setuptools3 pypi
 
 DEPENDS += " python-hgtools"

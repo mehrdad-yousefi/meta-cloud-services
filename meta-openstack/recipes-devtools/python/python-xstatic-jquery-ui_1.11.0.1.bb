@@ -9,7 +9,7 @@ PYPI_PACKAGE = "XStatic-jquery-ui"
 SRC_URI[md5sum] = "03d8ea7a0dab29d548e7bc195703b04f"
 SRC_URI[sha256sum] = "099b1836eb0d91b8dc98f5b8a6b856a2631d43af0d47f33ef90ee72ed37bda58"
 
-inherit setuptools pypi
+inherit setuptools3 pypi
 
 # DEPENDS_default: python-pip
 

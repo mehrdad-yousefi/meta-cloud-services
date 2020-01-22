@@ -20,7 +20,7 @@ SRCREV="4ca08cc395e686265574366497a6869e94eebcb2"
 PV="2.2.2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
-inherit setuptools python-dir update-rc.d hosts identity
+inherit setuptools3 python3-dir update-rc.d hosts identity
 
 # The size of the backing file (in Gigabytes) of loopback devices
 # which are used for setting up Swift storage devices.  The value

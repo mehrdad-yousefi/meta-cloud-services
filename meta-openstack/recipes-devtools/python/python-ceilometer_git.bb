@@ -122,7 +122,7 @@ pkg_postinst_${SRCNAME}-setup () {
     fi
 }
 
-inherit setuptools identity hosts update-rc.d default_configs monitor
+inherit setuptools3 identity hosts update-rc.d default_configs monitor
 
 PACKAGES += " ${SRCNAME}-tests"
 PACKAGES += "${SRCNAME}-setup ${SRCNAME}-common ${SRCNAME}-api"
@@ -199,7 +199,7 @@ RDEPENDS_${PN} += " \
 	python-paramiko \
 	python-babel \
 	python-iso8601 \
-	python-setuptools-git \
+	python-setuptools3-git \
 	python-glanceclient \
 	python-keystoneclient \
 	python-swiftclient \

@@ -10,7 +10,7 @@ PYPI_SRC_URI = "https://pypi.python.org/packages/source/k/${SRCNAME}/kazoo-${PV}
 SRC_URI[md5sum] = "4b172de456c102b0e33f661e7e2b3583"
 SRC_URI[sha256sum] = "f0c42cc7752a331ba59269827bd19cb271210399a9dcab32b6a91465b4431a18"
 
-inherit setuptools pypi
+inherit setuptools3 pypi
 
 # DEPENDS_default: python-pip
 

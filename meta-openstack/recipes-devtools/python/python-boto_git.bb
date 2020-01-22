@@ -16,5 +16,5 @@ SRC_URI[sha256sum] = "4d6d38aa8e9e536a27a9737eb4222f896417841fed9a12eedcb619ba8f
 
 S = "${WORKDIR}/git"
 
-inherit setuptools
+inherit setuptools3
 

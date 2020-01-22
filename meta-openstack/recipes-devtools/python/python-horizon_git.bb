@@ -85,7 +85,7 @@ SRCREV = "246ff9f81248a00a434e66d18fad70519ba811cc"
 PV = "12.0.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
-inherit setuptools systemd python-dir default_configs monitor useradd
+inherit setuptools3 systemd python3-dir default_configs monitor useradd
 
 USER = "horizon"
 GROUP = "horizon"

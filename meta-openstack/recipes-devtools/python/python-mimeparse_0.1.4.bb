@@ -9,7 +9,7 @@ PYPI_PACKAGE = "python-mimeparse"
 SRC_URI[md5sum] = "1d2816a16f17dcfe0c613da611fe7e13"
 SRC_URI[sha256sum] = "3c69a21e37e77f754e6fc09ebda70acd92c90d8a58f29a41cc0248351378ddc3"
 
-inherit distutils pypi
+inherit distutils3 pypi
 
 DISTUTILS_INSTALL_ARGS = "--root=${D} \
     --prefix=${prefix} \

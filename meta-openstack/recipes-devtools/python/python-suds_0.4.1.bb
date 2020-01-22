@@ -12,4 +12,4 @@ SRC_URI = "https://fedorahosted.org/releases/s/u/${SRCNAME}/${PN}-${PV}.tar.gz"
 SRC_URI[md5sum] = "95a2f04378931e973cbb3cca8f8d9765"
 SRC_URI[sha256sum] = "dd711c2635483733cd3aebf5073edf338595a2d2cae1398041f0273e9bdaac66"
 
-inherit setuptools
+inherit setuptools3

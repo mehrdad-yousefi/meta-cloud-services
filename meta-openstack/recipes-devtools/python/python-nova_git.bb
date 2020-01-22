@@ -38,7 +38,7 @@ PV = "16.0.4+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit systemd setuptools identity hosts useradd default_configs monitor
+inherit systemd setuptools3 identity hosts useradd default_configs monitor
 
 LIBVIRT_IMAGES_TYPE ?= "default"
 
@@ -295,7 +295,7 @@ RDEPENDS_${PN} += " \
 		   python-requests \
 		   python-six \
 		   python-stevedore \
-		   python-setuptools \
+		   python-setuptools3 \
 		   python-websockify \
 		   python-oslo.cache \
 		   python-oslo.concurrency \

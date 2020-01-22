@@ -1,2 +1,2 @@
 require python-xstatic-angular-irdragndrop.inc
-inherit setuptools
+inherit setuptools3

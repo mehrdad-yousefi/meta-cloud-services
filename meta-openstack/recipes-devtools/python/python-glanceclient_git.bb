@@ -17,7 +17,7 @@ DEPENDS += " \
         python-pbr \
         "
 
-inherit setuptools monitor rmargparse
+inherit setuptools3 monitor rmargparse
 
 FILES_${PN} += "${datadir}/${SRCNAME}"
 

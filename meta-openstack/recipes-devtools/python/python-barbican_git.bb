@@ -19,7 +19,7 @@ SRCREV = "e6f05febbe18a86e4e6b05acc5f4868fa3beb291"
 PV = "2015.1.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
-inherit update-rc.d setuptools identity hosts useradd default_configs monitor
+inherit update-rc.d setuptools3 identity hosts useradd default_configs monitor
 
 SERVICECREATE_PACKAGES = "${SRCNAME}-setup"
 KEYSTONE_HOST="${CONTROLLER_IP}"

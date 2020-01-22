@@ -1,4 +1,4 @@
-DESCRIPTION = "Spin JavaScript library packaged for setuptools"
+DESCRIPTION = "Spin JavaScript library packaged for setuptools3"
 HOMEPAGE = "https://pypi.python.org/pypi/XStatic-Spin"
 SECTION = "devel/python"
 LICENSE = "MIT"
@@ -9,7 +9,7 @@ PYPI_PACKAGE = "XStatic-Spin"
 SRC_URI[md5sum] = "df83f80fd0b11545b64497112996e49e"
 SRC_URI[sha256sum] = "7f46ef0e45e047019ba6eda22c432fb96f681b97bbe7f1749aa9209e07727192"
 
-inherit setuptools pypi
+inherit setuptools3 pypi
 
 # DEPENDS_default: python-pip
 

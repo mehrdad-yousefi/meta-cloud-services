@@ -12,7 +12,7 @@ PV = "0.1.4+git${SRCPV}"
 SRCREV = "1f6eac7c3df048679663919f75c2bcecd3e183a2"
 S = "${WORKDIR}/git"
 
-inherit setuptools
+inherit setuptools3
 
 DEPENDS += " \
         "

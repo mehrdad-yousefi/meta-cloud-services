@@ -36,7 +36,7 @@ PV = "2.9.1"
 SRCREV = "4ee321feeef39fa2a297ad8e58e931b8a03d8f14"
 S = "${WORKDIR}/git"
 
-inherit setuptools rmargparse
+inherit setuptools3 rmargparse
 
 
 PACKAGECONFIG ?= "bash-completion"

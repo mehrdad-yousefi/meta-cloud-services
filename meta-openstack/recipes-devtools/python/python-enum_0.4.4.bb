@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=4325afd396febcb659c36b49533135d4 \
 SRC_URI[md5sum] = "ce75c7c3c86741175a84456cc5bd531e"
 SRC_URI[sha256sum] = "9bdfacf543baf2350df7613eb37f598a802f346985ca0dc1548be6494140fdff"
 
-inherit setuptools pypi
+inherit setuptools3 pypi
 
 DEPENDS += " \
         python-pip \

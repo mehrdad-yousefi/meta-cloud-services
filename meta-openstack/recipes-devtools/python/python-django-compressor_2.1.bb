@@ -9,7 +9,7 @@ PYPI_PACKAGE = "django_compressor"
 SRC_URI[md5sum] = "21ecfe4e8615eae64f7068a5599df9af"
 SRC_URI[sha256sum] = "ae0051bc0c7a0660c93434e68d617553fccdd573293dfd15aa33f78d2b4954ef"
 
-inherit setuptools pypi
+inherit setuptools3 pypi
 
 RDEPENDS_${PN} += " \
         python-django-appconf  \

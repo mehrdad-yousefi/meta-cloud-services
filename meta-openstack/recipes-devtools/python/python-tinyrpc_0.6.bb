@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 SRC_URI[md5sum] = "2663568ba3e1793da7b21003f0847fdd"
 SRC_URI[sha256sum] = "b4d64227f023f1f0736ef137bd4c901c7652563e62c7a20329222c3a0b14d84f"
 
-inherit setuptools pypi
+inherit setuptools3 pypi
 
 RDEPENDS_${PN} += " \
         python-six \

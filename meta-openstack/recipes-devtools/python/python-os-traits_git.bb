@@ -12,7 +12,7 @@ PV = "0.3.3+git${SRCPV}"
 SRCREV = "3e8b4a77aaf2d8b64f89ba3b479113d0b44bbe2f"
 S = "${WORKDIR}/git"
 
-inherit setuptools
+inherit setuptools3
 
 DEPENDS += " \
         python-pbr \

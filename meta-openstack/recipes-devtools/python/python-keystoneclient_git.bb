@@ -15,7 +15,7 @@ PV = "3.13.0+git${SRCPV}"
 SRCREV = "7ff05baa1fa56f152173651f16fc6fd181291292"
 S = "${WORKDIR}/git"
 
-inherit setuptools monitor
+inherit setuptools3 monitor
 
 FILES_${PN}-doc += "${datadir}/keystoneclient" 
 

@@ -1,4 +1,4 @@
-DESCRIPTION = "JQuery.quicksearch JavaScript library packaged for setuptools "
+DESCRIPTION = "JQuery.quicksearch JavaScript library packaged for setuptools3 "
 HOMEPAGE = "https://pypi.python.org/pypi/XStatic-JQuery.quicksearch"
 SECTION = "devel/python"
 LICENSE = "MIT"
@@ -9,7 +9,7 @@ PYPI_PACKAGE = "XStatic-JQuery.quicksearch"
 SRC_URI[md5sum] = "0dc4bd1882cf35dc7b19a236ba09b89d"
 SRC_URI[sha256sum] = "1271571b420417add56c274fd935e81bfc79e0d54a03559d6ba5ef369f358477"
 
-inherit setuptools pypi
+inherit setuptools3 pypi
 
 # DEPENDS_default: python-pip
 

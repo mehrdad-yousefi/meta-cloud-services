@@ -12,7 +12,7 @@ PV = "1.15.5+git${SRCPV}"
 SRCREV = "4090db76673cadb3b8adfceb106069e03414de49"
 S = "${WORKDIR}/git"
 
-inherit setuptools
+inherit setuptools3
 
 FILES_${PN} += "${datadir}/etc/*"
 

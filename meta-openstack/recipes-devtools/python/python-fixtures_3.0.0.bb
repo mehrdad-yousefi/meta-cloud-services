@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=239e2f4698b85aad5ed39bae5d2ef226"
 SRC_URI[md5sum] = "cd6345b497a62fad739efee66346c2e0"
 SRC_URI[sha256sum] = "fcf0d60234f1544da717a9738325812de1f42c2fa085e2d9252d8fff5712b2ef"
 
-inherit distutils pypi
+inherit distutils3 pypi
 
 DISTUTILS_INSTALL_ARGS = "--root=${D} \
     --prefix=${prefix} \

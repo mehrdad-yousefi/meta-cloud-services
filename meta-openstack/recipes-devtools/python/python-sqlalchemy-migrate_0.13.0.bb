@@ -9,7 +9,7 @@ inherit pypi
 SRC_URI[md5sum] = "86572c92ae84334907f5e3a2cecc92a6"
 SRC_URI[sha256sum] = "0bc02e292a040ade5e35a01d3ea744119e1309cdddb704fdb99bac13236614f8"
 
-inherit setuptools
+inherit setuptools3
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \

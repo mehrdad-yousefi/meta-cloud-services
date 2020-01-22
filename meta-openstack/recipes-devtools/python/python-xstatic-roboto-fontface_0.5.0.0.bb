@@ -1,2 +1,2 @@
 require python-xstatic-roboto-fontface.inc
-inherit setuptools
+inherit setuptools3

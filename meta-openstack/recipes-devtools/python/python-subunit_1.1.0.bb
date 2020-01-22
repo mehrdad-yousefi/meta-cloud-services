@@ -9,4 +9,4 @@ PYPI_PACKAGE = "python-subunit"
 SRC_URI[md5sum] = "d2c09c93346077ced675c9f718e6a0f1"
 SRC_URI[sha256sum] = "d9a7606e9610828d68c1d2f0f5abbb421e34e518b8f4882c8b2e08176281bf88"
 
-inherit setuptools pypi
+inherit setuptools3 pypi

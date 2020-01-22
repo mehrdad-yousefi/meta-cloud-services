@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/MiCHiLU/python-${SRCNAME}.git"
 
 S = "${WORKDIR}/git"
 
-inherit distutils
+inherit distutils3
 
 DISTUTILS_INSTALL_ARGS = "--root=${D} \
     --prefix=${prefix} \

@@ -12,7 +12,7 @@ PV="git${SRCPV}"
 SRCREV="0bd376242f8522edef7031d2339b9533b86c17aa"
 S = "${WORKDIR}/git"
 
-inherit python-dir
+inherit python3-dir
 
 do_install_append() {
     install -D -m 0644 hybrid_assignment.py ${D}/${PYTHON_SITEPACKAGES_DIR}/keystone/assignment/backends/hybrid_assignment.py

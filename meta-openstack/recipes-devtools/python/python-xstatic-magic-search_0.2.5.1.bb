@@ -9,7 +9,7 @@ PYPI_PACKAGE = "XStatic-Magic-Search"
 SRC_URI[md5sum] = "cfb8a82129fffbe1f5c6339240cb6139"
 SRC_URI[sha256sum] = "9b2f35a5792f4e763e6dc319036e3676f3e18f46153096f3ab5e507177ec007e"
 
-inherit setuptools pypi
+inherit setuptools3 pypi
 
 DEPENDS += " \
         "

@@ -26,7 +26,7 @@ PV = "12.0.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit setuptools identity hosts default_configs monitor useradd systemd
+inherit setuptools3 identity hosts default_configs monitor useradd systemd
 
 SERVICE_TOKEN = "password"
 TOKEN_FORMAT ?= "PKI"

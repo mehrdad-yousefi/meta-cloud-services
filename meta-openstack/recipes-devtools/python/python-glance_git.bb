@@ -19,7 +19,7 @@ PV = "15.0.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit setuptools identity default_configs hosts monitor useradd systemd
+inherit setuptools3 identity default_configs hosts monitor useradd systemd
 
 USER = "glance"
 GROUP = "glance"

@@ -1,2 +1,2 @@
 require python-gevent-websocket.inc
-inherit setuptools
+inherit setuptools3

@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike"
 
 S = "${WORKDIR}/git"
 
-inherit setuptools rmargparse
+inherit setuptools3 rmargparse
 
 DEPENDS += " \
         python-pbr \

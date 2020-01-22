@@ -20,5 +20,5 @@ RDEPENDS_${PN} = "\
                   python-unittest \
 "
 
-inherit setuptools
+inherit setuptools3
 

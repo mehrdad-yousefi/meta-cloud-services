@@ -33,7 +33,7 @@ PV = "1.17.0+git${SRCPV}"
 SRCREV = "8af5deb458d51f4ec16e769d7fd6c94655f82f5f"
 S = "${WORKDIR}/git"
 
-inherit setuptools
+inherit setuptools3
 
 
 PACKAGECONFIG ?= "bash-completion"

@@ -32,7 +32,7 @@ PV = "11.0.2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit setuptools systemd useradd identity hosts default_configs monitor
+inherit setuptools3 systemd useradd identity hosts default_configs monitor
 
 USER = "neutron"
 GROUP = "neutron"

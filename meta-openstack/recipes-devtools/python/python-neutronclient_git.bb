@@ -43,7 +43,7 @@ PV = "6.5.0+git${SRCPV}"
 SRCREV = "e145c4ef8a0e8390f0468df422a757760e77f823"
 S = "${WORKDIR}/git"
 
-inherit setuptools monitor rmargparse
+inherit setuptools3 monitor rmargparse
 
 PACKAGECONFIG ?= "bash-completion"
 PACKAGECONFIG[bash-completion] = ",,bash-completion,bash-completion ${BPN}-bash-completion"

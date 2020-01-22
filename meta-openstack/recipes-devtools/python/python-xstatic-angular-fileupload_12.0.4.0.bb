@@ -1,2 +1,2 @@
 require python-xstatic-angular-fileupload.inc
-inherit setuptools
+inherit setuptools3

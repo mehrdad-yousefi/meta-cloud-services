@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/haypo/${SRCNAME}.git;branch=trollius"
 
 S = "${WORKDIR}/git"
 
-inherit setuptools
+inherit setuptools3
 
 DEPENDS += " \
         python-pip \

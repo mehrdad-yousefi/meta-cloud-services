@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/jdunck/${BPN}.git"
 
 S = "${WORKDIR}/git"
 
-inherit setuptools
+inherit setuptools3
 
 DEPENDS += " \
 	python-pbr \

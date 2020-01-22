@@ -1,2 +1,2 @@
 require python-xstatic-angular-cookies.inc
-inherit setuptools
+inherit setuptools3

@@ -13,7 +13,7 @@ SRC_URI = "\
 
 S = "${WORKDIR}/git"
 
-inherit setuptools
+inherit setuptools3
 
 DEPENDS += " \
         gmp \

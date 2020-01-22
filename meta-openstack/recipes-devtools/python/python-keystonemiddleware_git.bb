@@ -14,7 +14,7 @@ PV = "4.17.0+git${SRCPV}"
 SRCREV = "69aed2693475797c8d0dda2725a790eea05a9419"
 S = "${WORKDIR}/git"
 
-inherit setuptools
+inherit setuptools3
 
 DEPENDS += " \
         python-pip \

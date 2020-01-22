@@ -11,10 +11,10 @@ SRCREV = "3b8ec46fd26d644e6edbea4f46e630929297e448"
 PV = "0.5.1+git${SRCPV}"
 
 SRC_URI = "git://github.com/kanaka/noVNC.git \
-           file://python-distutils.patch"
+           file://python-distutils3.patch"
 
 S = "${WORKDIR}/git"
 
-inherit distutils
+inherit distutils3
 
 DEPENDS += " python-websockify"

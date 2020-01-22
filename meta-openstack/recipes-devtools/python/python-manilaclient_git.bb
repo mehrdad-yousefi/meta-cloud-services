@@ -37,4 +37,4 @@ PV = "1.29.0+git${SRCPV}"
 SRCREV = "1b2cafb008bee70242b68a03212bcc575df683b9"
 S = "${WORKDIR}/git"
 
-inherit setuptools rmargparse
+inherit setuptools3 rmargparse

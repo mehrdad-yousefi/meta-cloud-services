@@ -1,4 +1,4 @@
-DESCRIPTION = "Angular-Mock JavaScript library packaged for setuptools"
+DESCRIPTION = "Angular-Mock JavaScript library packaged for setuptools3"
 HOMEPAGE = "https://pypi.python.org/pypi/XStatic-Angular-Mock/"
 SECTION = "devel/python"
 LICENSE = "MIT"
@@ -9,7 +9,7 @@ PYPI_PACKAGE = "XStatic-Angular-Mock"
 SRC_URI[md5sum] = "94f072c39c2070f3939b619d913fb37f"
 SRC_URI[sha256sum] = "ffee6edfab8276abd8057ddc28c4d8503424c0c61938e787720766862ef43e42"
 
-inherit setuptools pypi
+inherit setuptools3 pypi
 
 # DEPENDS_default: python-pip
 
