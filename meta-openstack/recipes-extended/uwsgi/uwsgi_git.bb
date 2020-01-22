@@ -14,15 +14,15 @@ SRCREV="af44211739136e22471a2897383f34586284bf86"
 PV="2.0.14+git${SRCPV}"
 S = "${WORKDIR}/git"
 
-inherit setuptools pkgconfig
+inherit setuptools3 pkgconfig
 
 # prevent host contamination and remove local search paths
 export UWSGI_REMOVE_INCLUDES = "/usr/include,/usr/local/include"
 
 DEPENDS += " \
         e2fsprogs \
-        python-pip \
-        python-six \
+        python3-pip \
+        python3-six \
         yajl \
         "
 

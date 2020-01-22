@@ -20,10 +20,10 @@ SRC_URI = "\
 	file://configure.ac-allow-PYTHON-values-to-be-passed-via-en.patch \        
 	"
 
-inherit autotools-brokensep distutils-base
+inherit autotools-brokensep distutils3-base
 
-DEPENDS += "apache2-native apache2 python"
-RDEPENDS_${PN} = "python"
+DEPENDS += "apache2-native apache2 python3"
+RDEPENDS_${PN} = "python3"
 
 EXTRA_OECONF = "\
 	--with-apxs=${STAGING_BINDIR_CROSS}/apxs \

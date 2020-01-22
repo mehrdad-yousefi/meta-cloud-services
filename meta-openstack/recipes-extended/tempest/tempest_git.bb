@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 PR = "r0"
 SRCNAME = "tempest"
 
-inherit setuptools identity hosts
+inherit setuptools3 identity hosts
 
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
            file://tempest.conf \
@@ -122,36 +122,36 @@ RDEPENDS_${PN} += " \
         ${SRCNAME}-setup \
         ${SRCNAME}-setup-altdemo \
         ${SRCNAME}-setup-admin \
-	python-mox \
-	python-mock \
-	python-hp3parclient \
-	python-oauth2 \
-	python-testrepository \
-	python-fixtures \
-	python-keyring \
-	python-glanceclient \
-	python-keystoneclient \
-	python-swiftclient \
-	python-novaclient \
-	python-cinderclient \
-	python-heatclient \
-	python-pbr \
-	python-anyjson \
-	python-nose \
-	python-httplib2 \
-	python-jsonschema \
-	python-testtools \
-	python-lxml \
-	python-boto \
-	python-paramiko \
-	python-netaddr \
-	python-testresources \
-	python-oslo.config \
-	python-eventlet \
-	python-six \
-	python-iso8601 \
-	python-mimeparse \
-	python-flake8 \
-	python-tox \
+	python3-mox \
+	python3-mock \
+	python3-hp3parclient \
+	python3-oauth2 \
+	python3-testrepository \
+	python3-fixtures \
+	python3-keyring \
+	python3-glanceclient \
+	python3-keystoneclient \
+	python3-swiftclient \
+	python3-novaclient \
+	python3-cinderclient \
+	python3-heatclient \
+	python3-pbr \
+	python3-anyjson \
+	python3-nose \
+	python3-httplib2 \
+	python3-jsonschema \
+	python3-testtools \
+	python3-lxml \
+	python3-boto \
+	python3-paramiko \
+	python3-netaddr \
+	python3-testresources \
+	python3-oslo.config \
+	python3-eventlet \
+	python3-six \
+	python3-iso8601 \
+	python3-mimeparse \
+	python3-flake8 \
+	python3-tox \
 	"
 

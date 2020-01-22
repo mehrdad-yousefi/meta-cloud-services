@@ -3,7 +3,7 @@ HOMEPAGE = "http://qpid.apache.org/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7ab4c208aa62d92d7a03cc8e0a89c12b"
 SECTION = "mq"
-DEPENDS = "boost perl-native python util-linux cyrus-sasl"
+DEPENDS = "boost perl-native python3 util-linux cyrus-sasl"
 RDEPENDS_${PN} = "cyrus-sasl-bin"
 PR = "r0"
 
@@ -17,7 +17,7 @@ SRC_URI[sha256sum] = "31b80ba3c4773d288b4e6245e3b2048438386331d460f7a7b0794cbd20
 
 S = "${WORKDIR}/${PN}c-${PV}"
 
-inherit autotools python-dir perlnative cpan-base update-rc.d pkgconfig
+inherit autotools python3-dir perlnative cpan-base update-rc.d pkgconfig
 
 # Env var which tells perl if it should use host (no) or target (yes) settings
 export PERLCONFIGTARGET = "${@is_target(d)}"

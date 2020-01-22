@@ -36,7 +36,7 @@ do_install_append() {
     ln -s ${libdir}/${BPN}/write-ssh-key-fingerprints ${D}${sysconfdir}/cloud/write-ssh-key-fingerprints
 }
 
-inherit setuptools update-rc.d
+inherit setuptools3 update-rc.d
 
 PACKAGES += "${PN}-systemd"
 
@@ -49,5 +49,5 @@ INITSCRIPT_PACKAGES = "${PN}"
 INITSCRIPT_NAME_${BPN} = "cloud-init"
 
 RDEPENDS_${PN} = "sysklogd \
-                  python \
+                  python3 \
                  "
