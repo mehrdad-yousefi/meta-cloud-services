@@ -1,4 +1,1 @@
-do_install_append() {
-    # Remove /var/run as it is created on startup
-    rm -rf ${D}${localstatedir}/run
-}
+require ${@bb.utils.contains('DISTRO_FEATURES', 'openstack', '${BPN}_openstack.inc', '', d)}

@@ -1,4 +1,1 @@
-FILESEXTRAPATHS_append := "${THISDIR}/${PN}"
-
-RRECOMMENDS_${PN} += "kernel-module-veth \
-	"
+require ${@bb.utils.contains('DISTRO_FEATURES', 'openstack', '${BPN}_openstack.inc', '', d)}

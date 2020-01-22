@@ -1,7 +1,1 @@
-RRECOMMENDS_${PN} += " \
-	kernel-module-ebtables \
-	kernel-module-ebtable-nat \
-	kernel-module-ebt-arp \
-	kernel-module-ebt-ip \
-	"
-
+require ${@bb.utils.contains('DISTRO_FEATURES', 'openstack', '${BPN}_openstack.inc', '', d)}
