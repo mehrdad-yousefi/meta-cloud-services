@@ -45,12 +45,12 @@ SRC_URI += " \
 
 S = "${WORKDIR}/git"
 
-inherit autotools gettext pythonnative python-dir pkgconfig
+inherit autotools gettext python3native python3-dir pkgconfig
 
-DEPENDS += "python-native celt051 python-pyparsing jpeg pixman alsa-lib glib-2.0"
+DEPENDS += "python3-native celt051 python3-pyparsing jpeg pixman alsa-lib glib-2.0"
 
 export PYTHON="${STAGING_BINDIR_NATIVE}/python-native/python"
-export PYTHONPATH="${PKG_CONFIG_SYSROOT_DIR}${libdir}/python2.7/site-packages"
+export PYTHONPATH="${PKG_CONFIG_SYSROOT_DIR}${libdir}/python${PYTHON_BASEVERSION}/site-packages"
 
 PACKAGECONFIG ?= "sasl"
 

@@ -26,7 +26,8 @@ LIC_FILES_CHKSUM = "file://COPYING-GPLV2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://COPYING-LGPLV3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
                     file://contrib/fuse-util/COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
-inherit autotools pkgconfig distutils-base update-rc.d systemd
+inherit autotools pkgconfig distutils3-base update-rc.d systemd
+inherit python3-dir
 
 DEPENDS += "bison-native flex-native python3-native fuse libaio libtirpc libxml2 ncurses \
             openssl python3 readline zlib liburcu util-linux glib-2.0 acl"
@@ -42,8 +43,8 @@ EXTRA_OECONF = "ac_cv_file__etc_debian_version=no \
 				ac_cv_file__etc_centos_release=no \
                 --with-mountutildir=${sbindir} \
                 --disable-fusermount \
-                TARGET_PYTHON=${bindir}/python \
-                PYTHON=${STAGING_BINDIR_NATIVE}/python-native/python \
+                TARGET_PYTHON=${bindir}/python3 \
+                PYTHON=${PYTHON} \
                 BUILD_PYTHON_INC=${STAGING_INCDIR}/python${PYTHON_BASEVERSION} \
                 BUILD_PYTHON_LIB=python${PYTHON_BASEVERSION} \
                 BUILD_PYTHON_SITE_PACKAGES=${PYTHON_SITEPACKAGES_DIR} \
