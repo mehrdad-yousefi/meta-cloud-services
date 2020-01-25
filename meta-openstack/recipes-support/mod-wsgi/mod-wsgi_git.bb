@@ -5,12 +5,12 @@ DESCRIPTION = "\
   be suitable for use in hosting high performance production web sites, as well as \
   your average self managed personal sites running on web hosting services."
 
-HOMEPAGE = "http://code.google.com/p/modwsgi/"
+HOMEPAGE = "https://github.com/GrahamDumpleton/mod_wsgi"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRCREV = "f22376f5141e8505f183b1b48f276c31168e2b6a"
-PV = "4.5.13+git${SRCPV}"
+SRCREV = "217e80b7436035723b80ff02ee349365e8553dfc"
+PV = "4.6.8+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -47,7 +47,7 @@ FILES_${PN}-dbg += "${libdir}/apache2/modules/.debug"
 
 do_install_append() {
 	mkdir -p ${D}/etc/apache2/modules.d/
-	echo "LoadModule wsgi_module ${libdir}/apache2/modules/mod_wsgi.so" > \
+	echo "LoadModule wsgi_module ${libexecdir}/apache2/modules/mod_wsgi.so" > \
 	  ${D}/etc/apache2/modules.d/wsgi.load
 }
 
