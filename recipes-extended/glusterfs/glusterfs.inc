@@ -119,7 +119,7 @@ INSANE_SKIP_${PN}-server += "dev-so"
 PACKAGES += "${PN}-rdma ${PN}-geo-replication ${PN}-fuse ${PN}-server \
              ${PN}-api ${PN}-ocf"
 
-RDEPENDS_${PN} += "python3-core python-json python-ctypes bash"
+RDEPENDS_${PN} += "python3-core python3-json python3-ctypes bash"
 RDEPENDS_${PN}-ocf += "bash"
 RDEPENDS_${PN}-server += "bash"
 RDEPENDS_${PN}-geo-replication += "python3-core bash"
