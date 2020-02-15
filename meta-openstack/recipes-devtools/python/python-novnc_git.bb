@@ -11,7 +11,7 @@ SRCREV = "3b8ec46fd26d644e6edbea4f46e630929297e448"
 PV = "0.5.1+git${SRCPV}"
 
 SRC_URI = "git://github.com/kanaka/noVNC.git \
-           file://python-distutils3.patch"
+           file://python-distutils.patch"
 
 S = "${WORKDIR}/git"
 
