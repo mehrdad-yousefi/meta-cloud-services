@@ -8,6 +8,8 @@ RDEPENDS_${PN} += " \
     ruby \
 "
 
+SRCNAME ?= "${PN}"
+
 #${PN}_do_compile[depends] += "ruby-native:do_populate_sysroot"
 
 def get_rubyversion(p):
@@ -78,8 +80,8 @@ RUBY_GEM_VERSION ?= "${@get_rubygemsversion("${STAGING_BINDIR_NATIVE}")}"
 
 export GEM_HOME = "${STAGING_DIR_NATIVE}/usr/lib/ruby/gems/${RUBY_GEM_VERSION}"
 
-RUBY_BUILD_GEMS ?= "${BPN}.gemspec"
-RUBY_INSTALL_GEMS ?= "${BPN}-${BPV}.gem"
+RUBY_BUILD_GEMS ?= "${SRCNAME}.gemspec"
+RUBY_INSTALL_GEMS ?= "${SRCNAME}-${PV}.gem"
 
 RUBY_COMPILE_FLAGS ?= 'LANG="en_US.UTF-8" LC_ALL="en_US.UTF-8"'
 
