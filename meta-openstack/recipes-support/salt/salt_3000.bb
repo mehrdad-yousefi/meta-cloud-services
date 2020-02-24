@@ -1,12 +1,17 @@
 HOMEPAGE = "http://saltstack.com/"
 SECTION = "admin"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=fb92f464675f6b5df90f540d60237915"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=89aea4e17d99a7cacdbeed46a0096b10"
 DEPENDS = "\
            python3-msgpack \
            python3-pyyaml \
            python3-jinja2 \
            python3-markupsafe \
+           python3-dateutil \
+           python3-pycrypto \
+           python3-pytest-salt \
+           python3-pyzmq \
+           python3-requests \
 "
 
 PACKAGECONFIG ??= "zeromq"
@@ -15,68 +20,63 @@ PACKAGECONFIG[tcp] = ",,python3-pycrypto"
 
 SRC_URI = "https://files.pythonhosted.org/packages/source/s/${PN}/${PN}-${PV}.tar.gz \
            file://set_python_location_hashbang.patch \
-           file://minion \
-           file://salt-minion \
-           file://salt-common.bash_completion \
-           file://salt-common.logrotate \
-           file://salt-api \
-           file://salt-master \
-           file://master \
-           file://salt-syndic \
-           file://cloud \
-           file://roster \
 "
 
-SRC_URI[md5sum] = "b6ec271b59554b9af7ff4005028434b5"
-SRC_URI[sha256sum] = "a0a45d22fdf6961542a419b7e09568a3118e2b019ffe7bab9dee5aeb55b56b31"
+SRC_URI[md5sum] = "8084ef6f2a275b627ae364b9d562b4ff"
+SRC_URI[sha256sum] = "04fbc64933b375cbbefc9576bcc65167b74d5eec7f58e64d096d67529ea66500"
+
+
+SYSTEMD_AUTO_ENABLE_${PN}-master = "disable"
+SYSTEMD_AUTO_ENABLE_${PN}-minion = "disable"
+SYSTEMD_AUTO_ENABLE_${PN}-api = "disable"
 
 S = "${WORKDIR}/${PN}-${PV}"
 
-inherit setuptools3 update-rc.d
+inherit setuptools3 systemd
 
 # Avoid a QA Warning triggered by the test package including a file
 # with a .a extension
 INSANE_SKIP_${PN}-tests += "staticdev"
 
+RDEPENDS_${PN} += "${PN}-api \
+                   ${PN}-common \
+                   ${PN}-master \
+                   ${PN}-minion \
+                   ${PN}-bash-completion \
+"
+
 # Note ${PN}-tests must be before ${PN}-common in the PACKAGES variable
 # in order for ${PN}-tests to own the correct FILES.
 PACKAGES += "\
-           ${PN}-tests \
            ${PN}-api \
-           ${PN}-cloud \
            ${PN}-common \
            ${PN}-master \
            ${PN}-minion \
-           ${PN}-ssh \
+           ${PN}-cloud \
            ${PN}-syndic \
+           ${PN}-ssh \
            ${PN}-bash-completion \
+           ${PN}-zsh-completion \
 "
 
 do_install_append() {
-        install -d ${D}${sysconfdir}/bash_completion.d/
-        install -m 0644 ${WORKDIR}/salt-common.bash_completion ${D}${sysconfdir}/bash_completion.d/${PN}-common
-        install -d ${D}${sysconfdir}/logrotate.d/
-        install -m 0644 ${WORKDIR}/salt-common.logrotate ${D}${sysconfdir}/logrotate.d/${PN}-common
-        install -d ${D}${sysconfdir}/init.d/
-        install -m 0755 ${WORKDIR}/salt-minion ${D}${sysconfdir}/init.d/${PN}-minion
-        install -m 0755 ${WORKDIR}/salt-api ${D}${sysconfdir}/init.d/${PN}-api
-        install -m 0755 ${WORKDIR}/salt-master ${D}${sysconfdir}/init.d/${PN}-master
-        install -m 0755 ${WORKDIR}/salt-syndic ${D}${sysconfdir}/init.d/${PN}-syndic
-        install -d ${D}${sysconfdir}/${PN}/
-        install -m 0644 ${WORKDIR}/minion ${D}${sysconfdir}/${PN}/minion
-        install -m 0644 ${WORKDIR}/master ${D}${sysconfdir}/${PN}/master
-        install -m 0644 ${WORKDIR}/cloud ${D}${sysconfdir}/${PN}/cloud
-        install -m 0644 ${WORKDIR}/roster ${D}${sysconfdir}/${PN}/roster
-        install -d ${D}${sysconfdir}/${PN}/cloud.conf.d ${D}${sysconfdir}/${PN}/cloud.profiles.d ${D}${sysconfdir}/${PN}/cloud.providers.d
+        install -Dm644 ${S}/pkg/salt-common.logrotate ${D}${sysconfdir}/logrotate.d/${PN}
+        install -Dm644 ${S}/pkg/salt.bash ${D}${datadir}/bash-completion/completions/${PN}
+        install -Dm644 ${S}/pkg/zsh_completion.zsh ${D}${datadir}/zsh/site-functions/_${PN}
 
-        install -d ${D}${PYTHON_SITEPACKAGES_DIR}/${PN}-tests/
-        cp -r ${S}/tests/ ${D}${PYTHON_SITEPACKAGES_DIR}/${PN}-tests/
+        # default config
+        install -Dm644 ${S}/conf/minion ${D}${sysconfdir}/${PN}/minion
+        install -Dm644 ${S}/conf/minion ${D}${sysconfdir}/${PN}/master
+
+        # systemd services
+        for _svc in salt-master.service salt-syndic.service salt-minion.service salt-api.service; do
+            install -Dm644 ${S}/pkg/$_svc "${D}${systemd_system_unitdir}/$_svc"
+        done
 }
 
 ALLOW_EMPTY_${PN} = "1"
 FILES_${PN} = ""
-
-INITSCRIPT_PACKAGES = "${PN}-minion ${PN}-api ${PN}-master ${PN}-syndic"
+FILES_${PN} += "${systemd_system_unitdir} ${systemd_system_unitdir}/* /etc/salt/master.d /etc/salt/master.d/preseed_key.py"
 
 DESCRIPTION_COMMON = "salt is a powerful remote execution manager that can be used to administer servers in a\
  fast and efficient way. It allows commands to be executed across large groups of servers. This means systems\
@@ -93,20 +93,18 @@ RDEPENDS_${PN}-minion += "${@bb.utils.contains('PACKAGECONFIG', 'zeromq', 'pytho
 RDEPENDS_${PN}-minion += "${@bb.utils.contains('PACKAGECONFIG', 'tcp', 'python3-pycrypto', '',d)}"
 RRECOMMENDS_${PN}-minion_append_x64 = "dmidecode"
 RSUGGESTS_${PN}-minion = "python3-augeas"
-CONFFILES_${PN}-minion = "${sysconfdir}/${PN}/minion ${sysconfdir}/init.d/${PN}-minion"
-FILES_${PN}-minion = "${bindir}/${PN}-minion ${sysconfdir}/${PN}/minion.d/ ${CONFFILES_${PN}-minion} ${bindir}/${PN}-proxy"
-INITSCRIPT_NAME_${PN}-minion = "${PN}-minion"
-INITSCRIPT_PARAMS_${PN}-minion = "defaults"
+CONFFILES_${PN}-minion = "${sysconfdir}/${PN}/minion"
+FILES_${PN}-minion = "${bindir}/${PN}-minion ${sysconfdir}/${PN}/minion.d/ ${CONFFILES_${PN}-minion} ${bindir}/${PN}-proxy ${systemd_system_unitdir}/salt-minion.service"
 
 SUMMARY_${PN}-common = "shared libraries that salt requires for all packages"
 DESCRIPTION_${PN}-common ="${DESCRIPTION_COMMON} This particular package provides shared libraries that \
 salt-master, salt-minion, and salt-syndic require to function."
-RDEPENDS_${PN}-common = "python3-dateutil python3-jinja2 python3-pyyaml python3-requests (>= 1.0.0) python3-tornado (>= 4.2.1)"
-RRECOMMENDS_${PN}-common = "lsb python3-futures"
+RDEPENDS_${PN}-common = "python3-dateutil python3-jinja2 python3-pyyaml python3-requests (>= 1.0.0)"
+RRECOMMENDS_${PN}-common = "lsb"
 RSUGGESTS_${PN}-common = "python3-mako python3-git"
 RCONFLICTS_${PN}-common = "python3-mako (< 0.7.0)"
-CONFFILES_${PN}-common="${sysconfdir}/logrotate.d/${PN}-common"
-FILES_${PN}-common = "${bindir}/${PN}-call ${libdir}/python${PYTHON_BASEVERSION}/ ${CONFFILES_${PN}-common}"
+CONFFILES_${PN}-common="${sysconfdir}/logrotate.d/${PN}"
+FILES_${PN}-common = "${bindir}/${PN}-call ${libdir}/python3.7/ ${CONFFILES_${PN}-common}"
 
 SUMMARY_${PN}-ssh = "remote manager to administer servers via salt"
 DESCRIPTION_${PN}-ssh = "${DESCRIPTION_COMMON} This particular package provides the salt ssh controller. It \
@@ -125,9 +123,8 @@ even a Websocket API. The Salt API system is used to expose the fundamental aspe
 RDEPENDS_${PN}-api = "${PN}-master"
 RSUGGESTS_${PN}-api = "python3-cherrypy"
 CONFFILES_${PN}-api = "${sysconfdir}/init.d/${PN}-api"
-FILES_${PN}-api = "${bindir}/${PN}-api ${CONFFILES_${PN}-api}"
-INITSCRIPT_NAME_${PN}-api = "${PN}-api"
-INITSCRIPT_PARAMS_${PN}-api = "defaults"
+FILES_${PN}-api = "${bindir}/${PN}-api ${CONFFILES_${PN}-api} ${systemd_system_unitdir}/${PN}-api.service"
+
 
 SUMMARY_${PN}-master = "remote manager to administer servers via salt"
 DESCRIPTION_${PN}-master ="${DESCRIPTION_COMMON} This particular package provides the salt controller."
@@ -136,18 +133,15 @@ RDEPENDS_${PN}-master += "${@bb.utils.contains('PACKAGECONFIG', 'zeromq', 'pytho
 RDEPENDS_${PN}-master += "${@bb.utils.contains('PACKAGECONFIG', 'tcp', 'python3-pycrypto', '',d)}"
 CONFFILES_${PN}-master="${sysconfdir}/init.d/${PN}-master  ${sysconfdir}/${PN}/master"
 RSUGGESTS_${PN}-master = "python3-git"
-FILES_${PN}-master = "${bindir}/${PN} ${bindir}/${PN}-cp ${bindir}/${PN}-key ${bindir}/${PN}-master ${bindir}/${PN}-run ${bindir}/${PN}-unity ${bindir}/spm ${CONFFILES_${PN}-master}"
-INITSCRIPT_NAME_${PN}-master = "${PN}-master"
-INITSCRIPT_PARAMS_${PN}-master = "defaults"
+FILES_${PN}-master = "${bindir}/${PN} ${bindir}/${PN}-cp ${bindir}/${PN}-key ${bindir}/${PN}-master ${bindir}/${PN}-run ${bindir}/${PN}-unity ${bindir}/spm ${CONFFILES_${PN}-master} ${systemd_system_unitdir}/${PN}-master.service"
+
 
 SUMMARY_${PN}-syndic = "master-of-masters for salt, the distributed remote execution system"
 DESCRIPTION_${PN}-syndic = "${DESCRIPTION_COMMON} This particular package provides the master of masters for \
 salt; it enables the management of multiple masters at a time."
 RDEPENDS_${PN}-syndic = "${PN}-master (= ${EXTENDPKGV})"
 CONFFILES_${PN}-syndic="${sysconfdir}/init.d/${PN}-syndic"
-FILES_${PN}-syndic = "${bindir}/${PN}-syndic ${CONFFILES_${PN}-syndic}"
-INITSCRIPT_NAME_${PN}-syndic = "${PN}-syndic"
-INITSCRIPT_PARAMS_${PN}-syndic = "defaults"
+FILES_${PN}-syndic = "${bindir}/${PN}-syndic ${CONFFILES_${PN}-syndic} ${systemd_system_unitdir}/${PN}-syndic.service"
 
 SUMMARY_${PN}-cloud = "public cloud VM management system"
 DESCRIPTION_${PN}-cloud = "provision virtual machines on various public clouds via a cleanly controlled profile and mapping system."
@@ -161,4 +155,5 @@ DESCRIPTION_${PN}-tests ="${DESCRIPTION_COMMON} This particular package provides
 RDEPENDS_${PN}-tests = "${PN}-common python3-pytest-salt python3-tests python3-image bash"
 FILES_${PN}-tests = "${PYTHON_SITEPACKAGES_DIR}/salt-tests/tests/"
 
-FILES_${PN}-bash-completion = "${sysconfdir}/bash_completion.d/${PN}-common"
+FILES_${PN}-bash-completion = "${datadir}/bash-completion"
+FILES_${PN}-zsh-completion = "${datadir}/zsh/site-functions"
