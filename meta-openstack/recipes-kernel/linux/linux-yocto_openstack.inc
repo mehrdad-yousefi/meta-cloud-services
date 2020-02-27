@@ -1,4 +1,4 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS_prepend := "${THISDIR}/linux-yocto:"
 
 SRC_URI += "file://enable-veth.cfg \
             file://enable-iscsi-tcp.cfg \
