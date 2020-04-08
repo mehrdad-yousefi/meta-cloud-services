@@ -22,4 +22,6 @@ DEPENDS += " \
 # RDEPENDS_default:
 RDEPENDS_${PN} += " \
         ${PYTHON_PN}-pbr \
+        ${PYTHON_PN}-wrapt \
+        ${PYTHON_PN}-six \
         "
