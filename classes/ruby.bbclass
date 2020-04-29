@@ -104,23 +104,31 @@ EOF
   system("perl -p -i -e 's#^arch =.*#arch = ${ruby_arch}#' Makefile")
   system("perl -p -i -e 's#^LIBPATH =.*#LIBPATH = -L.#' Makefile")
   system("perl -p -i -e 's#^dldflags =.*#dldflags = ${LDFLAGS}#' Makefile")
+  system("perl -p -i -e 's#^ldflags  =.*#ldflags = -L${STAGING_LIBDIR}#' Makefile")
 EOF
 }
 
 ruby_do_compile() {
-	if [ -f extconf.rb -a ! -f extconf.rb.orig ] ; then
-		grep create_makefile extconf.rb > append2 || (exit 0)
-		ruby_gen_extconf_fix
-		cp extconf.rb extconf.rb.orig
-		# Patch extconf.rb for cross compile
-		cat append >> extconf.rb
-	fi
-	for gem in ${RUBY_BUILD_GEMS}; do
-		${RUBY_COMPILE_FLAGS} gem build $gem
-	done
-	if [ -f extconf.rb.orig ] ; then
-		mv extconf.rb.orig extconf.rb
-	fi
+    EXTCONF_FILES=$(find . -name extconf.rb -exec ls {} \;)
+    for e in $EXTCONF_FILES
+    do
+        if [ -f $e -a ! -f $e.orig ] ; then
+            grep create_makefile $e > append2 || continue
+            ruby_gen_extconf_fix
+            cp $e $e.orig
+            # Patch extconf.rb for cross compile
+            cat append >> $e
+        fi
+    done
+    for gem in ${RUBY_BUILD_GEMS}; do
+            ${RUBY_COMPILE_FLAGS} gem build $gem
+    done
+    for e in $EXTCONF_FILES
+    do
+        if [ -f $e.orig ] ; then
+            mv $e.orig $e
+        fi
+    done
 }
 
 
