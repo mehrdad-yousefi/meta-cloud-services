@@ -34,7 +34,7 @@ DEPENDS += "bison-native flex-native python3-native fuse libaio libtirpc libxml2
 
 # rpc now comes from libtirpc instead of glibc
 #
-CFLAGS += "-I${STAGING_INCDIR}/tirpc"
+CFLAGS += "-I${STAGING_INCDIR}/tirpc -Wno-error=implicit-function-declaration"
 LDFLAGS += " -ltirpc"
 
 EXTRA_OECONF = "ac_cv_file__etc_debian_version=no \
