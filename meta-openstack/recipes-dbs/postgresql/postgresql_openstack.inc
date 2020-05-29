@@ -35,7 +35,7 @@ do_install_append() {
     sed -e "s:%SYSCONFIGDIR%:${sysconfdir}:g" -i ${PG_INIT_SERVICE_FILE}
 
     # Update PGDATA throughout
-    files="${D}${localstatedir}/lib/${BPN}/.bash_profile"
+    files="${D}${localstatedir}/lib/${BPN}/.profile"
     files="$files ${D}${systemd_unitdir}/system/postgresql.service"
     files="$files ${D}${bindir}/${BPN}-setup"
     files="$files ${D}${sysconfdir}/init.d/${BPN}-server"
