@@ -9,6 +9,11 @@ SRC_URI[sha256sum] = "ab27d4efb59105555b6c9b1fe7792fd895ad9ca893058c39bba4106d6a
 
 inherit setuptools3 pypi
 
+# Satisfy setup.py 'setup_requires'
+DEPENDS += " \
+        python-pbr-native \
+	"
+
 RDEPENDS_${PN} += " \
         python-lxml \
         python-oslo.concurrency \
