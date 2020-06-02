@@ -13,6 +13,11 @@ DEPENDS += "\
     python-pbr \
     "
 
+# Satisfy setup.py 'setup_requires'
+DEPENDS += " \
+        python-pbr-native \
+        "
+
 RDPENDS_${PN} += "\
     python-pbr \
     "
