@@ -17,6 +17,11 @@ inherit setuptools3
 DEPENDS += " \
         "
 
+# Satisfy setup.py 'setup_requires'
+DEPENDS += " \
+        python-pbr-native \
+	"
+
 RDEPENDS_${PN} += " \
         "
 	
