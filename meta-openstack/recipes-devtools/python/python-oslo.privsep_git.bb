@@ -17,6 +17,11 @@ DEPENDS += " \
         python-pbr \
         "
 
+# Satisfy setup.py 'setup_requires'
+DEPENDS += " \
+        python-pbr-native \
+        "
+
 # RDEPENDS_default:
 RDEPENDS_${PN} += " \
         python-oslo.log \
