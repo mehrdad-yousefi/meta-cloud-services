@@ -7,16 +7,16 @@ SECTION = "devel/python"
 LICENSE = "LGPL-2.1"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/LGPL-2.1;md5=1a6d268fd218675ffea8be556788b780"
 
-SRC_URI[md5sum] = "c8d798c3e29ac82dd5c7bf98a99404af"
-SRC_URI[sha256sum] = "27babdc53e0741ed09d21b7fdb5d244aabb1679f67ef81289f0f34e50aca51c9"
+SRC_URI[md5sum] = "072f72e782f28a9c42356976f8ec22d9"
+SRC_URI[sha256sum] = "f78fa8b41eeb815f0486414f710f1eea0949e346cfb11d59ba6295ed69e84304"
 
 inherit setuptools3 pypi
 
 DEPENDS += " \
-        python-pip \
+        python3-pip \
         "
 
 RDEPENDS_${PN} += " \
-        python-nose \
+        python3-nose \
         "
 
