@@ -4,10 +4,10 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-SRC_URI[md5sum] = "240d3debc1b6eaadf5e8838f5f2d06fb"
-SRC_URI[sha256sum] = "3467a1edf62946f1b67724fa7f9c699b5e31d80b111ed9e4c7aec21633a3e30d"
+SRC_URI[md5sum] = "62d32a59bf4447191b957c6a65eff47f"
+SRC_URI[sha256sum] = "697d08204a59933035ac246fbc8c8e5453b846b4a8875ed7a9e9caba769b1b57"
 
-inherit pypi
+inherit setuptools3 pypi
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
