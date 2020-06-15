@@ -15,14 +15,14 @@ DISTUTILS_INSTALL_ARGS = "--root=${D} \
     --install-data=${datadir}"
 
 DEPENDS += " \
-	python-pbr \
+	python3-pbr \
 	"
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
-RDEPENDS_${PN} += "python-testtools \
-	python-pbr \
+RDEPENDS_${PN} += "python3-testtools \
+	python3-pbr \
 	"
