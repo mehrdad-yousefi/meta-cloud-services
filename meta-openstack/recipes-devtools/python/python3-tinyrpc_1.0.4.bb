@@ -5,18 +5,18 @@ SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
-SRC_URI[md5sum] = "2663568ba3e1793da7b21003f0847fdd"
-SRC_URI[sha256sum] = "b4d64227f023f1f0736ef137bd4c901c7652563e62c7a20329222c3a0b14d84f"
+SRC_URI[md5sum] = "cd61e3cbc01ea940abc97d3a87abf4a7"
+SRC_URI[sha256sum] = "4b41fab967fb1c978f573bf0d609a3b12cc3b6ed62bd3108f43f575563746396"
 
 inherit setuptools3 pypi
 
 RDEPENDS_${PN} += " \
-        python-six \
-        python-gevent \
-        python-requests \
-        python-websocket-client \
-        python-jsonext \
-        python-gevent-websocket \
-        python-werkzeug \
-        python-pyzmq \
+        python3-six \
+        python3-gevent \
+        python3-requests \
+        python3-websocket-client \
+        python3-jsonext \
+        python3-gevent-websocket \
+        python3-werkzeug \
+        python3-pyzmq \
         "
