@@ -15,31 +15,29 @@ S = "${WORKDIR}/git"
 inherit setuptools3
 
 DEPENDS += " \
-        python-pip \
-        python-pbr \
+        python3-pip \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 RDEPENDS_${PN} += " \
-        python-pbr \
-        python-six \
-        python-enum34 \
-        python-futurist \
-        python-fasteners \
-        python-networkx \
-        python-contextlib2 \
-        python-stevedore \
-        python-futures \
-        python-jsonschema \
-        python-automaton \
-        python-oslo.utils \
-        python-oslo.serialization \
-        python-tenacity \
-        python-cachetools \
-        python-debtcollector \
+        python3-pbr \
+        python3-six \
+        python3-futurist \
+        python3-fasteners \
+        python3-networkx \
+        python3-contextlib2 \
+        python3-stevedore \
+        python3-jsonschema \
+        python3-automaton \
+        python3-oslo.utils \
+        python3-oslo.serialization \
+        python3-tenacity \
+        python3-cachetools \
+        python3-debtcollector \
         "
 	
