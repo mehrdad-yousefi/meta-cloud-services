@@ -10,18 +10,18 @@ SRC_URI[sha256sum] = "ca8bfbea03b9f39a536b4b261d90fbe8b1b0e1766bff5d8222e35691f8
 inherit setuptools3 pypi
 
 DEPENDS += " \
-        python-pip \
+        python3-pip \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 RDEPENDS_${PN} += " \
-        python-pbr \
-        python-six \
-        python-debtcollector \
-        python-prettytable \
+        python3-pbr \
+        python3-six \
+        python3-debtcollector \
+        python3-prettytable \
         "
 
