@@ -13,23 +13,23 @@ S = "${WORKDIR}/git"
 
 inherit setuptools3
 
-# DEPENDS_default: python-pip
+# DEPENDS_default: python3-pip
 
 DEPENDS += " \
-        python-pip \
-        python-pbr \
+        python3-pip \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 # RDEPENDS_default: 
 RDEPENDS_${PN} += " \
-        python-pbr \
-        python-six \
-        python-oslo.utils \
-        python-pytz \
-        python-msgpack \
+        python3-pbr \
+        python3-six \
+        python3-oslo.utils \
+        python3-pytz \
+        python3-msgpack \
         "
