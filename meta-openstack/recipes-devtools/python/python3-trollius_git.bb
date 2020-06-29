@@ -4,8 +4,8 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8f7bb094c7232b058c7e9f2e431f389c"
 
-PV = "2.0+git${SRCPV}"
-SRCREV = "5e9854d7b7bed6eb6e182808379342355e2bfca4"
+PV = "3.4.3+git${SRCPV}"
+SRCREV = "7b2d8abfce1d7ef18ef516f9b1b7032172630375"
 
 SRCNAME = "trollius"
 SRC_URI = "git://github.com/haypo/${SRCNAME}.git;branch=trollius"
@@ -15,7 +15,7 @@ S = "${WORKDIR}/git"
 inherit setuptools3
 
 DEPENDS += " \
-        python-pip \
+        python3-pip \
         "
 
 RDEPENDS_${PN} += " \
