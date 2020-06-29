@@ -7,26 +7,26 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 SRCNAME = "ovsdbapp"
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike"
 
-PV = "0.4.1+git${SRCPV}"
-SRCREV = "742754bce3c9453f8c7186455a92e4f6d6b18ace"
+PV = "0.4.4+git${SRCPV}"
+SRCREV = "40064ca2d99389f278028508a17f2e38d6df6f10"
 S = "${WORKDIR}/git"
 
 inherit setuptools3
 
-# DEPENDS_default: python-pip
+# DEPENDS_default: python3-pip
 
 DEPENDS += " \
-        python-pip \
-        python-pbr \
+        python3-pip \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 RDEPENDS_${PN} += " \
-        python-fixtures \
-        python-ovs \
-        python-pbr \
+        python3-fixtures \
+        python3-ovs \
+        python3-pbr \
         "
