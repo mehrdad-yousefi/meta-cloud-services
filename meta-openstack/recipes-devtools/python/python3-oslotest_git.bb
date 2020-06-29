@@ -6,8 +6,8 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 
-PV = "2.17.0+git${SRCPV}"
-SRCREV = "aea2b5cfd6442195f7ee479e21664631825af924"
+PV = "2.17.2+git${SRCPV}"
+SRCREV = "54ac29c3edd46530c1ee90eb860a7e686d9a3740"
 
 SRCNAME = "oslotest"
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike"
@@ -17,23 +17,23 @@ S = "${WORKDIR}/git"
 inherit setuptools3
 
 DEPENDS += "\
-    python-pbr \
+    python3-pbr \
     "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
 	"
 
-RDEPENDS_${PN} = "python-fixtures \
-                  python-subunit \
-                  python-six \
-                  python-testrepository \
-                  python-testtools \
-                  python-mock \
-                  python-mox3 \
-                  python-os-client-config \
-                  python-debtcollector \
+RDEPENDS_${PN} = "python3-fixtures \
+                  python3-subunit \
+                  python3-six \
+                  python3-testrepository \
+                  python3-testtools \
+                  python3-mock \
+                  python3-mox3 \
+                  python3-os-client-config \
+                  python3-debtcollector \
                   bash \
 "
 	
