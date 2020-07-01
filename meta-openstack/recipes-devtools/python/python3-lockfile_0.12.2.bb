@@ -10,14 +10,14 @@ SRC_URI[sha256sum] = "6aed02de03cba24efabcd600b30540140634fc06cfa603822d508d5361
 inherit distutils3 pypi
 
 DEPENDS += "\
-    python-pbr \
+    python3-pbr \
     "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-    python-pbr-native \
+    python3-pbr-native \
     "
 
 RDEPENDS_${PN} += "\
-    python-pbr \
+    python3-pbr \
     "
