@@ -2,10 +2,10 @@ DESCRIPTION = "An unladen web framework for building APIs and app backends."
 HOMEPAGE = "http://falconframework.org"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://README.rst;md5=2bf705a48be7b7799862ffe602c94b87"
+LIC_FILES_CHKSUM = "file://README.rst;md5=a0c7260e38287caff6c266d1f287e962"
 
-SRC_URI[md5sum] = "bf9e8bdd20700f1ff7ce6397cd441fbd"
-SRC_URI[sha256sum] = "92bb899bf6e58e2299e3b1de1e628b90c38544ba3354a0141d108318b50c3402"
+SRC_URI[md5sum] = "77c52c144dd284e6259d257c6f008072"
+SRC_URI[sha256sum] = "eea593cf466b9c126ce667f6d30503624ef24459f118c75594a69353b6c3d5fc"
 
 inherit setuptools3 pypi
 
@@ -15,10 +15,12 @@ do_install_append() {
 }
 
 DEPENDS += " \
-        python-pip \
+        python3-pip \
         "
 
 RDEPENDS_${PN} += " \
-        python-six \
-        python-mimeparse \
+        python3-six \
+        python3-json \
+        python3-xml \
+        python3-netserver \
         "
