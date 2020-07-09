@@ -19,11 +19,10 @@ PACKAGECONFIG[zeromq] = ",,python3-pyzmq python3-pycrypto,"
 PACKAGECONFIG[tcp] = ",,python3-pycrypto"
 
 SRC_URI = "https://files.pythonhosted.org/packages/source/s/${PN}/${PN}-${PV}.tar.gz \
-           file://set_python_location_hashbang.patch \
 "
 
-SRC_URI[md5sum] = "8084ef6f2a275b627ae364b9d562b4ff"
-SRC_URI[sha256sum] = "04fbc64933b375cbbefc9576bcc65167b74d5eec7f58e64d096d67529ea66500"
+SRC_URI[md5sum] = "ae06cef7557e237a954491a069e79a25"
+SRC_URI[sha256sum] = "5ca60d1b2cc8e63db50995bd8b117914eeaf57c48ce2b3a3731ee57163adf154"
 
 
 SYSTEMD_AUTO_ENABLE_${PN}-master = "disable"
@@ -100,7 +99,7 @@ SUMMARY_${PN}-common = "shared libraries that salt requires for all packages"
 DESCRIPTION_${PN}-common ="${DESCRIPTION_COMMON} This particular package provides shared libraries that \
 salt-master, salt-minion, and salt-syndic require to function."
 RDEPENDS_${PN}-common = "python3-dateutil python3-jinja2 python3-pyyaml python3-requests (>= 1.0.0)"
-RRECOMMENDS_${PN}-common = "lsb"
+RRECOMMENDS_${PN}-common = "lsb-release"
 RSUGGESTS_${PN}-common = "python3-mako python3-git"
 RCONFLICTS_${PN}-common = "python3-mako (< 0.7.0)"
 CONFFILES_${PN}-common="${sysconfdir}/logrotate.d/${PN}"
