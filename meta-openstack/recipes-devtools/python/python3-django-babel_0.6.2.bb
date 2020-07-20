@@ -4,24 +4,17 @@ SECTION = "devel/python"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5ae97ab65116b8d7890c59de57577b46"
 
-SRCNAME = "django-babel"
+inherit setuptools3 pypi
 
-PV = "0.5.1+git${SRCPV}"
-SRCREV = "88b389381c0e269605311ae07029555b65a86bc5"
-
-SRC_URI = "git://github.com/python-babel/${SRCNAME}.git \
-          "
-
-S = "${WORKDIR}/git"
-
-inherit setuptools3
+SRC_URI[md5sum] = "a5483952426d1cd749e7204902b34d63"
+SRC_URI[sha256sum] = "1e621b198e1f98ae4f93e43463cf78cbedbace475eb6e0853ba1e2567f3b8119"
 
 DEPENDS += " \
-        python-pip \
+        python3-pip \
         "
 
 RDEPENDS_${PN} += " \
-        python-django \
-        python-babel \
+        python3-django \
+        python3-babel \
         "
 
