@@ -4,10 +4,11 @@ SECTION = "devel/python"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3f34b9b2f6413fd5f91869fa7e992457"
 
-SRC_URI[md5sum] = "29c87a00f0d098b90f3ac6113ae6e52d"
-SRC_URI[sha256sum] = "ba1375fb1024e8e91547504d4392321795c989fde500b96ebc7c93884f786e60"
+SRC_URI[md5sum] = "da4a355140acaa3eeb236987ab174e9d"
+SRC_URI[sha256sum] = "be58deb54a43d77d2e1621fe59f787681376d3cd0b8bd8e4758ef6c3a6453380"
 
-inherit pypi
+inherit setuptools3 pypi
 
-#RDEPENDS_${PN} += "${PYTHON_PN}-six \
-#	"
+RDEPENDS_${PN} += " \
+	${PYTHON_PN}-django \
+	"
