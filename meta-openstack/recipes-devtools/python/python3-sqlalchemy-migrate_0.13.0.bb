@@ -13,15 +13,15 @@ inherit setuptools3
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 RDEPENDS_${PN} += " \
-        python-pbr \
-        python-sqlalchemy \
-        python-decorator \
-        python-six \
-        python-sqlparse \
-        python-tempita \
+        python3-pbr \
+        python3-sqlalchemy \
+        python3-decorator \
+        python3-six \
+        python3-sqlparse \
+        python3-tempita \
         "
 	
