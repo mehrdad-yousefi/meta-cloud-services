@@ -6,12 +6,14 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4a4d0e932ffae1c0131528d30d419c55"
 
 SRCNAME = "keystoneclient"
 
-SRC_URI = "\
-	git://github.com/openstack/python-keystoneclient.git;branch=stable/pike \
-	file://keystone-api-check.sh \
-	"
+SRC_URI = "file://keystone-api-check.sh"
 
-PV = "3.13.0+git${SRCPV}"
+SRC_URI = "\
+        git://github.com/openstack/python-keystoneclient.git;branch=stable/pike \
+        file://keystone-api-check.sh \
+        "
+
+PV = "4.1.0+git${SRCPV}"
 SRCREV = "7ff05baa1fa56f152173651f16fc6fd181291292"
 S = "${WORKDIR}/git"
 
@@ -20,28 +22,28 @@ inherit setuptools3 monitor
 FILES_${PN}-doc += "${datadir}/keystoneclient" 
 
 DEPENDS += " \
-        python-pip \
-        python-pbr \
+        python3-pip \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 RDEPENDS_${PN} += " \
         bash \
-        python-pbr \
-        python-debtcollector \
-        python-keystoneauth1 \
-        python-oslo.config \
-        python-oslo.i18n \
-        python-oslo.serialization \
-        python-oslo.utils \
-        python-positional \
-        python-requests \
-        python-six \
-        python-stevedore \
+        python3-pbr \
+        python3-debtcollector \
+        python3-keystoneauth1 \
+        python3-oslo.config \
+        python3-oslo.i18n \
+        python3-oslo.serialization \
+        python3-oslo.utils \
+        python3-positional \
+        python3-requests \
+        python3-six \
+        python3-stevedore \
         "
 
 do_install_append() {
@@ -53,7 +55,7 @@ PACKAGES =+ " ${SRCNAME}-tests"
 FILES_${SRCNAME}-tests = "${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}/examples \
         "
 RDEPENDS_${SRCNAME}-tests += " \
-	python-httpretty \
+	python3-httpretty \
         bash \
 	"
 
