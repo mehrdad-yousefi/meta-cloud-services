@@ -2,10 +2,10 @@ DESCRIPTION = "WebSockets support for any application/server"
 HOMEPAGE = "https://github.com/kanaka/websockify"
 SECTION = "devel/python"
 LICENSE = "LGPLv3"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a3b5f97c9d64189899b91b3728bfd774"
+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=eb81922f483833198eace60f1469f99d"
 
-SRC_URI[md5sum] = "8fa547ca4de84a96aa3472d55fbcdd59"
-SRC_URI[sha256sum] = "547d3d98c5081f2dc2872a2e4a3aef33e0ee5141d5f6209204aab2f4a41548d2"
+SRC_URI[md5sum] = "ff745fd67457fd077915753c9b808b2a"
+SRC_URI[sha256sum] = "c35b5b79ebc517d3b784dacfb993be413a93cda5222c6f382443ce29c1a6cada"
 
 inherit setuptools3 pypi
 
