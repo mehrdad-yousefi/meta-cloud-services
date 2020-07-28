@@ -4,8 +4,8 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c46f31914956e4579f9b488e71415ac8"
 
-PV = "2.10.0+git${SRCPV}"
-SRCREV = "d113c1564d49d93451d9330955e8a42b7db04149"
+PV = "3.1.0+git${SRCPV}"
+SRCREV = "2402013a8719873d65136fc283e1855166adbc26"
 
 SRCNAME = "pycadf"
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git"
@@ -17,21 +17,21 @@ inherit setuptools3
 FILES_${PN} += "${datadir}/etc/${SRCNAME}/*"
 
 DEPENDS += " \
-        python-pip \
-        python-pbr \
+        python3-pip \
+        python3-pbr \
         "
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 RDEPENDS_${PN} += " \
-      python-babel \
-      python-iso8601 \
-      python-netaddr \
-      python-posix-ipc \
-      python-pytz \
-      python-six \
-      python-webob \
-      python-pbr \
+      python3-babel \
+      python3-iso8601 \
+      python3-netaddr \
+      python3-posix-ipc \
+      python3-pytz \
+      python3-six \
+      python3-webob \
+      python3-pbr \
         "
