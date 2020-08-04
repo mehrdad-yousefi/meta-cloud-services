@@ -2,16 +2,14 @@ DESCRIPTION = "System V IPC primitives (semaphores, shared memory and message qu
 HOMEPAGE = "http://semanchuk.com/philip/sysv_ipc/"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=9d6e34e7b47096d7c19c1e3be707374e"
+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=4f09db8030b38bf57a442088a5a521ff"
 
 PYPI_PACKAGE = "sysv_ipc"
 
-SRC_URI[md5sum] = "c6cf5b4aa7cd3e07fd4b5661530eca8c"
-SRC_URI[sha256sum] = "0af73375a85c5d9d487c2f14f208812600bd81e4046437ebaf55746b3aade00e"
+SRC_URI[md5sum] = "9ef5167ed58a5a09e637cdfaeb8099d7"
+SRC_URI[sha256sum] = "8eff10dd17789ddf21b422ce46ae0f6420088902a88e4296cb805cf2fde8b4dc"
 
-inherit pypi
-
-# DEPENDS_default: python-pip
+inherit setuptools3 pypi
 
 DEPENDS += " \
         ${PYTHON_PN}-pip \
