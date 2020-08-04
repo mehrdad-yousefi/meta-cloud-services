@@ -13,6 +13,6 @@ SRC_URI[sha256sum] = "1d6d69ce66211143803fbc56652b41d73b4a400a2891d7bf7a1cdf4c02
 inherit distutils3 pypi
 
 DEPENDS += " \
-        python-pip \
+        python3-pip \
         "
 
