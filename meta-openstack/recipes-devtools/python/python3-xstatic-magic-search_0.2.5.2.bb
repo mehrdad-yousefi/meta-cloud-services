@@ -2,12 +2,12 @@ DESCRIPTION = "An AngularJS directive that provides a UI for both faceted filter
 HOMEPAGE = "https://pypi.python.org/pypi/XStatic-Magic-Search"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=e3d8469611ec04e52d71f2e293d54e9c"
+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=ed1f7d184ee839074df6b44c744de2c0"
 
 PYPI_PACKAGE = "XStatic-Magic-Search"
 
-SRC_URI[md5sum] = "cfb8a82129fffbe1f5c6339240cb6139"
-SRC_URI[sha256sum] = "9b2f35a5792f4e763e6dc319036e3676f3e18f46153096f3ab5e507177ec007e"
+SRC_URI[md5sum] = "7edce59ce76a326b618f74f797498451"
+SRC_URI[sha256sum] = "e72fcf08e7806b60cb6b120fb712c8d221f3ba53c12a10995da01e16fa5360f5"
 
 inherit setuptools3 pypi
 
