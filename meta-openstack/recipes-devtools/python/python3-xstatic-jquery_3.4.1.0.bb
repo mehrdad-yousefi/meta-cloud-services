@@ -6,12 +6,12 @@ LIC_FILES_CHKSUM = "file://README.txt;md5=af1f21066b501c7d9265fab0d5556ece"
 
 PYPI_PACKAGE = "XStatic-jQuery"
 
-SRC_URI[md5sum] = "7a29efeab6961ef00ea2272c923f4503"
-SRC_URI[sha256sum] = "83416a6bb86e8534858c4d1ddca45e881c87639da6f78000c28c3a193fe91305"
+SRC_URI[md5sum] = "8b7ace314d6780e159b2c03cd93a4b5b"
+SRC_URI[sha256sum] = "3fccac7eb265f95430c62eb652cdaeb671785267c77413df926d9facd5825978"
 
-inherit pypi
+inherit setuptools3 pypi
 
-# DEPENDS_default: python-pip
+# DEPENDS_default: python3-pip
 
 DEPENDS += " \
         ${PYTHON_PN}-pip \
