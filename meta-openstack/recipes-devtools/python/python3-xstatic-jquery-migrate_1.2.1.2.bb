@@ -2,16 +2,16 @@ DESCRIPTION = "JQuery-Migrate JavaScript library packaged for setuptools"
 HOMEPAGE = "https://pypi.python.org/pypi/XStatic-JQuery-Migrate"
 SECTION = "devel/python"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=2bbd78dd61f7b4f2fb6b3e31e4d7a26b"
+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=55fddf010d3daf1956396fa50e27c864"
 
 PYPI_PACKAGE = "XStatic-JQuery-Migrate"
 
-SRC_URI[md5sum] = "2dd39f9d6351aeaf129b33d4134ac6a7"
-SRC_URI[sha256sum] = "e2959b3df49afdddb00d36b74cca727a91b994b9f4edb993d7264731a750900e"
+SRC_URI[md5sum] = "7ade6ebf832a62e45b0096a1799a1bfc"
+SRC_URI[sha256sum] = "db9d28cb161626f979f7999f158a4a7aaf6dc957fd0106b1ad1051d47969c425"
 
-inherit pypi
+inherit setuptools3 pypi
 
-# DEPENDS_default: python-pip
+# DEPENDS_default: python3-pip
 
 DEPENDS += " \
         ${PYTHON_PN}-pip \
