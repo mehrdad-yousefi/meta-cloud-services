@@ -2,17 +2,17 @@ DESCRIPTION = "mdi javascript library packaged for setuptools3 (easy_install) / 
 HOMEPAGE = "https://pypi.python.org/pypi/XStatic-mdi"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=898ae9ca7b59edc4521f10be07c6b622"
+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=af9320964a0ddf3bd33eccd79c29f964"
 
 PYPI_PACKAGE = "XStatic-mdi"
 
-SRC_URI[md5sum] = "f3d3d58603178e5898ee1ea4737826ee"
-SRC_URI[sha256sum] = "19b4d522f8fa62fee2893b39147fcf45ebaba8b95d63f3708ebdf34e130a8a53"
+SRC_URI[md5sum] = "aa720e603fce607681cc69989fbd41a9"
+SRC_URI[sha256sum] = "be1005af7a593b0b3a349aadb05e4160ea65894248a47b246c6658345e2f10c1"
 
 inherit setuptools3 pypi
 
 DEPENDS += " \
-        python-pip \
+        python3-pip \
         "
 
 RDEPENDS_${PN} += " \
