@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 PYPI_PACKAGE = "XStatic-Angular-Bootstrap"
 
-SRC_URI[md5sum] = "1d7d02580f022c36628f99fbf40e39c9"
-SRC_URI[sha256sum] = "61b0a86aad66bf0d333ed24496f51d77cb20ad5bf664140d86e880b15a231166"
+SRC_URI[md5sum] = "cb8629df48e822255d1057a2bc624cb6"
+SRC_URI[sha256sum] = "be60686c9a29c74ceeadd787969c2bcbce39f15b30daa4949574aeca602f9f35"
 
-inherit pypi
+inherit setuptools3 pypi
 
 DEPENDS += " \
         ${PYTHON_PN}-pip \
