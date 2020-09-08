@@ -12,9 +12,9 @@ SRC_URI[sha256sum] = "ae0051bc0c7a0660c93434e68d617553fccdd573293dfd15aa33f78d2b
 inherit setuptools3 pypi
 
 RDEPENDS_${PN} += " \
-        python-django-appconf  \
-        python-rcssmin  \
-        python-rjsmin  \
+        python3-django-appconf  \
+        python3-rcssmin  \
+        python3-rjsmin  \
         "
 
 do_install_append() {
