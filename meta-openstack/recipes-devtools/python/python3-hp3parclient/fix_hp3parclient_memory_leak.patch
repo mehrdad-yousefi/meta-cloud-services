@@ -4,7 +4,7 @@
 
 --- a/hp3parclient/http.py
 +++ b/hp3parclient/http.py
-@@ -61,6 +61,7 @@
+@@ -66,6 +66,7 @@
          self.set_debug_flag(http_log_debug)
  
          self.times = []  # [("item", starttime, endtime), ...]
@@ -25,7 +25,7 @@
      def _http_log_req(self, args, kwargs):
          if not self.http_log_debug:
              return
-@@ -205,6 +212,9 @@
+@@ -208,6 +215,9 @@
          resp, body = self.request(url, method, **kwargs)
          self.times.append(("%s %s" % (method, url),
                             start_time, time.time()))
@@ -33,5 +33,5 @@
 +        while len(self.times) > self.times_max_len:
 +            del self.times[0]
          return resp, body
- 
- 
+
+     def _do_reauth(self, url, method, ex, **kwargs):
