@@ -2,14 +2,14 @@ DESCRIPTION = "Translation library for Python"
 HOMEPAGE = "https://github.com/tuvistavie/python-i18n"
 SECTION = "devel/python"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://README.md;md5=7624ac071dec291ca8ef74e62e536a7a"
+LIC_FILES_CHKSUM = "file://README.md;md5=57cb947993e30ec5ab6df3f12d04ebad"
 
 PYPI_PACKAGE = "python-i18n"
 
-SRC_URI[md5sum] = "08b8c247add9f90806c4742a685fdb88"
-SRC_URI[sha256sum] = "e1d832ff7d1d39ce593793cc709b2344aa8fdf321cf707081335f146160d9f20"
+SRC_URI[md5sum] = "581de49007179e536c4c47982a651cea"
+SRC_URI[sha256sum] = "df97f3d2364bf3a7ebfbd6cbefe8e45483468e52a9e30b909c6078f5f471e4e8"
 
-inherit pypi
+inherit setuptools3 pypi
 
 # DEPENDS_default: python-pip
 
