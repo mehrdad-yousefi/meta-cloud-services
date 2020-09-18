@@ -2,14 +2,14 @@ DESCRIPTION = "Hogan JavaScript library packaged for setuptools"
 HOMEPAGE = "https://pypi.python.org/pypi/XStatic-Hogan"
 SECTION = "devel/python"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=18dc983faa3113478ed59ae157a985d5"
+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=e5366bec2bd8e901c248ef0df2425a7f"
 
 PYPI_PACKAGE = "XStatic-Hogan"
 
-SRC_URI[md5sum] = "1c1de09c4813e8568aab98fa5270d6a0"
-SRC_URI[sha256sum] = "5941bc7fb2a09916b8837848e6fc2a13b2dfc271811e9b522c61e1337d5fc2bd"
+SRC_URI[md5sum] = "b9b7610ba5c16e9ba398efb83d26a656"
+SRC_URI[sha256sum] = "27a921963e470abbada15b2d85d198833795aaead5fd73339bc2883cfddb5619"
 
-inherit pypi
+inherit setuptools3 pypi
 
 # DEPENDS_default: python-pip
 
