@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 PYPI_PACKAGE = "XStatic-Jasmine"
 
-SRC_URI[md5sum] = "9378ce965dfcb4ddb64855cc717d4ec8"
-SRC_URI[sha256sum] = "d1e8bf3c0e1cf683cc2c0aad95f197e9e51ea747fb91291445223a2b7dbc4740"
+SRC_URI[md5sum] = "736937d16fd655d1f6f2096b97d8255b"
+SRC_URI[sha256sum] = "bf921be423c254a5cebc2156a7fd66d8210cefd251fc2fa51f792a153bf9e82b"
 
-inherit pypi
+inherit setuptools3 pypi
 
 # DEPENDS_default: python-pip
 
