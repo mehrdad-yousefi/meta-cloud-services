@@ -7,10 +7,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a01aae31681ac25b4c46f98d627b9b5d"
 DEPENDS += "${PYTHON_PN}-ply"
 RDEPENDS_${PN} += "${PYTHON_PN}-ply"
 
-SRC_URI[md5sum] = "fedbad1f4eb19c3af37f09560156246d"
-SRC_URI[sha256sum] = "ccad1ad2a89ced1875c5ca4e16e5478b791d31fb187fe29f1541859318ed9055"
+SRC_URI[md5sum] = "efe82be479ddb7bdc48b2114dab94b20"
+SRC_URI[sha256sum] = "7b664f60818a16afa8cc9f1dd6d9b17f944e0ce94e50787d76f81bc7a8648cce"
 
-inherit pypi
+inherit setuptools3 pypi
 
 DISTUTILS_INSTALL_ARGS = "--root=${D} \
     --prefix=${prefix} \
