@@ -2,16 +2,20 @@ DESCRIPTION = "basic functions for parsing mime-type names and matching "
 HOMEPAGE = "https://pypi.python.org/pypi/python-mimeparse/"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://README;md5=07e6feb820fbca7eb99538badb3cd8e2"
+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=1f333cc431fd2aaf1a80b1b7212a6086"
 
 PYPI_PACKAGE = "python-mimeparse"
 
-SRC_URI[md5sum] = "1d2816a16f17dcfe0c613da611fe7e13"
-SRC_URI[sha256sum] = "3c69a21e37e77f754e6fc09ebda70acd92c90d8a58f29a41cc0248351378ddc3"
+SRC_URI[md5sum] = "a32ae1df93be1ddb581d1c0fa124bab4"
+SRC_URI[sha256sum] = "76e4b03d700a641fd7761d3cd4fdbbdcd787eade1ebfac43f877016328334f78"
 
-inherit distutils3 pypi
+inherit distutils3 pypi setuptools3
 
 DISTUTILS_INSTALL_ARGS = "--root=${D} \
     --prefix=${prefix} \
     --install-lib=${PYTHON_SITEPACKAGES_DIR} \
     --install-data=${datadir}"
+
+RDEPENDS_${PN} += " \
+	python3-netserver \
+"
