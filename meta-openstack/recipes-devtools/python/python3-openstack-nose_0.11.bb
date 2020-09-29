@@ -15,12 +15,12 @@ SRC_URI[sha256sum] = "a28d44dc23de8164d7893da7020404c73c4325b46d5507911f0257c15f
 inherit setuptools3 pypi
 
 DEPENDS += " \
-        python-pip \
+        python3-pip \
         "
 
 RDEPENDS_${PN} += " \
-        python-nose \
-        python-colorama \
-        python-termcolor \
+        python3-nose \
+        python3-colorama \
+        python3-termcolor \
         "
 
