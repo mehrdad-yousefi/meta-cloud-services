@@ -4,33 +4,33 @@ SECTION = "devel/python"
 LICENSE = "Apache-2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-PV = "1.22.0+git${SRCPV}"
-SRCREV = "a837f40bb0c31958d3ce99e2f9a6eb2fe651f4e6"
+PV = "2.2.0+git${SRCPV}"
+SRCREV = "bc631aedef131bc45225720e5c8f8e4ca35ff020"
 
 SRCNAME = "oslo.reports"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git"
 
 S = "${WORKDIR}/git"
 
 inherit setuptools3
 
 DEPENDS += " \
-        python-pip \
-        python-pbr \
+        python3-pip \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 # RDEPENDS_default: 
 RDEPENDS_${PN} += " \
-        python-pbr \
-        python-six \
-        python-jinja2 \
-        python-psutil \
-        python-oslo.i18n \
-        python-oslo.utils \
-        python-oslo.serialization \
+        python3-pbr \
+        python3-six \
+        python3-jinja2 \
+        python3-psutil \
+        python3-oslo.i18n \
+        python3-oslo.utils \
+        python3-oslo.serialization \
         "
