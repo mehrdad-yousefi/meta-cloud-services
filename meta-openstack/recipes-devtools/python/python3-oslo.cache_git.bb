@@ -4,11 +4,11 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-PV = "1.14.0+git${SRCPV}"
-SRCREV = "f5b6ddf7d18a7e06e19712ca7a2509d658a08c4d"
+PV = "2.6.1+git${SRCPV}"
+SRCREV = "df075b2465195de53e42897e7d9be6c6c375ce5e"
 
 SRCNAME = "oslo.cache"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git"
 
 S = "${WORKDIR}/git"
 
@@ -17,21 +17,21 @@ inherit setuptools3
 # DEPENDS_default: python-pip
 
 DEPENDS += " \
-        python-pip \
-        python-pbr \
+        python3-pip \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 # RDEPENDS_default: 
 RDEPENDS_${PN} += " \
-        python-dogpile.cache \
-        python-six \
-        python-oslo.config \
-        python-oslo.i18n \
-        python-oslo.log \
-        python-oslo.utils \
+        python3-dogpile.cache \
+        python3-six \
+        python3-oslo.config \
+        python3-oslo.i18n \
+        python3-oslo.log \
+        python3-oslo.utils \
         "
