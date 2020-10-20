@@ -5,32 +5,31 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
 SRCNAME = "oslo.privsep"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git"
 
-PV = "1.22.1+git${SRCPV}"
-SRCREV = "d27bb5371c90e0f8b1bdf1bc24f16e1532b3e595"
+PV = "2.4.0+git${SRCPV}"
+SRCREV = "512b5d9f6b79b798474d8bb2dac2462b0f705cb9"
 S = "${WORKDIR}/git"
 
 inherit setuptools3
 
 DEPENDS += " \
-        python-pbr \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 # RDEPENDS_default:
 RDEPENDS_${PN} += " \
-        python-oslo.log \
-        python-oslo.i18n \
-        python-oslo.config \
-        python-oslo.utils \
-        python-enum34 \
-        python-cffi \
-        python-eventlet \
-        python-greenlet \
-        python-msgpack \
+        python3-oslo.log \
+        python3-oslo.i18n \
+        python3-oslo.config \
+        python3-oslo.utils \
+        python3-cffi \
+        python3-eventlet \
+        python3-greenlet \
+        python3-msgpack \
         "
