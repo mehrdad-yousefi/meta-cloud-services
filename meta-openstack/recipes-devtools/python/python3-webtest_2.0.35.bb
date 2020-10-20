@@ -8,5 +8,13 @@ PYPI_PACKAGE = "WebTest"
 
 RDEPENDS_${PN} += "${PYTHON_PN}-beautifulsoup4"
 
-SRC_URI[md5sum] = "dd0385c725b85ac1e8079f38d2acd7b1"
-SRC_URI[sha256sum] = "41348efe4323a647a239c31cde84e5e440d726ca4f449859264e538d39037fd0"
+SRC_URI[md5sum] = "a5d027ffa0991fdf20e305c62bd37791"
+SRC_URI[sha256sum] = "aac168b5b2b4f200af4e35867cf316712210e3d5db81c1cbdff38722647bb087"
+
+RDEPENDS_${PN} += " \
+	python3-html \
+	python3-logging \
+	python3-webob \
+"
+
+inherit setuptools3 pypi
