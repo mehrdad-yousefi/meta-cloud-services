@@ -2,19 +2,19 @@ DESCRIPTION = "Rickshaw JavaScript library packaged for setuptools3"
 HOMEPAGE = "https://pypi.python.org/pypi/XStatic-Rickshaw"
 SECTION = "devel/python"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=af85a1450add1a38e6ff5ca1384cc1b6"
+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=0048c87aa2dfc6c21a4516c06867ad67"
 
 PYPI_PACKAGE = "XStatic-Rickshaw"
 
-SRC_URI[md5sum] = "789fffdced10e93e10f75ce1ade6fc6c"
-SRC_URI[sha256sum] = "147574228757254442700a9eea5150f14acb1224ef0612f896b663ab58406de8"
+SRC_URI[md5sum] = "aef17022c8a0ea3d9e2da6237d5175ef"
+SRC_URI[sha256sum] = "cf278d4bd4e974ddcf7170d20bbb706cc34f93cf61658f2f68f3138374178564"
 
 inherit setuptools3 pypi
 
 # DEPENDS_default: python-pip
 
 DEPENDS += " \
-        python-pip \
+        python3-pip \
         "
 
 # RDEPENDS_default: 
