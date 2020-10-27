@@ -4,10 +4,10 @@ SECTION = "devel/python"
 LICENSE = "BSD-Modification"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2c33cdbc6bc9ae6e5d64152fdb754292"
 
-SRC_URI[md5sum] = "c677ac4d4a32b6f6880a8f9cf20adffb"
-SRC_URI[sha256sum] = "322629ec7c779dce4700e8f3ba531002b724d2429178c1cbb0dc169255dc9a8b"
+SRC_URI[md5sum] = "5dc3b549d968a64342f3b7196477c895"
+SRC_URI[sha256sum] = "cf97450de3c8eb5c03b4037be75b018db91befab1094204e452a0b1c0f7a94a6"
 
-inherit pypi
+inherit setuptools3 pypi
 
 # DEPENDS_default: python-pip
 
