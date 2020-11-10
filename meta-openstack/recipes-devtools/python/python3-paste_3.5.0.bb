@@ -6,7 +6,11 @@ LIC_FILES_CHKSUM = "file://docs/license.txt;md5=1798f29d55080c60365e6283cb49779c
 
 PYPI_PACKAGE = "Paste"
 
-SRC_URI[md5sum] = "4690566403fd89b01ae70a64245441b7"
-SRC_URI[sha256sum] = "001370f4fcc7446006b52a39ed386341fce626605af711e0ec18ddb0b4912cb7"
+SRC_URI[md5sum] = "90c56e0f84c58ca4841c0df0bcfc11d9"
+SRC_URI[sha256sum] = "1b095c42dc91d426f3ae85101796b14d265887f8f36f3aad143a5f29effdc39d"
 
 inherit setuptools3 pypi
+
+RDEPENDS_${PN} += " \
+	python3-typing \
+"
