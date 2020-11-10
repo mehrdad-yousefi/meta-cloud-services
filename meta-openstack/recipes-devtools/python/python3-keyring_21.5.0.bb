@@ -4,8 +4,8 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7a7126e068206290f3fe9f8d6c713ea6"
 
-SRC_URI[md5sum] = "c9691de646eced3b15e888e5b410d6a1"
-SRC_URI[sha256sum] = "9aeadd006a852b78f4b4ef7c7556c2774d2432bbef8ee538a3e9089ac8b11466"
+SRC_URI[md5sum] = "1609e4804bfc08ca0adf43f9d9c90de6"
+SRC_URI[sha256sum] = "207bd66f2a9881c835dad653da04e196c678bf104f8252141d2d3c4f31051579"
 
 inherit setuptools3 pypi
 
@@ -18,4 +18,5 @@ DEPENDS += " \
 RDEPENDS_${PN} = " \
 	python3-logging \
 	python3-importlib-metadata \
+	python3-typing \
 "
