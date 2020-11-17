@@ -10,7 +10,3 @@ SRC_URI[md5sum] = "90c56e0f84c58ca4841c0df0bcfc11d9"
 SRC_URI[sha256sum] = "1b095c42dc91d426f3ae85101796b14d265887f8f36f3aad143a5f29effdc39d"
 
 inherit setuptools3 pypi
-
-RDEPENDS_${PN} += " \
-	python3-typing \
-"
