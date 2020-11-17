@@ -20,5 +20,5 @@ RDEPENDS_${PN} = " \
 	${PYTHON_PN}-crypt \
 	${PYTHON_PN}-logging \
 	${PYTHON_PN}-json \
-	${PYTHON_PN}-typing \
+	${PYTHON_PN}-core \
 "
