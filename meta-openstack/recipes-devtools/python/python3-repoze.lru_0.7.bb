@@ -14,5 +14,5 @@ SRC_URI[sha256sum] = "0429a75e19380e4ed50c0694e26ac8819b4ea7851ee1fc7583c8572db8
 inherit setuptools3 pypi
 
 RDEPENDS_${PN} += " \
-	python3-typing \
+	python3-netclient \
 "
