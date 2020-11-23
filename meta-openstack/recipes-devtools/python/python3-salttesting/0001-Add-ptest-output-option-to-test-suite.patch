@@ -1,6 +1,6 @@
-From 1950b943b7173198f345a1cff7b7f771cbac2244 Mon Sep 17 00:00:00 2001
-From: Collin Richards <collin.richards@ni.com>
-Date: Tue, 28 Jun 2016 16:02:22 -0500
+From 61ba63c3cde920873b8df48b950b8ebb79158346 Mon Sep 17 00:00:00 2001
+From: Wang Mingyu <wangmy@cn.fujitsu.com>
+Date: Thu, 19 Nov 2020 11:20:58 +0900
 Subject: [PATCH] Add ptest output option to test suite
 
 Extend salttesting to support outputing the results of running the test
@@ -9,26 +9,28 @@ suite in ptest format.
 Upstream-Status: Inappropriate [OE specific]
 
 Signed-off-by: Collin Richards <collin.richards@ni.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+
 Natinst-ReviewBoard-ID: 143279
 ---
  salttesting/parser/__init__.py |  12 +++
- salttesting/ptest.py           | 165 +++++++++++++++++++++++++++++++++++++++++
+ salttesting/ptest.py           | 165 +++++++++++++++++++++++++++++++++
  2 files changed, 177 insertions(+)
  create mode 100644 salttesting/ptest.py
 
 diff --git a/salttesting/parser/__init__.py b/salttesting/parser/__init__.py
-index 1e7275b..d8cba0c 100644
+index d752acf..b41e5ea 100644
 --- a/salttesting/parser/__init__.py
 +++ b/salttesting/parser/__init__.py
-@@ -25,6 +25,7 @@ from functools import partial
- from contextlib import closing
+@@ -28,6 +28,7 @@ from contextlib import closing
  
+ import six
  from salttesting import TestLoader, TextTestRunner
 +from salttesting.ptest import PTestRunner
+ from salttesting import helpers
  from salttesting.version import __version_info__
  from salttesting.xmlunit import HAS_XMLRUNNER, XMLTestRunner
- try:
-@@ -264,6 +265,12 @@ class SaltTestingParser(optparse.OptionParser):
+@@ -277,6 +278,12 @@ class SaltTestingParser(optparse.OptionParser):
              action='store_true',
              help='Do NOT show the overall tests result'
          )
@@ -41,7 +43,7 @@ index 1e7275b..d8cba0c 100644
          self.add_option_group(self.output_options_group)
  
          self.fs_cleanup_options_group = optparse.OptionGroup(
-@@ -491,6 +498,11 @@ class SaltTestingParser(optparse.OptionParser):
+@@ -531,6 +538,11 @@ class SaltTestingParser(optparse.OptionParser):
                  verbosity=self.options.verbosity
              ).run(tests)
              self.testsuite_results.append((header, runner))
@@ -225,5 +227,5 @@ index 0000000..4c50f57
 +        self.stream.writeln()
 +        return result
 -- 
-2.13.2
+2.25.1
 
