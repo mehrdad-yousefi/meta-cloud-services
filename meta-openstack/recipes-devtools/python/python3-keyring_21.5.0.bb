@@ -18,5 +18,4 @@ DEPENDS += " \
 RDEPENDS_${PN} = " \
 	python3-logging \
 	python3-importlib-metadata \
-	python3-typing \
 "
