@@ -8,8 +8,8 @@ SRC_URI = "\
 	git://github.com/openstack/microversion-parse.git;branch=master \
 	"
 
-PV = "0.1.4+git${SRCPV}"
-SRCREV = "1f6eac7c3df048679663919f75c2bcecd3e183a2"
+PV = "1.0.1+git${SRCPV}"
+SRCREV = "2c36df6bf33e42c379fbd8228fbe63c77b3714b1"
 S = "${WORKDIR}/git"
 
 inherit setuptools3
@@ -19,7 +19,7 @@ DEPENDS += " \
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
 	"
 
 RDEPENDS_${PN} += " \
