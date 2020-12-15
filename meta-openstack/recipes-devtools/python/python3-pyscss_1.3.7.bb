@@ -6,22 +6,25 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=28155276e8df3f75bbd327335f66f2fa"
 
 PYPI_PACKAGE = "pyScss"
 
-SRC_URI[md5sum] = "9527b4864cd6023f77a8277e6fb773d7"
-SRC_URI[sha256sum] = "d0323110ecc7d3ead6b99cfec31301306928130e4d0a9eb13226bf390aba8c0e"
+SRC_URI[md5sum] = "c75fa4ea88d3c9df57a11679f337a939"
+SRC_URI[sha256sum] = "f1df571569021a23941a538eb154405dde80bed35dc1ea7c5f3e18e0144746bf"
 
 inherit setuptools3 pypi
 
 # DEPENDS_default: python-pip
 
 DEPENDS += " \
-        python-pip \
+        python3-pip \
         libpcre \
-        python-six \
+        python3-six \
         "
 
 # RDEPENDS_default: 
 RDEPENDS_${PN} += " \
-        python-enum \
+	python3-logging \
+	python3-six \
+	python3-numbers \
+	python3-image \
         "
 
 CLEANBROKEN = "1"
