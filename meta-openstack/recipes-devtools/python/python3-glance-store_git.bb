@@ -15,28 +15,29 @@ S = "${WORKDIR}/git"
 inherit setuptools3
 
 DEPENDS += " \
-        python-pip \
-        python-pbr \
+        python3-pip \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 RDEPENDS_${PN} += " \
         bash \
-        python-oslo.config \
-        python-oslo.i18n \
-        python-oslo.serialization \
-        python-oslo.utils \
-        python-oslo.concurrency \
-        python-stevedore \
-        python-enum34 \
-        python-eventlet \
-        python-six \
-        python-jsonschema \
-        python-keystoneauth1 \
-        python-keystoneclient \
-        python-requests \
+        python3-oslo.config \
+        python3-oslo.i18n \
+        python3-oslo.serialization \
+        python3-oslo.utils \
+        python3-oslo.concurrency \
+        python3-stevedore \
+        python3-eventlet \
+        python3-six \
+        python3-jsonschema \
+        python3-keystoneauth1 \
+        python3-keystoneclient \
+        python3-requests \
+        python3-monotonic \
+        python3-dnspython \
         "
