@@ -5,18 +5,18 @@ SUMMARY = "An implementation of the JSON specification according to RFC 4627"
 DESCRIPTION = "An implementation of the JSON specification according to RFC 4627"
 
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=aef161fe3c86f1a8d6c71d3b8c5655c5"
+LIC_FILES_CHKSUM = "file://CHANGES;md5=af8cad0ff27a1593ac5ee461bc2d71ab"
 
 PR = "r0"
 
-BPV = "1.8.3"
+BPV = "1.8.5"
 PV = "${BPV}"
-SRCREV = "db4c71a7701b95c30f945ee1536240920dcfdc17"
+SRCREV = "4cf6c6270f52888997ec1b626b9f557db4f26f2e"
 
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
-    git://github.com/flori/json.git \
+    git://github.com/flori/json.git;branch=v1.8 \
     "
 
 inherit ruby
