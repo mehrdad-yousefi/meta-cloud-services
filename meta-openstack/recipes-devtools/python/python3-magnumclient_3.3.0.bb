@@ -4,7 +4,7 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d2794c0df5b907fdace235a619d80314"
 
-SRC_URI[sha256sum] = "3d03a3a3cf4b9ece4e903a77415356767c2bea44ce5c1449a00edb527fc9cb0e"
+SRC_URI[sha256sum] = "9734fbaa571fe11f252835878999efe02d4200ca9a5b1d9fe691fd5f4ec81f3b"
 
 DEPENDS += " \
         python3-pip \
