@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/mumrah/kafka-python"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 
-PV = "2.0.1+git${SRCPV}"
-SRCREV = "fcc9a30c62662cee7aa2c1f69c0d06a9741e2700"
+PV = "2.0.2+git${SRCPV}"
+SRCREV = "5bb126bf20bbb5baeb4e9afc48008dbe411631bc"
 
 SRCNAME = "kafka-python"
 
