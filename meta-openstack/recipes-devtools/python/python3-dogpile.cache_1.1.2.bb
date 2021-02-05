@@ -2,10 +2,10 @@ DESCRIPTION = "Python Dogpile Cache: A caching front-end based on the Dogpile lo
 HOMEPAGE = "https://pypi.python.org/pypi/dogpile.cache"
 SECTION = "devel/python"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=46e560ef3e93a33b284504845ea6a11d"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=6d830a549d9d8c25362346e0f8fbba53"
 
-SRC_URI[md5sum] = "3cf83a593a1a1bc17b89d14917f66ef0"
-SRC_URI[sha256sum] = "40147b19696f387415a7efaaa4cf8ea0b5d31bdd1b53e5187e75d48ddfee9f0e"
+SRC_URI[md5sum] = "fb9bea726156560d03890599c4cd92e0"
+SRC_URI[sha256sum] = "2134464672a3deb7ef1366a8691726686d8c62540e4208f1a40c9aaa1a0b6a45"
 
 inherit setuptools3 pypi
 
