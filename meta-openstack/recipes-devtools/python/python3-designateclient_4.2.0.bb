@@ -13,8 +13,8 @@ DEPENDS += " \
 DEPENDS += " \
         python3-pbr-native \
         "
-SRC_URI[md5sum] = "29f1ebf4352162e4e8d3a6d6f9ab1eb4"
-SRC_URI[sha256sum] = "a5b800d767d6626057e1cefd0c6a35936ba5009e822d5b0df05aaa6ae7efaab9"
+SRC_URI[md5sum] = "51e6aaf70e253c999824c7bc29009f5e"
+SRC_URI[sha256sum] = "cf0e76540530491a6100164c514e1c60b55efa25c8db4c18f4902c988d7c1080"
 
 RDEPENDS_${PN} += " \
         python3-cliff \
