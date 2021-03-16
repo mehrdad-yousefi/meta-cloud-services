@@ -28,6 +28,10 @@ COMPATIBLE_HOST_mipsarch = "null"
 SYSTEMD_SERVICE_${PN} = "consul.service"
 SYSTEMD_AUTO_ENABLE_${PN} = "disable"
 
+do_compile_prepend () {
+    export GO111MODULE=off
+}
+
 do_install_append() {
     install -d ${D}/${systemd_unitdir}/system
     cp ${WORKDIR}/consul.service ${D}/${systemd_unitdir}/system
