@@ -23,11 +23,11 @@ do_install() {
     install -m 755 -d ${D}${datadir}/novnc
    
     cp -R --no-dereference --preserve=mode,links ${S}/* ${D}${datadir}/novnc
-    
+ 
     install -m 444 ${S}/vnc.html ${D}${datadir}/novnc/index.html
     install -m 444 ${S}/vnc_lite.html ${D}${datadir}/novnc/vnc_auto.html
 
     install -m 755 -d ${D}${bindir}
-    install -m 644 ${S}/utils/launch.sh ${D}${bindir}/novnc_server
+    install ${S}/utils/launch.sh ${D}${bindir}/novnc_server
 }
 
