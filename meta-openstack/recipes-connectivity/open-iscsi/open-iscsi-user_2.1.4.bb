@@ -29,6 +29,11 @@ do_compile () {
         oe_runmake user
 }
 
+inherit update-alternatives
+
+ALTERNATIVE_PRIORITY = "60"
+ALTERNATIVE_${PN}-dev = "libcap-ng.so"
+ALTERNATIVE_LINK_NAME[libcap-ng.so] = "${libdir}/libcap-ng.so"
 
 do_install () {
         oe_runmake DESTDIR="${D}" install_user
