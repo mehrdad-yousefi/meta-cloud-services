@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://src/github.com/hashicorp/consul/LICENSE;md5=b278a92d2
 
 GO_IMPORT = "github.com/hashicorp/consul"
 SRCREV = "944cc71026c007e7de9467ec3f38f0ad14464fcc"
-SRC_URI = "git://${GO_IMPORT}.git \
+SRC_URI = "git://${GO_IMPORT}.git;branch=main \
            file://0001-Migration-Rename-imports-throughout.patch \
            file://consul.service \
           "
