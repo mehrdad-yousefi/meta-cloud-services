@@ -29,12 +29,6 @@ do_compile () {
         oe_runmake user
 }
 
-inherit update-alternatives
-
-ALTERNATIVE_PRIORITY = "60"
-ALTERNATIVE_${PN}-dev = "libcap-ng.so"
-ALTERNATIVE_LINK_NAME[libcap-ng.so] = "${libdir}/libcap-ng.so"
-
 do_install () {
         oe_runmake DESTDIR="${D}" install_user
         install ${S}/etc/initd/initd.debian ${D}/etc/init.d/open-iscsi
@@ -42,7 +36,7 @@ do_install () {
 
         install -d ${D}${libdir}
         install -Dm 0644 ${S}/libopeniscsiusr/libopeniscsiusr.so.0.2.0 ${D}${libdir}/
-        ln -sf ${libdir}/libopeniscsiusr.so.0.2.0 ${D}${libdir}/libcap-ng.so 
+        ln -sf ${libdir}/libopeniscsiusr.so.0.2.0 ${D}${libdir}/libopeniscsiusr.so
 }
 
 # systemd support
