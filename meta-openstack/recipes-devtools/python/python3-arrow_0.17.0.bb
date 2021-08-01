@@ -9,7 +9,7 @@ SRC_URI[sha256sum] = "ff08d10cda1d36c68657d6ad20d74fbea493d980f8b2d45344e00d6ed2
 
 inherit setuptools3 pypi
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         ${PYTHON_PN}-dateutil \
         ${PYTHON_PN}-backports-functools-lru-cache \
         "

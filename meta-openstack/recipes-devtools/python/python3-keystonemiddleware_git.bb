@@ -26,7 +26,7 @@ DEPENDS += " \
         python3-pbr-native \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         python3-keystoneauth1 \
         python3-oslo.config \
         python3-oslo.context \

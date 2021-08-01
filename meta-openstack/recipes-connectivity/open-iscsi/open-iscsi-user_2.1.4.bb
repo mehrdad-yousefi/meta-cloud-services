@@ -7,7 +7,7 @@ inherit systemd autotools pkgconfig
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "kmod openssl util-linux open-isns"
-DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
+DEPENDS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
 
 SRC_URI = "git://github.com/open-iscsi/open-iscsi.git;protocol=https   \
            file://0001-fix-build-error-of-cross-build.patch \
@@ -41,20 +41,20 @@ do_install () {
 
 # systemd support
 PACKAGES =+ "${PN}-systemd"
-RDEPENDS_${PN} += "bash"
-RDEPENDS_${PN}-systemd += "${PN}"
-FILES_${PN}-systemd +=  "${base_libdir}/systemd                  \
+RDEPENDS:${PN} += "bash"
+RDEPENDS:${PN}-systemd += "${PN}"
+FILES:${PN}-systemd +=  "${base_libdir}/systemd                  \
                          ${sysconfdir}/default/iscsi-initiator   \
                         "
 SYSTEMD_PACKAGES = "${PN}-systemd"
-SYSTEMD_SERVICE_${PN}-systemd = "iscsi.service \
+SYSTEMD_SERVICE:${PN}-systemd = "iscsi.service \
                                  iscsiuio.service \
                                  iscsid.service \
                                  iscsi-init.service \
                                  iscsid.socket \
                                  iscsiuio.socket "
 
-do_install_append () {
+do_install:append () {
         install -d ${D}${systemd_unitdir}/system
         install -m 0644 ${S}/etc/systemd/* ${D}${systemd_unitdir}/system/
 }

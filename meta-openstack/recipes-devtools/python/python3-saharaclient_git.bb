@@ -14,7 +14,7 @@ DEPENDS += " \
         ${PYTHON_PN}-pbr-native \
 "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
 	${PYTHON_PN}-pbr \
 	"
 

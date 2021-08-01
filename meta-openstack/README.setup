@@ -88,14 +88,14 @@ to the bblayers.conf file:
 initialized you have to append the necessary variables to ensure that
 systemd will be used in your images:
 
-    DISTRO_FEATURES_append = " systemd"
+    DISTRO_FEATURES:append = " systemd"
     DISTRO_FEATURES_BACKFILL_CONSIDERED += "sysvinit"
     VIRTUAL-RUNTIME_init_manager = "systemd"
     VIRTUAL-RUNTIME_initscripts = "systemd-compat-units"
 
 Additionally activiate the meta-virtualization layer:
 
-    DISTRO_FEATURES_append += "virtualization kvm"
+    DISTRO_FEATURES:append += "virtualization kvm"
 
 
 Package configurations
@@ -120,7 +120,7 @@ bblayers.conf file, after the node type deployment layer.
 If a sample guest image is desired on a control node, the following can
 be added to local.conf:
 
-  IMAGE_INSTALL_append = " cirros-guest-image"
+  IMAGE_INSTALL:append = " cirros-guest-image"
 
 * Cinder Additional Packages *
 

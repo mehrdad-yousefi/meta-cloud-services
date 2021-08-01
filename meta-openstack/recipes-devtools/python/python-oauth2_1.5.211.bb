@@ -9,7 +9,7 @@ SRC_URI[sha256sum] = "82a38f674da1fa496c0fc4df714cbb058540bed72a30c50a2e344b0d98
 
 inherit setuptools3 pypi
 
-RDEPENDS_${PN} += "python-prettytable \
+RDEPENDS:${PN} += "python-prettytable \
             python-cmd2 \
             python-pyparsing \
             python-mccabe \
@@ -17,7 +17,7 @@ RDEPENDS_${PN} += "python-prettytable \
             python-pyflakes"
 
 
-do_install_append() {
+do_install:append() {
 	perm_files=$(find "${D}${PYTHON_SITEPACKAGES_DIR}/" -name "PKG-INFO")
 	for f in $perm_files; do
 		chmod 644 "${f}"

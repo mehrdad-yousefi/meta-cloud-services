@@ -21,7 +21,7 @@ SRC_URI = " \
 
 inherit ruby
 
-do_patch_append() {
+do_patch:append() {
     bb.build.exec_func('do_fixup_gemspec', d)
 }
 

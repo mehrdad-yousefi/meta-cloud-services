@@ -13,7 +13,7 @@ inherit setuptools3 pypi
 
 DEPENDS += "${PYTHON_PN}-pytest-runner-native"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
 	${PYTHON_PN}-paste \
 	${PYTHON_PN}-setuptools \
 "

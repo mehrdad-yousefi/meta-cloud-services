@@ -1,7 +1,7 @@
 DEPEND_${PN} += "cyrus-sasl" 
 RDEPEND_${PN} += "libsasl2-modules"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 SRC_URI += "file://initscript"
 SRC_URI += "file://ops-base.ldif"
 
@@ -12,7 +12,7 @@ OPENLDAP_LIBEXECDIR = "${libexecdir}"
 
 EXTRA_OECONF += "--libexecdir=${OPENLDAP_LIBEXECDIR}"
 
-do_install_append() {
+do_install:append() {
     install -D -m 0755 ${WORKDIR}/initscript ${D}${sysconfdir}/init.d/openldap
     sed -i -e 's/%DEFAULT_DN%/${LDAP_DN}/g' ${D}${sysconfdir}/init.d/openldap
     sed -i -e 's#%LDAP_DATADIR%#${LDAP_DATADIR}#g' ${D}${sysconfdir}/init.d/openldap
@@ -69,5 +69,5 @@ inherit update-rc.d
 INITSCRIPT_NAME = "openldap"
 INITSCRIPT_PARAMS = "defaults"
 
-FILES_${PN} += "${OPENLDAP_LIBEXECDIR}/* ${sysconfdir}/openldap/ops-base.ldif"
-FILES_${PN}-dbg += "${OPENLDAP_LIBEXECDIR}/openldap/.debug ${OPENLDAP_LIBEXECDIR}/.debug"
+FILES:${PN} += "${OPENLDAP_LIBEXECDIR}/* ${sysconfdir}/openldap/ops-base.ldif"
+FILES:${PN}-dbg += "${OPENLDAP_LIBEXECDIR}/openldap/.debug ${OPENLDAP_LIBEXECDIR}/.debug"

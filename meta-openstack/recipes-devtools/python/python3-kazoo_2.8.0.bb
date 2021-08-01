@@ -20,6 +20,6 @@ DEPENDS += " \
         python3-pip \
         "
 
-# RDEPENDS_default: 
-RDEPENDS_${PN} += " \
+# RDEPENDS:default: 
+RDEPENDS:${PN} += " \
         "

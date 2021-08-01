@@ -16,7 +16,7 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 ANSIBLE_WHITELIST_MODULES ?= "commands files system network/ovs __pycache__ service"
 
-do_install_append() {
+do_install:append() {
     set +e
 
     # install hosts and conf

@@ -1,3 +1,3 @@
-RRECOMMENDS_${PN} += "kernel-module-xt-conntrack \
+RRECOMMENDS:${PN} += "kernel-module-xt-conntrack \
                       kernel-module-xt-redirect \
                       "

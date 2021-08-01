@@ -9,7 +9,7 @@ SRC_URI[sha256sum] = "fcc29c9e8208eda8955367c11607e72467a68564d5afbcf632b1dd6ecf
 
 inherit pypi setuptools3
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
     ${PYTHON_PN}-pytest \
     ${PYTHON_PN}-pytest-tempdir \
     ${PYTHON_PN}-pytest-helpers-namespace \

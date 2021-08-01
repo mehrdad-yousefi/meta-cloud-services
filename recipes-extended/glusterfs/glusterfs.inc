@@ -52,8 +52,8 @@ EXTRA_OECONF = "ac_cv_file__etc_debian_version=no \
                "
 
 PACKAGECONFIG ??= "georeplication libibverbs"
-PACKAGECONFIG_remove_mipsarch = "libibverbs"
-PACKAGECONFIG_remove_arm = "libibverbs"
+PACKAGECONFIG:remove:mipsarch = "libibverbs"
+PACKAGECONFIG:remove:arm = "libibverbs"
 
 PACKAGECONFIG[debug] = "--enable-debug,--disable-debug,,"
 PACKAGECONFIG[georeplication] = "--enable-georeplication,--disable-georeplication,,rsync"
@@ -61,7 +61,7 @@ PACKAGECONFIG[libibverbs] = "--enable-ibverbs,--disable-ibverbs,virtual/libibver
 PACKAGECONFIG[ocf] = "--with-ocf,--without-ocf,,"
 PACKAGECONFIG[valgrind] = "--enable-valgrind,--disable-valgrind,valgrind,"
 
-do_install_append() {
+do_install:append() {
     install -d ${D}${sysconfdir}/init.d
     install -m 0755 ${WORKDIR}/glusterd.init \
         ${D}${sysconfdir}/init.d/glusterd
@@ -108,29 +108,29 @@ INITSCRIPT_NAME = "glusterd"
 INITSCRIPT_PARAMS = "start 20 5 3 2 . stop 80 0 1 6 ."
 
 SYSTEMD_PACKAGES = "glusterfs-server"
-SYSTEMD_SERVICE_${PN} = "glusterd.service"
+SYSTEMD_SERVICE:${PN} = "glusterd.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 
 # Allow plug-in symlinks.
-INSANE_SKIP_${PN} += "dev-so"
-INSANE_SKIP_${PN}-rdma += "dev-so"
-INSANE_SKIP_${PN}-fuse += "dev-so"
-INSANE_SKIP_${PN}-server += "dev-so"
+INSANE_SKIP:${PN} += "dev-so"
+INSANE_SKIP:${PN}-rdma += "dev-so"
+INSANE_SKIP:${PN}-fuse += "dev-so"
+INSANE_SKIP:${PN}-server += "dev-so"
 
 PACKAGES += "${PN}-rdma ${PN}-geo-replication ${PN}-fuse ${PN}-server \
              ${PN}-api ${PN}-ocf"
 
-RDEPENDS_${PN} += "python3-core python3-json python3-ctypes bash"
-RDEPENDS_${PN}-ocf += "bash"
-RDEPENDS_${PN}-server += "bash"
-RDEPENDS_${PN}-geo-replication += "python3-core bash"
+RDEPENDS:${PN} += "python3-core python3-json python3-ctypes bash"
+RDEPENDS:${PN}-ocf += "bash"
+RDEPENDS:${PN}-server += "bash"
+RDEPENDS:${PN}-geo-replication += "python3-core bash"
 
-FILES_${PN}-dbg += "${libdir}/glusterfs/${PV}/*/.debug \
+FILES:${PN}-dbg += "${libdir}/glusterfs/${PV}/*/.debug \
                     ${libdir}/glusterfs/${PV}/*/*/.debug \
                     ${libdir}/glusterfs/${PV}/*/*/*/.debug \
                     ${libexecdir}/glusterfs/.debug"
 
-FILES_${PN} = "${libdir}/glusterfs/${PV}/auth \
+FILES:${PN} = "${libdir}/glusterfs/${PV}/auth \
                ${libdir}/glusterfs/${PV}/rpc-transport/socket* \
                ${libdir}/glusterfs/${PV}/xlator/cluster \
                ${libdir}/glusterfs/${PV}/xlator/debug \
@@ -182,20 +182,20 @@ FILES_${PN} = "${libdir}/glusterfs/${PV}/auth \
                ${datadir}/glusterfs/* \
 	      "
 
-FILES_${PN}-rdma = "${libdir}/glusterfs/${PV}/rpc-transport/rdma*"
+FILES:${PN}-rdma = "${libdir}/glusterfs/${PV}/rpc-transport/rdma*"
 
-FILES_${PN}-geo-replication = "${libexecdir}/glusterfs/gsyncd \
+FILES:${PN}-geo-replication = "${libexecdir}/glusterfs/gsyncd \
                                ${libexecdir}/glusterfs/python/syncdaemon \
                                ${libexecdir}/glusterfs/peer_georep-sshkey.py \
                                ${libexecdir}/glusterfs/set_geo_rep_pem_keys.sh \
                                ${sbindir}/gluster-georep-sshkey"
 
-FILES_${PN}-fuse = "${bindir}/fusermount-glusterfs \
+FILES:${PN}-fuse = "${bindir}/fusermount-glusterfs \
                     ${libdir}/glusterfs/${PV}/xlator/mount \
                     ${sbindir}/mount.glusterfs \
                     ${base_sbindir}/mount.glusterfs"
 
-FILES_${PN}-server = "${libdir}/glusterfs/${PV}/xlator/mgmt \
+FILES:${PN}-server = "${libdir}/glusterfs/${PV}/xlator/mgmt \
                       ${libdir}/glusterfs/${PV}/xlator/nfs \
                       ${libdir}/glusterfs/${PV}/xlator/protocol/server* \
                       ${libdir}/glusterfs/${PV}/xlator/storage \
@@ -208,11 +208,11 @@ FILES_${PN}-server = "${libdir}/glusterfs/${PV}/xlator/mgmt \
                       ${systemd_system_unitdir}"
 
 # Note: Debian package renaming produces libgfapi[0-9]+-*.*.rpm.
-FILES_${PN}-api = "${libdir}/libgfapi.so.*"
+FILES:${PN}-api = "${libdir}/libgfapi.so.*"
 
-FILES_${PN}-ocf = "${prefix}/lib/ocf"
+FILES:${PN}-ocf = "${prefix}/lib/ocf"
 
-pkg_postinst_${PN}() {
+pkg_postinst:${PN}() {
     if [ -z "$D" ] && [ -e /etc/init.d/populate-volatile.sh ]; then
         /etc/init.d/populate-volatile.sh update
     fi

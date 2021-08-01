@@ -40,7 +40,7 @@ python () {
 }
 SERVICECREATE_PACKAGES[vardeps] += "KEYSTONE_HOST"
 
-do_install_append() {
+do_install:append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}/${SRCNAME}
     BARBICAN_CONF_DIR=${D}${sysconfdir}/${SRCNAME}
 
@@ -67,24 +67,24 @@ do_install_append() {
 }
 
 USERADD_PACKAGES = "${PN}"
-GROUPADD_PARAM_${PN} = "--system barbican"
-USERADD_PARAM_${PN}  = "--system --home /var/lib/barbican -g barbican \
+GROUPADD_PARAM:${PN} = "--system barbican"
+USERADD_PARAM:${PN}  = "--system --home /var/lib/barbican -g barbican \
                         --no-create-home --shell /bin/false barbican"
 
 PACKAGES += "${SRCNAME} \
              ${SRCNAME}-setup "
 
-FILES_${PN} = "${libdir}/* \
+FILES:${PN} = "${libdir}/* \
 "
-FILES_${SRCNAME} = "${sysconfdir}/${SRCNAME}/* \
+FILES:${SRCNAME} = "${sysconfdir}/${SRCNAME}/* \
                     ${sysconfdir}/init.d/barbican-api \
 	            ${bindir} \
 	            ${bindir}/* \
                     ${localstatedir}/* \
 "
 
-ALLOW_EMPTY_${SRCNAME}-setup = "1"
-pkg_postinst_${SRCNAME}-setup () {
+ALLOW_EMPTY:${SRCNAME}-setup = "1"
+pkg_postinst:${SRCNAME}-setup () {
     if [ -z "$D" ]; then
         chown -R barbican:barbican ${sysconfdir}/${SRCNAME}
         chown -R barbican:barbican ${localstatedir}/lib/barbican
@@ -101,13 +101,13 @@ DEPENDS += " \
         python-pbr-native \
         "
 
-RDEPENDS_${SRCNAME} = "${PN} \
+RDEPENDS:${SRCNAME} = "${PN} \
                        ${SRCNAME}-setup \
                        uwsgi \
                        python-falcon \
                        python-oslo.messaging"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         python-pip \
         python-pbr \
         python-alembic \
@@ -131,8 +131,8 @@ RDEPENDS_${PN} += " \
         "
 
 INITSCRIPT_PACKAGES = "${SRCNAME}"
-INITSCRIPT_NAME_${SRCNAME} = "barbican-api"
-INITSCRIPT_PARAMS_${SRCNAME} = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+INITSCRIPT_NAME:${SRCNAME} = "barbican-api"
+INITSCRIPT_PARAMS:${SRCNAME} = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 
 MONITOR_SERVICE_PACKAGES = "${SRCNAME}"
 MONITOR_SERVICE_${SRCNAME} = "barbican"

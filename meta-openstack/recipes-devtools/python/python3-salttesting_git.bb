@@ -13,7 +13,7 @@ PV = "2018.9.21+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
                   python3-mock \
                   python3-unittest \
 "

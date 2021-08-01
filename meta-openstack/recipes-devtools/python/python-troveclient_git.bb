@@ -29,23 +29,23 @@ PACKAGES += " \
     ${SRCNAME}-bin \
     "
 
-PACKAGES_prepend = " \
+PACKAGES:prepend = " \
     ${SRCNAME}-tests \
     "
 
-FILES_${PN} = " \
+FILES:${PN} = " \
     ${libdir}/* \
     "
 
-FILES_${SRCNAME}-tests = " \
+FILES:${SRCNAME}-tests = " \
     ${libdir}/python*/site-packages/${SRCNAME}/tests/* \
     "
 
-ALLOW_EMPTY_${SRCNAME} = "1"
-FILES_${SRCNAME} = " \
+ALLOW_EMPTY:${SRCNAME} = "1"
+FILES:${SRCNAME} = " \
     "
 
-FILES_${SRCNAME}-bin = " \
+FILES:${SRCNAME}-bin = " \
     ${bindir}/* \
     "
 
@@ -54,7 +54,7 @@ DEPENDS += " \
         python-pbr \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         python-pbr \
         python-prettytable \
         python-requests \
@@ -65,9 +65,9 @@ RDEPENDS_${PN} += " \
         python-keystoneclient \
 	"
 
-RDEPENDS_${SRCNAME}-tests += "python-mock"
+RDEPENDS:${SRCNAME}-tests += "python-mock"
 
-RDEPENDS_${SRCNAME} += " \
+RDEPENDS:${SRCNAME} += " \
     ${PN} \
     ${SRCNAME}-bin \
     "
@@ -77,6 +77,6 @@ DEPENDS += " \
         python-pbr-native \
         "
 
-RDEPENDS_${SRCNAME}-bin += " \
+RDEPENDS:${SRCNAME}-bin += " \
     ${PN} \
     "

@@ -15,7 +15,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7e5ded7363d335e1bb18013ca08046ff"
 inherit autotools systemd
 
 DEPENDS += "libevent"
-RDEPENDS_${PN} += "\
+RDEPENDS:${PN} += "\
     bash \
     perl \
     perl-module-posix \
@@ -51,9 +51,9 @@ INITSCRIPT_NAME = "memcached"
 INITSCRIPT_PARAMS = "defaults"
 
 SYSTEMD_PACKAGES = "memcached"
-SYSTEMD_SERVICE_${PN} = "memcached.service"
+SYSTEMD_SERVICE:${PN} = "memcached.service"
 
-do_install_append() {
+do_install:append() {
     install -D -m 755 ${S}/scripts/memcached-init ${D}${sysconfdir}/init.d/memcached
     
     mkdir -p ${D}/usr/share/memcached/scripts

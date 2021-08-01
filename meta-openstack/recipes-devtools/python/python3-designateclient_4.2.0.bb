@@ -16,7 +16,7 @@ DEPENDS += " \
 SRC_URI[md5sum] = "51e6aaf70e253c999824c7bc29009f5e"
 SRC_URI[sha256sum] = "cf0e76540530491a6100164c514e1c60b55efa25c8db4c18f4902c988d7c1080"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         python3-cliff \
         python3-jsonschema \
         python3-osc-lib \

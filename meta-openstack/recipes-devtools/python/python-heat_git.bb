@@ -57,7 +57,7 @@ python () {
     d.setVarFlags("SERVICECREATE_PARAM_%s-cfn" % d.getVar('SRCNAME',True), flags)
 }
 
-do_install_append() {
+do_install:append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}/${SRCNAME}
     HEAT_CONF_DIR=${D}${sysconfdir}/${SRCNAME}
 
@@ -106,7 +106,7 @@ do_install_append() {
     fi
 }
 
-pkg_postinst_${SRCNAME}-setup () {
+pkg_postinst:${SRCNAME}-setup () {
     if [ -z "$D" ]; then
 	# This is to make sure postgres is configured and running
 	if ! pidof postmaster > /dev/null; then
@@ -127,30 +127,30 @@ PACKAGES += "${SRCNAME}-tests ${SRCNAME}-templates ${SRCNAME}-common ${SRCNAME}-
 PACKAGES += "${SRCNAME}-setup"
 PACKAGES += "${SRCNAME}-cfn"
 
-RDEPENDS_${SRCNAME}-tests += " bash"
+RDEPENDS:${SRCNAME}-tests += " bash"
 
-ALLOW_EMPTY_${SRCNAME}-tests = "1"
-ALLOW_EMPTY_${SRCNAME}-setup = "1"
-ALLOW_EMPTY_${SRCNAME}-templates = "1"
-ALLOW_EMPTY_${SRCNAME}-cfn = "1"
+ALLOW_EMPTY:${SRCNAME}-tests = "1"
+ALLOW_EMPTY:${SRCNAME}-setup = "1"
+ALLOW_EMPTY:${SRCNAME}-templates = "1"
+ALLOW_EMPTY:${SRCNAME}-cfn = "1"
 
-FILES_${PN} = "${libdir}/*"
+FILES:${PN} = "${libdir}/*"
 
-FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
+FILES:${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
 
-FILES_${SRCNAME}-templates = "${sysconfdir}/${SRCNAME}/templates/*"
+FILES:${SRCNAME}-templates = "${sysconfdir}/${SRCNAME}/templates/*"
 
-FILES_${SRCNAME}-common = "${sysconfdir}/${SRCNAME}/* \
+FILES:${SRCNAME}-common = "${sysconfdir}/${SRCNAME}/* \
 "
 
-FILES_${SRCNAME}-api = "${bindir}/heat-api \
+FILES:${SRCNAME}-api = "${bindir}/heat-api \
                         ${sysconfdir}/init.d/heat-api \
 "
-FILES_${SRCNAME}-api-cfn = "${bindir}/heat-api-cfn \
+FILES:${SRCNAME}-api-cfn = "${bindir}/heat-api-cfn \
                            ${sysconfdir}/init.d/heat-api-cfn \
 "
 
-FILES_${SRCNAME}-engine = "${bindir}/heat-engine \
+FILES:${SRCNAME}-engine = "${bindir}/heat-engine \
                            ${bindir}/* \
                            ${sysconfdir}/init.d/heat-engine \
 "
@@ -165,7 +165,7 @@ DEPENDS += " \
         python-pbr-native \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         python-heatclient \
         python-sqlalchemy \
 	python-amqplib \
@@ -246,20 +246,20 @@ RDEPENDS_${PN} += " \
         bash \
 	"
 
-RDEPENDS_${SRCNAME}-engine = "${PN} ${SRCNAME}-templates ${SRCNAME}-common postgresql postgresql-client python-psycopg2 tgt ${SRCNAME}-cfn bash"
-RDEPENDS_${SRCNAME}-api = "${SRCNAME}-engine"
-RDEPENDS_${SRCNAME}-api-cfn = "${SRCNAME}-engine"
-RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-engine"
-RDEPENDS_${SRCNAME}-templates = "postgresql sudo"
-RDEPENDS_${SRCNAME}-cfn = "postgresql sudo"
+RDEPENDS:${SRCNAME}-engine = "${PN} ${SRCNAME}-templates ${SRCNAME}-common postgresql postgresql-client python-psycopg2 tgt ${SRCNAME}-cfn bash"
+RDEPENDS:${SRCNAME}-api = "${SRCNAME}-engine"
+RDEPENDS:${SRCNAME}-api-cfn = "${SRCNAME}-engine"
+RDEPENDS:${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-engine"
+RDEPENDS:${SRCNAME}-templates = "postgresql sudo"
+RDEPENDS:${SRCNAME}-cfn = "postgresql sudo"
 
 INITSCRIPT_PACKAGES = "${SRCNAME}-api ${SRCNAME}-api-cfn ${SRCNAME}-engine"
-INITSCRIPT_NAME_${SRCNAME}-api = "${SRCNAME}-api"
-INITSCRIPT_PARAMS_${SRCNAME}-api = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
-INITSCRIPT_NAME_${SRCNAME}-api-cfn = "${SRCNAME}-api-cfn"
-INITSCRIPT_PARAMS_${SRCNAME}-api-cfn = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
-INITSCRIPT_NAME_${SRCNAME}-engine = "${SRCNAME}-engine"
-INITSCRIPT_PARAMS_${SRCNAME}-engine = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+INITSCRIPT_NAME:${SRCNAME}-api = "${SRCNAME}-api"
+INITSCRIPT_PARAMS:${SRCNAME}-api = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+INITSCRIPT_NAME:${SRCNAME}-api-cfn = "${SRCNAME}-api-cfn"
+INITSCRIPT_PARAMS:${SRCNAME}-api-cfn = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+INITSCRIPT_NAME:${SRCNAME}-engine = "${SRCNAME}-engine"
+INITSCRIPT_PARAMS:${SRCNAME}-engine = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 
 MONITOR_SERVICE_PACKAGES = "${SRCNAME}"
 MONITOR_SERVICE_${SRCNAME} = "heat"

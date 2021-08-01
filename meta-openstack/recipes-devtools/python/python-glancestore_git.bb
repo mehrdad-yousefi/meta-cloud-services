@@ -26,7 +26,7 @@ DEPENDS += " \
         python-pbr-native \
         "
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
    python-enum34 \
    python-eventlet \
    python-iso8601 \

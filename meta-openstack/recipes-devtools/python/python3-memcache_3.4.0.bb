@@ -18,8 +18,8 @@ DEPENDS += " \
         ${PYTHON_PN}-six-native \
         "
 
-# RDEPENDS_default: 
-RDEPENDS_${PN} += " \
+# RDEPENDS:default: 
+RDEPENDS:${PN} += " \
         ${PYTHON_PN}-io \
         ${PYTHON_PN}-six \
         ${PYTHON_PN}-logging \

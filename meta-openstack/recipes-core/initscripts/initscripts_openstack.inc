@@ -1,4 +1,4 @@
-do_install_append() {
+do_install:append() {
 
 	echo                  >> ${D}${sysconfdir}/init.d/functions
 	echo init_is_upstart \(\) \{  >> ${D}${sysconfdir}/init.d/functions

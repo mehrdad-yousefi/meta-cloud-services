@@ -13,6 +13,6 @@ DEPENDS += " \
 	python3-cffi-native \
 "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
 	python3-cffi \
 "

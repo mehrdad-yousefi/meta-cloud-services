@@ -9,11 +9,11 @@ EXTRA_OEMAKE = "BUILD_CC='${BUILD_CC}'"
 
 EXTRA_OECONF = "--with-ssl=${STAGING_DIR_HOST}${layout_exec_prefix}"
 
-EXTRA_OECONF_append_arm = " --disable-smp-support --disable-hipe"
-EXTRA_OECONF_append_armeb = " --disable-smp-support --disable-hipe"
-EXTRA_OECONF_append_mipsel = " --disable-smp-support --disable-hipe"
-EXTRA_OECONF_append_sh3 = " --disable-smp-support --disable-hipe"
-EXTRA_OECONF_append_sh4 = " --disable-smp-support --disable-hipe"
+EXTRA_OECONF:append:arm = " --disable-smp-support --disable-hipe"
+EXTRA_OECONF:append:armeb = " --disable-smp-support --disable-hipe"
+EXTRA_OECONF:append:mipsel = " --disable-smp-support --disable-hipe"
+EXTRA_OECONF:append_sh3 = " --disable-smp-support --disable-hipe"
+EXTRA_OECONF:append:sh4 = " --disable-smp-support --disable-hipe"
 
 NATIVE_BIN = "${TMPDIR}/work/erlang-native-${PV}-${PR}/otp_src_${UPSTREAM_VERSION}/bin"
 
@@ -51,9 +51,9 @@ do_install() {
 
 PACKAGES =+ "${PN}-libs-dbg ${PN}-libs"
 
-FILES_${PN}-staticdev += "${libdir}/*/*/*/*.a ${libdir}/*/*/*/*/*.a ${libdir}/*/*/*/*/*/*.a "
+FILES:${PN}-staticdev += "${libdir}/*/*/*/*.a ${libdir}/*/*/*/*/*.a ${libdir}/*/*/*/*/*/*.a "
 
-FILES_${PN}-libs-dbg += " ${libdir}/erlang/*/.debug ${libdir}/erlang/*/*/.debug ${libdir}/erlang/*/*/*/.debug ${libdir}/erlang/*/*/*/*/.debug ${libdir}/erlang/*/*/*/*/*/.debug "
+FILES:${PN}-libs-dbg += " ${libdir}/erlang/*/.debug ${libdir}/erlang/*/*/.debug ${libdir}/erlang/*/*/*/.debug ${libdir}/erlang/*/*/*/*/.debug ${libdir}/erlang/*/*/*/*/*/.debug "
 
 SRC_URI[md5sum] = "dd6c2a4807551b4a8a536067bde31d73"
 SRC_URI[sha256sum] = "5bc34fc34fc890f84bae7ff1f7c81fbec2c9aa28a0ef51a57d7a8192204d8aa2"

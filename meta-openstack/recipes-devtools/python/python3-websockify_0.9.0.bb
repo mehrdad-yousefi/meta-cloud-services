@@ -9,6 +9,6 @@ SRC_URI[sha256sum] = "c35b5b79ebc517d3b784dacfb993be413a93cda5222c6f382443ce29c1
 
 inherit setuptools3 pypi
 
-RDEPENDS_${PN} += "gmp"
+RDEPENDS:${PN} += "gmp"
 
-FILES_${PN} += "${datadir}/*"
+FILES:${PN} += "${datadir}/*"

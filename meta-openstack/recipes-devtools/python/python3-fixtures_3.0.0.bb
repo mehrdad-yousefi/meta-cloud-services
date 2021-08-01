@@ -23,6 +23,6 @@ DEPENDS += " \
         python3-pbr-native \
         "
 
-RDEPENDS_${PN} += "python3-testtools \
+RDEPENDS:${PN} += "python3-testtools \
 	python3-pbr \
 	"

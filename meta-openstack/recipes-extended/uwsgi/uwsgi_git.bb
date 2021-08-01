@@ -26,8 +26,8 @@ DEPENDS += " \
         yajl \
         "
 
-# RDEPENDS_default: 
-RDEPENDS_${PN} += " \
+# RDEPENDS:default: 
+RDEPENDS:${PN} += " \
         "
 
 CLEANBROKEN = "1"

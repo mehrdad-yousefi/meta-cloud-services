@@ -14,7 +14,7 @@ S = "${WORKDIR}/git"
 
 inherit setuptools3
 
-FILES_${PN} += "${datadir}/etc/${SRCNAME}/*"
+FILES:${PN} += "${datadir}/etc/${SRCNAME}/*"
 
 DEPENDS += " \
         python3-pip \
@@ -25,7 +25,7 @@ DEPENDS += " \
         python3-pbr-native \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
       python3-babel \
       python3-iso8601 \
       python3-netaddr \

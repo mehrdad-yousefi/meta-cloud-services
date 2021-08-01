@@ -26,7 +26,7 @@ inherit ruby
 
 RUBY_COMPILE_FLAGS = ""
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         coderay \
         method-source \
         slop \

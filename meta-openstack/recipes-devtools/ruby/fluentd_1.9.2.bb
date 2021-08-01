@@ -7,13 +7,13 @@ SRC_URI = "git://github.com/fluent/fluentd.git;protocol=https;tag=v${PV}"
 
 S = "${WORKDIR}/git"
 
-RDEPENDS_${PN} = "cool.io http-parser.rb msgpack serverengine sigdump strptime tzinfo tzinfo-data yajl-ruby"
+RDEPENDS:${PN} = "cool.io http-parser.rb msgpack serverengine sigdump strptime tzinfo tzinfo-data yajl-ruby"
 
 inherit ruby
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}/etc/fluent/
 	install ${S}/fluent.conf ${D}/etc/fluent/fluent.conf
 }
 
-INSANE_SKIP_${PN} = "installed-vs-shipped"
+INSANE_SKIP:${PN} = "installed-vs-shipped"

@@ -61,7 +61,7 @@ python () {
     d.setVarFlags("USERCREATE_PARAM_%s-setup-admin" % d.getVar('SRCNAME',True), flags)
 }
 
-do_install_append() {
+do_install:append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}/
     TEMPEST_CONF_DIR=${D}${sysconfdir}/${SRCNAME}
 
@@ -106,18 +106,18 @@ PACKAGES =+ "${SRCNAME}-tests \
              ${SRCNAME}-setup-admin \
              "
 
-FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/tests/*"
+FILES:${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/tests/*"
 
-FILES_${PN} = "${libdir}/* \
+FILES:${PN} = "${libdir}/* \
                ${sysconfdir}/* \
                ${bindir}/* \
 "
 
-ALLOW_EMPTY_${SRCNAME}-setup = "1"
-ALLOW_EMPTY_${SRCNAME}-setup-altdemo = "1"
-ALLOW_EMPTY_${SRCNAME}-setup-admin = "1"
+ALLOW_EMPTY:${SRCNAME}-setup = "1"
+ALLOW_EMPTY:${SRCNAME}-setup-altdemo = "1"
+ALLOW_EMPTY:${SRCNAME}-setup-admin = "1"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         ${SRCNAME}-tests \
         ${SRCNAME}-setup \
         ${SRCNAME}-setup-altdemo \

@@ -14,7 +14,7 @@ DEPENDS += " \
         python-pbr-native \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         python-pbr \
         python-babel \
         python-django \
@@ -96,13 +96,13 @@ USER = "horizon"
 GROUP = "horizon"
 
 USERADD_PACKAGES = "${PN}"
-GROUPADD_PARAM_${PN} = "--system ${GROUP}"
-USERADD_PARAM_${PN} = "--system -m -d ${localstatedir}/lib/openstack-dashboard -s /bin/false -g ${GROUP} ${USER}"
+GROUPADD_PARAM:${PN} = "--system ${GROUP}"
+USERADD_PARAM:${PN} = "--system -m -d ${localstatedir}/lib/openstack-dashboard -s /bin/false -g ${GROUP} ${USER}"
 
 # no longer required. kept as reference.
 # do_install[dirs] += "${D}/usr/share/bin"
 
-do_install_append() {
+do_install:append() {
     SYSCONF_DIR=${D}${sysconfdir}
     DASHBOARD_CONF_DIR=${SYSCONF_DIR}/openstack-dashboard
     DASHBOARD_SHARE_DIR=${D}${datadir}/openstack-dashboard
@@ -163,7 +163,7 @@ do_install_append() {
     ln -fs openstack_dashboard/static ${DASHBOARD_SHARE_DIR}/static
 }
 
-pkg_postinst_${SRCNAME} () {
+pkg_postinst:${SRCNAME} () {
     if [ -n "$D" ]; then
         exit 1
     else
@@ -173,39 +173,39 @@ pkg_postinst_${SRCNAME} () {
 }
 
 PACKAGES += "${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-apache ${SRCNAME}-standalone"
-ALLOW_EMPTY_${SRCNAME}-standalone = "1"
+ALLOW_EMPTY:${SRCNAME}-standalone = "1"
 
-RDEPENDS_${SRCNAME}-tests += " bash"
+RDEPENDS:${SRCNAME}-tests += " bash"
 
-FILES_${PN} = "${libdir}/*"
+FILES:${PN} = "${libdir}/*"
 
-FILES_${SRCNAME}-tests = "${sysconfdir}/openstack-dashboard/run_tests.sh"
+FILES:${SRCNAME}-tests = "${sysconfdir}/openstack-dashboard/run_tests.sh"
 
-FILES_${SRCNAME} = "${bindir}/* \
+FILES:${SRCNAME} = "${bindir}/* \
     ${datadir}/* \
     "
 
-FILES_${SRCNAME}-standalone = "${sysconfdir}/init.d/horizon"
+FILES:${SRCNAME}-standalone = "${sysconfdir}/init.d/horizon"
 
-FILES_${SRCNAME}-apache = " \
+FILES:${SRCNAME}-apache = " \
     ${sysconfdir}/apache2 \
     ${sysconfdir}/openstack-dashboard/ \
     ${datadir}/openstack-dashboard/ \
     "
 
 RDEP_ARCH_VAR = ""
-RDEP_ARCH_VAR_arm = "nodejs"
+RDEP_ARCH_VAR:arm = "nodejs"
 RDEP_ARCH_VAR_i686 = "nodejs"
-RDEP_ARCH_VAR_x86-64 = "nodejs"
+RDEP_ARCH_VAR:x86-64 = "nodejs"
 RDEP_ARCH_VAR_ia32 = "nodejs"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     ${RDEP_ARCH_VAR} \
     "
 
-RDEPENDS_${SRCNAME} = "${PN}"
+RDEPENDS:${SRCNAME} = "${PN}"
 
-RDEPENDS_${SRCNAME}-apache = "\
+RDEPENDS:${SRCNAME}-apache = "\
     apache2 \
     mod-wsgi \
     python-lesscpy \

@@ -26,8 +26,8 @@ DEPENDS += " \
         "
 
 
-# RDEPENDS_default: 
-RDEPENDS_${PN} += " \
+# RDEPENDS:default: 
+RDEPENDS:${PN} += " \
         python3-pbr \
         python3-jinja2 \
         python3-oslo.config \

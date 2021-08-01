@@ -31,8 +31,8 @@ USER = "cinder"
 GROUP = "cinder"
 
 USERADD_PACKAGES = "${PN}"
-GROUPADD_PARAM_${PN} = "--system ${GROUP}"
-USERADD_PARAM_${PN} = "--system -m -d ${localstatedir}/lib/cinder -s /bin/false -g ${GROUP} ${USER}"
+GROUPADD_PARAM:${PN} = "--system ${GROUP}"
+USERADD_PARAM:${PN} = "--system -m -d ${localstatedir}/lib/cinder -s /bin/false -g ${GROUP} ${USER}"
 
 CINDER_BACKUP_BACKEND_DRIVER ?= "cinder.backup.drivers.swift"
 
@@ -44,7 +44,7 @@ CINDER_NFS_VOLUME_SERVERS ?= "${CINDER_NFS_VOLUME_SERVERS_DEFAULT}"
 CINDER_GLUSTERFS_VOLUME_SERVERS_DEFAULT = "controller:/glusterfs_volumes"
 CINDER_GLUSTERFS_VOLUME_SERVERS ?= "${CINDER_GLUSTERFS_VOLUME_SERVERS_DEFAULT}"
 
-do_install_append() {
+do_install:append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}/${SRCNAME}
     CINDER_CONF_DIR=${D}${sysconfdir}/${SRCNAME}
     
@@ -160,35 +160,35 @@ do_install_append() {
 #}
 
 PACKAGES += "${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-setup ${SRCNAME}-api ${SRCNAME}-volume ${SRCNAME}-scheduler ${SRCNAME}-backup"
-ALLOW_EMPTY_${SRCNAME}-setup = "1"
-ALLOW_EMPTY_${SRCNAME}-backup = "1"
-ALLOW_EMPTY_${SRCNAME}-scheduler = "1"
-ALLOW_EMPTY_${SRCNAME}-volume = "1"
-ALLOW_EMPTY_${SRCNAME}-api = "1"
+ALLOW_EMPTY:${SRCNAME}-setup = "1"
+ALLOW_EMPTY:${SRCNAME}-backup = "1"
+ALLOW_EMPTY:${SRCNAME}-scheduler = "1"
+ALLOW_EMPTY:${SRCNAME}-volume = "1"
+ALLOW_EMPTY:${SRCNAME}-api = "1"
 
-RDEPENDS_${SRCNAME}-tests += " bash python"
+RDEPENDS:${SRCNAME}-tests += " bash python"
 
-FILES_${PN} = "${libdir}/* /etc/tgt"
+FILES:${PN} = "${libdir}/* /etc/tgt"
 
-FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/tools"
+FILES:${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/tools"
 
-FILES_${SRCNAME}-api = " \
+FILES:${SRCNAME}-api = " \
     ${bindir}/cinder-api \
 "
 
-FILES_${SRCNAME}-volume = " \
+FILES:${SRCNAME}-volume = " \
     ${bindir}/cinder-volume \
 "
 
-FILES_${SRCNAME}-scheduler = " \
+FILES:${SRCNAME}-scheduler = " \
     ${bindir}/cinder-scheduler \
 "
 
-FILES_${SRCNAME}-backup = " \
+FILES:${SRCNAME}-backup = " \
     ${bindir}/cinder-backup \
 "
 
-FILES_${SRCNAME} = "${bindir}/* \
+FILES:${SRCNAME} = "${bindir}/* \
     ${sysconfdir}/${SRCNAME}/* \
     ${localstatedir}/* \
     ${sysconfdir}/${SRCNAME}/drivers/* \
@@ -204,7 +204,7 @@ DEPENDS += " \
         python-pbr-native \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         lvm2 \
         python-pbr \
         python-babel \
@@ -267,17 +267,17 @@ RDEPENDS_${PN} += " \
         python-cryptography \
         "
 
-RDEPENDS_${SRCNAME} = " \
+RDEPENDS:${SRCNAME} = " \
     ${PN} \
     postgresql \
     postgresql-client \
     python-psycopg2 \
     tgt"
 
-RDEPENDS_${SRCNAME}-api = "${SRCNAME}"
-RDEPENDS_${SRCNAME}-volume = "${SRCNAME}"
-RDEPENDS_${SRCNAME}-scheduler = "${SRCNAME}"
-RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME} bash"
+RDEPENDS:${SRCNAME}-api = "${SRCNAME}"
+RDEPENDS:${SRCNAME}-volume = "${SRCNAME}"
+RDEPENDS:${SRCNAME}-scheduler = "${SRCNAME}"
+RDEPENDS:${SRCNAME}-setup = "postgresql sudo ${SRCNAME} bash"
 
 SYSTEMD_PACKAGES = " \
     ${SRCNAME}-setup \
@@ -287,17 +287,17 @@ SYSTEMD_PACKAGES = " \
     ${SRCNAME}-backup \
 "
 
-SYSTEMD_SERVICE_${SRCNAME}-setup = "cinder-init.service"
-SYSTEMD_SERVICE_${SRCNAME}-api = "cinder-api.service"
-SYSTEMD_SERVICE_${SRCNAME}-volume = "cinder-volume.service"
-SYSTEMD_SERVICE_${SRCNAME}-scheduler = "cinder-scheduler.service"
-SYSTEMD_SERVICE_${SRCNAME}-backup = "cinder-backup.service"
+SYSTEMD_SERVICE:${SRCNAME}-setup = "cinder-init.service"
+SYSTEMD_SERVICE:${SRCNAME}-api = "cinder-api.service"
+SYSTEMD_SERVICE:${SRCNAME}-volume = "cinder-volume.service"
+SYSTEMD_SERVICE:${SRCNAME}-scheduler = "cinder-scheduler.service"
+SYSTEMD_SERVICE:${SRCNAME}-backup = "cinder-backup.service"
 
 # Disable until they are configured (via -setup)
-SYSTEMD_AUTO_ENABLE_${SRCNAME}-api = "disable"
-SYSTEMD_AUTO_ENABLE_${SRCNAME}-volume = "disable"
-SYSTEMD_AUTO_ENABLE_${SRCNAME}-scheduler = "disable"
-SYSTEMD_AUTO_ENABLE_${SRCNAME}-backup = "disable"
+SYSTEMD_AUTO_ENABLE:${SRCNAME}-api = "disable"
+SYSTEMD_AUTO_ENABLE:${SRCNAME}-volume = "disable"
+SYSTEMD_AUTO_ENABLE:${SRCNAME}-scheduler = "disable"
+SYSTEMD_AUTO_ENABLE:${SRCNAME}-backup = "disable"
 
 MONITOR_SERVICE_PACKAGES = "${SRCNAME}"
 MONITOR_SERVICE_${SRCNAME} = "cinder"

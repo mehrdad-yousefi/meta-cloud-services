@@ -26,7 +26,7 @@ S = "${WORKDIR}/git"
 
 inherit setuptools3 update-rc.d hosts identity default_configs
 
-do_install_append() {
+do_install:append() {
     RALLY_CONF_DIR=${D}${sysconfdir}/${SRCNAME}
     RALLY_PYTHON_SITEPACKAGES_DIR=${D}${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}
 
@@ -62,7 +62,7 @@ do_install_append() {
     cp -r ${S}/tools ${RALLY_CONF_DIR}
 }
 
-pkg_postinst_${SRCNAME}-setup () {
+pkg_postinst:${SRCNAME}-setup () {
     if [ -z "$D" ]; then
 	# This is to make sure postgres is configured and running
 	if ! pidof postmaster > /dev/null; then
@@ -80,18 +80,18 @@ pkg_postinst_${SRCNAME}-setup () {
 }
 
 PACKAGES += "${SRCNAME}-tests ${SRCNAME}-api ${SRCNAME} ${SRCNAME}-setup"
-ALLOW_EMPTY_${SRCNAME}-setup = "1"
+ALLOW_EMPTY:${SRCNAME}-setup = "1"
 
-FILES_${PN} = "${libdir}/*"
+FILES:${PN} = "${libdir}/*"
 
-FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh \
+FILES:${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh \
     "
 
-FILES_${SRCNAME} = "${bindir}/* \
+FILES:${SRCNAME} = "${bindir}/* \
     ${sysconfdir}/${SRCNAME}/* \
     "
 
-FILES_${SRCNAME}-api = "${bindir}/rally-api \
+FILES:${SRCNAME}-api = "${bindir}/rally-api \
     ${sysconfdir}/init.d/rally-api \
     "
 
@@ -105,7 +105,7 @@ DEPENDS += " \
         python-pbr-native \
 	"
 
-RDEPENDS_${PN} += " python-babel \
+RDEPENDS:${PN} += " python-babel \
     python-decorator \
     python-fixtures \
     python-iso8601 \
@@ -131,7 +131,7 @@ RDEPENDS_${PN} += " python-babel \
     python-wsme \
     "
 
-RDEPENDS_${SRCNAME}-tests = "${PN} \
+RDEPENDS:${SRCNAME}-tests = "${PN} \
    python-coverage \
    python-mock \
    python-testrepository \
@@ -139,14 +139,14 @@ RDEPENDS_${SRCNAME}-tests = "${PN} \
    python-oslotest \
    "
 
-RDEPENDS_${SRCNAME} = "${PN} \
+RDEPENDS:${SRCNAME} = "${PN} \
    postgresql \
    postgresql-client \
    "
 
-RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}"
-RDEPENDS_${SRCNAME}-api = "${SRCNAME}"
+RDEPENDS:${SRCNAME}-setup = "postgresql sudo ${SRCNAME}"
+RDEPENDS:${SRCNAME}-api = "${SRCNAME}"
 
 INITSCRIPT_PACKAGES = "${SRCNAME}-api"
-INITSCRIPT_NAME_${SRCNAME}-api = "${SRCNAME}-api"
-INITSCRIPT_PARAMS_${SRCNAME}-api = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+INITSCRIPT_NAME:${SRCNAME}-api = "${SRCNAME}-api"
+INITSCRIPT_PARAMS:${SRCNAME}-api = "${OS_DEFAULT_INITSCRIPT_PARAMS}"

@@ -8,6 +8,6 @@ SRC_URI = 'git://github.com/treasure-data/serverengine.git;protocol=https;tag=v2
 
 S = '${WORKDIR}/git'
 
-RDEPENDS_${PN} = "sigdump"
+RDEPENDS:${PN} = "sigdump"
 
 inherit ruby

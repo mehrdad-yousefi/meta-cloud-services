@@ -14,7 +14,7 @@ DEPENDS += " \
         python3-pip \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     python3-requests \
     python3-netaddr \
     python3-stevedore \

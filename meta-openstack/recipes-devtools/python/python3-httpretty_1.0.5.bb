@@ -16,7 +16,7 @@ DEPENDS += " \
         ${PYTHON_PN}-pip \
         "
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
 	${PYTHON_PN}-crypt \
 	${PYTHON_PN}-logging \
 	${PYTHON_PN}-json \

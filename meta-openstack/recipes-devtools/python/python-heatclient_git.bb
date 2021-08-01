@@ -14,7 +14,7 @@ DEPENDS += " \
         python-pbr-native \
         "
 
-RDEPENDS_${PN} +="python-cliff \
+RDEPENDS:${PN} +="python-cliff \
 	python-httplib2 \
 	python-iso8601 \
 	python-prettytable \
@@ -39,15 +39,15 @@ inherit setuptools3
 PACKAGECONFIG ?= "bash-completion"
 PACKAGECONFIG[bash-completion] = ",,bash-completion,bash-completion ${BPN}-bash-completion"
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}/${sysconfdir}/bash_completion.d
 	install -m 664 ${S}/tools/heat.bash_completion ${D}/${sysconfdir}/bash_completion.d
 }
 
 PACKAGES =+ "${SRCNAME}-tests ${BPN}-bash-completion"
-FILES_${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"
-ALLOW_EMPTY_${SRCNAME}-tests = "1"
+FILES:${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"
+ALLOW_EMPTY:${SRCNAME}-tests = "1"
 
-RDEPENDS_${SRCNAME}-tests += "python-testscenarios \
+RDEPENDS:${SRCNAME}-tests += "python-testscenarios \
 	python-mox3 \
 	"

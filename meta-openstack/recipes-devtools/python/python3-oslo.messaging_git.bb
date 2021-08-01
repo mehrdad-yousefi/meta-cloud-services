@@ -25,8 +25,8 @@ DEPENDS += " \
         python3-pbr-native \
         "
 
-# RDEPENDS_default: 
-RDEPENDS_${PN} += " \
+# RDEPENDS:default: 
+RDEPENDS:${PN} += " \
         bash \
         python3-pbr \
         python3-cachetools \

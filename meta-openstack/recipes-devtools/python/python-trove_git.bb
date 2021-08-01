@@ -36,7 +36,7 @@ python () {
 }
 SERVICECREATE_PACKAGES[vardeps] += "KEYSTONE_HOST"
 
-do_install_append() {
+do_install:append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}/${SRCNAME}
     TROVE_CONF_DIR=${D}${sysconfdir}/${SRCNAME}
     TROVE_LOG_DIR="/var/log/${SRCNAME}"
@@ -144,7 +144,7 @@ do_install_append() {
 }
 
 
-pkg_postinst_${SRCNAME}-setup () {
+pkg_postinst:${SRCNAME}-setup () {
     # python-trove-setup postinst start
     if [ -z "$D" ]; then
 	source /etc/nova/openrc
@@ -173,8 +173,8 @@ pkg_postinst_${SRCNAME}-setup () {
 
 
 USERADD_PACKAGES = "${PN}"
-GROUPADD_PARAM_${PN} = "--system trove"
-USERADD_PARAM_${PN}  = "--system --home /var/lib/trove -g trove \
+GROUPADD_PARAM:${PN} = "--system trove"
+USERADD_PARAM:${PN}  = "--system --home /var/lib/trove -g trove \
                         --no-create-home --shell /bin/false trove"
 
 PROVIDES += " \
@@ -191,42 +191,42 @@ PACKAGES += " \
     ${SRCNAME}-taskmanager \
     "
 
-PACKAGES_prepend = " \
+PACKAGES:prepend = " \
     ${SRCNAME}-tests \
     "
 
-FILES_${PN} = " \
+FILES:${PN} = " \
     ${libdir}/* \
     "
 
-FILES_${SRCNAME}-tests = " \
+FILES:${SRCNAME}-tests = " \
     ${libdir}/python*/site-packages/${SRCNAME}/tests/* \
     "
 
-ALLOW_EMPTY_${SRCNAME} = "1"
-FILES_${SRCNAME} = " \
+ALLOW_EMPTY:${SRCNAME} = "1"
+FILES:${SRCNAME} = " \
     "
 
-FILES_${SRCNAME}-api = " \
+FILES:${SRCNAME}-api = " \
     ${sysconfdir}/init.d/trove-api \
     "
-ALLOW_EMPTY_${SRCNAME}-api = "1"
+ALLOW_EMPTY:${SRCNAME}-api = "1"
 
-FILES_${SRCNAME}-bin = " \
+FILES:${SRCNAME}-bin = " \
     ${bindir}/* \
     "
 
-FILES_${SRCNAME}-conductor = " \
+FILES:${SRCNAME}-conductor = " \
     ${sysconfdir}/init.d/trove-conductor \
     "
-ALLOW_EMPTY_${SRCNAME}-conductor = "1"
+ALLOW_EMPTY:${SRCNAME}-conductor = "1"
 
-FILES_${SRCNAME}-taskmanager = " \
+FILES:${SRCNAME}-taskmanager = " \
     ${sysconfdir}/init.d/trove-taskmanager \
     "
-ALLOW_EMPTY_${SRCNAME}-taskmanager = "1"
+ALLOW_EMPTY:${SRCNAME}-taskmanager = "1"
 
-FILES_${SRCNAME}-setup = " \
+FILES:${SRCNAME}-setup = " \
     ${localstatedir}/* \
     ${sysconfdir}/${SRCNAME}/* \
     "
@@ -243,7 +243,7 @@ DEPENDS += " \
         python-pbr-native \
 	"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     python-babel \
     python-cinderclient \
     python-eventlet \
@@ -273,7 +273,7 @@ RDEPENDS_${PN} += " \
     uwsgi \
     "
 
-RDEPENDS_${SRCNAME} = " \
+RDEPENDS:${SRCNAME} = " \
     ${PN} \
     ${SRCNAME}-api \
     ${SRCNAME}-bin \
@@ -283,19 +283,19 @@ RDEPENDS_${SRCNAME} = " \
     troveclient \
     "
 
-RDEPENDS_${SRCNAME}-api = " \
+RDEPENDS:${SRCNAME}-api = " \
     ${SRCNAME}-setup \
     "
 
-RDEPENDS_${SRCNAME}-bin = " \
+RDEPENDS:${SRCNAME}-bin = " \
     ${PN} \
     "
 
-RDEPENDS_${SRCNAME}-conductor = " \
+RDEPENDS:${SRCNAME}-conductor = " \
     ${SRCNAME}-setup \
     "
 
-RDEPENDS_${SRCNAME}-setup = " \
+RDEPENDS:${SRCNAME}-setup = " \
     ${PN} \
     ${SRCNAME}-bin \
     keystone-setup \
@@ -306,11 +306,11 @@ RDEPENDS_${SRCNAME}-setup = " \
     sudo \
     "
 
-RDEPENDS_${SRCNAME}-taskmanager = " \
+RDEPENDS:${SRCNAME}-taskmanager = " \
     ${SRCNAME}-setup \
     "
 
-RDEPENDS_${SRCNAME}-tests += " \
+RDEPENDS:${SRCNAME}-tests += " \
     python-mock \
     python-pexpect \
     "
@@ -318,11 +318,11 @@ RDEPENDS_${SRCNAME}-tests += " \
 
 INITSCRIPT_PACKAGES = "${SRCNAME}-api ${SRCNAME}-conductor ${SRCNAME}-taskmanager"
 
-INITSCRIPT_NAME_${SRCNAME}-api = "trove-api"
-INITSCRIPT_PARAMS_${SRCNAME}-api = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+INITSCRIPT_NAME:${SRCNAME}-api = "trove-api"
+INITSCRIPT_PARAMS:${SRCNAME}-api = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 
-INITSCRIPT_NAME_${SRCNAME}-conductor = "trove-conductor"
-INITSCRIPT_PARAMS_${SRCNAME}-conductor = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+INITSCRIPT_NAME:${SRCNAME}-conductor = "trove-conductor"
+INITSCRIPT_PARAMS:${SRCNAME}-conductor = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 
-INITSCRIPT_NAME_${SRCNAME}-taskmanager = "trove-taskmanager"
-INITSCRIPT_PARAMS_${SRCNAME}-taskmanager = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+INITSCRIPT_NAME:${SRCNAME}-taskmanager = "trove-taskmanager"
+INITSCRIPT_PARAMS:${SRCNAME}-taskmanager = "${OS_DEFAULT_INITSCRIPT_PARAMS}"

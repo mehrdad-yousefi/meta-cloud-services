@@ -14,7 +14,7 @@ S = "${WORKDIR}/git"
 
 inherit setuptools3
 
-FILES_${PN} += "${datadir}/etc/${SRCNAME}/*"
+FILES:${PN} += "${datadir}/etc/${SRCNAME}/*"
 
 DEPENDS += " \
         python-pip \
@@ -26,7 +26,7 @@ DEPENDS += " \
         python-pbr-native \
 	"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         python-eventlet \
         python-msgpack \
         python-netaddr \

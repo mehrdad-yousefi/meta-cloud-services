@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 inherit packagegroup
 
-RDEPENDS_${PN} = " postgresql \
+RDEPENDS:${PN} = " postgresql \
     postgresql-client \
     python-psycopg2 \
     rabbitmq-server \
@@ -55,7 +55,7 @@ RDEPENDS_${PN} = " postgresql \
     ${@bb.utils.contains('OPENSTACK_EXTRA_FEATURES', 'monitoring', 'packagegroup-monitoring-core', '', d)} \
     "
 
-RRECOMMENDS_${PN} = " \
+RRECOMMENDS:${PN} = " \
     kernel-module-fuse \
     cloud-init \
     kernel-module-softdog \

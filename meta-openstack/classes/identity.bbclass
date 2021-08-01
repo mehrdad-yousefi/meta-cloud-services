@@ -152,7 +152,7 @@ def servicecreate_param(d, pkg):
     return service_param
 
 # Add the postinst script into the generated package
-python populate_packages_append () {
+python populate_packages:append () {
     servicecreate_packages = d.getVar('SERVICECREATE_PACKAGES', True) or ""
 
     servicecreate_postinst_common_copy = d.getVar('servicecreate_postinst_common', True)
@@ -161,7 +161,7 @@ python populate_packages_append () {
     for pkg in servicecreate_packages.split():
         bb.debug(1, 'Adding service/user creation calls to postinst for %s' % pkg)
 
-        postinst = d.getVar('pkg_postinst_%s' % pkg, True) or d.getVar('pkg_postinst', True)
+        postinst = d.getVar('pkg_postinst:%s' % pkg, True) or d.getVar('pkg_postinst', True)
         if not postinst:
             postinst = ''
 
@@ -181,6 +181,6 @@ python populate_packages_append () {
         # Footer.
         postinst += '    fi\n'
 
-        d.setVar('pkg_postinst_%s' % pkg, postinst)
-        bb.debug(1, 'pkg_postinst_%s = %s' % (pkg, d.getVar('pkg_postinst_%s' % pkg, True)))
+        d.setVar('pkg_postinst:%s' % pkg, postinst)
+        bb.debug(1, 'pkg_postinst:%s = %s' % (pkg, d.getVar('pkg_postinst:%s' % pkg, True)))
 }

@@ -10,7 +10,7 @@ PYPI_PACKAGE = "Routes"
 
 inherit setuptools3 pypi
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
 	${PYTHON_PN}-netclient \	
 	${PYTHON_PN}-six \	
 	${PYTHON_PN}-repoze.lru \	

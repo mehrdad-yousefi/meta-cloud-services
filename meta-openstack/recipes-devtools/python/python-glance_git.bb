@@ -25,8 +25,8 @@ USER = "glance"
 GROUP = "glance"
 
 USERADD_PACKAGES = "${PN}"
-GROUPADD_PARAM_${PN} = "--system ${GROUP}"
-USERADD_PARAM_${PN} = "--system -m -d ${localstatedir}/lib/glance -s /bin/false -g ${GROUP} ${USER}"
+GROUPADD_PARAM:${PN} = "--system ${GROUP}"
+USERADD_PARAM:${PN} = "--system -m -d ${localstatedir}/lib/glance -s /bin/false -g ${GROUP} ${USER}"
 
 GLANCE_DEFAULT_STORE ?= "file"
 GLANCE_KNOWN_STORES ?= "glance.store.rbd.Store,\
@@ -56,13 +56,13 @@ python () {
 }
 SERVICECREATE_PACKAGES[vardeps] += "KEYSTONE_HOST"
 
-do_install_prepend() {
+do_install:prepend() {
     sed 's:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g' -i ${S}/${SRCNAME}/tests/functional/__init__.py
     sed 's:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g' -i ${S}/${SRCNAME}/tests/unit/base.py
     sed 's:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g' -i ${S}/${SRCNAME}/tests/utils.py
 }
 
-do_install_append() {
+do_install:append() {
     SRC_SYSCONFDIR=${S}${sysconfdir}
     GLANCE_CONF_DIR=${D}${sysconfdir}/glance
 
@@ -140,26 +140,26 @@ do_install_append() {
 
 PACKAGES += " ${SRCNAME} ${SRCNAME}-setup ${SRCNAME}-api ${SRCNAME}-registry"
 
-FILES_${PN} = " \
+FILES:${PN} = " \
     ${libdir}/* \
     ${datadir}/etc/${SRCNAME}* \
     "
 
-FILES_${SRCNAME} = "${bindir}/* \
+FILES:${SRCNAME} = "${bindir}/* \
     ${sysconfdir}/${SRCNAME}/* \
     ${localstatedir}/* \
     "
 
-FILES_${SRCNAME}-setup = " \
+FILES:${SRCNAME}-setup = " \
     ${systemd_unitdir}/system/glance-init.service \
     "
 
-FILES_${SRCNAME}-api = " \
+FILES:${SRCNAME}-api = " \
     ${bindir}/glance-api \
     ${systemd_unitdir}/system/glance-api.service \
     "
 
-FILES_${SRCNAME}-registry = "\
+FILES:${SRCNAME}-registry = "\
     ${bindir}/glance-registry \
     ${systemd_unitdir}/system/glance-registry.service \
     "
@@ -174,7 +174,7 @@ DEPENDS += " \
         python-pbr-native \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         coreutils \
         python-pbr \
         python-sqlalchemy \
@@ -218,22 +218,22 @@ RDEPENDS_${PN} += " \
         python-monotonic \
         "
 
-RDEPENDS_${SRCNAME} = " \
+RDEPENDS:${SRCNAME} = " \
         ${PN} \
         postgresql \
         postgresql-client \
         python-psycopg2 \
         "
 
-RDEPENDS_${SRCNAME}-api = "${SRCNAME}"
-RDEPENDS_${SRCNAME}-registry = "${SRCNAME}"
-RDEPENDS_${SRCNAME}-setup = "postgresql keystone-setup sudo ${SRCNAME}"
-RDEPENDS_${SRCNAME}-tests = "python-psutil qpid-python bash"
+RDEPENDS:${SRCNAME}-api = "${SRCNAME}"
+RDEPENDS:${SRCNAME}-registry = "${SRCNAME}"
+RDEPENDS:${SRCNAME}-setup = "postgresql keystone-setup sudo ${SRCNAME}"
+RDEPENDS:${SRCNAME}-tests = "python-psutil qpid-python bash"
 
 SYSTEMD_PACKAGES = "${SRCNAME}-api ${SRCNAME}-registry ${SRCNAME}-setup"
-SYSTEMD_SERVICE_${SRCNAME}-api = "glance-api.service"
-SYSTEMD_SERVICE_${SRCNAME}-registry = "glance-registry.service"
-SYSTEMD_SERVICE_${SRCNAME}-setup = "glance-init.service"
+SYSTEMD_SERVICE:${SRCNAME}-api = "glance-api.service"
+SYSTEMD_SERVICE:${SRCNAME}-registry = "glance-registry.service"
+SYSTEMD_SERVICE:${SRCNAME}-setup = "glance-init.service"
 
 MONITOR_SERVICE_PACKAGES = "${SRCNAME}"
 MONITOR_SERVICE_${SRCNAME} = "glance"

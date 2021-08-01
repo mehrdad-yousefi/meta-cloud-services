@@ -23,7 +23,7 @@ SRC_URI = " \
 
 inherit ruby
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         mime-types \
         "
 

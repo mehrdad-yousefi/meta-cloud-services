@@ -4,7 +4,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7ab4c208aa62d92d7a03cc8e0a89c12b"
 SECTION = "mq"
 DEPENDS = "boost perl-native python3 util-linux cyrus-sasl"
-RDEPENDS_${PN} = "cyrus-sasl-bin"
+RDEPENDS:${PN} = "cyrus-sasl-bin"
 PR = "r0"
 
 SRC_URI = "http://archive.apache.org/dist/${PN}/${PV}/qpid-cpp-0.20.tar.gz \
@@ -32,28 +32,28 @@ EXTRA_OEMAKE += " CPPFLAGS=-Wno-unused-function \
         pythondir=${PYTHON_SITEPACKAGES_DIR} \
 "
 
-do_install_append() {
+do_install:append() {
      install -d ${D}${sysconfdir}/init.d
      install -m 0755 ${WORKDIR}/qpidd ${D}${sysconfdir}/init.d/qpidd
 }
 
 PACKAGES += "qmfgen qmfgen-python qmfgen-python-dbg"
 
-FILES_qmfgen = "${bindir}/qmf-gen"
+FILES:qmfgen = "${bindir}/qmf-gen"
 
-FILES_qmfgen-python = "${PYTHON_SITEPACKAGES_DIR}/*"
+FILES:qmfgen-python = "${PYTHON_SITEPACKAGES_DIR}/*"
 
-FILES_qmfgen-python-dbg += "${PYTHON_SITEPACKAGES_DIR}/.debug/*"
+FILES:qmfgen-python-dbg += "${PYTHON_SITEPACKAGES_DIR}/.debug/*"
 
-FILES_${PN} += "${libdir}/${PN}/tests/test_store.so"
+FILES:${PN} += "${libdir}/${PN}/tests/test_store.so"
 
-FILES_${PN}-dev += "${libdir}/${PN}/tests/test_store.so "
+FILES:${PN}-dev += "${libdir}/${PN}/tests/test_store.so "
 
-FILES_${PN}-dbg += "${libdir}/${PN}/${PN}/tests/.debug/* \
+FILES:${PN}-dbg += "${libdir}/${PN}/${PN}/tests/.debug/* \
                     ${libdir}/${PN}/tests/.debug/*  \
                     ${libdir}/${PN}/daemon/.debug/*"
 
-FILES_${PN}-doc += "${datadir}/qpidc/*"
+FILES:${PN}-doc += "${datadir}/qpidc/*"
 
 INITSCRIPT_NAME = "qpidd"
 INITSCRIPT_PARAMS = "defaults"

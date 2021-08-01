@@ -14,5 +14,5 @@ inherit setuptools3 pypi
 DEPENDS += " \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         "

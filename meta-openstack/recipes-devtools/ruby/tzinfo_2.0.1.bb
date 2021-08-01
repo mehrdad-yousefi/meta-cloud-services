@@ -8,6 +8,6 @@ SRC_URI = "git://github.com/tzinfo/tzinfo.git;protocol=https;tag=v2.0.1"
 
 S = "${WORKDIR}/git"
 
-RDEPENDS_${PN} = "concurrent-ruby"
+RDEPENDS:${PN} = "concurrent-ruby"
 
 inherit ruby

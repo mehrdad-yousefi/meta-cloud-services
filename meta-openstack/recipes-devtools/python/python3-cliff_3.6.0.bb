@@ -18,7 +18,7 @@ DEPENDS += " \
     ${PYTHON_PN}-pbr-native \
     "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
             ${PYTHON_PN}-cmd2 \
             ${PYTHON_PN}-pbr \
             ${PYTHON_PN}-pyparsing \

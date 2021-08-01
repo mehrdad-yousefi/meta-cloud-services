@@ -23,7 +23,7 @@ DEPENDS += " \
         python-pbr-native \
 	"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         python-pbr \
         python-six \
         python-babel \

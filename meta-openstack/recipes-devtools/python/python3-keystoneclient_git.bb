@@ -19,7 +19,7 @@ S = "${WORKDIR}/git"
 
 inherit setuptools3 monitor
 
-FILES_${PN}-doc += "${datadir}/keystoneclient" 
+FILES:${PN}-doc += "${datadir}/keystoneclient" 
 
 DEPENDS += " \
         python3-pip \
@@ -31,7 +31,7 @@ DEPENDS += " \
         python3-pbr-native \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         bash \
         python3-pbr \
         python3-debtcollector \
@@ -46,15 +46,15 @@ RDEPENDS_${PN} += " \
         python3-stevedore \
         "
 
-do_install_append() {
+do_install:append() {
 	cp -r ${S}/examples ${D}${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}
 }
 
 PACKAGES =+ " ${SRCNAME}-tests"
 
-FILES_${SRCNAME}-tests = "${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}/examples \
+FILES:${SRCNAME}-tests = "${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}/examples \
         "
-RDEPENDS_${SRCNAME}-tests += " \
+RDEPENDS:${SRCNAME}-tests += " \
 	python3-httpretty \
         bash \
 	"

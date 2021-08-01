@@ -13,8 +13,8 @@ PACKAGES = "\
 	${SRCNAME}-agent \
 "
 
-RDEPENDS_${SRCNAME}-core += "\
+RDEPENDS:${SRCNAME}-core += "\
 "
 
-RDEPENDS_${SRCNAME}-agent += "\
+RDEPENDS:${SRCNAME}-agent += "\
 "

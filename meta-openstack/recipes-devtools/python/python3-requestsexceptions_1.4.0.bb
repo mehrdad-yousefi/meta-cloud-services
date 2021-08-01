@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "b095cbc77618f066d459a02b137b020c37da9f46d9b057704019c9f77d
 inherit setuptools3 pypi
 
 # conflicting file prevention
-do_install_append() {
+do_install:append() {
 	rm -f ${D}${libdir}/python*/site-packages/tests/*
 }
 
@@ -18,6 +18,6 @@ DEPENDS += " \
         ${PYTHON_PN}-pbr-native \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         ${PYTHON_PN}-pbr \
         "

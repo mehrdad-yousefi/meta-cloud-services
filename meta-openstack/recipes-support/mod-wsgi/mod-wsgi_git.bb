@@ -23,7 +23,7 @@ SRC_URI = "\
 inherit autotools-brokensep distutils3-base
 
 DEPENDS += "apache2-native apache2 python3"
-RDEPENDS_${PN} = "python3"
+RDEPENDS:${PN} = "python3"
 
 EXTRA_OECONF = "\
 	--with-apxs=${STAGING_BINDIR_CROSS}/apxs \
@@ -42,10 +42,10 @@ EXTRA_OECONF = "\
 
 CFLAGS += " -I${STAGING_INCDIR}/apache2"
 
-FILES_${PN} += "/etc/apache2/"
-FILES_${PN}-dbg += "${libdir}/apache2/modules/.debug"
+FILES:${PN} += "/etc/apache2/"
+FILES:${PN}-dbg += "${libdir}/apache2/modules/.debug"
 
-do_install_append() {
+do_install:append() {
 	mkdir -p ${D}/etc/apache2/modules.d/
 	echo "LoadModule wsgi_module ${libexecdir}/apache2/modules/mod_wsgi.so" > \
 	  ${D}/etc/apache2/modules.d/wsgi.load

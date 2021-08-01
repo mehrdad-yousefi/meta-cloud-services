@@ -20,7 +20,7 @@ DEPENDS += " \
         facter \
 "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         ruby \
         facter \
         ruby-shadow \
@@ -34,9 +34,9 @@ INITSCRIPT_PARAMS = "start 02 5 3 2 . stop 20 0 1 6 ."
 
 SYSTEMD_AUTO_ENABLE = "enable"
 SYSTEMD_PACKAGES = "${PN}"
-SYSTEMD_SERVICE_${PN} = "${BPN}.service"
+SYSTEMD_SERVICE:${PN} = "${BPN}.service"
 
-do_install_append() {
+do_install:append() {
     install -d ${D}${sysconfdir}/puppet
     install -d ${D}${sysconfdir}/puppet/manifests
     install -d ${D}${sysconfdir}/puppet/modules

@@ -17,7 +17,7 @@ DEPENDS += " \
         python-pip \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         python-sphinx \
         "
 

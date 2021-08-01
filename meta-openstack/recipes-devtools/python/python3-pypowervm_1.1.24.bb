@@ -14,7 +14,7 @@ DEPENDS += " \
         python3-pbr-native \
 	"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         python3-lxml \
         python3-oslo.concurrency \
         python3-oslo.context \

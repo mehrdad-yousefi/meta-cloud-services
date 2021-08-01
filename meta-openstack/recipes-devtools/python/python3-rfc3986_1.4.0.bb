@@ -15,6 +15,6 @@ DEPENDS += " \
         ${PYTHON_PN}-pip \
         "
 
-# RDEPENDS_default: 
-RDEPENDS_${PN} += " \
+# RDEPENDS:default: 
+RDEPENDS:${PN} += " \
         "

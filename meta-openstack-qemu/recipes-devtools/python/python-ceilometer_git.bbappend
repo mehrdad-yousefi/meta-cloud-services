@@ -1,4 +1,4 @@
-do_install_append() {
+do_install:append() {
     if [ ! -f "${WORKDIR}/ceilometer.conf" ]; then
         return
     fi

@@ -20,7 +20,7 @@ DEPENDS += " \
         ${PYTHON_PN}-pbr-native \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         ${PYTHON_PN}-pbr \
         ${PYTHON_PN}-pyyaml \
         ${PYTHON_PN}-appdirs \

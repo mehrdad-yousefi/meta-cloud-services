@@ -1,4 +1,4 @@
-RDEPENDS_${PN} += "python3-core python3-dbus"
+RDEPENDS:${PN} += "python3-core python3-dbus"
 SUMMARY = "Python bindings for the avahi zeroconf client"
 HOMEPAGE = "https://github.com/lathiat/avahi"
 SECTION = "devel/python"
@@ -30,4 +30,4 @@ do_install () {
 		${D}${PYTHON_SITEPACKAGES_DIR}/avahi/avahi-bookmarks
 }
 
-FILES_${PN} = "${PYTHON_SITEPACKAGES_DIR}/avahi"
+FILES:${PN} = "${PYTHON_SITEPACKAGES_DIR}/avahi"

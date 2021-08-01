@@ -9,6 +9,6 @@ SRC_URI[sha256sum] = "be58deb54a43d77d2e1621fe59f787681376d3cd0b8bd8e4758ef6c3a6
 
 inherit setuptools3 pypi
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
 	${PYTHON_PN}-django \
 	"

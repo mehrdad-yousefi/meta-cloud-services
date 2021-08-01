@@ -20,7 +20,7 @@ DEPENDS += " \
         facter \
 "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         ruby \
         facter \
         puppet \

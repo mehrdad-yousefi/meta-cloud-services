@@ -26,7 +26,7 @@ S = "${WORKDIR}/git"
 
 inherit go
 
-RDEPENDS_${PN}-dev += "bash make"
+RDEPENDS:${PN}-dev += "bash make"
 
 # Apache serf in oe-core is a completely different beast
-RCONFLICTS_${PN} = "serf"
+RCONFLICTS:${PN} = "serf"

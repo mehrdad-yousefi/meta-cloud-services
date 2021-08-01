@@ -16,7 +16,7 @@ DEPENDS += " \
         python3-pip \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         python3-django \
         python3-nose \
         python3-misc \

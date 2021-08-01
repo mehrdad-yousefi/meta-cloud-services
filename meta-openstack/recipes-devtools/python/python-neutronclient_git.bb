@@ -14,7 +14,7 @@ DEPENDS += " \
         python-pbr-native \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         python-pbr \
         python-cliff \
         python-debtcollector \
@@ -48,13 +48,13 @@ inherit setuptools3 monitor rmargparse
 PACKAGECONFIG ?= "bash-completion"
 PACKAGECONFIG[bash-completion] = ",,bash-completion,bash-completion ${BPN}-bash-completion"
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}/${sysconfdir}/bash_completion.d
 	install -m 664 ${S}/tools/neutron.bash_completion ${D}/${sysconfdir}/bash_completion.d
 }
 
 PACKAGES =+ "${BPN}-bash-completion"
-FILES_${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"
+FILES:${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"
 
 MONITOR_CHECKS_${PN} += "\
 	neutron-api-check.sh \

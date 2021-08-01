@@ -1,4 +1,4 @@
-RRECOMMENDS_${PN} += " \
+RRECOMMENDS:${PN} += " \
 	kernel-module-ebtables \
 	kernel-module-ebtable-nat \
 	kernel-module-ebt-arp \

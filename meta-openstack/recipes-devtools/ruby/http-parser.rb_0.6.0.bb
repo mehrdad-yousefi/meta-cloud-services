@@ -16,7 +16,7 @@ DEPENDS = "git"
 inherit ruby
 
 # Download the submodules
-do_configure_prepend() {
+do_configure:prepend() {
 	cd ${WORKDIR}/git
 	git submodule update --init --recursive
 }

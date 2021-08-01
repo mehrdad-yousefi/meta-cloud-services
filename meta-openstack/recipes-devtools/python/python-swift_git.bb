@@ -48,7 +48,7 @@ python () {
     d.setVarFlags("SERVICECREATE_PARAM_%s-setup" % d.getVar('SRCNAME',True), flags)
 }
 
-do_install_append() {
+do_install:append() {
     SWIFT_CONF_DIR=${D}${sysconfdir}/swift
 
     install -d ${SWIFT_CONF_DIR}
@@ -108,7 +108,7 @@ do_install_append() {
 
 }
 
-pkg_postinst_${SRCNAME}-setup () {
+pkg_postinst:${SRCNAME}-setup () {
     if [ -z "x$D" ]; then
 	CLUSTER_CONF=/etc/swift/cluster.conf
 	SWIFT_SETUP='/bin/bash /etc/swift/swift_setup.sh'
@@ -133,18 +133,18 @@ pkg_postinst_${SRCNAME}-setup () {
 
 PACKAGES += "${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-setup"
 
-FILES_${PN} = "${libdir}/*\
+FILES:${PN} = "${libdir}/*\
 "
 
-FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/test.conf \
+FILES:${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/test.conf \
 "
 
-FILES_${SRCNAME}-setup = "${sysconfdir}/init.d/swift \
+FILES:${SRCNAME}-setup = "${sysconfdir}/init.d/swift \
     ${sysconfdir}/${SRCNAME}/swift_setup.sh \
     ${sysconfdir}/${SRCNAME}/cluster.conf \
 "
 
-FILES_${SRCNAME} = "${bindir}/* \
+FILES:${SRCNAME} = "${bindir}/* \
     ${sysconfdir}/${SRCNAME}/* \
 "
 
@@ -158,7 +158,7 @@ DEPENDS += " \
         python-pbr-native \
 	"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     python-eventlet \
     python-greenlet \
     python-pastedeploy \
@@ -171,11 +171,11 @@ RDEPENDS_${PN} += " \
     bash \
     "
 
-RDEPENDS_${SRCNAME} = "${PN}"
+RDEPENDS:${SRCNAME} = "${PN}"
 
-RDEPENDS_${SRCNAME} = "${PN}"
-RDEPENDS_${SRCNAME}-setup = "${SRCNAME}"
+RDEPENDS:${SRCNAME} = "${PN}"
+RDEPENDS:${SRCNAME}-setup = "${SRCNAME}"
 
 INITSCRIPT_PACKAGES = "${SRCNAME}-setup"
-INITSCRIPT_NAME_${SRCNAME}-setup = "swift"
-INITSCRIPT_PARAMS_${SRCNAME}-setup = "defaults"
+INITSCRIPT_NAME:${SRCNAME}-setup = "swift"
+INITSCRIPT_PARAMS:${SRCNAME}-setup = "defaults"

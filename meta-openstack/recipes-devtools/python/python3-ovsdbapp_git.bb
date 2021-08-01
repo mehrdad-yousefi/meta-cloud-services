@@ -25,7 +25,7 @@ DEPENDS += " \
         python3-pbr-native \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         python3-fixtures \
         python3-ovs \
         python3-pbr \

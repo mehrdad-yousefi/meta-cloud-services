@@ -10,13 +10,13 @@ DEPENDS += " \
         ${PYTHON_PN}-pip \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         ${PYTHON_PN}-virtualenv \
         ${PYTHON_PN}-py \
         ${PYTHON_PN}-pytest \
         "
 
-do_install_append() {
+do_install:append() {
 
     install -d ${D}/${sysconfdir}/${SRCNAME}
     cp ${S}/tox.ini    ${D}/${sysconfdir}/${SRCNAME}
@@ -26,4 +26,4 @@ do_install_append() {
     ln -s ${PYTHON_SITEPACKAGES_DIR}/tox ${D}/${sysconfdir}/${SRCNAME}/tox
 }
 
-FILES_${PN} += "${sysconfdir}/${SRCNAME}/*"
+FILES:${PN} += "${sysconfdir}/${SRCNAME}/*"

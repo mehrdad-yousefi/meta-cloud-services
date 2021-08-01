@@ -25,7 +25,7 @@ DEPENDS += " \
         python-pbr-native \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         python-pbr \
         python-keystoneauth1 \
         python-iso8601 \
@@ -42,7 +42,7 @@ RDEPENDS_${PN} += " \
 PACKAGECONFIG ?= "bash-completion"
 PACKAGECONFIG[bash-completion] = ",,bash-completion,bash-completion ${BPN}-bash-completion"
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}/${sysconfdir}/bash_completion.d
 	install -m 664 ${S}/tools/nova.bash_completion ${D}/${sysconfdir}/bash_completion.d
 
@@ -53,7 +53,7 @@ do_install_append() {
 }
 
 PACKAGES =+ "${BPN}-bash-completion"
-FILES_${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"
+FILES:${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"
 
 MONITOR_CHECKS_${PN} += "\
 	nova-api-check.sh \

@@ -15,7 +15,7 @@ do_compile() {
     :
 }
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
 	bash \
 "
 

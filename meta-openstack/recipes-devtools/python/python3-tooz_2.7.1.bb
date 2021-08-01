@@ -21,8 +21,8 @@ DEPENDS += " \
         python3-pbr-native \
         "
 
-# RDEPENDS_default:
-RDEPENDS_${PN} += " \
+# RDEPENDS:default:
+RDEPENDS:${PN} += " \
         python3-pbr \
         python3-stevedore \
         python3-six \

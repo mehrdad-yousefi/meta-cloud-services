@@ -1,4 +1,4 @@
-FILESEXTRAPATHS_append := "${THISDIR}/${PN}"
+FILESEXTRAPATHS:append := "${THISDIR}/${PN}"
 
-RRECOMMENDS_${PN} += "kernel-module-veth \
+RRECOMMENDS:${PN} += "kernel-module-veth \
 	"

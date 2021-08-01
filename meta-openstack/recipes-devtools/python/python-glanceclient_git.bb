@@ -19,14 +19,14 @@ DEPENDS += " \
 
 inherit setuptools3 monitor rmargparse
 
-FILES_${PN} += "${datadir}/${SRCNAME}"
+FILES:${PN} += "${datadir}/${SRCNAME}"
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
     python-pbr-native \
     "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
    gmp \
    bash \
    python-pbr \

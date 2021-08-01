@@ -62,15 +62,15 @@ PACKAGECONFIG[opengl] = "--enable-opengl,--disable-opengl,,"
 PACKAGECONFIG[xinerama] = "--enable-xinerama,--disable-xinerama,libxinerama,"
 
 PACKAGES =+ "${PN}-protocol"
-LICENSE_${PN}-protocol = "BSD"
-FILES_${PN}-protocol += "${includedir}/spice-1"
-FILES_${PN}-protocol += "${datadir}/pkgconfig"
+LICENSE:${PN}-protocol = "BSD"
+FILES:${PN}-protocol += "${includedir}/spice-1"
+FILES:${PN}-protocol += "${datadir}/pkgconfig"
 
-do_configure_prepend() {
+do_configure:prepend() {
 	mkdir -p ${S}/spice-common/spice-protocol/m4
 }
 
-do_install_append() {
+do_install:append() {
 	cd ${B}/spice-common/spice-protocol
 	oe_runmake DESTDIR="${D}" install
 	cd -

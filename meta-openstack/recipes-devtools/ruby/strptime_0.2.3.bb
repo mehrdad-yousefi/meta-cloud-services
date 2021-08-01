@@ -8,6 +8,6 @@ SRC_URI = "git://github.com/nurse/strptime.git;protocol=https;tag=v0.2.3"
 
 S = "${WORKDIR}/git"
 
-RDEPENDS_${PN} = "bash"
+RDEPENDS:${PN} = "bash"
 
 inherit ruby

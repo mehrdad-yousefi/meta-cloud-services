@@ -24,8 +24,8 @@ DEPENDS += " \
         ${PYTHON_PN}-pbr-native \
         "
 
-# RDEPENDS_default:
-RDEPENDS_${PN} += " \
+# RDEPENDS:default:
+RDEPENDS:${PN} += " \
         ${PYTHON_PN}-pbr \
         ${PYTHON_PN}-six \
         ${PYTHON_PN}-iso8601 \

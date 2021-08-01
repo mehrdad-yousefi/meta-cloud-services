@@ -11,13 +11,13 @@ SRC_URI[sha256sum] = "ae0051bc0c7a0660c93434e68d617553fccdd573293dfd15aa33f78d2b
 
 inherit setuptools3 pypi
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         python3-django-appconf  \
         python3-rcssmin  \
         python3-rjsmin  \
         "
 
-do_install_append() {
+do_install:append() {
     # Ensure permisive perms are granted
     find -L "${D}${PYTHON_SITEPACKAGES_DIR}/compressor" -type f -exec chmod 644 {} \;
     find -L "${D}${PYTHON_SITEPACKAGES_DIR}/compressor" -type d -exec chmod 755 {} \;

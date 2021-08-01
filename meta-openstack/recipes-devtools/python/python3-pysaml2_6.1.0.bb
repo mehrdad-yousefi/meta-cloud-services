@@ -12,7 +12,7 @@ DEPENDS += " \
         python3-pip \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
 	python3-zopeinterface \
 	python3-repoze.who \
         "

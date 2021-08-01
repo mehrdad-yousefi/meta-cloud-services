@@ -25,7 +25,7 @@ DEPENDS += " \
         python3-pbr-native \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         python3-oslo.config \
         python3-oslo.i18n \
         python3-oslo.serialization \

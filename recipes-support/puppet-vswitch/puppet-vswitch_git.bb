@@ -20,7 +20,7 @@ DEPENDS += " \
         facter \
 "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         ruby \
         facter \
         puppet \
@@ -28,5 +28,5 @@ RDEPENDS_${PN} += " \
 
 RUBY_INSTALL_GEMS = "puppet-vswitch-${PV}.gem"
 
-do_install_append() {
+do_install:append() {
 }

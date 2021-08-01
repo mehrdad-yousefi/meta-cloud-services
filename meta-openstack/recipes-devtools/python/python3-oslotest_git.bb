@@ -25,7 +25,7 @@ DEPENDS += " \
         python3-pbr-native \
 	"
 
-RDEPENDS_${PN} = "python3-fixtures \
+RDEPENDS:${PN} = "python3-fixtures \
                   python3-subunit \
                   python3-six \
                   python3-testrepository \

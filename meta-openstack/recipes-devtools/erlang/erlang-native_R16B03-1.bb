@@ -13,11 +13,11 @@ do_configure() {
 	oe_runconf
 }
 
-do_compile_prepend() {
+do_compile:prepend() {
     export TARGET=${HOST_SYS}
 }
 
-do_install_prepend() {
+do_install:prepend() {
     export TARGET=${HOST_SYS}
 }
 

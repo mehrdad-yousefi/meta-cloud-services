@@ -15,8 +15,8 @@ DEPENDS += " \
         python3-pip \
         "
 
-# RDEPENDS_default: 
-RDEPENDS_${PN} += " \
+# RDEPENDS:default: 
+RDEPENDS:${PN} += " \
         python3-django \
         python3-pyscss \        
         python3-pathlib \

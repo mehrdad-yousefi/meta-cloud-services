@@ -19,7 +19,7 @@ DEPENDS += " \
 	${PYTHON_PN}-pbr \
 	"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         ${PYTHON_PN}-six \
         ${PYTHON_PN}-logging \
         ${PYTHON_PN}-compression \

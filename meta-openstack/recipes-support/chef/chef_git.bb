@@ -31,7 +31,7 @@ DEPENDS += " \
         bundler-native \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         ruby \
         chef-zero \
         coderay \
@@ -64,9 +64,9 @@ RDEPENDS_${PN} += " \
 
 RUBY_INSTALL_GEMS = "pkg/chef-${BPV}.gem"
 
-FILES_${PN} += "${libdir}/ruby/gems/2.2.0/build_info"
-FILES_${PN} += "${libdir}/ruby/gems/2.2.0/extensions"
+FILES:${PN} += "${libdir}/ruby/gems/2.2.0/build_info"
+FILES:${PN} += "${libdir}/ruby/gems/2.2.0/extensions"
 
-do_install_prepend() {
+do_install:prepend() {
 	rake gem
 }

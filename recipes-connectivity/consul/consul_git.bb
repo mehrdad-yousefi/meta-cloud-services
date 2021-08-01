@@ -12,7 +12,7 @@ SRC_URI = "git://${GO_IMPORT}.git;branch=main \
 
 S = "${WORKDIR}/git"
 
-RDEPENDS_${PN}-dev_append = " bash"
+RDEPENDS:${PN}-dev:append = " bash"
 
 # Temporarily workaround an issue with GO 1.12.1
 # http://www.lyddzz.com/github_/golang/go/issues/30768
@@ -23,21 +23,21 @@ inherit systemd go
 
 # Besides the hosts specified in goarch, we do not build for mips.
 #
-COMPATIBLE_HOST_mipsarch = "null"
+COMPATIBLE_HOST:mipsarch = "null"
 
-SYSTEMD_SERVICE_${PN} = "consul.service"
-SYSTEMD_AUTO_ENABLE_${PN} = "disable"
+SYSTEMD_SERVICE:${PN} = "consul.service"
+SYSTEMD_AUTO_ENABLE:${PN} = "disable"
 
-do_compile_prepend () {
+do_compile:prepend () {
     export GO111MODULE=off
 }
 
-do_install_append() {
+do_install:append() {
     install -d ${D}/${systemd_unitdir}/system
     cp ${WORKDIR}/consul.service ${D}/${systemd_unitdir}/system
 }
 
-FILES_${PN} += "${systemd_unitdir}/system"
+FILES:${PN} += "${systemd_unitdir}/system"
 
 #for i586, executable consul contains textrel
-INSANE_SKIP_${PN} += "textrel"
+INSANE_SKIP:${PN} += "textrel"

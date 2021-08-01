@@ -19,12 +19,12 @@ SRC_URI += "file://tgtd.init \
 
 S = "${WORKDIR}/git"
 
-CONFFILES_${PN} += "${sysconfdir}/tgt/targets.conf"
+CONFFILES:${PN} += "${sysconfdir}/tgt/targets.conf"
 
 inherit update-rc.d systemd
 
-SYSTEMD_SERVICE_${PN} = "tgtd.service"
-SYSTEMD_AUTO_ENABLE_${PN} = "disable"
+SYSTEMD_SERVICE:${PN} = "tgtd.service"
+SYSTEMD_AUTO_ENABLE:${PN} = "disable"
 
 CFLAGS += ' -I. -DUSE_SIGNALFD -DUSE_TIMERFD -D_GNU_SOURCE -DTGT_VERSION=\\"1.0.63\\" -DBSDIR=\\"${libdir}/backing-store\\"'
 
@@ -50,11 +50,11 @@ do_install() {
     fi
 }
 
-FILES_${PN} += "${systemd_unitdir}/system/tgtd.service \
+FILES:${PN} += "${systemd_unitdir}/system/tgtd.service \
                 ${sysconfdir}/sysconfig/tgtd \
 "
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
     bash \
     libaio \
     libconfig-general-perl \
@@ -88,5 +88,5 @@ RDEPENDS_${PN} = " \
     perl-module-constant \
     "
 INITSCRIPT_PACKAGES = "${PN}"
-INITSCRIPT_NAME_${PN} = "tgtd"
+INITSCRIPT_NAME:${PN} = "tgtd"
 

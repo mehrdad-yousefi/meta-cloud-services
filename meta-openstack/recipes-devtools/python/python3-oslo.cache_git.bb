@@ -26,8 +26,8 @@ DEPENDS += " \
         python3-pbr-native \
         "
 
-# RDEPENDS_default: 
-RDEPENDS_${PN} += " \
+# RDEPENDS:default: 
+RDEPENDS:${PN} += " \
         python3-dogpile.cache \
         python3-six \
         python3-oslo.config \

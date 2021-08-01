@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "eea593cf466b9c126ce667f6d30503624ef24459f118c75594a69353b6
 inherit setuptools3 pypi
 
 # conflicting file prevention
-do_install_append() {
+do_install:append() {
 	rm -f ${D}${libdir}/python*/site-packages/tests/*
 }
 
@@ -18,7 +18,7 @@ DEPENDS += " \
         python3-pip \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         python3-six \
         python3-json \
         python3-xml \

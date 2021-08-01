@@ -18,8 +18,8 @@ DEPENDS += " \
         ${PYTHON_PN}-pip \
         "
 
-# RDEPENDS_default: 
-RDEPENDS_${PN} += " \
+# RDEPENDS:default: 
+RDEPENDS:${PN} += " \
         ${PYTHON_PN}-lxml \
         ${PYTHON_PN}-requests \
         ${PYTHON_PN}-cython \

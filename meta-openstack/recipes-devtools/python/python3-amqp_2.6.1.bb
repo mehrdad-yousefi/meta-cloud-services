@@ -9,6 +9,6 @@ SRC_URI[sha256sum] = "70cdb10628468ff14e57ec2f751c7aa9e48e7e3651cfd62d431213c0c4
 
 inherit pypi setuptools3
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         ${PYTHON_PN}-vine \
         "

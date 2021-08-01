@@ -19,8 +19,8 @@ DEPENDS += " \
         python3-six \
         "
 
-# RDEPENDS_default: 
-RDEPENDS_${PN} += " \
+# RDEPENDS:default: 
+RDEPENDS:${PN} += " \
 	python3-logging \
 	python3-six \
 	python3-numbers \

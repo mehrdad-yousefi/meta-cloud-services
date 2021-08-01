@@ -15,5 +15,5 @@ DEPENDS += " \
         python3-pip \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         "

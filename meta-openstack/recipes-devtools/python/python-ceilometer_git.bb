@@ -47,13 +47,13 @@ python () {
     d.setVarFlags("USERCREATE_PARAM_%s-reseller" % d.getVar('SRCNAME',True), flags)
 }
 
-do_configure_append() {
+do_configure:append() {
     # We are using postgresql support, hence this requirement is not valid
     # removing it, to avoid on-target runtime issues
     sed -e "s:MySQL-python::g" -i ${S}/requirements.txt
 }
 
-do_install_append() {
+do_install:append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}/${SRCNAME}
     CEILOMETER_CONF_DIR=${D}${sysconfdir}/${SRCNAME}
 
@@ -107,7 +107,7 @@ do_install_append() {
     fi 
 }
 
-pkg_postinst_${SRCNAME}-setup () {
+pkg_postinst:${SRCNAME}-setup () {
     if [ -z "$D" ]; then
         # This is to make sure postgres is configured and running
         if ! pidof postmaster > /dev/null; then
@@ -131,44 +131,44 @@ PACKAGES += "${SRCNAME}-agent-notification"
 PACKAGES += "${SRCNAME}-collector ${SRCNAME}-compute ${SRCNAME}-controller"
 PACKAGES += " ${SRCNAME}-reseller"
 
-RDEPENDS_${SRCNAME}-tests += " bash"
+RDEPENDS:${SRCNAME}-tests += " bash"
 
-ALLOW_EMPTY_${SRCNAME}-setup = "1"
-ALLOW_EMPTY_${SRCNAME}-reseller = "1"
-ALLOW_EMPTY_${SRCNAME}-tests = "1"
+ALLOW_EMPTY:${SRCNAME}-setup = "1"
+ALLOW_EMPTY:${SRCNAME}-reseller = "1"
+ALLOW_EMPTY:${SRCNAME}-tests = "1"
 
-FILES_${PN} = "${libdir}/*"
+FILES:${PN} = "${libdir}/*"
 
-FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/setup-test-env.sh"
+FILES:${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/setup-test-env.sh"
 
-FILES_${SRCNAME}-common = "${sysconfdir}/${SRCNAME}/* \
+FILES:${SRCNAME}-common = "${sysconfdir}/${SRCNAME}/* \
 "
 
-FILES_${SRCNAME}-api = "${bindir}/ceilometer-api \
+FILES:${SRCNAME}-api = "${bindir}/ceilometer-api \
                         ${sysconfdir}/init.d/ceilometer-api \
 "
 
-FILES_${SRCNAME}-collector = "${bindir}/ceilometer-collector \
+FILES:${SRCNAME}-collector = "${bindir}/ceilometer-collector \
                               ${bindir}/ceilometer-collector-udp \
                               ${sysconfdir}/init.d/ceilometer-collector \
 "
-FILES_${SRCNAME}-alarm-evaluator = "${bindir}/ceilometer-alarm-evaluator \
+FILES:${SRCNAME}-alarm-evaluator = "${bindir}/ceilometer-alarm-evaluator \
                                     ${sysconfdir}/init.d/ceilometer-alarm-evaluator \
 "
 
-FILES_${SRCNAME}-alarm-notifier = "${bindir}/ceilometer-alarm-notifier \
+FILES:${SRCNAME}-alarm-notifier = "${bindir}/ceilometer-alarm-notifier \
                                    ${sysconfdir}/init.d/ceilometer-alarm-notifier \
 "
 
-FILES_${SRCNAME}-agent-notification = "${bindir}/ceilometer-agent-notification \
+FILES:${SRCNAME}-agent-notification = "${bindir}/ceilometer-agent-notification \
                                        ${sysconfdir}/init.d/ceilometer-agent-notification \
 "
 
-FILES_${SRCNAME}-compute = "${bindir}/ceilometer-agent-compute \
+FILES:${SRCNAME}-compute = "${bindir}/ceilometer-agent-compute \
                             ${sysconfdir}/init.d/ceilometer-agent-compute \
 "
 
-FILES_${SRCNAME}-controller = "${bindir}/* \
+FILES:${SRCNAME}-controller = "${bindir}/* \
                                ${localstatedir}/* \
                                ${sysconfdir}/init.d/ceilometer-agent-central \
 "
@@ -183,7 +183,7 @@ DEPENDS += " \
         python-pbr-native \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
 	python-ply \
 	python-jsonpath-rw \
 	python-sqlalchemy \
@@ -258,30 +258,30 @@ RDEPENDS_${PN} += " \
         python-tooz \
 	"
 
-RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common ${SRCNAME}-alarm-notifier ${SRCNAME}-alarm-evaluator ${SRCNAME}-agent-notification ${SRCNAME}-reseller \
+RDEPENDS:${SRCNAME}-controller = "${PN} ${SRCNAME}-common ${SRCNAME}-alarm-notifier ${SRCNAME}-alarm-evaluator ${SRCNAME}-agent-notification ${SRCNAME}-reseller \
                                   postgresql postgresql-client python-psycopg2 tgt"
-RDEPENDS_${SRCNAME}-api = "${SRCNAME}-controller"
-RDEPENDS_${SRCNAME}-collector = "${SRCNAME}-controller"
-RDEPENDS_${SRCNAME}-compute = "${PN} ${SRCNAME}-common python-ceilometerclient libvirt"
-RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-controller"
-RDEPENDS_${SRCNAME}-reseller = "postgresql sudo ${SRCNAME}-controller"
+RDEPENDS:${SRCNAME}-api = "${SRCNAME}-controller"
+RDEPENDS:${SRCNAME}-collector = "${SRCNAME}-controller"
+RDEPENDS:${SRCNAME}-compute = "${PN} ${SRCNAME}-common python-ceilometerclient libvirt"
+RDEPENDS:${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-controller"
+RDEPENDS:${SRCNAME}-reseller = "postgresql sudo ${SRCNAME}-controller"
 
 INITSCRIPT_PACKAGES =  "${SRCNAME}-api ${SRCNAME}-collector ${SRCNAME}-compute ${SRCNAME}-controller"
 INITSCRIPT_PACKAGES += "${SRCNAME}-alarm-notifier ${SRCNAME}-alarm-evaluator ${SRCNAME}-agent-notification"
-INITSCRIPT_NAME_${SRCNAME}-api = "${SRCNAME}-api"
-INITSCRIPT_PARAMS_${SRCNAME}-api = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
-INITSCRIPT_NAME_${SRCNAME}-collector = "${SRCNAME}-collector"
-INITSCRIPT_PARAMS_${SRCNAME}-collector = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
-INITSCRIPT_NAME_${SRCNAME}-compute = "${SRCNAME}-agent-compute"
-INITSCRIPT_PARAMS_${SRCNAME}-compute = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
-INITSCRIPT_NAME_${SRCNAME}-controller = "${SRCNAME}-agent-central"
-INITSCRIPT_PARAMS_${SRCNAME}-controller = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
-INITSCRIPT_NAME_${SRCNAME}-alarm-notifier = "${SRCNAME}-alarm-notifier"
-INITSCRIPT_PARAMS_${SRCNAME}-alarm-notifier = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
-INITSCRIPT_NAME_${SRCNAME}-alarm-evaluator = "${SRCNAME}-alarm-evaluator"
-INITSCRIPT_PARAMS_${SRCNAME}-alarm-evaluator = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
-INITSCRIPT_NAME_${SRCNAME}-agent-notification = "${SRCNAME}-agent-notification"
-INITSCRIPT_PARAMS_${SRCNAME}-agent-notification = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+INITSCRIPT_NAME:${SRCNAME}-api = "${SRCNAME}-api"
+INITSCRIPT_PARAMS:${SRCNAME}-api = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+INITSCRIPT_NAME:${SRCNAME}-collector = "${SRCNAME}-collector"
+INITSCRIPT_PARAMS:${SRCNAME}-collector = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+INITSCRIPT_NAME:${SRCNAME}-compute = "${SRCNAME}-agent-compute"
+INITSCRIPT_PARAMS:${SRCNAME}-compute = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+INITSCRIPT_NAME:${SRCNAME}-controller = "${SRCNAME}-agent-central"
+INITSCRIPT_PARAMS:${SRCNAME}-controller = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+INITSCRIPT_NAME:${SRCNAME}-alarm-notifier = "${SRCNAME}-alarm-notifier"
+INITSCRIPT_PARAMS:${SRCNAME}-alarm-notifier = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+INITSCRIPT_NAME:${SRCNAME}-alarm-evaluator = "${SRCNAME}-alarm-evaluator"
+INITSCRIPT_PARAMS:${SRCNAME}-alarm-evaluator = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
+INITSCRIPT_NAME:${SRCNAME}-agent-notification = "${SRCNAME}-agent-notification"
+INITSCRIPT_PARAMS:${SRCNAME}-agent-notification = "${OS_DEFAULT_INITSCRIPT_PARAMS}"
 
 MONITOR_SERVICE_PACKAGES = "${SRCNAME}"
 MONITOR_SERVICE_${SRCNAME} = "ceilometer"

@@ -9,8 +9,8 @@ SRC_URI[sha256sum] = "f4965fba0a4718d47d470beeb5d6446e3357a62402b16c510b6a2f251e
 
 inherit setuptools3 pypi
 
-FILES_${PN}-doc += "${datadir}/${SRCNAME}"
+FILES:${PN}-doc += "${datadir}/${SRCNAME}"
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
         ${PYTHON_PN}-amqp \
         "

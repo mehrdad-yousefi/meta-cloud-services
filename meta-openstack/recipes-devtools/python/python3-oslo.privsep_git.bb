@@ -22,8 +22,8 @@ DEPENDS += " \
         python3-pbr-native \
         "
 
-# RDEPENDS_default:
-RDEPENDS_${PN} += " \
+# RDEPENDS:default:
+RDEPENDS:${PN} += " \
         python3-oslo.log \
         python3-oslo.i18n \
         python3-oslo.config \

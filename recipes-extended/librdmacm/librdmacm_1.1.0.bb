@@ -24,21 +24,21 @@ SRC_URI[sha256sum] = "8f10848d4810585d6d70b443abc876c1db8df5e9b8b07e095c7e6eaf4a
 inherit autotools
 
 # Allow plug-in symlinks.
-INSANE_SKIP_${PN} += "dev-so"
+INSANE_SKIP:${PN} += "dev-so"
 
 PACKAGES += "${PN}-utils"
-FILES_${PN} = "${libdir}/*.so.* ${libdir}/rsocket/*.so*"
-FILES_${PN}-utils = "${bindir}"
-FILES_${PN}-staticdev += "${libdir}/rsocket/librspreload.a"
-FILES_${PN}-dbg += "${libdir}/rsocket/.debug"
+FILES:${PN} = "${libdir}/*.so.* ${libdir}/rsocket/*.so*"
+FILES:${PN}-utils = "${bindir}"
+FILES:${PN}-staticdev += "${libdir}/rsocket/librspreload.a"
+FILES:${PN}-dbg += "${libdir}/rsocket/.debug"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[valgrind] = "--with-valgrind,--without-valgrind,valgrind,"
 
-do_install_append() {
+do_install:append() {
         rm -f ${D}${libdir}/librdmacm.la
         rm -f ${D}${libdir}/rsocket/librspreload.la
 }
 
-COMPATIBLE_HOST_mipsarch = "none"
-COMPATIBLE_HOST_arm = "none"
+COMPATIBLE_HOST:mipsarch = "none"
+COMPATIBLE_HOST:arm = "none"

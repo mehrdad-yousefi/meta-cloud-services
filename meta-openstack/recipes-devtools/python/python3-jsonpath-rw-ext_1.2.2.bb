@@ -18,7 +18,7 @@ DEPENDS += " \
         python3-pbr-native \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         python3-pbr \
         python3-babel \
         python3-jsonpath-rw \

@@ -1,4 +1,4 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/postgresql:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/postgresql:"
 
 SRC_URI += " \
     file://postgresql-init \
@@ -7,12 +7,12 @@ SRC_URI += " \
 
 inherit identity hosts
 
-SYSTEMD_AUTO_ENABLE_${PN} = "enable"
+SYSTEMD_AUTO_ENABLE:${PN} = "enable"
 
 # default
 DB_DATADIR ?= "/var/lib/postgres/data"
 
-do_install_append() {
+do_install:append() {
     D_DEST_DIR=${D}${sysconfdir}/postgresql
 
     install -d ${D_DEST_DIR}
@@ -53,8 +53,8 @@ do_install_append() {
 PACKAGES += " ${PN}-setup"
 
 SYSTEMD_PACKAGES += "${PN}-setup"
-SYSTEMD_SERVICE_${PN}-setup = "postgresql-init.service"
+SYSTEMD_SERVICE:${PN}-setup = "postgresql-init.service"
 
-FILES_${PN}-setup = " \
+FILES:${PN}-setup = " \
     ${systemd_unitdir}/system \
 "

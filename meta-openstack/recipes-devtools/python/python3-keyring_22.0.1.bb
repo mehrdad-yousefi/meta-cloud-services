@@ -15,7 +15,7 @@ DEPENDS += " \
 	python3-toml-native \
 "
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
 	python3-logging \
 	python3-importlib-metadata \
 "

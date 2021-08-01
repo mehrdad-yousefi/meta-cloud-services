@@ -14,7 +14,7 @@ S = "${WORKDIR}/git"
 
 inherit setuptools3
 
-FILES_${PN} += "${datadir}/etc/*"
+FILES:${PN} += "${datadir}/etc/*"
 
 DEPENDS += " \
         python3-pbr \
@@ -25,7 +25,7 @@ DEPENDS += " \
         python3-pbr-native \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         python3-pbr \
         python3-babel \
         python3-eventlet \

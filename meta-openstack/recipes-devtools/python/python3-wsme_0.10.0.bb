@@ -19,7 +19,7 @@ DEPENDS += " \
         ${PYTHON_PN}-pbr-native \
         "
 
-RDEPENDS_${PN} += "\
+RDEPENDS:${PN} += "\
         ${PYTHON_PN}-pbr \
         ${PYTHON_PN}-six \
         ${PYTHON_PN}-pytz \

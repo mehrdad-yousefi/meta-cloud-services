@@ -9,7 +9,7 @@ inherit setuptools3 pypi
 SRC_URI[md5sum] = "3a9eb781f685949c04946f6c09e4c11d"
 SRC_URI[sha256sum] = "d486741e451287f69568a4d26d70d9acd73a2bbfa275746c535b4209891cccc6"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         ${PYTHON_PN}-httplib2 \
         ${PYTHON_PN}-pyasn1 \
         ${PYTHON_PN}-pyasn1-modules \

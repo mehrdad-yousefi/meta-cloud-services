@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "ff64136da01aabba76ae88b050e7197918d8b2139ccbf6144e14d472b9
 inherit setuptools3 pypi
 
 # conflicting file prevention
-do_install_append() {
+do_install:append() {
 	rm -f ${D}${libdir}/python*/site-packages/site.py*
 }
 BBCLASSEXTEND = "native"

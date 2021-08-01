@@ -13,6 +13,6 @@ DEPENDS += " \
 	python3-pbr \
 	"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
 	"
 

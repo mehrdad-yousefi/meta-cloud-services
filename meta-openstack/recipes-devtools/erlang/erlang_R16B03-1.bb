@@ -9,11 +9,11 @@ TARGET_CC_ARCH += "${LDFLAGS}"
 
 EXTRA_OEMAKE = "BUILD_CC='${BUILD_CC}'"
 
-EXTRA_OECONF_append_arm = " --disable-smp-support --disable-hipe"
-EXTRA_OECONF_append_armeb = " --disable-smp-support --disable-hipe"
-EXTRA_OECONF_append_mipsel = " --disable-smp-support --disable-hipe"
-EXTRA_OECONF_append_sh3 = " --disable-smp-support --disable-hipe"
-EXTRA_OECONF_append_sh4 = " --disable-smp-support --disable-hipe"
+EXTRA_OECONF:append:arm = " --disable-smp-support --disable-hipe"
+EXTRA_OECONF:append:armeb = " --disable-smp-support --disable-hipe"
+EXTRA_OECONF:append:mipsel = " --disable-smp-support --disable-hipe"
+EXTRA_OECONF:append_sh3 = " --disable-smp-support --disable-hipe"
+EXTRA_OECONF:append:sh4 = " --disable-smp-support --disable-hipe"
 
 NATIVE_BIN = "${STAGING_LIBDIR_NATIVE}/erlang/bin"
 

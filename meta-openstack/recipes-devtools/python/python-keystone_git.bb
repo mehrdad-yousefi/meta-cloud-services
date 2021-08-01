@@ -32,7 +32,7 @@ SERVICE_TOKEN = "password"
 TOKEN_FORMAT ?= "PKI"
 
 USERADD_PACKAGES = "${PN}"
-USERADD_PARAM_${PN} = "--system -m -s /bin/false keystone"
+USERADD_PARAM:${PN} = "--system -m -s /bin/false keystone"
 
 LDAP_DN ?= "dc=my-domain,dc=com"
 
@@ -65,7 +65,7 @@ python () {
     d.setVarFlags("SERVICECREATE_PARAM_%s-setup" % d.getVar('SRCNAME',True), flags)
 }
 
-do_install_append() {
+do_install:append() {
 
     KEYSTONE_CONF_DIR=${D}${sysconfdir}/keystone
     KEYSTONE_PACKAGE_DIR=${D}${PYTHON_SITEPACKAGES_DIR}/keystone
@@ -191,7 +191,7 @@ role_tree_dn = ou=Roles,${LDAP_DN} \
 # this token flush cronjob to run every 2 days
 KEYSTONE_TOKEN_FLUSH_TIME ??= "0 0 */2 * *"
 
-pkg_postinst_${SRCNAME}-cronjobs () {
+pkg_postinst:${SRCNAME}-cronjobs () {
     if [ -z "$D" ]; then
 	# By default keystone expired tokens are not automatic removed out of the
 	# database.  So we create a cronjob for cleaning these expired tokens.
@@ -202,20 +202,20 @@ pkg_postinst_${SRCNAME}-cronjobs () {
 PACKAGES += " ${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-setup ${SRCNAME}-cronjobs"
 
 SYSTEMD_PACKAGES += "${SRCNAME}-setup"
-SYSTEMD_SERVICE_${SRCNAME}-setup = "keystone-init.service"
+SYSTEMD_SERVICE:${SRCNAME}-setup = "keystone-init.service"
 
-FILES_${SRCNAME}-setup = " \
+FILES:${SRCNAME}-setup = " \
     ${systemd_unitdir}/system \
     "
 
-ALLOW_EMPTY_${SRCNAME}-cronjobs = "1"
+ALLOW_EMPTY:${SRCNAME}-cronjobs = "1"
 
-FILES_${PN} = "${libdir}/* \
+FILES:${PN} = "${libdir}/* \
     "
 
-FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
+FILES:${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
 
-FILES_${SRCNAME} = "${bindir}/* \
+FILES:${SRCNAME} = "${bindir}/* \
     ${sysconfdir}/${SRCNAME}/* \
     ${localstatedir}/* \
     ${datadir}/openstack-dashboard/openstack_dashboard/api/keystone-httpd.py \
@@ -232,7 +232,7 @@ DEPENDS += " \
         python-pbr-native \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         python-babel \
         python-pbr \
         python-webob \
@@ -271,7 +271,7 @@ RDEPENDS_${PN} += " \
         python-pytz \
         "
 
-RDEPENDS_${SRCNAME}-tests += " bash"
+RDEPENDS:${SRCNAME}-tests += " bash"
 
 PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'OpenLDAP', 'OpenLDAP', '', d)}"
 PACKAGECONFIG[OpenLDAP] = ",,,python-ldap python-keystone-hybrid-backend"
@@ -279,7 +279,7 @@ PACKAGECONFIG[OpenLDAP] = ",,,python-ldap python-keystone-hybrid-backend"
 # TODO:
 #    if DISTRO_FEATURE contains "tempest" then add *-tests to the main RDEPENDS
 
-RDEPENDS_${SRCNAME} = " \
+RDEPENDS:${SRCNAME} = " \
     ${PN} \
     postgresql \
     postgresql-client \
@@ -287,8 +287,8 @@ RDEPENDS_${SRCNAME} = " \
     apache2 \
     "
 
-RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}"
-RDEPENDS_${SRCNAME}-cronjobs = "cronie ${SRCNAME}"
+RDEPENDS:${SRCNAME}-setup = "postgresql sudo ${SRCNAME}"
+RDEPENDS:${SRCNAME}-cronjobs = "cronie ${SRCNAME}"
 
 MONITOR_SERVICE_PACKAGES = "${SRCNAME}"
 MONITOR_SERVICE_${SRCNAME} = "keystone"

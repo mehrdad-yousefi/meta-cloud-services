@@ -26,7 +26,7 @@ DEPENDS = " \
     coreutils-native\
 "
 
-RDEPENDS_${PN} = "erlang erlang-modules"
+RDEPENDS:${PN} = "erlang erlang-modules"
 
 do_compile() {
     oe_runmake
@@ -68,18 +68,18 @@ do_install() {
 inherit useradd update-rc.d systemd
 
 USERADD_PACKAGES = "${PN}"
-GROUPADD_PARAM_${PN} = "--system rabbitmq"
-USERADD_PARAM_${PN}  = "--system --create-home --home /var/lib/rabbitmq \
+GROUPADD_PARAM:${PN} = "--system rabbitmq"
+USERADD_PARAM:${PN}  = "--system --create-home --home /var/lib/rabbitmq \
 			-g rabbitmq rabbitmq"
 
 INITSCRIPT_NAME = "rabbitmq-server"
 INITSCRIPT_PARAMS = "defaults"
 
-SYSTEMD_SERVICE_${PN} = "rabbitmq-server.service"
+SYSTEMD_SERVICE:${PN} = "rabbitmq-server.service"
 
-FILES_${PN} += " ${libdir}/rabbitmq/lib/${PN}-${PV}/* \
+FILES:${PN} += " ${libdir}/rabbitmq/lib/${PN}-${PV}/* \
                  ${localstatedir}/* \ 
                "
 
-FILES_${PN}-doc += "LICENSE* INSTALL"
-INSANE_SKIP_${PN} = "unsafe-references-in-scripts"
+FILES:${PN}-doc += "LICENSE* INSTALL"
+INSANE_SKIP:${PN} = "unsafe-references-in-scripts"

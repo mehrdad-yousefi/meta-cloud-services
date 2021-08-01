@@ -18,7 +18,7 @@ DEPENDS += " \
         python3-pip \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         python3-nose \
         python3-colorama \
         python3-termcolor \

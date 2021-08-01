@@ -11,7 +11,7 @@ DEPENDS = " \
 
 SRCNAME = "nova"
 
-FILESEXTRAPATHS_append := "${THISDIR}/${PN}"
+FILESEXTRAPATHS:append := "${THISDIR}/${PN}"
 
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike \
            file://neutron-api-set-default-binding-vnic_type.patch \
@@ -46,8 +46,8 @@ USER = "nova"
 GROUP = "nova"
 
 USERADD_PACKAGES = "${PN}"
-GROUPADD_PARAM_${PN} = "--system ${GROUP}"
-USERADD_PARAM_${PN} = "--system -m -d ${localstatedir}/lib/nova -s /bin/false -g ${GROUP} ${USER}"
+GROUPADD_PARAM:${PN} = "--system ${GROUP}"
+USERADD_PARAM:${PN} = "--system -m -d ${localstatedir}/lib/nova -s /bin/false -g ${GROUP} ${USER}"
 
 # Need to create the user?
 PLACEMENT_USER = "placement"
@@ -82,7 +82,7 @@ python () {
     d.setVarFlags("SERVICECREATE_PARAM_%s-ec2" % d.getVar('SRCNAME',True), flags)
 }
 
-do_install_append() {
+do_install:append() {
     if [ ! -f "${WORKDIR}/nova.conf" ]; then
         return
     fi
@@ -227,37 +227,37 @@ PACKAGECONFIG ?= "bash-completion"
 PACKAGECONFIG[bash-completion] = ",,bash-completion,bash-completion python-nova-bash-completion"
 
 PACKAGES =+ "${BPN}-bash-completion"
-FILES_${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"
+FILES:${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"
 
 
-ALLOW_EMPTY_${SRCNAME}-setup = "1"
-ALLOW_EMPTY_${SRCNAME}-ec2 = "1"
-ALLOW_EMPTY_${SRCNAME}-api = "1"
-ALLOW_EMPTY_${SRCNAME}-compute = "1"
-ALLOW_EMPTY_${SRCNAME}-controller = "1"
-ALLOW_EMPTY_${SRCNAME}-console = "1"
-ALLOW_EMPTY_${SRCNAME}-conductor = "1"
-ALLOW_EMPTY_${SRCNAME}-network = "1"
-ALLOW_EMPTY_${SRCNAME}-novncproxy = "1"
-ALLOW_EMPTY_${SRCNAME}-scheduler = "1"
-ALLOW_EMPTY_${SRCNAME}-spicehtml5proxy = "1"
+ALLOW_EMPTY:${SRCNAME}-setup = "1"
+ALLOW_EMPTY:${SRCNAME}-ec2 = "1"
+ALLOW_EMPTY:${SRCNAME}-api = "1"
+ALLOW_EMPTY:${SRCNAME}-compute = "1"
+ALLOW_EMPTY:${SRCNAME}-controller = "1"
+ALLOW_EMPTY:${SRCNAME}-console = "1"
+ALLOW_EMPTY:${SRCNAME}-conductor = "1"
+ALLOW_EMPTY:${SRCNAME}-network = "1"
+ALLOW_EMPTY:${SRCNAME}-novncproxy = "1"
+ALLOW_EMPTY:${SRCNAME}-scheduler = "1"
+ALLOW_EMPTY:${SRCNAME}-spicehtml5proxy = "1"
 
 
 
-FILES_${PN} = "${libdir}/*"
+FILES:${PN} = "${libdir}/*"
 
-# MAA FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
-FILES_${SRCNAME}-tests = ""
+# MAA FILES:${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
+FILES:${SRCNAME}-tests = ""
 
-FILES_${SRCNAME}-common = "${bindir}/nova-manage \
+FILES:${SRCNAME}-common = "${bindir}/nova-manage \
                            ${bindir}/nova-rootwrap \
                            ${sysconfdir}/${SRCNAME}/* \
                            ${sysconfdir}/sudoers.d"
 
-FILES_${SRCNAME}-compute = "${bindir}/nova-compute \
+FILES:${SRCNAME}-compute = "${bindir}/nova-compute \
                             ${sysconfdir}/init.d/nova-compute"
 
-FILES_${SRCNAME}-controller = "${bindir}/* \
+FILES:${SRCNAME}-controller = "${bindir}/* \
  			       ${sysconfdir}/init.d/nova-all "
 
 DEPENDS += " \
@@ -270,7 +270,7 @@ DEPENDS += " \
         python-pbr-native \
 	"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
 		   libvirt \
 		   python-pbr \
 		   python-sqlalchemy \
@@ -333,10 +333,10 @@ RDEPENDS_${PN} += " \
 		   python-pypowervm \
    "
 
-RDEPENDS_${SRCNAME}-common = "${PN} openssl openssl-misc libxml2 libxslt \
+RDEPENDS:${SRCNAME}-common = "${PN} openssl openssl-misc libxml2 libxslt \
                               iptables curl dnsmasq sudo procps"
 
-RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common \
+RDEPENDS:${SRCNAME}-controller = "${PN} ${SRCNAME}-common \
 				  ${SRCNAME}-ec2 \
 				  ${SRCNAME}-console \
 				  ${SRCNAME}-novncproxy \
@@ -347,12 +347,12 @@ RDEPENDS_${SRCNAME}-controller = "${PN} ${SRCNAME}-common \
                                   ${SRCNAME}-api \
 				  postgresql postgresql-client python-psycopg2"
 
-RDEPENDS_${SRCNAME}-compute = "${PN} ${SRCNAME}-common python-oslo.messaging \
+RDEPENDS:${SRCNAME}-compute = "${PN} ${SRCNAME}-common python-oslo.messaging \
 			       qemu libvirt libvirt-libvirtd libvirt-python libvirt-virsh"
-RDEPENDS_${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-common"
-RDEPENDS_${SRCNAME}-ec2 = "postgresql sudo ${SRCNAME}-common"
+RDEPENDS:${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-common"
+RDEPENDS:${SRCNAME}-ec2 = "postgresql sudo ${SRCNAME}-common"
 
-RDEPENDS_${SRCNAME}-tests = " \
+RDEPENDS:${SRCNAME}-tests = " \
                             python-coverage \
                             bash \
                             "
@@ -370,22 +370,22 @@ SYSTEMD_PACKAGES = " \
     ${SRCNAME}-api \
     "
 
-SYSTEMD_SERVICE_${SRCNAME}-setup = "nova-init.service"
-SYSTEMD_SERVICE_${SRCNAME}-compute = "nova-compute.service"
-SYSTEMD_SERVICE_${SRCNAME}-console = "nova-console.service nova-consoleauth.service nova-xvpvncproxy.service"
-SYSTEMD_SERVICE_${SRCNAME}-novncproxy = "nova-novncproxy.service"
-SYSTEMD_SERVICE_${SRCNAME}-spicehtml5proxy = "nova-spicehtml5proxy.service"
-SYSTEMD_SERVICE_${SRCNAME}-network = "nova-network.service"
-SYSTEMD_SERVICE_${SRCNAME}-scheduler = "nova-scheduler.service"
-SYSTEMD_SERVICE_${SRCNAME}-conductor = "nova-conductor.service"
-SYSTEMD_SERVICE_${SRCNAME}-api = "nova-api.service"
+SYSTEMD_SERVICE:${SRCNAME}-setup = "nova-init.service"
+SYSTEMD_SERVICE:${SRCNAME}-compute = "nova-compute.service"
+SYSTEMD_SERVICE:${SRCNAME}-console = "nova-console.service nova-consoleauth.service nova-xvpvncproxy.service"
+SYSTEMD_SERVICE:${SRCNAME}-novncproxy = "nova-novncproxy.service"
+SYSTEMD_SERVICE:${SRCNAME}-spicehtml5proxy = "nova-spicehtml5proxy.service"
+SYSTEMD_SERVICE:${SRCNAME}-network = "nova-network.service"
+SYSTEMD_SERVICE:${SRCNAME}-scheduler = "nova-scheduler.service"
+SYSTEMD_SERVICE:${SRCNAME}-conductor = "nova-conductor.service"
+SYSTEMD_SERVICE:${SRCNAME}-api = "nova-api.service"
 
 # Disable services on first boot to avoid having them run when not configured
-SYSTEMD_AUTO_ENABLE_${SRCNAME}-api = "disable"
-SYSTEMD_AUTO_ENABLE_${SRCNAME}-consoleauth = "disable"
-SYSTEMD_AUTO_ENABLE_${SRCNAME}-scheduler = "disable"
-SYSTEMD_AUTO_ENABLE_${SRCNAME}-conductor = "disable"
-SYSTEMD_AUTO_ENABLE_${SRCNAME}-novncproxy = "disable"
+SYSTEMD_AUTO_ENABLE:${SRCNAME}-api = "disable"
+SYSTEMD_AUTO_ENABLE:${SRCNAME}-consoleauth = "disable"
+SYSTEMD_AUTO_ENABLE:${SRCNAME}-scheduler = "disable"
+SYSTEMD_AUTO_ENABLE:${SRCNAME}-conductor = "disable"
+SYSTEMD_AUTO_ENABLE:${SRCNAME}-novncproxy = "disable"
 
 MONITOR_SERVICE_PACKAGES = "${SRCNAME}"
 MONITOR_SERVICE_${SRCNAME} = "nova-api nova-conductor nova-console nova-scheduler"

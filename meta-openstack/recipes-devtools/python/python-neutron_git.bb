@@ -38,8 +38,8 @@ USER = "neutron"
 GROUP = "neutron"
 
 USERADD_PACKAGES = "${PN}"
-GROUPADD_PARAM_${PN} = "--system ${GROUP}"
-USERADD_PARAM_${PN} = "--system -m -d ${localstatedir}/lib/neutron -s /bin/false -g ${GROUP} ${USER}"
+GROUPADD_PARAM:${PN} = "--system ${GROUP}"
+USERADD_PARAM:${PN} = "--system -m -d ${localstatedir}/lib/neutron -s /bin/false -g ${GROUP} ${USER}"
 
 SERVICECREATE_PACKAGES = "${SRCNAME}-setup"
 KEYSTONE_HOST="${CONTROLLER_IP}"
@@ -60,7 +60,7 @@ python () {
     d.setVarFlags("SERVICECREATE_PARAM_%s-setup" % d.getVar('SRCNAME',True), flags)
 }
 
-do_install_append() {
+do_install:append() {
     TEMPLATE_CONF_DIR=${S}${sysconfdir}/
     NEUTRON_CONF_DIR=${D}${sysconfdir}/neutron
 
@@ -214,7 +214,7 @@ do_install_append() {
     install -m 600 ${S}/etc/neutron/rootwrap.d/* ${NEUTRON_CONF_DIR}/rootwrap.d/
 }
 
-pkg_postinst_${SRCNAME}-setup () {
+pkg_postinst:${SRCNAME}-setup () {
     if [ -z "$D" ]; then
 	# This is to make sure postgres is configured and running
 	if ! pidof postmaster > /dev/null; then
@@ -229,15 +229,15 @@ pkg_postinst_${SRCNAME}-setup () {
     fi
 }
 
-pkg_postinst_${SRCNAME}-plugin-openvswitch-setup () {
+pkg_postinst:${SRCNAME}-plugin-openvswitch-setup () {
     if [ -z "$D" ]; then
 	/etc/init.d/openvswitch-switch start
 	ovs-vsctl --no-wait -- --may-exist add-br br-int
     fi
 }
 
-ALLOW_EMPTY_${SRCNAME}-setup = "1"
-ALLOW_EMPTY_${SRCNAME}-plugin-openvswitch-setup = "1"
+ALLOW_EMPTY:${SRCNAME}-setup = "1"
+ALLOW_EMPTY:${SRCNAME}-plugin-openvswitch-setup = "1"
 
 PACKAGES += " \
      ${SRCNAME}-tests \
@@ -257,13 +257,13 @@ PACKAGES += " \
      ${SRCNAME}-plugin-openvswitch-setup \
      "
 
-FILES_${PN} = "${libdir}/*"
+FILES:${PN} = "${libdir}/*"
 
-FILES_${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
-RDEPENDS_${SRCNAME}-tests += " bash"
+FILES:${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
+RDEPENDS:${SRCNAME}-tests += " bash"
 
 
-FILES_${SRCNAME} = " \
+FILES:${SRCNAME} = " \
     ${bindir}/neutron-db-manage \
     ${bindir}/neutron-rootwrap \
     ${bindir}/neutron-debug \
@@ -278,53 +278,53 @@ FILES_${SRCNAME} = " \
     ${localstatedir}/* \    
     "
 
-FILES_${SRCNAME}-server = " \
+FILES:${SRCNAME}-server = " \
     ${bindir}/neutron-server \
     ${sysconfdir}/neutron/plugin.ini \
     "
 
-FILES_${SRCNAME}-plugin-ml2 = " \
+FILES:${SRCNAME}-plugin-ml2 = " \
     ${sysconfdir}/${SRCNAME}/plugins/ml2/* \
     "
 
-FILES_${SRCNAME}-plugin-openvswitch = " \
+FILES:${SRCNAME}-plugin-openvswitch = " \
     ${bindir}/neutron-openvswitch-agent \
     ${sysconfdir}/init.d/neutron-openvswitch-agent \
     "
 
-FILES_${SRCNAME}-dhcp-agent = " \
+FILES:${SRCNAME}-dhcp-agent = " \
     ${bindir}/neutron-dhcp-agent \
     ${bindir}/neutron-dhcp-agent-dnsmasq-lease-update \
     ${sysconfdir}/${SRCNAME}/dhcp_agent.ini \
     ${sysconfdir}/cron.d/neutron-dhcp-agent-netns-cleanup \
     "
 
-FILES_${SRCNAME}-linuxbridge-agent = " \
+FILES:${SRCNAME}-linuxbridge-agent = " \
     ${bindir}/neutron-linuxbridge-agent \
     ${sysconfdir}/${SRCNAME}/plugins/ml2/linuxbridge_agent.ini \
     "
 
-FILES_${SRCNAME}-l3-agent = " \
+FILES:${SRCNAME}-l3-agent = " \
     ${bindir}/neutron-l3-agent \
     ${sysconfdir}/${SRCNAME}/l3_agent.ini \
     "
 
-FILES_${SRCNAME}-metadata-agent = " \
+FILES:${SRCNAME}-metadata-agent = " \
     ${bindir}/neutron-metadata-agent \
     ${bindir}/neutron-ns-metadata-proxy \
     ${sysconfdir}/${SRCNAME}/metadata_agent.ini \
     "
 
-FILES_${SRCNAME}-metering-agent = " \
+FILES:${SRCNAME}-metering-agent = " \
     ${bindir}/neutron-metering-agent \
     ${sysconfdir}/${SRCNAME}/metering_agent.ini \
     "
 
-FILES_${SRCNAME}-extra-agents = "${bindir}/*"
+FILES:${SRCNAME}-extra-agents = "${bindir}/*"
 
-FILES_${SRCNAME}-doc = "${datadir}/*"
+FILES:${SRCNAME}-doc = "${datadir}/*"
 
-FILES_${SRCNAME}-setup = " \
+FILES:${SRCNAME}-setup = " \
     ${sysconfdir}/neutron/neutron-init \
     "
 
@@ -338,7 +338,7 @@ DEPENDS += " \
         python-pbr-native \
 	"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         python-pbr \
         python-paste \
         python-pastedeploy \
@@ -389,20 +389,20 @@ RDEPENDS_${PN} += " \
         python-os-xenapi \
         "
 
-RDEPENDS_${SRCNAME} = "${PN} \
+RDEPENDS:${SRCNAME} = "${PN} \
         postgresql postgresql-client python-psycopg2"
 
-RDEPENDS_${SRCNAME}-server = "${SRCNAME} ${SRCNAME}-plugin-ml2 ${SRCNAME}-dhcp-agent ${SRCNAME}-linuxbridge-agent ${SRCNAME}-metadata-agent"
-RDEPENDS_${SRCNAME}-plugin-openvswitch = "${SRCNAME} ${SRCNAME}-plugin-ml2 ${SRCNAME}-plugin-openvswitch-setup openvswitch-switch iproute2 bridge-utils"
-RDEPENDS_${SRCNAME}-plugin-openvswitch-setup = "openvswitch-switch "
-RDEPENDS_${SRCNAME}-dhcp-agent = "${SRCNAME} dnsmasq dhcp-server dhcp-server-config"
-RDEPENDS_${SRCNAME}-linuxbridge-agent = "${SRCNAME}"
-RDEPENDS_${SRCNAME}-l3-agent = "${SRCNAME} ${SRCNAME}-metadata-agent iputils"
-RDEPENDS_${SRCNAME}-metadata-agent = "${SRCNAME}"
-RDEPENDS_${SRCNAME}-plugin-ml2 = "${SRCNAME}"
-RDEPENDS_${SRCNAME}-setup = "postgresql sudo bash"
+RDEPENDS:${SRCNAME}-server = "${SRCNAME} ${SRCNAME}-plugin-ml2 ${SRCNAME}-dhcp-agent ${SRCNAME}-linuxbridge-agent ${SRCNAME}-metadata-agent"
+RDEPENDS:${SRCNAME}-plugin-openvswitch = "${SRCNAME} ${SRCNAME}-plugin-ml2 ${SRCNAME}-plugin-openvswitch-setup openvswitch-switch iproute2 bridge-utils"
+RDEPENDS:${SRCNAME}-plugin-openvswitch-setup = "openvswitch-switch "
+RDEPENDS:${SRCNAME}-dhcp-agent = "${SRCNAME} dnsmasq dhcp-server dhcp-server-config"
+RDEPENDS:${SRCNAME}-linuxbridge-agent = "${SRCNAME}"
+RDEPENDS:${SRCNAME}-l3-agent = "${SRCNAME} ${SRCNAME}-metadata-agent iputils"
+RDEPENDS:${SRCNAME}-metadata-agent = "${SRCNAME}"
+RDEPENDS:${SRCNAME}-plugin-ml2 = "${SRCNAME}"
+RDEPENDS:${SRCNAME}-setup = "postgresql sudo bash"
 
-RRECOMMENDS_${SRCNAME}-server = "${SRCNAME}-plugin-openvswitch"
+RRECOMMENDS:${SRCNAME}-server = "${SRCNAME}-plugin-openvswitch"
 
 #INITSCRIPT_PACKAGES = "${SRCNAME}-plugin-openvswitch ${SRCNAME}-l3-agent"
 #INITSCRIPT_NAME_${SRCNAME}-plugin-openvswitch = "neutron-openvswitch-agent"
@@ -417,17 +417,17 @@ SYSTEMD_PACKAGES = " \
     ${SRCNAME}-linuxbridge-agent \
     ${SRCNAME}-metadata-agent \
     "
-SYSTEMD_SERVICE_${SRCNAME}-server = "neutron-server.service"
-SYSTEMD_SERVICE_${SRCNAME}-dhcp-agent = "neutron-dhcp-agent.service"
-SYSTEMD_SERVICE_${SRCNAME}-linuxbridge-agent = "neutron-linuxbridge-agent.service"
-SYSTEMD_SERVICE_${SRCNAME}-metadata-agent = "neutron-metadata-agent.service"
-SYSTEMD_SERVICE_${SRCNAME}-setup = "neutron-init.service"
+SYSTEMD_SERVICE:${SRCNAME}-server = "neutron-server.service"
+SYSTEMD_SERVICE:${SRCNAME}-dhcp-agent = "neutron-dhcp-agent.service"
+SYSTEMD_SERVICE:${SRCNAME}-linuxbridge-agent = "neutron-linuxbridge-agent.service"
+SYSTEMD_SERVICE:${SRCNAME}-metadata-agent = "neutron-metadata-agent.service"
+SYSTEMD_SERVICE:${SRCNAME}-setup = "neutron-init.service"
 
 # Disable unconfigured services
-SYSTEMD_AUTO_ENABLE_${SRCNAME}-server = "disable"
-SYSTEMD_AUTO_ENABLE_${SRCNAME}-dhcp-agent = "disable"
-SYSTEMD_AUTO_ENABLE_${SRCNAME}-linuxbridge-agent = "disable"
-SYSTEMD_AUTO_ENABLE_${SRCNAME}-metadata-agent = "disable"
+SYSTEMD_AUTO_ENABLE:${SRCNAME}-server = "disable"
+SYSTEMD_AUTO_ENABLE:${SRCNAME}-dhcp-agent = "disable"
+SYSTEMD_AUTO_ENABLE:${SRCNAME}-linuxbridge-agent = "disable"
+SYSTEMD_AUTO_ENABLE:${SRCNAME}-metadata-agent = "disable"
 
 
 MONITOR_SERVICE_PACKAGES = "${SRCNAME}"

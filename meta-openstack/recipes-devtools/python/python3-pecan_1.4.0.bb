@@ -9,7 +9,7 @@ SRC_URI[sha256sum] = "4b2acd6802a04b59e306d0a6ccf37701d24376f4dc044bbbafba3afdf9
 
 inherit setuptools3 pypi
 
-RDEPENDS_${PN} = "${PYTHON_PN}-mako \
+RDEPENDS:${PN} = "${PYTHON_PN}-mako \
                   ${PYTHON_PN}-webtest \
                   ${PYTHON_PN}-six \
                   ${PYTHON_PN}-logutils \

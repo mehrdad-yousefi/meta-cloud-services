@@ -19,4 +19,4 @@ do_install() {
 }
 
 PACKAGES = "cirros-guest-image"
-FILES_cirros-guest-image = "${ROOT_HOME}/images/*"
+FILES:cirros-guest-image = "${ROOT_HOME}/images/*"

@@ -12,7 +12,7 @@ LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
 SECTION = "base"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 SRC_URI = "\
 	http://arthurdejong.org/nss-pam-ldapd/${BPN}-${PV}.tar.gz \
@@ -34,14 +34,14 @@ EXTRA_OECONF = "\
 	--with-pam-seclib-dir=${base_libdir}/security \
 	"
 
-CONFFILES_${PN} += "${sysconfdir}/nslcd.conf"
+CONFFILES:${PN} += "${sysconfdir}/nslcd.conf"
 
-FILES_${PN} += "${base_libdir}/security ${datadir}"
-FILES_${PN}-dbg += "${base_libdir}/security/.debug"
+FILES:${PN} += "${base_libdir}/security ${datadir}"
+FILES:${PN}-dbg += "${base_libdir}/security/.debug"
 
 LDAP_DN ?= "dc=my-domain,dc=com"
 
-do_install_append() {
+do_install:append() {
 	install -D -m 0755 ${WORKDIR}/nslcd.init ${D}${sysconfdir}/init.d/nslcd
 
 	sed -i -e 's/^uid nslcd/# uid nslcd/;' ${D}${sysconfdir}/nslcd.conf
@@ -57,4 +57,4 @@ inherit update-rc.d systemd
 INITSCRIPT_NAME = "nslcd"
 INITSCRIPT_PARAMS = "defaults"
 
-SYSTEMD_SERVICE_${PN} = "nslcd.service"
+SYSTEMD_SERVICE:${PN} = "nslcd.service"

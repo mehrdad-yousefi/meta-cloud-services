@@ -15,9 +15,9 @@ DEPENDS += " \
         ruby \
 "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         ruby \
 "
 
 RUBY_INSTALL_GEMS = "ruby-shadow-${PV}.gem"
-FILES_${PN}-dbg += "/usr/lib*/ruby/gems/*/gems/ruby-shadow-${PV}/.debug/shadow.so"
+FILES:${PN}-dbg += "/usr/lib*/ruby/gems/*/gems/ruby-shadow-${PV}/.debug/shadow.so"

@@ -164,7 +164,7 @@ PACKAGECONFIG[proxycache] = "--enable-proxycache=mod,--enable-proxycache=no,"
 #--enable-mdb         enable mdb database backend no|yes|mod no
 PACKAGECONFIG[mdb] = "--enable-mdb=mod,--enable-mdb=no,"
 
-CPPFLAGS_append = " -D_GNU_SOURCE"
+CPPFLAGS:append = " -D_GNU_SOURCE"
 
 do_configure() {
     cp ${STAGING_DATADIR_NATIVE}/libtool/config/ltmain.sh ${S}/build
@@ -177,6 +177,6 @@ do_configure() {
     oe_runconf
 }
 
-FILES_${PN}-dev = "${includedir} ${libdir}/lib*.so ${libdir}/*.la ${libdir}/*.a ${libexecdir}/openldap/*.a ${libexecdir}/openldap/*.la ${libexecdir}/openldap/*.so"
-FILES_${PN}-dbg += "${libexecdir}/openldap/.debug"
+FILES:${PN}-dev = "${includedir} ${libdir}/lib*.so ${libdir}/*.la ${libdir}/*.a ${libexecdir}/openldap/*.a ${libexecdir}/openldap/*.la ${libexecdir}/openldap/*.so"
+FILES:${PN}-dbg += "${libexecdir}/openldap/.debug"
 

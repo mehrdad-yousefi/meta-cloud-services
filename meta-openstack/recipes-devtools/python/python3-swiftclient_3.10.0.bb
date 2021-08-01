@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "66227eaf29a691c70675fb9982022980b92797c273dd5e6dc7e680425e
 
 inherit pypi setuptools3 python3-dir
 
-do_install_append() {
+do_install:append() {
     cp -r test ${D}/${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}/
 }
 
@@ -24,7 +24,7 @@ DEPENDS += " \
         python3-pbr-native \
         "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
         python3-simplejson \
         python3-pbr \
         python3-requests \
