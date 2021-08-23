@@ -1,7 +1,7 @@
 HOMEPAGE = "http://saltstack.com/"
 SECTION = "admin"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=89aea4e17d99a7cacdbeed46a0096b10"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=ac9a49d86925151327b277d6a3999a07"
 DEPENDS = "\
            python3-msgpack \
            python3-pyyaml \
