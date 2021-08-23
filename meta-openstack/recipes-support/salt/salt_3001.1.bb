@@ -18,7 +18,7 @@ PACKAGECONFIG ??= "zeromq"
 PACKAGECONFIG[zeromq] = ",,python3-pyzmq python3-pycrypto,"
 PACKAGECONFIG[tcp] = ",,python3-pycrypto"
 
-SRC_URI = "https://files.pythonhosted.org/packages/source/s/${PN}/${PN}-${PV}.tar.gz \
+SRC_URI = "https://files.pythonhosted.org/packages/source/s/${BPN}/${BPN}-${PV}.tar.gz \
 "
 
 SRC_URI[md5sum] = "4174a6dd2c7eee808086ca06bdd928c9"
