@@ -9,7 +9,7 @@ PV = "3.3.0+git${SRCPV}"
 SRCREV = "cab28649c689067970a51a2f9b329bdd6a0f0501"
 
 SRCNAME = "oslo.policy"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master"
 
 S = "${WORKDIR}/git"
 

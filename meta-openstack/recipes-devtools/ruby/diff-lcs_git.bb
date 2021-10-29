@@ -20,7 +20,7 @@ SRCREV = "704bc2c0000b5f9bf49d607dcd0d3989b63b2595"
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
-    git://github.com/halostatue/diff-lcs.git \
+    git://github.com/halostatue/diff-lcs.git;branch=master \
     "
 
 inherit ruby

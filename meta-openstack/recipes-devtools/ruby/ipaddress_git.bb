@@ -20,7 +20,7 @@ SRCREV = "96aaf68210d644157bd57a6ec3e38c49f38bfc34"
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
-    git://github.com/ipaddress-gem/ipaddress.git \
+    git://github.com/ipaddress-gem/ipaddress.git;branch=master \
     "
 
 inherit ruby

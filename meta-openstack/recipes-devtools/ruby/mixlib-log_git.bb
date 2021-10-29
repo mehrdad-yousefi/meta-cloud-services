@@ -17,7 +17,7 @@ SRCREV = "b750625a79cc46fffe6b886320f96e7874497fa0"
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
-    git://github.com/opscode/mixlib-log.git \
+    git://github.com/opscode/mixlib-log.git;branch=master \
     "
 
 inherit ruby

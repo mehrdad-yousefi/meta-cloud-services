@@ -4,7 +4,7 @@ LICENSE = "BSD & MPL-2.0 & MIT"
 LIC_FILES_CHKSUM = "file://src/github.com/hashicorp/consul-migrate/LICENSE;md5=b278a92d2c1509760384428817710378"
 
 GO_IMPORT = "github.com/hashicorp/consul-migrate"
-SRC_URI = "git://${GO_IMPORT}.git"
+SRC_URI = "git://${GO_IMPORT}.git;branch=master"
 SRCREV = "678fb10cdeae25ab309e99e655148f0bf65f9710"
 
 S = "${WORKDIR}/git"
@@ -18,13 +18,13 @@ SRCREV_bolt = "c6ba97b89e0454fec9aa92e1d33a4e2c5fc1f631"
 SRCREV_go-msgpack = "fa3f63826f7c23912c15263591e65d54d080b458"
 
 SRC_URI += " \
-   git://github.com/hashicorp/raft;name=raft;destsuffix=git/src/github.com/hashicorp/raft \
-   git://github.com/armon/go-metrics;name=go-metrics;destsuffix=git/src/github.com/armon/go-metrics \
-   git://github.com/hashicorp/raft-boltdb;name=raft-boltdb;destsuffix=git/src/github.com/hashicorp/raft-boltdb \
-   git://github.com/hashicorp/raft-mdb;name=raft-mdb;destsuffix=git/src/github.com/hashicorp/raft-mdb \
-   git://github.com/armon/gomdb;name=gomdb;destsuffix=git/src/github.com/armon/gomdb \
-   git://github.com/boltdb/bolt;name=bolt;destsuffix=git/src/github.com/boltdb/bolt \
-   git://github.com/hashicorp/go-msgpack;name=go-msgpack;destsuffix=git/src/github.com/hashicorp/go-msgpack \
+   git://github.com/hashicorp/raft;name=raft;destsuffix=git/src/github.com/hashicorp/raft;branch=master \
+   git://github.com/armon/go-metrics;name=go-metrics;destsuffix=git/src/github.com/armon/go-metrics;branch=master \
+   git://github.com/hashicorp/raft-boltdb;name=raft-boltdb;destsuffix=git/src/github.com/hashicorp/raft-boltdb;branch=master \
+   git://github.com/hashicorp/raft-mdb;name=raft-mdb;destsuffix=git/src/github.com/hashicorp/raft-mdb;branch=master \
+   git://github.com/armon/gomdb;name=gomdb;destsuffix=git/src/github.com/armon/gomdb;branch=master \
+   git://github.com/boltdb/bolt;name=bolt;destsuffix=git/src/github.com/boltdb/bolt;branch=master \
+   git://github.com/hashicorp/go-msgpack;name=go-msgpack;destsuffix=git/src/github.com/hashicorp/go-msgpack;branch=master \
 "
 
 inherit go

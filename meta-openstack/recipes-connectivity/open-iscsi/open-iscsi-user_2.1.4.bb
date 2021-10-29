@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "kmod openssl util-linux open-isns"
 DEPENDS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
 
-SRC_URI = "git://github.com/open-iscsi/open-iscsi.git;protocol=https   \
+SRC_URI = "git://github.com/open-iscsi/open-iscsi.git;protocol=https  ;branch=master \
            file://0001-fix-build-error-of-cross-build.patch \
            "
 

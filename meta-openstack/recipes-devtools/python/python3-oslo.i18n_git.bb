@@ -8,7 +8,7 @@ PV = "5.0.1+git${SRCPV}"
 SRCREV = "73187bd86903fc87665a829c9a0c714db6aa3022"
 
 SRCNAME = "oslo.i18n"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master"
 
 inherit setuptools3
 

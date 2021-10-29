@@ -4,7 +4,7 @@ HOMEPAGE = "https://rubygems.org/gems/http_parser.rb"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE-MIT;md5=157efc3766c6d07d3d857ebbab43351a"
 
-SRC_URI = "git://github.com/tmm1/http_parser.rb.git;protocol=https;tag=v0.6.0"
+SRC_URI = "git://github.com/tmm1/http_parser.rb.git;protocol=https;tag=v0.6.0;branch=master"
 
 S = "${WORKDIR}/git"
 

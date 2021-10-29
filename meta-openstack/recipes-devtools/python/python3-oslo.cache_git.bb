@@ -8,7 +8,7 @@ PV = "2.6.1+git${SRCPV}"
 SRCREV = "df075b2465195de53e42897e7d9be6c6c375ce5e"
 
 SRCNAME = "oslo.cache"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master"
 
 S = "${WORKDIR}/git"
 

@@ -16,7 +16,7 @@ SRCREV = "1f0b38d9e66885f8af0244d12d1a6702fc04a8de"
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
-    git://github.com/kwatch/erubis.git \
+    git://github.com/kwatch/erubis.git;branch=master \
     "
 
 inherit ruby

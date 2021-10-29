@@ -20,7 +20,7 @@ SRCREV = "1de7611a7f7cedbe7a4c6cf3798c88d00637582d"
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
-    git://github.com/net-ssh/net-ssh-gateway.git \
+    git://github.com/net-ssh/net-ssh-gateway.git;branch=master \
     file://gemspec-don-t-force-the-use-of-gem-private_key.pem.patch \
     "
 

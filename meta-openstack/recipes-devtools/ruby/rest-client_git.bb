@@ -18,7 +18,7 @@ SRCREV = "40eddc184a7b3fe79f9b68f291e06df4c1fbcb0b"
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
-    git://github.com/rest-client/rest-client.git \
+    git://github.com/rest-client/rest-client.git;branch=master \
     "
 
 inherit ruby

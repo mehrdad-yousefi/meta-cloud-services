@@ -8,7 +8,7 @@ SRCREV = "c816b38d9f12be75d989409cbab6dfefa8f49dc3"
 PV = "0.9.1+git${SRCPV}"
 
 SRC_URI = "\
-	git://github.com/openstack/glance_store.git \
+	git://github.com/openstack/glance_store.git;branch=master \
 	"
 
 S = "${WORKDIR}/git"

@@ -8,7 +8,7 @@ PV = "3.4.0+git${SRCPV}"
 SRCREV = "32c8d43a20cb6a29f03324fbc2e6cad3bfb5a294"
 
 SRCNAME = "oslo.vmware"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master"
 
 S = "${WORKDIR}/git"
 

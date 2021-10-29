@@ -26,9 +26,9 @@ SRCREV_spice-protocol = "784407f248e7f99d2bfcc9368f9acd1efb2b9617"
 
 SRCREV_FORMAT = "spice_spice-common_spice-protocol"
 
-SRC_URI = "git://anongit.freedesktop.org/spice/spice;name=spice \
-           git://anongit.freedesktop.org/spice/spice-common;destsuffix=git/spice-common;name=spice-common \
-           git://anongit.freedesktop.org/spice/spice-protocol;destsuffix=git/spice-common/spice-protocol;name=spice-protocol \
+SRC_URI = "git://anongit.freedesktop.org/spice/spice;name=spice;branch=master \
+           git://anongit.freedesktop.org/spice/spice-common;destsuffix=git/spice-common;name=spice-common;branch=master \
+           git://anongit.freedesktop.org/spice/spice-protocol;destsuffix=git/spice-common/spice-protocol;name=spice-protocol;branch=master \
           "
 
 SRC_URI += " \

@@ -17,7 +17,7 @@ LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=b278a92d2c15097603844288
 require serf-vendor-licenses.inc
 
 GO_IMPORT = "github.com/hashicorp/serf"
-SRC_URI = "git://${GO_IMPORT}.git;protocol=https"
+SRC_URI = "git://${GO_IMPORT}.git;protocol=https;branch=master"
 
 PV = "0.8.5+git${SRCPV}"
 SRCREV = "1d3fdf93bbe5002c5023da50402368a817488691"
