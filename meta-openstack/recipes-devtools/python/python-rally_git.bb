@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=19cbd64715b51267a47bf3750cc6a8a5"
 PR = "r0"
 SRCNAME = "rally"
 
-SRC_URI = "git://github.com/stackforge/${SRCNAME}.git;branch=master \
+SRC_URI = "git://github.com/stackforge/${SRCNAME}.git;branch=master;protocol=https \
            file://rally.init \
            file://rally.conf \
            file://task-example.json \

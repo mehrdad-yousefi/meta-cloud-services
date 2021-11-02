@@ -8,7 +8,7 @@ DEPENDS = "python-setuptools3-git"
 SRCNAME = "python-cinderclient"
 
 SRC_URI = "\
-	git://github.com/openstack/python-cinderclient.git;branch=stable/pike \
+	git://github.com/openstack/python-cinderclient.git;branch=stable/pike;protocol=https \
 	file://cinder-api-check.sh \
 	"
 

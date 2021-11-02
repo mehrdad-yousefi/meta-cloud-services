@@ -20,7 +20,7 @@ SRCREV = "27ba1e882dcab280527aa1764d1b45aca3ef5961"
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
-    git://github.com/opscode/mixlib-shellout.git;branch=master \
+    git://github.com/opscode/mixlib-shellout.git;branch=master;protocol=https \
     "
 
 inherit ruby

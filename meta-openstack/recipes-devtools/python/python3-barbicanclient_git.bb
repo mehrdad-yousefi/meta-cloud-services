@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e031cff4528978748f9cc064c6e6fa73"
 
 SRC_URI = "\
-	git://github.com/openstack/python-barbicanclient.git;branch=master \
+	git://github.com/openstack/python-barbicanclient.git;branch=master;protocol=https \
 	"
 
 PV = "5.0.1+git${SRCPV}"

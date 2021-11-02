@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=33ab1ce13e2312dddfad07f97f66321f"
 
 SRCNAME = "uwsgi"
-SRC_URI = "git://github.com/unbit/uwsgi.git;branch=uwsgi-2.0 \
+SRC_URI = "git://github.com/unbit/uwsgi.git;branch=uwsgi-2.0;protocol=https \
     file://Add-explicit-breaks-to-avoid-implicit-passthrough.patch \
     file://more-Add-explicit-breaks-to-avoid-implicit-passthrough.patch \
 "

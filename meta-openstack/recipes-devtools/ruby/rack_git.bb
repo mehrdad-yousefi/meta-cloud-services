@@ -20,7 +20,7 @@ SRCREV = "134d6218d0881d87ae6a522e88eafbddb6cd1bb7"
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
-    git://github.com/rack/rack.git;branch=1-6-stable \
+    git://github.com/rack/rack.git;branch=1-6-stable;protocol=https \
     "
 
 inherit ruby

@@ -78,7 +78,7 @@ RDEPENDS:${PN} += " \
 
 SRCNAME = "horizon"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol=https \
     file://wsgi-horizon.conf \
     file://fix_bindir_path.patch \
     file://local_settings.py \

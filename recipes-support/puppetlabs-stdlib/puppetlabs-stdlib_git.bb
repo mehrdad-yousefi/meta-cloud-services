@@ -7,7 +7,7 @@ PV = "4.10.0"
 SRCREV = "0b4822be3d2242e83c28ab7fed6c5817adc322d5"
 
 SRC_URI = " \
-    git://github.com/puppetlabs/puppetlabs-stdlib.git;branch=master \
+    git://github.com/puppetlabs/puppetlabs-stdlib.git;branch=master;protocol=https \
     file://Add-gemspec.patch \
 "
 

@@ -18,7 +18,7 @@ SRCREV = "1dc20627aa5d742376269dc5b4d5c67f34d08008"
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
-    git://github.com/opscode/chef.git;branch=12.4-stable \
+    git://github.com/opscode/chef.git;branch=12.4-stable;protocol=https \
     file://0001-chang-ksh-to-sh.patch \
     "
 

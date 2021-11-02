@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://hybrid_identity.py;beginline=1;endline=14;md5=06c14f6
 
 PR = "r0"
 
-SRC_URI = "git://github.com/SUSE-Cloud/keystone-hybrid-backend.git;branch=havana"
+SRC_URI = "git://github.com/SUSE-Cloud/keystone-hybrid-backend.git;branch=havana;protocol=https"
 
 PV="git${SRCPV}"
 SRCREV="0bd376242f8522edef7031d2339b9533b86c17aa"

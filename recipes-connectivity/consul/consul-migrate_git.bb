@@ -18,13 +18,13 @@ SRCREV_bolt = "c6ba97b89e0454fec9aa92e1d33a4e2c5fc1f631"
 SRCREV_go-msgpack = "fa3f63826f7c23912c15263591e65d54d080b458"
 
 SRC_URI += " \
-   git://github.com/hashicorp/raft;name=raft;destsuffix=git/src/github.com/hashicorp/raft;branch=master \
-   git://github.com/armon/go-metrics;name=go-metrics;destsuffix=git/src/github.com/armon/go-metrics;branch=master \
-   git://github.com/hashicorp/raft-boltdb;name=raft-boltdb;destsuffix=git/src/github.com/hashicorp/raft-boltdb;branch=master \
-   git://github.com/hashicorp/raft-mdb;name=raft-mdb;destsuffix=git/src/github.com/hashicorp/raft-mdb;branch=master \
-   git://github.com/armon/gomdb;name=gomdb;destsuffix=git/src/github.com/armon/gomdb;branch=master \
-   git://github.com/boltdb/bolt;name=bolt;destsuffix=git/src/github.com/boltdb/bolt;branch=master \
-   git://github.com/hashicorp/go-msgpack;name=go-msgpack;destsuffix=git/src/github.com/hashicorp/go-msgpack;branch=master \
+   git://github.com/hashicorp/raft;name=raft;destsuffix=git/src/github.com/hashicorp/raft;branch=master;protocol=https \
+   git://github.com/armon/go-metrics;name=go-metrics;destsuffix=git/src/github.com/armon/go-metrics;branch=master;protocol=https \
+   git://github.com/hashicorp/raft-boltdb;name=raft-boltdb;destsuffix=git/src/github.com/hashicorp/raft-boltdb;branch=master;protocol=https \
+   git://github.com/hashicorp/raft-mdb;name=raft-mdb;destsuffix=git/src/github.com/hashicorp/raft-mdb;branch=master;protocol=https \
+   git://github.com/armon/gomdb;name=gomdb;destsuffix=git/src/github.com/armon/gomdb;branch=master;protocol=https \
+   git://github.com/boltdb/bolt;name=bolt;destsuffix=git/src/github.com/boltdb/bolt;branch=master;protocol=https \
+   git://github.com/hashicorp/go-msgpack;name=go-msgpack;destsuffix=git/src/github.com/hashicorp/go-msgpack;branch=master;protocol=https \
 "
 
 inherit go

@@ -22,7 +22,7 @@ SRCNAME = "saharaclient"
 
 inherit setuptools3
 
-SRC_URI = "git://github.com/openstack/python-saharaclient.git;branch=master"
+SRC_URI = "git://github.com/openstack/python-saharaclient.git;branch=master;protocol=https"
 
 PV = "3.2.1+git${SRCPV}"
 SRCREV = "a9fee07108c432e20a3ca7760541d4fcb4f14811"

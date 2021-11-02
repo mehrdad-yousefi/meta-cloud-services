@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://PSF.LICENSE;md5=7dd786e8594f1e787da94a946557b40e"
 PV = "1.59+git${SRCPV}"
 SRCREV = "959e068fec8b4c956b0d82269336818e667726e7"
 
-SRC_URI = "git://github.com/linsomniac/python-memcached.git;branch=master"
+SRC_URI = "git://github.com/linsomniac/python-memcached.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
 

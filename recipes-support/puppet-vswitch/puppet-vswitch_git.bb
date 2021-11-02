@@ -7,7 +7,7 @@ PV = "3.0.0"
 SRCREV = "c374840910c823f7669cf2e1229c7df7192ae880"
 
 SRC_URI = " \
-    git://github.com/openstack/puppet-vswitch.git;branch=master \
+    git://github.com/openstack/puppet-vswitch.git;branch=master;protocol=https \
     file://Add-gemspec.patch \
 "
 

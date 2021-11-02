@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b428e7772bf00c07fb7b863b80358adf"
 SRCREV = "9142f8f0f7b4a53447f5cfec3a797cbf0d6204a9"
 PV = "1.2.0+git${SRCPV}"
 
-SRC_URI = "git://github.com/kanaka/noVNC.git;branch=master"
+SRC_URI = "git://github.com/kanaka/noVNC.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
 

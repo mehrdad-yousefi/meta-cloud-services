@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 SRCNAME = "troveclient"
 
 SRC_URI = "\
-	git://github.com/openstack/python-troveclient.git;branch=master \
+	git://github.com/openstack/python-troveclient.git;branch=master;protocol=https \
 	"
 
 PV = "3.0.0+git${SRCPV}"

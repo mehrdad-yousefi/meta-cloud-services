@@ -9,7 +9,7 @@ SRCNAME = "tempest"
 
 inherit setuptools3 identity hosts
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master;protocol=https \
            file://tempest.conf \
            file://logging.conf \
 "

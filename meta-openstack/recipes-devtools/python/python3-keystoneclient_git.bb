@@ -9,7 +9,7 @@ SRCNAME = "keystoneclient"
 SRC_URI = "file://keystone-api-check.sh"
 
 SRC_URI = "\
-        git://github.com/openstack/python-keystoneclient.git;branch=stable/pike \
+        git://github.com/openstack/python-keystoneclient.git;branch=stable/pike;protocol=https \
         file://keystone-api-check.sh \
         "
 

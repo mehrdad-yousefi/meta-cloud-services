@@ -16,7 +16,7 @@ S = "${WORKDIR}/git"
 
 SRCNAME = "mod_wsgi"
 SRC_URI = "\
-	git://github.com/GrahamDumpleton/mod_wsgi.git;branch=master \
+	git://github.com/GrahamDumpleton/mod_wsgi.git;branch=master;protocol=https \
 	file://configure.ac-allow-PYTHON-values-to-be-passed-via-en.patch \        
 	"
 

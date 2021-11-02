@@ -34,7 +34,7 @@ RDEPENDS:${PN} += " \
         bash \
         "
 
-SRC_URI = "git://github.com/openstack/python-neutronclient.git;branch=stable/pike \
+SRC_URI = "git://github.com/openstack/python-neutronclient.git;branch=stable/pike;protocol=https \
            file://neutronclient-use-csv-flag-instead-of-json.patch \
            file://neutron-api-check.sh \
           "

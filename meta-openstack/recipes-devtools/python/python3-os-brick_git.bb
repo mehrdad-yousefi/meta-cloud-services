@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
 SRC_URI = "\
-	git://github.com/openstack/os-brick.git;branch=stable/victoria \
+	git://github.com/openstack/os-brick.git;branch=stable/victoria;protocol=https \
 	"
 SRCREV = "f0cf77672fed70f20896c23015cb50341f311f38"
 

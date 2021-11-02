@@ -7,7 +7,7 @@ DEPENDS = "sg3-utils libaio"
 SRCREV = "b43dbc6711e43c0a32cc4d9df22884841d911d51"
 PV = "1.0.79+git${SRCPV}"
 
-SRC_URI = "git://github.com/fujita/tgt.git;branch=master \
+SRC_URI = "git://github.com/fujita/tgt.git;branch=master;protocol=https \
 	file://0001-Correct-the-path-of-header-files-check-in-Yocto-buil.patch \
         file://0001-usr-Makefile-WARNING-fix.patch \
         file://usr-Makefile-apply-LDFLAGS-to-all-executables.patch \

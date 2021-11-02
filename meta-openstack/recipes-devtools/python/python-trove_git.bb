@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
 SRCNAME = "trove"
 
-SRC_URI = "git://github.com/openstack/trove.git;branch=master \
+SRC_URI = "git://github.com/openstack/trove.git;branch=master;protocol=https \
           file://trove-init \
           "
 

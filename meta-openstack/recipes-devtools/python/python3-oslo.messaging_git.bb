@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c46f31914956e4579f9b488e71415ac8"
 
 SRCNAME = "oslo.messaging"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master;protocol=https"
 
 PV = "12.5.0+git${SRCPV}"
 SRCREV = "62e104bdb57714a0754f788795d1b4faf8ebb74d"

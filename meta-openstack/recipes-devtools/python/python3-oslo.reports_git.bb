@@ -8,7 +8,7 @@ PV = "2.2.0+git${SRCPV}"
 SRCREV = "bc631aedef131bc45225720e5c8f8e4ca35ff020"
 
 SRCNAME = "oslo.reports"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
 

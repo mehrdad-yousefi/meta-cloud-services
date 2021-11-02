@@ -8,7 +8,7 @@ PV = "4.19+git${SRCPV}"
 SRCREV = "51a1130f6cdcb029a51b6a75d43ac5e4cdde7072"
 
 SRCNAME = "ryu"
-SRC_URI = "git://github.com/osrg/${SRCNAME}.git;branch=master"
+SRC_URI = "git://github.com/osrg/${SRCNAME}.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
 

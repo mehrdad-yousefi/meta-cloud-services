@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7cdb54622cacc9bc9b2883091e6dd669"
 
 SRC_URI = "\
-	git://github.com/openstack/python-novaclient.git;branch=stable/pike \
+	git://github.com/openstack/python-novaclient.git;branch=stable/pike;protocol=https \
 	file://nova-api-check.sh \
 	"
 
