@@ -27,7 +27,7 @@ inherit identity
 inherit monitor
 
 # check for 5G of free space, so we use 5G as a starting point.
-IMAGE_ROOTFS_EXTRA_SPACE:append += "+ 5000000"
+IMAGE_ROOTFS_EXTRA_SPACE += "+ 5000000"
 
 POST_KEYSTONE_SETUP_COMMAND = "/etc/keystone/hybrid-backend-setup"
 
