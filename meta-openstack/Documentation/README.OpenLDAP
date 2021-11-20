@@ -6,7 +6,7 @@ OpenLDAP into DISTRO_FEATURES
 
 e.g. in conf/local.conf
 
-DISTRO_FEATURES:append += " OpenLDAP"
+DISTRO_FEATURES:append = " OpenLDAP"
 
 A number of variables can be specified during the build phase that configures
 OpenLDAP specific options:

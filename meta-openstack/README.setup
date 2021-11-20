@@ -95,7 +95,7 @@ systemd will be used in your images:
 
 Additionally activiate the meta-virtualization layer:
 
-    DISTRO_FEATURES:append += "virtualization kvm"
+    DISTRO_FEATURES:append = " virtualization kvm"
 
 
 Package configurations
