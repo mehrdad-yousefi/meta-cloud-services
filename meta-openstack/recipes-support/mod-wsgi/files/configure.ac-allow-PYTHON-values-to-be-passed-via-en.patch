@@ -7,28 +7,31 @@ This allows the recipe to specify specific values instead of them
 being 'discovered' which may lead to host contamination or similar
 issues.
 
+Updated for 4.9.0: Jeremy Puhlman
+
 Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
----
+----
  configure.ac | 41 +++++++++++++++++++++++++++++++++++++++++
  1 file changed, 41 insertions(+)
 
+
 diff --git a/configure.ac b/configure.ac
-index 25afe44..b5a9e03 100644
+index 37a0f86..9b77c7f 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -100,26 +100,38 @@ fi
+@@ -106,26 +106,38 @@ fi
  
  AC_SUBST(PYTHON)
  
 +if test -z "${PYTHON_VERSION}"; then
  PYTHON_VERSION=`${PYTHON} -c 'from sys import stdout; \
-     from distutils import sysconfig; \
+     import sysconfig; \
      stdout.write(sysconfig.get_config_var("VERSION"))'`
 +fi
  
 +if test -z "${PYTHON_LDVERSION}"; then
  PYTHON_LDVERSION=`${PYTHON} -c 'from sys import stdout; \
-     from distutils import sysconfig; \
+     import sysconfig; \
      stdout.write(sysconfig.get_config_var("LDVERSION") or "")'`
 +fi
  
@@ -38,7 +41,7 @@ index 25afe44..b5a9e03 100644
  
 +if test -z "${PYTHON_INCLUDEPY}"; then
  CPPFLAGS1=`${PYTHON} -c 'from sys import stdout; \
-     from distutils import sysconfig; \
+     import sysconfig; \
      stdout.write("-I" + sysconfig.get_config_var("INCLUDEPY"))'`
 +else
 +CPPFLAGS1="${PYTHON_INCLUDEPY}"
@@ -46,7 +49,7 @@ index 25afe44..b5a9e03 100644
  
 +if test -z "${PYTHON_CFLAGS}"; then
  CPPFLAGS2=`${PYTHON} -c 'from sys import stdout; \
-     from distutils import sysconfig; \
+     import sysconfig; \
      stdout.write(" ".join(filter(lambda x: x.startswith("-D"), \
      sysconfig.get_config_var("CFLAGS").split())))'`
 +else
@@ -55,13 +58,13 @@ index 25afe44..b5a9e03 100644
  
  if test "${ENABLE_EMBEDDED}" != "yes"; then
  CPPFLAGS3="-DMOD_WSGI_DISABLE_EMBEDDED"
-@@ -131,22 +143,43 @@ CPPFLAGS="${CPPFLAGS} ${CPPFLAGS1} ${CPPFLAGS2} ${CPPFLAGS3}"
+@@ -137,22 +149,42 @@ CPPFLAGS="${CPPFLAGS} ${CPPFLAGS1} ${CPPFLAGS2} ${CPPFLAGS3}"
  
  AC_SUBST(CPPFLAGS)
  
 +if test -z "${PYTHON_LIBDIR}"; then
  PYTHONLIBDIR=`${PYTHON} -c 'from sys import stdout; \
-     from distutils import sysconfig; \
+     import sysconfig; \
      stdout.write(sysconfig.get_config_var("LIBDIR"))'`
 +else
 +PYTHONLIBDIR="${PYTHON_LIBDIR}"
@@ -76,22 +79,21 @@ index 25afe44..b5a9e03 100644
 +fi
 +if test -z "${PYTHON_FRAMEWORKDIR}"; then
  PYTHONFRAMEWORKDIR=`${PYTHON} -c 'from sys import stdout; \
-     from distutils import sysconfig; \
+     import sysconfig; \
      stdout.write(sysconfig.get_config_var("PYTHONFRAMEWORKDIR"))'`
 +else
 +PYTHONFRAMEWORKDIR="${PYTHON_FRAMEWORKDIR}"
 +fi
-+
 +if test -z "${PYTHON_FRAMEWORKPREFIX}"; then
  PYTHONFRAMEWORKPREFIX=`${PYTHON} -c 'from sys import stdout; \
-     from distutils import sysconfig; \
+     import sysconfig; \
      stdout.write(sysconfig.get_config_var("PYTHONFRAMEWORKPREFIX"))'`
 +else
 +PYTHONFRAMEWORKPREFIX="${PYTHON_FRAMEWORKPREFIX}"
 +fi
 +if test -z "${PYTHON_FRAMEWORK}"; then
  PYTHONFRAMEWORK=`${PYTHON} -c 'from sys import stdout; \
-     from distutils import sysconfig; \
+     import sysconfig; \
      stdout.write(sysconfig.get_config_var("PYTHONFRAMEWORK"))'`
 +else
 +PYTHONFRAMEWORK="${PYTHON_FRAMEWORK}"
@@ -99,20 +101,20 @@ index 25afe44..b5a9e03 100644
  
  if test "${PYTHON_LDVERSION}" != "${PYTHON_VERSION}"; then
      PYTHONCFGDIR="${PYTHONCFGDIR}-${PYTHON_LDVERSION}"
-@@ -170,12 +203,20 @@ if test "${PYTHONFRAMEWORKDIR}" = "no-framework" -o \
+@@ -180,12 +212,20 @@ if test "${PYTHONFRAMEWORKDIR}" = "no-framework" -o \
          LDLIBS1="-lpython${PYTHON_VERSION}"
      fi
  
 +    if test -z "${PYTHON_LIBS}"; then
      LDLIBS2=`${PYTHON} -c 'from sys import stdout; \
-         from distutils import sysconfig; \
+         import sysconfig; \
          stdout.write(sysconfig.get_config_var("LIBS"))'`
 +    else
 +    LDLIBS2="${PYTHON_LIBS}"
 +    fi
 +    if test -z "${PYTHON_SYSLIBS}"; then
      LDLIBS3=`${PYTHON} -c 'from sys import stdout; \
-         from distutils import sysconfig; \
+         import sysconfig; \
          stdout.write(sysconfig.get_config_var("SYSLIBS"))'`
 +    else
 +    LDLIBS3="${PYTHON_SYSLIBS}"
@@ -120,6 +122,3 @@ index 25afe44..b5a9e03 100644
  else
      LDFLAGS1="-Wl,-F${PYTHONFRAMEWORKPREFIX} -framework ${PYTHONFRAMEWORK}"
  
--- 
-2.7.4
-

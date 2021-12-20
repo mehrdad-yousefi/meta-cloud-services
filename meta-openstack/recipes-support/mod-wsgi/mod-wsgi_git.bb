@@ -9,8 +9,8 @@ HOMEPAGE = "https://github.com/GrahamDumpleton/mod_wsgi"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRCREV = "217e80b7436035723b80ff02ee349365e8553dfc"
-PV = "4.6.8+git${SRCPV}"
+SRCREV = "df9faf954a1ab6208f45ba6fde90f0b41f605483"
+PV = "4.9.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
