@@ -20,7 +20,7 @@ SRC_URI = "\
 	file://configure.ac-allow-PYTHON-values-to-be-passed-via-en.patch \        
 	"
 
-inherit autotools-brokensep distutils3-base
+inherit autotools-brokensep setuptools3-base
 
 DEPENDS += "apache2-native apache2 python3"
 RDEPENDS:${PN} = "python3"
