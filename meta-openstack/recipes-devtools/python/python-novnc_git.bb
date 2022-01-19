@@ -15,6 +15,6 @@ SRC_URI = "git://github.com/kanaka/noVNC.git;branch=master;protocol=https \
 
 S = "${WORKDIR}/git"
 
-inherit distutils3
+inherit setuptools3
 
-DEPENDS += " python-websockify"
+DEPENDS += " python3-websockify"
