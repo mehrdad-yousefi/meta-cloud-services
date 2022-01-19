@@ -1,13 +1,13 @@
 Index: git/setup.py
 ===================================================================
 --- /dev/null
-+++ git/setup.py
++++ b/setup.py
 @@ -0,0 +1,14 @@
 +#!/usr/bin/env python
 +
 +from distutils.core import setup
 +
-+setup(name='python-novnc',
++setup(name='python3-novnc',
 +      version='2012.1~e3',
 +      description='NoVNC python libraries',
 +      author='Ghe Rivero',

@@ -2,13 +2,11 @@ DESCRIPTION = "This package contains the core python parts of NoVNC"
 HOMEPAGE = "https://github.com/kanaka/noVNC"
 SECTION = "devel/python"
 
-PR = "r0"
-
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=6458695fb66dcd893becb5f9f912715e"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=99aebbcc36b17df855fad64d4b792bff"
 
-SRCREV = "3b8ec46fd26d644e6edbea4f46e630929297e448"
-PV = "0.5.1+git${SRCPV}"
+SRCREV = "463c39e4af98ec4106b87bbea17e1605aa4c6180"
+PV = "1.3.0"
 
 SRC_URI = "git://github.com/kanaka/noVNC.git;branch=master;protocol=https \
            file://python-distutils.patch"
