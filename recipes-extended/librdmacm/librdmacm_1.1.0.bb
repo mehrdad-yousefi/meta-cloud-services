@@ -9,7 +9,7 @@ Also includes ACM (communication management assistant) service."
 HOMEPAGE = "http://www.openfabrics.org/downloads/rdmacm/"
 SECTION = "libs/devel"
 
-LICENSE = "BSD"
+LICENSE = "BSD-2-Clause | GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=39cc3044d68741f9005da73e9b92db95"
 
 DEPENDS = "virtual/libibverbs"
