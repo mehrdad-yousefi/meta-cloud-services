@@ -1,7 +1,7 @@
 DESCRIPTION = "A generic, spec-compliant, thorough implementation of the OAuth request-signing logic"
 HOMEPAGE = "https://github.com/idan/oauthlib"
 SECTION = "devel/python"
-LICENSE = "Apache-2"
+LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=5ba9ce41463615e082609806255bce1b"
 
 SRC_URI[md5sum] = "eb60abdb002b9c08d248707b79a1cc92"

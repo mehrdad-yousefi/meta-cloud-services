@@ -4,7 +4,7 @@
 SUMMARY = "An implementation of the JSON specification according to RFC 4627"
 DESCRIPTION = "An implementation of the JSON specification according to RFC 4627"
 
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://CHANGES;md5=af8cad0ff27a1593ac5ee461bc2d71ab"
 
 PR = "r0"

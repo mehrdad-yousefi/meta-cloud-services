@@ -3,7 +3,7 @@ SUMMARY = "Python bindings for the avahi zeroconf client"
 HOMEPAGE = "https://github.com/lathiat/avahi"
 SECTION = "devel/python"
 
-LICENSE = "GPLv2+"
+LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2d5025d4aa3495befef8f17206a5b0a1"
 
 SRC_URI = "https://github.com/lathiat/avahi/releases/download/v${PV}/avahi-${PV}.tar.gz"

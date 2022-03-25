@@ -2,7 +2,7 @@ SUMMARY = "An image containing the cirros cloud guest"
 DESCRIPTION = "CirrOS a tiny cloud guest"
 HOMEPAGE = "https://launchpad.net/cirros"
 
-LICENSE="GPLv2"
+LICENSE="GPL-2.0-only"
 
 SRC_URI = "http://download.cirros-cloud.net/${PV}/${PN}-${PV}-x86_64-disk.img"
 

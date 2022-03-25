@@ -1,7 +1,7 @@
 DESCRIPTION = "A collection of Python deprecation patterns and strategies that help you collect your technical debt in a non-destructive manner."
 HOMEPAGE = "http://docs.openstack.org/developer/debtcollector/"
 SECTION = "devel/python"
-LICENSE = "Apache-2"
+LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
 SRC_URI[md5sum] = "6ac3af37693e0f517e51593d9ea33f23"

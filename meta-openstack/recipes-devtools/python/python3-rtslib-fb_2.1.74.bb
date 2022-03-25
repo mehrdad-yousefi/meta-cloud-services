@@ -1,7 +1,7 @@
 DESCRIPTION = "API for Linux kernel SCSI target (aka LIO)"
 HOMEPAGE = "http://github.com/agrover/rtslib-fb"
 SECTION = "devel/python"
-LICENSE = "Apache-2"
+LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://PKG-INFO;md5=cf391b108961d84a581f45259ec47c52"
 
 SRC_URI[md5sum] = "85ab011e3a98fb585d8a0fb337c5dab4"

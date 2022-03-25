@@ -1,7 +1,7 @@
 DESCRIPTION = "oslo.versionedobjects library"
 HOMEPAGE = "https://wiki.openstack.org/wiki/Oslo"
 SECTION = "devel/python"
-LICENSE = "Apache-2"
+LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
 PV = "2.3.0+git${SRCPV}"

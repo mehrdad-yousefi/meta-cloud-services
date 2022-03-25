@@ -1,7 +1,7 @@
 DESCRIPTION = "Python client for the Advanced Message Queuing Procotol (AMQP)"
 HOMEPAGE = "http://code.google.com/p/py-amqplib/"
 SECTION = "devel/python"
-LICENSE = "LGPL-3.0"
+LICENSE = "LGPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1702a92c723f09e3fab3583b165a8d90"
 
 PR = "r1"

@@ -1,6 +1,6 @@
 DESCRIPTION = "Linux SCSI target framework (tgt)"
 HOMEPAGE = "http://stgt.sourceforge.net"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://scripts/tgtd.spec;beginline=7;endline=7;md5=21c19ea7dad04648b9c2f791b6e29b4c"
 DEPENDS = "sg3-utils libaio"
 

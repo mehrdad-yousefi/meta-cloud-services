@@ -1,7 +1,7 @@
 DESCRIPTION = "%DESCRIPTION%"
 HOMEPAGE = "%URL%"
 SECTION = "devel/python"
-LICENSE = "Apache-2"
+LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://PKG-INFO;md5=7de5500e6244db6d698bbb724aea9a17"
 
 PYPI_PACKAGE = "XStatic-jquery-ui"

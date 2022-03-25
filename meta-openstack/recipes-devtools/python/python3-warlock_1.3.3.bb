@@ -1,7 +1,7 @@
 DESCRIPTION = "Build self-validating python objects using JSON schemas"
 HOMEPAGE = "http://github.com/bcwaldon/warlock"
 SECTION = "devel/python"
-LICENSE = "Apache-2"
+LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 DEPENDS += "python3-jsonschema python3-jsonpatch"

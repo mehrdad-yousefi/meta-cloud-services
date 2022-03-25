@@ -1,6 +1,6 @@
 DESCRIPTION = "Config file parser module"
 HOMEPAGE = "http://search.cpan.org/dist/Config-General/"
-LICENSE = "Artistic-1.0 | GPL-1.0+"
+LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
 SECTION = "libs"
 LIC_FILES_CHKSUM = "file://README;beginline=90;endline=90;md5=3ba4bbac1e79a08332688196f637d2b2"
 

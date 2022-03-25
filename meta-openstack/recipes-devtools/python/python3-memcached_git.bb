@@ -5,7 +5,7 @@ DESCRIPTION = "\
   memcached servers. Search google for memcached for more information."
 HOMEPAGE = "https://pypi.python.org/pypi/python-memcached/"
 SECTION = "devel/python"
-LICENSE = "PSF"
+LICENSE = "PSF-2.0"
 LIC_FILES_CHKSUM = "file://PSF.LICENSE;md5=7dd786e8594f1e787da94a946557b40e"
 
 PV = "1.59+git${SRCPV}"

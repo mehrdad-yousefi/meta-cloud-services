@@ -1,7 +1,7 @@
 DESCRIPTION = "A WeakMethod class for storing bound methods using weak references."
 HOMEPAGE = "https://github.com/twang817/weakrefmethod"
 SECTION = "devel/python"
-LICENSE = "PSF"
+LICENSE = "PSF-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=dd98d01d471fac8d8dbdd975229dba03"
 
 SRC_URI[md5sum] = "39e7450191dea0b17a646b929784ac6f"

@@ -2,7 +2,7 @@ SUMMARY = "Oslo Policy library"
 DESCRIPTION = "The Oslo Policy library provides support for RBAC policy enforcement across all OpenStack services."
 HOMEPAGE = "https://github.com/openstack/oslo.policy"
 SECTION = "devel/python"
-LICENSE = "Apache-2"
+LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
 PV = "3.3.0+git${SRCPV}"

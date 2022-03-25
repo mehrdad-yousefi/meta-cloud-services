@@ -1,7 +1,7 @@
 DESCRIPTION = "WebSockets support for any application/server"
 HOMEPAGE = "https://github.com/kanaka/websockify"
 SECTION = "devel/python"
-LICENSE = "LGPLv3"
+LICENSE = "LGPL-3.0-only"
 LIC_FILES_CHKSUM = "file://PKG-INFO;md5=eb81922f483833198eace60f1469f99d"
 
 SRC_URI[md5sum] = "ff745fd67457fd077915753c9b808b2a"

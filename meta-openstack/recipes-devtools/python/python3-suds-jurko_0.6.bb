@@ -1,7 +1,7 @@
 DESCRIPTION = "Lightweight SOAP client (Jurko's fork)"
 HOMEPAGE = "https://bitbucket.org/jurko/suds"
 SECTION = "devel/python"
-LICENSE = "LGPLv3"
+LICENSE = "LGPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=847e96bce86d8774f491a92924343a29"
 
 PYPI_PACKAGE_EXT = "tar.bz2"

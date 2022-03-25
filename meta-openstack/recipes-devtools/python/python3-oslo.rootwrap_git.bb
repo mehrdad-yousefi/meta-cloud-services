@@ -1,7 +1,7 @@
 DESCRIPTION = "Oslo Rootwrap"
 HOMEPAGE = "https://launchpad.net/oslo"
 SECTION = "devel/python"
-LICENSE = "Apache-2"
+LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c46f31914956e4579f9b488e71415ac8"
 
 PV = "6.1.0+git${SRCPV}"

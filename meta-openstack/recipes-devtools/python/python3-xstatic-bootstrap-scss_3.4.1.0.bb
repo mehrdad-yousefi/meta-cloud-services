@@ -1,7 +1,7 @@
 DESCRIPTION = "%DESCRIPTION%"
 HOMEPAGE = "%URL%"
 SECTION = "devel/python"
-LICENSE = "Apache-2"
+LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
 PYPI_PACKAGE = "XStatic-Bootstrap-SCSS"
