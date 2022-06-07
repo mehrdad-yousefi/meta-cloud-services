@@ -43,3 +43,13 @@ FILES:${PN} += " \
     ${systemd_system_unitdir}/iscsiuio.service \
     ${systemd_unitdir}/system-generators/ibft-rule-generator \
 "
+
+do_install:append() {
+    rm -rf ${D}${systemd_unitdir}/
+
+    install -d ${D}${systemd_unitdir}/system
+    install -d ${D}${systemd_unitdir}/system-generators
+    install -m 0644 ${S}/etc/systemd/*.service ${D}${systemd_unitdir}/system/
+    install -m 0644 ${S}/etc/systemd/*.socket ${D}${systemd_unitdir}/system/
+    install -m 0644 ${S}/etc/systemd/ibft-rule-generator ${D}${systemd_unitdir}/system-generators/
+}
