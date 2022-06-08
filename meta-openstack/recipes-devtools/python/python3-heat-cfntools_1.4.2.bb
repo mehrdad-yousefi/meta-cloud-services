@@ -18,6 +18,6 @@ DEPENDS += " \
         python3-pbr-native \
         "
 
-RDPENDS_${PN} += "\
+RDEPENDS:${PN} += "\
     python3-pbr \
     "
