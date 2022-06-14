@@ -11,5 +11,4 @@ inherit setuptools3 pypi
 
 RDEPENDS:${PN} += " \
         ${PYTHON_PN}-dateutil \
-        ${PYTHON_PN}-backports-functools-lru-cache \
         "
