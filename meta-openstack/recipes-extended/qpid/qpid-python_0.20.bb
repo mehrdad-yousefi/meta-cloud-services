@@ -12,4 +12,5 @@ SRC_URI[sha256sum] = "3ca55a5aa11fbbd4e26cb4cdafc9658489c159acadceac60c89d4bfb5c
 
 S = "${WORKDIR}/qpid-${PV}/python"
 
-inherit distutils3
+inherit setuptools3
+
