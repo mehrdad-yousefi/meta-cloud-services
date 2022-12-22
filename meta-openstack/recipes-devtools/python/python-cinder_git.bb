@@ -245,7 +245,7 @@ RDEPENDS:${PN} += " \
         python-novaclient \
         python-swiftclient \
         python-pytz \
-        python-requests \
+        python3-requests \
         python-retrying \
         python-routes \
         python-taskflow \

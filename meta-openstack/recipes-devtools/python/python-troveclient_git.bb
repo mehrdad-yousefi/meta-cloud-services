@@ -57,7 +57,7 @@ DEPENDS += " \
 RDEPENDS:${PN} += " \
         python3-pbr \
         python3-prettytable \
-        python-requests \
+        python3-requests \
         python3-simplejson \
         python3-babel \
         python3-six \

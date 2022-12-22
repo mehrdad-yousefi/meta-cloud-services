@@ -241,7 +241,7 @@ RDEPENDS:${PN} += " \
         python-saharaclient \
         python-troveclient \
         python-zaqarclient \
-        python-requests \
+        python3-requests \
         python3-six \
         bash \
 	"

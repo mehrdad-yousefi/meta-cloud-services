@@ -27,7 +27,7 @@ RDEPENDS:${PN} += " \
         python-os-client-config \
         python3-keystoneauth1 \
         python3-keystoneclient \
-        python-requests \
+        python3-requests \
         python3-simplejson \
         python3-six \
         python3-babel \

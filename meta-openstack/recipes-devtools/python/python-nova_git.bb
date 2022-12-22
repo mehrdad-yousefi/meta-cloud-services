@@ -297,7 +297,7 @@ RDEPENDS:${PN} += " \
 		   python3-keystoneauth1 \
 		   python-neutronclient \
 		   python-glanceclient \
-		   python-requests \
+		   python3-requests \
 		   python3-six \
 		   python-stevedore \
 		   python-setuptools3 \

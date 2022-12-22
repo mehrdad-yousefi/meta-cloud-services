@@ -33,7 +33,7 @@ RDEPENDS:${PN} += " \
    python3-babel \
    python3-prettytable \
    python3-keystoneauth1 \
-   python-requests \
+   python3-requests \
    python-warlock \
    python3-six \
    python3-oslo.utils \

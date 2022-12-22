@@ -253,7 +253,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.utils \
         python-neutronclient \
         python-novaclient \
-        python-requests \
+        python3-requests \
         python3-six \
         python-tooz \
 	"
