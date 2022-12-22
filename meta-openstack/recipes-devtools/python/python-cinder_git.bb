@@ -235,8 +235,8 @@ RDEPENDS:${PN} += " \
         python-oslo.versionedobjects \
         python-osprofiler \
         python-paramiko \
-        python-paste \
-        python-pastedeploy \
+        python3-paste \
+        python3-pastedeploy \
         python-psutil \
         python-pyparsing \
         python-barbicanclient \

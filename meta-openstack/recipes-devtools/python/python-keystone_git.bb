@@ -236,8 +236,8 @@ RDEPENDS:${PN} += " \
         python3-babel \
         python3-pbr \
         python-webob \
-        python-pastedeploy \
-        python-paste \
+        python3-pastedeploy \
+        python3-paste \
         python-routes \
         python-cryptography \
         python-six \

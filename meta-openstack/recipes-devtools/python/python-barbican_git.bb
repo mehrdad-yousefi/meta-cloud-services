@@ -118,8 +118,8 @@ RDEPENDS:${PN} += " \
         python-jsonschema \
         python-kombu \
         python-netaddr \
-        python-pastedeploy \
-        python-paste \
+        python3-pastedeploy \
+        python3-paste \
         python-pycrypto \
         python-pysqlite \
         python3-keystoneclient \

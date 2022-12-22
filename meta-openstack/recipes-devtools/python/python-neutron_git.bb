@@ -340,8 +340,8 @@ DEPENDS += " \
 
 RDEPENDS:${PN} += " \
         python3-pbr \
-        python-paste \
-        python-pastedeploy \
+        python3-paste \
+        python3-pastedeploy \
         python-routes \
         python-debtcollector \
         python-eventlet \

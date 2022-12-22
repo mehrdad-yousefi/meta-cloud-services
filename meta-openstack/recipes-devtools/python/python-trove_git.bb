@@ -263,8 +263,8 @@ RDEPENDS:${PN} += " \
     python-oslo.config \
     python-oslo.service \
     python-passlib \
-    python-paste \
-    python-pastedeploy \
+    python3-paste \
+    python3-pastedeploy \
     python-routes \
     python-sqlalchemy-migrate \
     python-swiftclient \

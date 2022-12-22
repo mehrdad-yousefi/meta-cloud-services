@@ -196,8 +196,8 @@ RDEPENDS:${PN} += " \
 	python-webob \
 	python-greenlet \
 	python-lockfile \
-	python-pastedeploy \
-	python-paste \
+	python3-pastedeploy \
+	python3-paste \
 	python-sqlalchemy-migrate \
 	python-stevedore \
 	python-suds-jurko \

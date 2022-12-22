@@ -283,8 +283,8 @@ RDEPENDS:${PN} += " \
 		   python-cryptography \
 		   python-webob \
 		   python-greenlet \
-		   python-pastedeploy \
-		   python-paste \
+		   python3-pastedeploy \
+		   python3-paste \
 		   python-prettytable \
 		   python-sqlalchemy-migrate \
 		   python-netaddr \

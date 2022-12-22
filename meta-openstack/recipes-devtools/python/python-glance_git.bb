@@ -179,7 +179,7 @@ RDEPENDS:${PN} += " \
         python3-pbr \
         python-sqlalchemy \
         python-eventlet \
-        python-pastedeploy \
+        python3-pastedeploy \
         python-routes \
         python-webob \
         python-sqlalchemy-migrate \
@@ -197,7 +197,7 @@ RDEPENDS:${PN} += " \
         python-keystonemiddleware \
         python-wsme \
         python-prettytable \
-        python-paste \
+        python3-paste \
         python-jsonschema \
         python3-keystoneclient \
         python-pyopenssl \

@@ -161,7 +161,7 @@ DEPENDS += " \
 RDEPENDS:${PN} += " \
     python-eventlet \
     python-greenlet \
-    python-pastedeploy \
+    python3-pastedeploy \
     python3-simplejson \
     python-swiftclient \
     python-netifaces \
