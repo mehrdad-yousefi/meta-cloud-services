@@ -210,7 +210,7 @@ RDEPENDS:${PN} += " \
         python3-babel \
         python-decorator \
         python-eventlet \
-        python-greenlet \
+        python3-greenlet \
         python-httplib2 \
         python3-iso8601 \
         python-ipaddress \

@@ -194,7 +194,7 @@ RDEPENDS:${PN} += " \
 	python-lxml \
 	python-routes \
 	python-webob \
-	python-greenlet \
+	python3-greenlet \
 	python-lockfile \
 	python3-pastedeploy \
 	python3-paste \
