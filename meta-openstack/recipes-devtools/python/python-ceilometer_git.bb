@@ -190,7 +190,7 @@ RDEPENDS:${PN} += " \
 	python-amqplib \
 	python-anyjson \
 	python-eventlet \
-	python-kombu \
+	python3-kombu \
 	python-lxml \
 	python-routes \
 	python-webob \
