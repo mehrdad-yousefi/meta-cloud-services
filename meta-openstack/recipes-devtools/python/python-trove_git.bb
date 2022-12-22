@@ -254,7 +254,7 @@ RDEPENDS:${PN} += " \
     python3-iso8601 \
     python-jinja2 \
     python-jsonschema \
-    python-keystoneclient \
+    python3-keystoneclient \
     python-kombu \
     python-lxml \
     python-netaddr \
@@ -301,7 +301,7 @@ RDEPENDS:${SRCNAME}-setup = " \
     keystone-setup \
     postgresql \
     postgresql-client \
-    python-keystoneclient \
+    python3-keystoneclient \
     python-novaclient \
     sudo \
     "

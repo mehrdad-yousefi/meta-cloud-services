@@ -206,7 +206,7 @@ RDEPENDS:${PN} += " \
 	python3-iso8601 \
 	python-setuptools3-git \
 	python-glanceclient \
-	python-keystoneclient \
+	python3-keystoneclient \
 	python-swiftclient \
 	python-ceilometerclient \
 	python-oslo.config \

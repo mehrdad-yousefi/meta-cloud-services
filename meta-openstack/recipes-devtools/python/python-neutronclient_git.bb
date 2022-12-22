@@ -26,7 +26,7 @@ RDEPENDS:${PN} += " \
         python-oslo.utils \
         python-os-client-config \
         python-keystoneauth1 \
-        python-keystoneclient \
+        python3-keystoneclient \
         python-requests \
         python3-simplejson \
         python-six \

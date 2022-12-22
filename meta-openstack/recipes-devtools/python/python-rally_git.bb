@@ -118,7 +118,7 @@ RDEPENDS:${PN} += " python3-babel \
     python-prettytable \
     python-pyyaml \
     python-glanceclient \
-    python-keystoneclient \
+    python3-keystoneclient \
     python-novaclient \
     python-neutronclient \
     python-cinderclient \

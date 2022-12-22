@@ -62,7 +62,7 @@ RDEPENDS:${PN} += " \
         python3-babel \
         python-six \
         python-oslo.utils \
-        python-keystoneclient \
+        python3-keystoneclient \
 	"
 
 RDEPENDS:${SRCNAME}-tests += "python-mock"

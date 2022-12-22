@@ -38,7 +38,7 @@ RDEPENDS:${PN} += " \
         python-cinderclient \
         python-glanceclient \
         python-heatclient \
-        python-keystoneclient \
+        python3-keystoneclient \
         python-neutronclient \
         python-novaclient \
         python-swiftclient \

@@ -199,7 +199,7 @@ RDEPENDS:${PN} += " \
         python-prettytable \
         python-paste \
         python-jsonschema \
-        python-keystoneclient \
+        python3-keystoneclient \
         python-pyopenssl \
         python-six \
         python-oslo.db \

@@ -34,7 +34,7 @@ RDEPENDS:${PN} += " \
         python-oslo.i18n \
         python-oslo.utils \
         python-glanceclient \
-        python-keystoneclient \
+        python3-keystoneclient \
         python-novaclient \
         python-cinderclient \
         "

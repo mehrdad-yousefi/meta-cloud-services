@@ -122,7 +122,7 @@ RDEPENDS:${PN} += " \
         python-paste \
         python-pycrypto \
         python-pysqlite \
-        python-keystoneclient \
+        python3-keystoneclient \
         python-sqlalchemy \
         python-stevedore \
         python-webob \

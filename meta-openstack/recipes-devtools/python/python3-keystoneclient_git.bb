@@ -1,5 +1,5 @@
 DESCRIPTION = "Client library for OpenStack Identity API"
-HOMEPAGE = "https://github.com/openstack/python-keystoneclient"
+HOMEPAGE = "https://github.com/openstack/python3-keystoneclient"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4a4d0e932ffae1c0131528d30d419c55"
@@ -9,7 +9,7 @@ SRCNAME = "keystoneclient"
 SRC_URI = "file://keystone-api-check.sh"
 
 SRC_URI = "\
-        git://github.com/openstack/python-keystoneclient.git;branch=stable/pike;protocol=https \
+        git://github.com/openstack/python3-keystoneclient.git;branch=stable/pike;protocol=https \
         file://keystone-api-check.sh \
         "
 

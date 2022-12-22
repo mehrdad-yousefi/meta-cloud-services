@@ -348,7 +348,7 @@ REGEX:pn-python-zake = "/zake/${COMMON_REGEX}"
 GITTAGREGEX_COMMON = "(?P<pver>\d+\.\d+\.(\d\.?)*)"
 
 GITTAGREGEX:pn-python-glanceclient = "${GITTAGREGEX_COMMON}"
-GITTAGREGEX:pn-python-keystoneclient = "${GITTAGREGEX_COMMON}"
+GITTAGREGEX:pn-python3-keystoneclient = "${GITTAGREGEX_COMMON}"
 GITTAGREGEX:pn-python-neutronclient = "(?P<pver>\d+\.\d+\.(\d\.?)+)"
 GITTAGREGEX:pn-python-novaclient = "${GITTAGREGEX_COMMON}"
 

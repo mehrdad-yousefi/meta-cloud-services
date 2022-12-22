@@ -241,7 +241,7 @@ RDEPENDS:${PN} += " \
         python-pyparsing \
         python-barbicanclient \
         python-glanceclient \
-        python-keystoneclient \
+        python3-keystoneclient \
         python-novaclient \
         python-swiftclient \
         python-pytz \
