@@ -19,7 +19,7 @@ SRC_URI[sha256sum] = "a930f92b362df2f292ec5f0281aa2011eb0c668faf6e24c4653a9fc53e
 DEPENDS = " \
     erlang-native \
     libxslt \
-    python-simplejson \
+    python3-simplejson \
     zip-native \
     unzip-native \
     libxslt-native \

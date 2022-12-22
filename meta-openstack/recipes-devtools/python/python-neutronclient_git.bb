@@ -28,7 +28,7 @@ RDEPENDS:${PN} += " \
         python-keystoneauth1 \
         python-keystoneclient \
         python-requests \
-        python-simplejson \
+        python3-simplejson \
         python-six \
         python-babel \
         bash \

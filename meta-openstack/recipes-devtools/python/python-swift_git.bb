@@ -162,7 +162,7 @@ RDEPENDS:${PN} += " \
     python-eventlet \
     python-greenlet \
     python-pastedeploy \
-    python-simplejson \
+    python3-simplejson \
     python-swiftclient \
     python-netifaces \
     python-xattr \

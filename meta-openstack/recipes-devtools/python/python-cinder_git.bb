@@ -250,7 +250,7 @@ RDEPENDS:${PN} += " \
         python-routes \
         python-taskflow \
         python-rtslib-fb \
-        python-simplejson \
+        python3-simplejson \
         python-six \
         python-sqlalchemy \
         python-sqlalchemy-migrate \

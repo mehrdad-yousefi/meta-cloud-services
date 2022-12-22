@@ -32,7 +32,7 @@ RDEPENDS:${PN} += " \
         python3-pbr \
         python-prettytable \
         python-keystoneauth1 \
-        python-simplejson \
+        python3-simplejson \
         python-babel \
         python-six \
         python-oslo.i18n \

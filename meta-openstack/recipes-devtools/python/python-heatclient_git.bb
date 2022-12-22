@@ -19,7 +19,7 @@ RDEPENDS:${PN} +="python-cliff \
 	python-iso8601 \
 	python-prettytable \
 	python-pyparsing \
-	python-simplejson \
+	python3-simplejson \
 	python3-pbr \
 	bash \
 	"

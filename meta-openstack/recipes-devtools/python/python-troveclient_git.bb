@@ -58,7 +58,7 @@ RDEPENDS:${PN} += " \
         python3-pbr \
         python-prettytable \
         python-requests \
-        python-simplejson \
+        python3-simplejson \
         python-babel \
         python-six \
         python-oslo.utils \
