@@ -177,12 +177,12 @@ DEPENDS += " \
 RDEPENDS:${PN} += " \
         coreutils \
         python3-pbr \
-        python-sqlalchemy \
+        python3-sqlalchemy \
         python-eventlet \
         python3-pastedeploy \
         python-routes \
         python-webob \
-        python-sqlalchemy-migrate \
+        python3-sqlalchemy-migrate \
         python-sqlparse \
         python-alembic \
         python-httplib2 \

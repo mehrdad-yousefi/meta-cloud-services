@@ -123,7 +123,7 @@ RDEPENDS:${PN} += " \
         python-pycrypto \
         python-pysqlite \
         python3-keystoneclient \
-        python-sqlalchemy \
+        python3-sqlalchemy \
         python-stevedore \
         python-webob \
         python-wsgiref \

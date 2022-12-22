@@ -355,7 +355,7 @@ RDEPENDS:${PN} += " \
         python-neutronclient \
         python-tenacity \
         python-ryu \
-        python-sqlalchemy \
+        python3-sqlalchemy \
         python-webob \
         python3-keystoneauth1 \
         python-alembic \

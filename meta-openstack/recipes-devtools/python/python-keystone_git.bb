@@ -241,8 +241,8 @@ RDEPENDS:${PN} += " \
         python-routes \
         python-cryptography \
         python3-six \
-        python-sqlalchemy \
-        python-sqlalchemy-migrate \
+        python3-sqlalchemy \
+        python3-sqlalchemy-migrate \
         python-stevedore \
         python-passlib \
         python3-keystoneclient \

@@ -273,7 +273,7 @@ DEPENDS += " \
 RDEPENDS:${PN} += " \
 		   libvirt \
 		   python3-pbr \
-		   python-sqlalchemy \
+		   python3-sqlalchemy \
 		   python-decorator \
 		   python-eventlet \
 		   python-jinja2 \
@@ -286,7 +286,7 @@ RDEPENDS:${PN} += " \
 		   python3-pastedeploy \
 		   python3-paste \
 		   python3-prettytable \
-		   python-sqlalchemy-migrate \
+		   python3-sqlalchemy-migrate \
 		   python3-netaddr \
 		   python3-netifaces \
 		   python3-paramiko \

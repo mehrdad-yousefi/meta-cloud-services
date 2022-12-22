@@ -266,7 +266,7 @@ RDEPENDS:${PN} += " \
     python3-paste \
     python3-pastedeploy \
     python-routes \
-    python-sqlalchemy-migrate \
+    python3-sqlalchemy-migrate \
     python-swiftclient \
     python-webob \
     python-monotonic \

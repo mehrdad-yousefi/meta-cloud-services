@@ -252,8 +252,8 @@ RDEPENDS:${PN} += " \
         python-rtslib-fb \
         python3-simplejson \
         python3-six \
-        python-sqlalchemy \
-        python-sqlalchemy-migrate \
+        python3-sqlalchemy \
+        python3-sqlalchemy-migrate \
         python-stevedore \
         python-suds-jurko \
         python-webob \

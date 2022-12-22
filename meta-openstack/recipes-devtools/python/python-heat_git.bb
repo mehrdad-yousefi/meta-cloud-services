@@ -167,7 +167,7 @@ DEPENDS += " \
 
 RDEPENDS:${PN} += " \
         python-heatclient \
-        python-sqlalchemy \
+        python3-sqlalchemy \
 	python-amqplib \
 	python-anyjson \
 	python-eventlet \
@@ -179,7 +179,7 @@ RDEPENDS:${PN} += " \
 	python-lockfile \
 	python3-pastedeploy \
 	python3-paste \
-	python-sqlalchemy-migrate \
+	python3-sqlalchemy-migrate \
 	python-stevedore \
 	python-suds-jurko \
 	python3-paramiko \

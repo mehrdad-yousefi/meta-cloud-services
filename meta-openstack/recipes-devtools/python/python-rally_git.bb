@@ -126,7 +126,7 @@ RDEPENDS:${PN} += " python3-babel \
     python-ceilometerclient \
     python-subunit \
     python3-requests \
-    python-sqlalchemy \
+    python3-sqlalchemy \
     python3-six \
     python-wsme \
     "
