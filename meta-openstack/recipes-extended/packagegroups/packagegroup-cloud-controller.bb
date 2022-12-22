@@ -37,7 +37,7 @@ RDEPENDS:${PN} = " postgresql \
     heat-api-cfn \
     heat-engine \
     heat-setup \
-    python-heat-cfntools \
+    python3-heat-cfntools \
     python-openstackclient \
     horizon \
     horizon-standalone \
