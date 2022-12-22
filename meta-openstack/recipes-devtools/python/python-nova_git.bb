@@ -277,7 +277,7 @@ RDEPENDS:${PN} += " \
 		   python-decorator \
 		   python-eventlet \
 		   python-jinja2 \
-		   python-keystonemiddleware \
+		   python3-keystonemiddleware \
 		   python-lxml \
 		   python-routes \
 		   python-cryptography \

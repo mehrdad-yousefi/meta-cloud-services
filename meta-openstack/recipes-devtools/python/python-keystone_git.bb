@@ -246,7 +246,7 @@ RDEPENDS:${PN} += " \
         python-stevedore \
         python-passlib \
         python3-keystoneclient \
-        python-keystonemiddleware \
+        python3-keystonemiddleware \
         python-bcrypt \
         python-scrypt \
         python-oslo.cache \

@@ -194,7 +194,7 @@ RDEPENDS:${PN} += " \
         python-futurist \
         python-taskflow \
         python3-keystoneauth1 \
-        python-keystonemiddleware \
+        python3-keystonemiddleware \
         python-wsme \
         python3-prettytable \
         python3-paste \

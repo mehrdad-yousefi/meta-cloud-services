@@ -348,7 +348,7 @@ RDEPENDS:${PN} += " \
         python-pecan \
         python-httplib2 \
         python-jinja2 \
-        python-keystonemiddleware \
+        python3-keystonemiddleware \
         python3-netaddr \
         python-netifaces \
         python-neutron-lib \

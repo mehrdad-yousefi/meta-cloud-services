@@ -239,7 +239,7 @@ RDEPENDS:${PN} += " \
         python-jsonpath-rw-ext \
         python-jsonschema \
         python-kafka \
-        python-keystonemiddleware \
+        python3-keystonemiddleware \
         python-oslo.context \
         python-oslo.db \
         python-oslo.concurrency \
