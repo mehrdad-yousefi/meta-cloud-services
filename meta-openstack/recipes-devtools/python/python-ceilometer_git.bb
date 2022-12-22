@@ -234,7 +234,7 @@ RDEPENDS:${PN} += " \
 	python3-pbr \
 	python-croniter \
 	python-ipaddr \
-	python-pysnmp \
+	python3-pysnmp \
         python-retrying \
         python-jsonpath-rw-ext \
         python-jsonschema \
