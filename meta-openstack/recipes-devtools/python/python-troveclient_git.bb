@@ -65,7 +65,7 @@ RDEPENDS:${PN} += " \
         python3-keystoneclient \
 	"
 
-RDEPENDS:${SRCNAME}-tests += "python-mock"
+RDEPENDS:${SRCNAME}-tests += "python3-mock"
 
 RDEPENDS:${SRCNAME} += " \
     ${PN} \

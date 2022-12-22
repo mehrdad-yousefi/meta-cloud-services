@@ -311,7 +311,7 @@ RDEPENDS:${SRCNAME}-taskmanager = " \
     "
 
 RDEPENDS:${SRCNAME}-tests += " \
-    python-mock \
+    python3-mock \
     python-pexpect \
     "
 
