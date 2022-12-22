@@ -166,17 +166,17 @@ FILES:${SRCNAME}-registry = "\
 
 DEPENDS += " \
         python-pip \
-        python-pbr \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 RDEPENDS:${PN} += " \
         coreutils \
-        python-pbr \
+        python3-pbr \
         python-sqlalchemy \
         python-eventlet \
         python-pastedeploy \

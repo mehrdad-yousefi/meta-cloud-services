@@ -224,17 +224,17 @@ FILES:${SRCNAME} = "${bindir}/* \
 
 DEPENDS += " \
         python-pip \
-        python-pbr \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 RDEPENDS:${PN} += " \
         python-babel \
-        python-pbr \
+        python3-pbr \
         python-webob \
         python-pastedeploy \
         python-paste \

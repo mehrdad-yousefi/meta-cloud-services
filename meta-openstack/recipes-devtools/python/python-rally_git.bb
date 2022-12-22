@@ -97,12 +97,12 @@ FILES:${SRCNAME}-api = "${bindir}/rally-api \
 
 DEPENDS += " \
     python-pip \
-    python-pbr \
+    python3-pbr \
     "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
 	"
 
 RDEPENDS:${PN} += " python-babel \
@@ -113,7 +113,7 @@ RDEPENDS:${PN} += " python-babel \
     python-netaddr \
     python-oslo.config \
     python-paramiko \
-    python-pbr \
+    python3-pbr \
     python-pecan \
     python-prettytable \
     python-pyyaml \

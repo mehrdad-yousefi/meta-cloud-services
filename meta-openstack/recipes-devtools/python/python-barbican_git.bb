@@ -93,12 +93,12 @@ pkg_postinst:${SRCNAME}-setup () {
 
 DEPENDS += " \
         python-pip \
-        python-pbr \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 RDEPENDS:${SRCNAME} = "${PN} \
@@ -109,7 +109,7 @@ RDEPENDS:${SRCNAME} = "${PN} \
 
 RDEPENDS:${PN} += " \
         python-pip \
-        python-pbr \
+        python3-pbr \
         python-alembic \
         python-babel \
         python-eventlet \

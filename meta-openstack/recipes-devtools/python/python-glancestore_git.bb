@@ -18,12 +18,12 @@ inherit setuptools3
 DEPENDS += " \
         gmp \
         python-pip \
-        python-pbr \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 RDEPENDS:${PN} = " \
@@ -34,6 +34,6 @@ RDEPENDS:${PN} = " \
    python-cinderclient \
    python-oslo.config \
    python-oslo.i18n \
-   python-pbr \
+   python3-pbr \
    "
 

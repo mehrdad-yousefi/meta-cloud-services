@@ -196,17 +196,17 @@ FILES:${SRCNAME} = "${bindir}/* \
 
 DEPENDS += " \
         python-pip \
-        python-pbr \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 RDEPENDS:${PN} += " \
         lvm2 \
-        python-pbr \
+        python3-pbr \
         python-babel \
         python-decorator \
         python-eventlet \

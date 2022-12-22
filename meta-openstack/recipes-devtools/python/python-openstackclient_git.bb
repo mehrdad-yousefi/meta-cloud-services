@@ -15,16 +15,16 @@ S = "${WORKDIR}/git"
 inherit setuptools3
 
 DEPENDS += "\
-        python-pbr \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
 	"
 
 RDEPENDS:${PN} += " \
-        python-pbr \
+        python3-pbr \
         python-six \
         python-babel \
         python-cliff \

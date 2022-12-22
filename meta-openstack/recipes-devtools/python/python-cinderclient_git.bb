@@ -20,16 +20,16 @@ inherit setuptools3 monitor
 
 DEPENDS += " \
         python-pip \
-        python-pbr \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 RDEPENDS:${PN} += " \
-        python-pbr \
+        python3-pbr \
         python-prettytable \
         python-keystoneauth1 \
         python-simplejson \

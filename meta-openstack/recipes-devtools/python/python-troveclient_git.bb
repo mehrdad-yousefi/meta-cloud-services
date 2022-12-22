@@ -51,11 +51,11 @@ FILES:${SRCNAME}-bin = " \
 
 DEPENDS += " \
         python-pip \
-        python-pbr \
+        python3-pbr \
         "
 
 RDEPENDS:${PN} += " \
-        python-pbr \
+        python3-pbr \
         python-prettytable \
         python-requests \
         python-simplejson \
@@ -74,7 +74,7 @@ RDEPENDS:${SRCNAME} += " \
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 RDEPENDS:${SRCNAME}-bin += " \

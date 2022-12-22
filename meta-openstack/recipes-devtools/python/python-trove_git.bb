@@ -234,13 +234,13 @@ FILES:${SRCNAME}-setup = " \
 
 
 DEPENDS += " \
-    python-pbr \
+    python3-pbr \
     python-pip \
     "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
 	"
 
 RDEPENDS:${PN} += " \

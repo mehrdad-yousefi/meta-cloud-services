@@ -14,7 +14,7 @@ S = "${WORKDIR}/git"
 DEPENDS += " \
         gmp \
         python-pip \
-        python-pbr \
+        python3-pbr \
         "
 
 inherit setuptools3 monitor rmargparse
@@ -23,13 +23,13 @@ FILES:${PN} += "${datadir}/${SRCNAME}"
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-    python-pbr-native \
+    python3-pbr-native \
     "
 
 RDEPENDS:${PN} += " \
    gmp \
    bash \
-   python-pbr \
+   python3-pbr \
    python-babel \
    python-prettytable \
    python-keystoneauth1 \

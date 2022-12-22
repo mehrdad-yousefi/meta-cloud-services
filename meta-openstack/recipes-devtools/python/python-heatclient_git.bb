@@ -6,12 +6,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 
 DEPENDS += " \
         python-pip \
-        python-pbr \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 RDEPENDS:${PN} +="python-cliff \
@@ -20,7 +20,7 @@ RDEPENDS:${PN} +="python-cliff \
 	python-prettytable \
 	python-pyparsing \
 	python-simplejson \
-	python-pbr \
+	python3-pbr \
 	bash \
 	"
 
