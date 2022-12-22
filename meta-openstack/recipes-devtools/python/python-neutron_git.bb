@@ -374,7 +374,7 @@ RDEPENDS:${PN} += " \
         python-oslo.privsep \
         python-oslo.reports \
         python3-oslo.rootwrap \
-        python-oslo.serialization \
+        python3-oslo.serialization \
         python-oslo.service \
         python3-oslo.utils \
         python-oslo.versionedobjects \

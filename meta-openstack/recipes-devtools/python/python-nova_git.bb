@@ -308,7 +308,7 @@ RDEPENDS:${PN} += " \
 		   python-oslo.context \
 		   python-oslo.log \
 		   python-oslo.reports \
-		   python-oslo.serialization \
+		   python3-oslo.serialization \
 		   python3-oslo.utils \
 		   python-oslo.db \
 		   python3-oslo.rootwrap \

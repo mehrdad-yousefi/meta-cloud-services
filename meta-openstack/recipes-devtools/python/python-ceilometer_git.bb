@@ -210,7 +210,7 @@ RDEPENDS:${PN} += " \
 	python-swiftclient \
 	python-ceilometerclient \
 	python-oslo.config \
-	python-oslo.serialization \
+	python3-oslo.serialization \
 	python3-oslo.rootwrap \
 	python-tooz \        
 	python-msgpack \

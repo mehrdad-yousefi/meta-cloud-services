@@ -30,7 +30,7 @@ RDEPENDS:${PN} += " \
         python3-keystoneauth1 \
         python3-iso8601 \
         python-oslo.i18n \
-        python-oslo.serialization \
+        python3-oslo.serialization \
         python3-oslo.utils \
         python3-prettytable \
         python3-simplejson \

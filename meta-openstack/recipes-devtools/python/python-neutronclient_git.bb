@@ -22,7 +22,7 @@ RDEPENDS:${PN} += " \
         python3-netaddr \
         python-osc-lib \
         python-oslo.i18n \
-        python-oslo.serialization \
+        python3-oslo.serialization \
         python3-oslo.utils \
         python-os-client-config \
         python3-keystoneauth1 \

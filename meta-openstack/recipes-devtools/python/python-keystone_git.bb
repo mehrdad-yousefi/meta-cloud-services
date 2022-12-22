@@ -259,7 +259,7 @@ RDEPENDS:${PN} += " \
         python-oslo.log \
         python-oslo.middleware \
         python-oslo.policy \
-        python-oslo.serialization \
+        python3-oslo.serialization \
         python3-oslo.utils \
         python-oauthlib \
         python-pysaml2 \
