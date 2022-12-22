@@ -386,7 +386,7 @@ RDEPENDS:${PN} += " \
         python-weakrefmethod \
         python-novaclient \
         python-designateclient \
-        python-os-xenapi \
+        python3-os-xenapi \
         "
 
 RDEPENDS:${SRCNAME} = "${PN} \

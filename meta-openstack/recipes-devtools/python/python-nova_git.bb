@@ -327,7 +327,7 @@ RDEPENDS:${PN} += " \
 		   python-os-win \
 		   python-castellan \
 		   python-microversion-parse \
-		   python-os-xenapi \
+		   python3-os-xenapi \
 		   python-tooz \
 		   python-cursive \
 		   python-pypowervm \
