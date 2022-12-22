@@ -236,7 +236,7 @@ RDEPENDS:${PN} += " \
 	python-ipaddr \
 	python3-pysnmp \
         python-retrying \
-        python-jsonpath-rw-ext \
+        python3-jsonpath-rw-ext \
         python-jsonschema \
         python-kafka \
         python3-keystonemiddleware \
