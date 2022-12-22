@@ -294,7 +294,7 @@ RDEPENDS:${PN} += " \
 		   python3-iso8601 \
 		   python-jsonschema \
 		   python-cinderclient \
-		   python-keystoneauth1 \
+		   python3-keystoneauth1 \
 		   python-neutronclient \
 		   python-glanceclient \
 		   python-requests \

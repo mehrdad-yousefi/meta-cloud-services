@@ -31,7 +31,7 @@ DEPENDS += " \
 RDEPENDS:${PN} += " \
         python3-pbr \
         python3-prettytable \
-        python-keystoneauth1 \
+        python3-keystoneauth1 \
         python3-simplejson \
         python3-babel \
         python-six \

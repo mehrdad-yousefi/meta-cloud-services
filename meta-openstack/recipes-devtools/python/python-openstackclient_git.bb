@@ -28,7 +28,7 @@ RDEPENDS:${PN} += " \
         python-six \
         python3-babel \
         python-cliff \
-        python-keystoneauth1 \
+        python3-keystoneauth1 \
         python-openstacksdk \
         python-osc-lib \
         python-oslo.i18n \

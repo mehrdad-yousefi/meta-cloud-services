@@ -357,7 +357,7 @@ RDEPENDS:${PN} += " \
         python-ryu \
         python-sqlalchemy \
         python-webob \
-        python-keystoneauth1 \
+        python3-keystoneauth1 \
         python-alembic \
         python-six \
         python-stevedore \

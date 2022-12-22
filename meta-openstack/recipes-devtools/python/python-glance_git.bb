@@ -193,7 +193,7 @@ RDEPENDS:${PN} += " \
         python-stevedore \
         python-futurist \
         python-taskflow \
-        python-keystoneauth1 \
+        python3-keystoneauth1 \
         python-keystonemiddleware \
         python-wsme \
         python3-prettytable \
