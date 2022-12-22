@@ -290,7 +290,7 @@ RDEPENDS:${PN} += " \
 		   python-netaddr \
 		   python-netifaces \
 		   python-paramiko \
-		   python-babel \
+		   python3-babel \
 		   python3-iso8601 \
 		   python-jsonschema \
 		   python-cinderclient \

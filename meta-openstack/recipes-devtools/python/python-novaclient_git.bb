@@ -35,7 +35,7 @@ RDEPENDS:${PN} += " \
         python-prettytable \
         python3-simplejson \
         python-six \
-        python-babel \
+        python3-babel \
         bash \
         "
 

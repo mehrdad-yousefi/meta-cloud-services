@@ -207,7 +207,7 @@ DEPENDS += " \
 RDEPENDS:${PN} += " \
         lvm2 \
         python3-pbr \
-        python-babel \
+        python3-babel \
         python-decorator \
         python-eventlet \
         python-greenlet \

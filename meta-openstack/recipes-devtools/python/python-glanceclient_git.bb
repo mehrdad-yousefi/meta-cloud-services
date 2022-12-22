@@ -30,7 +30,7 @@ RDEPENDS:${PN} += " \
    gmp \
    bash \
    python3-pbr \
-   python-babel \
+   python3-babel \
    python-prettytable \
    python-keystoneauth1 \
    python-requests \

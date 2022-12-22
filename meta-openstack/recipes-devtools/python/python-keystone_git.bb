@@ -233,7 +233,7 @@ DEPENDS += " \
         "
 
 RDEPENDS:${PN} += " \
-        python-babel \
+        python3-babel \
         python3-pbr \
         python-webob \
         python-pastedeploy \

@@ -202,7 +202,7 @@ RDEPENDS:${PN} += " \
 	python-stevedore \
 	python-suds-jurko \
 	python-paramiko \
-	python-babel \
+	python3-babel \
 	python3-iso8601 \
 	python-setuptools3-git \
 	python-glanceclient \

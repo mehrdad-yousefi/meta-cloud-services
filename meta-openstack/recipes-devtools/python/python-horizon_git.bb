@@ -16,7 +16,7 @@ DEPENDS += " \
 
 RDEPENDS:${PN} += " \
         python3-pbr \
-        python-babel \
+        python3-babel \
         python-django \
         python-pint \
         python-django-babel \

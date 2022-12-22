@@ -105,7 +105,7 @@ DEPENDS += " \
         python3-pbr-native \
 	"
 
-RDEPENDS:${PN} += " python-babel \
+RDEPENDS:${PN} += " python3-babel \
     python-decorator \
     python-fixtures \
     python3-iso8601 \

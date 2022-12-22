@@ -111,7 +111,7 @@ RDEPENDS:${PN} += " \
         python3-pip \
         python3-pbr \
         python-alembic \
-        python-babel \
+        python3-babel \
         python-eventlet \
         python-falcon \
         python3-iso8601 \

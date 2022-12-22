@@ -244,7 +244,7 @@ DEPENDS += " \
 	"
 
 RDEPENDS:${PN} += " \
-    python-babel \
+    python3-babel \
     python-cinderclient \
     python-eventlet \
     python-falcon \
