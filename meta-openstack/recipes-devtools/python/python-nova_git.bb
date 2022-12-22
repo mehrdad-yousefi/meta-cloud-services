@@ -315,7 +315,7 @@ RDEPENDS:${PN} += " \
 		   python-oslo.messaging \
 		   python-oslo.policy \
 		   python-oslo.privsep \
-		   python-oslo.i18n \
+		   python3-oslo.i18n \
 		   python-oslo.service \
 		   python-rfc3986 \
 		   python-oslo.middleware \

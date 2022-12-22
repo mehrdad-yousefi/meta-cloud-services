@@ -203,7 +203,7 @@ RDEPENDS:${PN} += " \
         python-pyopenssl \
         python3-six \
         python-oslo.db \
-        python-oslo.i18n \
+        python3-oslo.i18n \
         python-oslo.log \
         python-oslo.messaging \
         python-oslo.middleware \

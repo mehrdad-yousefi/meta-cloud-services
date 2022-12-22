@@ -31,7 +31,7 @@ RDEPENDS:${PN} += " \
         python3-keystoneauth1 \
         python-openstacksdk \
         python-osc-lib \
-        python-oslo.i18n \
+        python3-oslo.i18n \
         python3-oslo.utils \
         python-glanceclient \
         python3-keystoneclient \

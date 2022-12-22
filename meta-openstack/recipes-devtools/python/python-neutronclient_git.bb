@@ -21,7 +21,7 @@ RDEPENDS:${PN} += " \
         python3-iso8601 \
         python3-netaddr \
         python-osc-lib \
-        python-oslo.i18n \
+        python3-oslo.i18n \
         python3-oslo.serialization \
         python3-oslo.utils \
         python-os-client-config \

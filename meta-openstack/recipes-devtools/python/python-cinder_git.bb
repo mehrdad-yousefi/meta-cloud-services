@@ -257,7 +257,7 @@ RDEPENDS:${PN} += " \
         python-stevedore \
         python-suds-jurko \
         python-webob \
-        python-oslo.i18n \
+        python3-oslo.i18n \
         python-oslo.vmware \
         python-os-brick \
         python-os-win \

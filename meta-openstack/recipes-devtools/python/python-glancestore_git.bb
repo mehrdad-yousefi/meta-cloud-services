@@ -33,7 +33,7 @@ RDEPENDS:${PN} = " \
    python3-six \
    python-cinderclient \
    python-oslo.config \
-   python-oslo.i18n \
+   python3-oslo.i18n \
    python3-pbr \
    "
 

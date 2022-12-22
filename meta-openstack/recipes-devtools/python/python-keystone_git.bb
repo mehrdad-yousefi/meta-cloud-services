@@ -255,7 +255,7 @@ RDEPENDS:${PN} += " \
         python-oslo.context \
         python-oslo.messaging \
         python-oslo.db \
-        python-oslo.i18n \
+        python3-oslo.i18n \
         python-oslo.log \
         python-oslo.middleware \
         python-oslo.policy \

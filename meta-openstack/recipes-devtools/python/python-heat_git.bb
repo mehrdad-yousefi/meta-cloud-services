@@ -218,7 +218,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.concurrency \
         python-oslo.context \
         python-oslo.db \
-        python-oslo.i18n \
+        python3-oslo.i18n \
         python-oslo.messaging \
         python-oslo.middleware \
         python-oslo.policy \
