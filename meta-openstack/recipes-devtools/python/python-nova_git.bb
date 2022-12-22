@@ -288,7 +288,7 @@ RDEPENDS:${PN} += " \
 		   python3-prettytable \
 		   python-sqlalchemy-migrate \
 		   python3-netaddr \
-		   python-netifaces \
+		   python3-netifaces \
 		   python3-paramiko \
 		   python3-babel \
 		   python3-iso8601 \

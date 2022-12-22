@@ -350,7 +350,7 @@ RDEPENDS:${PN} += " \
         python-jinja2 \
         python3-keystonemiddleware \
         python3-netaddr \
-        python-netifaces \
+        python3-netifaces \
         python-neutron-lib \
         python-neutronclient \
         python-tenacity \

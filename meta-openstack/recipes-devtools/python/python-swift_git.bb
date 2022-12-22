@@ -164,7 +164,7 @@ RDEPENDS:${PN} += " \
     python3-pastedeploy \
     python3-simplejson \
     python-swiftclient \
-    python-netifaces \
+    python3-netifaces \
     python-xattr \
     python3-pbr \
     python-dnspython \
