@@ -225,7 +225,7 @@ RDEPENDS:${PN} += " \
 	python-eventlet \
 	python-pymongo \
 	python-thrift \
-	python-simplegeneric \
+	python3-simplegeneric \
 	python-webtest \
 	python-waitress \
 	python-pyyaml \
