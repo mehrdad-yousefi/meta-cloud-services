@@ -263,7 +263,7 @@ RDEPENDS:${PN} += " \
         python-os-win \
         python-tooz \
         python-google-api-python-client \
-        python-castellan \
+        python3-castellan \
         python-cryptography \
         "
 

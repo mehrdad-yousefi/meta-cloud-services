@@ -325,7 +325,7 @@ RDEPENDS:${PN} += " \
 		   python-os-traits \
 		   python-os-vif \
 		   python-os-win \
-		   python-castellan \
+		   python3-castellan \
 		   python-microversion-parse \
 		   python3-os-xenapi \
 		   python-tooz \
