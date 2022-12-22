@@ -230,7 +230,7 @@ RDEPENDS:${PN} += " \
         python-oslo.reports \
         python3-oslo.rootwrap \
         python3-oslo.serialization \
-        python-oslo.service \
+        python3-oslo.service \
         python3-oslo.utils \
         python-oslo.versionedobjects \
         python-osprofiler \

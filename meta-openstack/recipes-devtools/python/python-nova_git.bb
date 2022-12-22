@@ -316,7 +316,7 @@ RDEPENDS:${PN} += " \
 		   python-oslo.policy \
 		   python-oslo.privsep \
 		   python3-oslo.i18n \
-		   python-oslo.service \
+		   python3-oslo.service \
 		   python-rfc3986 \
 		   python-oslo.middleware \
 		   python-psutil \

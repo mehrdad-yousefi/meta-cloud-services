@@ -261,7 +261,7 @@ RDEPENDS:${PN} += " \
     python-neutronclient \
     python-novaclient \
     python-oslo.config \
-    python-oslo.service \
+    python3-oslo.service \
     python-passlib \
     python3-paste \
     python3-pastedeploy \
