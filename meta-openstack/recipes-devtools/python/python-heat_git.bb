@@ -225,7 +225,7 @@ RDEPENDS:${PN} += " \
         python-oslo.reports \
         python-oslo.serialization \
         python-oslo.service \
-        python-oslo.utils \
+        python3-oslo.utils \
         python-osprofiler \
         python-oslo.versionedobjects \
         python-pycrypto \

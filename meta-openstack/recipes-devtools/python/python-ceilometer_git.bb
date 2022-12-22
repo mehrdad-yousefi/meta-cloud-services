@@ -250,7 +250,7 @@ RDEPENDS:${PN} += " \
         python-oslo.service \
         python-oslo.messaging \
         python-oslo.middleware \
-        python-oslo.utils \
+        python3-oslo.utils \
         python-neutronclient \
         python-novaclient \
         python-requests \

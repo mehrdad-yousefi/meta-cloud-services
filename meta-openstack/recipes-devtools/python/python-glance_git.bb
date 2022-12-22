@@ -189,7 +189,7 @@ RDEPENDS:${PN} += " \
         python-oslo.config \
         python-oslo.concurrency \
         python-oslo.context \
-        python-oslo.utils \
+        python3-oslo.utils \
         python-stevedore \
         python-futurist \
         python-taskflow \

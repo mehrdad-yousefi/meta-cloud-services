@@ -61,7 +61,7 @@ RDEPENDS:${PN} += " \
         python3-simplejson \
         python3-babel \
         python-six \
-        python-oslo.utils \
+        python3-oslo.utils \
         python3-keystoneclient \
 	"
 

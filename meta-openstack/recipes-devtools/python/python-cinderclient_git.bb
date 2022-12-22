@@ -36,7 +36,7 @@ RDEPENDS:${PN} += " \
         python3-babel \
         python-six \
         python-oslo.i18n \
-        python-oslo.utils \
+        python3-oslo.utils \
         bash \
         "
 	

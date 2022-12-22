@@ -31,7 +31,7 @@ RDEPENDS:${PN} += " \
         python-oslo.i18n \
         python-oslo.policy \
         python-oslo.serialization \
-        python-oslo.utils \
+        python3-oslo.utils \
         python-osprofiler \
         python-pymongo \
         python-pyscss \

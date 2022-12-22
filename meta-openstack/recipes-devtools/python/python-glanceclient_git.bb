@@ -36,7 +36,7 @@ RDEPENDS:${PN} += " \
    python-requests \
    python-warlock \
    python-six \
-   python-oslo.utils \
+   python3-oslo.utils \
    python-oslo.i18n \
    python-wrapt \
    python-pyopenssl \

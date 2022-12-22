@@ -37,5 +37,5 @@ RDEPENDS:${PN} += " \
         python-oslo.messaging \
         python-oslo.policy \
         python-oslo.service \
-        python-oslo.utils \
+        python3-oslo.utils \
         "

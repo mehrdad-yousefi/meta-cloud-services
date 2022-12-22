@@ -23,7 +23,7 @@ RDEPENDS:${PN} += " \
         python-osc-lib \
         python-oslo.i18n \
         python-oslo.serialization \
-        python-oslo.utils \
+        python3-oslo.utils \
         python-os-client-config \
         python-keystoneauth1 \
         python3-keystoneclient \

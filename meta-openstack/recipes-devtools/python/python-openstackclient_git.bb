@@ -32,7 +32,7 @@ RDEPENDS:${PN} += " \
         python-openstacksdk \
         python-osc-lib \
         python-oslo.i18n \
-        python-oslo.utils \
+        python3-oslo.utils \
         python-glanceclient \
         python3-keystoneclient \
         python-novaclient \

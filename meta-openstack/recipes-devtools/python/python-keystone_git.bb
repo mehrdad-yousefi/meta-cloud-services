@@ -260,7 +260,7 @@ RDEPENDS:${PN} += " \
         python-oslo.middleware \
         python-oslo.policy \
         python-oslo.serialization \
-        python-oslo.utils \
+        python3-oslo.utils \
         python-oauthlib \
         python-pysaml2 \
         python-dogpile.cache \
