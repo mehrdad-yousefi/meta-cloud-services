@@ -34,7 +34,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.utils \
         python3-prettytable \
         python3-simplejson \
-        python-six \
+        python3-six \
         python3-babel \
         bash \
         "

@@ -127,7 +127,7 @@ RDEPENDS:${PN} += " python3-babel \
     python-subunit \
     python-requests \
     python-sqlalchemy \
-    python-six \
+    python3-six \
     python-wsme \
     "
 

@@ -240,7 +240,7 @@ RDEPENDS:${PN} += " \
         python3-paste \
         python-routes \
         python-cryptography \
-        python-six \
+        python3-six \
         python-sqlalchemy \
         python-sqlalchemy-migrate \
         python-stevedore \

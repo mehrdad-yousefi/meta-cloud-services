@@ -25,7 +25,7 @@ DEPENDS += " \
 
 RDEPENDS:${PN} += " \
         python3-pbr \
-        python-six \
+        python3-six \
         python3-babel \
         python-cliff \
         python3-keystoneauth1 \

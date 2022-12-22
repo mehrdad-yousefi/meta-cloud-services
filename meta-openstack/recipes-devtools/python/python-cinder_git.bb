@@ -251,7 +251,7 @@ RDEPENDS:${PN} += " \
         python-taskflow \
         python-rtslib-fb \
         python3-simplejson \
-        python-six \
+        python3-six \
         python-sqlalchemy \
         python-sqlalchemy-migrate \
         python-stevedore \

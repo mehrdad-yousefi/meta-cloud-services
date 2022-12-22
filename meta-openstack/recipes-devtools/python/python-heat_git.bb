@@ -242,7 +242,7 @@ RDEPENDS:${PN} += " \
         python-troveclient \
         python-zaqarclient \
         python-requests \
-        python-six \
+        python3-six \
         bash \
 	"
 

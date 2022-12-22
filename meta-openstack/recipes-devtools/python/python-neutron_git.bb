@@ -359,7 +359,7 @@ RDEPENDS:${PN} += " \
         python-webob \
         python3-keystoneauth1 \
         python-alembic \
-        python-six \
+        python3-six \
         python-stevedore \
         python-oslo.cache \
         python-oslo.concurrency \

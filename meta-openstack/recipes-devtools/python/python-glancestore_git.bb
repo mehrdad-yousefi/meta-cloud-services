@@ -30,7 +30,7 @@ RDEPENDS:${PN} = " \
    python-enum34 \
    python-eventlet \
    python3-iso8601 \
-   python-six \
+   python3-six \
    python-cinderclient \
    python-oslo.config \
    python-oslo.i18n \

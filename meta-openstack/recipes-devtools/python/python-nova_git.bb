@@ -298,7 +298,7 @@ RDEPENDS:${PN} += " \
 		   python-neutronclient \
 		   python-glanceclient \
 		   python-requests \
-		   python-six \
+		   python3-six \
 		   python-stevedore \
 		   python-setuptools3 \
 		   python-websockify \

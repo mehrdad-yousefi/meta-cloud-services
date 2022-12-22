@@ -254,7 +254,7 @@ RDEPENDS:${PN} += " \
         python-neutronclient \
         python-novaclient \
         python-requests \
-        python-six \
+        python3-six \
         python-tooz \
 	"
 

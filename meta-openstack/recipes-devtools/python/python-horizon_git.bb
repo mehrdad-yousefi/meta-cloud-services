@@ -45,7 +45,7 @@ RDEPENDS:${PN} += " \
         python-pytz \
         python-pyyaml \
         python-semantic-version \
-        python-six \
+        python3-six \
         python-xstatic \
         python-xstatic-angular \
         python-xstatic-angular-bootstrap \

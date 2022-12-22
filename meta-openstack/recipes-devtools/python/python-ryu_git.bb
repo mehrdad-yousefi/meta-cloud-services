@@ -33,7 +33,7 @@ RDEPENDS:${PN} += " \
         python-oslo.config \
         python-ovs \
         python-routes \
-        python-six \
+        python3-six \
         python-tinyrpc \
         python-webob \
         "
