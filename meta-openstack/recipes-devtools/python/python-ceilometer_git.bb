@@ -174,7 +174,7 @@ FILES:${SRCNAME}-controller = "${bindir}/* \
 "
 
 DEPENDS += " \
-        python-pip \
+        python3-pip \
         python3-pbr \
         "
 
@@ -229,7 +229,7 @@ RDEPENDS:${PN} += " \
 	python-webtest \
 	python-waitress \
 	python-pyyaml \
-	python-pip \
+	python3-pip \
 	python-pytz \
 	python3-pbr \
 	python-croniter \

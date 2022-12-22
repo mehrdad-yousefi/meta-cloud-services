@@ -261,7 +261,7 @@ FILES:${SRCNAME}-controller = "${bindir}/* \
  			       ${sysconfdir}/init.d/nova-all "
 
 DEPENDS += " \
-        python-pip \
+        python3-pip \
         python3-pbr \
         "
 

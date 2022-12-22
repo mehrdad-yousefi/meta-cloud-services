@@ -223,7 +223,7 @@ FILES:${SRCNAME} = "${bindir}/* \
     "
 
 DEPENDS += " \
-        python-pip \
+        python3-pip \
         python3-pbr \
         "
 

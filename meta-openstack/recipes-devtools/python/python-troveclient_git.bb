@@ -50,7 +50,7 @@ FILES:${SRCNAME}-bin = " \
     "
 
 DEPENDS += " \
-        python-pip \
+        python3-pip \
         python3-pbr \
         "
 

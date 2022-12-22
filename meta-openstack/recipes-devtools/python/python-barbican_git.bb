@@ -92,7 +92,7 @@ pkg_postinst:${SRCNAME}-setup () {
 }
 
 DEPENDS += " \
-        python-pip \
+        python3-pip \
         python3-pbr \
         "
 
@@ -108,7 +108,7 @@ RDEPENDS:${SRCNAME} = "${PN} \
                        python-oslo.messaging"
 
 RDEPENDS:${PN} += " \
-        python-pip \
+        python3-pip \
         python3-pbr \
         python-alembic \
         python-babel \

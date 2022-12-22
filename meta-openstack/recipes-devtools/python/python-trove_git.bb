@@ -235,7 +235,7 @@ FILES:${SRCNAME}-setup = " \
 
 DEPENDS += " \
     python3-pbr \
-    python-pip \
+    python3-pip \
     "
 
 # Satisfy setup.py 'setup_requires'

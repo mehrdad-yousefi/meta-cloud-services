@@ -17,7 +17,7 @@ inherit setuptools3
 FILES:${PN} += "${datadir}/etc/${SRCNAME}/*"
 
 DEPENDS += " \
-        python-pip \
+        python3-pip \
         python3-pbr \
         "
 

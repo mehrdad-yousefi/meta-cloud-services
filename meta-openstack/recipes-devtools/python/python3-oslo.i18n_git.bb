@@ -14,7 +14,7 @@ inherit setuptools3
 
 S = "${WORKDIR}/git"
 
-# DEPENDS_default: python-pip
+# DEPENDS_default: python3-pip
 
 DEPENDS += " \
         ${PYTHON_PN}-pip \
