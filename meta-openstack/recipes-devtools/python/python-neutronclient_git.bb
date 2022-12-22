@@ -19,7 +19,7 @@ RDEPENDS:${PN} += " \
         python-cliff \
         python-debtcollector \
         python3-iso8601 \
-        python-netaddr \
+        python3-netaddr \
         python-osc-lib \
         python-oslo.i18n \
         python-oslo.serialization \

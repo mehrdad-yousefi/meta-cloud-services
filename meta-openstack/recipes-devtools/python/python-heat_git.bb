@@ -213,7 +213,7 @@ RDEPENDS:${PN} += " \
         python-croniter \
         python-cryptography \
         python-keystonemiddleware \
-        python-netaddr \
+        python3-netaddr \
         python-oslo.cache \
         python-oslo.concurrency \
         python-oslo.context \

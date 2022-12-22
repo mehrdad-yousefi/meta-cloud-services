@@ -29,7 +29,7 @@ DEPENDS += " \
 RDEPENDS:${PN} += " \
         python-eventlet \
         python-msgpack \
-        python-netaddr \
+        python3-netaddr \
         python-oslo.config \
         python-ovs \
         python-routes \

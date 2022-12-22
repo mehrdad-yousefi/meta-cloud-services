@@ -349,7 +349,7 @@ RDEPENDS:${PN} += " \
         python-httplib2 \
         python-jinja2 \
         python-keystonemiddleware \
-        python-netaddr \
+        python3-netaddr \
         python-netifaces \
         python-neutron-lib \
         python-neutronclient \

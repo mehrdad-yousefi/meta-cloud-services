@@ -25,7 +25,7 @@ RDEPENDS:${PN} += " \
         python-django-pyscss \
         python-futurist \
         python3-iso8601 \
-        python-netaddr \
+        python3-netaddr \
         python-oslo.concurrency \
         python-oslo.config \
         python-oslo.i18n \

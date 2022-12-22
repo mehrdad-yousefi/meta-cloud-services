@@ -257,7 +257,7 @@ RDEPENDS:${PN} += " \
     python3-keystoneclient \
     python-kombu \
     python-lxml \
-    python-netaddr \
+    python3-netaddr \
     python-neutronclient \
     python-novaclient \
     python-oslo.config \

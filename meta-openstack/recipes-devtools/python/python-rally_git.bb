@@ -110,7 +110,7 @@ RDEPENDS:${PN} += " python3-babel \
     python-fixtures \
     python3-iso8601 \
     python-jsonschema \
-    python-netaddr \
+    python3-netaddr \
     python-oslo.config \
     python-paramiko \
     python3-pbr \

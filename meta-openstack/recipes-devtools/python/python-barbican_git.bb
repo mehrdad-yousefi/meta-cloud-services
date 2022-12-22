@@ -117,7 +117,7 @@ RDEPENDS:${PN} += " \
         python3-iso8601 \
         python-jsonschema \
         python-kombu \
-        python-netaddr \
+        python3-netaddr \
         python3-pastedeploy \
         python3-paste \
         python-pycrypto \
