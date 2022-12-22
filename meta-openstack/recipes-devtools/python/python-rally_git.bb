@@ -112,7 +112,7 @@ RDEPENDS:${PN} += " python3-babel \
     python-jsonschema \
     python3-netaddr \
     python-oslo.config \
-    python-paramiko \
+    python3-paramiko \
     python3-pbr \
     python-pecan \
     python3-prettytable \

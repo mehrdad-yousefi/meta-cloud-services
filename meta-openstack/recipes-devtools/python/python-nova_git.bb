@@ -289,7 +289,7 @@ RDEPENDS:${PN} += " \
 		   python-sqlalchemy-migrate \
 		   python3-netaddr \
 		   python-netifaces \
-		   python-paramiko \
+		   python3-paramiko \
 		   python3-babel \
 		   python3-iso8601 \
 		   python-jsonschema \
