@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/openstack/python-cinderclient"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3572962e13e5e739b30b0864365e0795"
-DEPENDS = "python-setuptools3-git"
+DEPENDS = "python3-setuptools-git"
 
 SRCNAME = "python-cinderclient"
 

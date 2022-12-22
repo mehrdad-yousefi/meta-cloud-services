@@ -185,7 +185,7 @@ RDEPENDS:${PN} += " \
 	python3-paramiko \
 	python3-babel \
 	python3-iso8601 \
-	python-setuptools3-git \
+	python3-setuptools-git \
 	python-glanceclient \
 	python3-keystoneclient \
 	python-swiftclient \
