@@ -235,7 +235,7 @@ DEPENDS += " \
 RDEPENDS:${PN} += " \
         python3-babel \
         python3-pbr \
-        python-webob \
+        python3-webob \
         python3-pastedeploy \
         python3-paste \
         python-routes \

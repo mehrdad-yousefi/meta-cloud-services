@@ -181,7 +181,7 @@ RDEPENDS:${PN} += " \
         python-eventlet \
         python3-pastedeploy \
         python-routes \
-        python-webob \
+        python3-webob \
         python3-sqlalchemy-migrate \
         python-sqlparse \
         python-alembic \

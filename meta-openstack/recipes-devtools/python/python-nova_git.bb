@@ -281,7 +281,7 @@ RDEPENDS:${PN} += " \
 		   python-lxml \
 		   python-routes \
 		   python-cryptography \
-		   python-webob \
+		   python3-webob \
 		   python3-greenlet \
 		   python3-pastedeploy \
 		   python3-paste \

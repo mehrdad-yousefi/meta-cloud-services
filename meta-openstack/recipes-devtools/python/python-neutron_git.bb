@@ -356,7 +356,7 @@ RDEPENDS:${PN} += " \
         python-tenacity \
         python-ryu \
         python3-sqlalchemy \
-        python-webob \
+        python3-webob \
         python3-keystoneauth1 \
         python-alembic \
         python3-six \

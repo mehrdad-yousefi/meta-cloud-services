@@ -35,5 +35,5 @@ RDEPENDS:${PN} += " \
         python-routes \
         python3-six \
         python-tinyrpc \
-        python-webob \
+        python3-webob \
         "

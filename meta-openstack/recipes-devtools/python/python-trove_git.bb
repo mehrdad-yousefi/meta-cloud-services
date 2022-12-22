@@ -268,7 +268,7 @@ RDEPENDS:${PN} += " \
     python-routes \
     python3-sqlalchemy-migrate \
     python-swiftclient \
-    python-webob \
+    python3-webob \
     python-monotonic \
     uwsgi \
     "
