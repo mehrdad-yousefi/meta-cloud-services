@@ -242,7 +242,7 @@ RDEPENDS:${PN} += " \
         python3-keystonemiddleware \
         python-oslo.context \
         python-oslo.db \
-        python-oslo.concurrency \
+        python3-oslo.concurrency \
         python-oslo.i18n \
         python-oslo.log \
         python-oslo.policy \

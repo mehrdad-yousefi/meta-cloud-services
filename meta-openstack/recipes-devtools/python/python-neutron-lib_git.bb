@@ -28,7 +28,7 @@ RDEPENDS:${PN} += " \
         python-sqlalchemy \
         python-debtcollector \
         python-stevedore \
-        python-oslo.concurrency \
+        python3-oslo.concurrency \
         python-oslo.config \
         python-oslo.context \
         python-oslo.db \

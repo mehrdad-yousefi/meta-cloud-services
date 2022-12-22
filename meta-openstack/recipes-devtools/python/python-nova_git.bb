@@ -303,7 +303,7 @@ RDEPENDS:${PN} += " \
 		   python-setuptools3 \
 		   python-websockify \
 		   python-oslo.cache \
-		   python-oslo.concurrency \
+		   python3-oslo.concurrency \
 		   python-oslo.config \
 		   python-oslo.context \
 		   python-oslo.log \

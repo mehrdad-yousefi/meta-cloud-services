@@ -250,7 +250,7 @@ RDEPENDS:${PN} += " \
         python-bcrypt \
         python-scrypt \
         python-oslo.cache \
-        python-oslo.concurrency \
+        python3-oslo.concurrency \
         python-oslo.config \
         python-oslo.context \
         python-oslo.messaging \

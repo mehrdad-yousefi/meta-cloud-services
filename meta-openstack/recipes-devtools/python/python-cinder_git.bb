@@ -219,7 +219,7 @@ RDEPENDS:${PN} += " \
         python-lxml \
         python-oauth2client \
         python-oslo.config \
-        python-oslo.concurrency \
+        python3-oslo.concurrency \
         python-oslo.context \
         python-oslo.db \
         python-oslo.log \

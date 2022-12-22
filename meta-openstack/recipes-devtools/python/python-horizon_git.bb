@@ -26,7 +26,7 @@ RDEPENDS:${PN} += " \
         python-futurist \
         python3-iso8601 \
         python3-netaddr \
-        python-oslo.concurrency \
+        python3-oslo.concurrency \
         python-oslo.config \
         python-oslo.i18n \
         python-oslo.policy \
