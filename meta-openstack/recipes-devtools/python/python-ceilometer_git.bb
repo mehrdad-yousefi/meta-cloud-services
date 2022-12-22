@@ -211,7 +211,7 @@ RDEPENDS:${PN} += " \
 	python-ceilometerclient \
 	python-oslo.config \
 	python-oslo.serialization \
-	python-oslo.rootwrap \
+	python3-oslo.rootwrap \
 	python-tooz \        
 	python-msgpack \
 	python-pecan \
