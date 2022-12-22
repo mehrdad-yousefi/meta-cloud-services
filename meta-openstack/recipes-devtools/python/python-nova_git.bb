@@ -285,7 +285,7 @@ RDEPENDS:${PN} += " \
 		   python-greenlet \
 		   python3-pastedeploy \
 		   python3-paste \
-		   python-prettytable \
+		   python3-prettytable \
 		   python-sqlalchemy-migrate \
 		   python3-netaddr \
 		   python-netifaces \

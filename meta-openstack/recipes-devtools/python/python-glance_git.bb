@@ -196,7 +196,7 @@ RDEPENDS:${PN} += " \
         python-keystoneauth1 \
         python-keystonemiddleware \
         python-wsme \
-        python-prettytable \
+        python3-prettytable \
         python3-paste \
         python-jsonschema \
         python3-keystoneclient \

@@ -32,7 +32,7 @@ RDEPENDS:${PN} += " \
         python-oslo.i18n \
         python-oslo.serialization \
         python3-oslo.utils \
-        python-prettytable \
+        python3-prettytable \
         python3-simplejson \
         python-six \
         python3-babel \

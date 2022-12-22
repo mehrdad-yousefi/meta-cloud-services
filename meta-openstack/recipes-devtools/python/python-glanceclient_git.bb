@@ -31,7 +31,7 @@ RDEPENDS:${PN} += " \
    bash \
    python3-pbr \
    python3-babel \
-   python-prettytable \
+   python3-prettytable \
    python-keystoneauth1 \
    python-requests \
    python-warlock \

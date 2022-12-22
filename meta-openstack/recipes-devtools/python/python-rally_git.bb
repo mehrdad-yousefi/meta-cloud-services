@@ -115,7 +115,7 @@ RDEPENDS:${PN} += " python3-babel \
     python-paramiko \
     python3-pbr \
     python-pecan \
-    python-prettytable \
+    python3-prettytable \
     python-pyyaml \
     python-glanceclient \
     python3-keystoneclient \

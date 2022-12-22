@@ -17,7 +17,7 @@ DEPENDS += " \
 RDEPENDS:${PN} +="python-cliff \
 	python-httplib2 \
 	python3-iso8601 \
-	python-prettytable \
+	python3-prettytable \
 	python-pyparsing \
 	python3-simplejson \
 	python3-pbr \
