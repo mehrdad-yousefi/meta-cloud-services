@@ -46,7 +46,6 @@ RDEPENDS:${PN} = " postgresql \
     barbican \
     trove \
     novnc \
-    chkconfig \
     qemu \
     fuse \
     ${@bb.utils.contains('CINDER_EXTRA_FEATURES', 'glusterfs', 'glusterfs glusterfs-fuse glusterfs-server', '', d)} \
