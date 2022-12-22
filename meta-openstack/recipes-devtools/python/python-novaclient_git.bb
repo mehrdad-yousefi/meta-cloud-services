@@ -28,7 +28,7 @@ DEPENDS += " \
 RDEPENDS:${PN} += " \
         python3-pbr \
         python-keystoneauth1 \
-        python-iso8601 \
+        python3-iso8601 \
         python-oslo.i18n \
         python-oslo.serialization \
         python-oslo.utils \

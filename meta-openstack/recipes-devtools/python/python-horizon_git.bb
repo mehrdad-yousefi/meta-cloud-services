@@ -24,7 +24,7 @@ RDEPENDS:${PN} += " \
         python-django-openstack-auth \
         python-django-pyscss \
         python-futurist \
-        python-iso8601 \
+        python3-iso8601 \
         python-netaddr \
         python-oslo.concurrency \
         python-oslo.config \

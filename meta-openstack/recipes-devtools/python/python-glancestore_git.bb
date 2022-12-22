@@ -29,7 +29,7 @@ DEPENDS += " \
 RDEPENDS:${PN} = " \
    python-enum34 \
    python-eventlet \
-   python-iso8601 \
+   python3-iso8601 \
    python-six \
    python-cinderclient \
    python-oslo.config \

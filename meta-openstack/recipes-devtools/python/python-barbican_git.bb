@@ -114,7 +114,7 @@ RDEPENDS:${PN} += " \
         python-babel \
         python-eventlet \
         python-falcon \
-        python-iso8601 \
+        python3-iso8601 \
         python-jsonschema \
         python-kombu \
         python-netaddr \

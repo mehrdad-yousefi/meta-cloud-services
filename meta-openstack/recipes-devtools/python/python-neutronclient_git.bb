@@ -18,7 +18,7 @@ RDEPENDS:${PN} += " \
         python3-pbr \
         python-cliff \
         python-debtcollector \
-        python-iso8601 \
+        python3-iso8601 \
         python-netaddr \
         python-osc-lib \
         python-oslo.i18n \

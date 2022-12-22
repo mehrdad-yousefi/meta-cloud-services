@@ -212,7 +212,7 @@ RDEPENDS:${PN} += " \
         python-eventlet \
         python-greenlet \
         python-httplib2 \
-        python-iso8601 \
+        python3-iso8601 \
         python-ipaddress \
         python-keystoneauth1 \
         python-keystonemiddleware \

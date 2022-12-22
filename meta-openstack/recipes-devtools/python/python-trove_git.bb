@@ -251,7 +251,7 @@ RDEPENDS:${PN} += " \
     python-glanceclient \
     python-heatclient \
     python-httplib2 \
-    python-iso8601 \
+    python3-iso8601 \
     python-jinja2 \
     python-jsonschema \
     python-keystoneclient \

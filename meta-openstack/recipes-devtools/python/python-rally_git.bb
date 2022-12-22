@@ -108,7 +108,7 @@ DEPENDS += " \
 RDEPENDS:${PN} += " python-babel \
     python-decorator \
     python-fixtures \
-    python-iso8601 \
+    python3-iso8601 \
     python-jsonschema \
     python-netaddr \
     python-oslo.config \

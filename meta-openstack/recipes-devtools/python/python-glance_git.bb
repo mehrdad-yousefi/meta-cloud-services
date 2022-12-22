@@ -214,7 +214,7 @@ RDEPENDS:${PN} += " \
         python-debtcollector \
         python-cryptography \
         python-cursive \
-        python-iso8601 \
+        python3-iso8601 \
         python-monotonic \
         "
 

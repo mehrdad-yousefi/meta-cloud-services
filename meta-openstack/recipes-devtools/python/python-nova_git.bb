@@ -291,7 +291,7 @@ RDEPENDS:${PN} += " \
 		   python-netifaces \
 		   python-paramiko \
 		   python-babel \
-		   python-iso8601 \
+		   python3-iso8601 \
 		   python-jsonschema \
 		   python-cinderclient \
 		   python-keystoneauth1 \

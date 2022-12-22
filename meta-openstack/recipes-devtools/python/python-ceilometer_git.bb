@@ -203,7 +203,7 @@ RDEPENDS:${PN} += " \
 	python-suds-jurko \
 	python-paramiko \
 	python-babel \
-	python-iso8601 \
+	python3-iso8601 \
 	python-setuptools3-git \
 	python-glanceclient \
 	python-keystoneclient \
