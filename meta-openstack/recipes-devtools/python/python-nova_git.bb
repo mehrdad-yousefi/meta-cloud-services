@@ -317,7 +317,7 @@ RDEPENDS:${PN} += " \
 		   python3-oslo.privsep \
 		   python3-oslo.i18n \
 		   python3-oslo.service \
-		   python-rfc3986 \
+		   python3-rfc3986 \
 		   python-oslo.middleware \
 		   python3-psutil \
 		   python3-oslo.versionedobjects \
