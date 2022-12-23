@@ -353,7 +353,7 @@ RDEPENDS:${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-common"
 RDEPENDS:${SRCNAME}-ec2 = "postgresql sudo ${SRCNAME}-common"
 
 RDEPENDS:${SRCNAME}-tests = " \
-                            python-coverage \
+                            python3-coverage \
                             bash \
                             "
 

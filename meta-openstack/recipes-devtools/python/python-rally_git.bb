@@ -132,7 +132,7 @@ RDEPENDS:${PN} += " python3-babel \
     "
 
 RDEPENDS:${SRCNAME}-tests = "${PN} \
-   python-coverage \
+   python3-coverage \
    python3-mock \
    python-testrepository \
    python-testtools \
