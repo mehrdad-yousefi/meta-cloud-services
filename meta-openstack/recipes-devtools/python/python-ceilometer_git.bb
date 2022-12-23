@@ -248,7 +248,7 @@ RDEPENDS:${PN} += " \
         python-oslo.policy \
         python-oslo.reports \
         python3-oslo.service \
-        python-oslo.messaging \
+        python3-oslo.messaging \
         python-oslo.middleware \
         python3-oslo.utils \
         python-neutronclient \

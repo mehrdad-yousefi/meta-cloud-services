@@ -312,7 +312,7 @@ RDEPENDS:${PN} += " \
 		   python3-oslo.utils \
 		   python3-oslo.db \
 		   python3-oslo.rootwrap \
-		   python-oslo.messaging \
+		   python3-oslo.messaging \
 		   python-oslo.policy \
 		   python3-oslo.privsep \
 		   python3-oslo.i18n \
@@ -347,7 +347,7 @@ RDEPENDS:${SRCNAME}-controller = "${PN} ${SRCNAME}-common \
                                   ${SRCNAME}-api \
 				  postgresql postgresql-client python-psycopg2"
 
-RDEPENDS:${SRCNAME}-compute = "${PN} ${SRCNAME}-common python-oslo.messaging \
+RDEPENDS:${SRCNAME}-compute = "${PN} ${SRCNAME}-common python3-oslo.messaging \
 			       qemu libvirt libvirt-libvirtd libvirt-python libvirt-virsh"
 RDEPENDS:${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-common"
 RDEPENDS:${SRCNAME}-ec2 = "postgresql sudo ${SRCNAME}-common"

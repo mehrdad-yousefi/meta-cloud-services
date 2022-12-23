@@ -205,7 +205,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.db \
         python3-oslo.i18n \
         python-oslo.log \
-        python-oslo.messaging \
+        python3-oslo.messaging \
         python-oslo.middleware \
         python-oslo.policy \
         python-retrying \
