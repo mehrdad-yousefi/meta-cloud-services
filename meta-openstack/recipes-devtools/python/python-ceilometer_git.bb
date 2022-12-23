@@ -219,7 +219,7 @@ RDEPENDS:${PN} += " \
 	python-singledispatch \
 	python-flask \
 	python-werkzeug \
-	python-itsdangerous \
+	python3-itsdangerous \
 	python3-happybase \
 	python-wsme \
 	python3-eventlet \
