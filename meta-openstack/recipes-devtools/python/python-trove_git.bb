@@ -256,7 +256,7 @@ RDEPENDS:${PN} += " \
     python3-jsonschema \
     python3-keystoneclient \
     python3-kombu \
-    python-lxml \
+    python3-lxml \
     python3-netaddr \
     python-neutronclient \
     python-novaclient \

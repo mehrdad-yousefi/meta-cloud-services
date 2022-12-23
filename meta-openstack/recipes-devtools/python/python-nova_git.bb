@@ -278,7 +278,7 @@ RDEPENDS:${PN} += " \
 		   python3-eventlet \
 		   python3-jinja2 \
 		   python3-keystonemiddleware \
-		   python-lxml \
+		   python3-lxml \
 		   python3-routes \
 		   python-cryptography \
 		   python3-webob \

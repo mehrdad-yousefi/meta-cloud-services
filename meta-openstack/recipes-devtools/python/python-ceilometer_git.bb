@@ -191,7 +191,7 @@ RDEPENDS:${PN} += " \
 	python3-anyjson \
 	python3-eventlet \
 	python3-kombu \
-	python-lxml \
+	python3-lxml \
 	python3-routes \
 	python3-webob \
 	python3-greenlet \
