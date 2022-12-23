@@ -232,7 +232,7 @@ RDEPENDS:${PN} += " \
         python-barbicanclient \
         python-ceilometerclient \
         python-cinderclient \
-        python-designateclient \
+        python3-designateclient \
         python-magnumclient \
         python-manilaclient \
         python-mistralclient \

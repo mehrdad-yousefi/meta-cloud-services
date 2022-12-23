@@ -385,7 +385,7 @@ RDEPENDS:${PN} += " \
         python3-pyroute2 \
         python3-weakrefmethod \
         python-novaclient \
-        python-designateclient \
+        python3-designateclient \
         python3-os-xenapi \
         "
 
