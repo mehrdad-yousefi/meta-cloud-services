@@ -382,7 +382,7 @@ RDEPENDS:${PN} += " \
         python-ovs \
         python-ovsdbapp \
         python-psutil \
-        python-pyroute2 \
+        python3-pyroute2 \
         python3-weakrefmethod \
         python-novaclient \
         python-designateclient \
