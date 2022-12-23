@@ -180,7 +180,7 @@ RDEPENDS:${PN} += " \
         python3-sqlalchemy \
         python3-eventlet \
         python3-pastedeploy \
-        python-routes \
+        python3-routes \
         python3-webob \
         python3-sqlalchemy-migrate \
         python-sqlparse \

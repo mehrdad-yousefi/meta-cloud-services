@@ -238,7 +238,7 @@ RDEPENDS:${PN} += " \
         python3-webob \
         python3-pastedeploy \
         python3-paste \
-        python-routes \
+        python3-routes \
         python-cryptography \
         python3-six \
         python3-sqlalchemy \

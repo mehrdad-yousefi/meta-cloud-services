@@ -342,7 +342,7 @@ RDEPENDS:${PN} += " \
         python3-pbr \
         python3-paste \
         python3-pastedeploy \
-        python-routes \
+        python3-routes \
         python-debtcollector \
         python3-eventlet \
         python-pecan \

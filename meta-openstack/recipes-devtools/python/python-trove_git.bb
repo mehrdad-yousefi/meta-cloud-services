@@ -265,7 +265,7 @@ RDEPENDS:${PN} += " \
     python-passlib \
     python3-paste \
     python3-pastedeploy \
-    python-routes \
+    python3-routes \
     python3-sqlalchemy-migrate \
     python-swiftclient \
     python3-webob \

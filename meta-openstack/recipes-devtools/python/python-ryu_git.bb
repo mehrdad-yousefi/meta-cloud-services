@@ -32,7 +32,7 @@ RDEPENDS:${PN} += " \
         python3-netaddr \
         python-oslo.config \
         python-ovs \
-        python-routes \
+        python3-routes \
         python3-six \
         python-tinyrpc \
         python3-webob \

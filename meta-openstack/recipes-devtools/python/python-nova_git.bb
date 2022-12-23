@@ -279,7 +279,7 @@ RDEPENDS:${PN} += " \
 		   python-jinja2 \
 		   python3-keystonemiddleware \
 		   python-lxml \
-		   python-routes \
+		   python3-routes \
 		   python-cryptography \
 		   python3-webob \
 		   python3-greenlet \

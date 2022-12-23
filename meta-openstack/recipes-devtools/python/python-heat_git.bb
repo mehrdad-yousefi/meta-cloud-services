@@ -173,7 +173,7 @@ RDEPENDS:${PN} += " \
 	python3-eventlet \
 	python3-kombu \
 	python-lxml \
-	python-routes \
+	python3-routes \
 	python3-webob \
 	python3-greenlet \
 	python-lockfile \
