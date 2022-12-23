@@ -232,7 +232,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.serialization \
         python3-oslo.service \
         python3-oslo.utils \
-        python-oslo.versionedobjects \
+        python3-oslo.versionedobjects \
         python-osprofiler \
         python3-paramiko \
         python3-paste \

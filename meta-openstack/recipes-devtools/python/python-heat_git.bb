@@ -227,7 +227,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.service \
         python3-oslo.utils \
         python-osprofiler \
-        python-oslo.versionedobjects \
+        python3-oslo.versionedobjects \
         python-pycrypto \
         python-barbicanclient \
         python-ceilometerclient \

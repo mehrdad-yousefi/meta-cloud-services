@@ -320,7 +320,7 @@ RDEPENDS:${PN} += " \
 		   python-rfc3986 \
 		   python-oslo.middleware \
 		   python3-psutil \
-		   python-oslo.versionedobjects \
+		   python3-oslo.versionedobjects \
 		   python-os-brick \
 		   python-os-traits \
 		   python3-os-vif \
