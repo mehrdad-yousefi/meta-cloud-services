@@ -224,7 +224,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.db \
         python3-oslo.log \
         python3-oslo.messaging \
-        python-oslo.middleware \
+        python3-oslo.middleware \
         python-oslo.policy \
         python3-oslo.privsep \
         python3-oslo.reports \
