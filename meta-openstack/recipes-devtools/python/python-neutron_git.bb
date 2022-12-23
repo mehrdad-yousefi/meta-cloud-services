@@ -358,7 +358,7 @@ RDEPENDS:${PN} += " \
         python3-sqlalchemy \
         python3-webob \
         python3-keystoneauth1 \
-        python-alembic \
+        python3-alembic \
         python3-six \
         python3-stevedore \
         python-oslo.cache \

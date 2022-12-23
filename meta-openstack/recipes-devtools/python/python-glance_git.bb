@@ -184,7 +184,7 @@ RDEPENDS:${PN} += " \
         python3-webob \
         python3-sqlalchemy-migrate \
         python-sqlparse \
-        python-alembic \
+        python3-alembic \
         python-httplib2 \
         python3-oslo.config \
         python3-oslo.concurrency \

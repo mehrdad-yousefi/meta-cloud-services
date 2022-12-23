@@ -110,7 +110,7 @@ RDEPENDS:${SRCNAME} = "${PN} \
 RDEPENDS:${PN} += " \
         python3-pip \
         python3-pbr \
-        python-alembic \
+        python3-alembic \
         python3-babel \
         python3-eventlet \
         python-falcon \
