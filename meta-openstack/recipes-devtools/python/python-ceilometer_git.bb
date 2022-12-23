@@ -188,7 +188,7 @@ RDEPENDS:${PN} += " \
 	python3-jsonpath-rw \
 	python3-sqlalchemy \
 	python3-amqplib \
-	python-anyjson \
+	python3-anyjson \
 	python3-eventlet \
 	python3-kombu \
 	python-lxml \
