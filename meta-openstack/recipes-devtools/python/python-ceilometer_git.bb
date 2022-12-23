@@ -246,7 +246,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.i18n \
         python3-oslo.log \
         python-oslo.policy \
-        python-oslo.reports \
+        python3-oslo.reports \
         python3-oslo.service \
         python3-oslo.messaging \
         python-oslo.middleware \

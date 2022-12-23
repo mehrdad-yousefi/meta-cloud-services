@@ -372,7 +372,7 @@ RDEPENDS:${PN} += " \
         python-oslo.middleware \
         python-oslo.policy \
         python3-oslo.privsep \
-        python-oslo.reports \
+        python3-oslo.reports \
         python3-oslo.rootwrap \
         python3-oslo.serialization \
         python3-oslo.service \
