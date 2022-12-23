@@ -347,7 +347,7 @@ RDEPENDS:${PN} += " \
         python3-eventlet \
         python-pecan \
         python-httplib2 \
-        python-jinja2 \
+        python3-jinja2 \
         python3-keystonemiddleware \
         python3-netaddr \
         python3-netifaces \

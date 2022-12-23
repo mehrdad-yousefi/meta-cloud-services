@@ -252,7 +252,7 @@ RDEPENDS:${PN} += " \
     python-heatclient \
     python-httplib2 \
     python3-iso8601 \
-    python-jinja2 \
+    python3-jinja2 \
     python3-jsonschema \
     python3-keystoneclient \
     python3-kombu \

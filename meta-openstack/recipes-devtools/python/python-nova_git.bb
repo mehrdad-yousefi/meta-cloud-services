@@ -276,7 +276,7 @@ RDEPENDS:${PN} += " \
 		   python3-sqlalchemy \
 		   python-decorator \
 		   python3-eventlet \
-		   python-jinja2 \
+		   python3-jinja2 \
 		   python3-keystonemiddleware \
 		   python-lxml \
 		   python3-routes \
