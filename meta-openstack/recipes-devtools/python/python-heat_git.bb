@@ -168,7 +168,7 @@ DEPENDS += " \
 RDEPENDS:${PN} += " \
         python-heatclient \
         python3-sqlalchemy \
-	python-amqplib \
+	python3-amqplib \
 	python-anyjson \
 	python3-eventlet \
 	python3-kombu \
