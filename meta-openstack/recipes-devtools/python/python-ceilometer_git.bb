@@ -223,7 +223,7 @@ RDEPENDS:${PN} += " \
 	python3-happybase \
 	python-wsme \
 	python3-eventlet \
-	python-pymongo \
+	python3-pymongo \
 	python-thrift \
 	python3-simplegeneric \
 	python-webtest \
