@@ -220,7 +220,7 @@ RDEPENDS:${PN} += " \
         python-oauth2client \
         python-oslo.config \
         python3-oslo.concurrency \
-        python-oslo.context \
+        python3-oslo.context \
         python-oslo.db \
         python-oslo.log \
         python-oslo.messaging \

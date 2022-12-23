@@ -188,7 +188,7 @@ RDEPENDS:${PN} += " \
         python-httplib2 \
         python-oslo.config \
         python3-oslo.concurrency \
-        python-oslo.context \
+        python3-oslo.context \
         python3-oslo.utils \
         python-stevedore \
         python-futurist \

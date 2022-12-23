@@ -240,7 +240,7 @@ RDEPENDS:${PN} += " \
         python3-jsonschema \
         python-kafka \
         python3-keystonemiddleware \
-        python-oslo.context \
+        python3-oslo.context \
         python-oslo.db \
         python3-oslo.concurrency \
         python3-oslo.i18n \

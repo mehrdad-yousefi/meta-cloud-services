@@ -305,7 +305,7 @@ RDEPENDS:${PN} += " \
 		   python-oslo.cache \
 		   python3-oslo.concurrency \
 		   python-oslo.config \
-		   python-oslo.context \
+		   python3-oslo.context \
 		   python-oslo.log \
 		   python-oslo.reports \
 		   python3-oslo.serialization \

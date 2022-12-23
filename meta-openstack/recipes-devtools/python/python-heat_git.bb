@@ -216,7 +216,7 @@ RDEPENDS:${PN} += " \
         python3-netaddr \
         python-oslo.cache \
         python3-oslo.concurrency \
-        python-oslo.context \
+        python3-oslo.context \
         python-oslo.db \
         python3-oslo.i18n \
         python-oslo.messaging \

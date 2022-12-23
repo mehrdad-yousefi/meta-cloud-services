@@ -30,7 +30,7 @@ RDEPENDS:${PN} += " \
         python-stevedore \
         python3-oslo.concurrency \
         python-oslo.config \
-        python-oslo.context \
+        python3-oslo.context \
         python-oslo.db \
         python3-oslo.i18n \
         python-oslo.log \
