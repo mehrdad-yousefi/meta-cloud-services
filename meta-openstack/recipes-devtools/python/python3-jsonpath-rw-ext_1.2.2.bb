@@ -1,5 +1,5 @@
 SUMMARY = "Extensions for JSONPath RW"
-HOMEPAGE = "https://github.com/sileht/python3-jsonpath-rw-ext"
+HOMEPAGE = "https://github.com/sileht/python-jsonpath-rw-ext"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 
