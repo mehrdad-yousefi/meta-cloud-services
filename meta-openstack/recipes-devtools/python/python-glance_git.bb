@@ -228,7 +228,7 @@ RDEPENDS:${SRCNAME} = " \
 RDEPENDS:${SRCNAME}-api = "${SRCNAME}"
 RDEPENDS:${SRCNAME}-registry = "${SRCNAME}"
 RDEPENDS:${SRCNAME}-setup = "postgresql keystone-setup sudo ${SRCNAME}"
-RDEPENDS:${SRCNAME}-tests = "python-psutil qpid-python bash"
+RDEPENDS:${SRCNAME}-tests = "python3-psutil qpid-python bash"
 
 SYSTEMD_PACKAGES = "${SRCNAME}-api ${SRCNAME}-registry ${SRCNAME}-setup"
 SYSTEMD_SERVICE:${SRCNAME}-api = "glance-api.service"

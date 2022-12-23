@@ -237,7 +237,7 @@ RDEPENDS:${PN} += " \
         python3-paramiko \
         python3-paste \
         python3-pastedeploy \
-        python-psutil \
+        python3-psutil \
         python-pyparsing \
         python-barbicanclient \
         python-glanceclient \

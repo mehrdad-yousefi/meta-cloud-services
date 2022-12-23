@@ -319,7 +319,7 @@ RDEPENDS:${PN} += " \
 		   python3-oslo.service \
 		   python-rfc3986 \
 		   python-oslo.middleware \
-		   python-psutil \
+		   python3-psutil \
 		   python-oslo.versionedobjects \
 		   python-os-brick \
 		   python-os-traits \

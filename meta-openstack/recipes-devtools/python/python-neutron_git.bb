@@ -381,7 +381,7 @@ RDEPENDS:${PN} += " \
         python-osprofiler \
         python-ovs \
         python-ovsdbapp \
-        python-psutil \
+        python3-psutil \
         python3-pyroute2 \
         python3-weakrefmethod \
         python-novaclient \
