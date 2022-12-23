@@ -35,7 +35,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.i18n \
         python3-oslo.log \
         python3-oslo.messaging \
-        python-oslo.policy \
+        python3-oslo.policy \
         python3-oslo.service \
         python3-oslo.utils \
         "

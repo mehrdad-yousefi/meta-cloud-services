@@ -258,7 +258,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.i18n \
         python3-oslo.log \
         python3-oslo.middleware \
-        python-oslo.policy \
+        python3-oslo.policy \
         python3-oslo.serialization \
         python3-oslo.utils \
         python-oauthlib \

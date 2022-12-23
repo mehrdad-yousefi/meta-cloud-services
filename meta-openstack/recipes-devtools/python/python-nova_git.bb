@@ -313,7 +313,7 @@ RDEPENDS:${PN} += " \
 		   python3-oslo.db \
 		   python3-oslo.rootwrap \
 		   python3-oslo.messaging \
-		   python-oslo.policy \
+		   python3-oslo.policy \
 		   python3-oslo.privsep \
 		   python3-oslo.i18n \
 		   python3-oslo.service \

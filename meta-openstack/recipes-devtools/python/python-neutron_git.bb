@@ -370,7 +370,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.log \
         python3-oslo.messaging \
         python3-oslo.middleware \
-        python-oslo.policy \
+        python3-oslo.policy \
         python3-oslo.privsep \
         python3-oslo.reports \
         python3-oslo.rootwrap \

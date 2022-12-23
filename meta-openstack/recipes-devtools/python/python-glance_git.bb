@@ -207,7 +207,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.log \
         python3-oslo.messaging \
         python3-oslo.middleware \
-        python-oslo.policy \
+        python3-oslo.policy \
         python-retrying \
         python3-osprofiler \
         python-glance-store \
