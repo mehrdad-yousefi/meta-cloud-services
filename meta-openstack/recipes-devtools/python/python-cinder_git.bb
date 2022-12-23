@@ -208,7 +208,7 @@ RDEPENDS:${PN} += " \
         lvm2 \
         python3-pbr \
         python3-babel \
-        python-decorator \
+        python3-decorator \
         python3-eventlet \
         python3-greenlet \
         python-httplib2 \

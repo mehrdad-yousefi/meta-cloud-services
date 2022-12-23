@@ -274,7 +274,7 @@ RDEPENDS:${PN} += " \
 		   libvirt \
 		   python3-pbr \
 		   python3-sqlalchemy \
-		   python-decorator \
+		   python3-decorator \
 		   python3-eventlet \
 		   python3-jinja2 \
 		   python3-keystonemiddleware \

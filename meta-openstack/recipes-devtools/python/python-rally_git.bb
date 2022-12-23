@@ -106,7 +106,7 @@ DEPENDS += " \
 	"
 
 RDEPENDS:${PN} += " python3-babel \
-    python-decorator \
+    python3-decorator \
     python-fixtures \
     python3-iso8601 \
     python3-jsonschema \
