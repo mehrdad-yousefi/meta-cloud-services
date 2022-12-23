@@ -192,7 +192,7 @@ RDEPENDS:${PN} += " \
 	python3-oslo.config \
         python-msgpack \
         python-pecan \
-        python-amqp \
+        python3-amqp \
         python-singledispatch \
         python-flask \
         python-werkzeug \
