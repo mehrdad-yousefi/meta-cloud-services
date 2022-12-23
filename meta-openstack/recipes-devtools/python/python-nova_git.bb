@@ -323,7 +323,7 @@ RDEPENDS:${PN} += " \
 		   python-oslo.versionedobjects \
 		   python-os-brick \
 		   python-os-traits \
-		   python-os-vif \
+		   python3-os-vif \
 		   python-os-win \
 		   python3-castellan \
 		   python-microversion-parse \
