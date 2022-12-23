@@ -300,7 +300,7 @@ RDEPENDS:${PN} += " \
 		   python3-requests \
 		   python3-six \
 		   python-stevedore \
-		   python-setuptools3 \
+		   python3-setuptools \
 		   python-websockify \
 		   python-oslo.cache \
 		   python3-oslo.concurrency \
