@@ -1,5 +1,5 @@
 DESCRIPTION = "A robust and significantly extended implementation of JSONPath for Python"
-HOMEPAGE = "https://github.com/kennknowles/python-jsonpath-rw"
+HOMEPAGE = "https://github.com/kennknowles/python3-jsonpath-rw"
 SECTION = "devel/python"
 LICENSE = "BSD+"
 LIC_FILES_CHKSUM = "file://README.rst;md5=02384665f821c394981e0dd1faec9a7d"
