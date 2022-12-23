@@ -243,7 +243,7 @@ RDEPENDS:${PN} += " \
         python3-six \
         python3-sqlalchemy \
         python3-sqlalchemy-migrate \
-        python-stevedore \
+        python3-stevedore \
         python-passlib \
         python3-keystoneclient \
         python3-keystonemiddleware \

@@ -199,7 +199,7 @@ RDEPENDS:${PN} += " \
 	python3-pastedeploy \
 	python3-paste \
 	python3-sqlalchemy-migrate \
-	python-stevedore \
+	python3-stevedore \
 	python-suds-jurko \
 	python3-paramiko \
 	python3-babel \

@@ -299,7 +299,7 @@ RDEPENDS:${PN} += " \
 		   python-glanceclient \
 		   python3-requests \
 		   python3-six \
-		   python-stevedore \
+		   python3-stevedore \
 		   python3-setuptools \
 		   python-websockify \
 		   python-oslo.cache \

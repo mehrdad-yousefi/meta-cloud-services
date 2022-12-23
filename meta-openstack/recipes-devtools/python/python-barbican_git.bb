@@ -124,7 +124,7 @@ RDEPENDS:${PN} += " \
         python-pysqlite \
         python3-keystoneclient \
         python3-sqlalchemy \
-        python-stevedore \
+        python3-stevedore \
         python3-webob \
         python-wsgiref \
         python-barbicanclient \
