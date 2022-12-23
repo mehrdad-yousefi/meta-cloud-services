@@ -197,7 +197,7 @@ RDEPENDS:${PN} += " \
         python-flask \
         python-werkzeug \
         python-itsdangerous \
-        python-happybase \
+        python3-happybase \
         python-wsme \
         python3-eventlet \
         python-pymongo \
