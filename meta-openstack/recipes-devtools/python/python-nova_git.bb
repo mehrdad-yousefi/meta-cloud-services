@@ -292,7 +292,7 @@ RDEPENDS:${PN} += " \
 		   python3-paramiko \
 		   python3-babel \
 		   python3-iso8601 \
-		   python-jsonschema \
+		   python3-jsonschema \
 		   python-cinderclient \
 		   python3-keystoneauth1 \
 		   python-neutronclient \

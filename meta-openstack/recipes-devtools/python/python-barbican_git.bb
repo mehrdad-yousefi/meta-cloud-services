@@ -115,7 +115,7 @@ RDEPENDS:${PN} += " \
         python3-eventlet \
         python-falcon \
         python3-iso8601 \
-        python-jsonschema \
+        python3-jsonschema \
         python3-kombu \
         python3-netaddr \
         python3-pastedeploy \

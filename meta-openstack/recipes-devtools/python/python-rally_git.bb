@@ -109,7 +109,7 @@ RDEPENDS:${PN} += " python3-babel \
     python-decorator \
     python-fixtures \
     python3-iso8601 \
-    python-jsonschema \
+    python3-jsonschema \
     python3-netaddr \
     python-oslo.config \
     python3-paramiko \

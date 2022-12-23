@@ -198,7 +198,7 @@ RDEPENDS:${PN} += " \
         python-wsme \
         python3-prettytable \
         python3-paste \
-        python-jsonschema \
+        python3-jsonschema \
         python3-keystoneclient \
         python-pyopenssl \
         python3-six \

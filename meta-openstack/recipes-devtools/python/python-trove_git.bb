@@ -253,7 +253,7 @@ RDEPENDS:${PN} += " \
     python-httplib2 \
     python3-iso8601 \
     python-jinja2 \
-    python-jsonschema \
+    python3-jsonschema \
     python3-keystoneclient \
     python3-kombu \
     python-lxml \

@@ -264,7 +264,7 @@ RDEPENDS:${PN} += " \
         python-oauthlib \
         python-pysaml2 \
         python-dogpile.cache \
-        python-jsonschema \
+        python3-jsonschema \
         python-pycadf \
         python-msgpack \
         python-osprofiler \
