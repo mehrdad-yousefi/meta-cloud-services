@@ -361,7 +361,7 @@ RDEPENDS:${PN} += " \
         python3-alembic \
         python3-six \
         python3-stevedore \
-        python-oslo.cache \
+        python3-oslo.cache \
         python3-oslo.concurrency \
         python3-oslo.config \
         python3-oslo.context \

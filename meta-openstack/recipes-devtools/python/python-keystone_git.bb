@@ -249,7 +249,7 @@ RDEPENDS:${PN} += " \
         python3-keystonemiddleware \
         python-bcrypt \
         python-scrypt \
-        python-oslo.cache \
+        python3-oslo.cache \
         python3-oslo.concurrency \
         python3-oslo.config \
         python3-oslo.context \

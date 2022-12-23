@@ -214,7 +214,7 @@ RDEPENDS:${PN} += " \
         python-cryptography \
         python3-keystonemiddleware \
         python3-netaddr \
-        python-oslo.cache \
+        python3-oslo.cache \
         python3-oslo.concurrency \
         python3-oslo.context \
         python3-oslo.db \
