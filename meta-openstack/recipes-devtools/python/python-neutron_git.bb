@@ -379,7 +379,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.utils \
         python3-oslo.versionedobjects \
         python3-osprofiler \
-        python-ovs \
+        python3-ovs \
         python3-ovsdbapp \
         python3-psutil \
         python3-pyroute2 \

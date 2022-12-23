@@ -31,7 +31,7 @@ RDEPENDS:${PN} += " \
         python-msgpack \
         python3-netaddr \
         python3-oslo.config \
-        python-ovs \
+        python3-ovs \
         python3-routes \
         python3-six \
         python-tinyrpc \
