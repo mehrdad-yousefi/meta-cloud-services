@@ -310,7 +310,7 @@ RDEPENDS:${PN} += " \
 		   python-oslo.reports \
 		   python3-oslo.serialization \
 		   python3-oslo.utils \
-		   python-oslo.db \
+		   python3-oslo.db \
 		   python3-oslo.rootwrap \
 		   python-oslo.messaging \
 		   python-oslo.policy \

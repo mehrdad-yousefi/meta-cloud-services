@@ -202,7 +202,7 @@ RDEPENDS:${PN} += " \
         python3-keystoneclient \
         python-pyopenssl \
         python3-six \
-        python-oslo.db \
+        python3-oslo.db \
         python3-oslo.i18n \
         python-oslo.log \
         python-oslo.messaging \
