@@ -383,7 +383,7 @@ RDEPENDS:${PN} += " \
         python-ovsdbapp \
         python-psutil \
         python-pyroute2 \
-        python-weakrefmethod \
+        python3-weakrefmethod \
         python-novaclient \
         python-designateclient \
         python3-os-xenapi \
