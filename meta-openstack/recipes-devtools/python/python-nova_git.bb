@@ -322,7 +322,7 @@ RDEPENDS:${PN} += " \
 		   python3-psutil \
 		   python3-oslo.versionedobjects \
 		   python-os-brick \
-		   python-os-traits \
+		   python3-os-traits \
 		   python3-os-vif \
 		   python-os-win \
 		   python3-castellan \
