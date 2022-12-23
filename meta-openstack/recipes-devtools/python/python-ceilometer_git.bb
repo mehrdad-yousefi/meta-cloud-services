@@ -238,7 +238,7 @@ RDEPENDS:${PN} += " \
         python-retrying \
         python3-jsonpath-rw-ext \
         python3-jsonschema \
-        python-kafka \
+        python3-kafka \
         python3-keystonemiddleware \
         python3-oslo.context \
         python-oslo.db \
