@@ -1,2 +1,2 @@
 inherit setuptools3
-require python3-eventlet.inc
+require python-eventlet.inc
