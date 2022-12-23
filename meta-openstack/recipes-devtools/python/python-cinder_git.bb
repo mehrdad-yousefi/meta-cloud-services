@@ -244,7 +244,7 @@ RDEPENDS:${PN} += " \
         python3-keystoneclient \
         python-novaclient \
         python-swiftclient \
-        python-pytz \
+        python3-pytz \
         python3-requests \
         python-retrying \
         python3-routes \

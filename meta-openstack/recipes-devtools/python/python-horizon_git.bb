@@ -42,7 +42,7 @@ RDEPENDS:${PN} += " \
         python-neutronclient \
         python-novaclient \
         python-swiftclient \
-        python-pytz \
+        python3-pytz \
         python-pyyaml \
         python-semantic-version \
         python3-six \

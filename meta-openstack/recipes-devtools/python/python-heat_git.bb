@@ -207,7 +207,7 @@ RDEPENDS:${PN} += " \
         python-waitress \
         python-pyyaml \
         python3-pip \
-        python-pytz \
+        python3-pytz \
         python3-pbr \
         python-oslo.log \
         python-croniter \

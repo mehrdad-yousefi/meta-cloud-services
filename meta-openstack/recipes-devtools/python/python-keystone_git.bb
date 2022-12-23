@@ -268,7 +268,7 @@ RDEPENDS:${PN} += " \
         python-pycadf \
         python-msgpack \
         python-osprofiler \
-        python-pytz \
+        python3-pytz \
         "
 
 RDEPENDS:${SRCNAME}-tests += " bash"
