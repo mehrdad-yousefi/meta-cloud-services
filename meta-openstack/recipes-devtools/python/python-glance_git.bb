@@ -211,7 +211,7 @@ RDEPENDS:${PN} += " \
         python-retrying \
         python3-osprofiler \
         python-glance-store \
-        python-debtcollector \
+        python3-debtcollector \
         python-cryptography \
         python-cursive \
         python3-iso8601 \

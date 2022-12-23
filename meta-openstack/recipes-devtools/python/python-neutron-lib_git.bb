@@ -26,7 +26,7 @@ DEPENDS += " \
 RDEPENDS:${PN} += " \
         python3-pbr \
         python3-sqlalchemy \
-        python-debtcollector \
+        python3-debtcollector \
         python3-stevedore \
         python3-oslo.concurrency \
         python3-oslo.config \
