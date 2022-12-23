@@ -112,7 +112,7 @@ RDEPENDS:${PN} += " \
         python3-pbr \
         python-alembic \
         python3-babel \
-        python-eventlet \
+        python3-eventlet \
         python-falcon \
         python3-iso8601 \
         python-jsonschema \

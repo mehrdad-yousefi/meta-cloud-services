@@ -159,7 +159,7 @@ DEPENDS += " \
 	"
 
 RDEPENDS:${PN} += " \
-    python-eventlet \
+    python3-eventlet \
     python3-greenlet \
     python3-pastedeploy \
     python3-simplejson \

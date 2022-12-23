@@ -189,7 +189,7 @@ RDEPENDS:${PN} += " \
 	python3-sqlalchemy \
 	python-amqplib \
 	python-anyjson \
-	python-eventlet \
+	python3-eventlet \
 	python3-kombu \
 	python-lxml \
 	python-routes \
@@ -222,7 +222,7 @@ RDEPENDS:${PN} += " \
 	python-itsdangerous \
 	python-happybase \
 	python-wsme \
-	python-eventlet \
+	python3-eventlet \
 	python-pymongo \
 	python-thrift \
 	python3-simplegeneric \

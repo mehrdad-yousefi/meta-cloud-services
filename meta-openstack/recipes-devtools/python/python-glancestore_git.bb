@@ -28,7 +28,7 @@ DEPENDS += " \
 
 RDEPENDS:${PN} = " \
    python-enum34 \
-   python-eventlet \
+   python3-eventlet \
    python3-iso8601 \
    python3-six \
    python-cinderclient \

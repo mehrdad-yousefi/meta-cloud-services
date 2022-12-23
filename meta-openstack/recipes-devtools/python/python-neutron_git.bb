@@ -344,7 +344,7 @@ RDEPENDS:${PN} += " \
         python3-pastedeploy \
         python-routes \
         python-debtcollector \
-        python-eventlet \
+        python3-eventlet \
         python-pecan \
         python-httplib2 \
         python-jinja2 \

@@ -178,7 +178,7 @@ RDEPENDS:${PN} += " \
         coreutils \
         python3-pbr \
         python3-sqlalchemy \
-        python-eventlet \
+        python3-eventlet \
         python3-pastedeploy \
         python-routes \
         python3-webob \

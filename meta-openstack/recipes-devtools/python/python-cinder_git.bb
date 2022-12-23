@@ -209,7 +209,7 @@ RDEPENDS:${PN} += " \
         python3-pbr \
         python3-babel \
         python-decorator \
-        python-eventlet \
+        python3-eventlet \
         python3-greenlet \
         python-httplib2 \
         python3-iso8601 \

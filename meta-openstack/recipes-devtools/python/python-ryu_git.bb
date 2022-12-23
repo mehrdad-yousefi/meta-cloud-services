@@ -27,7 +27,7 @@ DEPENDS += " \
 	"
 
 RDEPENDS:${PN} += " \
-        python-eventlet \
+        python3-eventlet \
         python-msgpack \
         python3-netaddr \
         python-oslo.config \
