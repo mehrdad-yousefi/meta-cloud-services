@@ -380,7 +380,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.versionedobjects \
         python-osprofiler \
         python-ovs \
-        python-ovsdbapp \
+        python3-ovsdbapp \
         python3-psutil \
         python3-pyroute2 \
         python3-weakrefmethod \
