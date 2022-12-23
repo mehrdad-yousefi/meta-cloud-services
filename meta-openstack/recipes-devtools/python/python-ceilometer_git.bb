@@ -244,7 +244,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.db \
         python3-oslo.concurrency \
         python3-oslo.i18n \
-        python-oslo.log \
+        python3-oslo.log \
         python-oslo.policy \
         python-oslo.reports \
         python3-oslo.service \

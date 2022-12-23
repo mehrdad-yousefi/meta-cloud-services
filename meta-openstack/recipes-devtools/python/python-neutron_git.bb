@@ -367,7 +367,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.context \
         python3-oslo.db \
         python3-oslo.i18n \
-        python-oslo.log \
+        python3-oslo.log \
         python3-oslo.messaging \
         python-oslo.middleware \
         python-oslo.policy \

@@ -209,7 +209,7 @@ RDEPENDS:${PN} += " \
         python3-pip \
         python3-pytz \
         python3-pbr \
-        python-oslo.log \
+        python3-oslo.log \
         python-croniter \
         python-cryptography \
         python3-keystonemiddleware \
