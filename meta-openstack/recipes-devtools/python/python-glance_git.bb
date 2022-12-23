@@ -185,7 +185,7 @@ RDEPENDS:${PN} += " \
         python3-sqlalchemy-migrate \
         python-sqlparse \
         python3-alembic \
-        python-httplib2 \
+        python3-httplib2 \
         python3-oslo.config \
         python3-oslo.concurrency \
         python3-oslo.context \

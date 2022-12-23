@@ -250,7 +250,7 @@ RDEPENDS:${PN} += " \
     python-falcon \
     python-glanceclient \
     python-heatclient \
-    python-httplib2 \
+    python3-httplib2 \
     python3-iso8601 \
     python3-jinja2 \
     python3-jsonschema \

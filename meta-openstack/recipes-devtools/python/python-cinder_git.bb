@@ -211,7 +211,7 @@ RDEPENDS:${PN} += " \
         python3-decorator \
         python3-eventlet \
         python3-greenlet \
-        python-httplib2 \
+        python3-httplib2 \
         python3-iso8601 \
         python3-ipaddress \
         python3-keystoneauth1 \

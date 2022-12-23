@@ -346,7 +346,7 @@ RDEPENDS:${PN} += " \
         python3-debtcollector \
         python3-eventlet \
         python-pecan \
-        python-httplib2 \
+        python3-httplib2 \
         python3-jinja2 \
         python3-keystonemiddleware \
         python3-netaddr \
