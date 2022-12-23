@@ -251,7 +251,7 @@ RDEPENDS:${PN} += " \
         python-scrypt \
         python-oslo.cache \
         python3-oslo.concurrency \
-        python-oslo.config \
+        python3-oslo.config \
         python3-oslo.context \
         python-oslo.messaging \
         python-oslo.db \

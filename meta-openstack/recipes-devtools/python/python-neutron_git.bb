@@ -363,7 +363,7 @@ RDEPENDS:${PN} += " \
         python3-stevedore \
         python-oslo.cache \
         python3-oslo.concurrency \
-        python-oslo.config \
+        python3-oslo.config \
         python3-oslo.context \
         python-oslo.db \
         python3-oslo.i18n \

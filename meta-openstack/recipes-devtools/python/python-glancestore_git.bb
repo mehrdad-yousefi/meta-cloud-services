@@ -32,7 +32,7 @@ RDEPENDS:${PN} = " \
    python3-iso8601 \
    python3-six \
    python-cinderclient \
-   python-oslo.config \
+   python3-oslo.config \
    python3-oslo.i18n \
    python3-pbr \
    "

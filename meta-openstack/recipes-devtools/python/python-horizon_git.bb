@@ -27,7 +27,7 @@ RDEPENDS:${PN} += " \
         python3-iso8601 \
         python3-netaddr \
         python3-oslo.concurrency \
-        python-oslo.config \
+        python3-oslo.config \
         python3-oslo.i18n \
         python-oslo.policy \
         python3-oslo.serialization \

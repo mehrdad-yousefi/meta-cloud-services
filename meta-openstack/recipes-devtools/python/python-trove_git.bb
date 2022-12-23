@@ -260,7 +260,7 @@ RDEPENDS:${PN} += " \
     python3-netaddr \
     python-neutronclient \
     python-novaclient \
-    python-oslo.config \
+    python3-oslo.config \
     python3-oslo.service \
     python-passlib \
     python3-paste \

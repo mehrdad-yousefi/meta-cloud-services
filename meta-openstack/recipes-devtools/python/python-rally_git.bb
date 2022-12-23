@@ -111,7 +111,7 @@ RDEPENDS:${PN} += " python3-babel \
     python3-iso8601 \
     python3-jsonschema \
     python3-netaddr \
-    python-oslo.config \
+    python3-oslo.config \
     python3-paramiko \
     python3-pbr \
     python-pecan \

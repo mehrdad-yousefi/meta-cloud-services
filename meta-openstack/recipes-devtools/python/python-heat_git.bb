@@ -189,7 +189,7 @@ RDEPENDS:${PN} += " \
 	python-glanceclient \
 	python3-keystoneclient \
 	python-swiftclient \
-	python-oslo.config \
+	python3-oslo.config \
         python-msgpack \
         python-pecan \
         python-amqp \
