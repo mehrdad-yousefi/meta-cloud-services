@@ -181,7 +181,7 @@ RDEPENDS:${PN} += " \
 	python3-paste \
 	python3-sqlalchemy-migrate \
 	python3-stevedore \
-	python-suds-jurko \
+	python3-suds-jurko \
 	python3-paramiko \
 	python3-babel \
 	python3-iso8601 \
