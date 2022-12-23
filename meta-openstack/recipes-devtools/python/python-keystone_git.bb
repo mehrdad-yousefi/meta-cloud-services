@@ -267,7 +267,7 @@ RDEPENDS:${PN} += " \
         python3-jsonschema \
         python-pycadf \
         python-msgpack \
-        python-osprofiler \
+        python3-osprofiler \
         python3-pytz \
         "
 

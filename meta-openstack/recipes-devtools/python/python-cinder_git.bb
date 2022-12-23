@@ -233,7 +233,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.service \
         python3-oslo.utils \
         python3-oslo.versionedobjects \
-        python-osprofiler \
+        python3-osprofiler \
         python3-paramiko \
         python3-paste \
         python3-pastedeploy \

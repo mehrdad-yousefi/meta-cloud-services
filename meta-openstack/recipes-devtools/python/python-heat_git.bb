@@ -226,7 +226,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.serialization \
         python3-oslo.service \
         python3-oslo.utils \
-        python-osprofiler \
+        python3-osprofiler \
         python3-oslo.versionedobjects \
         python-pycrypto \
         python-barbicanclient \

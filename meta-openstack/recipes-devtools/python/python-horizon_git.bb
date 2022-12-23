@@ -32,7 +32,7 @@ RDEPENDS:${PN} += " \
         python-oslo.policy \
         python3-oslo.serialization \
         python3-oslo.utils \
-        python-osprofiler \
+        python3-osprofiler \
         python-pymongo \
         python-pyscss \
         python-cinderclient \
