@@ -16,7 +16,7 @@ DEPENDS += " \
 
 RDEPENDS:${PN} += " \
         python3-pbr \
-        python-cliff \
+        python3-cliff \
         python3-debtcollector \
         python3-iso8601 \
         python3-netaddr \

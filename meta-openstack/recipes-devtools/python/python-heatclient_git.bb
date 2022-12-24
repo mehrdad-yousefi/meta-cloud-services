@@ -14,7 +14,7 @@ DEPENDS += " \
         python3-pbr-native \
         "
 
-RDEPENDS:${PN} +="python-cliff \
+RDEPENDS:${PN} +="python3-cliff \
 	python3-httplib2 \
 	python3-iso8601 \
 	python3-prettytable \
