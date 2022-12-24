@@ -269,7 +269,7 @@ RDEPENDS:${PN} += " \
     python3-sqlalchemy-migrate \
     python3-swiftclient \
     python3-webob \
-    python-monotonic \
+    python3-monotonic \
     uwsgi \
     "
 

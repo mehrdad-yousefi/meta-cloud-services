@@ -215,7 +215,7 @@ RDEPENDS:${PN} += " \
         python3-cryptography \
         python3-cursive \
         python3-iso8601 \
-        python-monotonic \
+        python3-monotonic \
         "
 
 RDEPENDS:${SRCNAME} = " \
