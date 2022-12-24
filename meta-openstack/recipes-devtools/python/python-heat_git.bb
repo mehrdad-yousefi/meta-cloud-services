@@ -238,7 +238,7 @@ RDEPENDS:${PN} += " \
         python-novaclient \
         python-saharaclient \
         python-troveclient \
-        python-zaqarclient \
+        python3-zaqarclient \
         python3-requests \
         python3-six \
         bash \
