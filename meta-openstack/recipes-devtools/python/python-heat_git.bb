@@ -176,7 +176,7 @@ RDEPENDS:${PN} += " \
 	python3-routes \
 	python3-webob \
 	python3-greenlet \
-	python-lockfile \
+	python3-lockfile \
 	python3-pastedeploy \
 	python3-paste \
 	python3-sqlalchemy-migrate \
