@@ -46,34 +46,34 @@ RDEPENDS:${PN} += " \
         python3-pyyaml \
         python-semantic-version \
         python3-six \
-        python-xstatic \
-        python-xstatic-angular \
-        python-xstatic-angular-bootstrap \
-        python-xstatic-angular-fileupload \
-        python-xstatic-angular-gettext \
-        python-xstatic-angular-lrdragndrop \
-        python-xstatic-angular-schema-form \
-        python-xstatic-bootstrap-datepicker \
-        python-xstatic-bootstrap-scss \
-        python-xstatic-bootswatch \
-        python-xstatic-d3 \
-        python-xstatic-hogan \
-        python-xstatic-font-awesome \
-        python-xstatic-jasmine \
-        python-xstatic-jquery \
-        python-xstatic-jquery-migrate \
-        python-xstatic-jquery.quicksearch \
-        python-xstatic-jquery.tablesorter \
-        python-xstatic-jquery-ui \
-        python-xstatic-jsencrypt \
-        python-xstatic-mdi \
-        python-xstatic-objectpath \
-        python-xstatic-rickshaw \
-        python-xstatic-roboto-fontface \
-        python-xstatic-smart-table \
-        python-xstatic-spin \
-        python-xstatic-term.js \
-        python-xstatic-tv4 \
+        python3-xstatic \
+        python3-xstatic-angular \
+        python3-xstatic-angular-bootstrap \
+        python3-xstatic-angular-fileupload \
+        python3-xstatic-angular-gettext \
+        python3-xstatic-angular-lrdragndrop \
+        python3-xstatic-angular-schema-form \
+        python3-xstatic-bootstrap-datepicker \
+        python3-xstatic-bootstrap-scss \
+        python3-xstatic-bootswatch \
+        python3-xstatic-d3 \
+        python3-xstatic-hogan \
+        python3-xstatic-font-awesome \
+        python3-xstatic-jasmine \
+        python3-xstatic-jquery \
+        python3-xstatic-jquery-migrate \
+        python3-xstatic-jquery.quicksearch \
+        python3-xstatic-jquery.tablesorter \
+        python3-xstatic-jquery-ui \
+        python3-xstatic-jsencrypt \
+        python3-xstatic-mdi \
+        python3-xstatic-objectpath \
+        python3-xstatic-rickshaw \
+        python3-xstatic-roboto-fontface \
+        python3-xstatic-smart-table \
+        python3-xstatic-spin \
+        python3-xstatic-term.js \
+        python3-xstatic-tv4 \
         "
 
 SRCNAME = "horizon"
