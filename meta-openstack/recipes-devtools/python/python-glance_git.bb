@@ -213,7 +213,7 @@ RDEPENDS:${PN} += " \
         python-glance-store \
         python3-debtcollector \
         python3-cryptography \
-        python-cursive \
+        python3-cursive \
         python3-iso8601 \
         python-monotonic \
         "

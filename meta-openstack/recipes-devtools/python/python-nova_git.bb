@@ -329,7 +329,7 @@ RDEPENDS:${PN} += " \
 		   python3-microversion-parse \
 		   python3-os-xenapi \
 		   python3-tooz \
-		   python-cursive \
+		   python3-cursive \
 		   python-pypowervm \
    "
 
