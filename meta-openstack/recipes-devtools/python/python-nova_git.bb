@@ -330,7 +330,7 @@ RDEPENDS:${PN} += " \
 		   python3-os-xenapi \
 		   python3-tooz \
 		   python3-cursive \
-		   python-pypowervm \
+		   python3-pypowervm \
    "
 
 RDEPENDS:${SRCNAME}-common = "${PN} openssl openssl-misc libxml2 libxslt \
