@@ -17,9 +17,9 @@ DEPENDS += " \
 RDEPENDS:${PN} += " \
         python3-pbr \
         python3-babel \
-        python-django \
+        python3-django \
         python3-pint \
-        python-django-babel \
+        python3-django-babel \
         python3-django-compressor \
         python3-django-openstack-auth \
         python3-django-pyscss \
