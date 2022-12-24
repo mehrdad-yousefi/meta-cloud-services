@@ -249,7 +249,7 @@ RDEPENDS:${PN} += " \
         python3-retrying \
         python3-routes \
         python3-taskflow \
-        python-rtslib-fb \
+        python3-rtslib-fb \
         python3-simplejson \
         python3-six \
         python3-sqlalchemy \
