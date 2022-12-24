@@ -217,7 +217,7 @@ RDEPENDS:${PN} += " \
         python3-keystoneauth1 \
         python3-keystonemiddleware \
         python3-lxml \
-        python-oauth2client \
+        python3-oauth2client \
         python3-oslo.config \
         python3-oslo.concurrency \
         python3-oslo.context \
