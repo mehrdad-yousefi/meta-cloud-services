@@ -120,7 +120,7 @@ RDEPENDS:${PN} += " \
         python3-netaddr \
         python3-pastedeploy \
         python3-paste \
-        python-pycrypto \
+        python3-pycrypto \
         python-pysqlite \
         python3-keystoneclient \
         python3-sqlalchemy \
