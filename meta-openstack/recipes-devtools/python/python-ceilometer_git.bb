@@ -184,7 +184,7 @@ DEPENDS += " \
         "
 
 RDEPENDS:${PN} += " \
-	python-ply \
+	python3-ply \
 	python3-jsonpath-rw \
 	python3-sqlalchemy \
 	python3-amqplib \
