@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/stackforge/${SRCNAME}.git;branch=master;protocol=htt
            file://rally.conf \
            file://task-example.json \
            file://deployment-existing.json \
-           file://remove-ironic-support.patch \
            file://verification-to-use-existing-tempest.patch \
            file://sqlalchemy-db-missing-name-for-ENUM.patch \
            file://verification-subunit2json-fail-to-open-result-file.patch \
@@ -123,7 +122,6 @@ RDEPENDS:${PN} += " python3-babel \
     python-neutronclient \
     python-cinderclient \
     python-heatclient \
-    python-ceilometerclient \
     python-subunit \
     python3-requests \
     python3-sqlalchemy \

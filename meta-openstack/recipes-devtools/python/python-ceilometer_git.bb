@@ -208,7 +208,6 @@ RDEPENDS:${PN} += " \
 	python-glanceclient \
 	python3-keystoneclient \
 	python-swiftclient \
-	python-ceilometerclient \
 	python3-oslo.config \
 	python3-oslo.serialization \
 	python3-oslo.rootwrap \
@@ -262,7 +261,7 @@ RDEPENDS:${SRCNAME}-controller = "${PN} ${SRCNAME}-common ${SRCNAME}-alarm-notif
                                   postgresql postgresql-client python-psycopg2 tgt"
 RDEPENDS:${SRCNAME}-api = "${SRCNAME}-controller"
 RDEPENDS:${SRCNAME}-collector = "${SRCNAME}-controller"
-RDEPENDS:${SRCNAME}-compute = "${PN} ${SRCNAME}-common python-ceilometerclient libvirt"
+RDEPENDS:${SRCNAME}-compute = "${PN} ${SRCNAME}-common libvirt"
 RDEPENDS:${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-controller"
 RDEPENDS:${SRCNAME}-reseller = "postgresql sudo ${SRCNAME}-controller"
 

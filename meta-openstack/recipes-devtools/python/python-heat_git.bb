@@ -230,7 +230,6 @@ RDEPENDS:${PN} += " \
         python3-oslo.versionedobjects \
         python-pycrypto \
         python-barbicanclient \
-        python-ceilometerclient \
         python-cinderclient \
         python3-designateclient \
         python-magnumclient \
