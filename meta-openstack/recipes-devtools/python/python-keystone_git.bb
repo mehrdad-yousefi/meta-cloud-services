@@ -262,7 +262,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.serialization \
         python3-oslo.utils \
         python-oauthlib \
-        python-pysaml2 \
+        python3-pysaml2 \
         python3-dogpile.cache \
         python3-jsonschema \
         python3-pycadf \
