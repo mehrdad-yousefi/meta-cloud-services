@@ -210,7 +210,7 @@ RDEPENDS:${PN} += " \
         python3-pytz \
         python3-pbr \
         python3-oslo.log \
-        python-croniter \
+        python3-croniter \
         python3-cryptography \
         python3-keystonemiddleware \
         python3-netaddr \

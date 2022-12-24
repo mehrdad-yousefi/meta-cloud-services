@@ -231,7 +231,7 @@ RDEPENDS:${PN} += " \
 	python3-pip \
 	python3-pytz \
 	python3-pbr \
-	python-croniter \
+	python3-croniter \
 	python3-ipaddr \
 	python3-pysnmp \
         python3-retrying \
