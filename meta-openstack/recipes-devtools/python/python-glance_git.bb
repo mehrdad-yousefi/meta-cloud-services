@@ -200,7 +200,7 @@ RDEPENDS:${PN} += " \
         python3-paste \
         python3-jsonschema \
         python3-keystoneclient \
-        python-pyopenssl \
+        python3-pyopenssl \
         python3-six \
         python3-oslo.db \
         python3-oslo.i18n \

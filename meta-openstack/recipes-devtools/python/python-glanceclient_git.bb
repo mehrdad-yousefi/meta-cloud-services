@@ -39,7 +39,7 @@ RDEPENDS:${PN} += " \
    python3-oslo.utils \
    python3-oslo.i18n \
    python-wrapt \
-   python-pyopenssl \
+   python3-pyopenssl \
    "
 
 MONITOR_CHECKS_${PN} += "\
