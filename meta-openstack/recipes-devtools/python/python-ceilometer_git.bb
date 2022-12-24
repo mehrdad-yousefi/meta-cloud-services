@@ -216,7 +216,7 @@ RDEPENDS:${PN} += " \
 	python3-amqp \
 	python3-singledispatch \
 	python3-flask \
-	python-werkzeug \
+	python3-werkzeug \
 	python3-itsdangerous \
 	python3-happybase \
 	python3-wsme \
