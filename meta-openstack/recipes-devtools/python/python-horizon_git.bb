@@ -210,7 +210,7 @@ RDEPENDS:${SRCNAME}-apache = "\
     mod-wsgi \
     python-lesscpy \
     memcached \
-    python-memcached \
+    python3-memcached \
     "
 
 MONITOR_SERVICE_PACKAGES = "${SRCNAME}"
