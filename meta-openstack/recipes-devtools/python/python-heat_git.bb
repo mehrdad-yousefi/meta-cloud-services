@@ -236,7 +236,7 @@ RDEPENDS:${PN} += " \
         python-mistralclient \
         python-neutronclient \
         python-novaclient \
-        python-saharaclient \
+        python3-saharaclient \
         python-troveclient \
         python3-zaqarclient \
         python3-requests \
