@@ -233,7 +233,7 @@ RDEPENDS:${PN} += " \
         python3-designateclient \
         python3-magnumclient \
         python3-manilaclient \
-        python-mistralclient \
+        python3-mistralclient \
         python-neutronclient \
         python-novaclient \
         python3-saharaclient \
