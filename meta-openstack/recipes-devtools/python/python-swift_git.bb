@@ -163,7 +163,7 @@ RDEPENDS:${PN} += " \
     python3-greenlet \
     python3-pastedeploy \
     python3-simplejson \
-    python-swiftclient \
+    python3-swiftclient \
     python3-netifaces \
     python-xattr \
     python3-pbr \

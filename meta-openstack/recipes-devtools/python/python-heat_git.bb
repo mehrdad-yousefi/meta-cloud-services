@@ -188,7 +188,7 @@ RDEPENDS:${PN} += " \
 	python3-setuptools-git \
 	python-glanceclient \
 	python3-keystoneclient \
-	python-swiftclient \
+	python3-swiftclient \
 	python3-oslo.config \
         python-msgpack \
         python3-pecan \

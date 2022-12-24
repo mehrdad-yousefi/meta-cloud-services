@@ -41,7 +41,7 @@ RDEPENDS:${PN} += " \
         python3-keystoneclient \
         python-neutronclient \
         python-novaclient \
-        python-swiftclient \
+        python3-swiftclient \
         python3-pytz \
         python-pyyaml \
         python-semantic-version \

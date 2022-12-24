@@ -243,7 +243,7 @@ RDEPENDS:${PN} += " \
         python-glanceclient \
         python3-keystoneclient \
         python-novaclient \
-        python-swiftclient \
+        python3-swiftclient \
         python3-pytz \
         python3-requests \
         python3-retrying \
