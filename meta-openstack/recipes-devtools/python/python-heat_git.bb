@@ -190,7 +190,7 @@ RDEPENDS:${PN} += " \
 	python3-keystoneclient \
 	python3-swiftclient \
 	python3-oslo.config \
-        python-msgpack \
+        python3-msgpack \
         python3-pecan \
         python3-amqp \
         python3-singledispatch \

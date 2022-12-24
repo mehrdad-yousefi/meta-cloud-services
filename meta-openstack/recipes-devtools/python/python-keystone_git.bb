@@ -266,7 +266,7 @@ RDEPENDS:${PN} += " \
         python-dogpile.cache \
         python3-jsonschema \
         python-pycadf \
-        python-msgpack \
+        python3-msgpack \
         python3-osprofiler \
         python3-pytz \
         "

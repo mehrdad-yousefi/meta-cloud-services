@@ -212,7 +212,7 @@ RDEPENDS:${PN} += " \
 	python3-oslo.serialization \
 	python3-oslo.rootwrap \
 	python3-tooz \        
-	python-msgpack \
+	python3-msgpack \
 	python3-pecan \
 	python3-amqp \
 	python3-singledispatch \
