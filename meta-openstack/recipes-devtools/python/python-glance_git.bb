@@ -191,7 +191,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.context \
         python3-oslo.utils \
         python3-stevedore \
-        python-futurist \
+        python3-futurist \
         python3-taskflow \
         python3-keystoneauth1 \
         python3-keystonemiddleware \

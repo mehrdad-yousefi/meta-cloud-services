@@ -23,7 +23,7 @@ RDEPENDS:${PN} += " \
         python-django-compressor \
         python-django-openstack-auth \
         python-django-pyscss \
-        python-futurist \
+        python3-futurist \
         python3-iso8601 \
         python3-netaddr \
         python3-oslo.concurrency \
