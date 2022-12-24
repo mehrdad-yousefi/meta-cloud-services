@@ -18,7 +18,7 @@ RDEPENDS:${PN} +="python3-cliff \
 	python3-httplib2 \
 	python3-iso8601 \
 	python3-prettytable \
-	python-pyparsing \
+	python3-pyparsing \
 	python3-simplejson \
 	python3-pbr \
 	bash \

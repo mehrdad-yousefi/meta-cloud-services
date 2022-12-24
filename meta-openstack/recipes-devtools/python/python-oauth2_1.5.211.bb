@@ -11,7 +11,7 @@ inherit setuptools3 pypi
 
 RDEPENDS:${PN} += "python3-prettytable \
             python-cmd2 \
-            python-pyparsing \
+            python3-pyparsing \
             python-mccabe \
             python-pep8 \
             python-pyflakes"
