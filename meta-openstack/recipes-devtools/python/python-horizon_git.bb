@@ -43,7 +43,7 @@ RDEPENDS:${PN} += " \
         python-novaclient \
         python3-swiftclient \
         python3-pytz \
-        python-pyyaml \
+        python3-pyyaml \
         python-semantic-version \
         python3-six \
         python-xstatic \

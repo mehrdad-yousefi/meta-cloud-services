@@ -204,7 +204,7 @@ RDEPENDS:${PN} += " \
         python3-simplegeneric \
         python3-webtest \
         python3-waitress \
-        python-pyyaml \
+        python3-pyyaml \
         python3-pip \
         python3-pytz \
         python3-pbr \
