@@ -114,7 +114,7 @@ RDEPENDS:${PN} += " python3-babel \
     python3-oslo.config \
     python3-paramiko \
     python3-pbr \
-    python-pecan \
+    python3-pecan \
     python3-prettytable \
     python-pyyaml \
     python-glanceclient \

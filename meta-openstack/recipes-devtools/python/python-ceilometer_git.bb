@@ -214,7 +214,7 @@ RDEPENDS:${PN} += " \
 	python3-oslo.rootwrap \
 	python-tooz \        
 	python-msgpack \
-	python-pecan \
+	python3-pecan \
 	python3-amqp \
 	python-singledispatch \
 	python-flask \

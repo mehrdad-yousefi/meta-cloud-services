@@ -191,7 +191,7 @@ RDEPENDS:${PN} += " \
 	python-swiftclient \
 	python3-oslo.config \
         python-msgpack \
-        python-pecan \
+        python3-pecan \
         python3-amqp \
         python-singledispatch \
         python-flask \
