@@ -215,7 +215,7 @@ RDEPENDS:${PN} += " \
 	python-msgpack \
 	python3-pecan \
 	python3-amqp \
-	python-singledispatch \
+	python3-singledispatch \
 	python-flask \
 	python-werkzeug \
 	python3-itsdangerous \
