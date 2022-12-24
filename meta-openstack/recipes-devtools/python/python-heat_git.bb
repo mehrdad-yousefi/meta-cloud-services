@@ -169,7 +169,6 @@ RDEPENDS:${PN} += " \
         python-heatclient \
         python3-sqlalchemy \
 	python3-amqplib \
-	python3-anyjson \
 	python3-eventlet \
 	python3-kombu \
 	python3-lxml \
