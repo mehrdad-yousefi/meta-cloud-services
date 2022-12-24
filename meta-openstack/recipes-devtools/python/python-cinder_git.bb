@@ -239,7 +239,7 @@ RDEPENDS:${PN} += " \
         python3-pastedeploy \
         python3-psutil \
         python-pyparsing \
-        python-barbicanclient \
+        python3-barbicanclient \
         python-glanceclient \
         python3-keystoneclient \
         python-novaclient \
