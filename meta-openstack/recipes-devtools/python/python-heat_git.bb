@@ -231,7 +231,7 @@ RDEPENDS:${PN} += " \
         python-barbicanclient \
         python-cinderclient \
         python3-designateclient \
-        python-magnumclient \
+        python3-magnumclient \
         python-manilaclient \
         python-mistralclient \
         python-neutronclient \
