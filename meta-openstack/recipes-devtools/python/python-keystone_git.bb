@@ -239,7 +239,7 @@ RDEPENDS:${PN} += " \
         python3-pastedeploy \
         python3-paste \
         python3-routes \
-        python-cryptography \
+        python3-cryptography \
         python3-six \
         python3-sqlalchemy \
         python3-sqlalchemy-migrate \

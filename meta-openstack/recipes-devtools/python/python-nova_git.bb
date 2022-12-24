@@ -280,7 +280,7 @@ RDEPENDS:${PN} += " \
 		   python3-keystonemiddleware \
 		   python3-lxml \
 		   python3-routes \
-		   python-cryptography \
+		   python3-cryptography \
 		   python3-webob \
 		   python3-greenlet \
 		   python3-pastedeploy \

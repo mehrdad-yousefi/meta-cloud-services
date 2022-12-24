@@ -264,7 +264,7 @@ RDEPENDS:${PN} += " \
         python-tooz \
         python-google-api-python-client \
         python3-castellan \
-        python-cryptography \
+        python3-cryptography \
         "
 
 RDEPENDS:${SRCNAME} = " \

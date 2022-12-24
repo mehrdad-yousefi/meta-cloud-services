@@ -211,7 +211,7 @@ RDEPENDS:${PN} += " \
         python3-pbr \
         python3-oslo.log \
         python-croniter \
-        python-cryptography \
+        python3-cryptography \
         python3-keystonemiddleware \
         python3-netaddr \
         python3-oslo.cache \
