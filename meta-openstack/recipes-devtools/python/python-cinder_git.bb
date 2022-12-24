@@ -166,7 +166,7 @@ ALLOW_EMPTY:${SRCNAME}-scheduler = "1"
 ALLOW_EMPTY:${SRCNAME}-volume = "1"
 ALLOW_EMPTY:${SRCNAME}-api = "1"
 
-RDEPENDS:${SRCNAME}-tests += " bash python"
+RDEPENDS:${SRCNAME}-tests += " bash python3"
 
 FILES:${PN} = "${libdir}/* /etc/tgt"
 
