@@ -223,7 +223,7 @@ RDEPENDS:${PN} += " \
 	python-wsme \
 	python3-eventlet \
 	python3-pymongo \
-	python-thrift \
+	python3-thrift \
 	python3-simplegeneric \
 	python-webtest \
 	python-waitress \
