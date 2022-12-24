@@ -248,7 +248,7 @@ RDEPENDS:${PN} += " \
         python3-requests \
         python3-retrying \
         python3-routes \
-        python-taskflow \
+        python3-taskflow \
         python-rtslib-fb \
         python3-simplejson \
         python3-six \

@@ -192,7 +192,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.utils \
         python3-stevedore \
         python-futurist \
-        python-taskflow \
+        python3-taskflow \
         python3-keystoneauth1 \
         python3-keystonemiddleware \
         python3-wsme \
