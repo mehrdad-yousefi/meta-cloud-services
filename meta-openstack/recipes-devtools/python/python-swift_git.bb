@@ -165,7 +165,7 @@ RDEPENDS:${PN} += " \
     python3-simplejson \
     python3-swiftclient \
     python3-netifaces \
-    python-xattr \
+    python3-xattr \
     python3-pbr \
     python-dnspython \
     bash \
