@@ -353,7 +353,7 @@ RDEPENDS:${PN} += " \
         python3-netifaces \
         python-neutron-lib \
         python-neutronclient \
-        python-tenacity \
+        python3-tenacity \
         python-ryu \
         python3-sqlalchemy \
         python3-webob \
