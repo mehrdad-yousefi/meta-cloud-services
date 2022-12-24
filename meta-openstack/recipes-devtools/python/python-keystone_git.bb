@@ -244,7 +244,7 @@ RDEPENDS:${PN} += " \
         python3-sqlalchemy \
         python3-sqlalchemy-migrate \
         python3-stevedore \
-        python-passlib \
+        python3-passlib \
         python3-keystoneclient \
         python3-keystonemiddleware \
         python3-bcrypt \

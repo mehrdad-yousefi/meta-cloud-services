@@ -262,7 +262,7 @@ RDEPENDS:${PN} += " \
     python-novaclient \
     python3-oslo.config \
     python3-oslo.service \
-    python-passlib \
+    python3-passlib \
     python3-paste \
     python3-pastedeploy \
     python3-routes \
