@@ -246,7 +246,7 @@ RDEPENDS:${PN} += " \
         python-swiftclient \
         python3-pytz \
         python3-requests \
-        python-retrying \
+        python3-retrying \
         python3-routes \
         python-taskflow \
         python-rtslib-fb \

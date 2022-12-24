@@ -234,7 +234,7 @@ RDEPENDS:${PN} += " \
 	python-croniter \
 	python3-ipaddr \
 	python3-pysnmp \
-        python-retrying \
+        python3-retrying \
         python3-jsonpath-rw-ext \
         python3-jsonschema \
         python3-kafka \
