@@ -183,7 +183,7 @@ RDEPENDS:${PN} += " \
         python3-routes \
         python3-webob \
         python3-sqlalchemy-migrate \
-        python-sqlparse \
+        python3-sqlparse \
         python3-alembic \
         python3-httplib2 \
         python3-oslo.config \
