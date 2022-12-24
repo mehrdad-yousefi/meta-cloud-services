@@ -260,7 +260,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.i18n \
         python-oslo.vmware \
         python3-os-brick \
-        python-os-win \
+        python3-os-win \
         python3-tooz \
         python-google-api-python-client \
         python3-castellan \

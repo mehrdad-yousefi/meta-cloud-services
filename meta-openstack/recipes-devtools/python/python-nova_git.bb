@@ -324,7 +324,7 @@ RDEPENDS:${PN} += " \
 		   python3-os-brick \
 		   python3-os-traits \
 		   python3-os-vif \
-		   python-os-win \
+		   python3-os-win \
 		   python3-castellan \
 		   python3-microversion-parse \
 		   python3-os-xenapi \
