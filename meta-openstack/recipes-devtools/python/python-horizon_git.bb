@@ -208,7 +208,7 @@ RDEPENDS:${SRCNAME} = "${PN}"
 RDEPENDS:${SRCNAME}-apache = "\
     apache2 \
     mod-wsgi \
-    python-lesscpy \
+    python3-lesscpy \
     memcached \
     python3-memcached \
     "
