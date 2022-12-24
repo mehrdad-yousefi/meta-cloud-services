@@ -259,7 +259,7 @@ RDEPENDS:${PN} += " \
         python3-webob \
         python3-oslo.i18n \
         python-oslo.vmware \
-        python-os-brick \
+        python3-os-brick \
         python-os-win \
         python-tooz \
         python-google-api-python-client \
