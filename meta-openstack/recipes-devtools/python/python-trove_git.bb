@@ -247,7 +247,7 @@ RDEPENDS:${PN} += " \
     python3-babel \
     python-cinderclient \
     python3-eventlet \
-    python-falcon \
+    python3-falcon \
     python-glanceclient \
     python-heatclient \
     python3-httplib2 \
