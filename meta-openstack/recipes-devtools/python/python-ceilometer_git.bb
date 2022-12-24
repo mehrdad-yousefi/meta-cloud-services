@@ -211,7 +211,7 @@ RDEPENDS:${PN} += " \
 	python3-oslo.config \
 	python3-oslo.serialization \
 	python3-oslo.rootwrap \
-	python-tooz \        
+	python3-tooz \        
 	python-msgpack \
 	python3-pecan \
 	python3-amqp \
@@ -254,7 +254,7 @@ RDEPENDS:${PN} += " \
         python-novaclient \
         python3-requests \
         python3-six \
-        python-tooz \
+        python3-tooz \
 	"
 
 RDEPENDS:${SRCNAME}-controller = "${PN} ${SRCNAME}-common ${SRCNAME}-alarm-notifier ${SRCNAME}-alarm-evaluator ${SRCNAME}-agent-notification ${SRCNAME}-reseller \

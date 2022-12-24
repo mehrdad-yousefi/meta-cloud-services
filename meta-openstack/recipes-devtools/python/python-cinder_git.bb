@@ -261,7 +261,7 @@ RDEPENDS:${PN} += " \
         python-oslo.vmware \
         python3-os-brick \
         python-os-win \
-        python-tooz \
+        python3-tooz \
         python-google-api-python-client \
         python3-castellan \
         python3-cryptography \
