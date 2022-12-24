@@ -167,7 +167,7 @@ RDEPENDS:${PN} += " \
     python3-netifaces \
     python3-xattr \
     python3-pbr \
-    python-dnspython \
+    python3-dnspython \
     bash \
     "
 
