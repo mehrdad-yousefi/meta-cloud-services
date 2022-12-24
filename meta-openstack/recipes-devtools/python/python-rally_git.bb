@@ -126,7 +126,7 @@ RDEPENDS:${PN} += " python3-babel \
     python3-requests \
     python3-sqlalchemy \
     python3-six \
-    python-wsme \
+    python3-wsme \
     "
 
 RDEPENDS:${SRCNAME}-tests = "${PN} \

@@ -195,7 +195,7 @@ RDEPENDS:${PN} += " \
         python-taskflow \
         python3-keystoneauth1 \
         python3-keystonemiddleware \
-        python-wsme \
+        python3-wsme \
         python3-prettytable \
         python3-paste \
         python3-jsonschema \

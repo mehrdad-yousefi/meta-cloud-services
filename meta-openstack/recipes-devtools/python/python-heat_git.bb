@@ -198,7 +198,7 @@ RDEPENDS:${PN} += " \
         python-werkzeug \
         python3-itsdangerous \
         python3-happybase \
-        python-wsme \
+        python3-wsme \
         python3-eventlet \
         python3-pymongo \
         python3-thrift \
