@@ -247,7 +247,7 @@ RDEPENDS:${PN} += " \
         python-passlib \
         python3-keystoneclient \
         python3-keystonemiddleware \
-        python-bcrypt \
+        python3-bcrypt \
         python3-scrypt \
         python3-oslo.cache \
         python3-oslo.concurrency \
