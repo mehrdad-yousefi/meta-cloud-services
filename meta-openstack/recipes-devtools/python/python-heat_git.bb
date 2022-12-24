@@ -203,7 +203,7 @@ RDEPENDS:${PN} += " \
         python3-pymongo \
         python3-thrift \
         python3-simplegeneric \
-        python-webtest \
+        python3-webtest \
         python-waitress \
         python-pyyaml \
         python3-pip \
