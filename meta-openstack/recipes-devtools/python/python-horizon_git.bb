@@ -44,7 +44,7 @@ RDEPENDS:${PN} += " \
         python3-swiftclient \
         python3-pytz \
         python3-pyyaml \
-        python-semantic-version \
+        python3-semantic-version \
         python3-six \
         python3-xstatic \
         python3-xstatic-angular \
