@@ -210,7 +210,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.policy \
         python3-retrying \
         python3-osprofiler \
-        python-glance-store \
+        python3-glance-store \
         python3-debtcollector \
         python3-cryptography \
         python3-cursive \
