@@ -22,7 +22,7 @@ RDEPENDS:${PN} += " \
         python-django-babel \
         python-django-compressor \
         python-django-openstack-auth \
-        python-django-pyscss \
+        python3-django-pyscss \
         python3-futurist \
         python3-iso8601 \
         python3-netaddr \
