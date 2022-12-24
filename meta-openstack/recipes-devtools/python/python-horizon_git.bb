@@ -18,7 +18,7 @@ RDEPENDS:${PN} += " \
         python3-pbr \
         python3-babel \
         python-django \
-        python-pint \
+        python3-pint \
         python-django-babel \
         python-django-compressor \
         python-django-openstack-auth \
