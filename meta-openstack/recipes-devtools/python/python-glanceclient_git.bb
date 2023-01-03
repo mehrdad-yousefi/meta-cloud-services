@@ -38,7 +38,7 @@ RDEPENDS:${PN} += " \
    python3-six \
    python3-oslo.utils \
    python3-oslo.i18n \
-   python-wrapt \
+   python3-wrapt \
    python3-pyopenssl \
    "
 
