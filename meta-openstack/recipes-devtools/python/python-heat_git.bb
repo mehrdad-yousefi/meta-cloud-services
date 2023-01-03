@@ -227,7 +227,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.utils \
         python3-osprofiler \
         python3-oslo.versionedobjects \
-        python3-pycrypto \
+        python3-pycryptodome \
         python3-barbicanclient \
         python-cinderclient \
         python3-designateclient \

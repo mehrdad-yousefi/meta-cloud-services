@@ -24,7 +24,7 @@ RDEPENDS:${PN} +=" \
         python3-oslo.serialization \
         python3-oslo.utils \
         python3-prettytable \
-        python3-pycrypto \
+        python3-pycryptodome \
         python3-requests \
         python3-simplejson \
         python3-babel \

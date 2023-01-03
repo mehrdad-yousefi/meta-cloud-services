@@ -8,15 +8,15 @@ DEPENDS = "\
            python3-jinja2 \
            python3-markupsafe \
            python3-dateutil \
-           python3-pycrypto \
+           python3-pycryptodome \
            python3-pytest-salt \
            python3-pyzmq \
            python3-requests \
 "
 
 PACKAGECONFIG ??= "zeromq"
-PACKAGECONFIG[zeromq] = ",,python3-pyzmq python3-pycrypto,"
-PACKAGECONFIG[tcp] = ",,python3-pycrypto"
+PACKAGECONFIG[zeromq] = ",,python3-pyzmq python3-pycryptodome,"
+PACKAGECONFIG[tcp] = ",,python3-pycryptodome"
 
 SRC_URI = "https://files.pythonhosted.org/packages/source/s/${BPN}/${BPN}-${PV}.tar.gz \
 "
@@ -87,9 +87,9 @@ Between the remote execution system, and state management Salt addresses the bac
 
 SUMMARY:${PN}-minion = "client package for salt, the distributed remote execution system"
 DESCRIPTION:${PN}-minion = "${DESCRIPTION_COMMON} This particular package provides the worker agent for salt."
-RDEPENDS:${PN}-minion = "${PN}-common (= ${EXTENDPKGV}) python3-msgpack python3-pycryptodomex (>= 3.9.7)"
-RDEPENDS:${PN}-minion += "${@bb.utils.contains('PACKAGECONFIG', 'zeromq', 'python3-pycrypto python3-pyzmq (>= 13.1.0)', '',d)}"
-RDEPENDS:${PN}-minion += "${@bb.utils.contains('PACKAGECONFIG', 'tcp', 'python3-pycrypto', '',d)}"
+RDEPENDS:${PN}-minion = "${PN}-common (= ${EXTENDPKGV}) python3-msgpack python3-pycryptodomedomex (>= 3.9.7)"
+RDEPENDS:${PN}-minion += "${@bb.utils.contains('PACKAGECONFIG', 'zeromq', 'python3-pycryptodome python3-pyzmq (>= 13.1.0)', '',d)}"
+RDEPENDS:${PN}-minion += "${@bb.utils.contains('PACKAGECONFIG', 'tcp', 'python3-pycryptodome', '',d)}"
 RRECOMMENDS:${PN}-minion:append_x64 = "dmidecode"
 RSUGGESTS:${PN}-minion = "python3-augeas"
 CONFFILES:${PN}-minion = "${sysconfdir}/${PN}/minion"
@@ -127,9 +127,9 @@ FILES:${PN}-api = "${bindir}/${PN}-api ${CONFFILES_${PN}-api} ${systemd_system_u
 
 SUMMARY:${PN}-master = "remote manager to administer servers via salt"
 DESCRIPTION:${PN}-master ="${DESCRIPTION_COMMON} This particular package provides the salt controller."
-RDEPENDS:${PN}-master = "${PN}-common (= ${EXTENDPKGV}) python3-msgpack python3-pycryptodomex (>= 3.9.7)"
-RDEPENDS:${PN}-master += "${@bb.utils.contains('PACKAGECONFIG', 'zeromq', 'python3-pycrypto python3-pyzmq (>= 13.1.0)', '',d)}"
-RDEPENDS:${PN}-master += "${@bb.utils.contains('PACKAGECONFIG', 'tcp', 'python3-pycrypto', '',d)}"
+RDEPENDS:${PN}-master = "${PN}-common (= ${EXTENDPKGV}) python3-msgpack python3-pycryptodomedomex (>= 3.9.7)"
+RDEPENDS:${PN}-master += "${@bb.utils.contains('PACKAGECONFIG', 'zeromq', 'python3-pycryptodome python3-pyzmq (>= 13.1.0)', '',d)}"
+RDEPENDS:${PN}-master += "${@bb.utils.contains('PACKAGECONFIG', 'tcp', 'python3-pycryptodome', '',d)}"
 CONFFILES:${PN}-master="${sysconfdir}/init.d/${PN}-master  ${sysconfdir}/${PN}/master"
 RSUGGESTS:${PN}-master = "python3-git"
 FILES:${PN}-master = "${bindir}/${PN} ${bindir}/${PN}-cp ${bindir}/${PN}-key ${bindir}/${PN}-master ${bindir}/${PN}-run ${bindir}/${PN}-unity ${bindir}/spm ${CONFFILES_${PN}-master} ${systemd_system_unitdir}/${PN}-master.service"
