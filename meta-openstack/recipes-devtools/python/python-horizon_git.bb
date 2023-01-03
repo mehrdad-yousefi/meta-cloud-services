@@ -34,7 +34,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.utils \
         python3-osprofiler \
         python3-pymongo \
-        python-pyscss \
+        python3-pyscss \
         python-cinderclient \
         python-glanceclient \
         python-heatclient \
