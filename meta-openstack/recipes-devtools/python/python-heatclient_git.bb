@@ -48,6 +48,6 @@ PACKAGES =+ "${SRCNAME}-tests ${BPN}-bash-completion"
 FILES:${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"
 ALLOW_EMPTY:${SRCNAME}-tests = "1"
 
-RDEPENDS:${SRCNAME}-tests += "python-testscenarios \
+RDEPENDS:${SRCNAME}-tests += "python3-testscenarios \
 	python-mox3 \
 	"
