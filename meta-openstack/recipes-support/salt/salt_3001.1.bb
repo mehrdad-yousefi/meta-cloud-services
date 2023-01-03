@@ -87,7 +87,7 @@ Between the remote execution system, and state management Salt addresses the bac
 
 SUMMARY:${PN}-minion = "client package for salt, the distributed remote execution system"
 DESCRIPTION:${PN}-minion = "${DESCRIPTION_COMMON} This particular package provides the worker agent for salt."
-RDEPENDS:${PN}-minion = "${PN}-common (= ${EXTENDPKGV}) python3-msgpack python3-pycryptodomedomex (>= 3.9.7)"
+RDEPENDS:${PN}-minion = "${PN}-common (= ${EXTENDPKGV}) python3-msgpack python3-pycryptodomex (>= 3.9.7)"
 RDEPENDS:${PN}-minion += "${@bb.utils.contains('PACKAGECONFIG', 'zeromq', 'python3-pycryptodome python3-pyzmq (>= 13.1.0)', '',d)}"
 RDEPENDS:${PN}-minion += "${@bb.utils.contains('PACKAGECONFIG', 'tcp', 'python3-pycryptodome', '',d)}"
 RRECOMMENDS:${PN}-minion:append_x64 = "dmidecode"
@@ -127,7 +127,7 @@ FILES:${PN}-api = "${bindir}/${PN}-api ${CONFFILES_${PN}-api} ${systemd_system_u
 
 SUMMARY:${PN}-master = "remote manager to administer servers via salt"
 DESCRIPTION:${PN}-master ="${DESCRIPTION_COMMON} This particular package provides the salt controller."
-RDEPENDS:${PN}-master = "${PN}-common (= ${EXTENDPKGV}) python3-msgpack python3-pycryptodomedomex (>= 3.9.7)"
+RDEPENDS:${PN}-master = "${PN}-common (= ${EXTENDPKGV}) python3-msgpack python3-pycryptodomex (>= 3.9.7)"
 RDEPENDS:${PN}-master += "${@bb.utils.contains('PACKAGECONFIG', 'zeromq', 'python3-pycryptodome python3-pyzmq (>= 13.1.0)', '',d)}"
 RDEPENDS:${PN}-master += "${@bb.utils.contains('PACKAGECONFIG', 'tcp', 'python3-pycryptodome', '',d)}"
 CONFFILES:${PN}-master="${sysconfdir}/init.d/${PN}-master  ${sysconfdir}/${PN}/master"
