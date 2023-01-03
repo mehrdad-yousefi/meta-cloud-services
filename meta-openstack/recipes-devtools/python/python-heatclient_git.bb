@@ -49,5 +49,5 @@ FILES:${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"
 ALLOW_EMPTY:${SRCNAME}-tests = "1"
 
 RDEPENDS:${SRCNAME}-tests += "python3-testscenarios \
-	python-mox3 \
+	python3-mox3 \
 	"
