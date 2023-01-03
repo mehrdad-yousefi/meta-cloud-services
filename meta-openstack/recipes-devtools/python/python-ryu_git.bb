@@ -34,6 +34,6 @@ RDEPENDS:${PN} += " \
         python3-ovs \
         python3-routes \
         python3-six \
-        python-tinyrpc \
+        python3-tinyrpc \
         python3-webob \
         "
