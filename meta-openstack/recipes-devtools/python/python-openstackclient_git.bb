@@ -5,11 +5,11 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
 SRC_URI = " \
-        git://github.com/openstack/python-openstackclient.git;branch=stable/pike;protocol=https \
+        git://github.com/openstack/python-openstackclient.git;branch=stable/zed;protocol=https \
         "
 
-PV = "3.12.0+git${SRCPV}"
-SRCREV = "ff4abb7d19829efa0209cb67faf01011d9c841c5"
+PV = "6.0.0+git${SRCPV}"
+SRCREV = "27b2496e03ceb95b56b3b1b68a57058fe90251b5"
 S = "${WORKDIR}/git"
 
 inherit setuptools3
