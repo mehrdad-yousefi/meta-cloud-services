@@ -5,10 +5,10 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 
 SRCNAME = "oslo.utils"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol=https"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/zed;protocol=https"
 
-PV = "3.28.0+git${SRCPV}"
-SRCREV = "8b3965b9bbe1e31a4939f2f69c5239d6d5c7f72c"
+PV = "6.0.1+git${SRCPV}"
+SRCREV = "760deb9cc4441fe573e2757447d14f2a7ab8673f"
 S = "${WORKDIR}/git"
 
 # DEPENDS_default: python3-pip
