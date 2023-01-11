@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
 SRCNAME = "cinder"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol=https \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/zed;protocol=https \
     file://cinder-init \
     file://cinder-init.service \
     file://cinder-api.service \
@@ -21,8 +21,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol
     file://add-cinder-volume-types.sh \
     "
 
-SRCREV = "4fb3a702ba8c3de24c41a6f706597bfa81e60435"
-PV = "11.1.0+git${SRCPV}"
+SRCREV = "f1ebe259df3e81a241a708ecd50b6e550ac108ea"
+PV = "21.0.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools3 systemd useradd identity default_configs hosts monitor
@@ -88,7 +88,7 @@ do_install:append() {
     done
 
     #
-    # Per https://docs.openstack.org/cinder/pike/install/cinder-controller-install-ubuntu.html
+    # Per https://docs.openstack.org/cinder/zed/install/cinder-controller-install-ubuntu.html
     #
     CONF_FILE="${CINDER_CONF_DIR}/cinder.conf"
     sed -e "/^\[database\]/aconnection = postgresql+psycopg2://${DB_USER}:${DB_PASSWORD}@${CONTROLLER_IP}/cinder" \
