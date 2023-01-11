@@ -5,11 +5,11 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
 SRC_URI = "\
-	git://git.openstack.org/openstack/glance_store.git;branch=stable/pike \
+	git://git.openstack.org/openstack/glance_store.git;branch=stable/zed \
 	"
 
-PV="0.22.0+git${SRCPV}"
-SRCREV="49c915f498fc8d91c98fcf4e07ceecdcf167fc5a"
+PV="4.1.0+git${SRCPV}"
+SRCREV="ea4cdf474c166073934ff36029e54408bdd34b80"
 S = "${WORKDIR}/git"
 
 inherit setuptools3
