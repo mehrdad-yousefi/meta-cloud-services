@@ -4,11 +4,11 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-PV = "1.25.2"
-SRCREV = "8481ce67951aa1b44203c03639b79e06f65bd8bc"
+PV = "3.0.0"
+SRCREV = "a27acfe23feded4d2a4a9684b7ef64acd46a62cb"
 
 SRCNAME = "oslo.service"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol=https"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/zed;protocol=https"
 
 S = "${WORKDIR}/git"
 
