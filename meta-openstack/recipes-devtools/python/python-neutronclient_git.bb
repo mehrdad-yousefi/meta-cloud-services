@@ -34,13 +34,13 @@ RDEPENDS:${PN} += " \
         bash \
         "
 
-SRC_URI = "git://github.com/openstack/python-neutronclient.git;branch=stable/pike;protocol=https \
+SRC_URI = "git://github.com/openstack/python-neutronclient.git;branch=stable/zed;protocol=https \
            file://neutronclient-use-csv-flag-instead-of-json.patch \
            file://neutron-api-check.sh \
           "
 
-PV = "6.5.0+git${SRCPV}"
-SRCREV = "e145c4ef8a0e8390f0468df422a757760e77f823"
+PV = "8.1.0+git${SRCPV}"
+SRCREV = "7467c710f624aee80de8ef487e5b2c0e78143214"
 S = "${WORKDIR}/git"
 
 inherit setuptools3 monitor rmargparse
