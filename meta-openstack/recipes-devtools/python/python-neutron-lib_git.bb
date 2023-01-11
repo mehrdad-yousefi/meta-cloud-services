@@ -5,11 +5,11 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
 SRC_URI = "\
-	git://git.openstack.org/openstack/neutron-lib.git;branch=stable/pike \
+	git://github.com/openstack/neutron-lib.git;branch=stable/zed \
 	"
 
-PV="1.9.1+git${SRCPV}"
-SRCREV="f0d7e470c2ef1702b2715ceb2fd8a00fce2a23be"
+PV="3.2.0+git${SRCPV}"
+SRCREV="821923a183191dcbf86d97a51468f230662fd0ee"
 S = "${WORKDIR}/git"
 
 inherit setuptools3
