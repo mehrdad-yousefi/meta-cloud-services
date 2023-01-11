@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Basic neutron setup based on:
-# https://docs.openstack.org/neutron/pike/install/controller-install-ubuntu.html
+# https://docs.openstack.org/neutron/zed/install/controller-install-ubuntu.html
 #
 # Prerequisites: keystone must be available and bootstrapped
 #

@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
 SRCNAME = "neutron"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol=https \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/zed;protocol=https \
            file://neutron-server.service \
            file://neutron.conf \
            file://l3_agent.ini \
@@ -27,8 +27,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol
            file://neutron-dhcp-agent-netns-cleanup.cron \
 	  "
 
-SRCREV = "7fd30cb652fb5d516b4c1f5415f18f54d7a40c2a"
-PV = "11.0.2+git${SRCPV}"
+SRCREV = "8eefeb36b45770259ece9e7a60b48c427a1cf27a"
+PV = "21.0.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
