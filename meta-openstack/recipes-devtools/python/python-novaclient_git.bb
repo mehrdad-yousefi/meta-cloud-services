@@ -5,12 +5,12 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7cdb54622cacc9bc9b2883091e6dd669"
 
 SRC_URI = "\
-	git://github.com/openstack/python-novaclient.git;branch=stable/pike;protocol=https \
+	git://github.com/openstack/python-novaclient.git;branch=stable/zed;protocol=https \
 	file://nova-api-check.sh \
 	"
 
-PV = "9.1.1+git${SRCPV}"
-SRCREV = "204eff6dc7b234d2807a6caa24a2fc58ebee520b"
+PV = "18.1.0+git${SRCPV}"
+SRCREV = "be9517cb027d960caf4c9c8171b3ad2568bedae9"
 S = "${WORKDIR}/git"
 
 inherit setuptools3 monitor rmargparse
