@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
 SRCNAME = "glance"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol=https \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/zed;protocol=https \
            file://glance.init \
            file://glance-api.service \
            file://glance-registry.service \
@@ -14,8 +14,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol
            file://glance-init \
            "
 
-SRCREV = "06af2eb5abe0332f7035a7d7c2fbfd19fbc4dae7"
-PV = "15.0.0+git${SRCPV}"
+SRCREV = "d45b7c26af2963bb811c5596a42be10cb75c0685"
+PV = "25.0.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -95,7 +95,7 @@ do_install:append() {
     #sed -e 's:^swift_store_key =.*:swift_store_key = %SERVICE_PASSWORD%:g' -i ${CONF_FILE}
     sed -e '/^#swift_store_create_container_on_put = .*/aswift_store_create_container_on_put = True' -i ${CONF_FILE}
 
-    # As documented in https://docs.openstack.org/glance/pike/install/install-debian.html
+    # As documented in https://docs.openstack.org/glance/zed/install/install-debian.html
     for file in api registry
     do
         CONF_FILE=${GLANCE_CONF_DIR}/glance-$file.conf
