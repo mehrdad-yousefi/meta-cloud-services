@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
 SRCNAME = "keystone"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol=https \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/zed;protocol=https \
            file://keystone-init \
            file://keystone-init.service \
            file://keystone.conf \
@@ -21,8 +21,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol
 # file://keystone-remove-git-commands-in-tests.patch 
 # file://keystone-explicitly-import-localcontext-from-oslo.me.patch
 
-SRCREV = "d07677aba54362a4a3aa2d165b155105ffe30d73"
-PV = "12.0.0+git${SRCPV}"
+SRCREV = "1ea9f7557dc442c56805f70b3f0c9393b427a770"
+PV = "22.0.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 

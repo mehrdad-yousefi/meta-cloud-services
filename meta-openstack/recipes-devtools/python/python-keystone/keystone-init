@@ -2,7 +2,7 @@
 #
 # Basic keystone setup as described on:
 # https://docs.openstack.org/mitaka/install-guide-ubuntu/keystone-install.html
-# https://docs.openstack.org/keystone/pike/install/keystone-install-ubuntu.html
+# https://docs.openstack.org/keystone/zed/install/keystone-install-ubuntu.html
 #
 # Prerequisites: /etc/postgresql/postgresql-init must be run first to create the DB
 #
