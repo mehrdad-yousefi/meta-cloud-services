@@ -9,12 +9,12 @@ SRCNAME = "keystoneclient"
 SRC_URI = "file://keystone-api-check.sh"
 
 SRC_URI = "\
-        git://github.com/openstack/python-keystoneclient.git;branch=stable/pike;protocol=https \
+        git://github.com/openstack/python-keystoneclient.git;branch=stable/zed;protocol=https \
         file://keystone-api-check.sh \
         "
 
-PV = "4.1.0+git${SRCPV}"
-SRCREV = "7ff05baa1fa56f152173651f16fc6fd181291292"
+PV = "5.0.1+git${SRCPV}"
+SRCREV = "bc8e9e73b1ecbcf9cae8c5bfe013c68469b60cef"
 S = "${WORKDIR}/git"
 
 inherit setuptools3 monitor
