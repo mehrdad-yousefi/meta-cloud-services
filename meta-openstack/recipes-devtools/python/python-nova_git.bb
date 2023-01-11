@@ -13,7 +13,7 @@ SRCNAME = "nova"
 
 FILESEXTRAPATHS:append := "${THISDIR}/${PN}"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol=https \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/zed;protocol=https \
            file://neutron-api-set-default-binding-vnic_type.patch \
            "
 
@@ -33,8 +33,8 @@ SRC_URI += " \
             file://nova-scheduler.service \
             file://nova-spicehtml5proxy.service \
            "
-SRCREV = "b535f0808526c8eba37f15e83cede536e4e06029"
-PV = "16.0.4+git${SRCPV}"
+SRCREV = "2db7cbf7d0a6692a885968bec67f48e7262ceec3"
+PV = "26.0.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -156,7 +156,7 @@ do_install:append() {
     install -o nova -d ${NOVA_CONF_DIR}/instances
 
     #
-    # Per https://docs.openstack.org/nova/pike/install/controller-install-ubuntu.html
+    # Per https://docs.openstack.org/nova/zed/install/controller-install-ubuntu.html
     #
     CONF_FILE="${NOVA_CONF_DIR}/nova.conf"
     sed -e "/^\[api_database\]/aconnection = postgresql+psycopg2://${DB_USER}:${DB_PASSWORD}@${CONTROLLER_IP}/nova-api" \
