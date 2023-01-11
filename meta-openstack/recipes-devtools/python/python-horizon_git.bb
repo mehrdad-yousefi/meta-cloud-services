@@ -78,7 +78,7 @@ RDEPENDS:${PN} += " \
 
 SRCNAME = "horizon"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol=https \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/zed;protocol=https \
     file://wsgi-horizon.conf \
     file://fix_bindir_path.patch \
     file://local_settings.py \
@@ -86,8 +86,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol
     "
 #    file://openstack-dashboard-apache.conf
 
-SRCREV = "246ff9f81248a00a434e66d18fad70519ba811cc"
-PV = "12.0.0+git${SRCPV}"
+SRCREV = "34b2e823438ceeeedb6b5c9b9e473d9327101110"
+PV = "23.0.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools3 systemd python3-dir default_configs monitor useradd
