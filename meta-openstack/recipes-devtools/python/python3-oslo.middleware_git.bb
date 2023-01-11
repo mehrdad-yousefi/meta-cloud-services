@@ -4,11 +4,11 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 
-PV = "4.1.0+git${SRCPV}"
-SRCREV = "7355d905bc0e6b7d8884e290cc26895eed0f7179"
+PV = "5.0.0+git${SRCPV}"
+SRCREV = "51e1882de1e14878aabf95e198fd852281626645"
 
 SRCNAME = "oslo.middleware"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol=https"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/zed;protocol=https"
 
 S = "${WORKDIR}/git"
 
