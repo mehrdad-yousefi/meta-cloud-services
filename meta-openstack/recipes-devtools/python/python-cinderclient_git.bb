@@ -8,12 +8,12 @@ DEPENDS = "python3-setuptools-git"
 SRCNAME = "python-cinderclient"
 
 SRC_URI = "\
-	git://github.com/openstack/python-cinderclient.git;branch=stable/pike;protocol=https \
+	git://github.com/openstack/python-cinderclient.git;branch=stable/zed;protocol=https \
 	file://cinder-api-check.sh \
 	"
 
-PV="3.1.0+git${SRCPV}"
-SRCREV="3640aeab6e11987288a2f149fbeedb1c026045e2"
+PV="9.1.0+git${SRCPV}"
+SRCREV="730a8c7728a8481d4c74e4c93b2619025f7267ea"
 S = "${WORKDIR}/git"
 
 inherit setuptools3 monitor
