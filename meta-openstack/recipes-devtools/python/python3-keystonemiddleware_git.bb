@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4a4d0e932ffae1c0131528d30d419c55"
 SRCNAME = "keystonemiddleware"
 
 SRC_URI = "\
-	git://git.openstack.org/openstack/keystonemiddleware;branch=stable/pike \
+	git://git.openstack.org/openstack/keystonemiddleware;branch=stable/zed \
 	"
 
-PV = "4.17.1+git${SRCPV}"
-SRCREV = "6712e8b7125fcbcf891b7e89ecb240798dad28ac"
+PV = "10.1.0+git${SRCPV}"
+SRCREV = "f7ac6a1b24e584ab6264f66636a58011a4f3c7af"
 S = "${WORKDIR}/git"
 
 inherit setuptools3
