@@ -81,7 +81,6 @@ SRCNAME = "horizon"
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/zed;protocol=https \
     file://wsgi-horizon.conf \
     file://local_settings.py \
-    file://horizon-use-full-package-path-to-test-directories.patch \
     "
 #    file://openstack-dashboard-apache.conf
 
