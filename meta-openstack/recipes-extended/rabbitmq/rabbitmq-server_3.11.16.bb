@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE-MPL-RabbitMQ;md5=b651d0a6feaaf2bf5eb9d36b2495
 SECTION = "network"
 PR = "r2"
 
-SRC_URI = "http://www.rabbitmq.com/releases/rabbitmq-server/v${PV}/${PN}-${PV}.tar.gz \
+SRC_URI = "https://github.com/rabbitmq/rabbitmq-server/releases/download/v${PV}/${PN}-${PV}.tar.xz \
            file://rabbitmq-server \
            file://remove-docs.patch \
            file://cleanup_install.patch \
