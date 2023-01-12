@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4a4d0e932ffae1c0131528d30d419c55"
 SRCNAME = "keystonemiddleware"
 
 SRC_URI = "\
-	git://https://github.com/openstack/keystonemiddleware.git;branch=stable/zed \
+	git://github.com/openstack/keystonemiddleware.git;branch=stable/zed \
 	"
 
 PV = "10.1.0+git${SRCPV}"
