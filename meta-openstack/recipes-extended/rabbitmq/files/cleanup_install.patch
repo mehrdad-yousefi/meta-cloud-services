@@ -1,7 +1,7 @@
-Index: rabbitmq-server-3.2.4/Makefile
+Index: rabbitmq-server-3.11.16/Makefile
 ===================================================================
---- rabbitmq-server-3.2.4.orig/Makefile
-+++ rabbitmq-server-3.2.4/Makefile
+--- rabbitmq-server-3.11.16.orig/Makefile
++++ rabbitmq-server-3.11.16/Makefile
 @@ -326,7 +326,8 @@
  install: install_bin
  
