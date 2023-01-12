@@ -7,8 +7,6 @@ PR = "r2"
 
 SRC_URI = "https://github.com/rabbitmq/rabbitmq-server/releases/download/v${PV}/${PN}-${PV}.tar.xz \
            file://rabbitmq-server \
-           file://remove-docs.patch \
-           file://cleanup_install.patch \
            file://rabbitmq-server.service \
            file://rabbitmq-server-setup \
            "
