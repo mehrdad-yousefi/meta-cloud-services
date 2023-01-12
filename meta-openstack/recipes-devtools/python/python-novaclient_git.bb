@@ -46,9 +46,9 @@ do_install:append() {
 	install -d ${D}/${sysconfdir}/bash_completion.d
 	install -m 664 ${S}/tools/nova.bash_completion ${D}/${sysconfdir}/bash_completion.d
 
-	if [ -e "${D}/${PYTHON_SITEPACKAGES_DIR}/novaclient/tests/v1_1/test_servers.py" ]; then
+	if [ -e "${D}/${PYTHON_SITEPACKAGES_DIR}/novaclient/tests/functional/v2/test_servers.py" ]; then
 		sed -e "s:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g" \
-		    -i ${D}/${PYTHON_SITEPACKAGES_DIR}/novaclient/tests/v1_1/test_servers.py
+		    -i ${D}/${PYTHON_SITEPACKAGES_DIR}/novaclient/tests/functional/v2/test_servers.py
 	fi
 }
 
