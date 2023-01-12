@@ -504,12 +504,12 @@ Heat Built-In Unit Tests
 This section describes how to run Heat and Heat client built-in unit
 tests which are located at:
 
-    /usr/lib64/python2.7/site-packages/heat/tests
-    /usr/lib64/python2.7/site-packages/heatclient/tests
+    /usr/lib64/python3/site-packages/heat/tests
+    /usr/lib64/python3/site-packages/heatclient/tests
 
 To run heat built-in unit test with nosetests:
 
-    $ cd /usr/lib64/python2.7/site-packages/heat
+    $ cd /usr/lib64/python3/site-packages/heat
     $ nosetests -v tests
 
 ----------------------------------------------------------------------
@@ -519,7 +519,7 @@ OK
 
 To run heatclient built-in unit test with nosetests:
 
-    $ cd /usr/lib64/python2.7/site-packages/heatclient/tests
+    $ cd /usr/lib64/python3/site-packages/heatclient/tests
     $ python -v -m subunit.run discover . | subunit2pyunit
 
 ----------------------------------------------------------------------

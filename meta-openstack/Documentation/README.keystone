@@ -69,11 +69,11 @@ Keystone Built-In Unit Tests
 This section describes how to run Keystone built-in unit
 tests which are located at:
 
-    /usr/lib64/python2.7/site-packages/keystone/tests
+    /usr/lib64/python3/site-packages/keystone/tests
 
 To run Keystone built-in unit test with nosetests:
 
-    $ cd /usr/lib64/python2.7/site-packages/keystone/tests
+    $ cd /usr/lib64/python3/site-packages/keystone/tests
     $ nosetests -v
 
 
