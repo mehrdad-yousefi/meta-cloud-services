@@ -14,7 +14,6 @@ SRCNAME = "nova"
 FILESEXTRAPATHS:append := "${THISDIR}/${PN}"
 
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/zed;protocol=https \
-           file://neutron-api-set-default-binding-vnic_type.patch \
            "
 
 SRC_URI += " \
