@@ -207,6 +207,7 @@ FILES:${SRCNAME}-setup = " \
 ALLOW_EMPTY:${SRCNAME}-cronjobs = "1"
 
 FILES:${PN} = "${libdir}/* \
+		/usr/etc/keystone/** \
     "
 
 FILES:${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
