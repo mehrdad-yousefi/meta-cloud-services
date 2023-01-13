@@ -111,10 +111,6 @@ do_install:append() {
     install -m 755 ${WORKDIR}/identity.sh ${KEYSTONE_CONF_DIR}/
     install -m 600 ${S}${sysconfdir}/logging.conf.sample \
         ${KEYSTONE_CONF_DIR}/logging.conf
-    install -m 600 ${S}${sysconfdir}/keystone.conf.sample \
-        ${KEYSTONE_CONF_DIR}/keystone.conf.sample
-    install -m 644 ${S}${sysconfdir}/keystone-paste.ini \
-        ${KEYSTONE_CONF_DIR}/keystone-paste.ini
 
     # Copy examples from upstream
     cp -r ${S}/examples ${KEYSTONE_PACKAGE_DIR}
