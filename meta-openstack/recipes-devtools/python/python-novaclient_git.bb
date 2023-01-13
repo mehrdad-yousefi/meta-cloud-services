@@ -39,22 +39,6 @@ RDEPENDS:${PN} += " \
         bash \
         "
 
-PACKAGECONFIG ?= "bash-completion"
-PACKAGECONFIG[bash-completion] = ",,bash-completion,bash-completion ${BPN}-bash-completion"
-
-do_install:append() {
-	install -d ${D}/${sysconfdir}/bash_completion.d
-	install -m 664 ${S}/tools/nova.bash_completion ${D}/${sysconfdir}/bash_completion.d
-
-	if [ -e "${D}/${PYTHON_SITEPACKAGES_DIR}/novaclient/tests/functional/v2/test_servers.py" ]; then
-		sed -e "s:%PYTHON_SITEPACKAGES_DIR%:${PYTHON_SITEPACKAGES_DIR}:g" \
-		    -i ${D}/${PYTHON_SITEPACKAGES_DIR}/novaclient/tests/functional/v2/test_servers.py
-	fi
-}
-
-PACKAGES =+ "${BPN}-bash-completion"
-FILES:${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"
-
 MONITOR_CHECKS_${PN} += "\
 	nova-api-check.sh \
 "
