@@ -13,7 +13,7 @@ PV = "18.1.0+git${SRCPV}"
 SRCREV = "be9517cb027d960caf4c9c8171b3ad2568bedae9"
 S = "${WORKDIR}/git"
 
-inherit setuptools3 monitor rmargparse
+inherit setuptools3 monitor
 
 DEPENDS += " \
         python3-pip \

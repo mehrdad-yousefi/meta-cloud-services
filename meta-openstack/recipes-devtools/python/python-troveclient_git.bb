@@ -14,7 +14,7 @@ PV = "3.0.0+git${SRCPV}"
 SRCREV = "960843de8142db6e61cc4d148a51f55862acbba0"
 S = "${WORKDIR}/git"
 
-inherit setuptools3 hosts default_configs rmargparse
+inherit setuptools3 hosts default_configs
 
 
 USERADD_PACKAGES = "${PN}"
