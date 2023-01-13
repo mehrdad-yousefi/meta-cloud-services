@@ -1,7 +1,7 @@
 DESCRIPTION = "High-performance AMQP-compliant message broker written in Erlang."
 HOMEPAGE = "http://www.rabbitmq.com/"
 LICENSE = "MPL-1.1"
-LIC_FILES_CHKSUM = "file://LICENSE-MPL-RabbitMQ;md5=b651d0a6feaaf2bf5eb9d36b2495c510"
+LIC_FILES_CHKSUM = "file://LICENSE-MPL-RabbitMQ;md5=815ca599c9df247a0c7f619bab123dad"
 SECTION = "network"
 PR = "r2"
 
