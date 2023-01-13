@@ -11,8 +11,8 @@ SRC_URI = "https://github.com/rabbitmq/rabbitmq-server/releases/download/v${PV}/
            file://rabbitmq-server-setup \
            "
 
-SRC_URI[md5sum] = "09d1af64c005bc680d6790b90655d021"
-SRC_URI[sha256sum] = "a930f92b362df2f292ec5f0281aa2011eb0c668faf6e24c4653a9fc53ec43b9f"
+SRC_URI[md5sum] = "5450e1b093bf02d29f7b006b2760d67c"
+SRC_URI[sha256sum] = "8302ebe685ef89976037152911ecea353fb49fa065b7a4651cc7b8f8e6631437"
 
 DEPENDS = " \
     erlang-native \
