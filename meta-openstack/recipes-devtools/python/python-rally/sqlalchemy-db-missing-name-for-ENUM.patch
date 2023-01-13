@@ -2,7 +2,7 @@ sqlalchemy-db: missing name for ENUM
 
 Command "rally-manage db recreate" gives the following error:
 
-TRACE rally   File "/usr/lib64/python3/site-packages/sqlalchemy/dialects/postgresql/base.py", line 898, in format_type
+TRACE rally   File "/usr/lib64/python3.10/site-packages/sqlalchemy/dialects/postgresql/base.py", line 898, in format_type
 TRACE rally     raise exc.CompileError("Postgresql ENUM type requires a name.")
 TRACE rally CompileError: Postgresql ENUM type requires a name.
 

@@ -5,12 +5,12 @@ OPENSTACK_CONTROLLER_EXTRA_INSTALL += "tempest keystone-tests glance-tests cinde
 # For the tempest built-in tests:
 ---------------------------------
   # edit /etc/tempest/tempest.conf to suit details of the system
-  % cd /usr/lib/python3/site-packages
+  % cd /usr/lib/python3.10/site-packages
   % nosetests --verbose tempest/api
 
 OR (less reliable)
 
-  % cd /usr/lib/python3/site-packages
+  % cd /usr/lib/python3.10/site-packages
   % cp /etc/tempest/.testr.conf .
   % testr init
   % testr run --parallel tempest
@@ -18,25 +18,25 @@ OR (less reliable)
 # For individual package tests
 ------------------------------
 # typical:
-  % cd /usr/lib/python3/site-packages/<project>
+  % cd /usr/lib/python3.10/site-packages/<project>
   % /etc/<project>/run_tests.sh --verbose -N
 
 # Cinder:
 # Notes: tries to run setup.py, --debug works around part of the issue
-  % cd /usr/lib/python3/site-packages/
+  % cd /usr/lib/python3.10/site-packages/
   % nosetests --verbose cinder/tests
 
 # Neutron:
 # Notes: use nosetests directly
-  % cd /usr/lib/python3/site-packages/
+  % cd /usr/lib/python3.10/site-packages/
   % nosetests --verbose neutron/tests
 
 # Nova:
-# Notes: vi /usr/lib/python3/site-packages/nova/tests/conf_fixture.py
+# Notes: vi /usr/lib/python3.10/site-packages/nova/tests/conf_fixture.py
 #        modify api-paste.ini reference to be /etc/nova/api-paste.ini, the conf
 #        file isn't being read properly, so some tests will fail to run
    % cd /
-   % nosetests --verbose /usr/lib/python3/site-packages/nova/tests
+   % nosetests --verbose /usr/lib/python3.10/site-packages/nova/tests
 
 # keystone:
 #

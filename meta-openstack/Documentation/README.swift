@@ -395,8 +395,8 @@ Swift Built-In Unit Tests
 This section describes how to run Swift and Swift client built-in unit
 tests which are located at:
 
-    /usr/lib64/python3/site-packages/swift/test
-    /usr/lib64/python3/site-packages/swiftclient/tests
+    /usr/lib64/python3.10/site-packages/swift/test
+    /usr/lib64/python3.10/site-packages/swiftclient/tests
 
 with nosetests test-runner.  Please make sure that the test accounts
 setting in /etc/swift/test.conf reflects the keystone user accounts
@@ -407,7 +407,7 @@ To run swift built-in unit test with nosetests:
     $ To accommodate the small space of loop dev,
       modify /etc/swift/swift.conf to have "max_file_size = 5242880"
     $ /etc/init.d/swift restart
-    $ cd /usr/lib64/python3/site-packages/swift
+    $ cd /usr/lib64/python3.10/site-packages/swift
     $ nosetests -v test
 
 Ran 1633 tests in 272.930s
@@ -416,7 +416,7 @@ FAILED (errors=5, failures=4)
 
 To run swiftclient built-in unit test with nosetests:
 
-    $ cd /usr/lib64/python3/site-packages/swiftclient
+    $ cd /usr/lib64/python3.10/site-packages/swiftclient
     $ nosetests -v tests
 
 Ran 108 tests in 2.277s

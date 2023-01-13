@@ -1,7 +1,7 @@
 heat tests change project_dir path
 
 By default, heat-tests sets project dir to
-/usr/<lib/lib64>/python3/site-packages/.  However
+/usr/<lib/lib64>/python3.10/site-packages/.  However
 all heat config files are within /etc/heat.  So
 set project_dir to "/"
 

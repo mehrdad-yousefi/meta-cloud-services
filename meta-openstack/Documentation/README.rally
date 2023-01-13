@@ -307,12 +307,12 @@ Rally Built-In Unit Tests
 This section describes how to run Rally built-in unit
 tests which are located at:
 
-    /usr/lib64/python3/site-packages/rally/tests
-    /usr/lib64/python3/site-packages/rally/tests_ci
+    /usr/lib64/python3.10/site-packages/rally/tests
+    /usr/lib64/python3.10/site-packages/rally/tests_ci
 
 To run Rally built-in unit test with nosetests:
 
-    $ cd /usr/lib64/python3/site-packages/rally/tests
+    $ cd /usr/lib64/python3.10/site-packages/rally/tests
     $ nosetests -v
 
 ----------------------------------------------------------------------
@@ -320,7 +320,7 @@ Ran 647 tests in 7.598s
 
 FAILED (errors=3, failures=2)
 
-    $ /usr/lib64/python3/site-packages/rally/tests_ci
+    $ /usr/lib64/python3.10/site-packages/rally/tests_ci
     $ nosetests -v
 
 ----------------------------------------------------------------------
