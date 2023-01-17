@@ -2,7 +2,7 @@ DESCRIPTION = "Python-PostgreSQL Database Adapter"
 HOMEPAGE = "http://initd.org/psycopg/"
 SECTION = "devel/python"
 LICENSE = "GPL-3.0-or-later"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=72bded22a37845c7d9dc3fd39d699a2d"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=89ae5da7594f6112905b3a7b0c76ff7f"
 DEPENDS = "postgresql"
 
 SRC_URI[md5sum] = "3cec7285f61690633bb070d4bba259c2"
