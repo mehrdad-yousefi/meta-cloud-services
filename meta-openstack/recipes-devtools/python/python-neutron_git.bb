@@ -256,7 +256,9 @@ PACKAGES += " \
      ${SRCNAME}-plugin-openvswitch-setup \
      "
 
-FILES:${PN} = "${libdir}/*"
+FILES:${PN} = "${libdir}/*
+               /usr/etc/neutron/** \
+	      "
 
 FILES:${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
 RDEPENDS:${SRCNAME}-tests += " bash"
