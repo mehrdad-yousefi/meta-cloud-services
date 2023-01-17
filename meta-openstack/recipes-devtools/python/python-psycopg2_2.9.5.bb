@@ -9,8 +9,8 @@ SRC_URI += " \
            file://remove-pg-config.patch \
           "
 
-SRC_URI[md5sum] = "9e7d6f695fc7f8d1c42a7905449246c9"
-SRC_URI[sha256sum] = "eccf962d41ca46e6326b97c8fe0a6687b58dfc1a5f6540ed071ff1474cea749e"
+SRC_URI[md5sum] = "4abf11760cef67f3f43f62731ad130f6"
+SRC_URI[sha256sum] = "920bf418000dd17669d2904472efeab2b20546efd0548139618f8fa305d1d7ad"
 
 inherit setuptools3 pypi
 
