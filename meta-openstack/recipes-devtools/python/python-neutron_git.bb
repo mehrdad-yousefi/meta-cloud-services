@@ -70,7 +70,6 @@ do_install:append() {
 
     # Available directly from source
     install -m 640 -g ${GROUP} ${S}/etc/api-paste.ini ${NEUTRON_CONF_DIR}/
-    install -m 640 -g ${GROUP} ${S}/etc/policy.json ${NEUTRON_CONF_DIR}/
 
     # Generated using ./tools/generate_config_file_samples.sh
     install -m 640 -g ${GROUP} ${WORKDIR}/neutron.conf ${NEUTRON_CONF_DIR}/
