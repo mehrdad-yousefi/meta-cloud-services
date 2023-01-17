@@ -1,0 +1,13 @@
+diff --git a/setup.cfg b/setup.cfg
+index 04328554..76c93d55 100644
+--- a/setup.cfg
++++ b/setup.cfg
+@@ -5,7 +5,7 @@ define=PSYCOPG_DEBUG
+ # "pg_config" is required to locate PostgreSQL headers and libraries needed to
+ # build psycopg2. If pg_config is not in the path or is installed under a
+ # different name set the following option to the pg_config full path.
+-pg_config=
++pg_config="/bin/true"
+ 
+ # For Windows only:
+ # Set to 1 if the PostgreSQL library was built with OpenSSL.
