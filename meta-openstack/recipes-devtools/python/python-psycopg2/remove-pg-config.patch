@@ -1,11 +1,10 @@
---- setup.cfg	2022-10-25 04:34:29.000000000 -0700
-+++ ../setup.cfg	2023-01-17 14:45:10.143515610 -0800
-@@ -5,7 +5,7 @@
- # "pg_config" is required to locate PostgreSQL headers and libraries needed to
- # build psycopg2. If pg_config is not in the path or is installed under a
- # different name set the following option to the pg_config full path.
--pg_config=
-+pg_config="/bin/true"
- 
- # For Windows only:
- # Set to 1 if the PostgreSQL library was built with OpenSSL.
+--- setup.cfg	2022-10-25 04:05:49.459371300 -0700
++++ ../setup.cfg	2023-01-17 15:43:47.150081103 -0800
+@@ -1,6 +1,6 @@
+ [build_ext]
+ define = PSYCOPG_DEBUG
+-pg_config = 
++pg_config = "/bin/true" 
+ have_ssl = 0
+ static_libpq = 0
+ libraries = 
