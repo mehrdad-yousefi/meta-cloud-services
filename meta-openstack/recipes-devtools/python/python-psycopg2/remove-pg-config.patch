@@ -11,7 +11,7 @@ index a4a1eff..bfa4e4e 100644
  static_libpq = 0
  libraries = 
 diff --git a/setup.py b/setup.py
-index 7faf4d5..d1d7f7f 100644
+index 7faf4d5..cce3aaf 100644
 --- a/setup.py
 +++ b/setup.py
 @@ -374,20 +374,9 @@ For further information please check the 'doc/src/install.rst' file (also at
