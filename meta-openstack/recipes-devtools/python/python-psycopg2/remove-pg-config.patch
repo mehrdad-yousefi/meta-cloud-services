@@ -1,5 +1,7 @@
---- setup.cfg	2022-10-25 04:05:49.459371300 -0700
-+++ ../setup.cfg	2023-01-17 15:43:47.150081103 -0800
+diff --git a/setup.cfg b/setup.cfg
+index a4a1eff..bfa4e4e 100644
+--- a/setup.cfg
++++ b/setup.cfg
 @@ -1,6 +1,6 @@
  [build_ext]
  define = PSYCOPG_DEBUG
@@ -8,3 +10,30 @@
  have_ssl = 0
  static_libpq = 0
  libraries = 
+diff --git a/setup.py b/setup.py
+index 7faf4d5..d1d7f7f 100644
+--- a/setup.py
++++ b/setup.py
+@@ -374,20 +374,9 @@ For further information please check the 'doc/src/install.rst' file (also at
+             self.libraries.append("pq")
+ 
+         try:
+-            self.library_dirs.append(pg_config_helper.query("libdir"))
+-            self.include_dirs.append(pg_config_helper.query("includedir"))
+-            self.include_dirs.append(pg_config_helper.query("includedir-server"))
+-
+-            # add includedirs from cppflags, libdirs from ldflags
+-            for token in pg_config_helper.query("ldflags").split():
+-                if token.startswith("-L"):
+-                    self.library_dirs.append(token[2:])
+-
+-            for token in pg_config_helper.query("cppflags").split():
+-                if token.startswith("-I"):
+-                    self.include_dirs.append(token[2:])
+-
+             pgversion = pg_config_helper.query("version").split()[1]
++        except:
++            pgversion = "9.4.4"
+ 
+             verre = re.compile(
+                 r"(\d+)(?:\.(\d+))?(?:(?:\.(\d+))|(devel|(?:alpha|beta|rc)\d+))?")
