@@ -32,7 +32,7 @@ index 7faf4d5..d1d7f7f 100644
 -                    self.include_dirs.append(token[2:])
 -
              pgversion = pg_config_helper.query("version").split()[1]
-+        except:
++        except Exception as e:
 +            pgversion = "9.4.4"
  
              verre = re.compile(
