@@ -124,7 +124,9 @@ do_install:append() {
     # mv ${D}${datadir}/bin ${DASHBOARD_DIR}/bin
 
     install -d ${DASHBOARD_CONF_DIR}
-    cp run_tests.sh ${DASHBOARD_CONF_DIR}
+    if [ -e "run_tests.sh" ]; then
+    	cp run_tests.sh ${DASHBOARD_CONF_DIR}
+    fi
 
     # The following allows horizon to be run from apache. This
     # is the preffered way to run horizon.
