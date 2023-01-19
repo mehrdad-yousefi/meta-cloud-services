@@ -1,0 +1,17 @@
+diff --git a/bin/swift b/bin/run-swift
+similarity index 100%
+rename from bin/swift
+rename to bin/run-swift
+diff --git a/setup.cfg b/setup.cfg
+index 6736790..7919c47 100644
+--- a/setup.cfg
++++ b/setup.cfg
+@@ -27,7 +27,7 @@ classifier =
+ packages = 
+ 	swiftclient
+ scripts = 
+-	bin/swift
++	bin/run-swift
+ data_files = 
+ 	share/man/man1 = doc/manpages/swift.1
+ 
