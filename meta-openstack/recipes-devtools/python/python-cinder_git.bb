@@ -53,7 +53,6 @@ do_install:append() {
     install -d ${CINDER_CONF_DIR}
     install -o ${USER} -m 664 ${WORKDIR}/cinder.conf ${CINDER_CONF_DIR}/
     install -o ${USER} -m 664 ${TEMPLATE_CONF_DIR}/api-paste.ini ${CINDER_CONF_DIR}/
-    install -o ${USER} -m 664 ${S}/etc/cinder/policy.json ${CINDER_CONF_DIR}/
 
     install -d ${CINDER_CONF_DIR}/drivers
     install -m 600 ${WORKDIR}/nfs_setup.sh ${CINDER_CONF_DIR}/drivers/
