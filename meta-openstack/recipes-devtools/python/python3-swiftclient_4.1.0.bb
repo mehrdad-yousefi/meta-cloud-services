@@ -6,6 +6,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 
 PYPI_PACKAGE = "python-swiftclient"
 
+SRC_URI += " \
+           file://avoids-duplicate-naming.patch \
+          "
+
 SRC_URI[sha256sum] = "f82298e4a48f7cbdd680f2638c85d1ca7ae1a76edbe30036d21b4cd7a29c09eb"
 
 inherit pypi setuptools3 python3-dir
