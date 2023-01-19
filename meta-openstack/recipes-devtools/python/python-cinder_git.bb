@@ -167,7 +167,10 @@ ALLOW_EMPTY:${SRCNAME}-api = "1"
 
 RDEPENDS:${SRCNAME}-tests += " bash python3"
 
-FILES:${PN} = "${libdir}/* /etc/tgt"
+FILES:${PN} = "${libdir}/* \
+               /etc/tgt \
+               /usr/etc/cinder/** \
+              "
 
 FILES:${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/tools"
 
