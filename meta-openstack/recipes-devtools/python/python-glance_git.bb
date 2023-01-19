@@ -69,12 +69,9 @@ do_install:append() {
     install -o root -g ${GROUP} -m 750 -d ${GLANCE_CONF_DIR}
 
     # Start with pristine copies from upstream
-    install -m 644 -o root -g ${GROUP} ${SRC_SYSCONFDIR}/glance-registry.conf ${GLANCE_CONF_DIR}/
     install -m 644 -o root -g ${GROUP} ${SRC_SYSCONFDIR}/glance-api.conf ${GLANCE_CONF_DIR}/
     install -m 644 -o root -g ${GROUP} ${SRC_SYSCONFDIR}/glance-cache.conf ${GLANCE_CONF_DIR}/
-    install -m 644 -o root -g ${GROUP} ${SRC_SYSCONFDIR}/glance-registry-paste.ini ${GLANCE_CONF_DIR}/
     install -m 644 -o root -g ${GROUP} ${SRC_SYSCONFDIR}/glance-api-paste.ini ${GLANCE_CONF_DIR}/
-    install -m 644 -o root -g ${GROUP} ${SRC_SYSCONFDIR}/policy.json ${GLANCE_CONF_DIR}/
     install -m 644 -o root -g ${GROUP} ${SRC_SYSCONFDIR}/schema-image.json ${GLANCE_CONF_DIR}/
 
     for file in api registry cache
