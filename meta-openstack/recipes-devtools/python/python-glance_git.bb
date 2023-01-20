@@ -74,7 +74,7 @@ do_install:append() {
     install -m 644 -o root -g ${GROUP} ${SRC_SYSCONFDIR}/glance-api-paste.ini ${GLANCE_CONF_DIR}/
     install -m 644 -o root -g ${GROUP} ${SRC_SYSCONFDIR}/schema-image.json ${GLANCE_CONF_DIR}/
 
-    for file in api registry cache
+    for file in api cache
     do
         sed -e "/^#connection = .*/aconnection = postgresql+psycopg2://${DB_USER}:${DB_PASSWORD}@localhost/glance" \
             -i ${GLANCE_CONF_DIR}/glance-$file.conf
@@ -93,7 +93,7 @@ do_install:append() {
     sed -e '/^#swift_store_create_container_on_put = .*/aswift_store_create_container_on_put = True' -i ${CONF_FILE}
 
     # As documented in https://docs.openstack.org/glance/zed/install/install-debian.html
-    for file in api registry
+    for file in api
     do
         CONF_FILE=${GLANCE_CONF_DIR}/glance-$file.conf
 	keystone_authtoken="#\n# Setup at install by python-glance_git.bb\n#"
