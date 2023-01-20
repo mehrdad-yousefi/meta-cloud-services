@@ -34,7 +34,7 @@ RDEPENDS:${PN} += " \
         python3-oslo.concurrency \
         python3-pyyaml \
         python3-lxml \
-        python3-suds-jurko \
+        python3-suds \
         python3-eventlet \
         python3-requests \
         python3-urllib3 \

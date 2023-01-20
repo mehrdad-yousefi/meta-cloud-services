@@ -257,7 +257,7 @@ RDEPENDS:${PN} += " \
         python3-sqlalchemy \
         python3-sqlalchemy-migrate \
         python3-stevedore \
-        python3-suds-jurko \
+        python3-suds \
         python3-webob \
         python3-oslo.i18n \
         python3-oslo.vmware \
