@@ -205,7 +205,6 @@ do_install:append() {
     install -m 664 ${S}/tools/nova-manage.bash_completion ${D}/${sysconfdir}/bash_completion.d
 
     cp -r "${S}/doc" "${D}/${PYTHON_SITEPACKAGES_DIR}/nova"
-    cp -r "${S}/plugins" "${D}/${PYTHON_SITEPACKAGES_DIR}/nova"
 }
 
 PACKAGES += " ${SRCNAME}-tests"
