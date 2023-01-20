@@ -140,6 +140,7 @@ PACKAGES += " ${SRCNAME} ${SRCNAME}-setup ${SRCNAME}-api ${SRCNAME}-registry"
 FILES:${PN} = " \
     ${libdir}/* \
     ${datadir}/etc/${SRCNAME}* \
+    /usr/etc/glance/** \
     "
 
 FILES:${SRCNAME} = "${bindir}/* \
