@@ -4,8 +4,12 @@ SECTION = "devel/python"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d846877d24bbb3d7a00a985c90378e8c"
 
-SRC_URI[md5sum] = "70667908b648043bc8a3fcb7d1e4d53a"
-SRC_URI[sha256sum] = "4b2acd6802a04b59e306d0a6ccf37701d24376f4dc044bbbafba3afdf9d3389a"
+SRC_URI += " \
+           file://avoids-duplicate-naming.patch \
+          "
+
+SRC_URI[md5sum] = "5ded3398853c3f5bc9c6838ca7d32761"
+SRC_URI[sha256sum] = "49b255e701c3f1461605f5b0e8f54f0c21922d7845d414c24dd6409fe695d550"
 
 inherit setuptools3 pypi
 
