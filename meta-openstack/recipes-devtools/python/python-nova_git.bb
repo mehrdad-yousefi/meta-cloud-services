@@ -242,7 +242,9 @@ ALLOW_EMPTY:${SRCNAME}-spicehtml5proxy = "1"
 
 
 
-FILES:${PN} = "${libdir}/*"
+FILES:${PN} = "${libdir}/* \
+               /usr/etc/nova/** \
+              "
 
 # MAA FILES:${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
 FILES:${SRCNAME}-tests = ""
