@@ -31,3 +31,7 @@ RDEPENDS:${PN} += " \
 
 CLEANBROKEN = "1"
 
+do_install() {
+    install -m 0755 -d ${D}${bindir}
+    install -m 0755 ${S}/uwsgi ${D}${bindir}
+}
