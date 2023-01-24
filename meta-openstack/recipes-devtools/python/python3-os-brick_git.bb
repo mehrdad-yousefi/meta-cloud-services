@@ -14,7 +14,9 @@ S = "${WORKDIR}/git"
 
 inherit setuptools3
 
-FILES:${PN} += "${datadir}/etc/*"
+FILES:${PN} += "${datadir}/etc/* \
+                /usr/etc/os-brick/** \
+               "
 
 DEPENDS += " \
         python3-pbr \
