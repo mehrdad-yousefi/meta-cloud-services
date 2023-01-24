@@ -1,3 +1,18 @@
+diff --git a/bin/uwsgi b/bin/run-uwsgi
+similarity index 100%
+rename from bin/uwsgi
+rename to bin/run-uwsgi
+diff --git a/buildconf/unbitstaff.ini b/buildconf/unbitstaff.ini
+index 42330cd..7c2ee47 100644
+--- a/buildconf/unbitstaff.ini
++++ b/buildconf/unbitstaff.ini
+@@ -1,5 +1,5 @@
+ [uwsgi]
+ inherit = unbit
+ embedded_plugins = python
+-bin_name = ../bin/uwsgi
++bin_name = ../bin/run-uwsgi
+ plugin_dir = ../bin/uwsgi_plugins
 diff --git a/core/hash.c b/core/hash.c
 index 5940f66..bf989fc 100644
 --- a/core/hash.c
