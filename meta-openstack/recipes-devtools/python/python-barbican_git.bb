@@ -126,6 +126,7 @@ RDEPENDS:${PN} += " \
         python3-stevedore \
         python3-webob \
         python3-barbicanclient \
+        bash \
         "
 
 INITSCRIPT_PACKAGES = "${SRCNAME}"
