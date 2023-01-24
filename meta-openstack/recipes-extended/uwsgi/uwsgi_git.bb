@@ -30,3 +30,5 @@ RDEPENDS:${PN} += " \
         "
 
 CLEANBROKEN = "1"
+
+INSANE_SKIP_${PN} = "rpaths"
