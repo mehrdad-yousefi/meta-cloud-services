@@ -105,7 +105,9 @@ RDEPENDS:${SRCNAME} = "${PN} \
                        ${SRCNAME}-setup \
                        uwsgi \
                        python3-falcon \
-                       python3-oslo.messaging"
+                       python3-oslo.messaging \
+                       bash \
+                      "
 
 RDEPENDS:${PN} += " \
         python3-pip \
