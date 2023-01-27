@@ -2,13 +2,13 @@ DESCRIPTION = "A very small text templating language"
 HOMEPAGE = "https://github.com/nsoranzo/tempita"
 SECTION = "devel/python"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://setup.py;beginline=36;endline=36;md5=3cbf117e7a23a9d13aabecd89569c69e"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=06e8c765d2d2ec21c46aeaff361cb044"
 
-SRCREV = "a30af77422444985d43e249e035963a0e131ea05"
-PV = "0.5.2+git${SRCPV}"
+SRCREV = "f6015ac7c6e698e52d2b4909517eef0d6fde3889"
+PV = "0.5.4dev+git${SRCPV}"
 
 SRC_URI = "\
-	git://github.com/nsoranzo/tempita.git;branch=main;protocol=https \
+	git://github.com/mehrdad-yousefi/tempita.git;branch=main;protocol=https \
 	"
 
 S = "${WORKDIR}/git"
