@@ -274,12 +274,23 @@ RDEPENDS:${SRCNAME} = " \
     postgresql \
     postgresql-client \
     python-psycopg2 \
+    bash \
+    python3 \
     tgt"
 
-RDEPENDS:${SRCNAME}-api = "${SRCNAME}"
-RDEPENDS:${SRCNAME}-volume = "${SRCNAME}"
-RDEPENDS:${SRCNAME}-scheduler = "${SRCNAME}"
-RDEPENDS:${SRCNAME}-setup = "postgresql sudo ${SRCNAME} bash"
+RDEPENDS:${SRCNAME}-api = "${SRCNAME} \
+                           bash \
+                           python3 \
+                          "
+RDEPENDS:${SRCNAME}-volume = "${SRCNAME} \
+                              bash \
+                              python3 \
+                             "
+RDEPENDS:${SRCNAME}-scheduler = "${SRCNAME} \
+                                bash \
+                                python3 \
+                                "
+RDEPENDS:${SRCNAME}-setup = "postgresql sudo ${SRCNAME} bash python3"
 
 SYSTEMD_PACKAGES = " \
     ${SRCNAME}-setup \
@@ -303,3 +314,5 @@ SYSTEMD_AUTO_ENABLE:${SRCNAME}-backup = "disable"
 
 MONITOR_SERVICE_PACKAGES = "${SRCNAME}"
 MONITOR_SERVICE_${SRCNAME} = "cinder"
+
+INSANE_SKIP:${PN} = "empty-dirs"
