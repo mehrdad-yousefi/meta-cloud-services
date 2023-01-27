@@ -171,10 +171,16 @@ RDEPENDS:${PN} += " \
     bash \
     "
 
-RDEPENDS:${SRCNAME} = "${PN}"
+RDEPENDS:${SRCNAME} = "${PN} \
+                       bash \
+                      "
 
-RDEPENDS:${SRCNAME} = "${PN}"
-RDEPENDS:${SRCNAME}-setup = "${SRCNAME}"
+RDEPENDS:${SRCNAME} = "${PN} \
+                       bash \
+                      "
+RDEPENDS:${SRCNAME}-setup = "${SRCNAME} \
+                             bash \
+                            "
 
 INITSCRIPT_PACKAGES = "${SRCNAME}-setup"
 INITSCRIPT_NAME:${SRCNAME}-setup = "swift"
