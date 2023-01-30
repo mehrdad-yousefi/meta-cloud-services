@@ -41,3 +41,7 @@ RDEPENDS:${PN} += " \
         python3-monotonic \
         python3-dnspython \
         "
+
+FILES:${PN} = " \
+    /usr/etc/glance/** \
+    "
