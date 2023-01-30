@@ -9,8 +9,8 @@ SRCNAME = "amqplib"
 
 SRC_URI = "https://github.com/barryp/py-amqplib/archive/${PV}.tar.gz"
 
-SRC_URI[md5sum] = "ff405a7b57aa98cdf07d02bd8090fa29"
-SRC_URI[sha256sum] = "9461d73f75ca704e6b656738b5dad42a1948e61dfbc8233077d84d00f74c3936"
+SRC_URI[md5sum] = "2a705976787612991ee9da32f0ba638d"
+SRC_URI[sha256sum] = "ef370cdbf9b83b2efa685f6010a0a712a1bc60a3d82e1206a073110b898ef338"
 
 S = "${WORKDIR}/py-amqplib-${PV}"
 
