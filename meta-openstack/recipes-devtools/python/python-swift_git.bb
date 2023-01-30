@@ -14,6 +14,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master;protocol=http
            file://swift.init \
            file://swift_setup.sh \
            file://cluster.conf \
+           file://replace-2to3.patch \
 "
 
 SRCREV="4ca08cc395e686265574366497a6869e94eebcb2"
@@ -168,6 +169,7 @@ RDEPENDS:${PN} += " \
     python3-xattr \
     python3-pbr \
     python3-dnspython \
+    python3 \
     bash \
     "
 
