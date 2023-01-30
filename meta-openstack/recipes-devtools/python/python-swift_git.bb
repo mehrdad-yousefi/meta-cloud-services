@@ -17,8 +17,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master;protocol=http
            file://replace-2to3.patch \
 "
 
-SRCREV="4ca08cc395e686265574366497a6869e94eebcb2"
-PV="2.2.2+git${SRCPV}"
+SRCREV="f6196b0a221eb17e1d5649d732b997dc200b2fe7"
+PV="2.30.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools3 python3-dir update-rc.d hosts identity

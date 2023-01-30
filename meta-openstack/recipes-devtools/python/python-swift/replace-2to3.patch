@@ -147,7 +147,7 @@ index ff3cf5c93..2df96d2d5 100644
  #
  # Licensed under the Apache License, Version 2.0 (the "License");
 diff --git a/test/probe/brain.py b/test/probe/brain.py
-index 1109de6c8..131ded3dc 100644
+index 3ab80305f..63ca678e2 100644
 --- a/test/probe/brain.py
 +++ b/test/probe/brain.py
 @@ -1,4 +1,4 @@
