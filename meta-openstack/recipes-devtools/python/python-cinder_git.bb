@@ -165,11 +165,6 @@ ALLOW_EMPTY:${SRCNAME}-scheduler = "1"
 ALLOW_EMPTY:${SRCNAME}-volume = "1"
 ALLOW_EMPTY:${SRCNAME}-api = "1"
 
-RDEPENDS:${SRCNAME}-tests += " \
-                          bash \
-                          python3 \
-                          "
-
 FILES:${PN} = "${libdir}/* \
                /etc/tgt \
                /usr/etc/cinder/** \
@@ -293,6 +288,10 @@ RDEPENDS:${SRCNAME}-scheduler = "${SRCNAME} \
                                 bash \
                                 python3 \
                                 "
+RDEPENDS:${SRCNAME}-tests = "${SRCNAME} \
+                             bash \
+                             python3 \
+                            "
 RDEPENDS:${SRCNAME}-setup = "postgresql sudo ${SRCNAME} bash python3"
 
 SYSTEMD_PACKAGES = " \
