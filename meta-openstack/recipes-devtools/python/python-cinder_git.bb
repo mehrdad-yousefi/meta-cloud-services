@@ -165,7 +165,10 @@ ALLOW_EMPTY:${SRCNAME}-scheduler = "1"
 ALLOW_EMPTY:${SRCNAME}-volume = "1"
 ALLOW_EMPTY:${SRCNAME}-api = "1"
 
-RDEPENDS:${SRCNAME}-tests += " bash python3"
+RDEPENDS:${SRCNAME}-tests += " \
+                          bash \
+                          python3 \
+                          "
 
 FILES:${PN} = "${libdir}/* \
                /etc/tgt \
@@ -315,4 +318,4 @@ SYSTEMD_AUTO_ENABLE:${SRCNAME}-backup = "disable"
 MONITOR_SERVICE_PACKAGES = "${SRCNAME}"
 MONITOR_SERVICE_${SRCNAME} = "cinder"
 
-INSANE_SKIP:${PN} = "empty-dirs"
+INSANE_SKIP:${SRCNAME} = "empty-dirs"
