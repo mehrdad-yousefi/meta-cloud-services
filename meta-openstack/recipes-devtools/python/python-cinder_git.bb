@@ -265,6 +265,7 @@ RDEPENDS:${PN} += " \
         python3-google-api-python-client \
         python3-castellan \
         python3-cryptography \
+        python3 \
         "
 
 RDEPENDS:${SRCNAME} = " \
@@ -288,8 +289,7 @@ RDEPENDS:${SRCNAME}-scheduler = "${SRCNAME} \
                                 bash \
                                 python3 \
                                 "
-RDEPENDS:${SRCNAME}-tests = "${SRCNAME} \
-                             bash \
+RDEPENDS:${SRCNAME}-tests = "bash \
                              python3 \
                             "
 RDEPENDS:${SRCNAME}-setup = "postgresql sudo ${SRCNAME} bash python3"
