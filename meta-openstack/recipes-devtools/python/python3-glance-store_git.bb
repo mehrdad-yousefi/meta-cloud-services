@@ -43,5 +43,7 @@ RDEPENDS:${PN} += " \
         "
 
 FILES:${PN} = " \
+    /usr/bin/** \
+    /usr/lib/** \
     /usr/etc/glance/** \
     "
