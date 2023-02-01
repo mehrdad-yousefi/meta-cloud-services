@@ -282,7 +282,7 @@ RDEPENDS:${SRCNAME} = " \
     postgresql-client \
     python-psycopg2 \
     apache2 \
-    bash
+    bash \
     "
 
 RDEPENDS:${SRCNAME}-setup = "postgresql sudo ${SRCNAME}"
