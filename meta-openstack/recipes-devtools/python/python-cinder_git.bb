@@ -19,6 +19,7 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/zed;protocol=
     file://glusterfs_setup.sh \
     file://lvm_iscsi_setup.sh \
     file://add-cinder-volume-types.sh \
+    file://fix_runtime_dependencies_cinder_tests.patch \
     "
 
 SRCREV = "f1ebe259df3e81a241a708ecd50b6e550ac108ea"
