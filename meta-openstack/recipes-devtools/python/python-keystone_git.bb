@@ -282,6 +282,7 @@ RDEPENDS:${SRCNAME} = " \
     postgresql-client \
     python-psycopg2 \
     apache2 \
+    bash
     "
 
 RDEPENDS:${SRCNAME}-setup = "postgresql sudo ${SRCNAME}"
@@ -289,3 +290,5 @@ RDEPENDS:${SRCNAME}-cronjobs = "cronie ${SRCNAME}"
 
 MONITOR_SERVICE_PACKAGES = "${SRCNAME}"
 MONITOR_SERVICE_${SRCNAME} = "keystone"
+
+INSANE_SKIP:${SRCNAME} = "empty-dirs"
