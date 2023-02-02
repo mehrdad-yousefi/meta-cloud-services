@@ -14,7 +14,9 @@ S = "${WORKDIR}/git"
 
 inherit setuptools3
 
-FILES:${PN} += "${datadir}/etc/${SRCNAME}/*"
+FILES:${PN} += "${datadir}/etc/${SRCNAME}/* \
+                /usr/etc/ryu/** \
+               "
 
 DEPENDS += " \
         python3-pip \
