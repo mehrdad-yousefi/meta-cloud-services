@@ -334,7 +334,7 @@ RDEPENDS:${PN} += " \
    "
 
 RDEPENDS:${SRCNAME}-common = "${PN} openssl openssl-misc libxml2 libxslt \
-                              iptables curl dnsmasq sudo procps"
+                              iptables curl dnsmasq sudo procps bash"
 
 RDEPENDS:${SRCNAME}-controller = "${PN} ${SRCNAME}-common \
 				  ${SRCNAME}-ec2 \
