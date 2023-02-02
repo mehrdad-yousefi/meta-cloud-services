@@ -254,6 +254,7 @@ RDEPENDS:${PN} += " \
         python3-requests \
         python3-six \
         python3-tooz \
+        bash \
 	"
 
 RDEPENDS:${SRCNAME}-controller = "${PN} ${SRCNAME}-common ${SRCNAME}-alarm-notifier ${SRCNAME}-alarm-evaluator ${SRCNAME}-agent-notification ${SRCNAME}-reseller \
