@@ -402,6 +402,7 @@ RDEPENDS:${SRCNAME}-l3-agent = "${SRCNAME} ${SRCNAME}-metadata-agent iputils"
 RDEPENDS:${SRCNAME}-metadata-agent = "${SRCNAME}"
 RDEPENDS:${SRCNAME}-plugin-ml2 = "${SRCNAME}"
 RDEPENDS:${SRCNAME}-setup = "postgresql sudo bash"
+RDEPENDS:${SRCNAME}-extra-agents = "bash"
 
 RRECOMMENDS:${SRCNAME}-server = "${SRCNAME}-plugin-openvswitch"
 
