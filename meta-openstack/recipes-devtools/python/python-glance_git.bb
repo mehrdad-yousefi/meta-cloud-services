@@ -221,6 +221,7 @@ RDEPENDS:${SRCNAME} = " \
         postgresql \
         postgresql-client \
         python-psycopg2 \
+        bash \
         "
 
 RDEPENDS:${SRCNAME}-api = "${SRCNAME}"
