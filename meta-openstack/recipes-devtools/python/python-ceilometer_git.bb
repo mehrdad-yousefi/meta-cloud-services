@@ -134,7 +134,9 @@ ALLOW_EMPTY:${SRCNAME}-setup = "1"
 ALLOW_EMPTY:${SRCNAME}-reseller = "1"
 ALLOW_EMPTY:${SRCNAME}-tests = "1"
 
-FILES:${PN} = "${libdir}/*"
+FILES:${PN} = "${libdir}/* \
+               /usr/etc/ceilometer/** \
+              "
 
 FILES:${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/setup-test-env.sh"
 
