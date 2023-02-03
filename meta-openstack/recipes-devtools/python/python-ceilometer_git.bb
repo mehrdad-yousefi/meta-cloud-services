@@ -58,7 +58,6 @@ do_install:append() {
 
     install -d ${CEILOMETER_CONF_DIR}
     install -m 600 ${WORKDIR}/ceilometer.conf ${CEILOMETER_CONF_DIR}
-    install -m 600 ${TEMPLATE_CONF_DIR}/*.json ${CEILOMETER_CONF_DIR}
     install -m 600 ${TEMPLATE_CONF_DIR}/*.yaml ${CEILOMETER_CONF_DIR}
 
     install -m 600 ${TEMPLATE_CONF_DIR}/api_paste.ini ${CEILOMETER_CONF_DIR}
