@@ -9,14 +9,13 @@ SRCNAME = "ceilometer"
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master;protocol=https \
            file://ceilometer.conf \
            file://ceilometer.init \
-           file://fix_ceilometer_memory_leak.patch \
 "
 # dropped for juno:
 #   file://ceilometer-builtin-tests-config-location.patch
 
 
-SRCREV = "026a5d475e1958bf761e41c2bb426b09e0f3d270"
-PV = "5.0.0+git${SRCPV}"
+SRCREV = "6f88ee6be9a3ae5c78587f1a2bc8cd2e9a5a2fa7"
+PV = "19.0.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 CEILOMETER_SECRET ?= "12121212"
