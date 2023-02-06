@@ -50,15 +50,12 @@ do_install:append() {
     install -d ${TROVE_CONF_DIR}
 
     # init.
-    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)};
-    then
-        install -d ${D}${sysconfdir}/init.d
-        for suffix in api taskmanager conductor; do
-            SUFFIX_FILE=${D}${sysconfdir}/init.d/trove-${suffix}
-            install -m 0755 ${WORKDIR}/trove-init ${SUFFIX_FILE}
-            sed -e "s:@suffix@:${suffix}:g" -i ${SUFFIX_FILE}
-        done
-    fi
+    install -d ${D}${sysconfdir}/init.d
+    for suffix in api taskmanager conductor; do
+        SUFFIX_FILE=${D}${sysconfdir}/init.d/trove-${suffix}
+        install -m 0755 ${WORKDIR}/trove-init ${SUFFIX_FILE}
+        sed -e "s:@suffix@:${suffix}:g" -i ${SUFFIX_FILE}
+    done
 
 
     install -d ${D}${localstatedir}/lib/trove

@@ -88,18 +88,16 @@ do_install:append() {
     sed -e "s:%ADMIN_PASSWORD%:${ADMIN_PASSWORD}:g" -i ${HEAT_CONF_DIR}/heat.conf
     sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" -i ${HEAT_CONF_DIR}/heat.conf
 
-    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
-        install -d ${D}${sysconfdir}/init.d
+    install -d ${D}${sysconfdir}/init.d
 
-        sed 's:@suffix@:api:' < ${WORKDIR}/heat.init >${WORKDIR}/heat-api.init.sh
-        install -m 0755 ${WORKDIR}/heat-api.init.sh ${D}${sysconfdir}/init.d/heat-api
+    sed 's:@suffix@:api:' < ${WORKDIR}/heat.init >${WORKDIR}/heat-api.init.sh
+    install -m 0755 ${WORKDIR}/heat-api.init.sh ${D}${sysconfdir}/init.d/heat-api
 
-        sed 's:@suffix@:api-cfn:' < ${WORKDIR}/heat.init >${WORKDIR}/heat-api-cfn.init.sh
-        install -m 0755 ${WORKDIR}/heat-api-cfn.init.sh ${D}${sysconfdir}/init.d/heat-api-cfn
+    sed 's:@suffix@:api-cfn:' < ${WORKDIR}/heat.init >${WORKDIR}/heat-api-cfn.init.sh
+    install -m 0755 ${WORKDIR}/heat-api-cfn.init.sh ${D}${sysconfdir}/init.d/heat-api-cfn
 
-        sed 's:@suffix@:engine:' < ${WORKDIR}/heat.init >${WORKDIR}/heat-engine.init.sh
-        install -m 0755 ${WORKDIR}/heat-engine.init.sh ${D}${sysconfdir}/init.d/heat-engine
-    fi
+    sed 's:@suffix@:engine:' < ${WORKDIR}/heat.init >${WORKDIR}/heat-engine.init.sh
+    install -m 0755 ${WORKDIR}/heat-engine.init.sh ${D}${sysconfdir}/init.d/heat-engine
 
     if [ -e "run_tests.sh" ]; then
         cp run_tests.sh ${HEAT_CONF_DIR}

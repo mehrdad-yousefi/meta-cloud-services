@@ -74,30 +74,28 @@ do_install:append() {
     sed -e "s:%ADMIN_PASSWORD%:${ADMIN_PASSWORD}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
     sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
 
-    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
-        install -d ${D}${sysconfdir}/init.d
+    install -d ${D}${sysconfdir}/init.d
 
-        sed 's:@suffix@:api:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-api.init.sh
-        install -m 0755 ${WORKDIR}/ceilometer-api.init.sh ${D}${sysconfdir}/init.d/ceilometer-api
+    sed 's:@suffix@:api:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-api.init.sh
+    install -m 0755 ${WORKDIR}/ceilometer-api.init.sh ${D}${sysconfdir}/init.d/ceilometer-api
 
-        sed 's:@suffix@:collector:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-collector.init.sh
-        install -m 0755 ${WORKDIR}/ceilometer-collector.init.sh ${D}${sysconfdir}/init.d/ceilometer-collector
+    sed 's:@suffix@:collector:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-collector.init.sh
+    install -m 0755 ${WORKDIR}/ceilometer-collector.init.sh ${D}${sysconfdir}/init.d/ceilometer-collector
 
-        sed 's:@suffix@:agent-central:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-agent-central.init.sh
-        install -m 0755 ${WORKDIR}/ceilometer-agent-central.init.sh ${D}${sysconfdir}/init.d/ceilometer-agent-central
+    sed 's:@suffix@:agent-central:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-agent-central.init.sh
+    install -m 0755 ${WORKDIR}/ceilometer-agent-central.init.sh ${D}${sysconfdir}/init.d/ceilometer-agent-central
 
-        sed 's:@suffix@:agent-compute:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-agent-compute.init.sh
-        install -m 0755 ${WORKDIR}/ceilometer-agent-compute.init.sh ${D}${sysconfdir}/init.d/ceilometer-agent-compute
+    sed 's:@suffix@:agent-compute:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-agent-compute.init.sh
+    install -m 0755 ${WORKDIR}/ceilometer-agent-compute.init.sh ${D}${sysconfdir}/init.d/ceilometer-agent-compute
 
-        sed 's:@suffix@:alarm-notifier:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-alarm-notifier.init.sh
-        install -m 0755 ${WORKDIR}/ceilometer-alarm-notifier.init.sh ${D}${sysconfdir}/init.d/ceilometer-alarm-notifier
+    sed 's:@suffix@:alarm-notifier:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-alarm-notifier.init.sh
+    install -m 0755 ${WORKDIR}/ceilometer-alarm-notifier.init.sh ${D}${sysconfdir}/init.d/ceilometer-alarm-notifier
 
-        sed 's:@suffix@:alarm-evaluator:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-alarm-evaluator.init.sh
-        install -m 0755 ${WORKDIR}/ceilometer-alarm-evaluator.init.sh ${D}${sysconfdir}/init.d/ceilometer-alarm-evaluator
+    sed 's:@suffix@:alarm-evaluator:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-alarm-evaluator.init.sh
+    install -m 0755 ${WORKDIR}/ceilometer-alarm-evaluator.init.sh ${D}${sysconfdir}/init.d/ceilometer-alarm-evaluator
 
-        sed 's:@suffix@:agent-notification:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-agent-notification.init.sh
-        install -m 0755 ${WORKDIR}/ceilometer-agent-notification.init.sh ${D}${sysconfdir}/init.d/ceilometer-agent-notification
-    fi
+    sed 's:@suffix@:agent-notification:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-agent-notification.init.sh
+    install -m 0755 ${WORKDIR}/ceilometer-agent-notification.init.sh ${D}${sysconfdir}/init.d/ceilometer-agent-notification
 
     if [ -e "setup-test-env.sh" ]; then
         cp setup-test-env.sh ${CEILOMETER_CONF_DIR}

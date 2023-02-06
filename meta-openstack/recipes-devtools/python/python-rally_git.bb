@@ -34,11 +34,9 @@ do_install:append() {
     sed -e "s:%DB_USER%:${DB_USER}:g" -i ${RALLY_CONF_DIR}/rally.conf
     sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${RALLY_CONF_DIR}/rally.conf
 
-    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
-        install -d ${D}${sysconfdir}/init.d
-        sed 's:@suffix@:api:' < ${WORKDIR}/rally.init > ${WORKDIR}/rally-api.init.sh
-        install -m 0755 ${WORKDIR}/rally-api.init.sh ${D}${sysconfdir}/init.d/rally-api
-    fi
+    install -d ${D}${sysconfdir}/init.d
+    sed 's:@suffix@:api:' < ${WORKDIR}/rally.init > ${WORKDIR}/rally-api.init.sh
+    install -m 0755 ${WORKDIR}/rally-api.init.sh ${D}${sysconfdir}/init.d/rally-api
 
     install -d ${RALLY_PYTHON_SITEPACKAGES_DIR}
     cp -r ${S}/tests* ${RALLY_PYTHON_SITEPACKAGES_DIR}
