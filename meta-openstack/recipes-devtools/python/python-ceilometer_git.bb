@@ -228,7 +228,6 @@ RDEPENDS:${PN} += " \
 	python3-pytz \
 	python3-pbr \
 	python3-croniter \
-	python3-ipaddr \
 	python3-pysnmp \
         python3-retrying \
         python3-jsonpath-rw-ext \

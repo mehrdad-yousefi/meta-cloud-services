@@ -214,7 +214,6 @@ RDEPENDS:${PN} += " \
         python3-greenlet \
         python3-httplib2 \
         python3-iso8601 \
-        python3-ipaddress \
         python3-keystoneauth1 \
         python3-keystonemiddleware \
         python3-lxml \
