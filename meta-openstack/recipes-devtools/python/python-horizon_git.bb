@@ -21,7 +21,6 @@ RDEPENDS:${PN} += " \
         python3-pint \
         python3-django-babel \
         python3-django-compressor \
-        python3-django-openstack-auth \
         python3-django-pyscss \
         python3-futurist \
         python3-iso8601 \
