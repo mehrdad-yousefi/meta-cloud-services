@@ -17,23 +17,23 @@ inherit setuptools3
 
 DEPENDS += " \
         gmp \
-        python-pip \
-        python-pbr \
+        python3-pip \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 RDEPENDS:${PN} = " \
    python-enum34 \
-   python-eventlet \
-   python-iso8601 \
-   python-six \
+   python3-eventlet \
+   python3-iso8601 \
+   python3-six \
    python-cinderclient \
-   python-oslo.config \
-   python-oslo.i18n \
-   python-pbr \
+   python3-oslo.config \
+   python3-oslo.i18n \
+   python3-pbr \
    "
 

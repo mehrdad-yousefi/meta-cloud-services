@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Basic nova setup based on:
-# https://docs.openstack.org/nova/pike/install/controller-install-ubuntu.html
+# https://docs.openstack.org/nova/zed/install/controller-install-ubuntu.html
 #
 # Prerequisites: keystone must be available and bootstrapped
 #

@@ -4,11 +4,11 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 
-PV = "1.28.0"
-SRCREV = "261c05f0057d556a8910457f1e22ca4d81801081"
+PV = "2.1.0"
+SRCREV = "bc96c23a9c44cee8f54d7349b288a406cec3f10a"
 
 SRCNAME = "os-client-config"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol=https"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
 

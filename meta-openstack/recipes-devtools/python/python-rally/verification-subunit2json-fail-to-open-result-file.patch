@@ -2,7 +2,7 @@ verification: subunit2json fail to open result file
 
 Command "rally verify start" gives the following error:
 
-TRACE rally   File "/usr/lib64/python2.7/site-packages/rally/verification/verifiers/tempest/subunit2json.py", line 113, in stopTestRun
+TRACE rally   File "/usr/lib64/python3.10/site-packages/rally/verification/verifiers/tempest/subunit2json.py", line 113, in stopTestRun
 TRACE rally     with open(self.results_file, 'wb') as results_file:
 TRACE rally TypeError: coercing to Unicode: need string or buffer, int found
 

@@ -5,22 +5,22 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 
 DEPENDS += " \
-        python-pip \
-        python-pbr \
+        python3-pip \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
-RDEPENDS:${PN} +="python-cliff \
-	python-httplib2 \
-	python-iso8601 \
-	python-prettytable \
-	python-pyparsing \
-	python-simplejson \
-	python-pbr \
+RDEPENDS:${PN} +="python3-cliff \
+	python3-httplib2 \
+	python3-iso8601 \
+	python3-prettytable \
+	python3-pyparsing \
+	python3-simplejson \
+	python3-pbr \
 	bash \
 	"
 
@@ -48,6 +48,6 @@ PACKAGES =+ "${SRCNAME}-tests ${BPN}-bash-completion"
 FILES:${BPN}-bash-completion = "${sysconfdir}/bash_completion.d/*"
 ALLOW_EMPTY:${SRCNAME}-tests = "1"
 
-RDEPENDS:${SRCNAME}-tests += "python-testscenarios \
-	python-mox3 \
+RDEPENDS:${SRCNAME}-tests += "python3-testscenarios \
+	python3-mox3 \
 	"

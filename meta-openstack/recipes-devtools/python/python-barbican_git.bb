@@ -50,17 +50,15 @@ do_install:append() {
     install -d ${D}${localstatedir}/lib/barbican
     sed -e "s:%BARBICAN_MAX_PACKET_SIZE%:${BARBICAN_MAX_PACKET_SIZE}:g" -i ${BARBICAN_CONF_DIR}/vassals/barbican-api.ini
     sed -e "s:%BARBICAN_MAX_PACKET_SIZE%:${BARBICAN_MAX_PACKET_SIZE}:g" -i ${BARBICAN_CONF_DIR}/vassals/barbican-admin.ini
-    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
-        install -d ${D}${sysconfdir}/init.d
+    install -d ${D}${sysconfdir}/init.d
 
-	for binary in api; do
-	    sed "s:@suffix@:$binary:" < ${WORKDIR}/barbican.init >${WORKDIR}/barbican-$binary.init.sh
-	    sed -e "s:%BARBICAN_MAX_PACKET_SIZE%:${BARBICAN_MAX_PACKET_SIZE}:g" -i ${WORKDIR}/barbican-$binary.init.sh
-            install -m 0755 ${WORKDIR}/barbican-$binary.init.sh ${D}${sysconfdir}/init.d/barbican-$binary
-	done
-	rm -f ${D}/usr/bin/barbican.sh
-	rm -f ${D}/usr/bin/barbican-worker.py
-    fi
+    for binary in api; do
+	sed "s:@suffix@:$binary:" < ${WORKDIR}/barbican.init >${WORKDIR}/barbican-$binary.init.sh
+	sed -e "s:%BARBICAN_MAX_PACKET_SIZE%:${BARBICAN_MAX_PACKET_SIZE}:g" -i ${WORKDIR}/barbican-$binary.init.sh
+        install -m 0755 ${WORKDIR}/barbican-$binary.init.sh ${D}${sysconfdir}/init.d/barbican-$binary
+    done
+    rm -f ${D}/usr/bin/barbican.sh
+    rm -f ${D}/usr/bin/barbican-worker.py
 
     sed -e "s:%BARBICAN_CONF_DIR%:${sysconfdir}/${SRCNAME}:g" \
         -i ${D}/${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}/tests/api/test_resources_policy.py
@@ -92,42 +90,43 @@ pkg_postinst:${SRCNAME}-setup () {
 }
 
 DEPENDS += " \
-        python-pip \
-        python-pbr \
+        python3-pip \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 RDEPENDS:${SRCNAME} = "${PN} \
                        ${SRCNAME}-setup \
                        uwsgi \
-                       python-falcon \
-                       python-oslo.messaging"
+                       python3-falcon \
+                       python3-oslo.messaging \
+                       bash \
+                      "
 
 RDEPENDS:${PN} += " \
-        python-pip \
-        python-pbr \
-        python-alembic \
-        python-babel \
-        python-eventlet \
-        python-falcon \
-        python-iso8601 \
-        python-jsonschema \
-        python-kombu \
-        python-netaddr \
-        python-pastedeploy \
-        python-paste \
-        python-pycrypto \
-        python-pysqlite \
-        python-keystoneclient \
-        python-sqlalchemy \
-        python-stevedore \
-        python-webob \
-        python-wsgiref \
-        python-barbicanclient \
+        python3-pip \
+        python3-pbr \
+        python3-alembic \
+        python3-babel \
+        python3-eventlet \
+        python3-falcon \
+        python3-iso8601 \
+        python3-jsonschema \
+        python3-kombu \
+        python3-netaddr \
+        python3-pastedeploy \
+        python3-paste \
+        python3-pycryptodome \
+        python3-keystoneclient \
+        python3-sqlalchemy \
+        python3-stevedore \
+        python3-webob \
+        python3-barbicanclient \
+        bash \
         "
 
 INITSCRIPT_PACKAGES = "${SRCNAME}"

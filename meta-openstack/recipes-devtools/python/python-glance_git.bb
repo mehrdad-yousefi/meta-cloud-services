@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
 SRCNAME = "glance"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol=https \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/zed;protocol=https \
            file://glance.init \
            file://glance-api.service \
            file://glance-registry.service \
@@ -14,8 +14,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol
            file://glance-init \
            "
 
-SRCREV = "06af2eb5abe0332f7035a7d7c2fbfd19fbc4dae7"
-PV = "15.0.0+git${SRCPV}"
+SRCREV = "d45b7c26af2963bb811c5596a42be10cb75c0685"
+PV = "25.0.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -69,15 +69,12 @@ do_install:append() {
     install -o root -g ${GROUP} -m 750 -d ${GLANCE_CONF_DIR}
 
     # Start with pristine copies from upstream
-    install -m 644 -o root -g ${GROUP} ${SRC_SYSCONFDIR}/glance-registry.conf ${GLANCE_CONF_DIR}/
     install -m 644 -o root -g ${GROUP} ${SRC_SYSCONFDIR}/glance-api.conf ${GLANCE_CONF_DIR}/
     install -m 644 -o root -g ${GROUP} ${SRC_SYSCONFDIR}/glance-cache.conf ${GLANCE_CONF_DIR}/
-    install -m 644 -o root -g ${GROUP} ${SRC_SYSCONFDIR}/glance-registry-paste.ini ${GLANCE_CONF_DIR}/
     install -m 644 -o root -g ${GROUP} ${SRC_SYSCONFDIR}/glance-api-paste.ini ${GLANCE_CONF_DIR}/
-    install -m 644 -o root -g ${GROUP} ${SRC_SYSCONFDIR}/policy.json ${GLANCE_CONF_DIR}/
     install -m 644 -o root -g ${GROUP} ${SRC_SYSCONFDIR}/schema-image.json ${GLANCE_CONF_DIR}/
 
-    for file in api registry cache
+    for file in api cache
     do
         sed -e "/^#connection = .*/aconnection = postgresql+psycopg2://${DB_USER}:${DB_PASSWORD}@localhost/glance" \
             -i ${GLANCE_CONF_DIR}/glance-$file.conf
@@ -95,8 +92,8 @@ do_install:append() {
     #sed -e 's:^swift_store_key =.*:swift_store_key = %SERVICE_PASSWORD%:g' -i ${CONF_FILE}
     sed -e '/^#swift_store_create_container_on_put = .*/aswift_store_create_container_on_put = True' -i ${CONF_FILE}
 
-    # As documented in https://docs.openstack.org/glance/pike/install/install-debian.html
-    for file in api registry
+    # As documented in https://docs.openstack.org/glance/zed/install/install-debian.html
+    for file in api
     do
         CONF_FILE=${GLANCE_CONF_DIR}/glance-$file.conf
 	keystone_authtoken="#\n# Setup at install by python-glance_git.bb\n#"
@@ -143,6 +140,7 @@ PACKAGES += " ${SRCNAME} ${SRCNAME}-setup ${SRCNAME}-api ${SRCNAME}-registry"
 FILES:${PN} = " \
     ${libdir}/* \
     ${datadir}/etc/${SRCNAME}* \
+    /usr/etc/glance/** \
     "
 
 FILES:${SRCNAME} = "${bindir}/* \
@@ -165,57 +163,57 @@ FILES:${SRCNAME}-registry = "\
     "
 
 DEPENDS += " \
-        python-pip \
-        python-pbr \
+        python3-pip \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 RDEPENDS:${PN} += " \
         coreutils \
-        python-pbr \
-        python-sqlalchemy \
-        python-eventlet \
-        python-pastedeploy \
-        python-routes \
-        python-webob \
-        python-sqlalchemy-migrate \
-        python-sqlparse \
-        python-alembic \
-        python-httplib2 \
-        python-oslo.config \
-        python-oslo.concurrency \
-        python-oslo.context \
-        python-oslo.utils \
-        python-stevedore \
-        python-futurist \
-        python-taskflow \
-        python-keystoneauth1 \
-        python-keystonemiddleware \
-        python-wsme \
-        python-prettytable \
-        python-paste \
-        python-jsonschema \
-        python-keystoneclient \
-        python-pyopenssl \
-        python-six \
-        python-oslo.db \
-        python-oslo.i18n \
-        python-oslo.log \
-        python-oslo.messaging \
-        python-oslo.middleware \
-        python-oslo.policy \
-        python-retrying \
-        python-osprofiler \
-        python-glance-store \
-        python-debtcollector \
-        python-cryptography \
-        python-cursive \
-        python-iso8601 \
-        python-monotonic \
+        python3-pbr \
+        python3-sqlalchemy \
+        python3-eventlet \
+        python3-pastedeploy \
+        python3-routes \
+        python3-webob \
+        python3-sqlalchemy-migrate \
+        python3-sqlparse \
+        python3-alembic \
+        python3-httplib2 \
+        python3-oslo.config \
+        python3-oslo.concurrency \
+        python3-oslo.context \
+        python3-oslo.utils \
+        python3-stevedore \
+        python3-futurist \
+        python3-taskflow \
+        python3-keystoneauth1 \
+        python3-keystonemiddleware \
+        python3-wsme \
+        python3-prettytable \
+        python3-paste \
+        python3-jsonschema \
+        python3-keystoneclient \
+        python3-pyopenssl \
+        python3-six \
+        python3-oslo.db \
+        python3-oslo.i18n \
+        python3-oslo.log \
+        python3-oslo.messaging \
+        python3-oslo.middleware \
+        python3-oslo.policy \
+        python3-retrying \
+        python3-osprofiler \
+        python3-glance-store \
+        python3-debtcollector \
+        python3-cryptography \
+        python3-cursive \
+        python3-iso8601 \
+        python3-monotonic \
         "
 
 RDEPENDS:${SRCNAME} = " \
@@ -223,12 +221,13 @@ RDEPENDS:${SRCNAME} = " \
         postgresql \
         postgresql-client \
         python-psycopg2 \
+        bash \
         "
 
 RDEPENDS:${SRCNAME}-api = "${SRCNAME}"
 RDEPENDS:${SRCNAME}-registry = "${SRCNAME}"
 RDEPENDS:${SRCNAME}-setup = "postgresql keystone-setup sudo ${SRCNAME}"
-RDEPENDS:${SRCNAME}-tests = "python-psutil qpid-python bash"
+RDEPENDS:${SRCNAME}-tests = "python3-psutil qpid-python bash"
 
 SYSTEMD_PACKAGES = "${SRCNAME}-api ${SRCNAME}-registry ${SRCNAME}-setup"
 SYSTEMD_SERVICE:${SRCNAME}-api = "glance-api.service"

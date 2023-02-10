@@ -25,7 +25,7 @@ index d1a111e..58cdaf9 100644
  #include <dlfcn.h>
  #include <sys/uio.h>
 -#include <Python.h>
-+#include <python2.7/Python.h>
++#include <python3.10/Python.h>
  
  #include "glusterfs.h"
  #include "xlator.h"

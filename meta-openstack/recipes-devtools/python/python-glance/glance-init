@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Basic glance setup based on:
-# https://docs.openstack.org/glance/pike/install/install-debian.html
+# https://docs.openstack.org/glance/zed/install/install-debian.html
 #
 # Prerequisites: keystone must be available and bootstrapped
 #

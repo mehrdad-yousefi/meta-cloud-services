@@ -4,11 +4,11 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
 
-PV = "3.21.2+git${SRCPV}"
-SRCREV = "1b25351d1c63e573068fff3d16faca440bbdcabf"
+PV = "5.0.1+git${SRCPV}"
+SRCREV = "01cf2ffdf48c21f886b2aa3f766be5d268248c18"
 
 SRCNAME = "oslo.concurrency"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol=https"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
 

@@ -13,8 +13,7 @@ SRCNAME = "nova"
 
 FILESEXTRAPATHS:append := "${THISDIR}/${PN}"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol=https \
-           file://neutron-api-set-default-binding-vnic_type.patch \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/zed;protocol=https \
            "
 
 SRC_URI += " \
@@ -33,8 +32,8 @@ SRC_URI += " \
             file://nova-scheduler.service \
             file://nova-spicehtml5proxy.service \
            "
-SRCREV = "b535f0808526c8eba37f15e83cede536e4e06029"
-PV = "16.0.4+git${SRCPV}"
+SRCREV = "2db7cbf7d0a6692a885968bec67f48e7262ceec3"
+PV = "26.0.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -156,7 +155,7 @@ do_install:append() {
     install -o nova -d ${NOVA_CONF_DIR}/instances
 
     #
-    # Per https://docs.openstack.org/nova/pike/install/controller-install-ubuntu.html
+    # Per https://docs.openstack.org/nova/zed/install/controller-install-ubuntu.html
     #
     CONF_FILE="${NOVA_CONF_DIR}/nova.conf"
     sed -e "/^\[api_database\]/aconnection = postgresql+psycopg2://${DB_USER}:${DB_PASSWORD}@${CONTROLLER_IP}/nova-api" \
@@ -206,7 +205,6 @@ do_install:append() {
     install -m 664 ${S}/tools/nova-manage.bash_completion ${D}/${sysconfdir}/bash_completion.d
 
     cp -r "${S}/doc" "${D}/${PYTHON_SITEPACKAGES_DIR}/nova"
-    cp -r "${S}/plugins" "${D}/${PYTHON_SITEPACKAGES_DIR}/nova"
 }
 
 PACKAGES += " ${SRCNAME}-tests"
@@ -244,7 +242,9 @@ ALLOW_EMPTY:${SRCNAME}-spicehtml5proxy = "1"
 
 
 
-FILES:${PN} = "${libdir}/*"
+FILES:${PN} = "${libdir}/* \
+               /usr/etc/nova/** \
+              "
 
 # MAA FILES:${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
 FILES:${SRCNAME}-tests = ""
@@ -261,80 +261,80 @@ FILES:${SRCNAME}-controller = "${bindir}/* \
  			       ${sysconfdir}/init.d/nova-all "
 
 DEPENDS += " \
-        python-pip \
-        python-pbr \
+        python3-pip \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
 	"
 
 RDEPENDS:${PN} += " \
 		   libvirt \
-		   python-pbr \
-		   python-sqlalchemy \
-		   python-decorator \
-		   python-eventlet \
-		   python-jinja2 \
-		   python-keystonemiddleware \
-		   python-lxml \
-		   python-routes \
-		   python-cryptography \
-		   python-webob \
-		   python-greenlet \
-		   python-pastedeploy \
-		   python-paste \
-		   python-prettytable \
-		   python-sqlalchemy-migrate \
-		   python-netaddr \
-		   python-netifaces \
-		   python-paramiko \
-		   python-babel \
-		   python-iso8601 \
-		   python-jsonschema \
+		   python3-pbr \
+		   python3-sqlalchemy \
+		   python3-decorator \
+		   python3-eventlet \
+		   python3-jinja2 \
+		   python3-keystonemiddleware \
+		   python3-lxml \
+		   python3-routes \
+		   python3-cryptography \
+		   python3-webob \
+		   python3-greenlet \
+		   python3-pastedeploy \
+		   python3-paste \
+		   python3-prettytable \
+		   python3-sqlalchemy-migrate \
+		   python3-netaddr \
+		   python3-netifaces \
+		   python3-paramiko \
+		   python3-babel \
+		   python3-iso8601 \
+		   python3-jsonschema \
 		   python-cinderclient \
-		   python-keystoneauth1 \
+		   python3-keystoneauth1 \
 		   python-neutronclient \
 		   python-glanceclient \
-		   python-requests \
-		   python-six \
-		   python-stevedore \
-		   python-setuptools3 \
-		   python-websockify \
-		   python-oslo.cache \
-		   python-oslo.concurrency \
-		   python-oslo.config \
-		   python-oslo.context \
-		   python-oslo.log \
-		   python-oslo.reports \
-		   python-oslo.serialization \
-		   python-oslo.utils \
-		   python-oslo.db \
-		   python-oslo.rootwrap \
-		   python-oslo.messaging \
-		   python-oslo.policy \
-		   python-oslo.privsep \
-		   python-oslo.i18n \
-		   python-oslo.service \
-		   python-rfc3986 \
-		   python-oslo.middleware \
-		   python-psutil \
-		   python-oslo.versionedobjects \
-		   python-os-brick \
-		   python-os-traits \
-		   python-os-vif \
-		   python-os-win \
-		   python-castellan \
-		   python-microversion-parse \
-		   python-os-xenapi \
-		   python-tooz \
-		   python-cursive \
-		   python-pypowervm \
+		   python3-requests \
+		   python3-six \
+		   python3-stevedore \
+		   python3-setuptools \
+		   python3-websockify \
+		   python3-oslo.cache \
+		   python3-oslo.concurrency \
+		   python3-oslo.config \
+		   python3-oslo.context \
+		   python3-oslo.log \
+		   python3-oslo.reports \
+		   python3-oslo.serialization \
+		   python3-oslo.utils \
+		   python3-oslo.db \
+		   python3-oslo.rootwrap \
+		   python3-oslo.messaging \
+		   python3-oslo.policy \
+		   python3-oslo.privsep \
+		   python3-oslo.i18n \
+		   python3-oslo.service \
+		   python3-rfc3986 \
+		   python3-oslo.middleware \
+		   python3-psutil \
+		   python3-oslo.versionedobjects \
+		   python3-os-brick \
+		   python3-os-traits \
+		   python3-os-vif \
+		   python3-os-win \
+		   python3-castellan \
+		   python3-microversion-parse \
+		   python3-os-xenapi \
+		   python3-tooz \
+		   python3-cursive \
+		   python3-pypowervm \
    "
 
 RDEPENDS:${SRCNAME}-common = "${PN} openssl openssl-misc libxml2 libxslt \
-                              iptables curl dnsmasq sudo procps"
+                              iptables curl dnsmasq sudo procps bash"
 
 RDEPENDS:${SRCNAME}-controller = "${PN} ${SRCNAME}-common \
 				  ${SRCNAME}-ec2 \
@@ -347,13 +347,13 @@ RDEPENDS:${SRCNAME}-controller = "${PN} ${SRCNAME}-common \
                                   ${SRCNAME}-api \
 				  postgresql postgresql-client python-psycopg2"
 
-RDEPENDS:${SRCNAME}-compute = "${PN} ${SRCNAME}-common python-oslo.messaging \
+RDEPENDS:${SRCNAME}-compute = "${PN} ${SRCNAME}-common python3-oslo.messaging \
 			       qemu libvirt libvirt-libvirtd libvirt-python libvirt-virsh"
 RDEPENDS:${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-common"
 RDEPENDS:${SRCNAME}-ec2 = "postgresql sudo ${SRCNAME}-common"
 
 RDEPENDS:${SRCNAME}-tests = " \
-                            python-coverage \
+                            python3-coverage \
                             bash \
                             "
 

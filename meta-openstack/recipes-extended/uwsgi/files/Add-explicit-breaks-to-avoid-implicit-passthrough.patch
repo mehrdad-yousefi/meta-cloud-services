@@ -1,50 +1,55 @@
-From 0a14d0f0425f00421a69f0ca8e09a92cfdfc6a36 Mon Sep 17 00:00:00 2001
-From: Paul Tagliamonte <paultag@gmail.com>
-Date: Mon, 7 Aug 2017 11:18:56 -0400
-Subject: [PATCH] Add explicit breaks to avoid implicit passthrough.
-
-commit 0a14d0f0425f00421a69f0ca8e09a92cfdfc6a36 from upstream
-git://github.com/unbit/uwsgi.git
-
--Werror=implicit-fallthrough was added in gcc 7.1, which will
-throw a compile error if a switch has an implicit passthrough.
-
-Seeing as how this switch doesn't appear to depend on passthrough to
-function correctly, I've added explicit breaks to the switch.
-
-From https://gcc.gnu.org/gcc-7/changes.html:
-
--Wimplicit-fallthrough warns when a switch case falls through. This
-warning has five different levels. The compiler is able to parse a wide
-range of fallthrough comments, depending on the level. It also handles
-control-flow statements, such as ifs. It's possible to suppress the
-warning by either adding a fallthrough comment, or by using a null
-statement: __attribute__ ((fallthrough)); (C, C++), or [[fallthrough]];
-(C++17), or [[gnu::fallthrough]]; (C++11/C++14). This warning is enabled
-by -Wextra.
----
- core/hash.c | 3 +++
- 1 file changed, 3 insertions(+)
-
+diff --git a/bin/uwsgi b/bin/run-uwsgi
+similarity index 100%
+rename from bin/uwsgi
+rename to bin/run-uwsgi
+diff --git a/buildconf/unbitstaff.ini b/buildconf/unbitstaff.ini
+index 42330cd..7c2ee47 100644
+--- a/buildconf/unbitstaff.ini
++++ b/buildconf/unbitstaff.ini
+@@ -1,5 +1,5 @@
+ [uwsgi]
+ inherit = unbit
+ embedded_plugins = python
+-bin_name = ../bin/uwsgi
++bin_name = ../bin/run-uwsgi
+ plugin_dir = ../bin/uwsgi_plugins
 diff --git a/core/hash.c b/core/hash.c
-index a1288fa..9ae6bd2 100644
+index 5940f66..bf989fc 100644
 --- a/core/hash.c
 +++ b/core/hash.c
-@@ -42,11 +42,14 @@ static uint32_t murmur2_hash(char *key, uint64_t keylen) {
+@@ -42,13 +42,16 @@ static uint32_t murmur2_hash(char *key, uint64_t keylen) {
  	switch (keylen) {
  		case 3:
          		h ^= key[2] << 16;
-+        		break;
++			break;
+ 			/* fallthrough */
      		case 2:
          		h ^= key[1] << 8;
-+        		break;
++			break;
+ 			/* fallthrough */
      		case 1:
          		h ^= key[0];
          		h *= 0x5bd1e995;
-+        		break;
++			break;
      	}
  
  	h ^= h >> 13;
--- 
-2.7.4
-
+diff --git a/core/routing.c b/core/routing.c
+index 4ba70b4..0b05643 100644
+--- a/core/routing.c
++++ b/core/routing.c
+@@ -1792,10 +1792,10 @@ static int uwsgi_route_condition_ipv6in(struct wsgi_request *wsgi_req, struct uw
+ 
+ 	int i = (pfxlen / 32);
+ 	switch (i) {
+-	case 0: mask[0] = 0; /* fallthrough */
+-	case 1: mask[1] = 0; /* fallthrough */
+-	case 2: mask[2] = 0; /* fallthrough */
+-	case 3: mask[3] = 0; /* fallthrough */
++	case 0: mask[0] = 0; break; /* fallthrough */
++	case 1: mask[1] = 0; break; /* fallthrough */
++	case 2: mask[2] = 0; break; /* fallthrough */
++	case 3: mask[3] = 0; break; /* fallthrough */
+ 	}
+ 
+ 	if (pfxlen % 32)

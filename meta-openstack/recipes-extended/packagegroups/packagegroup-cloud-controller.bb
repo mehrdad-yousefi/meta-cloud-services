@@ -4,6 +4,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302 \
                     file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
+PACKAGE_ARCH = "${TUNE_PKGARCH}"
 inherit packagegroup
 
 RDEPENDS:${PN} = " postgresql \
@@ -37,7 +38,7 @@ RDEPENDS:${PN} = " postgresql \
     heat-api-cfn \
     heat-engine \
     heat-setup \
-    python-heat-cfntools \
+    python3-heat-cfntools \
     python-openstackclient \
     horizon \
     horizon-standalone \
@@ -46,7 +47,6 @@ RDEPENDS:${PN} = " postgresql \
     barbican \
     trove \
     novnc \
-    chkconfig \
     qemu \
     fuse \
     ${@bb.utils.contains('CINDER_EXTRA_FEATURES', 'glusterfs', 'glusterfs glusterfs-fuse glusterfs-server', '', d)} \

@@ -14,26 +14,28 @@ S = "${WORKDIR}/git"
 
 inherit setuptools3
 
-FILES:${PN} += "${datadir}/etc/${SRCNAME}/*"
+FILES:${PN} += "${datadir}/etc/${SRCNAME}/* \
+                /usr/etc/ryu/** \
+               "
 
 DEPENDS += " \
-        python-pip \
-        python-pbr \
+        python3-pip \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
 	"
 
 RDEPENDS:${PN} += " \
-        python-eventlet \
-        python-msgpack \
-        python-netaddr \
-        python-oslo.config \
-        python-ovs \
-        python-routes \
-        python-six \
-        python-tinyrpc \
-        python-webob \
+        python3-eventlet \
+        python3-msgpack \
+        python3-netaddr \
+        python3-oslo.config \
+        python3-ovs \
+        python3-routes \
+        python3-six \
+        python3-tinyrpc \
+        python3-webob \
         "

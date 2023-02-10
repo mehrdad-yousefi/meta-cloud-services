@@ -57,13 +57,13 @@ Trove and Troveclient Unit Tests
 ===============================
 
 On the controller:
-sh run_ostest_nose.sh -t /usr/lib64/python2.7/site-packages/trove
+sh run_ostest_nose.sh -t /usr/lib64/python3.10/site-packages/trove
 
 Total: 741, Passed: 740
 
 
 On either the controller or compute node:
-sh run_ostest_nose.sh -t /usr/lib64/python2.7/site-packages/troveclient
+sh run_ostest_nose.sh -t /usr/lib64/python3.10/site-packages/troveclient
 
 Total: 202, Passed: 202
 

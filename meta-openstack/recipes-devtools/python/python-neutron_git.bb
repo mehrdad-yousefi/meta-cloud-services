@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
 SRCNAME = "neutron"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol=https \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/zed;protocol=https \
            file://neutron-server.service \
            file://neutron.conf \
            file://l3_agent.ini \
@@ -27,8 +27,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol
            file://neutron-dhcp-agent-netns-cleanup.cron \
 	  "
 
-SRCREV = "7fd30cb652fb5d516b4c1f5415f18f54d7a40c2a"
-PV = "11.0.2+git${SRCPV}"
+SRCREV = "8eefeb36b45770259ece9e7a60b48c427a1cf27a"
+PV = "21.0.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -70,7 +70,6 @@ do_install:append() {
 
     # Available directly from source
     install -m 640 -g ${GROUP} ${S}/etc/api-paste.ini ${NEUTRON_CONF_DIR}/
-    install -m 640 -g ${GROUP} ${S}/etc/policy.json ${NEUTRON_CONF_DIR}/
 
     # Generated using ./tools/generate_config_file_samples.sh
     install -m 640 -g ${GROUP} ${WORKDIR}/neutron.conf ${NEUTRON_CONF_DIR}/
@@ -257,7 +256,9 @@ PACKAGES += " \
      ${SRCNAME}-plugin-openvswitch-setup \
      "
 
-FILES:${PN} = "${libdir}/*"
+FILES:${PN} = "${libdir}/* \
+		/usr/etc/neutron/** \
+    "
 
 FILES:${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
 RDEPENDS:${SRCNAME}-tests += " bash"
@@ -329,64 +330,64 @@ FILES:${SRCNAME}-setup = " \
     "
 
 DEPENDS += " \
-        python-pip \
-        python-pbr \
+        python3-pip \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
 	"
 
 RDEPENDS:${PN} += " \
-        python-pbr \
-        python-paste \
-        python-pastedeploy \
-        python-routes \
-        python-debtcollector \
-        python-eventlet \
-        python-pecan \
-        python-httplib2 \
-        python-jinja2 \
-        python-keystonemiddleware \
-        python-netaddr \
-        python-netifaces \
+        python3-pbr \
+        python3-paste \
+        python3-pastedeploy \
+        python3-routes \
+        python3-debtcollector \
+        python3-eventlet \
+        python3-pecan \
+        python3-httplib2 \
+        python3-jinja2 \
+        python3-keystonemiddleware \
+        python3-netaddr \
+        python3-netifaces \
         python-neutron-lib \
         python-neutronclient \
-        python-tenacity \
+        python3-tenacity \
         python-ryu \
-        python-sqlalchemy \
-        python-webob \
-        python-keystoneauth1 \
-        python-alembic \
-        python-six \
-        python-stevedore \
-        python-oslo.cache \
-        python-oslo.concurrency \
-        python-oslo.config \
-        python-oslo.context \
-        python-oslo.db \
-        python-oslo.i18n \
-        python-oslo.log \
-        python-oslo.messaging \
-        python-oslo.middleware \
-        python-oslo.policy \
-        python-oslo.privsep \
-        python-oslo.reports \
-        python-oslo.rootwrap \
-        python-oslo.serialization \
-        python-oslo.service \
-        python-oslo.utils \
-        python-oslo.versionedobjects \
-        python-osprofiler \
-        python-ovs \
-        python-ovsdbapp \
-        python-psutil \
-        python-pyroute2 \
-        python-weakrefmethod \
+        python3-sqlalchemy \
+        python3-webob \
+        python3-keystoneauth1 \
+        python3-alembic \
+        python3-six \
+        python3-stevedore \
+        python3-oslo.cache \
+        python3-oslo.concurrency \
+        python3-oslo.config \
+        python3-oslo.context \
+        python3-oslo.db \
+        python3-oslo.i18n \
+        python3-oslo.log \
+        python3-oslo.messaging \
+        python3-oslo.middleware \
+        python3-oslo.policy \
+        python3-oslo.privsep \
+        python3-oslo.reports \
+        python3-oslo.rootwrap \
+        python3-oslo.serialization \
+        python3-oslo.service \
+        python3-oslo.utils \
+        python3-oslo.versionedobjects \
+        python3-osprofiler \
+        python3-ovs \
+        python3-ovsdbapp \
+        python3-psutil \
+        python3-pyroute2 \
+        python3-weakrefmethod \
         python-novaclient \
-        python-designateclient \
-        python-os-xenapi \
+        python3-designateclient \
+        python3-os-xenapi \
         "
 
 RDEPENDS:${SRCNAME} = "${PN} \
@@ -395,12 +396,13 @@ RDEPENDS:${SRCNAME} = "${PN} \
 RDEPENDS:${SRCNAME}-server = "${SRCNAME} ${SRCNAME}-plugin-ml2 ${SRCNAME}-dhcp-agent ${SRCNAME}-linuxbridge-agent ${SRCNAME}-metadata-agent"
 RDEPENDS:${SRCNAME}-plugin-openvswitch = "${SRCNAME} ${SRCNAME}-plugin-ml2 ${SRCNAME}-plugin-openvswitch-setup openvswitch-switch iproute2 bridge-utils"
 RDEPENDS:${SRCNAME}-plugin-openvswitch-setup = "openvswitch-switch "
-RDEPENDS:${SRCNAME}-dhcp-agent = "${SRCNAME} dnsmasq dhcp-server dhcp-server-config"
+RDEPENDS:${SRCNAME}-dhcp-agent = "${SRCNAME} dnsmasq kea"
 RDEPENDS:${SRCNAME}-linuxbridge-agent = "${SRCNAME}"
 RDEPENDS:${SRCNAME}-l3-agent = "${SRCNAME} ${SRCNAME}-metadata-agent iputils"
 RDEPENDS:${SRCNAME}-metadata-agent = "${SRCNAME}"
 RDEPENDS:${SRCNAME}-plugin-ml2 = "${SRCNAME}"
 RDEPENDS:${SRCNAME}-setup = "postgresql sudo bash"
+RDEPENDS:${SRCNAME}-extra-agents = "bash"
 
 RRECOMMENDS:${SRCNAME}-server = "${SRCNAME}-plugin-openvswitch"
 

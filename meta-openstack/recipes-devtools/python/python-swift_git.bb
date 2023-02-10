@@ -14,10 +14,11 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master;protocol=http
            file://swift.init \
            file://swift_setup.sh \
            file://cluster.conf \
+           file://replace-2to3.patch \
 "
 
-SRCREV="4ca08cc395e686265574366497a6869e94eebcb2"
-PV="2.2.2+git${SRCPV}"
+SRCREV="f6196b0a221eb17e1d5649d732b997dc200b2fe7"
+PV="2.30.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools3 python3-dir update-rc.d hosts identity
@@ -149,32 +150,39 @@ FILES:${SRCNAME} = "${bindir}/* \
 "
 
 DEPENDS += " \
-        python-pip \
-        python-pbr \
+        python3-pip \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
 	"
 
 RDEPENDS:${PN} += " \
-    python-eventlet \
-    python-greenlet \
-    python-pastedeploy \
-    python-simplejson \
-    python-swiftclient \
-    python-netifaces \
-    python-xattr \
-    python-pbr \
-    python-dnspython \
+    python3-eventlet \
+    python3-greenlet \
+    python3-pastedeploy \
+    python3-simplejson \
+    python3-swiftclient \
+    python3-netifaces \
+    python3-xattr \
+    python3-pbr \
+    python3-dnspython \
+    python3 \
     bash \
     "
 
-RDEPENDS:${SRCNAME} = "${PN}"
+RDEPENDS:${SRCNAME} = "${PN} \
+                       bash \
+                      "
 
-RDEPENDS:${SRCNAME} = "${PN}"
-RDEPENDS:${SRCNAME}-setup = "${SRCNAME}"
+RDEPENDS:${SRCNAME} = "${PN} \
+                       bash \
+                      "
+RDEPENDS:${SRCNAME}-setup = "${SRCNAME} \
+                             bash \
+                            "
 
 INITSCRIPT_PACKAGES = "${SRCNAME}-setup"
 INITSCRIPT_NAME:${SRCNAME}-setup = "swift"

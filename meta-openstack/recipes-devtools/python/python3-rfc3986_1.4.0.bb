@@ -9,7 +9,7 @@ SRC_URI[sha256sum] = "112398da31a3344dc25dbf477d8df6cb34f9278a94fee2625d89e4514b
 
 inherit setuptools3 pypi
 
-# DEPENDS_default: python-pip
+# DEPENDS_default: python3-pip
 
 DEPENDS += " \
         ${PYTHON_PN}-pip \

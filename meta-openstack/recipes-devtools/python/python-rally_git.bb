@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/stackforge/${SRCNAME}.git;branch=master;protocol=htt
            file://rally.conf \
            file://task-example.json \
            file://deployment-existing.json \
-           file://remove-ironic-support.patch \
            file://verification-to-use-existing-tempest.patch \
            file://sqlalchemy-db-missing-name-for-ENUM.patch \
            file://verification-subunit2json-fail-to-open-result-file.patch \
@@ -35,11 +34,9 @@ do_install:append() {
     sed -e "s:%DB_USER%:${DB_USER}:g" -i ${RALLY_CONF_DIR}/rally.conf
     sed -e "s:%DB_PASSWORD%:${DB_PASSWORD}:g" -i ${RALLY_CONF_DIR}/rally.conf
 
-    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
-        install -d ${D}${sysconfdir}/init.d
-        sed 's:@suffix@:api:' < ${WORKDIR}/rally.init > ${WORKDIR}/rally-api.init.sh
-        install -m 0755 ${WORKDIR}/rally-api.init.sh ${D}${sysconfdir}/init.d/rally-api
-    fi
+    install -d ${D}${sysconfdir}/init.d
+    sed 's:@suffix@:api:' < ${WORKDIR}/rally.init > ${WORKDIR}/rally-api.init.sh
+    install -m 0755 ${WORKDIR}/rally-api.init.sh ${D}${sysconfdir}/init.d/rally-api
 
     install -d ${RALLY_PYTHON_SITEPACKAGES_DIR}
     cp -r ${S}/tests* ${RALLY_PYTHON_SITEPACKAGES_DIR}
@@ -96,44 +93,43 @@ FILES:${SRCNAME}-api = "${bindir}/rally-api \
     "
 
 DEPENDS += " \
-    python-pip \
-    python-pbr \
+    python3-pip \
+    python3-pbr \
     "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
 	"
 
-RDEPENDS:${PN} += " python-babel \
-    python-decorator \
+RDEPENDS:${PN} += " python3-babel \
+    python3-decorator \
     python-fixtures \
-    python-iso8601 \
-    python-jsonschema \
-    python-netaddr \
-    python-oslo.config \
-    python-paramiko \
-    python-pbr \
-    python-pecan \
-    python-prettytable \
-    python-pyyaml \
+    python3-iso8601 \
+    python3-jsonschema \
+    python3-netaddr \
+    python3-oslo.config \
+    python3-paramiko \
+    python3-pbr \
+    python3-pecan \
+    python3-prettytable \
+    python3-pyyaml \
     python-glanceclient \
-    python-keystoneclient \
+    python3-keystoneclient \
     python-novaclient \
     python-neutronclient \
     python-cinderclient \
     python-heatclient \
-    python-ceilometerclient \
     python-subunit \
-    python-requests \
-    python-sqlalchemy \
-    python-six \
-    python-wsme \
+    python3-requests \
+    python3-sqlalchemy \
+    python3-six \
+    python3-wsme \
     "
 
 RDEPENDS:${SRCNAME}-tests = "${PN} \
-   python-coverage \
-   python-mock \
+   python3-coverage \
+   python3-mock \
    python-testrepository \
    python-testtools \
    python-oslotest \

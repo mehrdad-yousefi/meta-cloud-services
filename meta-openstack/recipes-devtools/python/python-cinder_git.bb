@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
 SRCNAME = "cinder"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol=https \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/zed;protocol=https \
     file://cinder-init \
     file://cinder-init.service \
     file://cinder-api.service \
@@ -19,10 +19,11 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol
     file://glusterfs_setup.sh \
     file://lvm_iscsi_setup.sh \
     file://add-cinder-volume-types.sh \
+    file://fix_runtime_dependencies_cinder_tests.patch \
     "
 
-SRCREV = "4fb3a702ba8c3de24c41a6f706597bfa81e60435"
-PV = "11.1.0+git${SRCPV}"
+SRCREV = "f1ebe259df3e81a241a708ecd50b6e550ac108ea"
+PV = "21.0.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools3 systemd useradd identity default_configs hosts monitor
@@ -53,7 +54,6 @@ do_install:append() {
     install -d ${CINDER_CONF_DIR}
     install -o ${USER} -m 664 ${WORKDIR}/cinder.conf ${CINDER_CONF_DIR}/
     install -o ${USER} -m 664 ${TEMPLATE_CONF_DIR}/api-paste.ini ${CINDER_CONF_DIR}/
-    install -o ${USER} -m 664 ${S}/etc/cinder/policy.json ${CINDER_CONF_DIR}/
 
     install -d ${CINDER_CONF_DIR}/drivers
     install -m 600 ${WORKDIR}/nfs_setup.sh ${CINDER_CONF_DIR}/drivers/
@@ -88,7 +88,7 @@ do_install:append() {
     done
 
     #
-    # Per https://docs.openstack.org/cinder/pike/install/cinder-controller-install-ubuntu.html
+    # Per https://docs.openstack.org/cinder/zed/install/cinder-controller-install-ubuntu.html
     #
     CONF_FILE="${CINDER_CONF_DIR}/cinder.conf"
     sed -e "/^\[database\]/aconnection = postgresql+psycopg2://${DB_USER}:${DB_PASSWORD}@${CONTROLLER_IP}/cinder" \
@@ -166,9 +166,10 @@ ALLOW_EMPTY:${SRCNAME}-scheduler = "1"
 ALLOW_EMPTY:${SRCNAME}-volume = "1"
 ALLOW_EMPTY:${SRCNAME}-api = "1"
 
-RDEPENDS:${SRCNAME}-tests += " bash python"
-
-FILES:${PN} = "${libdir}/* /etc/tgt"
+FILES:${PN} = "${libdir}/* \
+               /etc/tgt \
+               /usr/etc/cinder/** \
+              "
 
 FILES:${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/tools"
 
@@ -195,76 +196,76 @@ FILES:${SRCNAME} = "${bindir}/* \
     "
 
 DEPENDS += " \
-        python-pip \
-        python-pbr \
+        python3-pip \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 RDEPENDS:${PN} += " \
         lvm2 \
-        python-pbr \
-        python-babel \
-        python-decorator \
-        python-eventlet \
-        python-greenlet \
-        python-httplib2 \
-        python-iso8601 \
-        python-ipaddress \
-        python-keystoneauth1 \
-        python-keystonemiddleware \
-        python-lxml \
-        python-oauth2client \
-        python-oslo.config \
-        python-oslo.concurrency \
-        python-oslo.context \
-        python-oslo.db \
-        python-oslo.log \
-        python-oslo.messaging \
-        python-oslo.middleware \
-        python-oslo.policy \
-        python-oslo.privsep \
-        python-oslo.reports \
-        python-oslo.rootwrap \
-        python-oslo.serialization \
-        python-oslo.service \
-        python-oslo.utils \
-        python-oslo.versionedobjects \
-        python-osprofiler \
-        python-paramiko \
-        python-paste \
-        python-pastedeploy \
-        python-psutil \
-        python-pyparsing \
-        python-barbicanclient \
+        python3-pbr \
+        python3-babel \
+        python3-decorator \
+        python3-eventlet \
+        python3-greenlet \
+        python3-httplib2 \
+        python3-iso8601 \
+        python3-keystoneauth1 \
+        python3-keystonemiddleware \
+        python3-lxml \
+        python3-oauth2client \
+        python3-oslo.config \
+        python3-oslo.concurrency \
+        python3-oslo.context \
+        python3-oslo.db \
+        python3-oslo.log \
+        python3-oslo.messaging \
+        python3-oslo.middleware \
+        python3-oslo.policy \
+        python3-oslo.privsep \
+        python3-oslo.reports \
+        python3-oslo.rootwrap \
+        python3-oslo.serialization \
+        python3-oslo.service \
+        python3-oslo.utils \
+        python3-oslo.versionedobjects \
+        python3-osprofiler \
+        python3-paramiko \
+        python3-paste \
+        python3-pastedeploy \
+        python3-psutil \
+        python3-pyparsing \
+        python3-barbicanclient \
         python-glanceclient \
-        python-keystoneclient \
+        python3-keystoneclient \
         python-novaclient \
-        python-swiftclient \
-        python-pytz \
-        python-requests \
-        python-retrying \
-        python-routes \
-        python-taskflow \
-        python-rtslib-fb \
-        python-simplejson \
-        python-six \
-        python-sqlalchemy \
-        python-sqlalchemy-migrate \
-        python-stevedore \
-        python-suds-jurko \
-        python-webob \
-        python-oslo.i18n \
-        python-oslo.vmware \
-        python-os-brick \
-        python-os-win \
-        python-tooz \
-        python-google-api-python-client \
-        python-castellan \
-        python-cryptography \
+        python3-swiftclient \
+        python3-pytz \
+        python3-requests \
+        python3-retrying \
+        python3-routes \
+        python3-taskflow \
+        python3-rtslib-fb \
+        python3-simplejson \
+        python3-six \
+        python3-sqlalchemy \
+        python3-sqlalchemy-migrate \
+        python3-stevedore \
+        python3-suds \
+        python3-webob \
+        python3-oslo.i18n \
+        python3-oslo.vmware \
+        python3-os-brick \
+        python3-os-win \
+        python3-tooz \
+        python3-google-api-python-client \
+        python3-castellan \
+        python3-cryptography \
+        python3 \
         "
 
 RDEPENDS:${SRCNAME} = " \
@@ -272,12 +273,26 @@ RDEPENDS:${SRCNAME} = " \
     postgresql \
     postgresql-client \
     python-psycopg2 \
+    bash \
+    python3 \
     tgt"
 
-RDEPENDS:${SRCNAME}-api = "${SRCNAME}"
-RDEPENDS:${SRCNAME}-volume = "${SRCNAME}"
-RDEPENDS:${SRCNAME}-scheduler = "${SRCNAME}"
-RDEPENDS:${SRCNAME}-setup = "postgresql sudo ${SRCNAME} bash"
+RDEPENDS:${SRCNAME}-api = "${SRCNAME} \
+                           bash \
+                           python3 \
+                          "
+RDEPENDS:${SRCNAME}-volume = "${SRCNAME} \
+                              bash \
+                              python3 \
+                             "
+RDEPENDS:${SRCNAME}-scheduler = "${SRCNAME} \
+                                bash \
+                                python3 \
+                                "
+RDEPENDS:${SRCNAME}-tests = "bash \
+                             python3 \
+                            "
+RDEPENDS:${SRCNAME}-setup = "postgresql sudo ${SRCNAME} bash python3"
 
 SYSTEMD_PACKAGES = " \
     ${SRCNAME}-setup \
@@ -301,3 +316,5 @@ SYSTEMD_AUTO_ENABLE:${SRCNAME}-backup = "disable"
 
 MONITOR_SERVICE_PACKAGES = "${SRCNAME}"
 MONITOR_SERVICE_${SRCNAME} = "cinder"
+
+INSANE_SKIP:${SRCNAME} = "empty-dirs"

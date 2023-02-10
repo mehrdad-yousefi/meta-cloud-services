@@ -88,18 +88,16 @@ do_install:append() {
     sed -e "s:%ADMIN_PASSWORD%:${ADMIN_PASSWORD}:g" -i ${HEAT_CONF_DIR}/heat.conf
     sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" -i ${HEAT_CONF_DIR}/heat.conf
 
-    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
-        install -d ${D}${sysconfdir}/init.d
+    install -d ${D}${sysconfdir}/init.d
 
-        sed 's:@suffix@:api:' < ${WORKDIR}/heat.init >${WORKDIR}/heat-api.init.sh
-        install -m 0755 ${WORKDIR}/heat-api.init.sh ${D}${sysconfdir}/init.d/heat-api
+    sed 's:@suffix@:api:' < ${WORKDIR}/heat.init >${WORKDIR}/heat-api.init.sh
+    install -m 0755 ${WORKDIR}/heat-api.init.sh ${D}${sysconfdir}/init.d/heat-api
 
-        sed 's:@suffix@:api-cfn:' < ${WORKDIR}/heat.init >${WORKDIR}/heat-api-cfn.init.sh
-        install -m 0755 ${WORKDIR}/heat-api-cfn.init.sh ${D}${sysconfdir}/init.d/heat-api-cfn
+    sed 's:@suffix@:api-cfn:' < ${WORKDIR}/heat.init >${WORKDIR}/heat-api-cfn.init.sh
+    install -m 0755 ${WORKDIR}/heat-api-cfn.init.sh ${D}${sysconfdir}/init.d/heat-api-cfn
 
-        sed 's:@suffix@:engine:' < ${WORKDIR}/heat.init >${WORKDIR}/heat-engine.init.sh
-        install -m 0755 ${WORKDIR}/heat-engine.init.sh ${D}${sysconfdir}/init.d/heat-engine
-    fi
+    sed 's:@suffix@:engine:' < ${WORKDIR}/heat.init >${WORKDIR}/heat-engine.init.sh
+    install -m 0755 ${WORKDIR}/heat-engine.init.sh ${D}${sysconfdir}/init.d/heat-engine
 
     if [ -e "run_tests.sh" ]; then
         cp run_tests.sh ${HEAT_CONF_DIR}
@@ -156,93 +154,91 @@ FILES:${SRCNAME}-engine = "${bindir}/heat-engine \
 "
 
 DEPENDS += " \
-        python-pip \
-        python-pbr \
+        python3-pip \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 RDEPENDS:${PN} += " \
         python-heatclient \
-        python-sqlalchemy \
-	python-amqplib \
-	python-anyjson \
-	python-eventlet \
-	python-kombu \
-	python-lxml \
-	python-routes \
-	python-webob \
-	python-greenlet \
-	python-lockfile \
-	python-pastedeploy \
-	python-paste \
-	python-sqlalchemy-migrate \
-	python-stevedore \
-	python-suds-jurko \
-	python-paramiko \
-	python-babel \
-	python-iso8601 \
-	python-setuptools3-git \
+        python3-sqlalchemy \
+	python3-amqplib \
+	python3-eventlet \
+	python3-kombu \
+	python3-lxml \
+	python3-routes \
+	python3-webob \
+	python3-greenlet \
+	python3-lockfile \
+	python3-pastedeploy \
+	python3-paste \
+	python3-sqlalchemy-migrate \
+	python3-stevedore \
+	python3-suds \
+	python3-paramiko \
+	python3-babel \
+	python3-iso8601 \
+	python3-setuptools-git \
 	python-glanceclient \
-	python-keystoneclient \
-	python-swiftclient \
-	python-oslo.config \
-        python-msgpack \
-        python-pecan \
-        python-amqp \
-        python-singledispatch \
-        python-flask \
-        python-werkzeug \
-        python-itsdangerous \
-        python-happybase \
-        python-wsme \
-        python-eventlet \
-        python-pymongo \
-        python-thrift \
-        python-simplegeneric \
-        python-webtest \
-        python-waitress \
-        python-pyyaml \
-        python-pip \
-        python-pytz \
-        python-pbr \
-        python-oslo.log \
-        python-croniter \
-        python-cryptography \
-        python-keystonemiddleware \
-        python-netaddr \
-        python-oslo.cache \
-        python-oslo.concurrency \
-        python-oslo.context \
-        python-oslo.db \
-        python-oslo.i18n \
-        python-oslo.messaging \
-        python-oslo.middleware \
-        python-oslo.policy \
-        python-oslo.reports \
-        python-oslo.serialization \
-        python-oslo.service \
-        python-oslo.utils \
-        python-osprofiler \
-        python-oslo.versionedobjects \
-        python-pycrypto \
-        python-barbicanclient \
-        python-ceilometerclient \
+	python3-keystoneclient \
+	python3-swiftclient \
+	python3-oslo.config \
+        python3-msgpack \
+        python3-pecan \
+        python3-amqp \
+        python3-singledispatch \
+        python3-flask \
+        python3-werkzeug \
+        python3-itsdangerous \
+        python3-happybase \
+        python3-wsme \
+        python3-eventlet \
+        python3-pymongo \
+        python3-thrift \
+        python3-simplegeneric \
+        python3-webtest \
+        python3-waitress \
+        python3-pyyaml \
+        python3-pip \
+        python3-pytz \
+        python3-pbr \
+        python3-oslo.log \
+        python3-croniter \
+        python3-cryptography \
+        python3-keystonemiddleware \
+        python3-netaddr \
+        python3-oslo.cache \
+        python3-oslo.concurrency \
+        python3-oslo.context \
+        python3-oslo.db \
+        python3-oslo.i18n \
+        python3-oslo.messaging \
+        python3-oslo.middleware \
+        python3-oslo.policy \
+        python3-oslo.reports \
+        python3-oslo.serialization \
+        python3-oslo.service \
+        python3-oslo.utils \
+        python3-osprofiler \
+        python3-oslo.versionedobjects \
+        python3-pycryptodome \
+        python3-barbicanclient \
         python-cinderclient \
-        python-designateclient \
-        python-magnumclient \
-        python-manilaclient \
-        python-mistralclient \
+        python3-designateclient \
+        python3-magnumclient \
+        python3-manilaclient \
+        python3-mistralclient \
         python-neutronclient \
         python-novaclient \
-        python-saharaclient \
+        python3-saharaclient \
         python-troveclient \
-        python-zaqarclient \
-        python-requests \
-        python-six \
+        python3-zaqarclient \
+        python3-requests \
+        python3-six \
         bash \
 	"
 

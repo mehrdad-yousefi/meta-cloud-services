@@ -5,10 +5,10 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
 SRCNAME = "ovsdbapp"
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol=https"
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/zed;protocol=https"
 
-PV = "0.4.4+git${SRCPV}"
-SRCREV = "40064ca2d99389f278028508a17f2e38d6df6f10"
+PV = "2.1.0+git${SRCPV}"
+SRCREV = "96cf8d6288587423e65d5149016e07fb51430724"
 S = "${WORKDIR}/git"
 
 inherit setuptools3

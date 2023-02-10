@@ -23,7 +23,7 @@ SRC_URI = "git://anongit.freedesktop.org/spice/spice-html5;branch=master"
 
 S = "${WORKDIR}/git"
 
-RDEPENDS:${PN} = "python-websockify"
+RDEPENDS:${PN} = "python3-websockify"
 
 do_install() {
 	oe_runmake DESTDIR="${D}" datadir="${D}/${datadir}" install

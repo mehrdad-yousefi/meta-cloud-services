@@ -9,14 +9,13 @@ SRCNAME = "ceilometer"
 SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=master;protocol=https \
            file://ceilometer.conf \
            file://ceilometer.init \
-           file://fix_ceilometer_memory_leak.patch \
 "
 # dropped for juno:
 #   file://ceilometer-builtin-tests-config-location.patch
 
 
-SRCREV = "026a5d475e1958bf761e41c2bb426b09e0f3d270"
-PV = "5.0.0+git${SRCPV}"
+SRCREV = "6f88ee6be9a3ae5c78587f1a2bc8cd2e9a5a2fa7"
+PV = "19.0.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 CEILOMETER_SECRET ?= "12121212"
@@ -59,10 +58,8 @@ do_install:append() {
 
     install -d ${CEILOMETER_CONF_DIR}
     install -m 600 ${WORKDIR}/ceilometer.conf ${CEILOMETER_CONF_DIR}
-    install -m 600 ${TEMPLATE_CONF_DIR}/*.json ${CEILOMETER_CONF_DIR}
     install -m 600 ${TEMPLATE_CONF_DIR}/*.yaml ${CEILOMETER_CONF_DIR}
 
-    install -m 600 ${TEMPLATE_CONF_DIR}/api_paste.ini ${CEILOMETER_CONF_DIR}
     sed -e "s:%CEILOMETER_SECRET%:${CEILOMETER_SECRET}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
 
     sed -e "s:%DB_USER%:${DB_USER}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
@@ -77,30 +74,28 @@ do_install:append() {
     sed -e "s:%ADMIN_PASSWORD%:${ADMIN_PASSWORD}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
     sed -e "s:%SERVICE_TENANT_NAME%:${SERVICE_TENANT_NAME}:g" -i ${CEILOMETER_CONF_DIR}/ceilometer.conf
 
-    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
-        install -d ${D}${sysconfdir}/init.d
+    install -d ${D}${sysconfdir}/init.d
 
-        sed 's:@suffix@:api:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-api.init.sh
-        install -m 0755 ${WORKDIR}/ceilometer-api.init.sh ${D}${sysconfdir}/init.d/ceilometer-api
+    sed 's:@suffix@:api:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-api.init.sh
+    install -m 0755 ${WORKDIR}/ceilometer-api.init.sh ${D}${sysconfdir}/init.d/ceilometer-api
 
-        sed 's:@suffix@:collector:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-collector.init.sh
-        install -m 0755 ${WORKDIR}/ceilometer-collector.init.sh ${D}${sysconfdir}/init.d/ceilometer-collector
+    sed 's:@suffix@:collector:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-collector.init.sh
+    install -m 0755 ${WORKDIR}/ceilometer-collector.init.sh ${D}${sysconfdir}/init.d/ceilometer-collector
 
-        sed 's:@suffix@:agent-central:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-agent-central.init.sh
-        install -m 0755 ${WORKDIR}/ceilometer-agent-central.init.sh ${D}${sysconfdir}/init.d/ceilometer-agent-central
+    sed 's:@suffix@:agent-central:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-agent-central.init.sh
+    install -m 0755 ${WORKDIR}/ceilometer-agent-central.init.sh ${D}${sysconfdir}/init.d/ceilometer-agent-central
 
-        sed 's:@suffix@:agent-compute:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-agent-compute.init.sh
-        install -m 0755 ${WORKDIR}/ceilometer-agent-compute.init.sh ${D}${sysconfdir}/init.d/ceilometer-agent-compute
+    sed 's:@suffix@:agent-compute:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-agent-compute.init.sh
+    install -m 0755 ${WORKDIR}/ceilometer-agent-compute.init.sh ${D}${sysconfdir}/init.d/ceilometer-agent-compute
 
-        sed 's:@suffix@:alarm-notifier:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-alarm-notifier.init.sh
-        install -m 0755 ${WORKDIR}/ceilometer-alarm-notifier.init.sh ${D}${sysconfdir}/init.d/ceilometer-alarm-notifier
+    sed 's:@suffix@:alarm-notifier:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-alarm-notifier.init.sh
+    install -m 0755 ${WORKDIR}/ceilometer-alarm-notifier.init.sh ${D}${sysconfdir}/init.d/ceilometer-alarm-notifier
 
-        sed 's:@suffix@:alarm-evaluator:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-alarm-evaluator.init.sh
-        install -m 0755 ${WORKDIR}/ceilometer-alarm-evaluator.init.sh ${D}${sysconfdir}/init.d/ceilometer-alarm-evaluator
+    sed 's:@suffix@:alarm-evaluator:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-alarm-evaluator.init.sh
+    install -m 0755 ${WORKDIR}/ceilometer-alarm-evaluator.init.sh ${D}${sysconfdir}/init.d/ceilometer-alarm-evaluator
 
-        sed 's:@suffix@:agent-notification:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-agent-notification.init.sh
-        install -m 0755 ${WORKDIR}/ceilometer-agent-notification.init.sh ${D}${sysconfdir}/init.d/ceilometer-agent-notification
-    fi
+    sed 's:@suffix@:agent-notification:' < ${WORKDIR}/ceilometer.init >${WORKDIR}/ceilometer-agent-notification.init.sh
+    install -m 0755 ${WORKDIR}/ceilometer-agent-notification.init.sh ${D}${sysconfdir}/init.d/ceilometer-agent-notification
 
     if [ -e "setup-test-env.sh" ]; then
         cp setup-test-env.sh ${CEILOMETER_CONF_DIR}
@@ -137,7 +132,9 @@ ALLOW_EMPTY:${SRCNAME}-setup = "1"
 ALLOW_EMPTY:${SRCNAME}-reseller = "1"
 ALLOW_EMPTY:${SRCNAME}-tests = "1"
 
-FILES:${PN} = "${libdir}/*"
+FILES:${PN} = "${libdir}/* \
+               /usr/etc/ceilometer/** \
+              "
 
 FILES:${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/setup-test-env.sh"
 
@@ -174,95 +171,93 @@ FILES:${SRCNAME}-controller = "${bindir}/* \
 "
 
 DEPENDS += " \
-        python-pip \
-        python-pbr \
+        python3-pip \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 RDEPENDS:${PN} += " \
-	python-ply \
-	python-jsonpath-rw \
-	python-sqlalchemy \
-	python-amqplib \
-	python-anyjson \
-	python-eventlet \
-	python-kombu \
-	python-lxml \
-	python-routes \
-	python-webob \
-	python-greenlet \
-	python-lockfile \
-	python-pastedeploy \
-	python-paste \
-	python-sqlalchemy-migrate \
-	python-stevedore \
-	python-suds-jurko \
-	python-paramiko \
-	python-babel \
-	python-iso8601 \
-	python-setuptools3-git \
+	python3-ply \
+	python3-jsonpath-rw \
+	python3-sqlalchemy \
+	python3-amqplib \
+	python3-eventlet \
+	python3-kombu \
+	python3-lxml \
+	python3-routes \
+	python3-webob \
+	python3-greenlet \
+	python3-lockfile \
+	python3-pastedeploy \
+	python3-paste \
+	python3-sqlalchemy-migrate \
+	python3-stevedore \
+	python3-suds \
+	python3-paramiko \
+	python3-babel \
+	python3-iso8601 \
+	python3-setuptools-git \
 	python-glanceclient \
-	python-keystoneclient \
-	python-swiftclient \
-	python-ceilometerclient \
-	python-oslo.config \
-	python-oslo.serialization \
-	python-oslo.rootwrap \
-	python-tooz \        
-	python-msgpack \
-	python-pecan \
-	python-amqp \
-	python-singledispatch \
-	python-flask \
-	python-werkzeug \
-	python-itsdangerous \
-	python-happybase \
-	python-wsme \
-	python-eventlet \
-	python-pymongo \
-	python-thrift \
-	python-simplegeneric \
-	python-webtest \
-	python-waitress \
-	python-pyyaml \
-	python-pip \
-	python-pytz \
-	python-pbr \
-	python-croniter \
-	python-ipaddr \
-	python-pysnmp \
-        python-retrying \
-        python-jsonpath-rw-ext \
-        python-jsonschema \
-        python-kafka \
-        python-keystonemiddleware \
-        python-oslo.context \
-        python-oslo.db \
-        python-oslo.concurrency \
-        python-oslo.i18n \
-        python-oslo.log \
-        python-oslo.policy \
-        python-oslo.reports \
-        python-oslo.service \
-        python-oslo.messaging \
-        python-oslo.middleware \
-        python-oslo.utils \
+	python3-keystoneclient \
+	python3-swiftclient \
+	python3-oslo.config \
+	python3-oslo.serialization \
+	python3-oslo.rootwrap \
+	python3-tooz \        
+	python3-msgpack \
+	python3-pecan \
+	python3-amqp \
+	python3-singledispatch \
+	python3-flask \
+	python3-werkzeug \
+	python3-itsdangerous \
+	python3-happybase \
+	python3-wsme \
+	python3-eventlet \
+	python3-pymongo \
+	python3-thrift \
+	python3-simplegeneric \
+	python3-webtest \
+	python3-waitress \
+	python3-pyyaml \
+	python3-pip \
+	python3-pytz \
+	python3-pbr \
+	python3-croniter \
+	python3-pysnmp \
+        python3-retrying \
+        python3-jsonpath-rw-ext \
+        python3-jsonschema \
+        python3-kafka \
+        python3-keystonemiddleware \
+        python3-oslo.context \
+        python3-oslo.db \
+        python3-oslo.concurrency \
+        python3-oslo.i18n \
+        python3-oslo.log \
+        python3-oslo.policy \
+        python3-oslo.reports \
+        python3-oslo.service \
+        python3-oslo.messaging \
+        python3-oslo.middleware \
+        python3-oslo.utils \
         python-neutronclient \
         python-novaclient \
-        python-requests \
-        python-six \
-        python-tooz \
+        python3-requests \
+        python3-six \
+        python3-tooz \
+        bash \
 	"
 
 RDEPENDS:${SRCNAME}-controller = "${PN} ${SRCNAME}-common ${SRCNAME}-alarm-notifier ${SRCNAME}-alarm-evaluator ${SRCNAME}-agent-notification ${SRCNAME}-reseller \
                                   postgresql postgresql-client python-psycopg2 tgt"
 RDEPENDS:${SRCNAME}-api = "${SRCNAME}-controller"
 RDEPENDS:${SRCNAME}-collector = "${SRCNAME}-controller"
-RDEPENDS:${SRCNAME}-compute = "${PN} ${SRCNAME}-common python-ceilometerclient libvirt"
+RDEPENDS:${SRCNAME}-compute = "${PN} ${SRCNAME}-common libvirt"
 RDEPENDS:${SRCNAME}-setup = "postgresql sudo ${SRCNAME}-controller"
 RDEPENDS:${SRCNAME}-reseller = "postgresql sudo ${SRCNAME}-controller"
 

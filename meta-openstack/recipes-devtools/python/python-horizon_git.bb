@@ -5,89 +5,86 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
 DEPENDS += " \
-        python-pip \
-        python-pbr \
+        python3-pip \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 RDEPENDS:${PN} += " \
-        python-pbr \
-        python-babel \
-        python-django \
-        python-pint \
-        python-django-babel \
-        python-django-compressor \
-        python-django-openstack-auth \
-        python-django-pyscss \
-        python-futurist \
-        python-iso8601 \
-        python-netaddr \
-        python-oslo.concurrency \
-        python-oslo.config \
-        python-oslo.i18n \
-        python-oslo.policy \
-        python-oslo.serialization \
-        python-oslo.utils \
-        python-osprofiler \
-        python-pymongo \
-        python-pyscss \
+        python3-pbr \
+        python3-babel \
+        python3-django \
+        python3-pint \
+        python3-django-babel \
+        python3-django-compressor \
+        python3-django-pyscss \
+        python3-futurist \
+        python3-iso8601 \
+        python3-netaddr \
+        python3-oslo.concurrency \
+        python3-oslo.config \
+        python3-oslo.i18n \
+        python3-oslo.policy \
+        python3-oslo.serialization \
+        python3-oslo.utils \
+        python3-osprofiler \
+        python3-pymongo \
+        python3-pyscss \
         python-cinderclient \
         python-glanceclient \
         python-heatclient \
-        python-keystoneclient \
+        python3-keystoneclient \
         python-neutronclient \
         python-novaclient \
-        python-swiftclient \
-        python-pytz \
-        python-pyyaml \
-        python-semantic-version \
-        python-six \
-        python-xstatic \
-        python-xstatic-angular \
-        python-xstatic-angular-bootstrap \
-        python-xstatic-angular-fileupload \
-        python-xstatic-angular-gettext \
-        python-xstatic-angular-lrdragndrop \
-        python-xstatic-angular-schema-form \
-        python-xstatic-bootstrap-datepicker \
-        python-xstatic-bootstrap-scss \
-        python-xstatic-bootswatch \
-        python-xstatic-d3 \
-        python-xstatic-hogan \
-        python-xstatic-font-awesome \
-        python-xstatic-jasmine \
-        python-xstatic-jquery \
-        python-xstatic-jquery-migrate \
-        python-xstatic-jquery.quicksearch \
-        python-xstatic-jquery.tablesorter \
-        python-xstatic-jquery-ui \
-        python-xstatic-jsencrypt \
-        python-xstatic-mdi \
-        python-xstatic-objectpath \
-        python-xstatic-rickshaw \
-        python-xstatic-roboto-fontface \
-        python-xstatic-smart-table \
-        python-xstatic-spin \
-        python-xstatic-term.js \
-        python-xstatic-tv4 \
+        python3-swiftclient \
+        python3-pytz \
+        python3-pyyaml \
+        python3-semantic-version \
+        python3-six \
+        python3-xstatic \
+        python3-xstatic-angular \
+        python3-xstatic-angular-bootstrap \
+        python3-xstatic-angular-fileupload \
+        python3-xstatic-angular-gettext \
+        python3-xstatic-angular-lrdragndrop \
+        python3-xstatic-angular-schema-form \
+        python3-xstatic-bootstrap-datepicker \
+        python3-xstatic-bootstrap-scss \
+        python3-xstatic-bootswatch \
+        python3-xstatic-d3 \
+        python3-xstatic-hogan \
+        python3-xstatic-font-awesome \
+        python3-xstatic-jasmine \
+        python3-xstatic-jquery \
+        python3-xstatic-jquery-migrate \
+        python3-xstatic-jquery.quicksearch \
+        python3-xstatic-jquery.tablesorter \
+        python3-xstatic-jquery-ui \
+        python3-xstatic-jsencrypt \
+        python3-xstatic-mdi \
+        python3-xstatic-objectpath \
+        python3-xstatic-rickshaw \
+        python3-xstatic-roboto-fontface \
+        python3-xstatic-smart-table \
+        python3-xstatic-spin \
+        python3-xstatic-term.js \
+        python3-xstatic-tv4 \
         "
 
 SRCNAME = "horizon"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol=https \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/zed;protocol=https \
     file://wsgi-horizon.conf \
-    file://fix_bindir_path.patch \
     file://local_settings.py \
-    file://horizon-use-full-package-path-to-test-directories.patch \
     "
 #    file://openstack-dashboard-apache.conf
 
-SRCREV = "246ff9f81248a00a434e66d18fad70519ba811cc"
-PV = "12.0.0+git${SRCPV}"
+SRCREV = "34b2e823438ceeeedb6b5c9b9e473d9327101110"
+PV = "23.0.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit setuptools3 systemd python3-dir default_configs monitor useradd
@@ -126,7 +123,9 @@ do_install:append() {
     # mv ${D}${datadir}/bin ${DASHBOARD_DIR}/bin
 
     install -d ${DASHBOARD_CONF_DIR}
-    cp run_tests.sh ${DASHBOARD_CONF_DIR}
+    if [ -e "run_tests.sh" ]; then
+    	cp run_tests.sh ${DASHBOARD_CONF_DIR}
+    fi
 
     # The following allows horizon to be run from apache. This
     # is the preffered way to run horizon.
@@ -163,13 +162,9 @@ do_install:append() {
     ln -fs openstack_dashboard/static ${DASHBOARD_SHARE_DIR}/static
 }
 
-pkg_postinst:${SRCNAME} () {
-    if [ -n "$D" ]; then
-        exit 1
-    else
-        # Regenerate the django static files
-        sudo -u horizon /usr/bin/env python ${datadir}/openstack-dashboard/manage.py collectstatic --noinput --clear 
-    fi
+pkg_postinst_ontarget:${SRCNAME} () {
+    # Regenerate the django static files
+    sudo -u horizon /usr/bin/env python3 ${datadir}/openstack-dashboard/manage.py collectstatic --noinput --clear 
 }
 
 PACKAGES += "${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-apache ${SRCNAME}-standalone"
@@ -208,9 +203,9 @@ RDEPENDS:${SRCNAME} = "${PN}"
 RDEPENDS:${SRCNAME}-apache = "\
     apache2 \
     mod-wsgi \
-    python-lesscpy \
+    python3-lesscpy \
     memcached \
-    python-memcached \
+    python3-memcached \
     "
 
 MONITOR_SERVICE_PACKAGES = "${SRCNAME}"

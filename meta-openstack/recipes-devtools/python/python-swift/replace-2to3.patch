@@ -1,0 +1,367 @@
+diff --git a/test/functional/test_access_control.py b/test/functional/test_access_control.py
+index 7bc3e479a..2a2bf5408 100644
+--- a/test/functional/test_access_control.py
++++ b/test/functional/test_access_control.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python3
+ # Copyright (c) 2015 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+diff --git a/test/functional/test_account.py b/test/functional/test_account.py
+index b4598dd08..29a145abe 100644
+--- a/test/functional/test_account.py
++++ b/test/functional/test_account.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python3
+ 
+ # Copyright (c) 2010-2012 OpenStack Foundation
+ #
+@@ -720,7 +720,7 @@ class TestAccount(unittest.TestCase):
+         uni_key = u'X-Account-Meta-uni\u0E12'
+         uni_value = u'uni\u0E12'
+         # Note that py3 has issues with non-ascii header names; see
+-        # https://bugs.python.org/issue37093
++        # https://bugs.python3.org/issue37093
+         if (tf.web_front_end == 'integral' and six.PY2):
+             resp = retry(post, uni_key, '1')
+             resp.read()
+diff --git a/test/functional/test_container.py b/test/functional/test_container.py
+index 4fdbe27f3..41af771f5 100644
+--- a/test/functional/test_container.py
++++ b/test/functional/test_container.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python3
+ 
+ # Copyright (c) 2010-2012 OpenStack Foundation
+ #
+@@ -158,7 +158,7 @@ class TestContainer(unittest.TestCase):
+         uni_key = u'X-Container-Meta-uni\u0E12'
+         uni_value = u'uni\u0E12'
+         # Note that py3 has issues with non-ascii header names; see
+-        # https://bugs.python.org/issue37093
++        # https://bugs.python3.org/issue37093
+         if (tf.web_front_end == 'integral' and six.PY2):
+             resp = retry(post, uni_key, '1')
+             resp.read()
+diff --git a/test/functional/test_dlo.py b/test/functional/test_dlo.py
+index d12a3654f..96728f34e 100644
+--- a/test/functional/test_dlo.py
++++ b/test/functional/test_dlo.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Copyright (c) 2010-2016 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+diff --git a/test/functional/test_domain_remap.py b/test/functional/test_domain_remap.py
+index eaaeecc2b..b12661fbe 100644
+--- a/test/functional/test_domain_remap.py
++++ b/test/functional/test_domain_remap.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Copyright (c) 2010-2016 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+diff --git a/test/functional/test_object.py b/test/functional/test_object.py
+index 768de19c0..9d9852aff 100644
+--- a/test/functional/test_object.py
++++ b/test/functional/test_object.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python3
+ 
+ # Copyright (c) 2010-2012 OpenStack Foundation
+ #
+diff --git a/test/functional/test_object_versioning.py b/test/functional/test_object_versioning.py
+index 32eb092c8..93cde676d 100644
+--- a/test/functional/test_object_versioning.py
++++ b/test/functional/test_object_versioning.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Copyright (c) 2010-2012 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+diff --git a/test/functional/test_slo.py b/test/functional/test_slo.py
+index 178e12680..174a43967 100644
+--- a/test/functional/test_slo.py
++++ b/test/functional/test_slo.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Copyright (c) 2010-2016 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+diff --git a/test/functional/test_staticweb.py b/test/functional/test_staticweb.py
+index 934715637..73d64c7ac 100644
+--- a/test/functional/test_staticweb.py
++++ b/test/functional/test_staticweb.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Copyright (c) 2010-2017 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+diff --git a/test/functional/test_symlink.py b/test/functional/test_symlink.py
+index eee646576..b7965dbcb 100755
+--- a/test/functional/test_symlink.py
++++ b/test/functional/test_symlink.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python3
+ # Copyright (c) 2010-2015 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+diff --git a/test/functional/test_tempurl.py b/test/functional/test_tempurl.py
+index 6f442e479..3f9346569 100644
+--- a/test/functional/test_tempurl.py
++++ b/test/functional/test_tempurl.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Copyright (c) 2010-2016 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+diff --git a/test/functional/test_versioned_writes.py b/test/functional/test_versioned_writes.py
+index 1dd381af9..324e938c0 100644
+--- a/test/functional/test_versioned_writes.py
++++ b/test/functional/test_versioned_writes.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Copyright (c) 2010-2012 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+diff --git a/test/functional/tests.py b/test/functional/tests.py
+index ff3cf5c93..2df96d2d5 100644
+--- a/test/functional/tests.py
++++ b/test/functional/tests.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Copyright (c) 2010-2012 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+diff --git a/test/probe/brain.py b/test/probe/brain.py
+index 3ab80305f..63ca678e2 100644
+--- a/test/probe/brain.py
++++ b/test/probe/brain.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Licensed under the Apache License, Version 2.0 (the "License");
+ # you may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+diff --git a/test/probe/test_account_failures.py b/test/probe/test_account_failures.py
+index 23292ed2f..18e1f8156 100644
+--- a/test/probe/test_account_failures.py
++++ b/test/probe/test_account_failures.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Copyright (c) 2010-2012 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+diff --git a/test/probe/test_account_get_fake_responses_match.py b/test/probe/test_account_get_fake_responses_match.py
+index a0d58ffd5..3a3fd6eb2 100644
+--- a/test/probe/test_account_get_fake_responses_match.py
++++ b/test/probe/test_account_get_fake_responses_match.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Copyright (c) 2010-2013 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+diff --git a/test/probe/test_account_reaper.py b/test/probe/test_account_reaper.py
+index d7cbbff12..dc4b1c51d 100644
+--- a/test/probe/test_account_reaper.py
++++ b/test/probe/test_account_reaper.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Licensed under the Apache License, Version 2.0 (the "License");
+ # you may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+diff --git a/test/probe/test_container_failures.py b/test/probe/test_container_failures.py
+index 6a3beb104..6880adc6f 100644
+--- a/test/probe/test_container_failures.py
++++ b/test/probe/test_container_failures.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Copyright (c) 2010-2012 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+diff --git a/test/probe/test_container_merge_policy_index.py b/test/probe/test_container_merge_policy_index.py
+index 441380590..f182138c7 100644
+--- a/test/probe/test_container_merge_policy_index.py
++++ b/test/probe/test_container_merge_policy_index.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Licensed under the Apache License, Version 2.0 (the "License");
+ # you may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+diff --git a/test/probe/test_container_sync.py b/test/probe/test_container_sync.py
+index a6d521b0e..cbf144e20 100644
+--- a/test/probe/test_container_sync.py
++++ b/test/probe/test_container_sync.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Licensed under the Apache License, Version 2.0 (the "License");
+ # you may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+diff --git a/test/probe/test_dark_data.py b/test/probe/test_dark_data.py
+index 435dff01b..2a7ca4d24 100644
+--- a/test/probe/test_dark_data.py
++++ b/test/probe/test_dark_data.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Copyright (c) 2010-2012 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+diff --git a/test/probe/test_empty_device_handoff.py b/test/probe/test_empty_device_handoff.py
+index 9a7f4234c..6d2d8d877 100644
+--- a/test/probe/test_empty_device_handoff.py
++++ b/test/probe/test_empty_device_handoff.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Copyright (c) 2010-2012 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+diff --git a/test/probe/test_object_async_update.py b/test/probe/test_object_async_update.py
+index 00aefcccb..2c8b32e0c 100644
+--- a/test/probe/test_object_async_update.py
++++ b/test/probe/test_object_async_update.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Copyright (c) 2010-2012 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+diff --git a/test/probe/test_object_expirer.py b/test/probe/test_object_expirer.py
+index e5afb989d..1542f844e 100644
+--- a/test/probe/test_object_expirer.py
++++ b/test/probe/test_object_expirer.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Licensed under the Apache License, Version 2.0 (the "License");
+ # you may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+diff --git a/test/probe/test_object_failures.py b/test/probe/test_object_failures.py
+index ae9509633..7961f8e77 100644
+--- a/test/probe/test_object_failures.py
++++ b/test/probe/test_object_failures.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Copyright (c) 2010-2012 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+diff --git a/test/probe/test_object_handoff.py b/test/probe/test_object_handoff.py
+index 30a3a2964..55b1f301d 100644
+--- a/test/probe/test_object_handoff.py
++++ b/test/probe/test_object_handoff.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Copyright (c) 2010-2012 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+diff --git a/test/probe/test_object_metadata_replication.py b/test/probe/test_object_metadata_replication.py
+index 4b5b0d448..39897e8ae 100644
+--- a/test/probe/test_object_metadata_replication.py
++++ b/test/probe/test_object_metadata_replication.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Copyright (c) 2010-2012 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+diff --git a/test/probe/test_object_versioning.py b/test/probe/test_object_versioning.py
+index 147cf84f4..3e1320aea 100644
+--- a/test/probe/test_object_versioning.py
++++ b/test/probe/test_object_versioning.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Copyright (c) 2010-2012 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+diff --git a/test/probe/test_orphan_container.py b/test/probe/test_orphan_container.py
+index 414cb2bd7..363f2fefd 100644
+--- a/test/probe/test_orphan_container.py
++++ b/test/probe/test_orphan_container.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Copyright (c) 2010-2012 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+diff --git a/test/probe/test_reconstructor_rebuild.py b/test/probe/test_reconstructor_rebuild.py
+index 4fc546f72..35acbe107 100644
+--- a/test/probe/test_reconstructor_rebuild.py
++++ b/test/probe/test_reconstructor_rebuild.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Copyright (c) 2010-2012 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+@@ -528,7 +528,7 @@ class TestReconstructorRebuild(ECProbeTest):
+ 
+ if six.PY2:
+     # The non-ASCII chars in metadata cause test hangs in
+-    # _assert_all_nodes_have_frag because of https://bugs.python.org/issue37093
++    # _assert_all_nodes_have_frag because of https://bugs.python3.org/issue37093
+ 
+     class TestReconstructorRebuildUTF8(TestReconstructorRebuild):
+ 
+diff --git a/test/probe/test_reconstructor_revert.py b/test/probe/test_reconstructor_revert.py
+index a86f4b49c..5a64b5408 100644
+--- a/test/probe/test_reconstructor_revert.py
++++ b/test/probe/test_reconstructor_revert.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Copyright (c) 2010-2012 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+diff --git a/test/probe/test_replication_servers_working.py b/test/probe/test_replication_servers_working.py
+index 3bc7ed928..0c2e4fa14 100644
+--- a/test/probe/test_replication_servers_working.py
++++ b/test/probe/test_replication_servers_working.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Copyright (c) 2010-2012 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+diff --git a/test/probe/test_reserved_name.py b/test/probe/test_reserved_name.py
+index bce009505..897829d5c 100644
+--- a/test/probe/test_reserved_name.py
++++ b/test/probe/test_reserved_name.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Copyright (c) 2019 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+diff --git a/test/probe/test_signals.py b/test/probe/test_signals.py
+index 761c53d2e..80ad8af47 100644
+--- a/test/probe/test_signals.py
++++ b/test/probe/test_signals.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -u
++#!/usr/bin/python3 -u
+ # Copyright (c) 2010-2012 OpenStack Foundation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");

@@ -136,7 +136,6 @@ RDEPENDS:${PN} += " \
 	python3-cinderclient \
 	python3-heatclient \
 	python3-pbr \
-	python3-anyjson \
 	python3-nose \
 	python3-httplib2 \
 	python3-jsonschema \

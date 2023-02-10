@@ -50,15 +50,12 @@ do_install:append() {
     install -d ${TROVE_CONF_DIR}
 
     # init.
-    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)};
-    then
-        install -d ${D}${sysconfdir}/init.d
-        for suffix in api taskmanager conductor; do
-            SUFFIX_FILE=${D}${sysconfdir}/init.d/trove-${suffix}
-            install -m 0755 ${WORKDIR}/trove-init ${SUFFIX_FILE}
-            sed -e "s:@suffix@:${suffix}:g" -i ${SUFFIX_FILE}
-        done
-    fi
+    install -d ${D}${sysconfdir}/init.d
+    for suffix in api taskmanager conductor; do
+        SUFFIX_FILE=${D}${sysconfdir}/init.d/trove-${suffix}
+        install -m 0755 ${WORKDIR}/trove-init ${SUFFIX_FILE}
+        sed -e "s:@suffix@:${suffix}:g" -i ${SUFFIX_FILE}
+    done
 
 
     install -d ${D}${localstatedir}/lib/trove
@@ -234,42 +231,42 @@ FILES:${SRCNAME}-setup = " \
 
 
 DEPENDS += " \
-    python-pbr \
-    python-pip \
+    python3-pbr \
+    python3-pip \
     "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
 	"
 
 RDEPENDS:${PN} += " \
-    python-babel \
+    python3-babel \
     python-cinderclient \
-    python-eventlet \
-    python-falcon \
+    python3-eventlet \
+    python3-falcon \
     python-glanceclient \
     python-heatclient \
-    python-httplib2 \
-    python-iso8601 \
-    python-jinja2 \
-    python-jsonschema \
-    python-keystoneclient \
-    python-kombu \
-    python-lxml \
-    python-netaddr \
+    python3-httplib2 \
+    python3-iso8601 \
+    python3-jinja2 \
+    python3-jsonschema \
+    python3-keystoneclient \
+    python3-kombu \
+    python3-lxml \
+    python3-netaddr \
     python-neutronclient \
     python-novaclient \
-    python-oslo.config \
-    python-oslo.service \
-    python-passlib \
-    python-paste \
-    python-pastedeploy \
-    python-routes \
-    python-sqlalchemy-migrate \
-    python-swiftclient \
-    python-webob \
-    python-monotonic \
+    python3-oslo.config \
+    python3-oslo.service \
+    python3-passlib \
+    python3-paste \
+    python3-pastedeploy \
+    python3-routes \
+    python3-sqlalchemy-migrate \
+    python3-swiftclient \
+    python3-webob \
+    python3-monotonic \
     uwsgi \
     "
 
@@ -301,7 +298,7 @@ RDEPENDS:${SRCNAME}-setup = " \
     keystone-setup \
     postgresql \
     postgresql-client \
-    python-keystoneclient \
+    python3-keystoneclient \
     python-novaclient \
     sudo \
     "
@@ -311,8 +308,8 @@ RDEPENDS:${SRCNAME}-taskmanager = " \
     "
 
 RDEPENDS:${SRCNAME}-tests += " \
-    python-mock \
-    python-pexpect \
+    python3-mock \
+    python3-pexpect \
     "
 
 

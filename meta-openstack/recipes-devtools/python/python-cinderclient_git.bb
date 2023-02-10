@@ -3,40 +3,40 @@ HOMEPAGE = "https://github.com/openstack/python-cinderclient"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3572962e13e5e739b30b0864365e0795"
-DEPENDS = "python-setuptools3-git"
+DEPENDS = "python3-setuptools-git"
 
 SRCNAME = "python-cinderclient"
 
 SRC_URI = "\
-	git://github.com/openstack/python-cinderclient.git;branch=stable/pike;protocol=https \
+	git://github.com/openstack/python-cinderclient.git;branch=stable/zed;protocol=https \
 	file://cinder-api-check.sh \
 	"
 
-PV="3.1.0+git${SRCPV}"
-SRCREV="3640aeab6e11987288a2f149fbeedb1c026045e2"
+PV="9.1.0+git${SRCPV}"
+SRCREV="730a8c7728a8481d4c74e4c93b2619025f7267ea"
 S = "${WORKDIR}/git"
 
 inherit setuptools3 monitor
 
 DEPENDS += " \
-        python-pip \
-        python-pbr \
+        python3-pip \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 RDEPENDS:${PN} += " \
-        python-pbr \
-        python-prettytable \
-        python-keystoneauth1 \
-        python-simplejson \
-        python-babel \
-        python-six \
-        python-oslo.i18n \
-        python-oslo.utils \
+        python3-pbr \
+        python3-prettytable \
+        python3-keystoneauth1 \
+        python3-simplejson \
+        python3-babel \
+        python3-six \
+        python3-oslo.i18n \
+        python3-oslo.utils \
         bash \
         "
 	

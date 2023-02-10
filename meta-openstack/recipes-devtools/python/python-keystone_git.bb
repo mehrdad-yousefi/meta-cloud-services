@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
 SRCNAME = "keystone"
 
-SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol=https \
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/zed;protocol=https \
            file://keystone-init \
            file://keystone-init.service \
            file://keystone.conf \
@@ -21,8 +21,8 @@ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/pike;protocol
 # file://keystone-remove-git-commands-in-tests.patch 
 # file://keystone-explicitly-import-localcontext-from-oslo.me.patch
 
-SRCREV = "d07677aba54362a4a3aa2d165b155105ffe30d73"
-PV = "12.0.0+git${SRCPV}"
+SRCREV = "1ea9f7557dc442c56805f70b3f0c9393b427a770"
+PV = "22.0.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -111,10 +111,6 @@ do_install:append() {
     install -m 755 ${WORKDIR}/identity.sh ${KEYSTONE_CONF_DIR}/
     install -m 600 ${S}${sysconfdir}/logging.conf.sample \
         ${KEYSTONE_CONF_DIR}/logging.conf
-    install -m 600 ${S}${sysconfdir}/keystone.conf.sample \
-        ${KEYSTONE_CONF_DIR}/keystone.conf.sample
-    install -m 644 ${S}${sysconfdir}/keystone-paste.ini \
-        ${KEYSTONE_CONF_DIR}/keystone-paste.ini
 
     # Copy examples from upstream
     cp -r ${S}/examples ${KEYSTONE_PACKAGE_DIR}
@@ -211,6 +207,7 @@ FILES:${SRCNAME}-setup = " \
 ALLOW_EMPTY:${SRCNAME}-cronjobs = "1"
 
 FILES:${PN} = "${libdir}/* \
+		/usr/etc/keystone/** \
     "
 
 FILES:${SRCNAME}-tests = "${sysconfdir}/${SRCNAME}/run_tests.sh"
@@ -223,52 +220,52 @@ FILES:${SRCNAME} = "${bindir}/* \
     "
 
 DEPENDS += " \
-        python-pip \
-        python-pbr \
+        python3-pip \
+        python3-pbr \
         "
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 RDEPENDS:${PN} += " \
-        python-babel \
-        python-pbr \
-        python-webob \
-        python-pastedeploy \
-        python-paste \
-        python-routes \
-        python-cryptography \
-        python-six \
-        python-sqlalchemy \
-        python-sqlalchemy-migrate \
-        python-stevedore \
-        python-passlib \
-        python-keystoneclient \
-        python-keystonemiddleware \
-        python-bcrypt \
-        python-scrypt \
-        python-oslo.cache \
-        python-oslo.concurrency \
-        python-oslo.config \
-        python-oslo.context \
-        python-oslo.messaging \
-        python-oslo.db \
-        python-oslo.i18n \
-        python-oslo.log \
-        python-oslo.middleware \
-        python-oslo.policy \
-        python-oslo.serialization \
-        python-oslo.utils \
-        python-oauthlib \
-        python-pysaml2 \
-        python-dogpile.cache \
-        python-jsonschema \
-        python-pycadf \
-        python-msgpack \
-        python-osprofiler \
-        python-pytz \
+        python3-babel \
+        python3-pbr \
+        python3-webob \
+        python3-pastedeploy \
+        python3-paste \
+        python3-routes \
+        python3-cryptography \
+        python3-six \
+        python3-sqlalchemy \
+        python3-sqlalchemy-migrate \
+        python3-stevedore \
+        python3-passlib \
+        python3-keystoneclient \
+        python3-keystonemiddleware \
+        python3-bcrypt \
+        python3-scrypt \
+        python3-oslo.cache \
+        python3-oslo.concurrency \
+        python3-oslo.config \
+        python3-oslo.context \
+        python3-oslo.messaging \
+        python3-oslo.db \
+        python3-oslo.i18n \
+        python3-oslo.log \
+        python3-oslo.middleware \
+        python3-oslo.policy \
+        python3-oslo.serialization \
+        python3-oslo.utils \
+        python3-oauthlib \
+        python3-pysaml2 \
+        python3-dogpile.cache \
+        python3-jsonschema \
+        python3-pycadf \
+        python3-msgpack \
+        python3-osprofiler \
+        python3-pytz \
         "
 
 RDEPENDS:${SRCNAME}-tests += " bash"
@@ -285,6 +282,7 @@ RDEPENDS:${SRCNAME} = " \
     postgresql-client \
     python-psycopg2 \
     apache2 \
+    bash \
     "
 
 RDEPENDS:${SRCNAME}-setup = "postgresql sudo ${SRCNAME}"
@@ -292,3 +290,5 @@ RDEPENDS:${SRCNAME}-cronjobs = "cronie ${SRCNAME}"
 
 MONITOR_SERVICE_PACKAGES = "${SRCNAME}"
 MONITOR_SERVICE_${SRCNAME} = "keystone"
+
+INSANE_SKIP:${SRCNAME} = "empty-dirs"

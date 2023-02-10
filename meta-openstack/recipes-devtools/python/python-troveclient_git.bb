@@ -14,7 +14,7 @@ PV = "3.0.0+git${SRCPV}"
 SRCREV = "960843de8142db6e61cc4d148a51f55862acbba0"
 S = "${WORKDIR}/git"
 
-inherit setuptools3 hosts default_configs rmargparse
+inherit setuptools3 hosts default_configs
 
 
 USERADD_PACKAGES = "${PN}"
@@ -50,22 +50,22 @@ FILES:${SRCNAME}-bin = " \
     "
 
 DEPENDS += " \
-        python-pip \
-        python-pbr \
+        python3-pip \
+        python3-pbr \
         "
 
 RDEPENDS:${PN} += " \
-        python-pbr \
-        python-prettytable \
-        python-requests \
-        python-simplejson \
-        python-babel \
-        python-six \
-        python-oslo.utils \
-        python-keystoneclient \
+        python3-pbr \
+        python3-prettytable \
+        python3-requests \
+        python3-simplejson \
+        python3-babel \
+        python3-six \
+        python3-oslo.utils \
+        python3-keystoneclient \
 	"
 
-RDEPENDS:${SRCNAME}-tests += "python-mock"
+RDEPENDS:${SRCNAME}-tests += "python3-mock"
 
 RDEPENDS:${SRCNAME} += " \
     ${PN} \
@@ -74,7 +74,7 @@ RDEPENDS:${SRCNAME} += " \
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-        python-pbr-native \
+        python3-pbr-native \
         "
 
 RDEPENDS:${SRCNAME}-bin += " \

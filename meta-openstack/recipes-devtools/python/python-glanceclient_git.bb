@@ -13,33 +13,33 @@ S = "${WORKDIR}/git"
 
 DEPENDS += " \
         gmp \
-        python-pip \
-        python-pbr \
+        python3-pip \
+        python3-pbr \
         "
 
-inherit setuptools3 monitor rmargparse
+inherit setuptools3 monitor
 
 FILES:${PN} += "${datadir}/${SRCNAME}"
 
 # Satisfy setup.py 'setup_requires'
 DEPENDS += " \
-    python-pbr-native \
+    python3-pbr-native \
     "
 
 RDEPENDS:${PN} += " \
    gmp \
    bash \
-   python-pbr \
-   python-babel \
-   python-prettytable \
-   python-keystoneauth1 \
-   python-requests \
-   python-warlock \
-   python-six \
-   python-oslo.utils \
-   python-oslo.i18n \
-   python-wrapt \
-   python-pyopenssl \
+   python3-pbr \
+   python3-babel \
+   python3-prettytable \
+   python3-keystoneauth1 \
+   python3-requests \
+   python3-warlock \
+   python3-six \
+   python3-oslo.utils \
+   python3-oslo.i18n \
+   python3-wrapt \
+   python3-pyopenssl \
    "
 
 MONITOR_CHECKS_${PN} += "\
