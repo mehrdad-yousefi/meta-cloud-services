@@ -162,13 +162,9 @@ do_install:append() {
     ln -fs openstack_dashboard/static ${DASHBOARD_SHARE_DIR}/static
 }
 
-pkg_postinst:${SRCNAME} () {
-    if [ -n "$D" ]; then
-        exit 1
-    else
-        # Regenerate the django static files
-        sudo -u horizon /usr/bin/env python ${datadir}/openstack-dashboard/manage.py collectstatic --noinput --clear 
-    fi
+pkg_postinst_ontarget:${SRCNAME} () {
+    # Regenerate the django static files
+    sudo -u horizon /usr/bin/env python3 ${datadir}/openstack-dashboard/manage.py collectstatic --noinput --clear 
 }
 
 PACKAGES += "${SRCNAME}-tests ${SRCNAME} ${SRCNAME}-apache ${SRCNAME}-standalone"
